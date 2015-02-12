@@ -42,8 +42,8 @@ class Scripts
      * @var array $css
      * Holds the path to all css files
      */
-    public static $scss = array(
-        "link/to/cssfile/which/is/nice.js",
+    public static $css = array(
+        "link/to/cssfile/which/is/nice.css",
     );
 }
 
