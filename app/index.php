@@ -8,7 +8,7 @@ $headstuff = ScriptLoader::echoScripts(true);
 ?>
 <html>
 <head>
-    <?php  //echo $headstuff ?>
+    <?php  echo $headstuff ?>
 </head>
 <body>
 hello world<br/>

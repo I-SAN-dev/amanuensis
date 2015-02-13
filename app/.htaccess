@@ -1,6 +1,11 @@
+RewriteEngine On
+
 # STRONG HTACCESS PROTECTION
 <Files ~ "^.*\.([Hh][Tt][Aa])">
     order allow,deny
     deny from all
     satisfy all
 </Files>
+
+# Legacy error handling - should be done better
+ErrorDocument 404 "<H1>Page not found</H1>"
