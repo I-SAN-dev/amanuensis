@@ -78,7 +78,16 @@ final class Config {
     {
         try
         {
-            $jsonstring = json_encode($this->get);
+            /* If JSON PRETTY PRINT is available, use it (PHP 5.4+) */
+            if(defined('JSON_PRETTY_PRINT')&&(version_compare(PHP_VERSION, '5.4', '>=')))
+            {
+                $jsonstring = json_encode($this->get, JSON_PRETTY_PRINT);
+            }
+            else
+            {
+                $jsonstring = json_encode($this->get);
+            }
+
             if(!file_put_contents(self::$filename, $jsonstring, LOCK_EX))
             {
                 throw new Exception("Error writing config: ".self::$filename);
