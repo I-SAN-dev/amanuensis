@@ -1,0 +1,17 @@
+{
+  "db":{
+    "host":"",
+    "user":"",
+    "password":""
+  },
+
+  "baseurl":"",
+  "debug":"1",
+
+  "path":{
+    "scriptsbytemplate":"js/scriptsbytemplate",
+    "generated":"js/generated"
+  }
+
+
+}
