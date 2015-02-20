@@ -11,6 +11,7 @@
      * @license GPL
      */
 
+require_once 'classes/config/config.php';
 require_once 'classes/scripthandling/scripts.php';
 require_once 'classes/scripthandling/scriptByTemplate.php';
 
@@ -89,7 +90,7 @@ class ScriptLoader
             }
             catch(Exception $e)
             {
-                //TODO: Somethin intelligent here! I think we need a logging mechanism or similar
+                //TODO: Something intelligent here! I think we need a logging mechanism or similar
                 echo "\n".$e->getMessage()."\n";
             }
 
@@ -102,9 +103,33 @@ class ScriptLoader
      */
     private static function getScriptsByTemplate()
     {
-        //TODO: Check if the scriptsByTemplate are existent, if not, call self::renderScriptsByTemplate()
-        //TODO: Return an array with paths to the rendered scriptsByTemplate
-        return array();
+        $conf = Config::getInstance();
+        $scriptsdir = $conf->get['path']['generated'];
+        $templates = Scripts::$byTemplate;
+
+        $paths = array();
+
+        foreach($templates as $file)
+        {
+            $renderedfile = $scriptsdir.'/'.str_replace('.jst', '.js', $file);
+            /* Check if the file is rendered */
+            if(!file_exists($renderedfile))
+            {
+                /* If not, render it */
+                $sbt = new ScriptByTemplate($file);
+                try
+                {
+                    $renderedfile = $sbt->render();
+                }
+                catch(Exception $e)
+                {
+                    //TODO: Something intelligent here! I think we need a logging mechanism or similar
+                    echo "\n".$e->getMessage()."\n";
+                }
+            }
+            array_push($paths, $renderedfile);
+        }
+        return $paths;
     }
 
 

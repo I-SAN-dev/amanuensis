@@ -13,6 +13,8 @@
  * @license GPL
  */
 
+require_once 'classes/scripthandling/scriptLoader.php';
+
 final class Config {
 
     protected static $instance;
@@ -92,6 +94,10 @@ final class Config {
             {
                 throw new Exception("Error writing config: ".self::$filename);
             }
+
+            /* Rerender the .jst-Templates with updated values */
+            ScriptLoader::renderScriptsByTemplate();
+
             return true;
         }
         catch(Exception $e)
