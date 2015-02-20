@@ -11,7 +11,8 @@
      * @license GPL
      */
 
-require_once 'scripts.php';
+require_once 'classes/scripthandling/scripts.php';
+require_once 'classes/scripthandling/scriptByTemplate.php';
 
 class ScriptLoader
 {

@@ -1,4 +1,5 @@
 <?php
+set_include_path(getcwd());
 
 require_once 'classes/scripthandling/scriptLoader.php';
 require_once 'classes/config/config.php';
