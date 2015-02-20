@@ -41,7 +41,7 @@ class ScriptLoader
      */
     private static function echoAllScripts()
     {
-        $result = '';
+        $result = "\n";
 
         /* Generate css file link tags */
         $cssfiles = Scripts::$css;
