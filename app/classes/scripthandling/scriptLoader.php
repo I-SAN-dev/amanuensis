@@ -79,7 +79,21 @@ class ScriptLoader
      */
     public static function renderScriptsByTemplate()
     {
-        //TODO: This has to render the scripts-by-template from a configuration file
+        $templates = Scripts::$byTemplate;
+        foreach($templates as $file)
+        {
+            $sbt = new ScriptByTemplate($file);
+            try
+            {
+                $sbt->render();
+            }
+            catch(Exception $e)
+            {
+                //TODO: Somethin intelligent here! I think we need a logging mechanism or similar
+                echo "\n".$e->getMessage()."\n";
+            }
+
+        }
     }
 
     /**

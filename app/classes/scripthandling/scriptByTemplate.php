@@ -28,6 +28,8 @@ class ScriptByTemplate
 
     /**
      * Reads the .jst file, replaces the marker with the values from the config file
+     * @return String - the path to the destinationfile
+     * @throws Exception - for failing file system operations
      */
     public function render()
     {
@@ -59,6 +61,8 @@ class ScriptByTemplate
         {
             throw new Exception('File not found: '.$file);
         }
+
+        return $destinationFile;
     }
 
     /**

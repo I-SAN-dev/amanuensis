@@ -26,8 +26,7 @@ class Scripts
      * Holds the path to all templates that should be compiled
      */
     public static $byTemplate = array(
-        "link/to/jstemplate/that/should/be/compiled.jst",
-        "link/to/jstemplate/that/should/be/compiled.jst",
+        "compileme.jst",
     );
 
     /**

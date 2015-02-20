@@ -4,7 +4,8 @@ set_include_path(getcwd());
 require_once 'classes/scripthandling/scriptLoader.php';
 require_once 'classes/config/config.php';
 
-$headstuff = ScriptLoader::echoScripts(true);
+$conf = Config::getInstance();
+$headstuff = ScriptLoader::echoScripts($conf->get['debug']);
 
 ?>
 <html>
@@ -14,7 +15,7 @@ $headstuff = ScriptLoader::echoScripts(true);
 <body>
 hello world<br/>
 <?php
-$conf = Config::getInstance();
+
 echo $conf->get['path']['scriptsbytemplate'];
 
 ?>
