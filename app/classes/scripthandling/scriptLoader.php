@@ -174,7 +174,7 @@ class ScriptLoader
                     //TODO: We can't echo something here, we need a logging mechanism!
                 }
             }
-            $filecontents = ob_end_clean();
+            $filecontents = ob_get_clean();
 
 
             /* compress css */
@@ -221,14 +221,16 @@ class ScriptLoader
             {
                 try
                 {
+                    echo "/* File: ".$file." */\n";
                     include($file);
+                    echo "\n\n";
                 }
                 catch (Exception $e)
                 {
                     //TODO: We can't echo something here, we need a logging mechanism!
                 }
             }
-            $filecontents = ob_end_clean();
+            $filecontents = ob_get_clean();
 
 
             /* compress js */

@@ -34,7 +34,7 @@ class Scripts
      * Holds the path to all default js files
      */
     public static $scripts = array(
-        "link/to/jsfile/which/is/nice.js",
+        "js/test.js",
     );
 
     /**

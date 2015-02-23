@@ -5,7 +5,7 @@ require_once 'classes/scripthandling/scriptLoader.php';
 require_once 'classes/config/config.php';
 
 $conf = Config::getInstance();
-$headstuff = ScriptLoader::echoScripts($conf->get['debug']);
+$headstuff = ScriptLoader::echoScripts(0);
 
 ?>
 <html>
