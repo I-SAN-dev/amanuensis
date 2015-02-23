@@ -68,7 +68,13 @@ class ScriptLoader
      */
     private static function echoCompressedScripts()
     {
-        $result = '';
+        $result = "\n";
+
+        /* CSS */
+        $result = $result.'<link rel="stylesheet" type="text/css" href="'.self::cacheCompressCss().'">'."\n";
+
+        /* JS */
+        $result = $result.'<script src="'.self::cacheCompressJs().'"></script>'."\n";
 
         return $result;
     }
@@ -134,7 +140,6 @@ class ScriptLoader
     /**
      * merges, caches and compresses all css files if necessary
      * @return String - the path to the generated css file
-     * @throws Exception - if something went wrong
      */
     private static function cacheCompressCss()
     {
@@ -150,7 +155,7 @@ class ScriptLoader
             }
         }
 
-        /* Check if file is not existent or older than yougnest css */
+        /* Check if file is not existent or older than youngest css */
         /* (re)generate it!!! */
         if(!file_exists($path) || (file_exists($path) && $youngest > filemtime($path)))
         {
@@ -160,7 +165,14 @@ class ScriptLoader
             /* load every css file */
             foreach(Scripts::$css as $file)
             {
-                include($file);
+                try
+                {
+                    include($file);
+                }
+                catch (Exception $e)
+                {
+                    //TODO: We can't echo something here, we need a logging mechanism!
+                }
             }
             $filecontents = ob_end_clean();
 
@@ -170,6 +182,57 @@ class ScriptLoader
             $filecontents = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $filecontents);
             /* remove tabs, spaces, newlines, etc. */
             $filecontents = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $filecontents);
+
+
+            /* write the cached version back to disc */
+            file_put_contents($path, $filecontents);
+        }
+        return $path;
+    }
+
+    /**
+     * merges, caches and compresses all js files if necessary
+     * @return String - the path to the generated js file
+     */
+    private static function cacheCompressJs()
+    {
+        $path = 'js/ama.all.min.js';
+        $jsfiles = array_merge(Scripts::$libs, self::getScriptsByTemplate(), Scripts::$scripts);
+
+        /* get youngest css file */
+        $youngest = 0;
+        foreach($jsfiles as $file)
+        {
+            if(file_exists($file) && filemtime($file) > $youngest)
+            {
+                $youngest = filemtime($file);
+            }
+        }
+
+        /* Check if file is not existent or older than youngest css */
+        /* (re)generate it!!! */
+        if(!file_exists($path) || (file_exists($path) && $youngest > filemtime($path)))
+        {
+            /* Start output buffer */
+            ob_start();
+
+            /* load every css file */
+            foreach($jsfiles as $file)
+            {
+                try
+                {
+                    include($file);
+                }
+                catch (Exception $e)
+                {
+                    //TODO: We can't echo something here, we need a logging mechanism!
+                }
+            }
+            $filecontents = ob_end_clean();
+
+
+            /* compress js */
+            /* well, actually that is not so easy as css minification... i think we go with concatenation for the moment */
 
 
             /* write the cached version back to disc */
