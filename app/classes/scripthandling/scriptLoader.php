@@ -52,7 +52,6 @@ class ScriptLoader
         }
 
 
-        //TODO check if the rendered js already exists
         $jsfiles = array_merge(Scripts::$libs, self::getScriptsByTemplate(), Scripts::$scripts);
 
 
@@ -130,6 +129,53 @@ class ScriptLoader
             array_push($paths, $renderedfile);
         }
         return $paths;
+    }
+
+    /**
+     * merges, caches and compresses all css files if necessary
+     * @return String - the path to the generated css file
+     * @throws Exception - if something went wrong
+     */
+    private static function cacheCompressCss()
+    {
+        $path = 'css/ama.all.min.css';
+
+        /* get youngest css file */
+        $youngest = 0;
+        foreach(Scripts::$css as $file)
+        {
+            if(file_exists($file) && filemtime($file) > $youngest)
+            {
+                $youngest = filemtime($file);
+            }
+        }
+
+        /* Check if file is not existent or older than yougnest css */
+        /* (re)generate it!!! */
+        if(!file_exists($path) || (file_exists($path) && $youngest > filemtime($path)))
+        {
+            /* Start output buffer */
+            ob_start();
+
+            /* load every css file */
+            foreach(Scripts::$css as $file)
+            {
+                include($file);
+            }
+            $filecontents = ob_end_clean();
+
+
+            /* compress css */
+            /* remove comments */
+            $filecontents = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $filecontents);
+            /* remove tabs, spaces, newlines, etc. */
+            $filecontents = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $filecontents);
+
+
+            /* write the cached version back to disc */
+            file_put_contents($path, $filecontents);
+        }
+        return $path;
     }
 
 

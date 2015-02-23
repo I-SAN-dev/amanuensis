@@ -42,7 +42,7 @@ class Scripts
      * Holds the path to all css files
      */
     public static $css = array(
-        "link/to/cssfile/which/is/nice.css",
+        "css/ama.css",
     );
 }
 
