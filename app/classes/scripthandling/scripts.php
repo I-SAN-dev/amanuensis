@@ -18,7 +18,7 @@ class Scripts
      * Holds the path to all library js files
      */
     public static $libs = array(
-        "link/to/jsfile/which/is/a/lib.js",
+        "lib/jquery-2.1.3.min.js",
     );
 
     /**
