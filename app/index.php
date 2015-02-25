@@ -13,7 +13,7 @@ $headstuff = ScriptLoader::echoScripts(0);
     <?php  echo $headstuff ?>
 </head>
 <body>
-hello world<br/>
+hello world lalala<br/>
 <?php
 
 echo $conf->get['path']['scriptsbytemplate'];
