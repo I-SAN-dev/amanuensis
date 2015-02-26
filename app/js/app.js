@@ -14,8 +14,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: function($scope) {
                 $scope.items = ["A", "List", "Of", "Items"];
             }
-        }
-    )
+        })
+        .state('something', {
+            url: '/something',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/something.html'
+                }
+            }
+        })
+
     ;
     $urlRouterProvider.otherwise('')
+});
+
+app.controller('SomeCtrl', function() {
+    this.sth="Something";
 });

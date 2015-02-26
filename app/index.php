@@ -38,6 +38,14 @@ require_once 'classes/config/config.php';
 </head>
 <body>
 <div ui-view="mainContent"></div>
+<ul>
+    <li>
+        <a ui-sref="index">Home</a>
+    </li>
+    <li>
+        <a ui-sref="something">Something else</a>
+    </li>
+</ul>
 hello world lalala<br/>
 <?php
 
