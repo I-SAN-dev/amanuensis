@@ -18,7 +18,7 @@ require_once 'classes/config/config.php';
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ama">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +37,7 @@ require_once 'classes/config/config.php';
     ?>
 </head>
 <body>
+<div ui-view="mainContent"></div>
 hello world lalala<br/>
 <?php
 
