@@ -21,7 +21,7 @@ require_once 'classes/errorhandling/amaException.php';
 ob_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ama">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +40,15 @@ ob_start();
     ?>
 </head>
 <body>
+<div ui-view="mainContent"></div>
+<ul>
+    <li>
+        <a ui-sref="index">Home</a>
+    </li>
+    <li>
+        <a ui-sref="something">Something else</a>
+    </li>
+</ul>
 hello world lalala<br/>
 <?php
 $bla = new amaException(NULL, 1337, 'tollertest');
