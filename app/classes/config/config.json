@@ -6,6 +6,7 @@
   },
 
   "baseurl":"",
+  "secureurl":"",
   "company":"I-SAN.de Webdesign & Hosting GbR",
   "lang":"de",
   "debug":"1",

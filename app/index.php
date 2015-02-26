@@ -15,7 +15,10 @@ set_include_path(getcwd());
 
 require_once 'classes/scripthandling/scriptLoader.php';
 require_once 'classes/config/config.php';
+require_once 'classes/errorhandling/amaException.php';
 
+/* Output buffering */
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +42,12 @@ require_once 'classes/config/config.php';
 <body>
 hello world lalala<br/>
 <?php
-
-echo $conf->get['path']['scriptsbytemplate'];
+$bla = new amaException(NULL, 1337, 'tollertest');
+$bla->renderScripttag();
 
 ?>
 </body>
 </html>
+<?php
+ob_end_flush();
+?>
