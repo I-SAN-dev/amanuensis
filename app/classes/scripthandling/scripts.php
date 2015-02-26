@@ -19,6 +19,8 @@ class Scripts
      */
     public static $libs = array(
         "lib/jquery-2.1.3.min.js",
+        "lib/angular-1.3.14.min.js",
+        "lib/modules/angular-ui-router.min.js",
     );
 
     /**
@@ -34,7 +36,7 @@ class Scripts
      * Holds the path to all default js files
      */
     public static $scripts = array(
-        "js/test.js",
+        "js/app.js",
     );
 
     /**
