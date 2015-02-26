@@ -34,7 +34,7 @@ require_once 'classes/config/config.php';
     ?>
 </head>
 <body>
-hello world<br/>
+hello world lalala<br/>
 <?php
 
 echo $conf->get['path']['scriptsbytemplate'];
