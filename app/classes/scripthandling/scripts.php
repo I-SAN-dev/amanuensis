@@ -21,6 +21,7 @@ class Scripts
         "lib/jquery-2.1.3.min.js",
         "lib/angular-1.3.14.min.js",
         "lib/modules/angular-ui-router.min.js",
+        "js/app.js", // has to be loaded before the other scripts
     );
 
     /**
@@ -28,7 +29,7 @@ class Scripts
      * Holds the path to all templates that should be compiled
      */
     public static $byTemplate = array(
-        "compileme.jst",
+        "constants.jst",
     );
 
     /**
@@ -36,7 +37,7 @@ class Scripts
      * Holds the path to all default js files
      */
     public static $scripts = array(
-        "js/app.js",
+
     );
 
     /**
@@ -44,6 +45,7 @@ class Scripts
      * Holds the path to all css files
      */
     public static $css = array(
+        "css/normalize.css",
         "css/ama.css",
     );
 }

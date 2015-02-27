@@ -32,6 +32,9 @@ require_once 'classes/config/config.php';
     <title>
         <?php echo $conf->get['company']; ?> - AMANU
     </title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
     <?php
         echo ScriptLoader::echoScripts(0);
     ?>
