@@ -23,6 +23,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('drag-n-drop', {
+            url: '/drag-n-drop',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/drag-drop.html'
+                }
+            }
+        })
 
     ;
     $urlRouterProvider.otherwise('')

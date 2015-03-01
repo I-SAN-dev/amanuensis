@@ -21,7 +21,7 @@ require_once 'classes/errorhandling/amaException.php';
 ob_start();
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="ama">
+<html lang="en" data-ng-app="ama">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,13 +43,16 @@ ob_start();
     ?>
 </head>
 <body>
-<div ui-view="mainContent"></div>
+<div data-ui-view="mainContent"></div>
 <ul>
     <li>
-        <a ui-sref="index">Home</a>
+        <a data-ui-sref="index">Home</a>
     </li>
     <li>
-        <a ui-sref="something">Something else</a>
+        <a data-ui-sref="something">Something else</a>
+    </li>
+    <li>
+        <a data-ui-sref="drag-n-drop">Drag &amp; Drop</a>
     </li>
 </ul>
 hello world lalala<br/>
