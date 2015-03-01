@@ -1,6 +1,14 @@
-<form>
-    <input type="text">
-    <button type="submit">OK</button>
-</form>
-<div class="draggable-items"></div>
-<div class="drop-area"></div>
+<div data-ng-controller="DragDropCtrl as dd">
+    <form data-ng-submit="dd.addElement(dd.element.text, dd.element.type)">
+        <input type="text" data-ng-model="dd.element.text">
+        <select data-ng-model="dd.element.type">
+            <option value="div">Block</option>
+            <option value="span">Inline</option>
+        </select>
+        <button type="submit">OK</button>
+    </form>
+    <div class="draggable-items" data-ng-repeat="item in dd.draggableElements">
+        <div draggable="true" class="draggable-item">{{item.text}}</div>
+    </div>
+    <div class="drop-area"></div>
+</div>

@@ -37,7 +37,7 @@ class Scripts
      * Holds the path to all default js files
      */
     public static $scripts = array(
-
+        "js/controllers/dragDropCtrl.js",
     );
 
     /**
