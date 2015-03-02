@@ -14,23 +14,34 @@ angular.module('ama')
             this.draggableElements.push({text: text, type: type});
             console.log(this.draggableElements);
         };
-/*
-        angular.element('.draggable-item').on('click', function (e) {
-            alert('Clicked!');
-        });
 
-        angular.element('.draggable-item').on('dragstart', function (e) {
-            e.originalEvent.dataTransfer.setData('element', $(this));
-            console.log('dragstart');
-        });
-
-        angular.element('.drop-area').on('dragover', function (e) {
-            e.preventDefault();
-        });
-
-        angular.element('.drop-area').on('drop', function (e) {
-            e.preventDefault();
-        });
-        */
     }]
-);
+)
+.directive('draggable', function () {
+    return {
+        restrict: 'A',
+        link: function($scope, elem, attr) {
+            elem.on('dragstart', function (e) {
+                e.originalEvent.dataTransfer.setData('element', $(this));
+                console.log('dragstart');
+            })
+        }
+    };
+})
+.directive('droppable', function () {
+    return {
+        restrict: 'A',
+        link: function($scope, elem, attr) {
+
+            elem.on('dragover', function (e) {
+                e.preventDefault();
+                console.log('dragover');
+            });
+
+            elem.on('drop', function (e) {
+                e.preventDefault();
+                console.log('drop');
+            });
+        }
+    };
+});
