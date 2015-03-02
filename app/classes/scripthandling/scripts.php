@@ -38,6 +38,7 @@ class Scripts
      */
     public static $scripts = array(
         "js/controllers/dragDropCtrl.js",
+        "js/directives/dragAndDrop.js",
     );
 
     /**
