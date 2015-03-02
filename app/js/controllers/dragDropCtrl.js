@@ -55,37 +55,24 @@ angular.module('ama')
 
                 elem.on('dragenter', function(e) {
                     e.preventDefault();
-
-                    /*var dragData = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
-                    if (elem.hasClass('draggable-items')){
-                        dragData.copy = false;
-                    }
-                    if (elem.hasClass('drop-area')) {
-                        if(dragData.fromDropArea) {
-                            dragData.copy = false;
-                        } else {
-                            dragData.copy = true;
-                        }
-                    }
-                    e.originalEvent.dataTransfer.setData('text', JSON.stringify(dragData));*/
                 });
 
                 elem.on('drop', function (e) {
                     e.preventDefault();
                     var dragged = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
-                    console.log(dragged);
-                    dragged = $($.parseHTML(dragged.element));
+                    if(!dragged.fromDropArea) {
+                        var draggedElement = $($.parseHTML(dragged.element));
+                        draggedElement.appendTo(e.target);
 
-                    dragged.appendTo(e.target);
-
-                    var eventData = {};
-                    eventData.element = dragged;
-                    if(elem.hasClass('drop-area')){
-                        eventData.fromDropArea = true;
-                    } else {
-                        eventData.fromDropArea = false;
+                        var eventData = {};
+                        eventData.element = draggedElement;
+                        if (elem.hasClass('drop-area')) {
+                            eventData.fromDropArea = true;
+                        } else {
+                            eventData.fromDropArea = false;
+                        }
+                        $scope.$emit('bindDragging', eventData);
                     }
-                    $scope.$emit('bindDragging', eventData);
                 });
             }
         };
