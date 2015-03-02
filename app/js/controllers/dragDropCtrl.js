@@ -12,7 +12,6 @@ angular.module('ama')
 
         this.addElement = function(text, type) {
             this.draggableElements.push({text: text, type: type});
-            console.log(this.draggableElements);
         };
 
     }]
@@ -22,9 +21,15 @@ angular.module('ama')
             restrict: 'A',
             link: function ($scope, elem, attr) {
                 $scope.$on('bindDragging', function (event, data) {
-                    data.on('dragstart', function (e) {
-                        e.originalEvent.dataTransfer.setData('element', e.target.outerHTML);
-                        console.log(e);
+                    data.element.on('dragstart', function (e) {
+                        e.originalEvent.dataTransfer.setData('text', JSON.stringify({element: e.target.outerHTML, fromDropArea: data.fromDropArea}));
+                        console.log(data);
+                    });
+
+                    data.element.on('dragend', function (e) {
+                        var dragData = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
+                        if(dragData.fromDropArea)
+                            $(e.target).remove();
                     });
                 });
             }
@@ -34,7 +39,7 @@ angular.module('ama')
         return {
             restrict: 'A',
             link: function($scope, elem, attr) {
-                $scope.$emit('bindDragging', elem);
+                $scope.$emit('bindDragging', {element:elem});
             }
         };
     })
@@ -46,16 +51,41 @@ angular.module('ama')
 
                 elem.on('dragover', function (e) {
                     e.preventDefault();
-                    console.log('dragover');
+                });
+
+                elem.on('dragenter', function(e) {
+                    e.preventDefault();
+
+                    /*var dragData = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
+                    if (elem.hasClass('draggable-items')){
+                        dragData.copy = false;
+                    }
+                    if (elem.hasClass('drop-area')) {
+                        if(dragData.fromDropArea) {
+                            dragData.copy = false;
+                        } else {
+                            dragData.copy = true;
+                        }
+                    }
+                    e.originalEvent.dataTransfer.setData('text', JSON.stringify(dragData));*/
                 });
 
                 elem.on('drop', function (e) {
                     e.preventDefault();
-                    var dragged = e.originalEvent.dataTransfer.getData('element');
-                    dragged = $($.parseHTML(dragged));
-                    dragged.appendTo(e.target);
-                    $scope.$emit('bindDragging', dragged);
+                    var dragged = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
                     console.log(dragged);
+                    dragged = $($.parseHTML(dragged.element));
+
+                    dragged.appendTo(e.target);
+
+                    var eventData = {};
+                    eventData.element = dragged;
+                    if(elem.hasClass('drop-area')){
+                        eventData.fromDropArea = true;
+                    } else {
+                        eventData.fromDropArea = false;
+                    }
+                    $scope.$emit('bindDragging', eventData);
                 });
             }
         };
