@@ -74,6 +74,7 @@ if(!file_exists($includefile))
     $error->renderJSONerror();
     die();
 }
+$thisisamanu = true;
 require_once($includefile);
 
 

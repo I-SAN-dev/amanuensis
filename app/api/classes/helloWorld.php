@@ -11,6 +11,8 @@
  * @license GPL
  */
 
+if(!$thisisamanu)die('Direct access restricted');
+
 class helloWorld {
 
     /**
