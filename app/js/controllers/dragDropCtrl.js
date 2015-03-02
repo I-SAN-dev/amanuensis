@@ -17,34 +17,46 @@ angular.module('ama')
 
     }]
 )
-.directive('draggable', function () {
-    return {
-        restrict: 'A',
-        link: function($scope, elem, attr) {
-            elem.on('dragstart', function (e) {
-                e.originalEvent.dataTransfer.setData('element', e.target.outerHTML);
-                console.log(e);
-            })
+    .directive('dragAndDrop', function () {
+        return {
+            restrict: 'A',
+            link: function ($scope, elem, attr) {
+                $scope.$on('bindDragging', function (event, data) {
+                    data.on('dragstart', function (e) {
+                        e.originalEvent.dataTransfer.setData('element', e.target.outerHTML);
+                        console.log(e);
+                    });
+                });
+            }
         }
-    };
-})
-.directive('droppable', function () {
-    return {
-        restrict: 'A',
-        link: function($scope, elem, attr) {
+    })
+    .directive('draggable', function () {
+        return {
+            restrict: 'A',
+            link: function($scope, elem, attr) {
+                $scope.$emit('bindDragging', elem);
+            }
+        };
+    })
 
-            elem.on('dragover', function (e) {
-                e.preventDefault();
-                console.log('dragover');
-            });
+    .directive('droppable', function () {
+        return {
+            restrict: 'A',
+            link: function($scope, elem, attr) {
 
-            elem.on('drop', function (e) {
-                e.preventDefault();
-                var dragged = e.originalEvent.dataTransfer.getData('element');
-                dragged = $($.parseHTML(dragged));
-                dragged.appendTo(e.target);
-                console.log(dragged);
-            });
-        }
-    };
-});
+                elem.on('dragover', function (e) {
+                    e.preventDefault();
+                    console.log('dragover');
+                });
+
+                elem.on('drop', function (e) {
+                    e.preventDefault();
+                    var dragged = e.originalEvent.dataTransfer.getData('element');
+                    dragged = $($.parseHTML(dragged));
+                    dragged.appendTo(e.target);
+                    $scope.$emit('bindDragging', dragged);
+                    console.log(dragged);
+                });
+            }
+        };
+    });
