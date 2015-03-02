@@ -13,7 +13,7 @@
 
   "debug":"1",
   "errorlogging":"1",
-  "errorlogpath":"/logs/errorlog.csv",
+  "errorlogpath":"logs/errorlog.csv",
 
   "path":{
     "scriptsbytemplate":"js/scriptsbytemplate",

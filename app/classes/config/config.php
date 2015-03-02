@@ -27,9 +27,9 @@ final class Config {
      */
     public static function getInstance()
     {
-        if(self::$instance == null)
+        if(self::$instance == NULL)
         {
-            self::$instance = new self();
+            self::$instance = new Config();
         }
         return self::$instance;
     }
@@ -38,9 +38,10 @@ final class Config {
      * Manage proper cloning
      * @return Config - a config instance
      */
+    /*
     private function __clone(){
         return self::getInstance();
-    }
+    }*/
 
     /**
      * Constructor will read and parse the config file
@@ -68,10 +69,10 @@ final class Config {
         }
         catch(Exception $e)
         {
-            $error = new amaException($e, 500, "Error reading config file:\n".$e->getMessage());
-            $error->renderScripttag();
-            $error->setHeaders();
-            die();
+            $errorjson = '{ "code": 500, "message": "Error reading config file: '.$e->getMessage().'" }';
+            echo "<script>pageErrors.push(JSON.parse('".$errorjson."'))</script>";
+
+            return array();
         }
     }
 

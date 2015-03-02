@@ -57,8 +57,8 @@ class amaException {
         if($conf->get['errorlogging'])
         {
             $logentry = array(
-                'timestamp' => new Date(),
-                'time' => new Date('d.m.Y - H:i:s'),
+                'timestamp' => time(),
+                'time' => date('d.m.Y - H:i:s'),
                 'code' => $this->errorcode,
                 'message' => $this->errormessage,
                 'file' => $this->file,
@@ -68,9 +68,9 @@ class amaException {
             $logfile = $conf->get['errorlogpath'];
             if(!file_exists($logfile))
             {
-                file_put_contents($logfile, "tiemstamp,time,code,message,file,line\n");
+                file_put_contents($logfile, "timestamp,time,code,message,file,line\n");
             }
-            file_put_contents($logfile, implode(',', $logentry)."\n");
+            file_put_contents($logfile, implode(',', $logentry)."\n", FILE_APPEND);
         }
     }
 
@@ -89,7 +89,16 @@ class amaException {
     public function renderJSONerror()
     {
         $obj = array("error" => $this->getData());
-        echo json_encode($obj);
+        /* If JSON PRETTY PRINT is available, use it (PHP 5.4+) */
+        if(defined('JSON_PRETTY_PRINT')&&(version_compare(PHP_VERSION, '5.4', '>=')))
+        {
+            echo json_encode($obj, JSON_PRETTY_PRINT);
+        }
+        else
+        {
+            echo json_encode($obj);
+        }
+
     }
 
     /**
@@ -139,6 +148,14 @@ class amaException {
         else if($c == 404)
         {
             header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+        }
+        else if($c == 400)
+        {
+            header($_SERVER["SERVER_PROTOCOL"]." 400 Bad Request", true, 400);
+        }
+        else if($c == 405)
+        {
+            header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed", true, 405);
         }
         else
         {
