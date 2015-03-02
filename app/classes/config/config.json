@@ -7,9 +7,13 @@
 
   "baseurl":"",
   "secureurl":"",
+
   "company":"I-SAN.de Webdesign & Hosting GbR",
   "lang":"de",
+
   "debug":"1",
+  "errorlogging":"1",
+  "errorlogpath":"/logs/errorlog.csv",
 
   "path":{
     "scriptsbytemplate":"js/scriptsbytemplate",

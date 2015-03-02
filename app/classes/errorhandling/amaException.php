@@ -50,6 +50,28 @@ class amaException {
         {
             $this->errormessage = $message;
         }
+
+
+        /* Logging */
+        $conf = Config::getInstance();
+        if($conf->get['errorlogging'])
+        {
+            $logentry = array(
+                'timestamp' => new Date(),
+                'time' => new Date('d.m.Y - H:i:s'),
+                'code' => $this->errorcode,
+                'message' => $this->errormessage,
+                'file' => $this->file,
+                'line' => $this->line
+            );
+
+            $logfile = $conf->get['errorlogpath'];
+            if(!file_exists($logfile))
+            {
+                file_put_contents($logfile, "tiemstamp,time,code,message,file,line\n");
+            }
+            file_put_contents($logfile, implode(',', $logentry)."\n");
+        }
     }
 
     /**

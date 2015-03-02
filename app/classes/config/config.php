@@ -14,6 +14,7 @@
  */
 
 require_once 'classes/scripthandling/scriptLoader.php';
+require_once 'classes/errorhandling/amaException.php';
 
 final class Config {
 
@@ -67,7 +68,9 @@ final class Config {
         }
         catch(Exception $e)
         {
-            echo "Error reading config file:\n".$e->getMessage();
+            $error = new amaException($e, 500, "Error reading config file:\n".$e->getMessage());
+            $error->renderScripttag();
+            $error->setHeaders();
             die();
         }
     }
@@ -102,10 +105,7 @@ final class Config {
         }
         catch(Exception $e)
         {
-            if($this->get['debug']==1)
-            {
-                echo "\n".$e->getMessage()."\n";
-            }
+            $error = new amaException($e, 500);
             return false;
         }
     }

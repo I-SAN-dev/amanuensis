@@ -95,8 +95,8 @@ class ScriptLoader
             }
             catch(Exception $e)
             {
-                //TODO: Something intelligent here! I think we need a logging mechanism or similar
-                echo "\n".$e->getMessage()."\n";
+                $error = new amaException($e);
+                $error->renderScripttag();
             }
 
         }
@@ -128,8 +128,8 @@ class ScriptLoader
                 }
                 catch(Exception $e)
                 {
-                    //TODO: Something intelligent here! I think we need a logging mechanism or similar
-                    echo "\n".$e->getMessage()."\n";
+                    $error = new amaException($e);
+                    $error->renderScripttag();
                 }
             }
             array_push($paths, $renderedfile);
@@ -171,7 +171,7 @@ class ScriptLoader
                 }
                 catch (Exception $e)
                 {
-                    //TODO: We can't echo something here, we need a logging mechanism!
+                    $error = new amaException($e);
                 }
             }
             $filecontents = ob_get_clean();
@@ -227,7 +227,7 @@ class ScriptLoader
                 }
                 catch (Exception $e)
                 {
-                    //TODO: We can't echo something here, we need a logging mechanism!
+                    $error = new amaException($e);
                 }
             }
             $filecontents = ob_get_clean();
