@@ -1,6 +1,7 @@
 <?php
 /**
- * This is an Hello World API example
+ * GET: a user login token
+ * POST: logs a user in
  *
  * This file is part of the project codename "AMANUENSIS"
  *
@@ -11,16 +12,28 @@
  * @license GPL
  */
 
+
 if(!$thisisamanu)die('Direct access restricted');
 
-class helloWorld {
+require_once('classes/authentication/authenticator.php');
+
+class login {
 
     /**
      * This method reacts to GET Requests
+     * it returns the current login state and, if not logged in, a login token
      */
     public static function get()
     {
-        echo 'Hello World: that was a get!';
+        $response = array(
+            "loggedin"=>Authenticator::isLoggedin(),
+            "token"=>""
+        );
+        if(!Authenticator::isLoggedin())
+        {
+            $response["token"] = Authenticator::getToken();
+        }
+        json_response($response);
     }
 
     /**

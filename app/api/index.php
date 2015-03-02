@@ -77,6 +77,25 @@ if(!file_exists($includefile))
 $thisisamanu = true;
 require_once($includefile);
 
+/*
+ * Define a method that can be used to output JSON
+ */
+/**
+ * Echoes a given array as JSON
+ */
+function json_response($array)
+{
+    header('Content-Type: application/json');
+    /* If JSON PRETTY PRINT is available, use it (PHP 5.4+) */
+    if(defined('JSON_PRETTY_PRINT')&&(version_compare(PHP_VERSION, '5.4', '>=')))
+    {
+        echo json_encode($array, JSON_PRETTY_PRINT);
+    }
+    else
+    {
+        echo json_encode($array);
+    }
+}
 
 /*
  * Call the appropriate method
@@ -89,3 +108,6 @@ call_user_func($callarray);
 
 /* End output buffering */
 ob_end_flush();
+
+
+

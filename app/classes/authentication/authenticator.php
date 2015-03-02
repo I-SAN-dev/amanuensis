@@ -11,6 +11,8 @@
  * @license GPL
  */
 
+require_once('classes/config/config.php');
+
 class Authenticator
 {
 
@@ -49,15 +51,26 @@ class Authenticator
      */
     public static function isLoggedin()
     {
-
+        return false;
     }
 
     /**
      * Returns an validation Token
+     * @param $previous - whether or not the previous token should be get
      * @return string - an validation token
      */
-    public static function getToken()
+    public static function getToken($previous = false)
     {
+        $algo = 'sha256';
+        $conf = Config::getInstance();
+        $secret = $conf->get['appsecret'];
+        $timeIn10Minutes = floor(time()/(1000*60*10))+ ($previous ? -1 : 0);
 
+        $token = hash(
+            $algo,
+            hash($algo, $timeIn10Minutes).hash($algo, $secret).hash($algo, $timeIn10Minutes)
+        );
+
+        return $token;
     }
 }
