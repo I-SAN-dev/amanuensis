@@ -101,7 +101,18 @@ function json_response($array)
  * Call the appropriate method
  */
 $callarray = array($action, strtolower($method));
-call_user_func($callarray);
+if(is_callable($callarray))
+{
+    call_user_func($callarray);
+}
+else
+{
+    $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed for action '".$action."'!");
+    $error->setHeaders();
+    $error->renderJSONerror();
+    die();
+}
+
 
 
 

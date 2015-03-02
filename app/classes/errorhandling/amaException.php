@@ -88,6 +88,7 @@ class amaException {
      */
     public function renderJSONerror()
     {
+        header('Content-Type: application/json');
         $obj = array("error" => $this->getData());
         /* If JSON PRETTY PRINT is available, use it (PHP 5.4+) */
         if(defined('JSON_PRETTY_PRINT')&&(version_compare(PHP_VERSION, '5.4', '>=')))
