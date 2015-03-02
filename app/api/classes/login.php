@@ -23,7 +23,7 @@ class login {
      * This method reacts to GET Requests
      * it returns the current login state and, if not logged in, a login token
      */
-    public static function getsrf()
+    public static function get()
     {
         $response = array(
             "loggedin"=>Authenticator::isLoggedin(),
