@@ -22,8 +22,8 @@ angular.module('ama')
         restrict: 'A',
         link: function($scope, elem, attr) {
             elem.on('dragstart', function (e) {
-                e.originalEvent.dataTransfer.setData('element', $(this));
-                console.log('dragstart');
+                e.originalEvent.dataTransfer.setData('element', e.target.outerHTML);
+                console.log(e);
             })
         }
     };
@@ -40,7 +40,10 @@ angular.module('ama')
 
             elem.on('drop', function (e) {
                 e.preventDefault();
-                console.log('drop');
+                var dragged = e.originalEvent.dataTransfer.getData('element');
+                dragged = $($.parseHTML(dragged));
+                dragged.appendTo(e.target);
+                console.log(dragged);
             });
         }
     };
