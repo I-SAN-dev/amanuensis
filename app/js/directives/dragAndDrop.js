@@ -112,7 +112,7 @@ angular.module('ama')
                 elem.on('dragleave', function (e) {
                     e.preventDefault();
                     var dragged = ctrl.getCurrentlyDragged();
-                    dragged.currDragTarget = null;
+                    dragged.currDragTarget = null;n
                     if (elem == dragged.dragSource) {
                         dragged.draggedOverEdge = true;
                     }
