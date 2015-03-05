@@ -106,7 +106,7 @@ class User {
      * @param $email
      * @return mixed - the first result for the user
      */
-    static function userdataByMail($email)
+    static private function userdataByMail($email)
     {
         /* look for the user */
         $dbal = DBAL::getInstance();
