@@ -54,6 +54,7 @@ final class DBAL {
             $dbname = $conf->get["db"]["database"];
 
             $this->connection = new PDO("mysql:host=".$dbhost.";port=".$dbport.";dbname=".$dbname."", $conf->get["db"]["user"], $conf->get["db"]["password"]);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(Exception $e)
         {
