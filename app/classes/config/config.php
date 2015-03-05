@@ -38,10 +38,10 @@ final class Config {
      * Manage proper cloning
      * @return Config - a config instance
      */
-    /*
+
     private function __clone(){
         return self::getInstance();
-    }*/
+    }
 
     /**
      * Constructor will read and parse the config file

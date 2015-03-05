@@ -1,8 +1,10 @@
 {
   "db":{
-    "host":"",
-    "user":"",
-    "password":""
+    "host":"localhost",
+    "database":"isande_ama",
+    "port":"3306",
+    "user":"isande_ama",
+    "password":"bachelor2015"
   },
 
   "baseurl":"",
