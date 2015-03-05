@@ -1,6 +1,6 @@
 <?php
 /**
- * Database Abstraction Layer, uses PDO, implements Singleton pattern (we only want ONE DB conenction)
+ * Database Abstraction Layer, uses PDO, implements Singleton pattern (we only want ONE DB connection)
  *
  * This file is part of the project codename "AMANUENSIS"
  *
