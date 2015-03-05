@@ -11,7 +11,7 @@
  * @license GPL
  */
 
-
+require_once('classes/authentication/user.php');
 
 class user_add {
 
@@ -21,6 +21,12 @@ class user_add {
      */
     public function post()
     {
+
+        //TODO: Authentication!
+        //TODO: Sanitation!
+
+        $user = new User("test@test.de","Tester","test123", 0);
+        var_dump($user);
 
     }
 

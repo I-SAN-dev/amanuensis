@@ -103,7 +103,25 @@ function json_response($array)
 $callarray = array($action, strtolower($method));
 if(is_callable($callarray))
 {
-    call_user_func($callarray);
+    try
+    {
+        call_user_func($callarray);
+    }
+    catch (Exception $e)
+    {
+        $conf = Config::getInstance();
+        if($conf->get["debug"])
+        {
+            $error = new amaException($e);
+        }
+        else
+        {
+            $error = new amaException(NULL, 500, "An error occurred");
+        }
+        $error->setHeaders();
+        $error->renderJSONerror();
+        die();
+    }
 }
 else
 {
