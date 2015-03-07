@@ -30,21 +30,22 @@ angular.module('ama')
 
                     draggable.element.on('dragstart', function (e) {
                         /**
-                         * save some information about the dragged element
+                         * The next line is just here to activate the HTML5 drag & drop API
                          * the dataTransfer key has to be 'text' due to some weird IE restriction
-                         * the value must be a string
+                         * the value must be a string, but can be left empty because we don't use it
                          */
-                        e.originalEvent.dataTransfer.setData('text', JSON.stringify({element: e.target.outerHTML, from: draggable.elem.parent().outerHTML}));
+                        e.originalEvent.dataTransfer.setData('text', '');
+                        // the transferred data is actually stored in the model
                         self.setCurrentlyDragged(draggable);
                     });
 
-                    draggable.elem.on('dragend', function (e) {
-                        var dragData = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
+                    draggable.element.on('dragend', function (e) {
+                        //var dragData = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
                         /**
                          * remove the dragged element from the DOM if it was taken from the drop (=target) area
                          */
-                        if(dragData.fromDropArea)
-                            $(e.target).remove();
+                        /*if(dragData.fromDropArea)
+                            $(e.target).remove();*/
 
                         self.setCurrentlyDragged(null);
                         draggable.draggedOverEdge = false;
@@ -112,7 +113,7 @@ angular.module('ama')
                 elem.on('dragleave', function (e) {
                     e.preventDefault();
                     var dragged = ctrl.getCurrentlyDragged();
-                    dragged.currDragTarget = null;n
+                    dragged.currDragTarget = null;
                     if (elem == dragged.dragSource) {
                         dragged.draggedOverEdge = true;
                     }
@@ -123,17 +124,19 @@ angular.module('ama')
                  */
                 elem.on('drop', function (e) {
                     e.preventDefault();
-                    var dragged = $.parseJSON(e.originalEvent.dataTransfer.getData('text'));
-                    if(!dragged.fromDropArea || elem.hasClass('drop-area')) {
-                        var draggedElement = $($.parseHTML(dragged.element));
-                        draggedElement.appendTo(e.target);
+                    var dragged = ctrl.getCurrentlyDragged();
+                    console.log(dragged.dragSource, elem, $(elem));
+                    if(dragged.dragSource.is(elem)) {
+                        console.log(true);
+                        dragged.element.appendTo(e.target);
                     }
-                        var eventData = {};
-                        eventData.element = draggedElement;
-                        eventData.fromDropArea = elem.hasClass('drop-area');
-                        //$scope.$emit('bindDragging', eventData);
-                    console.log(eventData.element);
-                    ctrl.addDraggable({elem: eventData.element});
+                    else {
+                        var draggedElem = dragged.element.clone();
+                        draggedElem.appendTo(e.target);
+                        draggedElem.dragSource = elem;
+                        ctrl.addDraggable(draggedElem);
+                    }
+
 
                 });
             }
