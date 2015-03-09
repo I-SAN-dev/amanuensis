@@ -108,6 +108,9 @@ angular.module('ama')
                         dragged.draggedOverEdge = true;
                     ctrl.setCurrentlyDragged(dragged);
 
+                    if(!($(e.target).hasClass('drop-area')))
+                        $(e.target).addClass('drop-placeholder');
+
                 });
 
                 elem.on('dragleave', function (e) {
@@ -117,6 +120,10 @@ angular.module('ama')
                     if (elem == dragged.dragSource) {
                         dragged.draggedOverEdge = true;
                     }
+                    ctrl.setCurrentlyDragged(dragged);
+
+                    $(e.target).removeClass('drop-placeholder');
+
                 });
 
                 /**
@@ -125,18 +132,22 @@ angular.module('ama')
                 elem.on('drop', function (e) {
                     e.preventDefault();
                     var dragged = ctrl.getCurrentlyDragged();
-                    console.log(dragged.dragSource, elem, $(elem));
+                    var target = $(e.target);
+                    var append = target.hasClass('drop-area');
                     if(dragged.dragSource.is(elem)) {
-                        console.log(true);
-                        dragged.element.appendTo(e.target);
+                        dragged.element.appendTo(elem);
                     }
                     else {
                         var draggedElem = dragged.element.clone();
-                        draggedElem.appendTo(e.target);
+                        if(append)
+                            draggedElem.appendTo(elem);
+                        else
+                            draggedElem.insertBefore(target);
                         draggedElem.dragSource = elem;
                         ctrl.addDraggable(draggedElem);
                     }
 
+                    target.removeClass('drop-placeholder');
 
                 });
             }

@@ -7,6 +7,14 @@
         </select>
         <button type="submit">OK</button>
     </form>
+    <style>
+        .drop-placeholder:before {
+            height: 40px;
+            background: red;
+            display: block;
+            content:'';
+        }
+    </style>
     <div drag-and-drop>
     <div droppable class="draggable-items" data-ng-repeat="item in dd.draggableElements">
         <div draggable="true" class="draggable-item">{{item.text}}</div>
