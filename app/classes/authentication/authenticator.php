@@ -12,6 +12,8 @@
  */
 
 require_once('classes/config/config.php');
+require_once('classes/authenticator/user.php');
+require_once('classes/errorhandling/amaException.php');
 
 class Authenticator
 {
@@ -24,6 +26,36 @@ class Authenticator
      */
     public static function login($email, $fe_salted_password)
     {
+        /* Get user from email */
+        $user = User::get($email);
+        if(!$user)
+        {
+            $error = new amaException(NULL, 400, 'Unknown email address');
+            $error->renderJSONerror();
+            $error->setHeaders();
+            die();
+        }
+
+        $algo = 'sha256';
+        $password = $user->password;
+        $be_password1 = hash($algo, $password.self::getToken($user->created));
+        $be_password2 = hash($algo, $password.self::getToken($user->created, true));
+
+        /* Check if the login data is correct */
+        if($fe_salted_password == $be_password1 || $fe_salted_password == $be_password2)
+        {
+            //TODO: Session handling
+            return true;
+        }
+        else
+        {
+            $error = new amaException(NULL, 401, 'Invalid email and/or password');
+            $error->renderJSONerror();
+            $error->setHeaders();
+            die();
+        }
+
+
 
     }
 

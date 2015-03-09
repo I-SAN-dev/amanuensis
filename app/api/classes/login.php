@@ -33,11 +33,12 @@ class login {
             "salt"=>"",
         );
 
-        $email = $_GET['mail'];
 
         /* Generate token only if user is not logged in and an email adress is supplied */
-        if(!Authenticator::isLoggedin() && isset($email) && $email != '')
+        if(!Authenticator::isLoggedin() && isset($_GET['mail']) && $_GET['mail'] != '')
         {
+
+            $email = $_GET['mail'];
 
             /* Check email address */
             if(!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -71,9 +72,37 @@ class login {
 
     /**
      * This methods reacts to POST Requests
+     * this may login a user
      */
     public static function post()
     {
-        echo 'Hello World: that was a post!';
+        $response = array();
+
+        if(isset($_POST['email']) && isset($_POST['password']) && $_POST['email'] != '' && $_POST['password'] != '')
+        {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            if(Authenticator::login($email, $password))
+            {
+                $response['loggedin'] = true;
+            }
+            else
+            {
+                $error = new amaException(NULL, 401, "Invalid email and/or password");
+                $error->renderJSONerror();
+                $error->setHeaders();
+                die();
+            }
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, "Invalid login data submitted");
+            $error->renderJSONerror();
+            $error->setHeaders();
+            die();
+        }
+
+        json_response($response);
     }
 }
