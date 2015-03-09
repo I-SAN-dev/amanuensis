@@ -90,8 +90,6 @@ class User {
 
             $result = User::userdataByMail($this->email);
             $this->id = $result["id"];
-
-
         }
     }
 
@@ -134,6 +132,25 @@ class User {
         $q->execute();
 
         $this->username = $username;
+    }
+
+    /**
+     * Sets the password
+     * @param String $password - the one time hashed password
+     */
+    public function setPassword($password)
+    {
+        $algo = 'sha256';
+        $salt = hash($algo, $this->created);
+        $newpassword = hash($algo, $password.$salt);
+
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("UPDATE users SET password=:password WHERE email=:email");
+        $q->bindParam(':password', $newpassword);
+        $q->bindParam(':email', $this->email);
+        $q->execute();
+
+        $this->password = $newpassword;
     }
 
     /**
