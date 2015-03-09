@@ -16,22 +16,55 @@
 if(!$thisisamanu)die('Direct access restricted');
 
 require_once('classes/authentication/authenticator.php');
+require_once('classes/authentication/user.php');
+require_once('classes/errorhandling/amaException.php');
 
 class login {
 
     /**
      * This method reacts to GET Requests
-     * it returns the current login state and, if not logged in, a login token
+     * it returns the current login state and, if not logged in, a login token for the given user
      */
     public static function get()
     {
         $response = array(
             "loggedin"=>Authenticator::isLoggedin(),
-            "token"=>""
+            "token"=>"",
+            "salt"=>"",
         );
-        if(!Authenticator::isLoggedin())
+
+        $email = $_GET['mail'];
+
+        /* Generate token only if user is not logged in and an email adress is supplied */
+        if(!Authenticator::isLoggedin() && isset($email) && $email != '')
         {
-            $response["token"] = Authenticator::getToken();
+
+            /* Check email address */
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                $error = new amaException(NULL, 400, "Invalid email address given");
+                $error->renderJSONerror();
+                $error->setHeaders();
+                die();
+            }
+
+            /* get the user */
+            $user = User::get($email);
+            if(!$user)
+            {
+                $error = new amaException(NULL, 400, "Unknown email address");
+                $error->renderJSONerror();
+                $error->setHeaders();
+                die();
+            }
+
+            /* Generate the salt and the token */
+            $salt = hash('sha256', $user->created);
+
+            $token = Authenticator::getToken($user->created);
+
+            $response["token"] = $token;
+            $response["salt"] = $salt;
         }
         json_response($response);
     }

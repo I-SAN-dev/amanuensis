@@ -18,11 +18,11 @@ class Authenticator
 
     /**
      * Logs an user in
-     * @param string $username - the username
+     * @param string $email - the users email address
      * @param string $fe_salted_password - the password string which is already salted from the frontend
      * @return boolean - true if success, false if fail
      */
-    public static function login($username, $fe_salted_password)
+    public static function login($email, $fe_salted_password)
     {
 
     }
