@@ -35,10 +35,10 @@ class login {
 
 
         /* Generate token only if user is not logged in and an email adress is supplied */
-        if(!Authenticator::isLoggedin() && isset($_GET['mail']) && $_GET['mail'] != '')
+        if(!Authenticator::isLoggedin() && isset($_GET['email']) && $_GET['email'] != '')
         {
 
-            $email = $_GET['mail'];
+            $email = $_GET['email'];
 
             /* Check email address */
             if(!filter_var($email, FILTER_VALIDATE_EMAIL))

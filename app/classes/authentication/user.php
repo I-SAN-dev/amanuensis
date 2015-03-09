@@ -114,6 +114,18 @@ class User {
     }
 
     /**
+     * Sets the last failed login attempt to now
+     */
+    public function setLastFailedLoginAttempt()
+    {
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("UPDATE users SET last_failed_login_attempt=:time WHERE email=:email");
+        $q->bindParam(':time', time());
+        $q->bindParam(':email', $this->email);
+        $q->execute();
+    }
+
+    /**
      * Gets an PDOStatement result with user data to a given Mail
      * @param $email
      * @return mixed - the first result for the user

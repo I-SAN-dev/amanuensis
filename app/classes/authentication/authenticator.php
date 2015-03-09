@@ -12,7 +12,7 @@
  */
 
 require_once('classes/config/config.php');
-require_once('classes/authenticator/user.php');
+require_once('classes/authentication/user.php');
 require_once('classes/errorhandling/amaException.php');
 
 class Authenticator
@@ -49,13 +49,12 @@ class Authenticator
         }
         else
         {
+            $user->setLastFailedLoginAttempt();
             $error = new amaException(NULL, 401, 'Invalid email and/or password');
             $error->renderJSONerror();
             $error->setHeaders();
             die();
         }
-
-
 
     }
 
