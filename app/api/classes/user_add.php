@@ -25,7 +25,8 @@ class user_add {
         //TODO: Authentication!
         //TODO: Sanitation!
 
-        $user = new User("test@test.de","Tester","test123", 0);
+        $password = hash('sha256', 'test123');
+        $user = new User("test@test.de","Tester", $password, 0);
         var_dump($user);
 
     }

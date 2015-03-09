@@ -34,7 +34,7 @@ class amaException {
         {
             $this->errormessage = $e->getMessage();
             $this->errorcode = $e->getCode();
-            $this->file = $e->getCode();
+            $this->file = $e->getFile();
             $this->line = $e->getLine();
         }
 
