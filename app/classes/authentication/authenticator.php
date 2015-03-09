@@ -56,10 +56,11 @@ class Authenticator
 
     /**
      * Returns an validation Token
+     * @param $usertime - the creation timestamp of the user
      * @param $previous - whether or not the previous token should be get
      * @return string - an validation token
      */
-    public static function getToken($previous = false)
+    public static function getToken($usertime, $previous = false)
     {
         $algo = 'sha256';
         $conf = Config::getInstance();
@@ -68,7 +69,10 @@ class Authenticator
 
         $token = hash(
             $algo,
-            hash($algo, $timeIn10Minutes).hash($algo, $secret).hash($algo, $timeIn10Minutes)
+            hash($algo, $timeIn10Minutes)
+            .hash($algo, $secret)
+            .hash($algo, $timeIn10Minutes)
+            .hash($algo, $usertime)
         );
 
         return $token;

@@ -16,8 +16,8 @@ require_once('classes/database/dbal.php');
 class User {
 
     /**
-     * Returns the User with the given email adress or NULL if none found
-     * @param string $email - the email adress of the wanted user
+     * Returns the User with the given email address or NULL if none found
+     * @param string $email - the email address of the wanted user
      * @return User|NULL
      */
     static function get($email)
@@ -52,7 +52,7 @@ class User {
      * Creates a new User and saves it to the Datastore
      * @param string $email
      * @param string $username
-     * @param string $password - already hashed!
+     * @param string $password - completely hashed if already existent user or only once hashed with sha256 without salt!
      * @param int $accessgroup
      * @param boolean $savetodb - set to false if user already exists
      */
@@ -60,12 +60,22 @@ class User {
     {
         $this->email = $email;
         $this->username = $username;
-        $this->password = $password;
         $this->accessgroup = $accessgroup;
 
-        if($savetodb)
+        if(!$savetodb)
+        {
+            /* this is a completely readymade password already from the db, we keep it as is */
+            $this->password = $password;
+        }
+        else
         {
             $this->created = time();
+
+            /* if it is a new user we get a only simply hashed password and need to salt it before storing */
+            $algo = 'sha256';
+            $salt = hash($algo, $this->created);
+            $this->password = hash($algo, $password.$salt);
+
 
             $dbal = DBAL::getInstance();
             $q = $dbal->prepare("INSERT INTO users (email, username, created, password, accessgroup) VALUES (:email, :username, :created, :password, :accessgroup)");
@@ -80,11 +90,13 @@ class User {
 
             $result = User::userdataByMail($this->email);
             $this->id = $result["id"];
+
+
         }
     }
 
     /**
-     * Sets the email adress
+     * Sets the email address
      * @param String $email
      */
     public function setEmail($email)
