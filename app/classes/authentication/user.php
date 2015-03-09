@@ -101,7 +101,24 @@ class User {
      */
     public function setEmail($email)
     {
-        //TODO
+        $otheruser = self::userdataByMail($email);
+        if(!otheruser)
+        {
+            $dbal = DBAL::getInstance();
+            $q = $dbal->prepare("UPDATE users SET email=:email WHERE id=:id");
+            $q->bindParam(':email', $email);
+            $q->bindParam(':id', $this->id);
+            $q->execute();
+
+            $this->$email = $email;
+        }
+        else
+        {
+            $error = new amaException(NULL, 500, 'E-Mail address already in use');
+            $error->renderJSONerror();
+            $error->setHeaders();
+            die();
+        }
     }
 
     /**
@@ -110,7 +127,13 @@ class User {
      */
     public function setUsername($username)
     {
-        //TODO
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("UPDATE users SET username=:username WHERE email=:email");
+        $q->bindParam(':username', $username);
+        $q->bindParam(':email', $this->email);
+        $q->execute();
+
+        $this->username = $username;
     }
 
     /**
@@ -118,11 +141,14 @@ class User {
      */
     public function setLastFailedLoginAttempt()
     {
+        $time = time();
         $dbal = DBAL::getInstance();
         $q = $dbal->prepare("UPDATE users SET last_failed_login_attempt=:time WHERE email=:email");
-        $q->bindParam(':time', time());
+        $q->bindParam(':time', $time);
         $q->bindParam(':email', $this->email);
         $q->execute();
+
+        $this->last_failed_login_attempt = $time;
     }
 
     /**
