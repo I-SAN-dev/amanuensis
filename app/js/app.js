@@ -1,6 +1,17 @@
 var app = angular.module('ama', ['ui.router']);
-app.run(function () {
+app.run(function ($rootScope, $state) {
 
+    /**
+     * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
+     */
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        var requireLogin = toState.data.requireLogin;
+
+        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+            event.preventDefault();
+            $state.go('login')
+        }
+    });
 });
 app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -12,7 +23,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             },
             data: {
-                noLoginRequired: true
+                requireLogin: false
             },
             controller: function($scope) {
                 $scope.items = ["A", "List", "Of", "Items"];

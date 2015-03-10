@@ -1,0 +1,9 @@
+<form ng-controller="AuthCtrl as auth" ng-submit="auth.submit(email, password)">
+    <div ng-if="auth.loggedOut">
+        <label for="email">E-Mail</label>
+        <input type="email" name="email" ng-model="email">
+        <label for="password">Passwort</label>
+        <input type="password" name="password" ng-model="password">
+    </div>
+    <button type="submit">Login/Logout</button>
+</form>
