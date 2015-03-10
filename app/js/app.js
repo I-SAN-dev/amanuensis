@@ -11,6 +11,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     templateUrl: 'templates/pages/start.html'
                 }
             },
+            data: {
+                noLoginRequired: true
+            },
             controller: function($scope) {
                 $scope.items = ["A", "List", "Of", "Items"];
             }
@@ -20,6 +23,73 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/something.html'
+                }
+            }
+        })
+        .state('login',{
+            url: '/login',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/login.html'
+                }
+            },
+            data: {
+                requireLogin: false
+            }
+        })
+        .state('app',{
+            abstract: true,
+            url: '/app',
+            data: {
+                requireLogin: true
+            },
+            templateUrl: 'index.php'
+        })
+        .state('app.dashboard',{
+            url: '/dashboard',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
+                }
+            }
+        })
+        .state('app.clients',{
+            url: '/clients',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
+                }
+            }
+        })
+        .state('app.offers',{
+            url: '/offers',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
+                }
+            }
+        })
+        .state('app.projects',{
+            url: '/projects',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
+                }
+            }
+        })
+        .state('app.acceptances',{
+            url: '/acceptances',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
+                }
+            }
+        })
+        .state('app.invoices',{
+            url: '/invoices',
+            views: {
+                'mainContent': {
+                    templateUrl: 'templates/pages/dashboard.html'
                 }
             }
         })
