@@ -134,18 +134,18 @@ angular.module('ama')
                     var dragged = ctrl.getCurrentlyDragged();
                     var target = $(e.target);
                     var append = target.hasClass('drop-area');
-                    if(dragged.dragSource.is(elem)) {
-                        dragged.element.appendTo(elem);
+
+                    var draggedElem = dragged.element;
+                    if(!dragged.dragSource.is(elem)) {
+                        var draggedElem = draggedElem.clone();
                     }
-                    else {
-                        var draggedElem = dragged.element.clone();
+
                         if(append)
                             draggedElem.appendTo(elem);
                         else
                             draggedElem.insertBefore(target);
                         draggedElem.dragSource = elem;
                         ctrl.addDraggable(draggedElem);
-                    }
 
                     target.removeClass('drop-placeholder');
 
