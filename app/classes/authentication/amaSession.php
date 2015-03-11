@@ -1,6 +1,6 @@
 <?php
 /**
- * This static class handles Login Sessions, wraps the default PHP session handling
+ * This static class handles Login Sessions, wraps the default PHP session handling.
  *
  * This file is part of the project codename "AMANUENSIS"
  *
