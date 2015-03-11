@@ -21,7 +21,7 @@ class Scripts
         "lib/jquery-2.1.3.min.js",
         "lib/angular-1.3.14.min.js",
         "lib/modules/angular-ui-router.min.js",
-        "lib/sha256.js",
+        //"lib/sha256.js",
         "js/app.js", // has to be loaded before the other scripts
     );
 
@@ -39,9 +39,10 @@ class Scripts
      */
     public static $scripts = array(
         // Filters
-        "js/filters/sha256.js",
+
         // Services
         "js/services/authService.js",
+        "js/services/sha256.js",
         // Directives
 
         //Controllers

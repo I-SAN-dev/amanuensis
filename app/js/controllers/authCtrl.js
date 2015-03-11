@@ -11,7 +11,7 @@ angular.module('ama')
             console.log('submit');
             if(! self.loggedIn){
                 AuthService.login(email, password).then(function (result) {
-                    console.log(result.data);
+                    console.log(result);
                 });
             } else {
                 console.log(self.loggedIn);
