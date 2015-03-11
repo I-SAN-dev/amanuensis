@@ -1,5 +1,5 @@
 angular.module('ama')
-.factory('AuthService', ['$q','$http', 'sha256Service',function($q, $http, sha256Service){
+.factory('AuthService', ['$q','$http', 'sha256Filter',function($q, $http, sha256Filter){
         var currentUser;
         return {
             currentUser: function(){
@@ -14,9 +14,9 @@ angular.module('ama')
                         var token = result.token;
                         var salt = result.salt;
 
-                        var hashedPass = sha256Service(password);
-                        var passSalt = sha256Service(hashedPass + salt);
-                        var passToSend = sha256Service(passSalt + token);
+                        var hashedPass = sha256Filter(password);
+                        var passSalt = sha256Filter(hashedPass + salt);
+                        var passToSend = sha256Filter(passSalt + token);
 
                         $http.post("api/", {
                             action: 'login',
