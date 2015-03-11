@@ -65,6 +65,8 @@ class Authenticator
     public static function logout()
     {
 
+
+
     }
 
     /**
