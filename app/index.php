@@ -53,11 +53,7 @@ ob_start();
     </li>
 </ul>
 hello world lalala<br/>
-<?php
-$bla = new amaException(NULL, 1337, 'tollertest');
-$bla->renderScripttag();
 
-?>
 </body>
 </html>
 <?php

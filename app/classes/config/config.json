@@ -1,15 +1,22 @@
 {
   "db":{
-    "host":"",
-    "user":"",
-    "password":""
+    "host":"localhost",
+    "database":"isande_ama",
+    "port":"3306",
+    "user":"isande_ama",
+    "password":"bachelor2015"
   },
 
   "baseurl":"",
   "secureurl":"",
+  "appsecret":"asdfkkj83n8429fkf9ek0kj",
+
   "company":"I-SAN.de Webdesign & Hosting GbR",
   "lang":"de",
+
   "debug":"1",
+  "errorlogging":"1",
+  "errorlogpath":"logs/errorlog.csv",
 
   "path":{
     "scriptsbytemplate":"js/scriptsbytemplate",

@@ -14,6 +14,7 @@
  */
 
 require_once 'classes/scripthandling/scriptLoader.php';
+require_once 'classes/errorhandling/amaException.php';
 
 final class Config {
 
@@ -26,9 +27,9 @@ final class Config {
      */
     public static function getInstance()
     {
-        if(self::$instance == null)
+        if(self::$instance == NULL)
         {
-            self::$instance = new self();
+            self::$instance = new Config();
         }
         return self::$instance;
     }
@@ -37,6 +38,7 @@ final class Config {
      * Manage proper cloning
      * @return Config - a config instance
      */
+
     private function __clone(){
         return self::getInstance();
     }
@@ -67,8 +69,10 @@ final class Config {
         }
         catch(Exception $e)
         {
-            echo "Error reading config file:\n".$e->getMessage();
-            die();
+            $errorjson = '{ "code": 500, "message": "Error reading config file: '.$e->getMessage().'" }';
+            echo "<script>pageErrors.push(JSON.parse('".$errorjson."'))</script>";
+
+            return array();
         }
     }
 
@@ -102,10 +106,7 @@ final class Config {
         }
         catch(Exception $e)
         {
-            if($this->get['debug']==1)
-            {
-                echo "\n".$e->getMessage()."\n";
-            }
+            $error = new amaException($e, 500);
             return false;
         }
     }
