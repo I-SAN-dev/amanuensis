@@ -1,17 +1,17 @@
 angular.module('ama')
 .factory('AuthService', ['$q','$http', 'sha256Filter', 'ApiAbstractionLayer',function($q, $http, sha256Filter, ApiAbstractionLayer){
-        var currentUser;
         return {
             currentUser: function(){
-                $http.get("api/?action=user_get").then(function (result) {
+                /*$http.get("api/?action=user_get").then(function (result) {
                     console.log(result);
-                });
+                });*/
+                return ApiAbstractionLayer('GET','user_get');
                 //return currentUser;
             },
             login: function(email, password) {
                 var deferred = $q.defer();
                 console.log('Login called');
-                $http.get("api/?action=login&email="+email)
+                /*$http.get("api/?action=login&email="+email)
                     .success(function (result) {
                         console.log(result);
                         var token = result.token;
@@ -34,8 +34,8 @@ angular.module('ama')
                     }).error(function (errorData, status, headers, config) {
                         console.log(errorData);
                         deferred.reject(errorData);
-                    });
-                /*ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
+                    });*/
+                ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
                     .then(function (result) {
                         var token = result.token;
                         var salt = result.salt;
@@ -49,12 +49,15 @@ angular.module('ama')
                                 deferred.resolve(data);
                                 console.log('Success');
                             })
-                    })*/
+                    });
 
                 return deferred.promise;
 
             },
             logout: function(){
+                ApiAbstractionLayer('GET', 'logout').then(function (result) {
+                    console.log(result);
+                });
 
             },
             isLoggedIn: function(){

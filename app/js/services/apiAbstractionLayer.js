@@ -1,13 +1,18 @@
 angular.module('ama')
     .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', function ($http, constants, $q) {
         var specialParams = {};
-        var apiUrl = (constants.SECUREURL || constants.BASEURL)+'api/';
+        var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/'api/';
         specialParams.login = {
-            url: apiUrl+'login'
+            url: apiUrl
+        };
+        specialParams.logout = {
+            url: apiUrl+'?action=logout'
+        };
+        specialParams.user_get = {
+            url: apiUrl+'?action=user_get'
         };
 
         return function(method,identifier) {
-            console.log(identifier);
             var id = identifier;
             if(typeof identifier == Object) {
                 id = identifier.name;
@@ -17,7 +22,9 @@ angular.module('ama')
                 params: identifier.params,
                 data: identifier.data
             };
-            $.extend(config, specialParams.id);
+            $.extend(config, specialParams[id]);
+
+            console.log(config);
 
             var defer = $q.defer();
             $http(config)
