@@ -1,5 +1,5 @@
 angular.module('ama')
-    .service('ApiAbstractionLayer', ['$http', 'constants', '$q', function ($http, constants, $q) {
+    .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', function ($http, constants, $q) {
         var specialParams = {};
         var apiUrl = (constants.SECUREURL || constants.BASEURL)+'api/';
         specialParams.login = {
@@ -7,6 +7,7 @@ angular.module('ama')
         };
 
         return function(method,identifier) {
+            console.log(identifier);
             var id = identifier;
             if(typeof identifier == Object) {
                 id = identifier.name;
