@@ -37,7 +37,7 @@ if ($method !== 'GET' && $method !== 'POST')
  */
 if($method == 'POST')
 {
-    if($_SERVER["CONTENT_TYPE"] == "application/json;charset=utf-8" || $_SERVER["CONTENT_TYPE"] == "application/json")
+    if($_SERVER["CONTENT_TYPE"] == "application/json;charset=utf-8" || $_SERVER["CONTENT_TYPE"] == "application/json" || !isset($_POST['action']))
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
     }
