@@ -1,5 +1,5 @@
 angular.module('ama')
-.factory('AuthService', ['$q','$http', 'sha256Filter',function($q, $http, sha256Filter){
+.factory('AuthService', ['$q','$http', 'sha256Service',function($q, $http, sha256Service){
         var currentUser;
         return {
             currentUser: function(){
@@ -11,32 +11,25 @@ angular.module('ama')
                 $http.get("api/?action=login&email="+email)
                     .success(function (result) {
                         console.log(result);
-                        if (result.error) {
-                            deferred.reject(result.error);
-                        }
                         var token = result.token;
                         var salt = result.salt;
 
-                        var hashedPass = sha256Filter(password);
-                        var passSalt = sha256Filter(hashedPass + salt);
-                        var passToSend = sha256Filter(passSalt + token);
+                        var hashedPass = sha256Service(password);
+                        var passSalt = sha256Service(hashedPass + salt);
+                        var passToSend = sha256Service(passSalt + token);
 
                         $http.post("api/", {
                             action: 'login',
                             email: email,
                             password: passToSend
                         }).success(function (data) {
-                            if (data.error) {
-                                deferred.reject(data.error)
-                            } else {
-                                deferred.resolve(data);
-                            }
+                            deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
                             console.log(data, status, headers, config);
                             deferred.reject(data);
                         });
-                    }).error(function (errorData, statur, headers, config) {
-                        console.log(header);
+                    }).error(function (errorData, status, headers, config) {
+                        console.log(errorData);
                         deferred.reject(errorData);
                     });
 
