@@ -1,9 +1,12 @@
 angular.module('ama')
-.factory('AuthService', ['$q','$http', 'sha256Filter',function($q, $http, sha256Filter){
+.factory('AuthService', ['$q','$http', 'sha256Filter', 'ApiAbstractionLayer',function($q, $http, sha256Filter, ApiAbstractionLayer){
         var currentUser;
         return {
             currentUser: function(){
-                return currentUser;
+                $http.get("api/?action=user_get").then(function (result) {
+                    console.log(result);
+                });
+                //return currentUser;
             },
             login: function(email, password) {
                 var deferred = $q.defer();
@@ -32,6 +35,21 @@ angular.module('ama')
                         console.log(errorData);
                         deferred.reject(errorData);
                     });
+                /*ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
+                    .then(function (result) {
+                        var token = result.token;
+                        var salt = result.salt;
+
+                        var hashedPass = sha256Filter(password);
+                        var passSalt = sha256Filter(hashedPass + salt);
+                        var passToSend = sha256Filter(passSalt + token);
+
+                        ApiAbstractionLayer('POST', {name: 'login', data: {action: 'login',email: email,password: passToSend}})
+                            .then(function (data) {
+                                deferred.resolve(data);
+                                console.log('Success');
+                            })
+                    })*/
 
                 return deferred.promise;
 

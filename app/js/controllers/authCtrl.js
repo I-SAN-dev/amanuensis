@@ -3,7 +3,9 @@ angular.module('ama')
         var self = this;
         this.loggedIn = false;
 
-        //var currentUser = AuthService.currentUser();
+        this.getUser = function () {
+            AuthService.currentUser();
+        };
 
         //this.email = currentUser.email;
 

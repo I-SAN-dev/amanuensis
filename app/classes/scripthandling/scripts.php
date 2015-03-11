@@ -42,6 +42,7 @@ class Scripts
         "js/filters/sha256.js",
         // Services
         "js/services/authService.js",
+        "js/services/apiAbstractionLayer.js",
         // Directives
 
         //Controllers
