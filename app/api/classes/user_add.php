@@ -11,6 +11,8 @@
  * @license GPL
  */
 
+if(!$thisisamanu)die('Direct access restricted');
+
 require_once('classes/authentication/user.php');
 
 class user_add {
