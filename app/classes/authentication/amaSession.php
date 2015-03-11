@@ -81,6 +81,7 @@ class AmaSession {
      */
     static function destroy()
     {
+        AmaSession::start();
         $a = setcookie(session_name(), "", 1);
         $b = setcookie(session_name(), false);
         unset($_COOKIE[session_name()]);
