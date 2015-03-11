@@ -1,5 +1,5 @@
 angular.module('ama')
-.factory('AuthService', ['$q','$http',function($q, $http){
+.factory('AuthService', ['$q','$http', 'sha256Filter',function($q, $http, sha256Filter){
         var currentUser;
         return {
             currentUser: function(){
@@ -7,34 +7,37 @@ angular.module('ama')
             },
             login: function(email, password) {
                 var deferred = $q.defer();
+                console.log('Login called');
                 $http.get("http://cb.ama.i-san.de/api/?action=login&email="+email)
-                    .then(function (result) {
-                        if(result.error){
+                    .success(function (result) {
+                        console.log(result);
+                        if (result.error) {
                             deferred.reject(result.error);
                         }
                         var token = result.token;
                         var salt = result.salt;
 
-                        var password = password.$filter('sha256');
-                        var passSalt = (password + salt).$filter('sha256');
-                        var passToSend = (passSalt + token).$filter('sha256');
+                        var hashedPass = sha256Filter(password);
+                        var passSalt = sha256Filter(hashedPass + salt);
+                        var passToSend = sha256Filter(passSalt + token);
 
                         $http.post("http://cb.ama.i-san.de/api/", {
-                            action: "login",
+                            action: 'login',
                             email: email,
                             password: passToSend
-                        }).then(function (result) {
-                            if(result.error){
-                                deferred.reject(result.error)
+                        }).success(function (data) {
+                            if (data.error) {
+                                deferred.reject(data.error)
                             } else {
-                                deferred.resolve(result);
+                                deferred.resolve(data);
                             }
-                        }, function (error) {
-                            deferred.reject(error);
+                        }).error(function (data, status, headers, config) {
+                            console.log(data, status, headers, config);
+                            deferred.reject(data);
                         });
-
-                    }, function (error) {
-                        deferred.reject(error);
+                    }).error(function (errorData, statur, headers, config) {
+                        console.log(header);
+                        deferred.reject(errorData);
                     });
 
                 return deferred.promise;
