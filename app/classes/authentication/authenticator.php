@@ -13,6 +13,7 @@
 
 require_once('classes/config/config.php');
 require_once('classes/authentication/user.php');
+require_once('classes/authentication/amaSession.php');
 require_once('classes/errorhandling/amaException.php');
 
 class Authenticator
@@ -44,7 +45,7 @@ class Authenticator
         /* Check if the login data is correct */
         if($fe_salted_password == $be_password1 || $fe_salted_password == $be_password2)
         {
-            //TODO: Session handling
+            AmaSession::set('user', $user);
             return true;
         }
         else
@@ -64,18 +65,23 @@ class Authenticator
      */
     public static function logout()
     {
-
-
-
+        return AmaSession::destroy();
     }
 
     /**
      * Gets the current User object
-     * @return User
+     * @return User|NULL
      */
     public static function getUser()
     {
-
+        if(Authenticator::isLoggedin())
+        {
+            return AmaSession::get('user');
+        }
+        else
+        {
+            return NULL;
+        }
     }
 
     /**
@@ -84,7 +90,7 @@ class Authenticator
      */
     public static function isLoggedin()
     {
-        return false;
+        return AmaSession::get('user') != NULL;
     }
 
     /**
