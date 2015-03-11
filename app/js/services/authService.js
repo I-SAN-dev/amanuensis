@@ -36,6 +36,7 @@ angular.module('ama')
                     }, function (error) {
                         deferred.reject(error);
                     });
+
                 return deferred.promise;
 
             },

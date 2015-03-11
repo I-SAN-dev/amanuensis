@@ -1,6 +1,8 @@
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', function (AuthService) {
-        this.loggedIn = AuthService.isLoggedIn || false;
+        this.loggedIn = AuthService.isLoggedIn().then(function (result) {
+            return result;
+        }) || false;
 
         var currentUser = AuthService.currentUser();
 
@@ -9,7 +11,9 @@ angular.module('ama')
         this.submit = function (email, password) {
 
             if(password){
-                AuthService.login(email, password);
+                AuthService.login(email, password).then(function (result) {
+                    console.log(result);
+                });
             } else {
                 AuthService.logout();
             }

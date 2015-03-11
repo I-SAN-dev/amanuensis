@@ -43,13 +43,13 @@ ob_start();
     ?>
 </head>
 <body>
-<div ui-view="mainContent"></div>
+<div data-ui-view="mainContent"></div>
 <ul>
     <li>
-        <a ui-sref="index">Home</a>
+        <a data-ui-sref="index">Home</a>
     </li>
     <li>
-        <a ui-sref="something">Something else</a>
+        <a data-ui-sref="login">Login</a>
     </li>
 </ul>
 hello world lalala<br/>
