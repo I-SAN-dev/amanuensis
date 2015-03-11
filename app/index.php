@@ -39,7 +39,7 @@ ob_start();
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <?php
-        echo ScriptLoader::echoScripts(0);
+        echo ScriptLoader::echoScripts($conf->get['debug']);
     ?>
 </head>
 <body>
