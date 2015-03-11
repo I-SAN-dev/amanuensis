@@ -5,6 +5,7 @@
         <label for="password">Passwort</label>
         <input type="password" name="password" ng-model="password">
     </div>
-    <button type="submit">Login/Logout</button>
+    <button type="submit">Login</button>
+    <button type="button" ng-click="auth.logout()">Logout</button>
     <button type="button" ng-click="auth.getUser()">Get User</button>
 </form>
