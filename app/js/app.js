@@ -13,7 +13,10 @@ app.run(function ($rootScope, $state) {
         }
     });
 });
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+    //$httpProvider.defaults.headers.post = { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' };
+
     $stateProvider
         .state('index', {
             url: '',

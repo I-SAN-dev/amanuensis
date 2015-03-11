@@ -8,7 +8,7 @@ angular.module('ama')
             login: function(email, password) {
                 var deferred = $q.defer();
                 console.log('Login called');
-                $http.get("http://cb.ama.i-san.de/api/?action=login&email="+email)
+                $http.get("api/?action=login&email="+email)
                     .success(function (result) {
                         console.log(result);
                         if (result.error) {
@@ -21,7 +21,7 @@ angular.module('ama')
                         var passSalt = sha256Filter(hashedPass + salt);
                         var passToSend = sha256Filter(passSalt + token);
 
-                        $http.post("http://cb.ama.i-san.de/api/", {
+                        $http.post("api/", {
                             action: 'login',
                             email: email,
                             password: passToSend
@@ -48,7 +48,7 @@ angular.module('ama')
             },
             isLoggedIn: function(){
                 var deferred = $q.defer();
-                $http.get("http://cb.ama.i-san.de/api/?action=login")
+                $http.get("api/?action=login")
                     .then(function(result){
                         deferred.resolve(result.loggedIn);
                     }, function (error) {
