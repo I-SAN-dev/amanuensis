@@ -10,6 +10,7 @@
   "baseurl":"",
   "secureurl":"",
   "appsecret":"asdfkkj83n8429fkf9ek0kj",
+  "sessiontimeout":"60",
 
   "company":"I-SAN.de Webdesign & Hosting GbR",
   "lang":"de",
