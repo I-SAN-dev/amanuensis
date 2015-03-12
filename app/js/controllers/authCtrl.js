@@ -1,14 +1,17 @@
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', function (AuthService) {
         var self = this;
-
         this.getUser = function () {
             AuthService.currentUser().then(function(result){
                 return result;
             });
         };
 
-        //this.email = currentUser.email;
+        this.email = '';
+        AuthService.currentUser().then(function(user){
+            self.email = user.email;
+        });
+
 
         this.submit = function (email, password) {
             console.log('submit');

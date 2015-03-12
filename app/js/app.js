@@ -1,5 +1,5 @@
 var app = angular.module('ama', ['ui.router']);
-app.run(function ($rootScope, $state) {
+app.run(function ($rootScope, $state, AuthService) {
 
     /**
      * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
@@ -12,6 +12,11 @@ app.run(function ($rootScope, $state) {
             $state.go('login')
         }
     });
+
+    $rootScope.getUser = function(){
+        return AuthService.currentUser();
+    };
+
 });
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
