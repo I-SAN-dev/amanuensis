@@ -1,15 +1,15 @@
 <?php 
 //define("DOMPDF_TEMP_DIR", "/tmp");
 //define("DOMPDF_CHROOT", DOMPDF_DIR);
-//define("DOMPDF_UNICODE_ENABLED", false);
+define("DOMPDF_UNICODE_ENABLED", true);
 //define("DOMPDF_PDF_BACKEND", "PDFLib");
-//define("DOMPDF_DEFAULT_MEDIA_TYPE", "print");
-//define("DOMPDF_DEFAULT_PAPER_SIZE", "letter");
+define("DOMPDF_DEFAULT_MEDIA_TYPE", "screen");
+define("DOMPDF_DEFAULT_PAPER_SIZE", "A4");
 //define("DOMPDF_DEFAULT_FONT", "serif");
 //define("DOMPDF_DPI", 72);
 //define("DOMPDF_ENABLE_PHP", true);
 //define("DOMPDF_ENABLE_REMOTE", true);
-//define("DOMPDF_ENABLE_CSS_FLOAT", true);
+define("DOMPDF_ENABLE_CSS_FLOAT", true);
 //define("DOMPDF_ENABLE_JAVASCRIPT", false);
 //define("DEBUGPNG", true);
 //define("DEBUGKEEPTEMP", true);
@@ -25,5 +25,5 @@
 //define("DOMPDF_ENABLE_FONTSUBSETTING", true);
 
 // DOMPDF authentication
-//define("DOMPDF_ADMIN_USERNAME", "user");
-//define("DOMPDF_ADMIN_PASSWORD", "password");
+define("DOMPDF_ADMIN_USERNAME", "user");
+define("DOMPDF_ADMIN_PASSWORD", "test");
