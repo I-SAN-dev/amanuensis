@@ -50,7 +50,6 @@ ob_start();
 </div>
 <div class="container-fluid">
     <div data-ui-view="mainContent"></div>
-    <p>{{'hello'|translate}}</p>
 </div>
 
 

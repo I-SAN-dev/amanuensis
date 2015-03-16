@@ -5619,5 +5619,7 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+#mainContent {
+  margin-top: 80px; }
 
 /*# sourceMappingURL=ama.css.map */
