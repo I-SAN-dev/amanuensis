@@ -36,7 +36,7 @@ angular.module('ama')
                 })
                 .error(function (data, status, headers, config) {
                     // Open modal with error information
-                    ErrorDialog.setup(data.error).activate();
+                    ErrorDialog(data.error).activate();
                     if(status == 401) {
                         $state.go('login');
                     }
