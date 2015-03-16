@@ -43,16 +43,16 @@ ob_start();
     ?>
 </head>
 <body>
-<div data-ui-view="mainContent"></div>
-<ul>
-    <li>
-        <a data-ui-sref="index">Home</a>
-    </li>
-    <li>
-        <a data-ui-sref="login">Login</a>
-    </li>
-</ul>
-hello world lalala<br/>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+    <div data-ui-view="mainNav"></div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div data-ui-view="mainContent"></div>
+</div>
+
+
 
 </body>
 </html>

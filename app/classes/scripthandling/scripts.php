@@ -49,6 +49,7 @@ class Scripts
 
         //Controllers
         "js/controllers/authCtrl.js",
+        "js/controllers/mainNavCtrl.js",
     );
 
     /**
