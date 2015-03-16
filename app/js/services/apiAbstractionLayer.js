@@ -11,7 +11,7 @@ angular.module('ama')
         var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/'api/';
 
 
-        return function(method,identifier) {
+        return function(method,identifier, noErrorModal) {
             var id = identifier;
             if(typeof(identifier) == "object") {
                 id = identifier.name;
@@ -35,8 +35,10 @@ angular.module('ama')
                     defer.resolve(data);
                 })
                 .error(function (data, status, headers, config) {
-                    // Open modal with error information
-                    ErrorDialog(data.error).activate();
+                    if(!noErrorModal) {
+                        // Open modal with error information
+                        ErrorDialog(data.error).activate();
+                    }
                     if(status == 401) {
                         $state.go('login');
                     }
