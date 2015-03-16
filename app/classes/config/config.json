@@ -22,6 +22,14 @@
   "path":{
     "scriptsbytemplate":"js/scriptsbytemplate",
     "generated":"js/generated"
+  },
+
+  "templates":
+  {
+    "offer":"pdftemplates/offer.html",
+    "invoice":"pdftemplates/invoice.html",
+    "approval":"pdftemplates/approval.html",
+    "reminder":"pdftemplates/reminder.html"
   }
 
 
