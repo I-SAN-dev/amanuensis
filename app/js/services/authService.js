@@ -10,8 +10,8 @@ angular.module('ama')
              * Gets the currently logged in user
              * @returns {promise}
              */
-            currentUser: function(){
-                return ApiAbstractionLayer('GET','user_get');
+            currentUser: function(noErrorModal){
+                return ApiAbstractionLayer('GET','user_get', noErrorModal);
             },
 
             /**

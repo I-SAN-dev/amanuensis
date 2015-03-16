@@ -18,7 +18,7 @@ angular.module('ama')
         };
 
         this.email = '';
-        AuthService.currentUser().then(function(user){
+        AuthService.currentUser(true).then(function(user){
             self.email = user.email;
         });
 
