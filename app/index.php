@@ -45,7 +45,7 @@ ob_start();
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-    <div data-ui-view="mainNav"></div>
+    <div data-ama-menu data-menuname="'mainNav'"></div>
     </div>
 </div>
 <div class="container-fluid">

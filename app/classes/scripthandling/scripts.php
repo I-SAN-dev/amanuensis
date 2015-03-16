@@ -46,10 +46,9 @@ class Scripts
         "js/services/apiAbstractionLayer.js",
         "js/services/errorDialog.js",
         // Directives
-
+        "js/directives/menu.js",
         //Controllers
         "js/controllers/authCtrl.js",
-        "js/controllers/mainNavCtrl.js",
     );
 
     /**

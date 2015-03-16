@@ -60,9 +60,6 @@ app.constant('sites', [
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/login.html'
-                },
-                'mainNav':{
-                    templateUrl: 'templates/modules/mainNav.html'
                 }
             },
             data: {
@@ -79,12 +76,7 @@ app.constant('sites', [
             data: {
                 requireLogin: true
             },
-            templateUrl: 'index.php',
-            views: {
-                'mainNav': {
-                    templateUrl: 'templates/modules/mainNav.html'
-                }
-            }
+            templateUrl: 'index.php'
         }
     },
     {
