@@ -7,20 +7,20 @@ angular.module('ama')
             },
             login: function(email, password) {
                 var deferred = $q.defer();
-                console.log('Login called');
                 ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
                     .then(function (result) {
                         var token = result.token;
                         var salt = result.salt;
-
-                        var hashedPass = sha256Filter(password);
-                        var passSalt = sha256Filter(hashedPass + salt);
-                        var passToSend = sha256Filter(passSalt + token);
-
+                        if (password) {
+                            var hashedPass = sha256Filter(password);
+                            var passSalt = sha256Filter(hashedPass + salt);
+                            var passToSend = sha256Filter(passSalt + token);
+                        } else {
+                            deferred.reject();
+                        }
                         ApiAbstractionLayer('POST', {name: 'login', data: {action: 'login',email: email,password: passToSend}})
                             .then(function (data) {
                                 deferred.resolve(data);
-                                console.log('Success');
                             })
                     });
 
@@ -32,7 +32,6 @@ angular.module('ama')
                 ApiAbstractionLayer('GET', 'logout').then(function (result) {
                     defer.resolve(result);
                 });
-                console.log(defer.promise);
                 return defer.promise;
             },
             isLoggedIn: function(){

@@ -1,5 +1,8 @@
 angular.module('ama')
-.controller('AuthCtrl', ['AuthService', function (AuthService) {
+.controller('AuthCtrl', ['AuthService', '$state', function (AuthService, $state) {
+
+        this.message = $state.current.data.message;
+        console.log($state.current);
         var self = this;
         this.getUser = function () {
             AuthService.currentUser().then(function(result){

@@ -1,5 +1,5 @@
 angular.module('ama')
-    .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', '$state', function ($http, constants, $q, $state) {
+    .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', '$state', 'ErrorDialog', function ($http, constants, $q, $state, ErrorDialog) {
         var specialParams = {};
         var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/'api/';
 
@@ -28,12 +28,12 @@ angular.module('ama')
                     defer.resolve(data);
                 })
                 .error(function (data, status, headers, config) {
+                    // Open modal with error information
+                    ErrorDialog.setup(data.error).activate();
                     if(status == 401) {
                         $state.go('login');
                     }
-                    console.log(data, status, headers, config);
                     defer.reject(data);
-
                 });
             return defer.promise;
 

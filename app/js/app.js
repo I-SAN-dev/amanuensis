@@ -1,4 +1,7 @@
-var app = angular.module('ama', ['ui.router']);
+/**
+ * Main application. Handles dependencies and routing.
+ */
+var app = angular.module('ama', ['ui.router', 'btford.modal']);
 app.run(function ($rootScope, $state, AuthService) {
 
     /**
@@ -115,8 +118,4 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     ;
     $urlRouterProvider.otherwise('')
-});
-
-app.controller('SomeCtrl', function() {
-    this.sth="Something";
 });
