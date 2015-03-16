@@ -21,16 +21,17 @@ app.run(function ($rootScope, $state, AuthService) {
     };
 
 });
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-
-    //$httpProvider.defaults.headers.post = { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' };
-
-    $stateProvider
-        .state('index', {
+app.constant('sites', [
+    {
+        name: 'index',
+        stateObject: {
             url: '',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/start.html'
+                },
+                'mainNav':{
+                    templateUrl: 'templates/modules/mainNav.html'
                 }
             },
             data: {
@@ -39,16 +40,22 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: function($scope) {
                 $scope.items = ["A", "List", "Of", "Items"];
             }
-        })
-        .state('something', {
+        }
+    },
+    {
+        name:'something',
+        stateObject: {
             url: '/something',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/something.html'
                 }
             }
-        })
-        .state('login',{
+        }
+    },
+    {
+        name:'login',
+        stateObject: {
             url: '/login',
             views: {
                 'mainContent': {
@@ -56,66 +63,115 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             },
             data: {
-                requireLogin: false
+                id: 'login',
+                name: 'Login'
             }
-        })
-        .state('app',{
+        }
+    },
+    {
+        name: 'app',
+        stateObject: {
             abstract: true,
             url: '/app',
             data: {
                 requireLogin: true
             },
             templateUrl: 'index.php'
-        })
-        .state('app.dashboard',{
+        }
+    },
+    {
+        name: 'app.dashboard',
+        stateObject: {
             url: '/dashboard',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
-        .state('app.clients',{
+        },
+        menus: {
+            mainNav: {
+                name: 'Dashboard',
+                title: 'App Dashboard'
+            }
+        }
+    },
+    {
+        name: 'app.clients',
+        stateObject: {
             url: '/clients',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
-        .state('app.offers',{
+        },
+        menus: {
+            mainNav: {
+                name: 'Clients',
+                title: 'Clients'
+            }
+        }
+    },
+    {
+        name: 'app.offers',
+        stateObject: {
             url: '/offers',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
-        .state('app.projects',{
+        },
+        menus: {
+            mainNav: {
+                name: 'Offers',
+                title: 'Offers'
+            }
+        }
+    },
+    {
+        name: 'app.projects',
+        stateObject: {
             url: '/projects',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
-        .state('app.acceptances',{
+        }
+    },
+    {
+        name: 'app.acceptances',
+        stateObject: {
             url: '/acceptances',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
-        .state('app.invoices',{
+        }
+    },
+    {
+        name:'app.invoices',
+        stateObject: {
             url: '/invoices',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
-        })
+        }
+    }
 
-    ;
-    $urlRouterProvider.otherwise('')
+]);
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites) {
+    var states = sites;
+    for(var i= 0; i<states.length; i++){
+        $stateProvider.state(states[i].name, states[i].stateObject);
+    }
+
+
+
+    $urlRouterProvider.otherwise('');
 });
