@@ -1,3 +1,6 @@
+/**
+ * Service that creates a modal showing error information when needed.
+ */
 app.factory('ErrorDialog', function (btfModal) {
     return btfModal({
                 templateUrl: 'templates/modules/errorDialog.html',

@@ -1,3 +1,10 @@
+/**
+ * API Abstraction Service
+ * Provides a simple function that will perform the right API call depending on its parameters
+ * @param method {string} - 'GET'|'POST' (other methods might be supported later)
+ * @param identifier {string|object} - an identifier for the api action
+ * @return {promise}
+ */
 angular.module('ama')
     .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', '$state', 'ErrorDialog', function ($http, constants, $q, $state, ErrorDialog) {
         var specialParams = {};

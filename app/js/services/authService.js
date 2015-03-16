@@ -1,10 +1,25 @@
+/**
+ * Authentication Service
+ * Provides functions to log in, log out and get the login state and the current user
+ */
 angular.module('ama')
 .factory('AuthService', ['$q','$http', 'sha256Filter', 'ApiAbstractionLayer',function($q, $http, sha256Filter, ApiAbstractionLayer){
 
         return {
+            /**
+             * Gets the currently logged in user
+             * @returns {promise}
+             */
             currentUser: function(){
                 return ApiAbstractionLayer('GET','user_get');
             },
+
+            /**
+             * Tries to login the user with the provided data
+             * @param email - the user's mail address
+             * @param password - the user's password
+             * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+             */
             login: function(email, password) {
                 var deferred = $q.defer();
                 ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
@@ -27,13 +42,21 @@ angular.module('ama')
                 return deferred.promise;
 
             },
+
+            /**
+             * Tries to log out the current user
+             * @returns {promise}
+             */
             logout: function(){
-                var defer = $q.defer();
-                ApiAbstractionLayer('GET', 'logout').then(function (result) {
-                    defer.resolve(result);
-                });
-                return defer.promise;
+                return ApiAbstractionLayer('GET', 'logout');
             },
+
+            /**
+             * Gets the login state of the current user
+             * TODO: Use AbstractionLayer
+             * TODO: return boolean
+             * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+             */
             isLoggedIn: function(){
                 var deferred = $q.defer();
                 $http.get("api/?action=login")

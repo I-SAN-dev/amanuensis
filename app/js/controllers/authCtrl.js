@@ -1,9 +1,16 @@
+/**
+ * Controller for the login page
+ */
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', '$state', function (AuthService, $state) {
 
         this.message = $state.current.data.message;
         console.log($state.current);
+
         var self = this;
+        /**
+         * Gets the current user
+         */
         this.getUser = function () {
             AuthService.currentUser().then(function(result){
                 return result;
@@ -16,12 +23,19 @@ angular.module('ama')
         });
 
 
+        /**
+         * Tries to login the user with the submitted data
+         * @param email - the user's mail address
+         * @param password - the user's password
+         */
         this.submit = function (email, password) {
-            console.log('submit');
             AuthService.login(email, password).then(function (result) {
                     console.log(result);
                 });
             };
+        /**
+         * Logs the user out
+         */
         this.logout = function () {
             AuthService.logout().then(function(result){
                 console.log(result);
