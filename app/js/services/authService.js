@@ -24,8 +24,13 @@ angular.module('ama')
                 var deferred = $q.defer();
                 ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
                     .then(function (result) {
+
+                        // TODO: check if token is empty (this is the case when the user is logged in)
                         var token = result.token;
+                        // TODO: check if salt is empty (this is the case when the user is logged in)
                         var salt = result.salt;
+
+
                         if (password) {
                             var hashedPass = sha256Filter(password);
                             var passSalt = sha256Filter(hashedPass + salt);
