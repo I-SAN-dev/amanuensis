@@ -24,6 +24,8 @@ class customer {
      */
     public static function get()
     {
+        //Authenticator::onlyFor(0, 1);
+
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
             self::getCustomer($_GET['id']);
@@ -39,6 +41,8 @@ class customer {
      */
     public static function post()
     {
+        Authenticator::onlyFor(0);
+
         if(isset($_POST['id']) && $_POST['id'] != '')
         {
             self::updateCustomer($_POST['id']);
@@ -54,7 +58,63 @@ class customer {
      */
     private static function getCustomerList()
     {
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("
+            SELECT
+              customers.id,
+              customers.companyname,
+              customers.contact_firstname,
+              customers.contact_lastname,
+              customers.city,
+              GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
+              GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
+            FROM customers
+            LEFT JOIN customers_customer_category_mm ON customers.id = customers_customer_category_mm.customer_id
+            LEFT JOIN customer_category ON customers_customer_category_mm.category_id = customer_category.id
+            GROUP BY customers.id
+            "
+        );
+        $q->execute();
 
+        $list = array();
+
+        while($row = $q->fetch())
+        {
+            /* Build the display name */
+            if(isset($row['companyname']) && $row['companyname'] != '')
+            {
+                $displayname = $row['companyname'];
+            }
+            else
+            {
+                $displayname = $row['contact_lastname'].' '.$row['contact_firstname'];
+            }
+
+            /* Build the categories */
+            $categories = array();
+            $catids = explode(',', $row['ids_categories']);
+            $catnames = explode(',', $row['names_categories']);
+
+            for($i = 0; $i< count($catids); $i++)
+            {
+                if($catids[$i] != '')
+                {
+                    $categories[$catids[$i]] = $catnames[$i];
+                }
+            }
+
+            /* Build the city */
+            $city = $row['city'] ? $row['city'] : '';
+
+            /* Add the object */
+            $list[$row['id']] = array(
+                'name' => $displayname,
+                'city' => $city,
+                /* If the array is empty, use an empty object instead!!! */
+                'categories' => count($categories) > 0 ? $categories : new stdClass()
+            );
+        }
+        json_response($list);
     }
 
     /**
