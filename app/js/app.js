@@ -1,7 +1,7 @@
 /**
  * Main application. Handles dependencies and routing.
  */
-var app = angular.module('ama', ['ui.router', 'btford.modal']);
+var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService) {
 
     /**
@@ -65,6 +65,12 @@ app.constant('sites', [
             data: {
                 id: 'login',
                 name: 'Login'
+            }
+        },
+        menus: {
+            mainNav: {
+                name: 'Login',
+                title: 'Login'
             }
         }
     },
@@ -165,7 +171,19 @@ app.constant('sites', [
     }
 
 ]);
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants) {
+    /*
+     * Configure the i18n service
+     */
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'lang/' + constants.LANGUAGE_PREFIX,
+        suffix: constants.LANGUAGE_SUFFIX
+    });
+    /*
+     * Set default language
+     */
+    $translateProvider.preferredLanguage(constants.LANGUAGE);
+
     var states = sites;
     for(var i= 0; i<states.length; i++){
         $stateProvider.state(states[i].name, states[i].stateObject);

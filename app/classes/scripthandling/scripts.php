@@ -22,10 +22,11 @@ class Scripts
         "lib/angular-1.3.14.min.js",
         "lib/modules/angular-ui-router.min.js",
         "lib/modules/angular.btf-modal.min.js",
+        "lib/modules/angular-translate.min.js",
+        "lib/modules/angular-translate-loader-static-files.min.js",
         "lib/sha256.js",
         "js/app.js", // has to be loaded before the other scripts
     );
-
     /**
      * @var array $byTemplate
      * Holds the path to all templates that should be compiled
