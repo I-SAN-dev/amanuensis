@@ -49,7 +49,7 @@ ob_start();
     </div>
 </div>
 <div class="container-fluid">
-    <div data-ui-view="mainContent"></div>
+    <div data-ui-view="mainContent" id="mainContent"></div>
 </div>
 
 
