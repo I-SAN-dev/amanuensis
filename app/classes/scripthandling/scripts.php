@@ -56,7 +56,6 @@ class Scripts
      * Holds the path to all css files
      */
     public static $css = array(
-        "css/normalize.css",
         "css/ama.css",
     );
 }
