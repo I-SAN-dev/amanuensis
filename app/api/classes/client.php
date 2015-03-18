@@ -17,7 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 
-class customer {
+class client {
 
     /**
      * This method reacts to GET Requests
@@ -28,11 +28,11 @@ class customer {
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
-            self::getCustomer($_GET['id']);
+            self::getClient($_GET['id']);
         }
         else
         {
-            self::getCustomerList();
+            self::getClientList();
         }
     }
 
@@ -45,18 +45,18 @@ class customer {
 
         if(isset($_POST['id']) && $_POST['id'] != '')
         {
-            self::updateCustomer($_POST['id']);
+            self::updateClient($_POST['id']);
         }
         else
         {
-            self::addCustomer();
+            self::addClient();
         }
     }
 
     /**
      * This method outputs a list of all customers
      */
-    private static function getCustomerList()
+    private static function getClientList()
     {
         $dbal = DBAL::getInstance();
         $q = $dbal->prepare("
@@ -121,7 +121,7 @@ class customer {
      * This method outputs the data of a specific customer
      * @param $id
      */
-    private static function getCustomer($id)
+    private static function getClient($id)
     {
 
     }
@@ -129,7 +129,7 @@ class customer {
     /**
      * This method adds a customer
      */
-    private static function addCustomer()
+    private static function addClient()
     {
 
     }
@@ -138,7 +138,7 @@ class customer {
      * This method updates an existing customer
      * @param $id
      */
-    private static function updateCustomer($id)
+    private static function updateClient($id)
     {
 
     }
