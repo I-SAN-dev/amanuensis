@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        //Authenticator::onlyFor(0, 1);
+        Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -169,6 +169,7 @@ class client {
             /* fetch additional data */
             $x = $dbal->prepare("
             SELECT
+              id,
               datatype,
               name,
               value
@@ -185,6 +186,7 @@ class client {
             {
                 $type = $entry['datatype'];
                 $data = array(
+                    'id' => $entry['id'],
                     'name' => $entry['name'],
                     'value' => $entry['value']
                 );
