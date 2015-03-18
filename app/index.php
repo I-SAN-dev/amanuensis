@@ -21,7 +21,7 @@ require_once 'classes/errorhandling/amaException.php';
 ob_start();
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="ama">
+<html lang="en" data-ng-app="ama">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,7 +48,7 @@ ob_start();
     <div data-ama-menu data-menuname="'mainNav'"></div>
     </div>
 </div>
-<div class="container-fluid">
+<div id="mainContent" class="container-fluid">
     <div data-ui-view="mainContent"></div>
 </div>
 

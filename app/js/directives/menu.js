@@ -13,8 +13,9 @@ app.controller('NavCtrl',['AuthService','$state','sites', '$scope',function (Aut
     AuthService.currentUser().then(function(data){
         self.navItems = menuItems;
     });
-    this.goTo = function(id){
-        $state.go(id)
+    this.goTo = function(item){
+        console.log($state.get());
+        $state.go(item.name);
     };
 }]);
 app.directive('amaMenu', [function(){

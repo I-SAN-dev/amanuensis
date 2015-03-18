@@ -10,7 +10,7 @@ app.run(function ($rootScope, $state, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
 
-        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+        if (requireLogin && typeof $rootScope.getUser() === 'undefined') {
             event.preventDefault();
             $state.go('login')
         }
@@ -82,7 +82,12 @@ app.constant('sites', [
             data: {
                 requireLogin: true
             },
-            templateUrl: 'index.php'
+            views: {
+                'mainContent': {
+                    template: '<div data-ui-view="appChild"></div>'
+                }
+            }
+
         }
     },
     {
@@ -107,7 +112,7 @@ app.constant('sites', [
         stateObject: {
             url: '/clients',
             views: {
-                'mainContent': {
+                'appChild': {
                     templateUrl: 'templates/pages/clients.html'
                 }
             }
