@@ -50,6 +50,7 @@ class Scripts
         "js/directives/menu.js",
         //Controllers
         "js/controllers/authCtrl.js",
+        "js/controllers/clientsCtrl.js",
     );
 
     /**

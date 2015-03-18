@@ -108,7 +108,7 @@ app.constant('sites', [
             url: '/clients',
             views: {
                 'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                    templateUrl: 'templates/pages/clients.html'
                 }
             }
         },
