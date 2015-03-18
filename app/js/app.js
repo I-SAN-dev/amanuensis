@@ -25,13 +25,10 @@ app.constant('sites', [
     {
         name: 'index',
         stateObject: {
-            url: '',
+            url: '/index',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/start.html'
-                },
-                'mainNav':{
-                    templateUrl: 'templates/modules/mainNav.html'
                 }
             },
             data: {
@@ -39,17 +36,6 @@ app.constant('sites', [
             },
             controller: function($scope) {
                 $scope.items = ["A", "List", "Of", "Items"];
-            }
-        }
-    },
-    {
-        name:'something',
-        stateObject: {
-            url: '/something',
-            views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/something.html'
-                }
             }
         }
     },
@@ -78,16 +64,16 @@ app.constant('sites', [
         name: 'app',
         stateObject: {
             abstract: true,
-            url: '/app',
+            url: '',
             data: {
                 requireLogin: true
             },
             views: {
                 'mainContent': {
-                    template: '<div data-ui-view="appChild"></div>'
+                    template: '<div data-ui-view="appContent"></div>'
                 }
-            }
-
+            },
+            controller: 'RootCtrl'
         }
     },
     {
@@ -95,7 +81,7 @@ app.constant('sites', [
         stateObject: {
             url: '/dashboard',
             views: {
-                'mainContent': {
+                'appContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
@@ -112,7 +98,7 @@ app.constant('sites', [
         stateObject: {
             url: '/clients',
             views: {
-                'appChild': {
+                'appContent': {
                     templateUrl: 'templates/pages/clients.html'
                 }
             }
@@ -129,8 +115,8 @@ app.constant('sites', [
         stateObject: {
             url: '/offers',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/offers.html'
                 }
             }
         },
@@ -146,8 +132,8 @@ app.constant('sites', [
         stateObject: {
             url: '/projects',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/projects.html'
                 }
             }
         }
@@ -158,7 +144,7 @@ app.constant('sites', [
             url: '/acceptances',
             views: {
                 'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                    templateUrl: 'templates/pages/acceptances.html'
                 }
             }
         }
@@ -168,8 +154,8 @@ app.constant('sites', [
         stateObject: {
             url: '/invoices',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/invoices.html'
                 }
             }
         }
