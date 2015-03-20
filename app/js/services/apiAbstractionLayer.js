@@ -6,7 +6,7 @@
  * @return {promise}
  */
 angular.module('ama')
-    .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', '$state', 'ErrorDialog', function ($http, constants, $q, $state, ErrorDialog) {
+    .factory('ApiAbstractionLayer', ['$http', 'constants', '$q', '$state', 'ErrorDialog', '$stateParams', function ($http, constants, $q, $state, ErrorDialog, $stateParams) {
         var specialParams = {};
         var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/'api/';
 
@@ -40,7 +40,7 @@ angular.module('ama')
                         ErrorDialog(data.error).activate();
                     }
                     if(status == 401) {
-                        $state.go('login');
+                        $state.go('login', {referrer: $state.current.name, referrerParams: $stateParams});
                     }
                     defer.reject(data);
                 });

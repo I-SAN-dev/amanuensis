@@ -7,18 +7,19 @@ app.run(function ($rootScope, $state, AuthService) {
     /**
      * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
      */
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        console.log(toParams);
         var requireLogin = toState.data.requireLogin;
 
         if (requireLogin && typeof $rootScope.getUser() === 'undefined') {
             event.preventDefault();
-            $state.go('login')
+            $state.go('login', {'referrer':123});
         }
     });
 
     $rootScope.getUser = function(){
         return AuthService.currentUser();
-    };
+    };*/
 
 });
 app.constant('sites', [
@@ -43,6 +44,10 @@ app.constant('sites', [
         name:'login',
         stateObject: {
             url: '/login',
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/login.html'
@@ -73,7 +78,15 @@ app.constant('sites', [
                     template: '<div data-ui-view="appContent"></div>'
                 }
             },
-            controller: 'RootCtrl'
+            resolve: {
+                authenticate: ['AuthService', function (AuthService) {
+                    AuthService.currentUser(true).then(function () {
+                        console.log('logged in');
+                    }, function () {
+                        console.log('not logged in');
+                    });
+                }]
+            }
         }
     },
     {
@@ -182,5 +195,5 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
 
 
 
-    $urlRouterProvider.otherwise('');
+    $urlRouterProvider.otherwise('/dashboard');
 });

@@ -49,7 +49,7 @@ class Scripts
         // Directives
         "js/directives/menu.js",
         //Controllers
-        "js/controllers/rootCtrl.js",
+        //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
         "js/controllers/clientsCtrl.js",
     );

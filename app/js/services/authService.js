@@ -24,14 +24,10 @@ angular.module('ama')
                 var deferred = $q.defer();
                 ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
                     .then(function (result) {
+                        if(password && result.salt && result.token) {
+                            var token = result.token;
+                            var salt = result.salt;
 
-                        // TODO: check if token is empty (this is the case when the user is logged in)
-                        var token = result.token;
-                        // TODO: check if salt is empty (this is the case when the user is logged in)
-                        var salt = result.salt;
-
-
-                        if (password) {
                             var hashedPass = sha256Filter(password);
                             var passSalt = sha256Filter(hashedPass + salt);
                             var passToSend = sha256Filter(passSalt + token);
@@ -41,7 +37,12 @@ angular.module('ama')
                         ApiAbstractionLayer('POST', {name: 'login', data: {action: 'login',email: email,password: passToSend}})
                             .then(function (data) {
                                 deferred.resolve(data);
-                            })
+                            }, function (error) {
+                                deferred.reject(error);
+                            });
+
+                    }, function (error) {
+                        deferred.reject(error);
                     });
 
                 return deferred.promise;
