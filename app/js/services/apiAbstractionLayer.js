@@ -19,12 +19,11 @@ angular.module('ama')
             var config = {
                 url: apiUrl,
                 method: method,
-                params: identifier.params,
-                data: identifier.data
+                params: identifier.params || {},
+                data: identifier.data || {}
             };
-            if(typeof(identifier)== "string") {
-                config.params = {action: identifier};
-            }
+            config.params.action = id;
+            config.data.action = id;
             $.extend(config, specialParams[id]);
 
 
