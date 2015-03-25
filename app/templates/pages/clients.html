@@ -1,7 +1,13 @@
 <div data-ng-controller="ClientsCtrl as clients">
-    <ul>
-        <li data-ng-repeat="client in clients.clientList">
-            {{client.name}}
-        </li>
-    </ul>
+    <input data-ng-model="filterText">
+    <table>
+        <thead>
+        <tr><td>Name</td><td>City</td><td>refNumber</td><td>Kategorien</td></tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="client in clients.clientList | filter:filterText">
+                <td>{{client.name}}</td><td>{{client.city}}</td><td>{{client.refnumber}}</td><td><ul><li data-ng-repeat="cat in client.categories">{{cat}}</li></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

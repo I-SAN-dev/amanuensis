@@ -4,7 +4,7 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService) {
 
-    $rootScope.loggedIn = false;
+    $rootScope.loggedIn;
 
     $rootScope.getLoginState = function(){
         AuthService.isLoggedIn().then(function (data) {
@@ -24,9 +24,6 @@ app.run(function ($rootScope, $state, AuthService) {
                 $state.go('login', {referrer:toState.name, referrerParams:toParams});
             }
         });
-    $rootScope.getUser = function(){
-        return AuthService.currentUser();
-    };
 
 });
 app.constant('sites', [
