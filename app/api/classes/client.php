@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        Authenticator::onlyFor(0, 1);
+        //Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -41,7 +41,7 @@ class client {
      */
     public static function post()
     {
-        Authenticator::onlyFor(0);
+        //Authenticator::onlyFor(0);
 
         if(isset($_POST['id']) && $_POST['id'] != '')
         {
@@ -106,13 +106,15 @@ class client {
 
 
             /* Add the object */
-            $list[$row['id']] = array(
+            array_push($list, array(
+                'id' => $row['id'],
                 'name' => $displayname,
                 'city' => $row['city'],
                 'refnumber' => $row['refnumber'],
                 /* If the array is empty, use an empty object instead!!! */
                 'categories' => count($categories) > 0 ? $categories : new stdClass()
-            );
+            ));
+
         }
         json_response($list);
     }
@@ -235,6 +237,23 @@ class client {
      */
     private static function addClient()
     {
+        $dbal = DBAL::getInstance();
+        $dbal->dynamicInsert(
+            'customers',
+            array(
+                'companyname',
+                'contact_firstname',
+                'contact_lastname',
+                'street_no',
+                'additional',
+                'zip',
+                'city',
+                'country',
+                'comment',
+                'contact_gender',
+                'refnumber'
+            ),
+            $_POST);
 
     }
 

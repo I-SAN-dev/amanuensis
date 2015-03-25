@@ -75,5 +75,48 @@ final class DBAL {
         return $this->connection->prepare($query);
     }
 
+    /**
+     * Takes a tablename, a list of column names to be inserted and and array of data containing the data that should be inserted
+     * @param string $table - the name of the table to insert into,
+     * @param array $columns - the column names that should be inserted
+     * @param array $data - an array that holds the data that should be inserted
+     */
+    public function dynamicInsert($table, array $columns, array $data)
+    {
+        /* Check if is set */
+        $realcolumns = array();
+        foreach($columns as $column)
+        {
+            if(isset($data[$column]) && $data[$column] != '')
+            {
+                array_push($realcolumns, $column);
+            }
+        }
+
+        if(count($realcolumns))
+        {
+            /* Build query */
+            $query = "  INSERT INTO ".$table." (".implode(',',$realcolumns).")
+                        VALUES (".implode(',', array_map(function($x){return ':'.$x;},$realcolumns)).")";
+
+            $q = $this->prepare($query);
+
+            /* Bind data */
+            foreach($realcolumns as $column)
+            {
+                $q->bindParam(':'.$column, $data[$column]);
+            }
+
+            $q->execute();
+
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, 'Not a single usable param was sent!');
+        }
+
+
+    }
+
 
 }
