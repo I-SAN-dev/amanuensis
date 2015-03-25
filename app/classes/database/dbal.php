@@ -116,6 +116,61 @@ final class DBAL {
         else
         {
             $error = new amaException(NULL, 400, 'Not a single usable param was sent!');
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+
+
+    }
+
+
+    /**
+     * Takes a tablename, a list of column names to be inserted and and array of data containing the data that should be inserted
+     * @param string $table - the name of the table to insert into,
+     * @param array $where - column:value for the where clause
+     * @param array $columns - the column names that should be inserted
+     * @param array $data - an array that holds the data that should be inserted
+     * @return int - the id of the inserted row
+     */
+    public function dynamicUpdate($table, array $where, array $columns, array $data)
+    {
+        /* Check if is set */
+        $realcolumns = array();
+        foreach($columns as $column)
+        {
+            if(isset($data[$column]))
+            {
+                array_push($realcolumns, $column);
+            }
+        }
+
+        if(count($realcolumns))
+        {
+            /* Build query */
+            $query = "  UPDATE ".$table."
+                        SET ".implode(',', array_map(function($x){return $x.' = :'.$x;},$realcolumns))."
+                        WHERE ".$where[0]." = :".$where[0];
+
+            $q = $this->prepare($query);
+
+            /* Bind data */
+            foreach($realcolumns as $column)
+            {
+                $q->bindParam(':'.$column, $data[$column]);
+            }
+            /* Bind where statement */
+            $q->bindParam(':'.$where[0], $where[1]);
+
+            $q->execute();
+
+            return $this->connection->lastInsertId();
+
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, 'Not a single usable param was sent!');
+            $error->renderJSONerror();
+            $error->setHeaders();
         }
 
 

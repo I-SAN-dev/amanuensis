@@ -281,6 +281,8 @@ class client {
                 }
             }
         }
+
+        self::getClient($id);
     }
 
     /**
@@ -290,6 +292,26 @@ class client {
     private static function updateClient($id)
     {
 
+        $dbal = DBAL::getInstance();
+        $affectedid = $dbal->dynamicUpdate(
+            'customers',
+            array('id', $id),
+            array(
+                'companyname',
+                'contact_firstname',
+                'contact_lastname',
+                'street_no',
+                'additional',
+                'zip',
+                'city',
+                'country',
+                'comment',
+                'contact_gender',
+                'refnumber'
+            ),
+            $_POST);
+
+        self::getClient($affectedid);
     }
 
 }
