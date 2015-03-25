@@ -1,13 +1,22 @@
 <div data-ng-controller="ClientsCtrl as clients">
-    <input data-ng-model="filterText">
-    <table>
+    <input data-ng-model="clients.filterText">
+    <table class="table table-striped">
         <thead>
-        <tr><td>Name</td><td>City</td><td>refNumber</td><td>Kategorien</td></tr>
+        <tr><th>Name</th><th>City</th><th>refNumber</th><th>Kategorien</th></tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="client in clients.clientList | filter:filterText">
-                <td>{{client.name}}</td><td>{{client.city}}</td><td>{{client.refnumber}}</td><td><ul><li data-ng-repeat="cat in client.categories">{{cat}}</li></td>
+            <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText">
+                <td>{{client.name}}</td><td>{{client.city}}</td><td>{{client.refnumber}}</td><td><ul><li data-ng-repeat="cat in client.categories">{{cat}}</li></ul></td>
+            </tr>
+            <tr>
+                <td><input data-ng-model="clients.newClient.companyname"></td>
+                <td><input data-ng-model="clients.newClient.city"></td>
+                <td><input data-ng-model="clients.newClient.refnumber"></td>
+                <td><select multiple data-ng-model="clients.empty">
+                    <option data-ng-repeat="cat in clients.allCategories">cat.name</option>
+                </select></td>
             </tr>
         </tbody>
     </table>
+    <button data-ng-click="clients.addClient()">Create new client</button>
 </div>
