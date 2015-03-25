@@ -65,6 +65,7 @@ class client {
               customers.companyname,
               customers.contact_firstname,
               customers.contact_lastname,
+              customers.contact_gender,
               customers.city,
               customers.refnumber,
               GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
@@ -81,16 +82,6 @@ class client {
 
         while($row = $q->fetch())
         {
-            /* Build the display name */
-            if(isset($row['companyname']) && $row['companyname'] != '')
-            {
-                $displayname = $row['companyname'];
-            }
-            else
-            {
-                $displayname = $row['contact_lastname'].' '.$row['contact_firstname'];
-            }
-
             /* Build the categories */
             $categories = array();
             $catids = explode(',', $row['ids_categories']);
@@ -108,7 +99,10 @@ class client {
             /* Add the object */
             array_push($list, array(
                 'id' => $row['id'],
-                'name' => $displayname,
+                'companyname' => $row['companyname'],
+                'contact_firstname' => $row['contact_firstame'],
+                'contact_lastname' => $row['contact_lastname'],
+                'contact_gender' => $row['contact_gender'],
                 'city' => $row['city'],
                 'refnumber' => $row['refnumber'],
                 /* If the array is empty, use an empty object instead!!! */
