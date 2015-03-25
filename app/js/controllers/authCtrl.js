@@ -2,7 +2,7 @@
  * Controller for the login page
  */
 angular.module('ama')
-.controller('AuthCtrl', ['AuthService', '$state', '$stateParams', function (AuthService, $state, $stateParams) {
+.controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
 
         console.log($stateParams);
 
@@ -41,6 +41,7 @@ angular.module('ama')
          */
         this.logout = function () {
             AuthService.logout().then(function(result){
+                $rootScope.loggedIn = false;
                 console.log(result);
             });
         };

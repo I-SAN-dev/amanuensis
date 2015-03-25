@@ -59,20 +59,10 @@ angular.module('ama')
 
             /**
              * Gets the login state of the current user
-             * TODO: Use AbstractionLayer
-             * TODO: return boolean
-             * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+             * @returns {boolean} - true if logged in, false if not
              */
             isLoggedIn: function(){
-                var deferred = $q.defer();
-                $http.get("api/?action=login")
-                    .then(function(result){
-                        deferred.resolve(result.loggedIn);
-                    }, function (error) {
-                        // TODO: Real error handling
-                        deferred.reject(error);
-                    });
-                return deferred.promise;
+                return ApiAbstractionLayer('GET','login');
             }
         }
     }]);

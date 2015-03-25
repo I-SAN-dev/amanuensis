@@ -42,7 +42,7 @@ ob_start();
         echo ScriptLoader::echoScripts($conf->get['debug']);
     ?>
 </head>
-<body>
+<body data-ng-init="init()">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
     <div data-ama-menu data-menuname="'mainNav'"></div>

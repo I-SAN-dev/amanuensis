@@ -4,22 +4,28 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService) {
 
+    $rootScope.loggedIn = false;
+
+    $rootScope.getLoginState = function(){
+        AuthService.isLoggedIn().then(function (data) {
+            $rootScope.loggedIn = data.loggedin;
+        });
+    };
+
     /**
      * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
      */
-    /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        console.log(toParams);
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
-
-        if (requireLogin && typeof $rootScope.getUser() === 'undefined') {
-            event.preventDefault();
-            $state.go('login', {'referrer':123});
-        }
-    });
+        if (requireLogin && $rootScope.loggedIn) {
+                event.preventDefault();
+                $state.go('login', {referrer:toState.name, referrerParams:toParams});
+            }
+        });
 
     $rootScope.getUser = function(){
         return AuthService.currentUser();
-    };*/
+    };
 
 });
 app.constant('sites', [
