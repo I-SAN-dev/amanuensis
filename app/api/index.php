@@ -24,7 +24,7 @@ ob_start();
  *  Check the request method
  */
 $method = $_SERVER['REQUEST_METHOD'];
-if ($method !== 'GET' && $method !== 'POST')
+if ($method != 'GET' && $method != 'POST')
 {
     $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed! (only GET and POST)");
     $error->setHeaders();
