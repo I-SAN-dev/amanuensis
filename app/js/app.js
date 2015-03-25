@@ -9,6 +9,7 @@ app.run(function ($rootScope, $state, AuthService) {
     $rootScope.getLoginState = function(){
         AuthService.isLoggedIn().then(function (data) {
             $rootScope.loggedIn = data.loggedin;
+            console.log('loggedIn',$rootScope.loggedIn);
         });
     };
 
@@ -16,13 +17,13 @@ app.run(function ($rootScope, $state, AuthService) {
      * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
      */
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        console.log('state');
         var requireLogin = toState.data.requireLogin;
-        if (requireLogin && $rootScope.loggedIn) {
+        if (requireLogin && !$rootScope.loggedIn) {
                 event.preventDefault();
                 $state.go('login', {referrer:toState.name, referrerParams:toParams});
             }
         });
-
     $rootScope.getUser = function(){
         return AuthService.currentUser();
     };
