@@ -66,6 +66,7 @@ class client {
               customers.contact_firstname,
               customers.contact_lastname,
               customers.city,
+              customers.refnumber,
               GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
               GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
             FROM customers
@@ -103,13 +104,12 @@ class client {
                 }
             }
 
-            /* Build the city */
-            $city = $row['city'] ? $row['city'] : '';
 
             /* Add the object */
             $list[$row['id']] = array(
                 'name' => $displayname,
-                'city' => $city,
+                'city' => $row['city'],
+                'refnumber' => $row['refnumber'],
                 /* If the array is empty, use an empty object instead!!! */
                 'categories' => count($categories) > 0 ? $categories : new stdClass()
             );
@@ -137,6 +137,7 @@ class client {
               customers.city,
               customers.country,
               customers.comment,
+              customers.refnumber,
               GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
               GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
             FROM customers
@@ -211,6 +212,7 @@ class client {
                 'city' => $row['city'],
                 'country' => $row['country'],
                 'comment' => $row['comment'],
+                'refnumber' => $row['refnumber'],
                 /* If the array is empty, use an empty object instead!!! */
                 'categories' => count($categories) > 0 ? $categories : new stdClass(),
                 'data' =>  count($additionalData) > 0 ? $additionalData : new stdClass()
