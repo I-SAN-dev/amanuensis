@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        //Authenticator::onlyFor(0, 1);
+        Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -66,6 +66,7 @@ class client {
               customers.contact_firstname,
               customers.contact_lastname,
               customers.city,
+              customers.refnumber,
               GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
               GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
             FROM customers
@@ -103,13 +104,12 @@ class client {
                 }
             }
 
-            /* Build the city */
-            $city = $row['city'] ? $row['city'] : '';
 
             /* Add the object */
             $list[$row['id']] = array(
                 'name' => $displayname,
-                'city' => $city,
+                'city' => $row['city'],
+                'refnumber' => $row['refnumber'],
                 /* If the array is empty, use an empty object instead!!! */
                 'categories' => count($categories) > 0 ? $categories : new stdClass()
             );
@@ -123,7 +123,111 @@ class client {
      */
     private static function getClient($id)
     {
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("
+            SELECT
+              customers.id,
+              customers.companyname,
+              customers.contact_gender,
+              customers.contact_firstname,
+              customers.contact_lastname,
+              customers.street_no,
+              customers.additional,
+              customers.zip,
+              customers.city,
+              customers.country,
+              customers.comment,
+              customers.refnumber,
+              GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
+              GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
+            FROM customers
+            LEFT JOIN customers_customer_category_mm ON customers.id = customers_customer_category_mm.customer_id
+            LEFT JOIN customer_category ON customers_customer_category_mm.category_id = customer_category.id
+            WHERE customers.id = :id
+            GROUP BY customers.id
+            "
+        );
 
+        $q->bindParam(':id', $id);
+        $q->execute();
+
+        if($row = $q->fetch())
+        {
+            /* Build the categories */
+            $categories = array();
+            $catids = explode(',', $row['ids_categories']);
+            $catnames = explode(',', $row['names_categories']);
+
+            for($i = 0; $i< count($catids); $i++)
+            {
+                if($catids[$i] != '')
+                {
+                    $categories[$catids[$i]] = $catnames[$i];
+                }
+            }
+
+
+            /* fetch additional data */
+            $x = $dbal->prepare("
+            SELECT
+              id,
+              datatype,
+              name,
+              value
+            FROM customer_data
+            WHERE customer = :id
+            "
+            );
+            $x->bindParam(':id', $id);
+            $x->execute();
+
+            /* process additional data */
+            $additionalData = array();
+            while($entry = $x->fetch())
+            {
+                $type = $entry['datatype'];
+                $data = array(
+                    'id' => $entry['id'],
+                    'name' => $entry['name'],
+                    'value' => $entry['value']
+                );
+
+                if(!isset($additionalData[$type]))
+                {
+                    $additionalData[$type] = array();
+                }
+                array_push($additionalData[$type], $data);
+            }
+
+            /* Build the response*/
+            $response = array(
+                'id' => $row['id'],
+                'companyname' => $row['companyname'],
+                'contact_gender' => $row['contact_gender'],
+                'contact_firstname' => $row['contact_firstname'],
+                'contact_lastname' => $row['contact_lastname'],
+                'street_no' => $row['street_no'],
+                'street_additional' => $row['additional'],
+                'zip' => $row['zip'],
+                'city' => $row['city'],
+                'country' => $row['country'],
+                'comment' => $row['comment'],
+                'refnumber' => $row['refnumber'],
+                /* If the array is empty, use an empty object instead!!! */
+                'categories' => count($categories) > 0 ? $categories : new stdClass(),
+                'data' =>  count($additionalData) > 0 ? $additionalData : new stdClass()
+            );
+
+            json_response($response);
+
+        }
+        else
+        {
+            $error = new amaException(NULL, 404, 'Cannot find user with ID '.$id);
+            $error->renderJSONerror();
+            $error->setHeaders();
+            die();
+        }
     }
 
     /**

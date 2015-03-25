@@ -48,8 +48,8 @@ ob_start();
     <div data-ama-menu data-menuname="'mainNav'"></div>
     </div>
 </div>
-<div id="mainContent" class="container-fluid">
-    <div data-ui-view="mainContent"></div>
+<div class="container-fluid">
+    <div data-ui-view="mainContent" id="mainContent"></div>
 </div>
 
 
