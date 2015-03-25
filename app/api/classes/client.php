@@ -238,7 +238,7 @@ class client {
     private static function addClient()
     {
         $dbal = DBAL::getInstance();
-        $dbal->dynamicInsert(
+        $id = $dbal->dynamicInsert(
             'customers',
             array(
                 'companyname',
@@ -255,6 +255,32 @@ class client {
             ),
             $_POST);
 
+        /* update the additional data */
+        if(isset($_POST['data']))
+        {
+            foreach($_POST['data'] as $datatype => $entries)
+            {
+                foreach($entries as $entry)
+                {
+                    $todb = array(
+                        'datatype' => $datatype,
+                        'name' => $entry->name,
+                        'value' => $entry->value,
+                        'customer' => $id
+                    );
+                    $dbal->dynamicInsert(
+                        'customer_data',
+                        array(
+                            'datatype',
+                            'name',
+                            'value',
+                            'customer'
+                        ),
+                        $todb
+                    );
+                }
+            }
+        }
     }
 
     /**

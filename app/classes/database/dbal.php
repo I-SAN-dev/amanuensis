@@ -80,6 +80,7 @@ final class DBAL {
      * @param string $table - the name of the table to insert into,
      * @param array $columns - the column names that should be inserted
      * @param array $data - an array that holds the data that should be inserted
+     * @return int - the id of the inserted row
      */
     public function dynamicInsert($table, array $columns, array $data)
     {
@@ -108,6 +109,8 @@ final class DBAL {
             }
 
             $q->execute();
+
+            return $this->connection->lastInsertId();
 
         }
         else
