@@ -4,18 +4,26 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService) {
 
+    $rootScope.loggedIn = false;
+
+    $rootScope.getLoginState = function(){
+        AuthService.isLoggedIn().then(function (data) {
+            $rootScope.loggedIn = data.loggedin;
+            console.log('loggedIn',$rootScope.loggedIn);
+        });
+    };
+
     /**
      * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
      */
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        console.log('state');
         var requireLogin = toState.data.requireLogin;
-
-        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
-            event.preventDefault();
-            $state.go('login')
-        }
-    });
-
+        if (requireLogin && !$rootScope.loggedIn) {
+                event.preventDefault();
+                $state.go('login', {referrer:toState.name, referrerParams:toParams});
+            }
+        });
     $rootScope.getUser = function(){
         return AuthService.currentUser();
     };
@@ -25,13 +33,10 @@ app.constant('sites', [
     {
         name: 'index',
         stateObject: {
-            url: '',
+            url: '/index',
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/start.html'
-                },
-                'mainNav':{
-                    templateUrl: 'templates/modules/mainNav.html'
                 }
             },
             data: {
@@ -43,20 +48,13 @@ app.constant('sites', [
         }
     },
     {
-        name:'something',
-        stateObject: {
-            url: '/something',
-            views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/something.html'
-                }
-            }
-        }
-    },
-    {
         name:'login',
         stateObject: {
             url: '/login',
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
             views: {
                 'mainContent': {
                     templateUrl: 'templates/pages/login.html'
@@ -78,11 +76,24 @@ app.constant('sites', [
         name: 'app',
         stateObject: {
             abstract: true,
-            url: '/app',
+            url: '',
             data: {
                 requireLogin: true
             },
-            templateUrl: 'index.php'
+            views: {
+                'mainContent': {
+                    template: '<div data-ui-view="appContent"></div>'
+                }
+            },
+            resolve: {
+                authenticate: ['AuthService', function (AuthService) {
+                    AuthService.currentUser(true).then(function () {
+                        console.log('logged in');
+                    }, function () {
+                        console.log('not logged in');
+                    });
+                }]
+            }
         }
     },
     {
@@ -90,7 +101,7 @@ app.constant('sites', [
         stateObject: {
             url: '/dashboard',
             views: {
-                'mainContent': {
+                'appContent': {
                     templateUrl: 'templates/pages/dashboard.html'
                 }
             }
@@ -107,8 +118,8 @@ app.constant('sites', [
         stateObject: {
             url: '/clients',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/clients.html'
                 }
             }
         },
@@ -124,8 +135,8 @@ app.constant('sites', [
         stateObject: {
             url: '/offers',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/offers.html'
                 }
             }
         },
@@ -141,8 +152,8 @@ app.constant('sites', [
         stateObject: {
             url: '/projects',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/projects.html'
                 }
             }
         }
@@ -153,7 +164,7 @@ app.constant('sites', [
             url: '/acceptances',
             views: {
                 'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                    templateUrl: 'templates/pages/acceptances.html'
                 }
             }
         }
@@ -163,8 +174,8 @@ app.constant('sites', [
         stateObject: {
             url: '/invoices',
             views: {
-                'mainContent': {
-                    templateUrl: 'templates/pages/dashboard.html'
+                'appContent': {
+                    templateUrl: 'templates/pages/invoices.html'
                 }
             }
         }
@@ -191,5 +202,5 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
 
 
 
-    $urlRouterProvider.otherwise('');
+    $urlRouterProvider.otherwise('/dashboard');
 });

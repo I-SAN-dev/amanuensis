@@ -21,7 +21,7 @@ require_once 'classes/errorhandling/amaException.php';
 ob_start();
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="ama">
+<html lang="en" data-ng-app="ama">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +42,7 @@ ob_start();
         echo ScriptLoader::echoScripts($conf->get['debug']);
     ?>
 </head>
-<body>
+<body data-ng-init="getLoginState()">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
     <div data-ama-menu data-menuname="'mainNav'"></div>

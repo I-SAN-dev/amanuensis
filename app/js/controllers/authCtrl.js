@@ -2,10 +2,11 @@
  * Controller for the login page
  */
 angular.module('ama')
-.controller('AuthCtrl', ['AuthService', '$state', function (AuthService, $state) {
+.controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
+
+        console.log($stateParams);
 
         this.message = $state.current.data.message;
-        console.log($state.current);
 
         var self = this;
         /**
@@ -18,9 +19,9 @@ angular.module('ama')
         };
 
         this.email = '';
-        AuthService.currentUser(true).then(function(user){
+        /*AuthService.currentUser(true).then(function(user){
             self.email = user.email;
-        });
+        });*/
 
 
         /**
@@ -30,14 +31,18 @@ angular.module('ama')
          */
         this.submit = function (email, password) {
             AuthService.login(email, password).then(function (result) {
-                    console.log(result);
-                });
-            };
+                var to = $stateParams.referrer || 'app.dashboard';
+                var toParams = $stateParams.referrerParams;
+                $rootScope.loggedIn = true;
+                $state.go(to,toParams);
+            });
+        };
         /**
          * Logs the user out
          */
         this.logout = function () {
             AuthService.logout().then(function(result){
+                $rootScope.loggedIn = false;
                 console.log(result);
             });
         };

@@ -1,21 +1,27 @@
 app.controller('NavCtrl',['AuthService','$state','sites', '$scope',function (AuthService, $state, sites, $scope) {
     var menuItems = [];
     var name=$scope.name;
-    console.log($scope);
 
     for(var i = 0; i<sites.length; i++) {
-        console.log(menuItems);
         if(sites[i].menus && sites[i].menus[name]){
             menuItems.push(sites[i]);
         }
     }
     var self = this;
-    AuthService.currentUser().then(function(data){
-        self.navItems = menuItems;
+    AuthService.isLoggedIn().then(function(data) {
+        if(data.loggedin)
+            self.navItems = menuItems;
     });
-    this.goTo = function(id){
-        $state.go(id)
+    this.goTo = function(item){
+        $state.go(item.name);
     };
+}]);
+app.factory('NavService', ['sites',function (sites) {
+    return {
+        buildMenu: function(){
+
+        }
+    }
 }]);
 app.directive('amaMenu', [function(){
     return {
