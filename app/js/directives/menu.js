@@ -8,20 +8,13 @@ app.controller('NavCtrl',['AuthService','$state','sites', '$scope',function (Aut
         }
     }
     var self = this;
-    AuthService.isLoggedIn().then(function(data) {
-        if(data.loggedin)
+    /*AuthService.isLoggedIn().then(function(data) {
+        if(data.loggedin)*/
             self.navItems = menuItems;
-    });
+    /*});*/
     this.goTo = function(item){
         $state.go(item.name);
     };
-}]);
-app.factory('NavService', ['sites',function (sites) {
-    return {
-        buildMenu: function(){
-
-        }
-    }
 }]);
 app.directive('amaMenu', [function(){
     return {
