@@ -46,6 +46,7 @@ class Scripts
         "js/services/authService.js",
         "js/services/apiAbstractionLayer.js",
         "js/services/errorDialog.js",
+        "js/services/localStorage.js",
         // Directives
         "js/directives/menu.js",
         //Controllers

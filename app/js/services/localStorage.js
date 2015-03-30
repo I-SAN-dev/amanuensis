@@ -4,7 +4,7 @@
  * @author Christian Baur, Sebastian Antosch
  */
 angular.module('starter')
-    .factory('LocalStorage', function($window, $rootScope){
+    .factory('LocalStorage', ['$window', '$rootScope', function($window, $rootScope){
         angular.element($window).on('storage', function(event){
             $rootScope.$apply();
         });
@@ -125,4 +125,4 @@ angular.module('starter')
                 return tryParseJSON($window.localStorage.getItem(cleanKey(key)));
             }
         }
-    });
+    }]);
