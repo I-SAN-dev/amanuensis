@@ -86,6 +86,7 @@ class login {
             if(Authenticator::login($email, $password))
             {
                 $user = Authenticator::getUser();
+                $response["id"] = $user->id;
                 $response["username"] = $user->username;
                 $response["email"] = $user->email;
                 $response["accessgroup"] = $user->accessgroup;
