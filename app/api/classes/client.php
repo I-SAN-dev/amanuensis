@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        //Authenticator::onlyFor(0, 1);
+        Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -41,7 +41,7 @@ class client {
      */
     public static function post()
     {
-        //Authenticator::onlyFor(0);
+        Authenticator::onlyFor(0);
 
         if(isset($_POST['id']) && $_POST['id'] != '')
         {
@@ -50,6 +50,51 @@ class client {
         else
         {
             self::addClient();
+        }
+    }
+
+    /**
+     * This methods reacts to DELETE Requests - deletes a client
+     * @param array $_DELETE
+     */
+    public static function delete($_DELETE)
+    {
+        Authenticator::onlyFor(0);
+
+        if(isset($_DELETE['id']) && $_DELETE['id'] != '')
+        {
+            $dbal = DBAL::getInstance();
+            try
+            {
+                $count = $dbal->deleteRow('customers', array('id', $_DELETE['id']));
+            }
+            catch(Exception $e)
+            {
+                $error = new amaException($e);
+                $error->renderJSONerror();
+                $error->setHeaders();
+                die();
+            }
+
+            $response = array();
+            if($count)
+            {
+                $response["delete"] = $_DELETE["id"];
+                $response["count"] = $count;
+                json_response($response);
+            }
+            else
+            {
+                $error = new amaException(NULL, 404, "There was no client matching your criteria");
+                $error->renderJSONerror();
+                $error->setHeaders();
+            }
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, "Id not specified");
+            $error->renderJSONerror();
+            $error->setHeaders();
         }
     }
 
