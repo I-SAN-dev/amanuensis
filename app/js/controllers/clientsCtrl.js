@@ -6,7 +6,10 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
         console.log(data);
         for(var i= 0; i<data.length; i++){
             if(!data[i].companyname){
-                data[i].companyname = (data[i].contact_firstname || '')+' '+(data[i].contact_lastname || '');
+                data[i].companyname =
+                    (data[i].contact_firstname || '')
+                    +' '
+                    +(data[i].contact_lastname || '');
             }
         }
         self.clientList = data;
@@ -31,5 +34,9 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
             self.clientList.push(data);
             self.newClient = initialNewClient;
         });
+    };
+
+    this.deleteClient = function(){
+        ApiAbstractionLayer('DELETE', 'helloWorld');
     };
 }]);
