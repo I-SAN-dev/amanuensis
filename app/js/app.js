@@ -4,17 +4,23 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService, $q) {
 
-
-    $rootScope.getLoginState = function(){
+    /**
+     * Checks if the current user is logged in and sets the 'loggedin' variable
+     * which will be used to get the login state at any other point
+     * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+     */
+    var getLoginState = function(){
+        console.log('loggedIn',$rootScope.loggedIn);
         var defer = $q.defer();
         AuthService.isLoggedIn().then(function (data) {
             $rootScope.loggedIn = data.loggedin;
             defer.resolve();
-            console.log('loggedIn',$rootScope.loggedIn);
+
         });
         return defer.promise;
     };
 
+    // redirects to login state if if authentication is required for the next state and the user is not logged in
     var loginLogic = function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         if (requireLogin && !$rootScope.loggedIn) {
@@ -22,14 +28,16 @@ app.run(function ($rootScope, $state, AuthService, $q) {
             $state.go('login', {referrer:toState.name, referrerParams:toParams});
         }
     };
+
     /**
-     * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
+     * Processes the login logic at every stateChange
      */
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
+        // if loggedIn is not set yet, wait for getLoginState
         if($rootScope.loggedIn === undefined)
         {
-            $rootScope.getLoginState().then(function () {
+            console.log('loggedin is undefined');
+            getLoginState().then(function () {
                 loginLogic(event, toState, toParams);
             });
         } else {
@@ -39,6 +47,11 @@ app.run(function ($rootScope, $state, AuthService, $q) {
     });
 
 });
+/**
+ * The 'sites' constant.
+ * Contains information about all app states,
+ * each including the actual state object and any additional information needed
+ */
 app.constant('sites', [
     {
         name: 'index',
@@ -51,9 +64,6 @@ app.constant('sites', [
             },
             data: {
                 requireLogin: false
-            },
-            controller: function($scope) {
-                $scope.items = ["A", "List", "Of", "Items"];
             }
         }
     },
@@ -88,21 +98,13 @@ app.constant('sites', [
             abstract: true,
             url: '',
             data: {
+                // all child states will require login
                 requireLogin: true
             },
             views: {
                 'mainContent': {
                     template: '<div data-ui-view="appContent"></div>'
                 }
-            },
-            resolve: {
-                authenticate: ['AuthService', function (AuthService) {
-                    AuthService.currentUser(true).then(function () {
-                        console.log('logged in');
-                    }, function () {
-                        console.log('not logged in');
-                    });
-                }]
             }
         }
     },
@@ -166,16 +168,28 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/projects.html'
                 }
             }
+        },
+        menus: {
+            mainNav: {
+                name: 'Projects',
+                title: 'Projects'
         }
+    }
     },
     {
         name: 'app.acceptances',
         stateObject: {
             url: '/acceptances',
             views: {
-                'mainContent': {
+                'appContent': {
                     templateUrl: 'templates/pages/acceptances.html'
                 }
+            }
+        },
+        menus: {
+            mainNav: {
+                name: 'Acceptances',
+                title: 'Acceptances'
             }
         }
     },
@@ -188,10 +202,21 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/invoices.html'
                 }
             }
+        },
+        menus: {
+            mainNav: {
+                name: 'Invoices',
+                title: 'Invoices'
+            }
         }
     }
 
 ]);
+
+/**
+ * App Config
+ * Configures i18n and app states
+ */
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants) {
     /*
      * Configure the i18n service
@@ -205,6 +230,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
      */
     $translateProvider.preferredLanguage(constants.LANGUAGE);
 
+    // create all app states based on the 'sites' constant
     var states = sites;
     for(var i= 0; i<states.length; i++){
         $stateProvider.state(states[i].name, states[i].stateObject);

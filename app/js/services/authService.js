@@ -3,7 +3,13 @@
  * Provides functions to log in, log out and get the login state and the current user
  */
 angular.module('ama')
-.factory('AuthService', ['$q','$http', 'sha256Filter', 'ApiAbstractionLayer',function($q, $http, sha256Filter, ApiAbstractionLayer){
+.factory('AuthService', [
+        '$q',
+        '$http',
+        'sha256Filter',
+        'ApiAbstractionLayer',
+        '$rootScope',
+        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope){
 
         return {
             /**
@@ -11,7 +17,7 @@ angular.module('ama')
              * @returns {promise}
              */
             currentUser: function(noErrorModal){
-                return ApiAbstractionLayer('GET','user_get', noErrorModal);
+                return ApiAbstractionLayer('GET','userdata', noErrorModal);
             },
 
             /**
@@ -36,6 +42,7 @@ angular.module('ama')
                         }
                         ApiAbstractionLayer('POST', {name: 'login', data: {action: 'login',email: email,password: passToSend}})
                             .then(function (data) {
+                                $rootScope.loggedIn = true;
                                 deferred.resolve(data);
                             }, function (error) {
                                 deferred.reject(error);
@@ -54,12 +61,19 @@ angular.module('ama')
              * @returns {promise}
              */
             logout: function(){
-                return ApiAbstractionLayer('GET', 'logout');
+                var defer = $q.defer();
+                ApiAbstractionLayer('GET', 'logout').then(function (result) {
+                    $rootScope.loggedIn = false;
+                    defer.resolve(result);
+                }, function (error) {
+                    defer.reject(error);
+                });
+                return defer.promise;
             },
 
             /**
              * Gets the login state of the current user
-             * @returns {boolean} - true if logged in, false if not
+             * @returns {promise} - promise containing the login state as boolean: true if logged in, false if not
              */
             isLoggedIn: function(){
                 return ApiAbstractionLayer('GET','login');

@@ -4,8 +4,6 @@
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
 
-        console.log($stateParams);
-
         this.message = $state.current.data.message;
 
         var self = this;
@@ -33,7 +31,6 @@ angular.module('ama')
             AuthService.login(email, password).then(function (result) {
                 var to = $stateParams.referrer || 'app.dashboard';
                 var toParams = $stateParams.referrerParams;
-                $rootScope.loggedIn = true;
                 $state.go(to,toParams);
             });
         };
@@ -42,7 +39,6 @@ angular.module('ama')
          */
         this.logout = function () {
             AuthService.logout().then(function(result){
-                $rootScope.loggedIn = false;
                 console.log(result);
             });
         };
