@@ -9,12 +9,13 @@ app.run(function ($rootScope, $state, AuthService, $q) {
      * which will be used to get the login state at any other point
      * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
      */
-    $rootScope.getLoginState = function(){
+    var getLoginState = function(){
+        console.log('loggedIn',$rootScope.loggedIn);
         var defer = $q.defer();
         AuthService.isLoggedIn().then(function (data) {
             $rootScope.loggedIn = data.loggedin;
             defer.resolve();
-            console.log('loggedIn',$rootScope.loggedIn);
+
         });
         return defer.promise;
     };
@@ -35,7 +36,8 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         // if loggedIn is not set yet, wait for getLoginState
         if($rootScope.loggedIn === undefined)
         {
-            $rootScope.getLoginState().then(function () {
+            console.log('loggedin is undefined');
+            getLoginState().then(function () {
                 loginLogic(event, toState, toParams);
             });
         } else {

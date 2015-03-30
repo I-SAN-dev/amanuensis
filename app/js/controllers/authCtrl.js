@@ -33,7 +33,6 @@ angular.module('ama')
             AuthService.login(email, password).then(function (result) {
                 var to = $stateParams.referrer || 'app.dashboard';
                 var toParams = $stateParams.referrerParams;
-                $rootScope.loggedIn = true;
                 $state.go(to,toParams);
             });
         };
@@ -42,7 +41,6 @@ angular.module('ama')
          */
         this.logout = function () {
             AuthService.logout().then(function(result){
-                $rootScope.loggedIn = false;
                 console.log(result);
             });
         };
