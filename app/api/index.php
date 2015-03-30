@@ -24,9 +24,9 @@ ob_start();
  *  Check the request method
  */
 $method = $_SERVER['REQUEST_METHOD'];
-if ($method != 'GET' && $method != 'POST')
+if ($method != 'GET' && $method != 'POST' && $method != 'DELETE')
 {
-    $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed! (only GET and POST)");
+    $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed! (only GET and POST and DELETE)");
     $error->setHeaders();
     $error->renderJSONerror();
     die();
@@ -44,6 +44,14 @@ if($method == 'POST')
 }
 
 /*
+ * Process DELETE requests
+ */
+if($method == 'DELETE')
+{
+    $_DELETE = json_decode(file_get_contents('php://input'), true);
+}
+
+/*
  *  Get the action
  */
 if($method === 'GET' && isset($_GET['action']))
@@ -53,6 +61,10 @@ if($method === 'GET' && isset($_GET['action']))
 else if ($method === 'POST' && isset($_POST['action']))
 {
     $action = $_POST['action'];
+}
+else if ($method === 'DELETE' && isset($_DELETE['action']))
+{
+    $action = $_DELETE['action'];
 }
 else
 {

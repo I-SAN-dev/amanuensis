@@ -30,4 +30,12 @@ class helloWorld {
     {
         echo 'Hello World: that was a post!';
     }
+
+    /**
+     * This methods reacts to DELETE Requests
+     */
+    public static function delete()
+    {
+        echo 'Hello World: that was a delete!';
+    }
 }
