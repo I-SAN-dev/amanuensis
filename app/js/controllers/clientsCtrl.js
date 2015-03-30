@@ -2,8 +2,8 @@
  * Controller for the client list view.
  * Gets the client list and holds functions to add and delete clients in the database.
  */
-app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLayer) {
-    this.clientList = [];
+app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (ApiAbstractionLayer, LocalStorage) {
+    this.clientList = LocalStorage.getData('clients');
 
     this.filterText = '';
     var self = this;
@@ -20,11 +20,13 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
             }
         }
         self.clientList = data;
+        LocalStorage.setData('clients', data);
     });
 
 
     // Get all client categories
     // TODO: test this, the API doesn't support it yet
+    this.allCategories = LocalStorage.getData('clientCategories');
     ApiAbstractionLayer('GET', 'client_category').then(function(data){
         self.allCategories = data;
     });

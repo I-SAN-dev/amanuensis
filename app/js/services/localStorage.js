@@ -3,8 +3,7 @@
  * @namespace js/services/localStorage
  * @author Christian Baur, Sebastian Antosch
  */
-angular.module('starter')
-    .factory('LocalStorage', ['$window', '$rootScope', function($window, $rootScope){
+app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootScope){
         angular.element($window).on('storage', function(event){
             $rootScope.$apply();
         });
