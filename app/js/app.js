@@ -4,7 +4,11 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService, $q) {
 
-
+    /**
+     * Checks if the current user is logged in and sets the 'loggedin' variable
+     * which will be used to get the login state at any other point
+     * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+     */
     $rootScope.getLoginState = function(){
         var defer = $q.defer();
         AuthService.isLoggedIn().then(function (data) {
@@ -15,6 +19,7 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         return defer.promise;
     };
 
+    // redirects to login state if if authentication is required for the next state and the user is not logged in
     var loginLogic = function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         if (requireLogin && !$rootScope.loggedIn) {
@@ -22,11 +27,12 @@ app.run(function ($rootScope, $state, AuthService, $q) {
             $state.go('login', {referrer:toState.name, referrerParams:toParams});
         }
     };
+
     /**
-     * Login logic, see: http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
+     * Processes the login logic at every stateChange
      */
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
+        // if loggedIn is not set yet, wait for getLoginState
         if($rootScope.loggedIn === undefined)
         {
             $rootScope.getLoginState().then(function () {
@@ -39,6 +45,11 @@ app.run(function ($rootScope, $state, AuthService, $q) {
     });
 
 });
+/**
+ * The 'sites' constant.
+ * Contains information about all app states,
+ * each including the actual state object and any additional information needed
+ */
 app.constant('sites', [
     {
         name: 'index',
@@ -51,9 +62,6 @@ app.constant('sites', [
             },
             data: {
                 requireLogin: false
-            },
-            controller: function($scope) {
-                $scope.items = ["A", "List", "Of", "Items"];
             }
         }
     },
@@ -88,6 +96,7 @@ app.constant('sites', [
             abstract: true,
             url: '',
             data: {
+                // all child states will require login
                 requireLogin: true
             },
             views: {
@@ -192,6 +201,10 @@ app.constant('sites', [
     }
 
 ]);
+/**
+ * App Config
+ * Configures i18n and app states
+ */
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants) {
     /*
      * Configure the i18n service
@@ -205,6 +218,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
      */
     $translateProvider.preferredLanguage(constants.LANGUAGE);
 
+    // create all app states based on the 'sites' constant
     var states = sites;
     for(var i= 0; i<states.length; i++){
         $stateProvider.state(states[i].name, states[i].stateObject);
