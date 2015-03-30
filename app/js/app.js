@@ -103,15 +103,6 @@ app.constant('sites', [
                 'mainContent': {
                     template: '<div data-ui-view="appContent"></div>'
                 }
-            },
-            resolve: {
-                authenticate: ['AuthService', function (AuthService) {
-                    AuthService.currentUser(true).then(function () {
-                        console.log('logged in');
-                    }, function () {
-                        console.log('not logged in');
-                    });
-                }]
             }
         }
     },
@@ -175,16 +166,28 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/projects.html'
                 }
             }
+        },
+        menus: {
+            mainNav: {
+                name: 'Projects',
+                title: 'Projects'
         }
+    }
     },
     {
         name: 'app.acceptances',
         stateObject: {
             url: '/acceptances',
             views: {
-                'mainContent': {
+                'appContent': {
                     templateUrl: 'templates/pages/acceptances.html'
                 }
+            }
+        },
+        menus: {
+            mainNav: {
+                name: 'Acceptances',
+                title: 'Acceptances'
             }
         }
     },
@@ -197,10 +200,17 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/invoices.html'
                 }
             }
+        },
+        menus: {
+            mainNav: {
+                name: 'Invoices',
+                title: 'Invoices'
+            }
         }
     }
 
 ]);
+
 /**
  * App Config
  * Configures i18n and app states
