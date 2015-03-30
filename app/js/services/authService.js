@@ -17,7 +17,7 @@ angular.module('ama')
              * @returns {promise}
              */
             currentUser: function(noErrorModal){
-                return ApiAbstractionLayer('GET','user_get', noErrorModal);
+                return ApiAbstractionLayer('GET','userdata', noErrorModal);
             },
 
             /**

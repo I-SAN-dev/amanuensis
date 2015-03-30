@@ -4,8 +4,6 @@
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
 
-        console.log($stateParams);
-
         this.message = $state.current.data.message;
 
         var self = this;
