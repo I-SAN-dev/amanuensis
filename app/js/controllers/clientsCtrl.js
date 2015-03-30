@@ -23,6 +23,12 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
     });
 
 
+    // Get all client categories
+    // TODO: test this, the API doesn't support it yet
+    ApiAbstractionLayer('GET', 'client_category').then(function(data){
+        self.allCategories = data;
+    });
+
     var initialNewClient = {
         companyname: null,
         contact_firstname: null,
