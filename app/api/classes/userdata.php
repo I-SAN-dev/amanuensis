@@ -1,6 +1,6 @@
 <?php
 /**
- * Gets the current user data
+ * Gets the current user data or adds a new one
  *
  * This file is part of the project codename "AMANUENSIS"
  *
@@ -16,7 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/errorhandling/amaException.php');
 
-class user_get {
+class userdata {
 
     /**
     * This method reacts to GET Requests
@@ -40,6 +40,22 @@ class user_get {
             $response["accessgroup"] = $user->accessgroup;
         }
         json_response($response);
+    }
+
+    /**
+    * Reacts to post requests
+    * adds a user to the db
+    */
+    public function post()
+    {
+
+        //TODO: Authentication!
+        //TODO: Sanitation!
+
+        $password = hash('sha256', 'test123');
+        $user = new User("test@test.de","Tester", $password, 0);
+        var_dump($user);
+
     }
 
 }
