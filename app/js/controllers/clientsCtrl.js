@@ -4,6 +4,11 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
     var self = this;
     ApiAbstractionLayer('GET','client').then(function (data) {
         console.log(data);
+        for(var i= 0; i<data.length; i++){
+            if(!data[i].companyname){
+                data[i].companyname = (data[i].contact_firstname || '')+' '+(data[i].contact_lastname || '');
+            }
+        }
         self.clientList = data;
     });
     var initialNewClient = {
@@ -20,6 +25,7 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
         refnumber: '123456'
     };
     this.newClient = initialNewClient;
+
     this.addClient = function () {
         ApiAbstractionLayer('POST', {name: 'client', data: self.newClient}).then(function(data){
             self.clientList.push(data);

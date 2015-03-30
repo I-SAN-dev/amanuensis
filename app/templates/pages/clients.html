@@ -6,7 +6,7 @@
         </thead>
         <tbody>
             <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText">
-                <td>{{client.name}}</td><td>{{client.city}}</td><td>{{client.refnumber}}</td><td><ul><li data-ng-repeat="cat in client.categories">{{cat}}</li></ul></td>
+                <td>{{client.companyname}}</td><td>{{client.city}}</td><td>{{client.refnumber}}</td><td><ul><li data-ng-repeat="cat in client.categories">{{cat}}</li></ul></td>
             </tr>
             <tr>
                 <td><input data-ng-model="clients.newClient.companyname"></td>
