@@ -33,6 +33,7 @@ angular.module('ama')
                         if(password && result.salt && result.token) {
                             var token = result.token;
                             var salt = result.salt;
+                            $rootScope.salt = result.salt;
 
                             var hashedPass = sha256Filter(password);
                             var passSalt = sha256Filter(hashedPass + salt);
