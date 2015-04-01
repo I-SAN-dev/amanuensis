@@ -204,4 +204,56 @@ final class DBAL {
     }
 
 
+    /**
+     * Takes a tablename and a where representation and a set of columnnames and performs a simple SELECT
+     * @param string $table - the name of the table to insert into,
+     * @param array $columns - the columns to be responded
+     * @param array $where - column:value for the where clause
+     * @throws Exception
+     * @return array - (2-dimensional)
+     */
+    public function simpleSelect($table, array $columns, array $where = NULL)
+    {
+        if(isset($where) && ( !isset($where[0]) || !isset($where[1])))
+        {
+            throw new Exception('Unusable where statement', 400);
+        }
+        else
+        {
+            $query = "  SELECT ".implode(',',$columns)."
+                        FROM ".$table;
+
+            if(isset($where))
+            {
+                $query = $query." WHERE ".$where[0]." = :".$where[0];
+            }
+
+            $q = $this->prepare($query);
+
+            if(isset($where))
+            {
+                /* Bind where statement */
+                $q->bindParam(':'.$where[0], $where[1]);
+            }
+
+            $q->execute();
+
+            /* creating the result array */
+            $result = array();
+
+            while ($entry = $q->fetch())
+            {
+                $row = array();
+                foreach($columns as $column)
+                {
+                    $row[$column] = $entry[$column];
+                }
+                array_push($result, $row);
+            }
+
+            return $result;
+        }
+    }
+
+
 }
