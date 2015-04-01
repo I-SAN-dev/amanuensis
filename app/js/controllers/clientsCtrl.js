@@ -29,9 +29,8 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
 
 
     // Get all client categories
-    // TODO: test this, the API doesn't support it yet
-    //this.allCategories = LocalStorage.getData('clientCategories');
-    ApiAbstractionLayer('GET', 'client_category').then(function(data){
+    this.allCategories = LocalStorage.getData('clientCategories');
+    ApiAbstractionLayer('GET', 'client_categories').then(function(data){
         self.allCategories = data;
     });
 

@@ -17,7 +17,7 @@
                 <td><input data-ng-model="clients.newClient.city"></td>
                 <td><input data-ng-model="clients.newClient.refnumber"></td>
                 <td><select multiple data-ng-model="clients.empty">
-                    <option data-ng-repeat="cat in clients.allCategories">cat.name</option>
+                    <option data-ng-repeat="cat in clients.allCategories">{{cat.name}}</option>
                 </select></td>
                 <td><button data-ng-click="clients.addClient()">Create new client</button></td>
             </tr>
