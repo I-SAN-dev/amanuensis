@@ -86,4 +86,13 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
             setClientList(data);
         });
     };
+
+
+
+    /**
+     * Creates a new client category
+     */
+    this.addCategory = function () {
+        ApiAbstractionLayer('POST', {name: 'client_categories', data: self.newCategory})
+    };
 }]);
