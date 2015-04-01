@@ -172,8 +172,35 @@ final class DBAL {
             $error->renderJSONerror();
             $error->setHeaders();
         }
+    }
 
+    /**
+     * Takes a tablename and a where representation that should be deleted
+     * @param string $table - the name of the table to insert into,
+     * @param array $where - column:value for the where clause
+     * @throws Exception
+     * @return int rowCount - the number of rows deleted
+     */
+    public function deleteRow($table, array $where)
+    {
+        if(!isset($where) || !isset($where[0]) || !isset($where[1]))
+        {
+            throw new Exception('Unusable where statement', 400);
+        }
+        else
+        {
+            $query = " DELETE FROM ".$table."
+                       WHERE ".$where[0]." = :".$where[0];
 
+            $q = $this->prepare($query);
+
+            /* Bind where statement */
+            $q->bindParam(':'.$where[0], $where[1]);
+
+            $q->execute();
+
+            return $q->rowCount();
+        }
     }
 
 

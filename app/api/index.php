@@ -124,11 +124,22 @@ function json_response($array)
  * Call the appropriate method
  */
 $callarray = array($action, strtolower($method));
+/*
+ * add some parameters for the DELETE action (because $_DELETE is not global)
+ */
+$arguments = array();
+if($method == 'DELETE')
+{
+    array_push($arguments, $_DELETE);
+}
+
+
 if(is_callable($callarray))
 {
     try
     {
-        call_user_func($callarray);
+        //call_user_func($callarray);
+        call_user_func_array($callarray, $arguments);
     }
     catch (Exception $e)
     {
