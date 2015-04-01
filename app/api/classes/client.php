@@ -79,9 +79,12 @@ class client {
             $response = array();
             if($count)
             {
+                /*
                 $response["delete"] = $_DELETE["id"];
                 $response["count"] = $count;
                 json_response($response);
+                */
+                self::getClientList();
             }
             else
             {
