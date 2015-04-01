@@ -74,7 +74,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     };
 
     var encrypt = function (actual, key) {
-        //var key = $rootScope.salt;
         var result = "";
         for(var i=0; i<actual.length;i++)
         {
@@ -84,7 +83,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     };
 
     var decrypt = function (encrypted, key) {
-        //var key = $rootScope.salt;
         if(encrypted) {
             var result = "";
             for (var i = 0; i < encrypted.length; i++) {
@@ -105,7 +103,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * @param: {string|object} val - value to save in the local storage
          * @memberof js/services/localStorage
          */
-        setData: function(key, val){
+        setData: function(key, val, encrypted){
 
             /* If the value is an object, serialize it with Json */
             var processedValue;
@@ -118,17 +116,21 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
                 processedValue = val;
             }
 
+            if(encrypted != false) {
+                processedValue = encrypt(processedValue, $window.localStorage.getItem('salt'));
+            }
+
             /* Store the Data */
             if($window.localStorage)
             {
                 try
                 {
-                    $window.localStorage.setItem(cleanKey(key), encrypt(processedValue, 'test'));
+                    $window.localStorage.setItem(cleanKey(key), processedValue);
                 }
                 catch(e)
                 {
                     cleanUpCache();
-                    $window.localStorage.setItem(cleanKey(key), encrypt(processedValue, 'test'));
+                    $window.localStorage.setItem(cleanKey(key), processedValue);
                 }
             }
             else
@@ -143,8 +145,19 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * @return: {string|object} - the corresponding localStorage entry
          * @memberof js/services/localStorage
          */
-        getData: function(key){
-            return tryParseJSON(decrypt($window.localStorage.getItem(cleanKey(key)), 'test'));
+        getData: function(key, encrypted){
+            var jsonString = $window.localStorage.getItem(cleanKey(key));
+            if(encrypted != false){
+                jsonString = decrypt(jsonString, $window.localStorage.getItem('salt'));
+            }
+            return tryParseJSON(jsonString);
+        },
+
+        /**
+         * Removes the entire data from the local storage
+         */
+        removeCache: function () {
+            $window.localStorage.clear();
         }
     }
 }]);
