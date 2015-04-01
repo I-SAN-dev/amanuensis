@@ -49,6 +49,7 @@ class Scripts
         "js/services/localStorage.js",
         // Directives
         "js/directives/menu.js",
+        "js/directives/masterDetail.js",
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
