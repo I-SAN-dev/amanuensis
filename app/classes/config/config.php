@@ -1,6 +1,6 @@
 <?php
 /**
- * Loads the config ini and grants access to it.
+ * Loads the config json and grants access to it.
  * Implements the singleton pattern (h8ters gonna h8..),
  * but therefore we ensure that the config file is only loaded ONCE
  *
