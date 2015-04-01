@@ -212,7 +212,7 @@ final class DBAL {
      * @throws Exception
      * @return array - (2-dimensional)
      */
-    public function simpleSelect($table, array $columns, array $where)
+    public function simpleSelect($table, array $columns, array $where = NULL)
     {
         if(isset($where) && ( !isset($where[0]) || !isset($where[1])))
         {
