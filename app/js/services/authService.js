@@ -9,7 +9,8 @@ angular.module('ama')
         'sha256Filter',
         'ApiAbstractionLayer',
         '$rootScope',
-        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope){
+        'LocalStorage',
+        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope, LocalStorage){
 
         return {
             /**
@@ -33,7 +34,7 @@ angular.module('ama')
                         if(password && result.salt && result.token) {
                             var token = result.token;
                             var salt = result.salt;
-                            $rootScope.salt = result.salt;
+                            LocalStorage.setData('salt',result.salt, false);
 
                             var hashedPass = sha256Filter(password);
                             var passSalt = sha256Filter(hashedPass + salt);
@@ -65,6 +66,7 @@ angular.module('ama')
                 var defer = $q.defer();
                 ApiAbstractionLayer('GET', 'logout').then(function (result) {
                     $rootScope.loggedIn = false;
+                    LocalStorage.removeCache();
                     defer.resolve(result);
                 }, function (error) {
                     defer.reject(error);
