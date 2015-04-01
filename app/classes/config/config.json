@@ -30,6 +30,12 @@
     "invoice":"pdftemplates/invoice.html",
     "approval":"pdftemplates/approval.html",
     "reminder":"pdftemplates/reminder.html"
+  },
+
+  "refnumber":
+  {
+    "idminlength": 4,
+    "scheme": "%y% %yy% %m% %mm% %d% %dd% %ddd% %dddd% %id% hallo"
   }
 
 
