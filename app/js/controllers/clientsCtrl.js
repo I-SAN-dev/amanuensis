@@ -2,14 +2,13 @@
  * Controller for the client list view.
  * Gets the client list and holds functions to add and delete clients in the database.
  */
-app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLayer) {
-    this.clientList = [];
+app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (ApiAbstractionLayer, LocalStorage) {
+    this.clientList = LocalStorage.getData('clients');
 
     this.filterText = '';
     var self = this;
 
-    // Get the client list
-    ApiAbstractionLayer('GET','client').then(function (data) {
+    var setClientList = function (data) {
         for(var i= 0; i<data.length; i++){
             // process contact name if companyname is not set
             if(!data[i].companyname){
@@ -20,11 +19,18 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
             }
         }
         self.clientList = data;
+        LocalStorage.setData('clients', self.clientList);
+    };
+
+    // Get the client list
+    ApiAbstractionLayer('GET','client').then(function (data) {
+        setClientList(data);
     });
 
 
     // Get all client categories
     // TODO: test this, the API doesn't support it yet
+    //this.allCategories = LocalStorage.getData('clientCategories');
     ApiAbstractionLayer('GET', 'client_category').then(function(data){
         self.allCategories = data;
     });
@@ -57,11 +63,12 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', function (ApiAbstractionLa
 
     /**
      * Deletes a client by given ID
-     * TODO: Use real data when API supports this
      *
      * @param id {string} - Database ID of the client to be deleted
      */
     this.deleteClient = function(id){
-        ApiAbstractionLayer('DELETE', 'helloWorld');
+        ApiAbstractionLayer('DELETE', {name:'client',data:{id:id}}).then(function (data) {
+            setClientList(data);
+        });
     };
 }]);
