@@ -33,8 +33,9 @@ class helloWorld {
 
     /**
      * This methods reacts to DELETE Requests
+     * Remember the parameter!!
      */
-    public static function delete()
+    public static function delete($_DELETE)
     {
         echo 'Hello World: that was a delete!';
     }
