@@ -32,6 +32,7 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
     this.allCategories = LocalStorage.getData('clientCategories');
     ApiAbstractionLayer('GET', 'client_categories').then(function(data){
         self.allCategories = data;
+        LocalStorage.setData('clientCategories', data)
     });
 
     var initialNewClient = {
@@ -76,6 +77,10 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
         }
     };
 
+    this.deleteCategoryLink = function (client, category) {
+        ApiAbstractionLayer('DELETE', {name:'client_categories', data: {id:self.allCategories[category].id, clientid: client}});
+    };
+
     /**
      * Deletes a client by given ID
      *
@@ -93,6 +98,19 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
      * Creates a new client category
      */
     this.addCategory = function () {
-        ApiAbstractionLayer('POST', {name: 'client_categories', data: self.newCategory})
+        ApiAbstractionLayer('POST', {name: 'client_categories', data: self.newCategory}).then(function (data) {
+            self.allCategories.push(data);
+            LocalStorage.setData('clientCategories', self.allCategories);
+        });
     };
+
+    /**
+     * Deletes a client category by given ID
+     */
+    this.deleteCategory = function (id) {
+        ApiAbstractionLayer('DELETE', {name: 'client_categories', data: {id: id}}).then(function (data) {
+            self.allCategories = data;
+            LocalStorage.setData('clientCategories', self.allCategories);
+        });
+    }
 }]);
