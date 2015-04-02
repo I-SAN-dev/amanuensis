@@ -1,0 +1,68 @@
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+
+
+
+.btn
+{
+  background-color: $gray-lighter;
+  border-radius: 0;
+  border-color: darken($gray-lighter, 5%);
+  position: relative;
+  padding-left: 45px;
+  color: $gray !important;
+
+  &:before
+  {
+    content: ' ';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    display: block;
+    width: 30px;
+    background-color: darken($gray-lighter, 15%);
+  }
+
+  &:hover,
+  &:active,
+  &:focus
+  {
+    background-color: darken($gray-lighter, 5%);
+    border-color: darken($gray-lighter, 10%);
+    outline: none !important;
+  }
+}
+
+.btn-primary:before
+{
+  background-color: $brand-primary;
+}
+.btn-success:before
+{
+  background-color: $brand-success;
+}
+.btn-info:before
+{
+  background-color: $brand-info;
+}
+.btn-warning:before
+{
+  background-color: $brand-warning;
+}
+.btn-danger:before
+{
+  background-color: $brand-danger;
+}
+
