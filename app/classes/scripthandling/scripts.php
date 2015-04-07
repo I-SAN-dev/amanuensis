@@ -54,6 +54,7 @@ class Scripts
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
         "js/controllers/clientsCtrl.js",
+        "js/controllers/clientCategoriesCtrl.js",
         "js/controllers/acceptancesCtrl.js",
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",

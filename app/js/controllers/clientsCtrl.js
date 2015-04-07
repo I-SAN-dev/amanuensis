@@ -96,26 +96,4 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
             setClientList(data);
         });
     };
-
-
-
-    /**
-     * Creates a new client category
-     */
-    this.addCategory = function () {
-        ApiAbstractionLayer('POST', {name: 'client_categories', data: self.newCategory}).then(function (data) {
-            self.allCategories.push(data);
-            LocalStorage.setData('clientCategories', self.allCategories);
-        });
-    };
-
-    /**
-     * Deletes a client category by given ID
-     */
-    this.deleteCategory = function (id) {
-        ApiAbstractionLayer('DELETE', {name: 'client_categories', data: {id: id}}).then(function (data) {
-            self.allCategories = data;
-            LocalStorage.setData('clientCategories', self.allCategories);
-        });
-    }
 }]);

@@ -29,10 +29,13 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         }
     };
 
+
+
     /**
      * Processes the login logic at every stateChange
      */
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        console.log(toState);
         // if loggedIn is not set yet, wait for getLoginState
         if($rootScope.loggedIn === undefined)
         {
@@ -139,6 +142,17 @@ app.constant('sites', [
             mainNav: {
                 name: 'Clients',
                 title: 'Clients'
+            }
+        }
+    },
+    {
+        name: 'app.clientCategories',
+        stateObject: {
+            url:'clients/categories',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/clientCategories.html'
+                }
             }
         }
     },
