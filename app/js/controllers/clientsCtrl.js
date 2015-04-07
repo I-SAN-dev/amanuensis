@@ -35,6 +35,11 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
         LocalStorage.setData('clientCategories', data)
     });
 
+    var refNumber = '';
+    ApiAbstractionLayer('GET','client_refnumber').then(function (data) {
+        self.newClient.refnumber = data.refnumber;
+    });
+
     var initialNewClient = {
         companyname: null,
         contact_firstname: null,
@@ -47,7 +52,7 @@ app.controller('ClientsCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (
         comment: null,
         contact_gender: null,
         // TODO: set refnumber to highest refnumber in client list + 1
-        refnumber: '123456'
+        refnumber: refNumber
     };
     this.newClient = initialNewClient;
 
