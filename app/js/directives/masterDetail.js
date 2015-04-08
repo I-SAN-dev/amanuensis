@@ -15,7 +15,8 @@ app.directive('masterDetail', [function(){
             var self = this;
             this.setDetail = function(detail){
                 console.log(detail);
-                self.detail = detail;
+                self.detail = detail
+                $scope.$broadcast('detailChanged', detail);
             }
         },
         controllerAs: 'MasterDetailCtrl'

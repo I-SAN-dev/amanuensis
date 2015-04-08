@@ -1,3 +1,7 @@
-<p>
-   {{MasterDetailCtrl.detail.companyname}}
-</p>
+<div data-ng-controller="ClientDetailCtrl as client">
+    <button data-ng-click="client.getClient(MasterDetailCtrl.detail.id)">load</button>
+    <p>
+       {{MasterDetailCtrl.detail.companyname}}
+    </p>
+    <p>{{client.client.city}}</p>
+</div>
