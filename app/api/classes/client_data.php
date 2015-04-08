@@ -24,7 +24,7 @@ class client_data {
      */
     public static function post()
     {
-        //Authenticator::onlyFor(0);
+        Authenticator::onlyFor(0);
 
         if(( !isset($_POST["id"]) || $_POST["id"]=='') && (isset($_POST["clientid"]) && $_POST["clientid"] != ''))
         {
@@ -47,7 +47,7 @@ class client_data {
      */
     public static function delete($_DELETE)
     {
-        //Authenticator::onlyFor(0);
+        Authenticator::onlyFor(0);
 
         if(!isset($_DELETE["id"]) || $_DELETE["id"]=='')
         {

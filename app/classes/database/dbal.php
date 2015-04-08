@@ -214,10 +214,11 @@ final class DBAL {
      * @param string $table - the name of the table to insert into,
      * @param array $columns - the columns to be responded
      * @param array $where - column:value for the where clause
+     * @param int $limit - limits the select to X, 0 = no limit
      * @throws Exception
      * @return array - (2-dimensional)
      */
-    public function simpleSelect($table, array $columns, array $where = NULL)
+    public function simpleSelect($table, array $columns, array $where = NULL, $limit = 0)
     {
         if(isset($where) && ( !isset($where[0]) || !isset($where[1])))
         {
@@ -228,11 +229,16 @@ final class DBAL {
             $query = "  SELECT ".implode(',',$columns)."
                         FROM ".$table;
 
+            /* add where stateme */
             if(isset($where))
             {
                 $query = $query." WHERE ".$where[0]." = :".$where[0];
             }
-
+            /* add limit statement */
+            if($limit > 0)
+            {
+                $query = $query." LIMIT ".$limit;
+            }
             $q = $this->prepare($query);
 
             if(isset($where))
@@ -246,16 +252,27 @@ final class DBAL {
             /* creating the result array */
             $result = array();
 
-            while ($entry = $q->fetch())
+            /* object for limited = 1 result, array of objects for set of results */
+            if($limit == 1)
             {
-                $row = array();
+                $entry = $q->fetch();
                 foreach($columns as $column)
                 {
-                    $row[$column] = $entry[$column];
+                    $result[$column] = $entry[$column];
                 }
-                array_push($result, $row);
             }
-
+            else
+            {
+                while ($entry = $q->fetch())
+                {
+                    $row = array();
+                    foreach($columns as $column)
+                    {
+                        $row[$column] = $entry[$column];
+                    }
+                    array_push($result, $row);
+                }
+            }
             return $result;
         }
     }

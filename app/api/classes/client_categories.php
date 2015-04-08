@@ -26,19 +26,18 @@ class client_categories {
      */
     public static function get($id = NULL)
     {
-        Authenticator::onlyFor(0, 1);
+        //Authenticator::onlyFor(0, 1);
 
         $dbal = DBAL::getInstance();
 
         /* where from get */
         $where = (isset($_GET["id"])&&$_GET["id"]!='') ? array('id', $_GET["id"]) : NULL;
-
+        $limit = ((isset($_GET["id"])&&$_GET["id"]!='')||isset($id)) ? 1 : 0;
         /* optional override of where */
         if(isset($id))
         {
             $where = array('id', $id);
         }
-
         $result = $dbal->simpleSelect(
             'customer_category',
             array(
@@ -46,7 +45,8 @@ class client_categories {
                 'name',
                 'description'
                 ),
-            $where
+            $where,
+            $limit
             );
         json_response($result);
     }

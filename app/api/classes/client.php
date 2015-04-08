@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        //Authenticator::onlyFor(0, 1);
+        Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -329,7 +329,6 @@ class client {
      */
     private static function updateClient($id)
     {
-
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
             'customers',
