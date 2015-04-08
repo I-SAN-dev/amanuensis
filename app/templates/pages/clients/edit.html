@@ -1,7 +1,6 @@
-<div data-ng-controller="ClientDetailCtrl as client" data-ng-switch data-on="client.editMode">
-    <div data-ng-switch-default>
     <h2>{{client.client.companyname}} <small>{{client.client.refnumber}}</small></h2>
-    <button class="btn btn-default" data-ng-click="client.enterEditMode()">!! Edit !!</button>
+    <button class="btn btn-default" data-ng-click="client.createOrUpdateClient()">!! Save !!</button>
+    <button class="btn btn-default" data-ng-click="client.cancelClientEdit()">!! Cancel !!</button>
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default">
@@ -9,7 +8,7 @@
                     {{'clients.contact'|translate}}
                 </div>
                 <div class="panel-body">
-                    <p>{{client.client.contact_firstname}} {{client.client.contact_lastname}}</p>
+                    <input data-ng-model="client.client.contact_firstname"> <input data-ng-model="client.client.contact_lastname">
                     <p>{{'clients.mail'|translate}}</p>
                     <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
                         <dt>{{mail.name}}</dt>
@@ -48,8 +47,3 @@
             </div>
         </div>
     </div>
-        </div>
-    <div data-ng-switch-when="true">
-        <div data-ng-include="'templates/pages/clients/edit.html'"></div>
-    </div>
-</div>

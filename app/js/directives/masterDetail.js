@@ -8,16 +8,19 @@ app.directive('masterDetail', [function(){
         },
         templateUrl: 'templates/directives/masterDetail.html',
         controller: function ($scope) {
-            console.log($scope.masterTpl);
+            console.log($scope.detail);
             this.detail = $scope.detail;
             this.masterTpl = $scope.masterTpl;
             this.detailTpl = $scope.detailTpl;
             var self = this;
-            this.setDetail = function(detail){
-                console.log(detail);
-                self.detail = detail
+            $scope.setDetail = function(detail){
+                self.detail = detail;
                 $scope.$broadcast('detailChanged', detail);
-            }
+            };
+            $scope.setDetailTpl = function(templateUrl) {
+                self.detailTpl = templateUrl;
+                $scope.$broadcast('detailTemplateChanged', self.detail);
+            };
         },
         controllerAs: 'MasterDetailCtrl'
     }

@@ -1,8 +1,8 @@
-<div class="master-detail-wrapper">
-    <div class="master" data-ng-include="MasterDetailCtrl.masterTpl">
+<div class="row master-detail-wrapper">
+    <div class="col-sm-6 master" data-ng-include="MasterDetailCtrl.masterTpl">
 
     </div>
-    <div class="detail" data-ng-include="MasterDetailCtrl.detailTpl">
+    <div data-ng-show="MasterDetailCtrl.detail" class="col-sm-6 detail" data-ng-include="MasterDetailCtrl.detailTpl">
 
     </div>
 </div>
