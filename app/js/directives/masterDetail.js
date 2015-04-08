@@ -14,10 +14,13 @@ app.directive('masterDetail', [function(){
             this.detailTpl = $scope.detailTpl;
             var self = this;
             $scope.setDetail = function(detail){
-                console.log(detail);
                 self.detail = detail;
                 $scope.$broadcast('detailChanged', detail);
-            }
+            };
+            $scope.setDetailTpl = function(templateUrl) {
+                self.detailTpl = templateUrl;
+                $scope.$broadcast('detailTemplateChanged', self.detail);
+            };
         },
         controllerAs: 'MasterDetailCtrl'
     }
