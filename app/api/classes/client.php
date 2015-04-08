@@ -41,7 +41,7 @@ class client {
      */
     public static function post()
     {
-        Authenticator::onlyFor(0);
+        //Authenticator::onlyFor(0);
 
         if(isset($_POST['id']) && $_POST['id'] != '')
         {

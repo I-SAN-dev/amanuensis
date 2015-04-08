@@ -156,6 +156,7 @@ final class DBAL {
                         SET ".implode(',', array_map(function($x){return $x.' = :'.$x;},$realcolumns))."
                         WHERE ".$where[0]." = :".$where[0];
 
+
             $q = $this->prepare($query);
 
             /* Bind data */
@@ -168,8 +169,16 @@ final class DBAL {
 
             $q->execute();
 
-            return $this->connection->lastInsertId();
-
+            /* return the id of the updated row */
+            if($where[0]=='id')
+            {
+                return $where[1];
+            }
+            else
+            {
+                $idarray = $this->simpleSelect($table, array('id'), $where, 1);
+                return $idarray['id'];
+            }
         }
         else
         {

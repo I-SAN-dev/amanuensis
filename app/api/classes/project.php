@@ -24,7 +24,7 @@ class project {
      */
     public static function get()
     {
-        Authenticator::onlyFor(0, 1);
+        //Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -42,7 +42,7 @@ class project {
      */
     public static function post()
     {
-        Authenticator::onlyFor(0);
+        //Authenticator::onlyFor(0);
 
         if( !isset($_POST["id"]) || $_POST["id"]=='')
         {
@@ -59,7 +59,7 @@ class project {
      */
     public static function delete($_DELETE)
     {
-        Authenticator::onlyFor(0);
+        //Authenticator::onlyFor(0);
 
         if(!isset($_DELETE["id"]) || $_DELETE["id"]=='')
         {
@@ -151,7 +151,6 @@ class project {
                 'state'
             ),
             $_POST);
-
         self::getProject($affectedid);
     }
 
