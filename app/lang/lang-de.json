@@ -12,6 +12,7 @@
     "companyName":"Firma",
     "address": "Adresse",
     "streetNo": "Straße, Hausnummer",
+    "streetAdditional": "Adresszusatz",
     "zip":"Postleitzahl",
     "city": "Stadt",
     "country": "Land",

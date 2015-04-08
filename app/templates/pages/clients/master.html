@@ -1,9 +1,25 @@
 <div data-ng-controller="ClientsCtrl as clients">
-    <h1>{{'clients.clients'|translate}}</h1>
-    <input data-ng-model="clients.filterText">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Filter:</span>
+            <input data-ng-model="clients.filterText" type="text" class="form-control" aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <!--<div class="panel-body">
+
+    </div>-->
+<div class="table-responsive">
     <table class="table table-striped">
         <thead>
-        <tr><th>{{'clients.name'|translate}}</th><th>{{'clients.city'|translate}}</th><th>{{'clients.refnumber'|translate}}</th><th>{{'clients.categories'|translate}}</th></tr>
+        <tr>
+            <th>{{'clients.name'|translate}}</th>
+            <th>{{'clients.city'|translate}}</th>
+            <th>{{'clients.refnumber'|translate}}</th>
+            <th>{{'clients.categories'|translate}}</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText" data-ng-click="MasterDetailCtrl.setDetail(client)">
@@ -24,5 +40,8 @@
         </tr>
         </tbody>
     </table>
+    </div>
+    </div>
     <a data-ui-sref="app.clientCategories">Kategorien</a>
+
 </div>
