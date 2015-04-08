@@ -1,7 +1,22 @@
 <div data-ng-controller="ClientDetailCtrl as client">
-    <button data-ng-click="client.getClient(MasterDetailCtrl.detail.id)">load</button>
-    <p>
-       {{MasterDetailCtrl.detail.companyname}}
-    </p>
-    <p>{{client.client.city}}</p>
+    <dl class="dl-horizontal">
+        <dt>{{'clients.companyName'|translate}}</dt>
+        <dd>{{client.client.companyname}}</dd>
+        <dt>{{'clients.firstName'|translate}}</dt>
+        <dd>{{client.client.contact_firstname}}</dd>
+        <dt>{{'clients.lastName'|translate}}</dt>
+        <dd>{{client.client.contact_lastname}}</dd>
+        <dt>{{'clients.streetNo'|translate}}</dt>
+        <dd>{{client.client.street_no}}</dd>
+        <dt>{{'clients.streetAdditional'|translate}}</dt>
+        <dd>{{client.client.street_additional}}</dd>
+        <dt>{{'clients.zip'|translate}}</dt>
+        <dd>{{client.client.zip}}</dd>
+        <dt>{{'clients.city'|translate}}</dt>
+        <dd>{{client.client.city}}</dd>
+        <dt>{{'clients.country'|translate}}</dt>
+        <dd>{{client.client.country}}</dd>
+        <dt>{{'clients.comment'|translate}}</dt>
+        <dd>{{client.client.comment}}</dd>
+    </dl>
 </div>
