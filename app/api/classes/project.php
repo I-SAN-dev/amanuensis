@@ -144,7 +144,7 @@ class project {
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
             'projects',
-            array('id', $id),
+            array('id', $_POST["id"]),
             array(
                 'name',
                 'description',
