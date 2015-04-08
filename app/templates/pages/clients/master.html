@@ -22,7 +22,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText" data-ng-click="MasterDetailCtrl.setDetail(client)">
+        <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText"
+            data-ng-click="clients.setDetail(client)">
             <td>{{client.companyname}}</td>
             <td>{{client.city}}</td>
             <td>{{client.refnumber}}</td>

@@ -13,7 +13,7 @@ app.directive('masterDetail', [function(){
             this.masterTpl = $scope.masterTpl;
             this.detailTpl = $scope.detailTpl;
             var self = this;
-            this.setDetail = function(detail){
+            $scope.setDetail = function(detail){
                 console.log(detail);
                 self.detail = detail;
                 $scope.$broadcast('detailChanged', detail);
