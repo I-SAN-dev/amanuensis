@@ -6,6 +6,7 @@
     "clients": "Kunden",
     "newClient":"Neuer Kunde",
     "deleteClient":"Diesen Kunden entfernen",
+    "contact": "Ansprechpartner",
     "name": "Name",
     "firstName": "Vorname",
     "lastName":"Nachname",
@@ -16,6 +17,8 @@
     "zip":"Postleitzahl",
     "city": "Stadt",
     "country": "Land",
+    "mail": "E-Mail",
+    "phone": "Telefon",
     "comment": "Kommentar",
     "refnumber":"Kunden-Nr.",
     "categories": "Kategorien"

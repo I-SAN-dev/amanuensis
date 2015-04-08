@@ -1,22 +1,49 @@
 <div data-ng-controller="ClientDetailCtrl as client">
-    <dl class="dl-horizontal">
-        <dt>{{'clients.companyName'|translate}}</dt>
-        <dd>{{client.client.companyname}}</dd>
-        <dt>{{'clients.firstName'|translate}}</dt>
-        <dd>{{client.client.contact_firstname}}</dd>
-        <dt>{{'clients.lastName'|translate}}</dt>
-        <dd>{{client.client.contact_lastname}}</dd>
-        <dt>{{'clients.streetNo'|translate}}</dt>
-        <dd>{{client.client.street_no}}</dd>
-        <dt>{{'clients.streetAdditional'|translate}}</dt>
-        <dd>{{client.client.street_additional}}</dd>
-        <dt>{{'clients.zip'|translate}}</dt>
-        <dd>{{client.client.zip}}</dd>
-        <dt>{{'clients.city'|translate}}</dt>
-        <dd>{{client.client.city}}</dd>
-        <dt>{{'clients.country'|translate}}</dt>
-        <dd>{{client.client.country}}</dd>
-        <dt>{{'clients.comment'|translate}}</dt>
-        <dd>{{client.client.comment}}</dd>
-    </dl>
+    <h2>{{client.client.companyname}} <small>{{client.client.refnumber}}</small></h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{'clients.contact'|translate}}
+                </div>
+                <div class="panel-body">
+                    <p>{{client.client.contact_firstname}} {{client.client.contact_lastname}}</p>
+                    <p>{{'clients.mail'|translate}}</p>
+                    <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
+                        <dt>{{mail.name}}</dt>
+                        <dd>{{mail.value}}</dd>
+                    </dl>
+                    <p>{{'clients.phone'|translate}}</p>
+                    <dl data-ng-repeat="phone in client.client.data.phone" class="dl-horizontal">
+                        <dt>{{phone.name}}</dt>
+                        <dd>{{phone.value}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{'clients.address'|translate}}
+                </div>
+                <div class="panel-body">
+                    <address>
+                        <strong>{{client.client.companyname}}</strong><br>
+                        {{client.client.street_no}}<br>
+                        {{client.client.additional}}<br>
+                        {{client.client.zip}} {{client.client.city}}<br>
+                        {{client.client.country}}
+                    </address>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{'clients.comment'|translate}}
+                </div>
+                <div class="panel-body">
+                    {{client.client.comment}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
