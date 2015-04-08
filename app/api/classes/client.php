@@ -24,7 +24,7 @@ class client {
      */
     public static function get()
     {
-        Authenticator::onlyFor(0, 1);
+        //Authenticator::onlyFor(0, 1);
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
@@ -243,6 +243,8 @@ class client {
                 array_push($additionalData[$type], $data);
             }
 
+
+
             /* Build the response*/
             $response = array(
                 'id' => $row['id'],
@@ -250,7 +252,7 @@ class client {
                 'contact_gender' => $row['contact_gender'],
                 'contact_firstname' => $row['contact_firstname'],
                 'contact_lastname' => $row['contact_lastname'],
-                'street_no' => $row['street_no'],
+                'street_no' => $row["street_no"],
                 'street_additional' => $row['additional'],
                 'zip' => $row['zip'],
                 'city' => $row['city'],
