@@ -41,7 +41,7 @@ class client {
      */
     public static function post()
     {
-        Authenticator::onlyFor(0);
+        //Authenticator::onlyFor(0);
 
         if(isset($_POST['id']) && $_POST['id'] != '')
         {
@@ -76,14 +76,8 @@ class client {
                 die();
             }
 
-            $response = array();
             if($count)
             {
-                /*
-                $response["delete"] = $_DELETE["id"];
-                $response["count"] = $count;
-                json_response($response);
-                */
                 self::getClientList();
             }
             else
@@ -243,6 +237,8 @@ class client {
                 array_push($additionalData[$type], $data);
             }
 
+
+
             /* Build the response*/
             $response = array(
                 'id' => $row['id'],
@@ -250,7 +246,7 @@ class client {
                 'contact_gender' => $row['contact_gender'],
                 'contact_firstname' => $row['contact_firstname'],
                 'contact_lastname' => $row['contact_lastname'],
-                'street_no' => $row['street_no'],
+                'street_no' => $row["street_no"],
                 'street_additional' => $row['additional'],
                 'zip' => $row['zip'],
                 'city' => $row['city'],
@@ -333,7 +329,6 @@ class client {
      */
     private static function updateClient($id)
     {
-
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
             'customers',

@@ -53,7 +53,12 @@ final class DBAL {
             $dbport = $conf->get["db"]["port"];
             $dbname = $conf->get["db"]["database"];
 
-            $this->connection = new PDO("mysql:host=".$dbhost.";port=".$dbport.";dbname=".$dbname."", $conf->get["db"]["user"], $conf->get["db"]["password"]);
+            $this->connection = new PDO(
+                "mysql:host=".$dbhost.";port=".$dbport.";dbname=".$dbname."",
+                $conf->get["db"]["user"],
+                $conf->get["db"]["password"],
+                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+            );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(Exception $e)
@@ -151,6 +156,7 @@ final class DBAL {
                         SET ".implode(',', array_map(function($x){return $x.' = :'.$x;},$realcolumns))."
                         WHERE ".$where[0]." = :".$where[0];
 
+
             $q = $this->prepare($query);
 
             /* Bind data */
@@ -163,8 +169,16 @@ final class DBAL {
 
             $q->execute();
 
-            return $this->connection->lastInsertId();
-
+            /* return the id of the updated row */
+            if($where[0]=='id')
+            {
+                return $where[1];
+            }
+            else
+            {
+                $idarray = $this->simpleSelect($table, array('id'), $where, 1);
+                return $idarray['id'];
+            }
         }
         else
         {
@@ -209,10 +223,11 @@ final class DBAL {
      * @param string $table - the name of the table to insert into,
      * @param array $columns - the columns to be responded
      * @param array $where - column:value for the where clause
+     * @param int $limit - limits the select to X, 0 = no limit
      * @throws Exception
      * @return array - (2-dimensional)
      */
-    public function simpleSelect($table, array $columns, array $where = NULL)
+    public function simpleSelect($table, array $columns, array $where = NULL, $limit = 0)
     {
         if(isset($where) && ( !isset($where[0]) || !isset($where[1])))
         {
@@ -223,11 +238,16 @@ final class DBAL {
             $query = "  SELECT ".implode(',',$columns)."
                         FROM ".$table;
 
+            /* add where stateme */
             if(isset($where))
             {
                 $query = $query." WHERE ".$where[0]." = :".$where[0];
             }
-
+            /* add limit statement */
+            if($limit > 0)
+            {
+                $query = $query." LIMIT ".$limit;
+            }
             $q = $this->prepare($query);
 
             if(isset($where))
@@ -241,16 +261,27 @@ final class DBAL {
             /* creating the result array */
             $result = array();
 
-            while ($entry = $q->fetch())
+            /* object for limited = 1 result, array of objects for set of results */
+            if($limit == 1)
             {
-                $row = array();
+                $entry = $q->fetch();
                 foreach($columns as $column)
                 {
-                    $row[$column] = $entry[$column];
+                    $result[$column] = $entry[$column];
                 }
-                array_push($result, $row);
             }
-
+            else
+            {
+                while ($entry = $q->fetch())
+                {
+                    $row = array();
+                    foreach($columns as $column)
+                    {
+                        $row[$column] = $entry[$column];
+                    }
+                    array_push($result, $row);
+                }
+            }
             return $result;
         }
     }
