@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the Projects
+ * Handles the Offers
  *
  * This file is part of the project codename "AMANUENSIS"
  *
@@ -17,7 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 
-class project {
+class offer {
 
     /**
      * This method reacts to GET Requests
@@ -28,11 +28,11 @@ class project {
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
-            self::getProject($_GET["id"]);
+            self::getOffer($_GET["id"]);
         }
         else
         {
-            self::getProjectList();
+            self::getOfferList();
         }
     }
 
@@ -46,11 +46,11 @@ class project {
 
         if( !isset($_POST["id"]) || $_POST["id"]=='')
         {
-            self::createProject();
+            self::createOffer();
         }
         else
         {
-            self::modifyProject();
+            self::modifyOffer();
         }
     }
 
@@ -69,47 +69,47 @@ class project {
         }
         else
         {
-            self::deleteProject($_DELETE);
+            self::deleteOffer($_DELETE);
         }
     }
 
     /**
-     * Gets a list of all Projects
+     * Gets a list of all Offers
      */
-    private static function getProjectList()
+    private static function getOfferList()
     {
-        //TODO select table and fields
-        //TODO add client name
+        //TODO add project+client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'projects',
+            'offers',
             array(
                 'id',
                 'name',
-                'client',
-                'state'
+                'refnumber',
+                'project',
+                'date'
             )
         );
         json_response($result);
     }
 
     /**
-     * Gets a single Project
-     * @param $id - the id of the Project to get
+     * Gets a single Offer
+     * @param $id - the id of the Offer to get
      */
-    private static function getProject($id)
+    private static function getOffer($id)
     {
-        //TODO select table and fields
-        //TODO add client name
+        //TODO add project+client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'projects',
+            'offers',
             array(
                 'id',
                 'name',
+                'refnumber',
                 'description',
-                'client',
-                'state'
+                'project',
+                'date'
             ),
             array('id', $id),
             1
@@ -118,55 +118,54 @@ class project {
     }
 
     /**
-     * creates a new Project
+     * creates a new Offer
      */
-    private static function createProject()
+    private static function createOffer()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $id = $dbal->dynamicInsert(
-            'projects',
+            'offers',
             array(
                 'name',
                 'description',
-                'state',
-                'client'
+                'refnumber',
+                'project',
+                'date'
             ),
             $_POST
         );
-        self::getProject($id);
+        self::getOffer($id);
     }
 
     /**
-     * modifies a Project
+     * modifies a Offer
      */
-    private static function modifyProject()
+    private static function modifyOffer()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
-            'projects',
+            'offers',
             array('id', $_POST["id"]),
             array(
                 'name',
                 'description',
-                'state'
+                'refnumber',
+                'date'
             ),
             $_POST);
-        self::getProject($affectedid);
+        self::getOffer($affectedid);
     }
 
     /**
-     * deletes a Project
+     * deletes a Offer
      * @param $_DELETE
      */
-    private static function deleteProject($_DELETE)
+    private static function deleteOffer($_DELETE)
     {
         $dbal = DBAL::getInstance();
         try
         {
-            //TODO select table!
-            $count = $dbal->deleteRow('projects', array('id', $_DELETE['id']));
+            $count = $dbal->deleteRow('offers', array('id', $_DELETE['id']));
         }
         catch(Exception $e)
         {
@@ -178,11 +177,11 @@ class project {
 
         if($count)
         {
-            self::getProjectList();
+            self::getOfferList();
         }
         else
         {
-            $error = new amaException(NULL, 404, "There was no Project matching your criteria");
+            $error = new amaException(NULL, 404, "There was no Offer matching your criteria");
             $error->renderJSONerror();
             $error->setHeaders();
         }
