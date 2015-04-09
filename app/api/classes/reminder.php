@@ -126,7 +126,6 @@ class reminder {
      */
     private static function createReminder()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $id = $dbal->dynamicInsert(
             'reminders',
