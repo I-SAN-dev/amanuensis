@@ -6,7 +6,9 @@ app.controller('ClientDetailCtrl', ['ApiAbstractionLayer', 'LocalStorage', '$sco
     var self = this;
     this.editMode = false;
     var getClient = function(id) {
+        self.client = LocalStorage.getData('client'+'/'+id);
         ApiAbstractionLayer('GET', {name:'client', params: {id:id}}).then(function (data) {
+            LocalStorage.setData('client'+'/'+id, data);
             self.client = data;
         });
     };

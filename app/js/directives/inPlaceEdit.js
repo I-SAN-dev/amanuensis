@@ -37,9 +37,10 @@ app.directive('inPlaceEdit',
 
                         apiObject.data[$scope.key] = self.val;
 
-                        ApiAbstractionLayer('POST', apiObject).then(function () {
+                        ApiAbstractionLayer('POST', apiObject).then(function (data) {
                             self.editMode = false;
                             backup = null;
+                            LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
                         });
                     };
 
