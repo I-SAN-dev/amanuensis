@@ -3,7 +3,7 @@
  * Gets the client list and holds functions to add and delete clients in the database.
  */
 app.controller('ClientsCtrl',
-    ['ApiAbstractionLayer', 'LocalStorage', '$scope', function (ApiAbstractionLayer, LocalStorage, $scope) {
+    ['ApiAbstractionLayer', 'LocalStorage', '$scope','$stateParams', function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams) {
         this.clientList = LocalStorage.getData('clients');
 
         this.filterText = '';
@@ -104,6 +104,7 @@ app.controller('ClientsCtrl',
          */
         this.setDetail = function (client) {
             // TODO: add an 'active' class to the client selected
+            $stateParams.id = client.id;
             $scope.$parent.setDetail(client);
         };
     }]);
