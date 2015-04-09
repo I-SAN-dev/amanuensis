@@ -57,7 +57,9 @@ final class DBAL {
                 "mysql:host=".$dbhost.";port=".$dbport.";dbname=".$dbname."",
                 $conf->get["db"]["user"],
                 $conf->get["db"]["password"],
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+                array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8, sql_mode="STRICT_ALL_TABLES"'
+                )
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
