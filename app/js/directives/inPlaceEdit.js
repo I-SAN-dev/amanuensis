@@ -11,7 +11,8 @@ app.directive('inPlaceEdit',
                     options: '=ipeOptions',
                     apiName: '=',
                     apiParams: '=',
-                    apiId: '='
+                    apiId: '=',
+                    deletable: '='
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: function($scope){
@@ -22,6 +23,7 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
+                        self.deletable = $scope.deletable || true;
                         self.type = $scope.type;
                         self.val = $scope.val;
                         self.editMode = true;
@@ -49,6 +51,10 @@ app.directive('inPlaceEdit',
                         self.val = angular.copy(backup);
                         backup = null;
                     };
+
+                    this.delete = function () {
+                        // TODO: Add a delete service
+                    }
                 },
                 controllerAs: 'ipe'
             }

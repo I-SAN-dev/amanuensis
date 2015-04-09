@@ -4,6 +4,7 @@
         <input data-ng-if="ipe.type != 'textarea'" data-ng-model="ipe.val" type="{{ipe.type}}">
         <textarea data-ng-if="ipe.type == 'textarea'" data-ng-model="ipe.val"></textarea>
         <button class="btn btn-success" data-ng-click="ipe.save()">Save</button>
-        <button class="btn btn-danger" data-ng-click="ipe.cancel()">Cancel</button>
+        <button class="btn btn-warning" data-ng-click="ipe.cancel()">Cancel</button>
+        <button class="btn btn-danger" data-ng-if="ipe.deletable" data-ng-click="ipe.delete()">X</button>
     </label>
 </span>
