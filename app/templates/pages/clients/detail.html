@@ -1,5 +1,4 @@
-<div data-ng-controller="ClientDetailCtrl as client" data-ng-switch data-on="client.editMode">
-    <div data-ng-switch-default>
+<div data-ng-controller="ClientDetailCtrl as client">
     <h2>{{client.client.companyname}} <small>{{client.client.refnumber}}</small></h2>
     <button class="btn btn-default" data-ng-click="client.enterEditMode()">!! Edit !!</button>
     <div class="row">
@@ -13,16 +12,37 @@
                              data-ipe-key="'contact_firstname'"
                              data-ipe-value="client.client.contact_firstname"
                              data-api-name="'client'"
-                             data-api-data="client.client"></span> {{client.client.contact_lastname}}</p>
+                             data-api-id="client.client.id"></span>
+                    <span data-in-place-edit
+                          data-ipe-key="'contact_lastname'"
+                          data-ipe-value="client.client.contact_lastname"
+                          data-api-name="'client'"
+                          data-api-id="client.client.id"></span></p>
                     <p>{{'clients.mail'|translate}}</p>
                     <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
-                        <dt>{{mail.name}}</dt>
-                        <dd>{{mail.value}}</dd>
+                        <dt data-in-place-edit
+                            data-ipe-key="'name'"
+                            data-ipe-value="mail.name"
+                            data-api-name="'client_data'"
+                            data-api-id="mail.id"></dt>
+                        <dd data-in-place-edit
+                            data-ipe-key="'value'"
+                            data-ipe-value="mail.value"
+                            data-api-name="'client_data'"
+                            data-api-id="mail.id"></dd>
                     </dl>
                     <p>{{'clients.phone'|translate}}</p>
                     <dl data-ng-repeat="phone in client.client.data.phone" class="dl-horizontal">
-                        <dt>{{phone.name}}</dt>
-                        <dd>{{phone.value}}</dd>
+                        <dt data-in-place-edit
+                              data-ipe-key="'name'"
+                              data-ipe-value="phone.name"
+                              data-api-name="'client_data'"
+                              data-api-id="phone.id"></dt>
+                        <dd data-in-place-edit
+                            data-ipe-key="'value'"
+                            data-ipe-value="phone.value"
+                            data-api-name="'client_data'"
+                            data-api-id="phone.id"></dd>
                     </dl>
                 </div>
             </div>
@@ -34,11 +54,35 @@
                 </div>
                 <div class="panel-body">
                     <address>
-                        <strong>{{client.client.companyname}}</strong><br>
-                        {{client.client.street_no}}<br>
-                        {{client.client.additional}}<br>
-                        {{client.client.zip}} {{client.client.city}}<br>
-                        {{client.client.country}}
+                        <strong><span data-in-place-edit
+                                      data-ipe-key="'companyname'"
+                                      data-ipe-value="client.client.companyname"
+                                      data-api-name="'client'"
+                                      data-api-id="client.client.id"></span></strong><br>
+                        <span data-in-place-edit
+                              data-ipe-key="'street_no'"
+                              data-ipe-value="client.client.street_no"
+                              data-api-name="'client'"
+                              data-api-id="client.client.id"></span><br>
+                        <span data-in-place-edit
+                              data-ipe-key="'additional'"
+                              data-ipe-value="client.client.additional"
+                              data-api-name="'client'"
+                              data-api-id="client.client.id"></span><br>
+                        <span data-in-place-edit
+                              data-ipe-key="'zip'"
+                              data-ipe-value="client.client.zip"
+                              data-api-name="'client'"
+                              data-api-id="client.client.id"></span> <span data-in-place-edit
+                                                                          data-ipe-key="'city'"
+                                                                          data-ipe-value="client.client.city"
+                                                                          data-api-name="'client'"
+                                                                          data-api-id="client.client.id"></span><br>
+                        <span data-in-place-edit
+                              data-ipe-key="'country'"
+                              data-ipe-value="client.client.country"
+                              data-api-name="'client'"
+                              data-api-id="client.client.id"></span>
                     </address>
                 </div>
             </div>
@@ -47,13 +91,14 @@
                     {{'clients.comment'|translate}}
                 </div>
                 <div class="panel-body">
-                    {{client.client.comment}}
+                    <span data-in-place-edit
+                          data-ipe-key="'comment'"
+                          data-ipe-value="client.client.comment"
+                          data-ipe-type="'textarea'"
+                          data-api-name="'client'"
+                          data-api-id="client.client.id"></span>
                 </div>
             </div>
         </div>
-    </div>
-        </div>
-    <div data-ng-switch-when="true">
-        <div data-ng-include="'templates/pages/clients/edit.html'"></div>
     </div>
 </div>

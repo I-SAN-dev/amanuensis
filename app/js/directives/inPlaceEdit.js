@@ -11,7 +11,7 @@ app.directive('inPlaceEdit',
                     options: '=ipeOptions',
                     apiName: '=',
                     apiParams: '=',
-                    apiData: '='
+                    apiId: '='
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: function($scope){
@@ -22,6 +22,7 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
+                        self.type = $scope.type;
                         self.val = $scope.val;
                         self.editMode = true;
                         backup = angular.copy($scope.val);
@@ -31,7 +32,7 @@ app.directive('inPlaceEdit',
                         var apiObject = {
                             name: $scope.apiName,
                             params: $scope.apiParams || {},
-                            data: $scope.apiData
+                            data: {id:$scope.apiId}
                         };
 
                         apiObject.data[$scope.key] = self.val;
