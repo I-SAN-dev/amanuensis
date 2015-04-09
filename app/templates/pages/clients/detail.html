@@ -9,7 +9,11 @@
                     {{'clients.contact'|translate}}
                 </div>
                 <div class="panel-body">
-                    <p>{{client.client.contact_firstname}} {{client.client.contact_lastname}}</p>
+                    <p><span data-in-place-edit
+                             data-ipe-key="'contact_firstname'"
+                             data-ipe-value="client.client.contact_firstname"
+                             data-api-name="'client'"
+                             data-api-data="client.client"></span> {{client.client.contact_lastname}}</p>
                     <p>{{'clients.mail'|translate}}</p>
                     <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
                         <dt>{{mail.name}}</dt>

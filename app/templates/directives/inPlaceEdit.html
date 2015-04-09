@@ -1,8 +1,8 @@
-<div data-ng-switch="editMode">
-    <span data-ng-switch-default data-ng-click="enterEditMode()">{{value}}</span>
-    <label>
-        <input data-ng-switch-when="true" data-ng-model="value">
-        <button class="btn btn-success" data-ng-click="save()">Save</button>
-        <button class="btn btn-danger" data-ng-click="cancel()">Cancel</button>
+<span data-ng-switch="ipe.editMode">
+    <span data-ng-switch-default data-ng-click="ipe.enterEditMode()">{{val}}</span>
+    <label data-ng-switch-when="true">
+        <input data-ng-model="ipe.val">
+        <button class="btn btn-success" data-ng-click="ipe.save()">Save</button>
+        <button class="btn btn-danger" data-ng-click="ipe.cancel()">Cancel</button>
     </label>
-</div>
+</span>
