@@ -50,6 +50,7 @@ class Scripts
         // Directives
         "js/directives/menu.js",
         "js/directives/masterDetail.js",
+        "js/directives/inPlaceEdit.js",
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
