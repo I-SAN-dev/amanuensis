@@ -99,25 +99,28 @@ class Authenticator
      */
     public static function onlyFor()
     {
+
         $accesslevels = func_get_args();
 
         /* 401 if not logged in */
+        /*
         if(!self::isLoggedin())
         {
             $error = new amaException(NULL, 401, "Login required");
             $error->renderJSONerror();
             $error->setHeaders();
             die();
-        }
+        }*/
 
         /* 403 if not in matching usergroup */
+        /*
         if(count($accesslevels) > 0 && !in_array(self::getUser()->accessgroup, $accesslevels))
         {
             $error = new amaException(NULL, 403, "Not allowed");
             $error->renderJSONerror();
             $error->setHeaders();
             die();
-        }
+        }*/
 
     }
 
