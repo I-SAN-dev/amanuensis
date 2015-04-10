@@ -1,7 +1,8 @@
 app.directive('inPlaceEdit',
     ['ApiAbstractionLayer',
         'LocalStorage',
-        function (ApiAbstractionLayer, LocalStorage) {
+        'DeleteService',
+        function (ApiAbstractionLayer, LocalStorage, DeleteService) {
             return {
                 restrict: 'A',
                 scope: {
@@ -12,7 +13,8 @@ app.directive('inPlaceEdit',
                     apiName: '=',
                     apiParams: '=',
                     apiId: '=',
-                    deletable: '='
+                    deletable: '=',
+                    deletableItem: '='
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: function($scope){
@@ -24,13 +26,14 @@ app.directive('inPlaceEdit',
 
                     this.enterEditMode = function () {
                         self.deletable = $scope.deletable || true;
+                        self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
                         self.editMode = true;
                         backup = angular.copy($scope.val);
                     };
 
-                    this.save = function() {
+                    var post = function() {
                         var apiObject = {
                             name: $scope.apiName,
                             params: $scope.apiParams || {},
@@ -46,18 +49,30 @@ app.directive('inPlaceEdit',
                         });
                     };
 
+                    this.save = function () {
+                        post();
+                    };
+
                     this.cancel = function () {
                         self.editMode = false;
                         self.val = angular.copy(backup);
                         backup = null;
                     };
 
-                    this.delete = function () {
-                        // TODO: Add a delete service
+                    this.deleteItem = function () {
+                        if(self.deletable) {
+                            if(self.deletableItem){
+                                DeleteService($scope.apiName, $scope.apiId);
+                            } else{
+                                self.val = '';
+                                post();
+                            }
+                        }
+
                     }
                 },
                 controllerAs: 'ipe'
-            }
+            };
         }
     ]
 );

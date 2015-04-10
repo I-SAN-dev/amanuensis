@@ -32,18 +32,19 @@
                             data-api-id="mail.id"></dd>
                     </dl>
                     <p>{{'clients.phone'|translate}}</p>
-                    <dl data-ng-repeat="phone in client.client.data.phone" class="dl-horizontal">
-                        <dt data-in-place-edit
+                    <ul data-ng-repeat="phone in client.client.data.phone">
+                        <li><span data-in-place-edit
                               data-ipe-key="'name'"
                               data-ipe-value="phone.name"
                               data-api-name="'client_data'"
-                              data-api-id="phone.id"></dt>
-                        <dd data-in-place-edit
+                              data-api-id="phone.id"
+                              data-deletable-item="true"></span> <span data-in-place-edit
                             data-ipe-key="'value'"
                             data-ipe-value="phone.value"
                             data-api-name="'client_data'"
-                            data-api-id="phone.id"></dd>
-                    </dl>
+                            data-api-id="phone.id"
+                            data-deletable-item="true"></span></li>
+                    </ul>
                 </div>
             </div>
         </div>

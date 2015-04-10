@@ -19,5 +19,5 @@ app.factory('ErrorDialog', function (btfModal) {
             controllerAs: 'error'
         });
         return modal;
-    }
+    };
 });
