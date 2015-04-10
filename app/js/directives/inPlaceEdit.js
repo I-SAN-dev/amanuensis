@@ -44,6 +44,7 @@ app.directive('inPlaceEdit',
 
                         ApiAbstractionLayer('POST', apiObject).then(function (data) {
                             self.editMode = false;
+                            $scope.val = self.val;
                             backup = null;
                             LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
                         });
@@ -68,6 +69,7 @@ app.directive('inPlaceEdit',
                                 post();
                             }
                         }
+                        self.editMode = false;
 
                     }
                 },
