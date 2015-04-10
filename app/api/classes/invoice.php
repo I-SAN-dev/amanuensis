@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the Offers
+ * Handles the Invoices
  *
  * This file is part of the project codename "AMANUENSIS"
  *
@@ -17,7 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 
-class offer {
+class invoice {
 
     /**
      * This method reacts to GET Requests
@@ -28,11 +28,11 @@ class offer {
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
-            self::getOffer($_GET["id"]);
+            self::getInvoice($_GET["id"]);
         }
         else
         {
-            self::getOfferList();
+            self::getInvoiceList();
         }
     }
 
@@ -46,11 +46,11 @@ class offer {
 
         if( !isset($_POST["id"]) || $_POST["id"]=='')
         {
-            self::createOffer();
+            self::createInvoice();
         }
         else
         {
-            self::modifyOffer();
+            self::modifyInvoice();
         }
     }
 
@@ -69,26 +69,26 @@ class offer {
         }
         else
         {
-            self::deleteOffer($_DELETE);
+            self::deleteInvoice($_DELETE);
         }
     }
 
     /**
-     * Gets a list of all Offers
+     * Gets a list of all Invoices
      */
-    private static function getOfferList()
+    private static function getInvoiceList()
     {
-        //TODO add project+client name
+        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'offers',
+            'invoices',
             array(
                 'id',
                 'name',
                 'refnumber',
+                'state',
                 'project',
                 'date',
-                'state',
                 'path'
             )
         );
@@ -96,23 +96,23 @@ class offer {
     }
 
     /**
-     * Gets a single Offer
-     * @param $id - the id of the Offer to get
+     * Gets a single Invoice
+     * @param $id - the id of the Invoice to get
      */
-    private static function getOffer($id)
+    private static function getInvoice($id)
     {
-        //TODO add project+client name
+        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'offers',
+            'invoices',
             array(
                 'id',
                 'name',
-                'refnumber',
                 'description',
+                'refnumber',
+                'state',
                 'project',
                 'date',
-                'state',
                 'path'
             ),
             array('id', $id),
@@ -122,58 +122,58 @@ class offer {
     }
 
     /**
-     * creates a new Offer
+     * creates a new Invoice
      */
-    private static function createOffer()
+    private static function createInvoice()
     {
         $dbal = DBAL::getInstance();
         $id = $dbal->dynamicInsert(
-            'offers',
+            'invoices',
             array(
                 'name',
                 'description',
                 'refnumber',
+                'state',
                 'project',
                 'date',
-                'state',
                 'path'
             ),
             $_POST
         );
-        self::getOffer($id);
+        self::getInvoice($id);
     }
 
     /**
-     * modifies a Offer
+     * modifies a Invoice
      */
-    private static function modifyOffer()
+    private static function modifyInvoice()
     {
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
-            'offers',
+            'invoices',
             array('id', $_POST["id"]),
             array(
                 'name',
                 'description',
                 'refnumber',
-                'date',
                 'state',
+                'date',
                 'path'
             ),
             $_POST);
-        self::getOffer($affectedid);
+        self::getInvoice($affectedid);
     }
 
     /**
-     * deletes a Offer
+     * deletes a Invoice
      * @param $_DELETE
      */
-    private static function deleteOffer($_DELETE)
+    private static function deleteInvoice($_DELETE)
     {
         $dbal = DBAL::getInstance();
         try
         {
-            $count = $dbal->deleteRow('offers', array('id', $_DELETE['id']));
+            $count = $dbal->deleteRow('invoices', array('id', $_DELETE['id']));
         }
         catch(Exception $e)
         {
@@ -185,11 +185,11 @@ class offer {
 
         if($count)
         {
-            self::getOfferList();
+            self::getInvoiceList();
         }
         else
         {
-            $error = new amaException(NULL, 404, "There was no Offer matching your criteria");
+            $error = new amaException(NULL, 404, "There was no Invoice matching your criteria");
             $error->renderJSONerror();
             $error->setHeaders();
         }

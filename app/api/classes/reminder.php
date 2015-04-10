@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the Offers
+ * Handles the Reminders
  *
  * This file is part of the project codename "AMANUENSIS"
  *
@@ -17,7 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 
-class offer {
+class reminder {
 
     /**
      * This method reacts to GET Requests
@@ -28,11 +28,11 @@ class offer {
 
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
-            self::getOffer($_GET["id"]);
+            self::getReminder($_GET["id"]);
         }
         else
         {
-            self::getOfferList();
+            self::getReminderList();
         }
     }
 
@@ -46,11 +46,11 @@ class offer {
 
         if( !isset($_POST["id"]) || $_POST["id"]=='')
         {
-            self::createOffer();
+            self::createReminder();
         }
         else
         {
-            self::modifyOffer();
+            self::modifyReminder();
         }
     }
 
@@ -69,26 +69,26 @@ class offer {
         }
         else
         {
-            self::deleteOffer($_DELETE);
+            self::deleteReminder($_DELETE);
         }
     }
 
     /**
-     * Gets a list of all Offers
+     * Gets a list of all Reminders
      */
-    private static function getOfferList()
+    private static function getReminderList()
     {
-        //TODO add project+client name
+        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'offers',
+            'reminders',
             array(
                 'id',
                 'name',
                 'refnumber',
-                'project',
-                'date',
                 'state',
+                'date',
+                'invoice',
                 'path'
             )
         );
@@ -96,23 +96,23 @@ class offer {
     }
 
     /**
-     * Gets a single Offer
-     * @param $id - the id of the Offer to get
+     * Gets a single Reminder
+     * @param $id - the id of the Reminder to get
      */
-    private static function getOffer($id)
+    private static function getReminder($id)
     {
-        //TODO add project+client name
+        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
-            'offers',
+            'reminders',
             array(
                 'id',
                 'name',
-                'refnumber',
                 'description',
-                'project',
-                'date',
+                'refnumber',
                 'state',
+                'date',
+                'invoice',
                 'path'
             ),
             array('id', $id),
@@ -122,58 +122,58 @@ class offer {
     }
 
     /**
-     * creates a new Offer
+     * creates a new Reminder
      */
-    private static function createOffer()
+    private static function createReminder()
     {
         $dbal = DBAL::getInstance();
         $id = $dbal->dynamicInsert(
-            'offers',
+            'reminders',
             array(
                 'name',
                 'description',
                 'refnumber',
-                'project',
-                'date',
                 'state',
+                'date',
+                'invoice',
                 'path'
             ),
             $_POST
         );
-        self::getOffer($id);
+        self::getReminder($id);
     }
 
     /**
-     * modifies a Offer
+     * modifies a Reminder
      */
-    private static function modifyOffer()
+    private static function modifyReminder()
     {
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
-            'offers',
+            'reminders',
             array('id', $_POST["id"]),
             array(
                 'name',
                 'description',
                 'refnumber',
-                'date',
                 'state',
+                'date',
                 'path'
             ),
             $_POST);
-        self::getOffer($affectedid);
+        self::getReminder($affectedid);
     }
 
     /**
-     * deletes a Offer
+     * deletes a Reminder
      * @param $_DELETE
      */
-    private static function deleteOffer($_DELETE)
+    private static function deleteReminder($_DELETE)
     {
         $dbal = DBAL::getInstance();
         try
         {
-            $count = $dbal->deleteRow('offers', array('id', $_DELETE['id']));
+            $count = $dbal->deleteRow('reminders', array('id', $_DELETE['id']));
         }
         catch(Exception $e)
         {
@@ -185,11 +185,11 @@ class offer {
 
         if($count)
         {
-            self::getOfferList();
+            self::getReminderList();
         }
         else
         {
-            $error = new amaException(NULL, 404, "There was no Offer matching your criteria");
+            $error = new amaException(NULL, 404, "There was no Reminder matching your criteria");
             $error->renderJSONerror();
             $error->setHeaders();
         }
