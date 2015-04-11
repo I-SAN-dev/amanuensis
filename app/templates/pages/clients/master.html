@@ -1,47 +1,21 @@
 <div data-ng-controller="ClientsCtrl as clients">
-    <div class="panel panel-default">
+    <div class="list-group">
     <!-- Default panel contents -->
-    <div class="panel-heading">
+    <div class="list-group-item disabled">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Filter:</span>
             <input data-ng-model="clients.filterText" type="text" class="form-control" aria-describedby="basic-addon1">
         </div>
     </div>
-    <!--<div class="panel-body">
-
-    </div>-->
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th>{{'clients.name'|translate}}</th>
-            <th>{{'clients.city'|translate}}</th>
-            <th>{{'clients.refnumber'|translate}}</th>
-            <th>{{'clients.categories'|translate}}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="client in clients.clientList | filter:clients.filterText"
-            data-ng-click="clients.setDetail(client)">
-            <td>{{client.companyname}}</td>
-            <td>{{client.city}}</td>
-            <td>{{client.refnumber}}</td>
-            <td><ul><li data-ng-repeat="cat in client.categories">{{cat}} <button data-ng-click="clients.deleteCategoryLink(client.id, $index)">X</button></li></ul></td>
-            <td><button data-ng-click="clients.deleteClient(client.id)">{{'clients.deleteClient'|translate}}</button></td>
-        </tr>
-        <tr>
-            <td><input data-ng-model="clients.newClient.companyname"></td>
-            <td><input data-ng-model="clients.newClient.city"></td>
-            <td><input data-ng-model="clients.newClient.refnumber"></td>
-            <td><select multiple data-ng-model="clients.newClientCategories">
-                <option data-ng-repeat="cat in clients.allCategories" data-ng-value="cat.id">{{cat.name}}</option>
-            </select></td>
-            <td><button data-ng-click="clients.addClient()">{{'clients.newClient'|translate}}</button></td>
-        </tr>
-        </tbody>
-    </table>
-    </div>
+        <a class="list-group-item" data-ng-repeat="client in clients.clientList | filter:clients.filterText"
+            data-ng-click="clients.setDetail(client)" href="#/clients/{{client.id}}">
+            <h4>{{client.companyname}}</h4>
+            <p>{{client.city}}<br>
+            {{client.refnumber}}</p>
+        </a>
+        <a class="list-group-item" data-ng-click="clients.addClient()">
+            {{'clients.newClient'|translate}}
+        </a>
     </div>
     <a data-ui-sref="app.clientCategories">Kategorien</a>
 
