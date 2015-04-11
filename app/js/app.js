@@ -157,6 +157,17 @@ app.constant('sites', [
         }
     },
     {
+        name: 'app.clientCreation',
+        stateObject: {
+            url:'/new-client',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/clientCreation.html'
+                }
+            }
+        }
+    },
+    {
         name: 'app.offers',
         stateObject: {
             url: '/offers',

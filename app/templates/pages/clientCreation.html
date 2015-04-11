@@ -1,0 +1,61 @@
+<div data-ng-controller="ClientCreationCtrl as create">
+    <form>
+        <div class="form-group">
+            <label for="companyname">{{'clients.companyName'|translate}}</label>
+            <input type="text" class="form-control" id="companyname" placeholder="{{'clients.companyName'|translate}}" data-ng-model="create.newClient.companyname">
+        </div>
+        <div class="form-group">
+            <label for="refnumber">{{'clients.refNumber'|translate}}</label>
+            <input type="text" class="form-control" id="refnumber" placeholder="{{'clients.refNumber'|translate}}" data-ng-model="create.newClient.refnumber">
+        </div>
+        <div class="form-group">
+            <label for="contact_gender">{{'clients.contactGender'|translate}}</label>
+            <select class="form-control" id="contact_gender" data-ng-model="create.newClient.contact_gender">
+                <option value="0">{{'clients.contactGender.male'|translate}}</option>
+                <option value="1">{{'clients.contactGender.female'|translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="contact_firstname">{{'clients.firstName'|translate}}</label>
+            <input type="text" class="form-control" id="contact_firstname" placeholder="{{'clients.firstName'|translate}}" data-ng-model="create.newClient.contact_firstname">
+        </div>
+        <div class="form-group">
+            <label for="contact_lastname">{{'clients.lastName'|translate}}</label>
+            <input type="text" class="form-control" id="contact_lastname" placeholder="{{'clients.lastName'|translate}}" data-ng-model="create.newClient.contact_lastname">
+        </div>
+        <div class="form-group">
+            <label for="street_no">{{'clients.streetNo'|translate}}</label>
+            <input type="text" class="form-control" id="street_no" placeholder="{{'clients.streetNo'|translate}}" data-ng-model="create.newClient.street_no">
+        </div>
+        <div class="form-group">
+            <label for="additional">{{'clients.additional'|translate}}</label>
+            <input type="text" class="form-control" id="additional" placeholder="{{'clients.additional'|translate}}" data-ng-model="create.newClient.additional">
+        </div>
+        <div class="form-group">
+            <label for="zip">{{'clients.zip'|translate}}</label>
+            <input type="text" class="form-control" id="zip" placeholder="{{'clients.zip'|translate}}" data-ng-model="create.newClient.zip">
+        </div>
+        <div class="form-group">
+            <label for="city">{{'clients.city'|translate}}</label>
+            <input type="text" class="form-control" id="city" placeholder="{{'clients.city'|translate}}" data-ng-model="create.newClient.city">
+        </div>
+        <div class="form-group">
+            <label for="country">{{'clients.country'|translate}}</label>
+            <input type="text" class="form-control" id="country" placeholder="{{'clients.country'|translate}}" data-ng-model="create.newClient.country">
+        </div>
+        <div class="form-group">
+            <label for="comment">{{'clients.comment'|translate}}</label>
+            <textarea class="form-control" id="comment" placeholder="{{'clients.comment'|translate}}" data-ng-model="create.newClient.comment"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="categories">{{'clients.categories'|translate}}</label>
+            <select class="form-control" id="categories" data-ng-model="create.newClientCategories">
+                <option data-ng-repeat="cat in create.allCategories" value="{{cat.id}}">{{cat.name}}</option>
+            </select>
+        </div>
+
+        <button type="submit" data-ng-click="create.addClient()" class="btn btn-success">{{'clients.addClient'|translate}}</button>
+
+    </form>
+</div>

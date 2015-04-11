@@ -29,35 +29,6 @@ app.controller('ClientsCtrl',
         });
 
 
-        // Get all client categories
-        this.allCategories = LocalStorage.getData('clientCategories');
-        ApiAbstractionLayer('GET', 'client_categories').then(function(data){
-            self.allCategories = data;
-            LocalStorage.setData('clientCategories', data)
-        });
-
-        var refNumber = '';
-        ApiAbstractionLayer('GET','client_refnumber').then(function (data) {
-            self.newClient.refnumber = data.refnumber;
-        });
-
-        var initialNewClient = {
-            companyname: null,
-            contact_firstname: null,
-            contact_lastname: null,
-            street_no: null,
-            additional: null,
-            zip: null,
-            city: null,
-            country: null,
-            comment: null,
-            contact_gender: null,
-            // TODO: set refnumber to highest refnumber in client list + 1
-            refnumber: refNumber
-        };
-        this.newClient = initialNewClient;
-
-        this.newClientCategories = [];
         /**
          * Creates a new client
          */
@@ -69,19 +40,7 @@ app.controller('ClientsCtrl',
             });
         };
 
-        /**
-         * Adds one or more categori(es) to a client
-         * TODO: test it when the API supports it
-         * @param {int} client - the client id
-         * @param {object} categories - an array containing all category ids that shall be added to the client
-         */
-        this.addCategoryLinks = function(client, categories) {
-            if(categories){
-                for (var i in categories) {
-                    ApiAbstractionLayer('POST', {name: 'client_categories', data: {id: categories[i], clientid: client}});
-                }
-            }
-        };
+
 
         this.deleteCategoryLink = function (client, category) {
             ApiAbstractionLayer('DELETE', {name:'client_categories', data: {id:self.allCategories[category].id, clientid: client}});
