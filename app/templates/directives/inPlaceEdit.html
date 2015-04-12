@@ -7,6 +7,6 @@
         <textarea data-ng-if="ipe.type == 'textarea'" data-ng-model="ipe.val"></textarea>
         <button class="btn btn-success" data-ng-click="ipe.save()">Save</button>
         <button class="btn btn-warning" data-ng-click="ipe.cancel()">Cancel</button>
-        <button class="btn btn-danger" data-ng-if="ipe.deletable" data-ng-click="ipe.deleteItem()">X</button>
+        <button class="btn btn-danger" data-ng-if="ipe.deletable != false" data-ng-click="ipe.deleteItem()">X</button>
     </label>
 </span>

@@ -1,13 +1,20 @@
 <div data-ng-controller="ClientDetailCtrl as client">
-    <h2>{{client.client.companyname}} <small>{{client.client.refnumber}}</small></h2>
+    <h2><span data-in-place-edit
+              data-api-id="client.client.id"
+              data-api-name="'client'"
+              data-ipe-key="'companyname'"
+              data-ipe-value="client.client.companyname"></span> <small><span data-in-place-edit
+                                                                              data-ipe-key="'refnumber'"
+                                                                              data-ipe-value="client.client.refnumber"
+                                                                              data-ipe-deletable="false"
+                                                                              data-api-id="client.client.id"
+                                                                              data-api-name="'client'"></span></small></h2>
     <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{'clients.contact'|translate}}
-                </div>
-                <div class="panel-body">
-                    <p><span data-in-place-edit
+        <div class="col-sm-3">
+            {{'clients.contact'|translate}}
+        </div>
+        <div class="col-sm-9">
+            <span data-in-place-edit
                              data-ipe-key="'contact_firstname'"
                              data-ipe-value="client.client.contact_firstname"
                              data-api-name="'client'"
@@ -16,49 +23,18 @@
                           data-ipe-key="'contact_lastname'"
                           data-ipe-value="client.client.contact_lastname"
                           data-api-name="'client'"
-                          data-api-id="client.client.id"></span></p>
-                    <p>{{'clients.mail'|translate}}</p>
-                    <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
-                        <dt data-in-place-edit
-                            data-ipe-key="'name'"
-                            data-ipe-value="mail.name"
-                            data-api-name="'client_data'"
-                            data-api-id="mail.id"></dt>
-                        <dd data-in-place-edit
-                            data-ipe-key="'value'"
-                            data-ipe-value="mail.value"
-                            data-api-name="'client_data'"
-                            data-api-id="mail.id"></dd>
-                    </dl>
-                    <p>{{'clients.phone'|translate}}</p>
-                    <ul data-ng-repeat="phone in client.client.data.phone">
-                        <li><span data-in-place-edit
-                              data-ipe-key="'name'"
-                              data-ipe-value="phone.name"
-                              data-api-name="'client_data'"
-                              data-api-id="phone.id"
-                              data-deletable-item="true"></span> <span data-in-place-edit
-                            data-ipe-key="'value'"
-                            data-ipe-value="phone.value"
-                            data-api-name="'client_data'"
-                            data-api-id="phone.id"
-                            data-deletable-item="true"></span></li>
-                    </ul>
-                </div>
-            </div>
+                          data-api-id="client.client.id"></span>
         </div>
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{'clients.address'|translate}}
-                </div>
-                <div class="panel-body">
-                    <address>
-                        <strong><span data-in-place-edit
-                                      data-ipe-key="'companyname'"
-                                      data-ipe-value="client.client.companyname"
-                                      data-api-name="'client'"
-                                      data-api-id="client.client.id"></span></strong><br>
+        <div class="col-sm-3">
+            {{'clients.address'|translate}}
+        </div>
+        <div class="col-sm-9">
+            <address>
+                <strong><span data-in-place-edit
+                              data-ipe-key="'companyname'"
+                              data-ipe-value="client.client.companyname"
+                              data-api-name="'client'"
+                              data-api-id="client.client.id"></span></strong><br>
                         <span data-in-place-edit
                               data-ipe-key="'street_no'"
                               data-ipe-value="client.client.street_no"
@@ -74,31 +50,64 @@
                               data-ipe-value="client.client.zip"
                               data-api-name="'client'"
                               data-api-id="client.client.id"></span> <span data-in-place-edit
-                                                                          data-ipe-key="'city'"
-                                                                          data-ipe-value="client.client.city"
-                                                                          data-api-name="'client'"
-                                                                          data-api-id="client.client.id"></span><br>
+                                                                           data-ipe-key="'city'"
+                                                                           data-ipe-value="client.client.city"
+                                                                           data-api-name="'client'"
+                                                                           data-api-id="client.client.id"></span><br>
                         <span data-in-place-edit
                               data-ipe-key="'country'"
                               data-ipe-value="client.client.country"
                               data-api-name="'client'"
                               data-api-id="client.client.id"></span>
-                    </address>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{'clients.comment'|translate}}
-                </div>
-                <div class="panel-body">
-                    <span data-in-place-edit
-                          data-ipe-key="'comment'"
-                          data-ipe-value="client.client.comment"
-                          data-ipe-type="'textarea'"
-                          data-api-name="'client'"
-                          data-api-id="client.client.id"></span>
-                </div>
-            </div>
+            </address>
+        </div>
+        <div class="col-sm-3">
+            {{'clients.mail'|translate}}
+        </div>
+        <div class="col-sm-9">
+            <dl data-ng-repeat="mail in client.client.data.mail" class="dl-horizontal">
+                <dt data-in-place-edit
+                    data-ipe-key="'name'"
+                    data-ipe-value="mail.name"
+                    data-api-name="'client_data'"
+                    data-api-id="mail.id"></dt>
+                <dd data-in-place-edit
+                    data-ipe-key="'value'"
+                    data-ipe-value="mail.value"
+                    data-api-name="'client_data'"
+                    data-api-id="mail.id"></dd>
+            </dl>
+        </div>
+        <div class="col-sm-3">
+            {{'clients.phone'|translate}}
+        </div>
+        <div class="col-sm-9">
+            <ul>
+                <li data-ng-repeat="phone in client.client.data.phone">
+                            <span data-in-place-edit
+                                  data-ipe-key="'name'"
+                                  data-ipe-value="phone.name"
+                                  data-api-name="'client_data'"
+                                  data-api-id="phone.id"
+                                  data-deletable-item="true"></span>: <span data-in-place-edit
+                                                                            data-ipe-key="'value'"
+                                                                            data-ipe-value="phone.value"
+                                                                            data-api-name="'client_data'"
+                                                                            data-api-id="phone.id"
+                                                                            data-deletable-item="true"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            {{'clients.comment'|translate}}
+        </div>
+        <div class="col-sm-9">
+            <span data-in-place-edit
+                  data-ipe-key="'comment'"
+                  data-ipe-value="client.client.comment"
+                  data-ipe-type="'textarea'"
+                  data-api-name="'client'"
+                  data-api-id="client.client.id"></span>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ app.directive('inPlaceEdit',
                     apiName: '=',
                     apiParams: '=',
                     apiId: '=',
-                    deletable: '=',
+                    deletable: '=ipeDeletable',
                     deletableItem: '='
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
@@ -25,7 +25,9 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
-                        self.deletable = $scope.deletable || true;
+                        console.log($scope.deletable);
+                        self.deletable = $scope.deletable;
+                        console.log(self.deletable);
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
