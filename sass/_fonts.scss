@@ -1,28 +1,28 @@
-@mixin font-face($path, $name) {
-  font-family: $name;
+@mixin font-face($family, $path, $name, $weight:normal,$style:normal) {
+  font-family: $family;
   src: url('#{$path}.eot');
   src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
   url('#{$path}.woff') format('woff'),
   url('#{$path}.ttf') format('truetype'),
   url('#{$path}.svg##{$name}') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-weight: $weight;
+  font-style: $style;
 }
 @font-face {
-  @include font-face('fonts/roboto/Roboto-Regular-webfont', 'robotoregular')
+  @include font-face('Roboto','fonts/roboto/Roboto-Regular-webfont', 'robotoregular')
 }
 @font-face {
-@include font-face('fonts/roboto/Roboto-Italic-webfont', 'robotoitalic')
+@include font-face('Roboto','fonts/roboto/Roboto-Italic-webfont', 'robotoitalic',normal,italic)
 }
 @font-face {
-  @include font-face('fonts/roboto/Roboto-Bold-webfont', 'robotobold')
+  @include font-face('Roboto','fonts/roboto/Roboto-Bold-webfont', 'robotobold', bold)
 }
 @font-face {
-  @include font-face('fonts/roboto/Roboto-BoldItalic-webfont', 'robotobold_italic')
+  @include font-face('Roboto','fonts/roboto/Roboto-BoldItalic-webfont', 'robotobold_italic', bold, italic)
 }
 @font-face {
-  @include font-face('fonts/roboto/RobotoCondensed-Light-webfont', 'roboto_condensedlight')
+  @include font-face('Roboto','fonts/roboto/RobotoCondensed-Light-webfont', 'roboto_condensedlight', 300)
 }
 @font-face {
-  @include font-face('fonts/roboto/RobotoCondensed-LightItalic-webfont', 'roboto_condensedlight_italic')
+  @include font-face('Roboto','fonts/roboto/RobotoCondensed-LightItalic-webfont', 'roboto_condensedlight_italic', 300, italic)
 }

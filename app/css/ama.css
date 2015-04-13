@@ -1,40 +1,40 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "robotoregular";
+  font-family: "Roboto";
   src: url("fonts/roboto/Roboto-Regular-webfont.eot");
   src: url("fonts/roboto/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/Roboto-Regular-webfont.woff") format("woff"), url("fonts/roboto/Roboto-Regular-webfont.ttf") format("truetype"), url("fonts/roboto/Roboto-Regular-webfont.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 @font-face {
-  font-family: "robotoitalic";
+  font-family: "Roboto";
   src: url("fonts/roboto/Roboto-Italic-webfont.eot");
   src: url("fonts/roboto/Roboto-Italic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/Roboto-Italic-webfont.woff") format("woff"), url("fonts/roboto/Roboto-Italic-webfont.ttf") format("truetype"), url("fonts/roboto/Roboto-Italic-webfont.svg#robotoitalic") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: italic; }
 @font-face {
-  font-family: "robotobold";
+  font-family: "Roboto";
   src: url("fonts/roboto/Roboto-Bold-webfont.eot");
   src: url("fonts/roboto/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/Roboto-Bold-webfont.woff") format("woff"), url("fonts/roboto/Roboto-Bold-webfont.ttf") format("truetype"), url("fonts/roboto/Roboto-Bold-webfont.svg#robotobold") format("svg");
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal; }
 @font-face {
-  font-family: "robotobold_italic";
+  font-family: "Roboto";
   src: url("fonts/roboto/Roboto-BoldItalic-webfont.eot");
   src: url("fonts/roboto/Roboto-BoldItalic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/Roboto-BoldItalic-webfont.woff") format("woff"), url("fonts/roboto/Roboto-BoldItalic-webfont.ttf") format("truetype"), url("fonts/roboto/Roboto-BoldItalic-webfont.svg#robotobold_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+  font-weight: bold;
+  font-style: italic; }
 @font-face {
-  font-family: "roboto_condensedlight";
+  font-family: "Roboto";
   src: url("fonts/roboto/RobotoCondensed-Light-webfont.eot");
   src: url("fonts/roboto/RobotoCondensed-Light-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/RobotoCondensed-Light-webfont.woff") format("woff"), url("fonts/roboto/RobotoCondensed-Light-webfont.ttf") format("truetype"), url("fonts/roboto/RobotoCondensed-Light-webfont.svg#roboto_condensedlight") format("svg");
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal; }
 @font-face {
-  font-family: "roboto_condensedlight_italic";
+  font-family: "Roboto";
   src: url("fonts/roboto/RobotoCondensed-LightItalic-webfont.eot");
   src: url("fonts/roboto/RobotoCondensed-LightItalic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto/RobotoCondensed-LightItalic-webfont.woff") format("woff"), url("fonts/roboto/RobotoCondensed-LightItalic-webfont.ttf") format("truetype"), url("fonts/roboto/RobotoCondensed-LightItalic-webfont.svg#roboto_condensedlight_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+  font-weight: 300;
+  font-style: italic; }
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -1093,7 +1093,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "robotoregular", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #263238;
@@ -2450,7 +2450,7 @@ output {
   padding-top: 7px;
   font-size: 14px;
   line-height: 1.42857;
-  color: #9E9E9E; }
+  color: #263238; }
 
 .form-control {
   display: block;
@@ -2459,21 +2459,21 @@ output {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
-  color: #9E9E9E;
-  background-color: #fff;
+  color: #263238;
+  background-color: transparent;
   background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 0 0 0 0;
+  border: 1px solid #BDBDBD;
+  border-radius: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   .form-control:focus {
-    border-color: #66afe9;
+    border-color: #546E7A;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6); }
   .form-control::-moz-placeholder {
     color: #999;
     opacity: 1; }
@@ -2614,7 +2614,7 @@ input[type="checkbox"] {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  border-radius: 0; }
 
 select.input-sm, .input-group-sm > select.form-control,
 .input-group-sm > select.input-group-addon,
@@ -2636,7 +2636,7 @@ select[multiple].input-sm,
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  border-radius: 0; }
 .form-group-sm select.form-control {
   height: 30px;
   line-height: 30px; }
@@ -2656,7 +2656,7 @@ select[multiple].input-sm,
   padding: 10px 16px;
   font-size: 20px;
   line-height: 1.33333;
-  border-radius: 6px; }
+  border-radius: 0; }
 
 select.input-lg, .input-group-lg > select.form-control,
 .input-group-lg > select.input-group-addon,
@@ -2678,7 +2678,7 @@ select[multiple].input-lg,
   padding: 10px 16px;
   font-size: 20px;
   line-height: 1.33333;
-  border-radius: 6px; }
+  border-radius: 0; }
 .form-group-lg select.form-control {
   height: 49px;
   line-height: 49px; }
@@ -3413,10 +3413,10 @@ tbody.collapse.in {
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: #9E9E9E;
+  color: #263238;
   text-align: center;
   background-color: #EEEEEE;
-  border: 1px solid #ccc;
+  border: 1px solid #BDBDBD;
   border-radius: 0 0 0 0; }
   .input-group-addon.input-sm,
   .input-group-sm > .input-group-addon,
@@ -5052,7 +5052,7 @@ button.close {
   z-index: 1070;
   display: block;
   visibility: visible;
-  font-family: "robotoregular", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: normal;
   line-height: 1.4;
@@ -5147,7 +5147,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "robotoregular", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857;
@@ -5668,6 +5668,31 @@ button.close {
 .navbar {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   border: none !important; }
+
+.form-control {
+  height: 30.33333px;
+  padding: 10.5px 0 5.25px;
+  margin-bottom: 5.25px;
+  color: #263238;
+  border: 0;
+  border-bottom: 1px solid #BDBDBD;
+  -webkit-box-shadow: inset 0 0 0 transparent;
+  box-shadow: inset 0 0 0 transparent;
+  -webkit-transition: border-bottom-width ease-in-out 0.25s;
+  -o-transition: border-bottom-width ease-in-out 0.25s;
+  transition: border-bottom-width ease-in-out 0.25s; }
+  .form-control:focus {
+    border-color: #546E7A;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6); }
+  .form-control:focus {
+    border-bottom-width: 2px;
+    -webkit-box-shadow: inset 0 0 0 transparent;
+    box-shadow: inset 0 0 0 transparent; }
+  .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    color: #999;
+    border-style: dotted; }
 
 .nav#nav-main {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
