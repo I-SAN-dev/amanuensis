@@ -46,7 +46,7 @@ app.controller('ClientCreationCtrl',
              */
             var addCategoryLinks = function(client, categories) {
                 if(categories.length > 0){
-                    for (var i in categories) {
+                    for (var i = 0; i<categories.length; i++) {
                         ApiAbstractionLayer('POST', {name: 'client_categories', data: {id: categories[i], clientid: client}});
                     }
                 }
