@@ -88,7 +88,8 @@ class contract {
                 'description',
                 'project',
                 'refnumber',
-                'date'
+                'date',
+                'path'
             )
         );
         json_response($result);
@@ -110,7 +111,8 @@ class contract {
                 'description',
                 'project',
                 'refnumber',
-                'date'
+                'date',
+                'path'
             ),
             array('id', $id),
             1
@@ -131,7 +133,8 @@ class contract {
                 'description',
                 'project',
                 'refnumber',
-                'date'
+                'date',
+                'path'
             ),
             $_POST
         );
@@ -152,7 +155,8 @@ class contract {
                 'name',
                 'description',
                 'refnumber',
-                'date'
+                'date',
+                'path'
             ),
             $_POST);
         self::getContract($affectedid);
