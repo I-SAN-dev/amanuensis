@@ -17,6 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/config/config.php');
+require_once('classes/project/amaProject.php');
 
 class refnumber {
 
@@ -25,7 +26,7 @@ class refnumber {
      */
     public static function get()
     {
-        //Authenticator::onlyFor(0);
+        Authenticator::onlyFor(0);
 
         $dbal = DBAL::getInstance();
 
@@ -78,8 +79,9 @@ class refnumber {
 
 
                 /* Add the client refnumber */
-                //TODO use upcoming project class!!!
-                $c = '';
+                $project = new AmaProject($projectid);
+                $client = $project->getClient();
+                $c = $client['refnumber'];
                 $replace['%c%'] = $c;
             }
 

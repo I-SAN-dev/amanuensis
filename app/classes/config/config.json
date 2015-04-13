@@ -50,7 +50,7 @@
   "refnumber_invoices":
   {
     "idminlength": 4,
-    "scheme": "INV-%yy%-%dddd%-%id%"
+    "scheme": "INV-%yy%-%dddd%-%c%-%id%"
   },
   "refnumber_reminders":
   {
