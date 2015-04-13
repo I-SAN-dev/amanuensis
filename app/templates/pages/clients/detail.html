@@ -11,6 +11,11 @@
                                                                               data-api-id="client.client.id"
                                                                               data-api-name="'client'"
                                                                               data-ipe-name="'clients.refnumber'|translate"></span></small></h2>
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <button class="btn btn-danger" data-ng-controller="ClientsCtrl as list" data-ng-click="list.deleteClient(client.client.id)">X</button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-3">
             {{'clients.contact'|translate}}

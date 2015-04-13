@@ -25,8 +25,6 @@ app.controller('ClientDetailCtrl',
                 $scope.$parent.setDetail({id:$stateParams.id});
             }
 
-
-
         }
     ]
 );
