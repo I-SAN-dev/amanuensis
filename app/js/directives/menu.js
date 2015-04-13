@@ -8,11 +8,21 @@ app.controller('NavCtrl',['AuthService','$state','sites', '$scope',function (Aut
         }
     }
     var self = this;
-    /*AuthService.isLoggedIn().then(function(data) {
-        if(data.loggedin)*/
+    AuthService.isLoggedIn().then(function(data) {
+        if(data.loggedin)
             self.navItems = menuItems;
-    /*});*/
+    });
     this.goTo = function(item){
+        angular.forEach(menuItems, function(value, key){
+            if(value.name == item.name)
+            {
+                value.active = true;
+            }
+            else
+            {
+                value.active = false;
+            }
+        });
         $state.go(item.name);
     };
 }]);

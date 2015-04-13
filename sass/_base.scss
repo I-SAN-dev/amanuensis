@@ -8,3 +8,9 @@
 {
   @include card(1);
 }
+
+.navbar
+{
+  @include card(1);
+  border: none !important;
+}

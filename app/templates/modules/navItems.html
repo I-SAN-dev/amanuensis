@@ -1,5 +1,5 @@
-<ul class="nav navbar-nav">
-    <li data-ng-repeat="item in nav.navItems">
+<ul class="nav" id="nav-main">
+    <li data-ng-repeat="item in nav.navItems" ng-class="{'active' : item.active}">
         <a data-ng-click="nav.goTo(item)" title="{{item.menus.mainNav.title}}">{{item.menus.mainNav.name}}</a>
     </li>
 </ul>

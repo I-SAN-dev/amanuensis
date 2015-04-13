@@ -32,7 +32,7 @@
 /// @requires {function} bottom-shadow
 @mixin card($depth) {
   @if $depth < 1 {
-    box-shadow: none;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
   } @else if $depth > 5 {
     @warn "Invalid $depth `#{$depth}` for mixin `card`.";
   } @else {

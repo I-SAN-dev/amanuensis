@@ -49,10 +49,10 @@ ob_start();
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-lg-1 col-md-2 col-sm-3">
             <div data-ama-menu data-menuname="'mainNav'"></div>
         </div>
-        <div class="col-sm-9" data-ui-view="mainContent" id="mainContent"></div>
+        <div class="col-lg-11 col-md-10 col-sm-9" data-ui-view="mainContent" id="mainContent"></div>
     </div>
 
 </div>
