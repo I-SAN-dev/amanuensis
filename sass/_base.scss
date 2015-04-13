@@ -2,3 +2,9 @@
 {
   margin-top: 80px;
 }
+
+.panel,
+.list-group
+{
+  @include card(1);
+}

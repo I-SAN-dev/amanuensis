@@ -1,0 +1,39 @@
+// Material color palette: http://www.google.com/design/spec/style/color.html#color-color-palette
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              #9E9E9E;
+$gray-darker:            #212121;
+$gray-dark:              #757575;
+$gray:                   $gray-base;
+$gray-light:             #BDBDBD;
+$gray-lighter:           #EEEEEE;
+
+$brand-primary:         #546E7A; // Blue Grey 600
+$brand-success:         #00897B; // Teal 600
+$brand-info:            #00ACC1; // Cyan 600
+$brand-warning:         #FFB300; // Amber 600
+$brand-danger:          #F4511E; // Deep Orange 600
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #ECEFF1; // Blue grey 50
+//** Global text color on `<body>`.
+$text-color:            #263238; // Blue grey 900
+
+//** Global textual link color.
+$link-color:            $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+// Border radius
+$border-radius-base: 0 0 0 0;
