@@ -15,6 +15,7 @@ if(!$thisisamanu)die('Direct access restricted');
 
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
+require_once('classes/project/amaProject.php');
 require_once('classes/authentication/authenticator.php');
 
 class project {
@@ -78,8 +79,6 @@ class project {
      */
     private static function getProjectList()
     {
-        //TODO select table and fields
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'projects',
@@ -99,8 +98,6 @@ class project {
      */
     private static function getProject($id)
     {
-        //TODO select table and fields
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'projects',
@@ -114,6 +111,17 @@ class project {
             array('id', $id),
             1
         );
+
+        /* Additional data */
+        $project = new AmaProject($result['id']);
+        $result['client'] = $project->getClient();
+        $result['offers'] = $project->getOffers();
+        $result['contracts'] = $project->getContracts();
+        $result['fileContracts'] = $project->getFileContracts();
+        $result['todos'] = $project->getTodos();
+        $result['acceptances'] = $project->getAcceptances();
+        $result['invoices'] = $project->getInvoices();
+
         json_response($result);
     }
 
@@ -122,7 +130,6 @@ class project {
      */
     private static function createProject()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $id = $dbal->dynamicInsert(
             'projects',
@@ -142,7 +149,6 @@ class project {
      */
     private static function modifyProject()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
             'projects',
@@ -165,7 +171,6 @@ class project {
         $dbal = DBAL::getInstance();
         try
         {
-            //TODO select table!
             $count = $dbal->deleteRow('projects', array('id', $_DELETE['id']));
         }
         catch(Exception $e)

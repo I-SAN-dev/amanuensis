@@ -29,7 +29,6 @@ class AmaProject {
         $this->name = $data['name'];
         $this->description = $data['description'];
         $this->clientid = $data['client'];
-        var_dump($data);
         $this->state = $data['state'];
     }
 
@@ -48,6 +47,108 @@ class AmaProject {
                 1);
         }
         return $this->client;
+    }
+
+    /**
+     * Returns an array that represents all offers associated with this project
+     * @return array
+     */
+    public function getOffers()
+    {
+        if(!isset($this->offers))
+        {
+            $this->offers = $this->dbal->simpleSelect(
+                'offers',
+                array('id', 'refnumber', 'name', 'date', 'state', 'path'),
+                array('project', $this->id)
+                );
+        }
+        return $this->offers;
+    }
+
+    /**
+     * Returns an array that represents all contracts associated with this project
+     * @return array
+     */
+    public function getContracts()
+    {
+        if(!isset($this->contracts))
+        {
+            $this->contracts = $this->dbal->simpleSelect(
+                'contracts',
+                array('id', 'refnumber', 'name', 'date', 'path'),
+                array('project', $this->id)
+            );
+        }
+        return $this->contracts;
+    }
+
+    /**
+     * Returns an array that represents all fileContracts associated with this project
+     * @return array
+     */
+    public function getFileContracts()
+    {
+        if(!isset($this->fileContracts))
+        {
+            $this->fileContracts = $this->dbal->simpleSelect(
+                'fileContracts',
+                array('id', 'name', 'path'),
+                array('project', $this->id)
+            );
+        }
+        return $this->fileContracts;
+    }
+
+    /**
+     * Returns an array that represents all Todos associated with this project
+     * @return array
+     */
+    public function getTodos()
+    {
+        if(!isset($this->todos))
+        {
+            $this->todos = $this->dbal->simpleSelect(
+                'todos',
+                array('id', 'name', 'due'),
+                array('project', $this->id)
+            );
+        }
+        return $this->todos;
+    }
+
+    /**
+     * Returns an array that represents all acceptances associated with this project
+     * @return array
+     */
+    public function getAcceptances()
+    {
+        if(!isset($this->acceptances))
+        {
+            $this->acceptances = $this->dbal->simpleSelect(
+                'acceptances',
+                array('id', 'refnumber', 'name', 'state', 'path'),
+                array('project', $this->id)
+            );
+        }
+        return $this->acceptances;
+    }
+
+    /**
+     * Returns an array that represents all invoices associated with this project
+     * @return array
+     */
+    public function getInvoices()
+    {
+        if(!isset($this->invoices))
+        {
+            $this->invoices = $this->dbal->simpleSelect(
+                'invoices',
+                array('id', 'refnumber', 'name', 'date', 'path', 'state'),
+                array('project', $this->id)
+            );
+        }
+        return $this->invoices;
     }
 
 }
