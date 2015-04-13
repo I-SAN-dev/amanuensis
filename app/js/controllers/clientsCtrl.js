@@ -27,7 +27,7 @@ app.controller('ClientsCtrl',
                 }
                 self.clientList = data;
                 LocalStorage.setData('clients', self.clientList);
-                $scope.$apply();
+
             };
 
             // Get the client list

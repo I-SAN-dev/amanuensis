@@ -9,7 +9,7 @@ app.controller('ClientCreationCtrl',
 
 
             var refNumber = '';
-            ApiAbstractionLayer('GET','client_refnumber').then(function (data) {
+            ApiAbstractionLayer('GET',{name:'refnumber', params: {for:'customers'}}).then(function (data) {
                 if(self.newClient.refnumber === ''){
                     self.newClient.refnumber = data.refnumber;
                 }
