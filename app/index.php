@@ -45,6 +45,23 @@ ob_start();
 <body data-ng-init="getLoginState()">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1 col-md-2 col-sm-3">
+                Logo + Dashboardlink
+            </div>
+            <div class="col-lg-11 col-md-10 col-sm-9">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h1>Ansichtname</h1>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="pull-right">
+                            Nutzername + Optionsicon
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container-fluid">

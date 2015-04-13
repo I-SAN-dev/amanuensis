@@ -37,13 +37,29 @@ $link-hover-decoration: underline !default;
 
 // Border radius
 $border-radius-base: 0 0 0 0;
+
+// Typo
 $font-family-sans-serif:  "robotoregular", Helvetica, Arial, sans-serif !default;
+
+$font-size-base:          14px;
+$font-size-large:         20px;
+$font-size-small:         12px;
+
+$font-size-h1:            34px;
+$font-size-h2:            $font-size-large;
+$font-size-h3:            16px;
+$font-size-h4:            $font-size-base;
+$font-size-h5:            $font-size-base;
+$font-size-h6:            $font-size-small;
 
 
 
 
 // Inverted navbar
 // Reset inverted navbar basics
+
+$navbar-height:                    64px;
+
 $navbar-inverse-color:                      #fff;
 $navbar-inverse-bg:                         $brand-primary;
 $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !default;
