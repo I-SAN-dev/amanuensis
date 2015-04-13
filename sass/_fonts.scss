@@ -1,0 +1,28 @@
+@mixin font-face($path, $name) {
+  font-family: $name;
+  src: url('#{$path}.eot');
+  src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
+  url('#{$path}.woff') format('woff'),
+  url('#{$path}.ttf') format('truetype'),
+  url('#{$path}.svg##{$name}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  @include font-face('fonts/roboto/Roboto-Regular-webfont', 'robotoregular')
+}
+@font-face {
+@include font-face('fonts/roboto/Roboto-Italic-webfont', 'robotoitalic')
+}
+@font-face {
+  @include font-face('fonts/roboto/Roboto-Bold-webfont', 'robotobold')
+}
+@font-face {
+  @include font-face('fonts/roboto/Roboto-BoldItalic-webfont', 'robotobold_italic')
+}
+@font-face {
+  @include font-face('fonts/roboto/RobotoCondensed-Light-webfont', 'roboto_condensedlight')
+}
+@font-face {
+  @include font-face('fonts/roboto/RobotoCondensed-LightItalic-webfont', 'roboto_condensedlight_italic')
+}
