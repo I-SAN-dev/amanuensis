@@ -40,7 +40,6 @@ app.controller('ClientCreationCtrl',
             this.newClientCategories = [];
             /**
              * Adds one or more categori(es) to a client
-             * TODO: test it when the API supports it
              * @param {int} client - the client id
              * @param {object} categories - an array containing all category ids that shall be added to the client
              */
