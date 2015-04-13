@@ -153,6 +153,14 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
         },
 
         /**
+         * Removes a specific item from the localStorage
+         * @param {string} key - The key of the storage's entry to be removed
+         */
+        removeItem: function (key) {
+            $window.localStorage.removeItem(key);
+        },
+
+        /**
          * Removes the entire data from the local storage
          */
         removeCache: function () {

@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <label for="categories">{{'clients.categories'|translate}}</label>
-            <select class="form-control" id="categories" data-ng-model="create.newClientCategories">
+            <select multiple class="form-control" id="categories" data-ng-model="create.newClientCategories">
                 <option data-ng-repeat="cat in create.allCategories" value="{{cat.id}}">{{cat.name}}</option>
             </select>
         </div>

@@ -9,7 +9,7 @@ app.controller('ClientCreationCtrl',
 
 
             var refNumber = '';
-            ApiAbstractionLayer('GET','client_refnumber').then(function (data) {
+            ApiAbstractionLayer('GET',{name:'refnumber', params: {for:'customers'}}).then(function (data) {
                 if(self.newClient.refnumber === ''){
                     self.newClient.refnumber = data.refnumber;
                 }
@@ -40,13 +40,12 @@ app.controller('ClientCreationCtrl',
             this.newClientCategories = [];
             /**
              * Adds one or more categori(es) to a client
-             * TODO: test it when the API supports it
              * @param {int} client - the client id
              * @param {object} categories - an array containing all category ids that shall be added to the client
              */
             var addCategoryLinks = function(client, categories) {
                 if(categories.length > 0){
-                    for (var i in categories) {
+                    for (var i = 0; i<categories.length; i++) {
                         ApiAbstractionLayer('POST', {name: 'client_categories', data: {id: categories[i], clientid: client}});
                     }
                 }
