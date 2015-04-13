@@ -32,11 +32,35 @@
     "reminder":"pdftemplates/reminder.html"
   },
 
-  "refnumber":
+  "refnumber_offers":
   {
     "idminlength": 4,
-    "scheme": "%y% %yy% %m% %mm% %d% %dd% %ddd% %dddd% %id% hallo"
+    "scheme": "OFF-%yy%-%dddd%-%id%"
+  },
+  "refnumber_contracts":
+  {
+    "idminlength": 4,
+    "scheme": "CON-%yy%-%dddd%-%id%"
+  },
+  "refnumber_acceptances":
+  {
+    "idminlength": 4,
+    "scheme": "ACC-%yy%-%dddd%-%id%"
+  },
+  "refnumber_invoices":
+  {
+    "idminlength": 4,
+    "scheme": "INV-%yy%-%dddd%-%id%"
+  },
+  "refnumber_reminders":
+  {
+    "idminlength": 4,
+    "scheme": "REM-%yy%-%dddd%-%id%"
+  },
+  "refnumber_customers":
+  {
+    "idminlength": 4,
+    "scheme": "%yy% %m% %mm% %d% %dd% %ddd% %dddd% %id% hallo"
   }
-
 
 }
