@@ -1,3 +1,16 @@
-<h2>{{error.code}}</h2>
-<p>{{error.message}}</p>
-<button type="button" ng-click="error.close()">OK</button>
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-ng-click="error.close()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{error.code}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{error.message}}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" type="button" data-ng-click="error.close()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
