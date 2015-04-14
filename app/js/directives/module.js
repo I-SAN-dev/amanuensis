@@ -7,9 +7,9 @@ app.controller('ModuleCtrl', ['$scope', 'modules', '$state', '$rootScope', funct
         var specificModule = module[toState.name];
         self.content = module.content;
         if(specificModule){
-            self.content = angular.extend(module.content, specificModule);
+            self.content = angular.extend({}, module.content, specificModule);
         }
-        console.log(toState.name);
+
     });
 
 
