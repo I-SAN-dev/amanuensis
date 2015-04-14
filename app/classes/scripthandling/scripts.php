@@ -50,6 +50,7 @@ class Scripts
         "js/services/localStorage.js",
         // Directives
         "js/directives/menu.js",
+        "js/directives/module.js",
         "js/directives/masterDetail.js",
         "js/directives/inPlaceEdit.js",
         //Controllers
