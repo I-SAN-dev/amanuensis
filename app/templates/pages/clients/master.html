@@ -9,6 +9,7 @@
     </form>
     <div class="list-group">
         <a class="list-group-item" data-ng-repeat="client in clients.clientList | filter:clients.filterText"
+           ng-class="{active:MasterDetailCtrl.detail.id == client.id}"
            data-ng-click="clients.setDetail(client)" href="#/clients/{{client.id}}">
             <h4>{{client.companyname}}</h4>
             <p>{{client.city}}<br>
