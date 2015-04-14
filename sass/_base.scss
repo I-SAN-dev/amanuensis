@@ -4,13 +4,22 @@
 }
 
 .panel,
-.list-group
+.list-group,
+.navbar,
+.detail-view
 {
   @include card(1);
 }
 
 .navbar
 {
-  @include card(1);
   border: none !important;
+}
+
+.detail-view {
+  padding: 20px;
+  background: #fff;
+  margin-top: 51px;
+  margin-left: -30px;
+  border-left: none;
 }

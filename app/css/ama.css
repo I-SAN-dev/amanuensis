@@ -5662,12 +5662,20 @@ button.close {
   margin-top: 80px; }
 
 .panel,
-.list-group {
+.list-group,
+.navbar,
+.detail-view {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
 
 .navbar {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   border: none !important; }
+
+.detail-view {
+  padding: 20px;
+  background: #fff;
+  margin-top: 51px;
+  margin-left: -30px;
+  border-left: none; }
 
 .form-control {
   height: 30.33333px;
