@@ -33,6 +33,7 @@ class Scripts
      */
     public static $byTemplate = array(
         "constants.jst",
+        "modules.jst",
     );
 
     /**
