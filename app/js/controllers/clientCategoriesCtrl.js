@@ -10,6 +10,8 @@ app.controller('ClientCategoriesCtrl', ['ApiAbstractionLayer', 'LocalStorage', f
         self.allCategories = data;
         LocalStorage.setData('clientCategories', data)
     });
+
+    var self = this;
     /**
      * Creates a new client category
      */
