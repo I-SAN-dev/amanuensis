@@ -32,6 +32,12 @@
     "reminder":"pdftemplates/reminder.html"
   },
 
+  "pricing":
+  {
+    "dailyrate": "300",
+    "hourlyrate": "40"
+  },
+
   "refnumber_offers":
   {
     "idminlength": 4,
