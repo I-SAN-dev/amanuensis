@@ -5676,6 +5676,12 @@ button.close {
   margin-top: 51px;
   margin-left: -30px;
   border-left: none; }
+  .detail-view .btn-toolbar {
+    margin: -20px -20px 20px;
+    padding: 20px; }
+
+.btn-toolbar {
+  border-bottom: 1px solid #EEEEEE; }
 
 .form-control {
   height: 30.33333px;
