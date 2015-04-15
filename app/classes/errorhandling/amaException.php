@@ -132,8 +132,9 @@ class amaException {
 
     /**
      * Sets HTTP error headers
+     * @param boolean $dontdie - most of the time we want to finish after an error. If we don't, pass true
      */
-    public function setHeaders()
+    public function setHeaders($dontdie = false)
     {
         /* Only allow HTTP statuscodes, alternatively 500 */
         $c = $this->errorcode;
@@ -163,7 +164,10 @@ class amaException {
             header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error", true, 500);
         }
 
-
+        if(!$dontdie)
+        {
+            die();
+        }
 
     }
 
