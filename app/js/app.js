@@ -148,7 +148,7 @@ app.constant('sites', [
     {
         name: 'app.clientCategories',
         stateObject: {
-            url:'clients/categories',
+            url:'/client-categories',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/clientCategories.html'
