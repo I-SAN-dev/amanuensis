@@ -69,7 +69,7 @@ class client_data {
         $_POST["customer"] = $_POST["clientid"];
 
         $dbal = DBAL::getInstance();
-        $dbal->dynamicInsert(
+        $id = $dbal->dynamicInsert(
             'customer_data',
             array(
                 'datatype',
@@ -79,7 +79,7 @@ class client_data {
             ),
             $_POST
         );
-        json_response(array('success' => true));
+        json_response(array('success' => true, 'id' => $id));
     }
 
     /**
