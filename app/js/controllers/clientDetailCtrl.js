@@ -83,11 +83,10 @@ app.controller('ClientDetailCtrl',
                 ApiAbstractionLayer('POST', {name: 'client_data', data: data}).then(function (data) {
                     self.setNewConnectionFlag(type);
                     var conns = self.client.data[type];
-                    // TODO: should push a return value here, API will support this soon
                     if(conns) {
-                        conns.push({name: name, value: value});
+                        conns.push({id: data.id, name: name, value: value});
                     } else {
-                        self.client.data[type] = [{name: name, value: value}];
+                        self.client.data[type] = [{id: data.id, name: name, value: value}];
                     }
                     LocalStorage.setData('client/'+self.client.id, self.client);
                 });
