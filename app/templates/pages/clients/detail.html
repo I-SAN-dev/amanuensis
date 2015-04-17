@@ -97,7 +97,17 @@
                     data-api-name="'client_data'"
                     data-api-id="mail.id"
                     data-ipe-name="'clients.mailAddress'|translate"></span>
-            </li></ul>
+            </li>
+                <li>
+                    <span data-ng-click="client.setNewConnectionFlag('mail')" data-ng-if="!client.newConnectionFlag.mail">!! + email !!</span>
+
+                    <form data-ng-if="client.newConnectionFlag.mail" data-ng-submit="client.addConnection('mail')">
+                        <input data-ng-model="client.newConnection.mail.name">
+                        <input data-ng-model="client.newConnection.mail.value">
+                        <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="row">
@@ -114,17 +124,25 @@
                                   data-api-id="phone.id"
                                   data-deletable-item="true"
                                   data-ipe-name="'clients.phone'|translate"></span>: <span data-in-place-edit
-                                                                            data-ipe-key="'value'"
-                                                                            data-ipe-value="phone.value"
-                                                                            data-api-name="'client_data'"
-                                                                            data-api-id="phone.id"
-                                                                            data-deletable-item="true"
-                                                                            data-ipe-name="'clients.phoneNumber'|translate"></span>
+                                                                                           data-ipe-key="'value'"
+                                                                                           data-ipe-value="phone.value"
+                                                                                           data-api-name="'client_data'"
+                                                                                           data-api-id="phone.id"
+                                                                                           data-deletable-item="true"
+                                                                                           data-ipe-name="'clients.phoneNumber'|translate"></span>
+                </li>
+                <li>
+                    <span data-ng-click="client.setNewConnectionFlag('phone')" data-ng-if="!client.newConnectionFlag.phone">!! + phone number !!</span>
+
+                    <form data-ng-if="client.newConnectionFlag.phone" data-ng-submit="client.addConnection('phone')">
+                        <input data-ng-model="client.newConnection.phone.name">
+                        <input data-ng-model="client.newConnection.phone.value">
+                        <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
+                    </form>
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="row">
+
         <div class="col-sm-3">
             {{'clients.comment'|translate}}
         </div>
