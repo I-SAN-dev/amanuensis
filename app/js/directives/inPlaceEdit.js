@@ -26,9 +26,7 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
-                        console.log($scope.deletable);
                         self.deletable = $scope.deletable;
-                        console.log(self.deletable);
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
@@ -64,7 +62,7 @@ app.directive('inPlaceEdit',
                     };
 
                     this.deleteItem = function () {
-                        if(self.deletable) {
+                        if(self.deletable != false) {
                             if(self.deletableItem){
                                 DeleteService($scope.apiName, $scope.apiId);
                             } else{
