@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaItemList.php');
 
 class item {
 
@@ -29,6 +30,10 @@ class item {
         if(isset($_GET['id']) && $_GET['id'] != '')
         {
             self::getItem($_GET["id"]);
+        }
+        else if((isset($_GET['for']) && $_GET['for'] != '')&&(isset($_GET['forid']) && $_GET['forid'] != ''))
+        {
+            self::getItemsOf($_GET["for"], $_GET["forid"]);
         }
         else
         {
@@ -220,6 +225,19 @@ class item {
             $error->renderJSONerror();
             $error->setHeaders();
         }
+    }
+
+
+
+    /**
+     * returns an item list of items associated with a given thing
+     * @param String $column - the type of thing which the items are associated with
+     * @param Int $id - the id of the column the items are associated with
+     */
+    private static function getItemsOf($column, $id)
+    {
+        $itemlist = new AmaItemList($column, $id);
+        json_response($itemlist->entries);
     }
 
 }
