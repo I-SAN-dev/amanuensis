@@ -43,7 +43,7 @@ class login {
             /* Check email address */
             if(!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
-                $error = new amaException(NULL, 400, "Invalid email address given");
+                $error = new amaException(NULL, 400, "Invalid email address given", "login.invalidmail");
                 $error->renderJSONerror();
                 $error->setHeaders();
                 die();
@@ -53,7 +53,7 @@ class login {
             $user = User::get($email);
             if(!$user)
             {
-                $error = new amaException(NULL, 400, "Unknown email address");
+                $error = new amaException(NULL, 400, "Unknown email address", "login.unknownmail");
                 $error->renderJSONerror();
                 $error->setHeaders();
                 die();
@@ -93,7 +93,7 @@ class login {
             }
             else
             {
-                $error = new amaException(NULL, 401, "Invalid email and/or password");
+                $error = new amaException(NULL, 401, "Invalid email and/or password", "login.invalid");
                 $error->renderJSONerror();
                 $error->setHeaders();
                 die();
@@ -101,7 +101,7 @@ class login {
         }
         else
         {
-            $error = new amaException(NULL, 400, "Invalid login data submitted");
+            $error = new amaException(NULL, 400, "Invalid login data submitted", "login.invalid");
             $error->renderJSONerror();
             $error->setHeaders();
             die();
