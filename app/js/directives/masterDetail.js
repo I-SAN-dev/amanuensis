@@ -7,7 +7,7 @@ app.directive('masterDetail', [function(){
             detailTpl: '='
         },
         templateUrl: 'templates/directives/masterDetail.html',
-        controller: function ($scope) {
+        controller: function ($scope, $state) {
             console.log($scope.detail);
             this.detail = $scope.detail;
             this.masterTpl = $scope.masterTpl;
@@ -16,6 +16,7 @@ app.directive('masterDetail', [function(){
             $scope.setDetail = function(detail){
                 self.detail = detail;
                 $scope.$broadcast('detailChanged', detail);
+                $state.go($state.$current.name, {id: detail.id});
             };
             $scope.setDetailTpl = function(templateUrl) {
                 self.detailTpl = templateUrl;
