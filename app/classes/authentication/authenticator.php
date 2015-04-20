@@ -31,7 +31,7 @@ class Authenticator
         $user = User::get($email);
         if(!$user)
         {
-            $error = new amaException(NULL, 400, 'Unknown email address');
+            $error = new amaException(NULL, 400, 'Unknown email address', 'login.unknownmail');
             $error->renderJSONerror();
             $error->setHeaders();
             die();
@@ -51,7 +51,7 @@ class Authenticator
         else
         {
             $user->setLastFailedLoginAttempt();
-            $error = new amaException(NULL, 401, 'Invalid email and/or password');
+            $error = new amaException(NULL, 401, 'Invalid email and/or password', 'login.invalid');
             $error->renderJSONerror();
             $error->setHeaders();
             die();
@@ -106,7 +106,7 @@ class Authenticator
         /*
         if(!self::isLoggedin())
         {
-            $error = new amaException(NULL, 401, "Login required");
+            $error = new amaException(NULL, 401, "Login required", "login.required");
             $error->renderJSONerror();
             $error->setHeaders();
             die();
@@ -116,7 +116,7 @@ class Authenticator
         /*
         if(count($accesslevels) > 0 && !in_array(self::getUser()->accessgroup, $accesslevels))
         {
-            $error = new amaException(NULL, 403, "Not allowed");
+            $error = new amaException(NULL, 403, "Not allowed", "login.noaccess");
             $error->renderJSONerror();
             $error->setHeaders();
             die();

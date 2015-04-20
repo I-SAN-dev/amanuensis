@@ -39,7 +39,7 @@ class AmaSession {
                 if($_SESSION['ipaddress'] != $ipaddress)
                 {
                     AmaSession::destroy();
-                    $error = new amaException(NULL, 401, "IP Address change detected!");
+                    $error = new amaException(NULL, 401, "IP Address change detected!", "login.ipchange");
                     $error->renderJSONerror();
                     $error->setHeaders();
                     die();
@@ -59,7 +59,7 @@ class AmaSession {
                 if($_SESSION['lastaction'] < intval(time() - $timeout))
                 {
                     AmaSession::destroy();
-                    $error = new amaException(NULL, 401, "Session timed out");
+                    $error = new amaException(NULL, 401, "Session timed out", "login.timeout");
                     $error->renderJSONerror();
                     $error->setHeaders();
                     die();
