@@ -45,6 +45,32 @@ class AmaSession {
                     die();
                 }
             }
+
+            /* Check session timeout */
+            if(!isset($_SESSION['lastaction']) || $_SESSION['lastaction'] == '')
+            {
+                $_SESSION['lastaction'] = time();
+            }
+            else
+            {
+                $conf = Config::getInstance();
+                $timeout = $conf->get["sessiontimeout"]*60;
+
+                if($_SESSION['lastaction'] < intval(time() - $timeout))
+                {
+                    AmaSession::destroy();
+                    $error = new amaException(NULL, 401, "Session timed out");
+                    $error->renderJSONerror();
+                    $error->setHeaders();
+                    die();
+                }
+                else
+                {
+                    $_SESSION['lastaction'] = time();
+                }
+
+            }
+
         }
     }
 
