@@ -89,9 +89,13 @@ app.constant('sites', [
             }
         },
         menus: {
-            mainNav: {
-                name: 'Login',
-                title: 'Login'
+            topRightNav: {
+                name: 'Logout',
+                title: 'Logout',
+                icon: 'md md-lg md-exit-to-app',
+                iconOnly: true,
+                service: 'AuthService',
+                click: 'logout'
             }
         }
     },
@@ -249,7 +253,7 @@ app.constant('sites', [
             topRightNav: {
                 name: 'Settings',
                 title: 'Settings',
-                icon: 'md md-settings',
+                icon: 'md md-lg md-settings',
                 iconOnly: true
             }
         }

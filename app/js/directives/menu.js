@@ -15,6 +15,10 @@ app.controller('NavCtrl',[
             var menuItems = [];
             var name=$scope.name;
 
+            var services = {
+                'AuthService': AuthService
+            };
+
             // get the menu items from the sites constant
             for(var i = 0; i<sites.length; i++) {
                 if(sites[i].menus && sites[i].menus[name]){
@@ -37,17 +41,26 @@ app.controller('NavCtrl',[
             });
 
             // Handle clicks on menu items
-            // valuie. active will set an active class on the menu item
+            // value.active will set an active class on the menu item
             this.goTo = function(item){
                 angular.forEach(menuItems, function(value, key){
                     value.active = value.name == item.name;
                 });
+                console.log(item);
+
+                var menuItem = item.menus[name];
+                if(menuItem.click){
+                    services[menuItem.service][menuItem.click]();
+                }
+
                 // change state
                 $state.go(item.name);
             };
 
             // read additional classes for the menu list from the modules constant
             this.additionalClasses = modules[name].additionalClasses || '';
+
+
         }
     ]
 );
