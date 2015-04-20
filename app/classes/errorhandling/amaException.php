@@ -22,12 +22,13 @@ class amaException {
      * @param int $code - an error code, can override the one from the exception
      * @param string $message - an Error Message, can override the one from the exception
      */
-    public function __construct(Exception $e = NULL, $code = NULL, $message = NULL)
+    public function __construct(Exception $e = NULL, $code = NULL, $message = NULL, $languagestring = NULL)
     {
         $this->errormessage = '';
         $this->errorcode = '';
         $this->file = '';
         $this->line = '';
+        $this->languagestring = '';
 
         /* Get values from the exception */
         if($e != NULL)
@@ -49,6 +50,12 @@ class amaException {
         if($message != NULL)
         {
             $this->errormessage = $message;
+        }
+
+        /* Override the languagestring */
+        if($languagestring != NULL)
+        {
+            $this->languagestring = $languagestring;
         }
 
 
@@ -120,7 +127,8 @@ class amaException {
     {
         $error = array(
             "code" => $this->errorcode,
-            "message" => $this->errormessage
+            "message" => $this->errormessage,
+            "languagestring" => $this->languagestring
         );
         if(Config::getInstance()->get['debug'])
         {
