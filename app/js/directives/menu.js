@@ -9,7 +9,8 @@ app.controller('NavCtrl',[
         'sites',
         '$scope',
         'modules',
-        function (AuthService, $state, sites, $scope, modules) {
+        '$rootScope',
+        function (AuthService, $state, sites, $scope, modules, $rootScope) {
             var self = this;
             var menuItems = [];
             var name=$scope.name;
@@ -27,6 +28,13 @@ app.controller('NavCtrl',[
                     self.navItems = menuItems;
             });
 
+            $rootScope.$watch('loggedIn', function (newValue, oldValue) {
+                if(newValue === true){
+                    self.navItems = menuItems;
+                } else {
+                    self.navItems = [];
+                }
+            });
 
             // Handle clicks on menu items
             // valuie. active will set an active class on the menu item
