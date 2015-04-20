@@ -28,6 +28,10 @@
   {
     "invalidmail": "Ungültige Maildresse übermittelt!",
     "unknownmail": "Es wurde kein Benutzer mit dieser Mailadresse gefunden",
-    "invalid": "Falscher Username und/oder Passwort eingegeben"
+    "invalid": "Falscher Username und/oder Passwort eingegeben",
+    "ipchange": "Ihre IP-Adresse hat sich geändert. Sie wurden aus Sicherheitsgründen ausgeloggt.",
+    "timeout": "Sie wurden wegen langer Inaktivität ausgeloggt.",
+    "required": "Sie müssen eingeloggt sein, um diese Ressource abzurufen",
+    "noaccess": "Sie haben nicht die benötigte Berechtigung um dies zu tun"
   }
 }
