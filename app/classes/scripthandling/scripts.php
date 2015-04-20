@@ -65,6 +65,7 @@ class Scripts
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",
         "js/controllers/projectsCtrl.js",
+        "js/controllers/settingsCtrl.js",
     );
 
     /**
