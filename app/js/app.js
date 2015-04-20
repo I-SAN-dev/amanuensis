@@ -234,6 +234,25 @@ app.constant('sites', [
                 title: 'Invoices'
             }
         }
+    },
+    {
+        name:'app.settings',
+        stateObject: {
+            url: '/settings',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/settings.html'
+                }
+            }
+        },
+        menus: {
+            topRightNav: {
+                name: 'Settings',
+                title: 'Settings',
+                icon: 'md md-settings',
+                iconOnly: true
+            }
+        }
     }
 
 ]);
