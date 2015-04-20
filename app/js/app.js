@@ -261,7 +261,7 @@ app.constant('sites', [
  * App Config
  * Configures i18n and app states
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants, $locationProvider) {
     /*
      * Configure the i18n service
      */
@@ -281,6 +281,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
     }
 
 
-
+    $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/dashboard');
 });
