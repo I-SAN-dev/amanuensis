@@ -250,7 +250,7 @@ app.constant('sites', [
                 name: 'Settings',
                 title: 'Settings',
                 icon: 'md md-settings',
-                showName: false
+                iconOnly: true
             }
         }
     }

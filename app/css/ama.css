@@ -8073,21 +8073,21 @@ button.close {
     color: #999;
     border-style: dotted; }
 
-.nav#nav-main {
+.nav#mainNav {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   position: fixed;
   top: 64px;
   bottom: 0;
   left: 0;
   background-color: #fff; }
-  .nav#nav-main li a {
+  .nav#mainNav li a {
     padding: 15px 22px 15px 22px;
     cursor: pointer;
     transition: 0.3s background-color, 0.3s color; }
-    .nav#nav-main li a:hover {
+    .nav#mainNav li a:hover {
       background-color: #ECEFF1 !important;
       color: #546E7A !important; }
-  .nav#nav-main li.active a {
+  .nav#mainNav li.active a {
     background-color: #ECEFF1;
     color: #263238 !important; }
 

@@ -1,5 +1,8 @@
-<ul class="nav" id="nav-main">
-    <li data-ng-repeat="item in nav.navItems" ng-class="{'active' : item.active}">
-        <a data-ng-click="nav.goTo(item)" title="{{item.menus.mainNav.title}}">{{item.menus.mainNav.name}}</a>
+<ul class="nav" id="{{name}}">
+    <li data-ng-repeat="item in nav.navItems" data-ng-class="{'active' : item.active}">
+        <a data-ng-click="nav.goTo(item)" title="{{item.menus[name].title}}">
+            <i data-ng-if="item.menus[name].icon" class="{{item.menus[name].icon}}"></i>
+            <span data-ng-if="!item.menus[name].iconOnly">{{item.menus[name].name}}</span>
+        </a>
     </li>
 </ul>
