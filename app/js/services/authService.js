@@ -10,7 +10,8 @@ angular.module('ama')
         'ApiAbstractionLayer',
         '$rootScope',
         'LocalStorage',
-        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope, LocalStorage){
+        'ErrorDialog',
+        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope, LocalStorage, ErrorDialog){
 
         return {
             /**
@@ -29,30 +30,40 @@ angular.module('ama')
              */
             login: function(email, password) {
                 var deferred = $q.defer();
-                ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
-                    .then(function (result) {
-                        if(password && result.salt && result.token) {
-                            var token = result.token;
-                            var salt = result.salt;
-                            LocalStorage.setData('salt',result.salt, false);
+                if(!$rootScope.loggedIn) {
+                    ApiAbstractionLayer('GET', {name: 'login', params: {action: 'login', email: email}})
+                        .then(function (result) {
+                            if (password && result.salt && result.token) {
+                                var token = result.token;
+                                var salt = result.salt;
+                                LocalStorage.setData('salt', result.salt, false);
 
-                            var hashedPass = sha256Filter(password);
-                            var passSalt = sha256Filter(hashedPass + salt);
-                            var passToSend = sha256Filter(passSalt + token);
-                        } else {
-                            deferred.reject();
-                        }
-                        ApiAbstractionLayer('POST', {name: 'login', data: {action: 'login',email: email,password: passToSend}})
-                            .then(function (data) {
-                                $rootScope.loggedIn = true;
-                                deferred.resolve(data);
-                            }, function (error) {
-                                deferred.reject(error);
-                            });
+                                var hashedPass = sha256Filter(password);
+                                var passSalt = sha256Filter(hashedPass + salt);
+                                var passToSend = sha256Filter(passSalt + token);
+                            } else {
+                                deferred.reject();
+                            }
+                            ApiAbstractionLayer('POST', {
+                                name: 'login',
+                                data: {action: 'login', email: email, password: passToSend}
+                            })
+                                .then(function (data) {
+                                    $rootScope.loggedIn = true;
+                                    deferred.resolve(data);
+                                }, function (error) {
+                                    deferred.reject(error);
+                                });
 
-                    }, function (error) {
-                        deferred.reject(error);
-                    });
+                        }, function (error) {
+                            deferred.reject(error);
+                        });
+                } else {
+                    var error = {code:'Fehler', message: 'Already logged in'};
+                    deferred.reject(error);
+                    ErrorDialog(error).activate();
+                }
+
 
                 return deferred.promise;
 
