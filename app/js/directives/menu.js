@@ -29,17 +29,10 @@ app.controller('NavCtrl',[
 
 
             // Handle clicks on menu items
+            // valuie. active will set an active class on the menu item
             this.goTo = function(item){
                 angular.forEach(menuItems, function(value, key){
-                    if(value.name == item.name)
-                    {
-                        // value.active will set a class on the menu item
-                        value.active = true;
-                    }
-                    else
-                    {
-                        value.active = false;
-                    }
+                    value.active = value.name == item.name;
                 });
                 // change state
                 $state.go(item.name);

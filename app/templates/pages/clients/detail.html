@@ -107,6 +107,7 @@
                         <input data-ng-model="client.newConnection.mail.name">
                         <input data-ng-model="client.newConnection.mail.value">
                         <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
+                        <button class="btn btn-danger" data-ng-click="client.setNewConnectionFlag('mail')" type="button"><i class="md md-cancel"></i></button>
                     </form>
                 </li>
             </ul>
@@ -140,6 +141,7 @@
                         <input data-ng-model="client.newConnection.phone.name">
                         <input data-ng-model="client.newConnection.phone.value">
                         <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
+                        <button class="btn btn-danger" data-ng-click="client.setNewConnectionFlag('phone')" type="button"><i class="md md-cancel"></i></button>
                     </form>
                 </li>
             </ul>
