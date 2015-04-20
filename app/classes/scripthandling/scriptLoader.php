@@ -111,6 +111,8 @@ class ScriptLoader
         $conf = Config::getInstance();
         $scriptsdir = $conf->get['path']['generated'];
         $templates = Scripts::$byTemplate;
+        $headers = getallheaders();
+        $hardrefresh = ($headers['Cache-Control'] == "no-cache" || $headers["Pragma"] == "no-cache");
 
         $paths = array();
 
@@ -118,7 +120,7 @@ class ScriptLoader
         {
             $renderedfile = $scriptsdir.'/'.str_replace('.jst', '.js', $file);
             /* Check if the file is rendered */
-            if(!file_exists($renderedfile))
+            if(!file_exists($renderedfile) || $hardrefresh)
             {
                 /* If not, render it */
                 $sbt = new ScriptByTemplate($file);
