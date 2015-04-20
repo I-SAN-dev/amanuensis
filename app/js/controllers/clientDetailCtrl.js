@@ -92,6 +92,7 @@ app.controller('ClientDetailCtrl',
                 });
             };
 
+
         }
     ]
 );
