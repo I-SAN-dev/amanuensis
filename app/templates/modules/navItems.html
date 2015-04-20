@@ -1,4 +1,4 @@
-<ul class="nav" id="{{name}}">
+<ul class="nav {{nav.additionalClasses}}" id="{{name}}">
     <li data-ng-repeat="item in nav.navItems" data-ng-class="{'active' : item.active}">
         <a data-ng-click="nav.goTo(item)" title="{{item.menus[name].title}}">
             <i data-ng-if="item.menus[name].icon" class="{{item.menus[name].icon}}"></i>
