@@ -17,7 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 
-class offer {
+class item_preset {
 
     /**
      * This method reacts to GET Requests
