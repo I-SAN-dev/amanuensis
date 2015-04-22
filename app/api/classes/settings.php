@@ -42,8 +42,59 @@ class settings {
      */
     public static function post()
     {
-        echo 'Hello World: that was a post!';
+        Authenticator::onlyFor(0);
+
+        if(isset($_POST["key"]) && $_POST["key"] != "" && isset($_POST["value"]))
+        {
+            $conf = Config::getInstance();
+
+            /* check if key is first-level or second-level*/
+            if (strpos($_POST["key"],'.') !== false)
+            {
+                //true, second-level
+                $keylevel = explode('.', $_POST["key"]);
+
+                if( isset($conf->get[ $keylevel[0] ]) &&
+                    is_array($conf->get[ $keylevel[0] ]) &&
+                    isset($conf->get[ $keylevel[0] ][ $keylevel[1] ]))
+                {
+                    $conf->get[ $keylevel[0] ][ $keylevel[1] ] = $_POST["value"];
+                    $conf->save();
+                }
+                else
+                {
+                    // key is not valid
+                    $error = new amaException(NULL, 400, "Invalid key.");
+                    $error->renderJSONerror();
+                    $error->setHeaders();
+                }
+
+            }
+            else
+            {
+                //false, first-level
+                if(isset($conf->get[$_POST["key"]]))
+                {
+                    $conf->get[$_POST["key"]] = $_POST["value"];
+                    $conf->save();
+                }
+                else
+                {
+                    // key is not valid
+                    $error = new amaException(NULL, 400, "Invalid key.");
+                    $error->renderJSONerror();
+                    $error->setHeaders();
+                }
+            }
+
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, "Not all required parameters given.");
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+
+        self::get();
     }
-
-
 }

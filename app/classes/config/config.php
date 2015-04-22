@@ -78,7 +78,6 @@ final class Config {
 
     /**
      * Saves the current config back to the file
-     * @return boolean - true for success/false for failure
      */
     public function save()
     {
@@ -101,13 +100,12 @@ final class Config {
 
             /* Rerender the .jst-Templates with updated values */
             ScriptLoader::renderScriptsByTemplate();
-
-            return true;
         }
         catch(Exception $e)
         {
             $error = new amaException($e, 500);
-            return false;
+            $error->renderJSONerror();
+            $error->setHeaders();
         }
     }
 }
