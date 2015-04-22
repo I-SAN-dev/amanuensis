@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaItemList.php');
 
 class acceptance {
 
@@ -114,6 +115,11 @@ class acceptance {
             array('id', $id),
             1
         );
+
+        /* Add items */
+        $itemlist = new AmaItemList('acceptance', $id);
+        $result["items"] = $itemlist->entries;
+
         json_response($result);
     }
 
