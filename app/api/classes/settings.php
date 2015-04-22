@@ -19,4 +19,31 @@ require_once('classes/config/config.php');
 
 class settings {
 
+    /**
+     * Echoes the current config
+     * This method reacts to GET Requests
+     */
+    public static function get()
+    {
+        Authenticator::onlyFor(0);
+
+        $conf = Config::getInstance();
+
+        $array = $conf->get;
+        /* Censor some config values, they only can be set but not read */
+        $array["db"]["password"] = '*****';
+        $array["appsecret"] = '*****';
+
+        json_response($array);
+    }
+
+    /**
+     * This methods reacts to POST Requests
+     */
+    public static function post()
+    {
+        echo 'Hello World: that was a post!';
+    }
+
+
 }
