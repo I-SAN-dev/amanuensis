@@ -33,5 +33,80 @@
     "timeout": "Sie wurden wegen langer Inaktivität ausgeloggt.",
     "required": "Sie müssen eingeloggt sein, um diese Ressource abzurufen",
     "noaccess": "Sie haben nicht die benötigte Berechtigung um dies zu tun"
+  },
+
+  "config":
+  {
+    "db":{
+      "host":"Hostadresse der Datenbank",
+      "database":"Datenbankname",
+      "port":"Port",
+      "user":"Datenbankbenutzer",
+      "password":"Passwort"
+    },
+
+    "baseurl":"Basisurl der Amanu-Installation",
+    "secureurl":"Alternative sichere URL der Amanu-Installation",
+    "appsecret":"Secret zur Loginverschlüsselung",
+    "sessiontimeout":"Session Timeout",
+
+    "company":"Firmenname",
+    "lang":"Sprache",
+
+    "debug":"Debuggingmodus",
+    "errorlogging":"Errorlogging",
+    "errorlogpath":"Pfad zur Logdatei",
+
+    "path":{
+      "scriptsbytemplate":"Pfad zum Ordner mit .jst (JavaScriptTemplate) Dateien",
+      "generated":"Pfad zum Ordner mit generierten Javascriptdateien"
+    },
+
+    "templates":
+    {
+      "offer":"Pfad zum angebotstemplate",
+      "invoice":"Pfad zum Rechnungstemplate",
+      "approval":"Pfad zum Abnahmeformulartemplate",
+      "reminder":"Pfad zum Mahnungstemplate"
+    },
+
+    "pricing":
+    {
+      "dailyrate": "Tagessatz",
+      "hourlyrate": "Stundensatz"
+    },
+
+    "refnumber_offers":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_contracts":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_acceptances":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_invoices":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_reminders":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_customers":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    }
   }
+
+
 }
