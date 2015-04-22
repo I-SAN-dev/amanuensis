@@ -58,3 +58,23 @@
 
   // [converter] extracted textarea& to textarea.form-control
 }
+
+.ipe
+{
+  cursor: pointer;
+
+  .ipe-empty
+  {
+    color: $gray-lighter;
+    transition: 0.3s color;
+
+
+    &:hover
+    {
+      color: $text-color;
+    }
+  }
+}
+
+
+

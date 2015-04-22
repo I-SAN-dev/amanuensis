@@ -101,8 +101,8 @@
                     data-deletable-item="true"
                     data-ipe-name="'clients.mailAddress'|translate"></span>
             </li>
-                <li>
-                    <span data-ng-click="client.setNewConnectionFlag('mail')" data-ng-if="!client.newConnectionFlag.mail">!! + email !!</span>
+                <li class="ipe">
+                    <span class="ipe-empty" data-ng-click="client.setNewConnectionFlag('mail')" data-ng-if="!client.newConnectionFlag.mail">!! + email !!</span>
 
                     <form data-ng-if="client.newConnectionFlag.mail" data-ng-submit="client.addConnection('mail')">
                         <input data-ng-model="client.newConnection.mail.name">
@@ -135,8 +135,8 @@
                                                                                            data-deletable-item="true"
                                                                                            data-ipe-name="'clients.phoneNumber'|translate"></span>
                 </li>
-                <li>
-                    <span data-ng-click="client.setNewConnectionFlag('phone')" data-ng-if="!client.newConnectionFlag.phone">!! + phone number !!</span>
+                <li class="ipe">
+                    <span class="ipe-empty" data-ng-click="client.setNewConnectionFlag('phone')" data-ng-if="!client.newConnectionFlag.phone">!! + phone number !!</span>
 
                     <form data-ng-if="client.newConnectionFlag.phone" data-ng-submit="client.addConnection('phone')">
                         <input data-ng-model="client.newConnection.phone.name">

@@ -8035,18 +8035,11 @@ button.close {
 .navbar {
   border: none !important; }
 
-.detail-view {
-  padding: 20px;
-  background: #fff;
-  margin-top: 51px;
-  margin-left: -30px;
-  border-left: none; }
-  .detail-view .btn-toolbar {
-    margin: -20px -20px 20px;
-    padding: 20px; }
-
 .btn-toolbar {
   border-bottom: 1px solid #EEEEEE; }
+
+a {
+  cursor: pointer; }
 
 .form-control {
   height: 30.33333px;
@@ -8073,6 +8066,14 @@ button.close {
     color: #999;
     border-style: dotted; }
 
+.ipe {
+  cursor: pointer; }
+  .ipe .ipe-empty {
+    color: #EEEEEE;
+    transition: 0.3s color; }
+    .ipe .ipe-empty:hover {
+      color: #263238; }
+
 .nav#mainNav {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   position: fixed;
@@ -8098,5 +8099,14 @@ button.close {
     padding: 0;
     font-weight: normal;
     line-height: 64px; }
+
+.detail-view {
+  padding: 20px;
+  background: #fff;
+  margin-top: 51px;
+  border-left: none; }
+  .detail-view .btn-toolbar {
+    margin: -20px -20px 20px;
+    padding: 20px; }
 
 /*# sourceMappingURL=ama.css.map */
