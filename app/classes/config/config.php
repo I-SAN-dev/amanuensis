@@ -64,8 +64,8 @@ final class Config {
             {
                 throw new Exception('File '.self::$filename.' does not exist');
             }
-            $file = file_get_contents(self::$filename);
-            return json_decode($file, true);
+            $this->file = file_get_contents(self::$filename);
+            return json_decode($this->file, true);
         }
         catch(Exception $e)
         {
