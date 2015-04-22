@@ -7,7 +7,7 @@
         </div>
     </div>
     </form>
-    <div class="list-group">
+    <div class="list-group" data-ng-keydown="clients.setNextDetail($event)">
         <a class="list-group-item" data-ng-repeat="client in clients.clientList | filter:clients.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == client.id}"
            data-ng-click="clients.setDetail(client)">
