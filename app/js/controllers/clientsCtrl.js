@@ -9,11 +9,14 @@ app.controller('ClientsCtrl',
         '$scope',
         '$stateParams',
         'DeleteService',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService) {
+        '$document',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, $document) {
             this.clientList = LocalStorage.getData('clients');
 
             this.filterText = '';
             var self = this;
+
+            var orderById = {};
 
             var setClientList = function (data) {
                 for(var i= 0; i<data.length; i++){
@@ -24,6 +27,8 @@ app.controller('ClientsCtrl',
                             +' '
                             +(data[i].contact_lastname || '');
                     }
+                    // save the list order for easy selection of next/prev item (keyboard navigation)
+                    orderById[data[i].id] = i;
                 }
                 self.clientList = data;
                 LocalStorage.setData('clients', self.clientList);
@@ -34,7 +39,6 @@ app.controller('ClientsCtrl',
             ApiAbstractionLayer('GET','client').then(function (data) {
                 setClientList(data);
             });
-
 
 
             this.deleteCategoryLink = function (client, category) {
@@ -61,6 +65,27 @@ app.controller('ClientsCtrl',
                 $stateParams.id = client.id;
                 $scope.$parent.setDetail(client);
             };
+
+            /**
+             * Keyboard navigation fr the client list
+             */
+            $document.on('keydown', function (event) {
+                var key = event.keyCode;
+                var oldId = angular.copy($stateParams.id);
+                var oldPos = orderById[oldId];
+                if(key == 38 || key == 40){
+                    event.stopImmediatePropagation();
+                    event.preventDefault();
+                    if (key == 38){
+                        if(self.clientList[oldPos - 1])
+                            self.setDetail(self.clientList[oldPos - 1]);
+                    } else {
+                        if (self.clientList[oldPos + 1])
+                            self.setDetail(self.clientList[oldPos + 1])
+                    }
+                }
+            });
+
         }
     ]
 );
