@@ -26,26 +26,6 @@ class AmaSession {
         {
             session_start();
 
-            /* Check if IP address has changed to prevent some session hijacking */
-            $ipaddress = $_SERVER['REMOTE_ADDR'];
-
-            if(!isset($_SESSION['ipaddress']) || $_SESSION['ipaddress'] == '')
-            {
-                $_SESSION['ipaddress'] = $ipaddress;
-            }
-            else
-            {
-                /* The user changed ipadress in one session - terminate it! */
-                if($_SESSION['ipaddress'] != $ipaddress)
-                {
-                    AmaSession::destroy();
-                    $error = new amaException(NULL, 401, "IP Address change detected!", "login.ipchange");
-                    $error->renderJSONerror();
-                    $error->setHeaders();
-                    die();
-                }
-            }
-
             /* Check session timeout */
             if(!isset($_SESSION['lastaction']) || $_SESSION['lastaction'] == '')
             {
@@ -69,6 +49,27 @@ class AmaSession {
                     $_SESSION['lastaction'] = time();
                 }
 
+            }
+
+
+            /* Check if IP address has changed to prevent some session hijacking */
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+
+            if(!isset($_SESSION['ipaddress']) || $_SESSION['ipaddress'] == '')
+            {
+                $_SESSION['ipaddress'] = $ipaddress;
+            }
+            else
+            {
+                /* The user changed ipadress in one session - terminate it! */
+                if($_SESSION['ipaddress'] != $ipaddress)
+                {
+                    AmaSession::destroy();
+                    $error = new amaException(NULL, 401, "IP Address change detected!", "login.ipchange");
+                    $error->renderJSONerror();
+                    $error->setHeaders();
+                    die();
+                }
             }
 
         }
