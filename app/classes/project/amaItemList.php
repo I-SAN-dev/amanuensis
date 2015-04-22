@@ -21,7 +21,7 @@ class AmaItemList {
     {
         if(in_array($column, array('offer', 'contract', 'todo', 'acceptance', 'invoice')))
         {
-            if($column == 'order')
+            if($column == 'todo')
             {
                 $orderBy = 'todo_order ASC';
             }
