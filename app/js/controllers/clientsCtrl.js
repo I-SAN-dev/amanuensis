@@ -10,7 +10,8 @@ app.controller('ClientsCtrl',
         '$stateParams',
         'DeleteService',
         '$document',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, $document) {
+        '$q',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, $document, $q) {
             this.clientList = LocalStorage.getData('clients');
 
             this.filterText = '';
@@ -61,9 +62,12 @@ app.controller('ClientsCtrl',
              * @param {object} client - the client selected
              */
             this.setDetail = function (client) {
-                // TODO: add an 'active' class to the client selected
+                var defer = $q.defer();
                 $stateParams.id = client.id;
-                $scope.$parent.setDetail(client);
+                $scope.$parent.setDetail(client).then(function (result) {
+                    defer.resolve();
+                });
+                return defer.promise;
             };
 
             /**
@@ -73,15 +77,42 @@ app.controller('ClientsCtrl',
                 var key = event.keyCode;
                 var oldId = angular.copy($stateParams.id);
                 var oldPos = orderById[oldId];
+
+                var viewportHeight = window.innerHeight;
+                var docHeight = $document.height();
+                var scrollTop = $document.scrollTop();
+                var viewPortBottom = viewportHeight + scrollTop;
+
+
                 if(key == 38 || key == 40){
                     event.stopImmediatePropagation();
                     event.preventDefault();
+                    var animation = {
+                        duration:500,
+                        queue:false
+                    };
+                    var documentOffset = 70;
                     if (key == 38){
-                        if(self.clientList[oldPos - 1])
+                        if(self.clientList[oldPos - 1]) {
+                            var newActiveOffset = $('.list-group-item.active').prev('.list-group-item').offset().top;
                             self.setDetail(self.clientList[oldPos - 1]);
+
+                            if(newActiveOffset < scrollTop)
+                                $('html, body').animate({scrollTop:newActiveOffset-documentOffset}, animation);
+                        }
                     } else {
-                        if (self.clientList[oldPos + 1])
-                            self.setDetail(self.clientList[oldPos + 1])
+                        if (self.clientList[oldPos + 1]) {
+                            var newActiveItem = $('.list-group-item.active').next('.list-group-item');
+                            var newActiveOffset = newActiveItem.height() + newActiveItem.offset().top;
+
+                            self.setDetail(self.clientList[oldPos + 1]);
+                            if(newActiveOffset > viewPortBottom) {
+                                $('html, body').animate({scrollTop: newActiveOffset-viewportHeight+documentOffset}, animation);
+                            }
+
+
+                        }
+
                     }
                 }
             });
