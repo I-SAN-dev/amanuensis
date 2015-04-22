@@ -227,10 +227,11 @@ final class DBAL {
      * @param array $columns - the columns to be responded
      * @param array $where - column:value for the where clause
      * @param int $limit - limits the select to X, 0 = no limit
+     * @param string $orderBy - an optional order by statement
      * @throws Exception
      * @return array - (2-dimensional)
      */
-    public function simpleSelect($table, array $columns, array $where = NULL, $limit = 0)
+    public function simpleSelect($table, array $columns, array $where = NULL, $limit = 0, $orderBy = NULL)
     {
         if(isset($where) && ( !isset($where[0]) || !isset($where[1])))
         {
@@ -241,11 +242,18 @@ final class DBAL {
             $query = "  SELECT ".implode(',',$columns)."
                         FROM ".$table;
 
-            /* add where stateme */
+            /* add where statement */
             if(isset($where))
             {
                 $query = $query." WHERE ".$where[0]." = :".$where[0];
             }
+
+            /* add orderBy statement */
+            if(isset($orderBy))
+            {
+                $query = $query. " ORDER BY ".$orderBy;
+            }
+
             /* add limit statement */
             if($limit > 0)
             {
@@ -258,6 +266,8 @@ final class DBAL {
                 /* Bind where statement */
                 $q->bindParam(':'.$where[0], $where[1]);
             }
+
+
 
             $q->execute();
 

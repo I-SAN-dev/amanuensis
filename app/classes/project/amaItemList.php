@@ -21,6 +21,16 @@ class AmaItemList {
     {
         if(in_array($column, array('offer', 'contract', 'todo', 'acceptance', 'invoice')))
         {
+            if($column == 'order')
+            {
+                $orderBy = 'todo_order ASC';
+            }
+            else
+            {
+                $orderBy = 'global_order ASC';
+            }
+
+
             $dbal = DBAL::getInstance();
             $this->entries = $dbal->simpleSelect(
                 'items',
@@ -41,7 +51,9 @@ class AmaItemList {
                     'todo_order',
                     'global_order'
                 ),
-                array($column, $id)
+                array($column, $id),
+                0,
+                $orderBy
             );
         }
         else
