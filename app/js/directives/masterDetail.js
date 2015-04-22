@@ -17,7 +17,6 @@ app.directive('masterDetail', [function(){
                 //var defer = $q.defer();
                 self.detail = detail;
                 $scope.$broadcast('detailChanged', detail);
-                console.log(window.history.state);
                 $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false });
             };
             $scope.setDetailTpl = function(templateUrl) {
