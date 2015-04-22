@@ -49,6 +49,11 @@ app.run(function ($rootScope, $state, AuthService, $q) {
 
     });
 
+    // trigger a refresh whenever user clicks history buttons
+    window.onpopstate = function (e) {
+        location.reload();
+    };
+
 });
 /**
  * The 'sites' constant.

@@ -62,12 +62,12 @@ app.controller('ClientsCtrl',
              * @param {object} client - the client selected
              */
             this.setDetail = function (client) {
-                var defer = $q.defer();
+                //var defer = $q.defer();
                 $stateParams.id = client.id;
-                $scope.$parent.setDetail(client).then(function (result) {
+                $scope.$parent.setDetail(client);/*.then(function (result) {
                     defer.resolve();
                 });
-                return defer.promise;
+                return defer.promise;*/
             };
 
             /**
@@ -79,7 +79,6 @@ app.controller('ClientsCtrl',
                 var oldPos = orderById[oldId];
 
                 var viewportHeight = window.innerHeight;
-                var docHeight = $document.height();
                 var scrollTop = $document.scrollTop();
                 var viewPortBottom = viewportHeight + scrollTop;
 
@@ -109,10 +108,7 @@ app.controller('ClientsCtrl',
                             if(newActiveOffset > viewPortBottom) {
                                 $('html, body').animate({scrollTop: newActiveOffset-viewportHeight+documentOffset}, animation);
                             }
-
-
                         }
-
                     }
                 }
             });
