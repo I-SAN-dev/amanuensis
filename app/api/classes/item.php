@@ -217,7 +217,14 @@ class item {
 
         if($count)
         {
-            self::getItemList();
+            if((isset($_DELETE['for']) && $_DELETE['for'] != '')&&(isset($_DELETE['forid']) && $_DELETE['forid'] != ''))
+            {
+                self::getItemsOf($_DELETE["for"], $_DELETE["forid"]);
+            }
+            else
+            {
+                self::getItemList();
+            }
         }
         else
         {
