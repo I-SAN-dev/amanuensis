@@ -57,7 +57,7 @@ class ScriptLoader
 
         foreach ($jsfiles as $path)
         {
-            $result = $result.'<script src="'.$path.'"></script>'."\n";
+            $result = $result.'<script src="'.$path.'" type="text/javascript"></script>'."\n";
         }
         return $result;
     }
@@ -74,7 +74,7 @@ class ScriptLoader
         $result = $result.'<link rel="stylesheet" type="text/css" href="'.self::cacheCompressCss().'">'."\n";
 
         /* JS */
-        $result = $result.'<script src="'.self::cacheCompressJs().'"></script>'."\n";
+        $result = $result.'<script src="'.self::cacheCompressJs().'" type="text/javascript"></script>'."\n";
 
         return $result;
     }
