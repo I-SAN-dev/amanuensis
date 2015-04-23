@@ -17,8 +17,8 @@ require_once 'classes/scripthandling/scriptLoader.php';
 require_once 'classes/config/config.php';
 require_once 'classes/errorhandling/amaException.php';
 
-
-$baseurl = $_SERVER['SERVER_PROTOCOL'].'://'.$_SERVER['HTTP_HOST'].'/';
+$protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'? 'https://' : 'http://';
+$baseurl = $protocol.$_SERVER['HTTP_HOST'].'/';
 
 /* Output buffering */
 ob_start();
@@ -26,7 +26,7 @@ ob_start();
 <!DOCTYPE html>
 <html lang="en" data-ng-app="ama">
 <head>
-    <base href="<?php echo($baseurl); ?>">
+    <base href="<?php echo($baseurl); ?>" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
