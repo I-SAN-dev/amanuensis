@@ -4,6 +4,8 @@
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate']);
 app.run(function ($rootScope, $state, AuthService, $q) {
 
+
+
     /**
      * Checks if the current user is logged in and sets the 'loggedin' variable
      * which will be used to get the login state at any other point
@@ -49,9 +51,29 @@ app.run(function ($rootScope, $state, AuthService, $q) {
 
     });
 
+
+    var wasLoaded = null;
     // trigger a refresh whenever user clicks history buttons
     window.onpopstate = function (e) {
-        location.reload();
+        console.log(wasLoaded);
+        // Safari hack
+        if(wasLoaded === null) {
+            wasLoaded = true;
+        } else {
+            location.reload();
+            wasLoaded = null;
+        }
+    };
+    window.onload = function () {
+
+
+        if(wasLoaded === null) {
+            setTimeout(function () {
+                wasLoaded = true;
+                console.log(wasLoaded);
+            },0);
+        }
+
     };
 
 });
