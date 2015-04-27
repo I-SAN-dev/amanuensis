@@ -46,7 +46,7 @@ class PdfTemplate {
         extract($this->data);
 
         /* include the template file */
-        include($this->$path);
+        include($this->path);
 
         /* Stop output buffering and return the data */
         return ob_get_clean();

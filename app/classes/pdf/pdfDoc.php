@@ -14,6 +14,7 @@
 require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/pdf/pdf.php');
+require_once('classes/pdf/pdfTemplate.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
 
@@ -33,10 +34,10 @@ class PdfDoc {
         $this->info = $this->getInfo();
 
         $this->refnumber = $this->info["refnumber"];
-        $this->date = date_create($this->info['date']);
+        $this->date = $this->info['date'];
 
         /* Gather associated items */
-        $this->items = $this->getItems();
+        $this->info['items'] = $this->getItems();
 
         $this->pdf = new PDF($this->generateFilename());
         $this->pdf->setHTML($this->generateHTML());
@@ -47,6 +48,8 @@ class PdfDoc {
      */
     public function streamPreview()
     {
+        //header('Content-Type: application/pdf');
+        //var_dump(headers_list());
         $this->pdf->stream();
     }
 
@@ -86,6 +89,10 @@ class PdfDoc {
 
         $dbal = DBAL::getInstance();
         $info = $dbal->simpleSelect($this->type.'s', $fields, array('id', $this->id), 1);
+        if(count($info) < 1)
+        {
+            throw new Exception('Document "'.$this->type.'" "'.$this->id.'" not found', 404);
+        }
 
         /* Add project and client data */
         if($this->type != 'reminder')
@@ -168,7 +175,7 @@ class PdfDoc {
      */
     private function generateFilename()
     {
-        return $this->date->format('Y-m-d').'__'.$this->refnumber;
+        return $this->date->format('Y-m-d').'__'.$this->refnumber.'.pdf';
     }
 
     /**
@@ -177,9 +184,10 @@ class PdfDoc {
      */
     private function generateHTML()
     {
-        //TODO
-        $html = '';
-        return $html;
+        $conf = Config::getInstance();
+        $path = $conf->get['templates'][$this->type];
+        $template = new PdfTemplate($path, $this->info);
+        return $template->getHTML();
     }
 
 }
