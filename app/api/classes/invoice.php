@@ -17,6 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
+require_once('classes/project/amaProject.php');
 
 class invoice {
 
@@ -79,7 +80,6 @@ class invoice {
      */
     private static function getInvoiceList()
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'invoices',
@@ -102,7 +102,6 @@ class invoice {
      */
     private static function getInvoice($id)
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'invoices',
@@ -123,6 +122,10 @@ class invoice {
         /* Add items */
         $itemlist = new AmaItemList('invoice', $id);
         $result["items"] = $itemlist->entries;
+
+        /* Add project data */
+        $project = new AmaProject($result['project']);
+        $result['project'] = $project->getProjectData();
 
         json_response($result);
     }
