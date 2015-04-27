@@ -218,7 +218,7 @@ app.constant('sites', [
     {
         name: 'app.projects',
         stateObject: {
-            url: '/projects',
+            url: '/projects/:id',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/projects.html'
