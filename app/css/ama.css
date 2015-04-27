@@ -8092,13 +8092,16 @@ a {
     background-color: #ECEFF1;
     color: #263238 !important; }
 
-.navbar {
+.navbar.navbar-inverse {
   color: #fff; }
-  .navbar h1 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    line-height: 64px; }
+.navbar h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  line-height: 64px; }
+.navbar.amanu-actionbar {
+  margin-top: 64px;
+  min-height: 32px; }
 
 .detail-view {
   padding: 20px;

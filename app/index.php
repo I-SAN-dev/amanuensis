@@ -50,6 +50,9 @@ ob_start();
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid" data-ama-module="'topBar'"></div>
 </div>
+<div class="navbar navbar-default navbar-fixed-top amanu-actionbar">
+    <div class="container-fluid">data-ama-module="'actionBar'"</div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-1 col-md-2 col-sm-3">

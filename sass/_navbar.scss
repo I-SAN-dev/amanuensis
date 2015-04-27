@@ -1,6 +1,8 @@
 .navbar
 {
-  color: #fff;
+  &.navbar-inverse {
+    color: #fff;
+  }
 
   h1
   {
@@ -8,5 +10,10 @@
     padding: 0;
     font-weight: normal;
     line-height: $navbar-height;
+  }
+
+  &.amanu-actionbar{
+    margin-top: $navbar-height;
+    min-height: $navbar-height/2;
   }
 }
