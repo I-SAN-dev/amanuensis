@@ -4,6 +4,17 @@
             <button class="btn btn-link" data-ng-controller="ProjectsCtrl as list" data-ng-click="list.deleteClient(project.project.id)"><i class="md md-lg md-delete"></i></button>
         </div>
     </div>
+    <h1>
+        <span data-in-place-edit
+              data-api-id="project.project.id"
+              data-api-name="'project'"
+              data-ipe-key="'name'"
+              data-ipe-value="project.project.name"
+              data-ipe-name="'projects.name'|translate"
+              data-ipe-deletable="false"
+                ></span>
+        <small>{{project.project.client.companyname}}</small>
+    </h1>
     <div class="row">
         <div class="col-sm-6">
             <p data-in-place-edit
@@ -24,17 +35,6 @@
             </p>
         </div>
     </div>
-    <h1>
-        <span data-in-place-edit
-              data-api-id="project.project.id"
-              data-api-name="'project'"
-              data-ipe-key="'name'"
-              data-ipe-value="project.project.name"
-              data-ipe-name="'projects.name'|translate"
-              data-ipe-deletable="false"
-            ></span>
-        <small>{{project.project.client.companyname}}</small>
-    </h1>
 
     <h3>{{'projects.offers'|translate}}</h3>
     <ul>
@@ -44,7 +44,7 @@
     </ul>
     <h3>{{'projects.contracts'|translate}}</h3>
     <ul>
-        <li data-ng-repeat="contract in project.contracts">
+        <li data-ng-repeat="contract in project.contracts | orderBy:'date'">
             {{contract.name}} {{contract.type}}
         </li>
     </ul>
