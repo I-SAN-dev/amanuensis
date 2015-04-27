@@ -5,7 +5,6 @@ var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.trans
 app.run(function ($rootScope, $state, AuthService, $q) {
 
 
-
     /**
      * Checks if the current user is logged in and sets the 'loggedin' variable
      * which will be used to get the login state at any other point

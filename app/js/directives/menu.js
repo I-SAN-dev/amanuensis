@@ -12,8 +12,9 @@ app.controller('NavCtrl',[
         '$rootScope',
         function (AuthService, $state, sites, $scope, modules, $rootScope) {
             var self = this;
-            var menuItems = [];
             var name=$scope.name;
+
+            var menuItems =  [];
 
             var services = {
                 'AuthService': AuthService

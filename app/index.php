@@ -51,7 +51,7 @@ ob_start();
     <div class="container-fluid" data-ama-module="'topBar'"></div>
 </div>
 <div class="navbar navbar-default navbar-fixed-top amanu-actionbar">
-    <div class="container-fluid">data-ama-module="'actionBar'"</div>
+    <div class="container-fluid" data-ama-module="'actionBar'"></div>
 </div>
 <div class="container-fluid">
     <div class="row">

@@ -8,6 +8,20 @@ app.constant('modules', {
         },
         'app.projects': 'projects.projects'
     },
+    actionBar: {
+        content: {
+            actions: {},
+            controller:''
+        },
+        'app.clients': {
+            actions: [
+                {
+                    name: 'new',
+                    sref: 'app.clientCreation'
+                }
+            ]
+        }
+    },
     // Navs
     mainNav: {},
     topRightNav: {

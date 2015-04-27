@@ -2,15 +2,25 @@ app.controller('ModuleCtrl', ['$scope', 'modules', '$state', '$rootScope', funct
     $scope.template = 'templates/modules/'+$scope.name+'.html';
 
     var self = this;
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+
+    var getContent = function (state) {
+        console.log(state);
         var module = modules[$scope.name];
-        var specificModule = module[toState.name];
+        var specificModule = module[state];
         self.content = module.content;
         if(specificModule){
             self.content = angular.extend({}, module.content, specificModule);
         }
+    };
 
+    /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        getContent(toState.name);
+    });*/
+
+    $rootScope.$on('$viewContentLoaded', function (event) {
+        getContent($state.current.name);
     });
+
 
 
 }]);
