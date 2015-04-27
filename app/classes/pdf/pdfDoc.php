@@ -15,6 +15,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/pdf/pdf.php');
 require_once('classes/project/amaItemList.php');
+require_once('classes/project/amaProject.php');
 
 class PdfDoc {
 
@@ -32,7 +33,7 @@ class PdfDoc {
         $this->info = $this->getInfo();
 
         $this->refnumber = $this->info["refnumber"];
-        $this->date = isset($this->info["date"]) ? date_create($this->info["date"]) : date('Y-m-d');
+        $this->date = date_create($this->info['date']);
 
         /* Gather associated items */
         $this->items = $this->getItems();
@@ -70,8 +71,37 @@ class PdfDoc {
      */
     private function getInfo()
     {
-        //TODO
-        $info = array();
+        if($this->type == 'acceptance')
+        {
+            $fields = array('name','description','project','refnumber');
+        }
+        else if($this->type == 'reminder')
+        {
+            $fields = array('name','description','invoice','refnumber','date');
+        }
+        else
+        {
+            $fields = array('name','description','project','refnumber','date');
+        }
+
+        $dbal = DBAL::getInstance();
+        $info = $dbal->simpleSelect($this->type.'s', $fields, array('id', $this->id), 1);
+
+        /* Add project and client data */
+        if($this->type != 'reminder')
+        {
+            $project = new AmaProject($info['project']);
+        }
+        else
+        {
+            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $info['invoice']), 1);
+            $project = new AmaProject($invoice['project']);
+        }
+        $info['project'] = $project->getProjectData();
+
+        /* Add current date as date, if not existent (acceptance) */
+        $info['date'] = isset($info["date"]) ? date_create($info["date"]) : date('Y-m-d');
+
         return $info;
     }
 
@@ -138,7 +168,7 @@ class PdfDoc {
      */
     private function generateFilename()
     {
-        return $this->date.'__'.$this->refnumber;
+        return $this->date->format('Y-m-d').'__'.$this->refnumber;
     }
 
     /**
