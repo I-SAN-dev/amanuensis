@@ -9,12 +9,10 @@ app.controller('ClientsCtrl',
         '$scope',
         '$stateParams',
         'DeleteService',
-        '$document',
-        '$q',
         function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService) {
             this.clientList = LocalStorage.getData('clients');
 
-            this.filterText = '';
+
             var self = this;
 
 

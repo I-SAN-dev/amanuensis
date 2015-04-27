@@ -18,6 +18,7 @@ app.directive('masterDetail', [function(){
                 this.detail = $scope.detail;
                 this.masterTpl = $scope.masterTpl;
                 this.detailTpl = $scope.detailTpl;
+                this.filterText = $stateParams.filter || '';
                 var self = this;
 
                 $scope.setDetail = function(detail){
