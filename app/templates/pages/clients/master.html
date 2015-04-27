@@ -3,12 +3,12 @@
     <div class="form-group">
         <label for="filter" class="col-sm-2 control-label">Filter:</label>
         <div class="col-sm-10">
-            <input data-ng-model="clients.filterText" id="filter" type="text" class="form-control">
+            <input data-ng-model="MasterDetailCtrl.filterText" id="filter" type="text" class="form-control">
         </div>
     </div>
     </form>
     <div class="list-group">
-        <a class="list-group-item" data-ng-repeat="client in masterList | filter:clients.filterText"
+        <a class="list-group-item" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == client.id}"
            data-ng-click="setDetail(client)">
             <h4>{{client.companyname}}</h4>
