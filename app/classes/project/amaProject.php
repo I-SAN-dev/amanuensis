@@ -33,6 +33,21 @@ class AmaProject {
     }
 
     /**
+     * Returns an array with basic project data, including the client
+     * @return array
+     */
+    public function getProjectData()
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'state' => $this->state,
+            'client' => $this->getClient()
+        );
+    }
+
+    /**
      * Returns an array that represents the associated client
      * @return array
      */

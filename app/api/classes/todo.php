@@ -17,6 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
+require_once('classes/project/amaProject.php');
 
 class project {
 
@@ -79,7 +80,6 @@ class project {
      */
     private static function getTodoList()
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'todos',
@@ -99,7 +99,6 @@ class project {
      */
     private static function getTodo($id)
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'todos',
@@ -116,6 +115,10 @@ class project {
         /* Add items */
         $itemlist = new AmaItemList('todo', $id);
         $result["items"] = $itemlist->entries;
+
+        /* Add project data */
+        $project = new AmaProject($result['project']);
+        $result['project'] = $project->getProjectData();
 
         json_response($result);
     }

@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaProject.php');
 
 class fileContract {
 
@@ -78,7 +79,6 @@ class fileContract {
      */
     private static function getFileContractList()
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'fileContracts',
@@ -99,7 +99,6 @@ class fileContract {
      */
     private static function getFileContract($id)
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'fileContracts',
@@ -113,6 +112,11 @@ class fileContract {
             array('id', $id),
             1
         );
+
+        /* Add project data */
+        $project = new AmaProject($result['project']);
+        $result['project'] = $project->getProjectData();
+
         json_response($result);
     }
 

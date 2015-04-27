@@ -16,7 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
-require_once('classes/project/amaItemList.php');
+require_once('classes/project/amaProject.php');
 
 class acceptance {
 
@@ -79,7 +79,6 @@ class acceptance {
      */
     private static function getAcceptanceList()
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'acceptances',
@@ -100,7 +99,6 @@ class acceptance {
      */
     private static function getAcceptance($id)
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'acceptances',
@@ -119,6 +117,10 @@ class acceptance {
         /* Add items */
         $itemlist = new AmaItemList('acceptance', $id);
         $result["items"] = $itemlist->entries;
+
+        /* Add project data */
+        $project = new AmaProject($result['project']);
+        $result['project'] = $project->getProjectData();
 
         json_response($result);
     }
