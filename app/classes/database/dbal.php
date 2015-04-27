@@ -267,42 +267,24 @@ final class DBAL {
                 $q->bindParam(':'.$where[0], $where[1]);
             }
 
-
-
             $q->execute();
-
-            /* creating the result array */
-            $result = array();
 
             /* object for limited = 1 result, array of objects for set of results */
             if($limit == 1)
             {
-                if($entry = $q->fetch())
+                if($entry = $q->fetch(PDO::FETCH_ASSOC))
                 {
-                    foreach($columns as $column)
-                    {
-                        $result[$column] = $entry[$column];
-                    }
+                    return $entry;
                 }
                 else
                 {
-                    $result = NULL;
+                    return NULL;
                 }
-
             }
             else
             {
-                while ($entry = $q->fetch())
-                {
-                    $row = array();
-                    foreach($columns as $column)
-                    {
-                        $row[$column] = $entry[$column];
-                    }
-                    array_push($result, $row);
-                }
+                return $q->fetchAll(PDO::FETCH_ASSOC);
             }
-            return $result;
         }
     }
 
