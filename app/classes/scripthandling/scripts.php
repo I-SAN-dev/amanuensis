@@ -61,10 +61,11 @@ class Scripts
         "js/controllers/clientDetailCtrl.js",
         "js/controllers/clientCategoriesCtrl.js",
         "js/controllers/clientCreationCtrl.js",
+        "js/controllers/projectsCtrl.js",
+        "js/controllers/projectDetailCtrl.js",
         "js/controllers/acceptancesCtrl.js",
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",
-        "js/controllers/projectsCtrl.js",
         "js/controllers/settingsCtrl.js",
     );
 

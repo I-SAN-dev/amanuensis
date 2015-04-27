@@ -1,4 +1,6 @@
-<div data-ng-controller="ProjectsCtrl as projects">
-<p>This is the projects page</p>
-    {{projects.projects|json}}
-    </div>
+<div data-ng-controller="ProjectsCtrl as projects"
+     data-master-detail
+     data-master-list="projects.projects"
+     data-master-tpl="'templates/pages/projects/master.html'"
+     data-detail-tpl="'templates/pages/projects/detail.html'">
+</div>
