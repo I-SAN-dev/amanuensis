@@ -1,4 +1,4 @@
-<div data-ng-controller="ClientsCtrl as clients">
+<div>
     <form class="form-horizontal">
     <div class="form-group">
         <label for="filter" class="col-sm-2 control-label">Filter:</label>
@@ -7,10 +7,10 @@
         </div>
     </div>
     </form>
-    <div class="list-group" data-ng-keydown="clients.setNextDetail($event)">
-        <a class="list-group-item" data-ng-repeat="client in clients.clientList | filter:clients.filterText"
+    <div class="list-group">
+        <a class="list-group-item" data-ng-repeat="client in masterList | filter:clients.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == client.id}"
-           data-ng-click="clients.setDetail(client)">
+           data-ng-click="setDetail(client)">
             <h4>{{client.companyname}}</h4>
             <p>{{client.city}}<br>
                 {{client.refnumber}}</p>
