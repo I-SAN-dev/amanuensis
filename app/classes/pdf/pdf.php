@@ -37,6 +37,7 @@ class PDF {
     /**
      * Loads a html file that should be converted - PHP will also work (thanks to include)
      * @param string $path
+     * @throws Exception
      */
     public function loadFile($path)
     {
@@ -48,10 +49,7 @@ class PDF {
         }
         else
         {
-            $error = new amaException(NULL, 404, "File '".$path."' not found!");
-            $error->renderJSONerror();
-            $error->setHeaders();
-            die();
+            throw new Exception("File '".$path."' not found!", 404);
         }
     }
 
@@ -70,6 +68,7 @@ class PDF {
     /**
      * Saves the PDF to disc to the given path
      * @param string $path
+     * @throws Exception
      */
     public function saveToDisk($path)
     {
@@ -80,10 +79,7 @@ class PDF {
 
         if(!file_put_contents($path, $content))
         {
-            $error = new amaException(NULL, 500, "Error writing PDF to path '".$path."'!");
-            $error->renderJSONerror();
-            $error->setHeaders();
-            die();
+            throw new Exception("Error writing PDF to path '".$path."'!", 500);
         }
     }
 
