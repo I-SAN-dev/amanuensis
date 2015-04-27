@@ -14,7 +14,9 @@
 require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/pdf/pdf.php');
+require_once('classes/pdf/pdfTemplate.php');
 require_once('classes/project/amaItemList.php');
+require_once('classes/project/amaProject.php');
 
 class PdfDoc {
 
@@ -32,10 +34,10 @@ class PdfDoc {
         $this->info = $this->getInfo();
 
         $this->refnumber = $this->info["refnumber"];
-        $this->date = isset($this->info["date"]) ? date_create($this->info["date"]) : date('Y-m-d');
+        $this->date = $this->info['date'];
 
         /* Gather associated items */
-        $this->items = $this->getItems();
+        $this->info['items'] = $this->getItems();
 
         $this->pdf = new PDF($this->generateFilename());
         $this->pdf->setHTML($this->generateHTML());
@@ -70,8 +72,41 @@ class PdfDoc {
      */
     private function getInfo()
     {
-        //TODO
-        $info = array();
+        if($this->type == 'acceptance')
+        {
+            $fields = array('name','description','project','refnumber');
+        }
+        else if($this->type == 'reminder')
+        {
+            $fields = array('name','description','invoice','refnumber','date');
+        }
+        else
+        {
+            $fields = array('name','description','project','refnumber','date');
+        }
+
+        $dbal = DBAL::getInstance();
+        $info = $dbal->simpleSelect($this->type.'s', $fields, array('id', $this->id), 1);
+        if(count($info) < 1)
+        {
+            throw new Exception('Document "'.$this->type.'" "'.$this->id.'" not found', 404);
+        }
+
+        /* Add project and client data */
+        if($this->type != 'reminder')
+        {
+            $project = new AmaProject($info['project']);
+        }
+        else
+        {
+            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $info['invoice']), 1);
+            $project = new AmaProject($invoice['project']);
+        }
+        $info['project'] = $project->getProjectData();
+
+        /* Add current date as date, if not existent (acceptance) */
+        $info['date'] = isset($info["date"]) ? date_create($info["date"]) : date('Y-m-d');
+
         return $info;
     }
 
@@ -92,16 +127,16 @@ class PdfDoc {
     {
         $dbal = DBAL::getInstance();
 
-        if(in_array($this->$type, array('offer', 'acceptance', 'invoice', 'reminder')))
+        if(in_array($this->type, array('offer', 'acceptance', 'invoice', 'reminder')))
         {
-            $dbal->dynamicUpdate(   $type,
+            $dbal->dynamicUpdate(   $this->type.'s',
                                     array('id', $this->id),
                                     array('path', 'state'),
                                     array('path' => $path, 'state' => PDF_GENERATED));
         }
         else
         {
-            $dbal->dynamicUpdate(   $type,
+            $dbal->dynamicUpdate(   $this->type.'s',
                                     array('id', $this->id),
                                     array('path'),
                                     array('path' => $path));
@@ -138,7 +173,7 @@ class PdfDoc {
      */
     private function generateFilename()
     {
-        return $this->date.'__'.$this->refnumber;
+        return $this->date->format('Y-m-d').'__'.$this->refnumber.'.pdf';
     }
 
     /**
@@ -147,9 +182,10 @@ class PdfDoc {
      */
     private function generateHTML()
     {
-        //TODO
-        $html = '';
-        return $html;
+        $conf = Config::getInstance();
+        $path = $conf->get['templates'][$this->type];
+        $template = new PdfTemplate($path, $this->info);
+        return $template->getHTML();
     }
 
 }

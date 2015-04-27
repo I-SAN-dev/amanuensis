@@ -80,16 +80,14 @@ class project {
     private static function getProjectList()
     {
         $dbal = DBAL::getInstance();
-        $result = $dbal->simpleSelect(
-            'projects',
-            array(
-                'id',
-                'name',
-                'client',
-                'state'
-            )
-        );
-        json_response($result);
+
+        $q = $dbal->prepare('
+            SELECT projects.id, projects.name, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
+            FROM projects LEFT JOIN customers ON projects.client = customers.id
+        ');
+
+        $q->execute();
+        json_response($q->fetchAll(PDO::FETCH_ASSOC));
     }
 
     /**

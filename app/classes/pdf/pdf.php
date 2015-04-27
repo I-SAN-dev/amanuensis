@@ -61,7 +61,7 @@ class PDF {
         $dompdf = new DOMPDF();
         $dompdf->load_html($this->html);
         $dompdf->render();
-        $dompdf->stream($this->name);
+        $dompdf->stream($this->name, array('Attachment' => false));
     }
 
 

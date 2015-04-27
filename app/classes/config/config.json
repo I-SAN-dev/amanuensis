@@ -26,10 +26,11 @@
 
   "templates":
   {
-    "offer":"pdftemplates/offer.html",
-    "invoice":"pdftemplates/invoice.html",
-    "approval":"pdftemplates/approval.html",
-    "reminder":"pdftemplates/reminder.html"
+    "offer":"pdftemplates/offer.phtml",
+    "contract":"pdftemplates/contract.phtml",
+    "acceptance":"pdftemplates/acceptance.ptml",
+    "invoice":"pdftemplates/invoice.phtml",
+    "reminder":"pdftemplates/reminder.phtml"
   },
 
   "pricing":
