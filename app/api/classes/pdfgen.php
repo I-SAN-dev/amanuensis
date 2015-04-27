@@ -54,7 +54,29 @@ class pdfgen {
      */
     public static function post()
     {
-        echo 'Hello World: that was a post!';
+        Authenticator::onlyFor(0);
+
+        if((!isset($_POST["for"]) || $_POST["for"] == '')||(!isset($_POST["forid"]) || $_POST["forid"] == '' ))
+        {
+            $error = new amaException(NULL, 400, "for and forid need to be specified");
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+
+        try
+        {
+            $pdfdoc = new PdfDoc($_POST["for"], $_POST["forid"]);
+            $path = $pdfdoc->saveToDisk();
+
+            $response = array('success' => true, 'path' => $path);
+            json_response($response);
+        }
+        catch(Exception $e)
+        {
+            $error = new amaException($e);
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
     }
 
 }

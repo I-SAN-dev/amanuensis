@@ -48,8 +48,6 @@ class PdfDoc {
      */
     public function streamPreview()
     {
-        //header('Content-Type: application/pdf');
-        //var_dump(headers_list());
         $this->pdf->stream();
     }
 
@@ -129,16 +127,16 @@ class PdfDoc {
     {
         $dbal = DBAL::getInstance();
 
-        if(in_array($this->$type, array('offer', 'acceptance', 'invoice', 'reminder')))
+        if(in_array($this->type, array('offer', 'acceptance', 'invoice', 'reminder')))
         {
-            $dbal->dynamicUpdate(   $type,
+            $dbal->dynamicUpdate(   $this->type.'s',
                                     array('id', $this->id),
                                     array('path', 'state'),
                                     array('path' => $path, 'state' => PDF_GENERATED));
         }
         else
         {
-            $dbal->dynamicUpdate(   $type,
+            $dbal->dynamicUpdate(   $this->type.'s',
                                     array('id', $this->id),
                                     array('path'),
                                     array('path' => $path));
