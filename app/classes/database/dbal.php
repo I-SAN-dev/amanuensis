@@ -277,11 +277,18 @@ final class DBAL {
             /* object for limited = 1 result, array of objects for set of results */
             if($limit == 1)
             {
-                $entry = $q->fetch();
-                foreach($columns as $column)
+                if($entry = $q->fetch())
                 {
-                    $result[$column] = $entry[$column];
+                    foreach($columns as $column)
+                    {
+                        $result[$column] = $entry[$column];
+                    }
                 }
+                else
+                {
+                    $result = NULL;
+                }
+
             }
             else
             {
