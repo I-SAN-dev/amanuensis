@@ -15,6 +15,24 @@
   "company":"I-SAN.de Webdesign & Hosting GbR",
   "lang":"de",
 
+  "mail":
+  {
+    "sender":"kontakt@i-san.de",
+    "replyto":"kontakt@i-san.de",
+    "archive":"kontakt@i-san.de",
+    "admin":"kontakt@i-san.de",
+
+    "usesmtp": "0",
+    "smtphost":"",
+    "smtpauth":"true",
+    "username":"",
+    "password":"",
+    "secure":"",
+    "port":"",
+
+    "template":""
+  },
+
   "debug":"1",
   "errorlogging":"1",
   "errorlogpath":"logs/errorlog.csv",
