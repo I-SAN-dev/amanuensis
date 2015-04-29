@@ -81,13 +81,36 @@ class project {
     {
         $dbal = DBAL::getInstance();
 
-        $q = $dbal->prepare('
-            SELECT projects.id, projects.name, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
-            FROM projects LEFT JOIN customers ON projects.client = customers.id
-        ');
+        if(isset($_GET["client"]) && $_GET["client"] != '')
+        {
+            /* List of all projects of given client */
+            $result = $dbal->simpleSelect(
+                'projects',
+                array(
+                    'id',
+                    'name',
+                    'description',
+                    'client',
+                    'state'
+                ),
+                array('client', $_GET["client"])
+            );
+            json_response($result);
+        }
+        else
+        {
+            /* List of all projects */
 
-        $q->execute();
-        json_response($q->fetchAll(PDO::FETCH_ASSOC));
+            $q = $dbal->prepare('
+                SELECT projects.id, projects.name, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
+                FROM projects LEFT JOIN customers ON projects.client = customers.id
+            ');
+
+            $q->execute();
+            json_response($q->fetchAll(PDO::FETCH_ASSOC));
+        }
+
+
     }
 
     /**
