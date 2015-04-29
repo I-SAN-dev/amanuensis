@@ -24,7 +24,7 @@
 
     "usesmtp": "0",
     "smtphost":"",
-    "smtpauth":"true",
+    "smtpauth":"1",
     "username":"",
     "password":"",
     "secure":"",
