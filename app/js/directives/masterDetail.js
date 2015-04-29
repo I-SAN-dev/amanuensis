@@ -88,6 +88,7 @@ app.directive('masterDetail', [function(){
                 });
 
                 $scope.setDetailTpl = function(templateUrl) {
+                    console.log('tralaala');
                     self.detailTpl = templateUrl;
                     $scope.$broadcast('detailTemplateChanged', self.detail);
                 };
