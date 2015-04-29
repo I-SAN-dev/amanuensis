@@ -1,6 +1,6 @@
 #mainContent
 {
-  margin-top: 80px;
+  margin-top: $navbar-height +$actionbar-height + 16;
 }
 
 .panel,
