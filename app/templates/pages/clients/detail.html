@@ -168,6 +168,11 @@
         </div>
     </div>
     <div data-ng-show="client.showProjects">
-        Projects of client {{client.client.companyname}}
+        <div data-ng-repeat="project in client.projects" class="list-group">
+            <a class="list-group-item" data-ui-sref="app.projects({id:{{project.id}}})">
+                <h4 class="list-group-item-heading">{{project.name}}</h4>
+                <p class="list-group-item-text">{{project.description}}</p>
+            </a>
+        </div>
     </div>
 </div>

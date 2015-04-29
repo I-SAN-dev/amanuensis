@@ -6,9 +6,12 @@ app.controller('ClientDetailCtrl',
         'LocalStorage',
         '$scope',
         '$stateParams',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams) {
+        '$filter',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, $filter) {
 
             var self = this;
+
+
 
             /**
              * Gets a client from the API
@@ -22,10 +25,20 @@ app.controller('ClientDetailCtrl',
                 });
             };
 
+            this.showProjects = false;
+            var getProjects = function (id) {
+                self.projects = LocalStorage.getData('client/'+id+'/projects');
+                ApiAbstractionLayer('GET', {name:'project',params:{client: id}}).then(function (data) {
+                    self.projects = data;
+                    LocalStorage.setData('client/'+id+'/projects', data);
+                });
+            };
+
             // call getClient when the detail view is requested
             $scope.$on('detailChanged', function(event, data){
                 self.client = data;
                 getClient(data.id);
+                getProjects(data.id);
             });
 
             // if the client state is entered with a certain id, we want to set the client detail for this id
@@ -91,6 +104,8 @@ app.controller('ClientDetailCtrl',
                     LocalStorage.setData('client/'+self.client.id, self.client);
                 });
             };
+
+
 
 
         }
