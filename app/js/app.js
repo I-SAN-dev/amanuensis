@@ -21,7 +21,7 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         return defer.promise;
     };
 
-    // redirects to login state if if authentication is required for the next state and the user is not logged in
+    // redirects to login state if authentication is required for the next state and the user is not logged in
     var loginLogic = function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         if (requireLogin && !$rootScope.loggedIn) {
@@ -190,6 +190,10 @@ app.constant('sites', [
         name: 'app.clientCreation',
         stateObject: {
             url:'/new-client',
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/clientCreation.html'

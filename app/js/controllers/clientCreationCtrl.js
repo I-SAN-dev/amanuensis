@@ -2,7 +2,9 @@ app.controller('ClientCreationCtrl',
     [
         'ApiAbstractionLayer',
         'LocalStorage',
-        function (ApiAbstractionLayer, LocalStorage) {
+        '$state',
+        '$stateParams',
+        function (ApiAbstractionLayer, LocalStorage, $state, $stateParams) {
 
             var self = this;
 
@@ -56,8 +58,23 @@ app.controller('ClientCreationCtrl',
              */
             this.addClient = function () {
                 ApiAbstractionLayer('POST', {name: 'client', data: self.newClient}).then(function(data){
+                    // cache the new client and update the cached clientlist
+                    LocalStorage.setData('client/'+data.id, data);
+                    var list = LocalStorage.getData('clients') || [];
+                    list.push(data);
+                    LocalStorage.setData('clients', list);
+
                     addCategoryLinks(data.id, self.newClientCategories);
                     self.newClient = initialNewClient;
+
+                    // go to where we came from or to the client list (and new client detail) if no referrer is specified
+                    var to = $stateParams.referrer || 'app.clients';
+                    var toParams;
+                    if(to=='app.clients')
+                        toParams = {id:data.id};
+                    else
+                        toParams = $stateParams.referrerParams;
+                    $state.go(to,toParams);
                 });
             };
         }]);
