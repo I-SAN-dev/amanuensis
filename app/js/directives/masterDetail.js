@@ -29,7 +29,7 @@ app.directive('masterDetail', [function(){
                     $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false });
                 };
 
-                var getNeighbor = function (offset) {
+                $scope.getNeighbor = function (offset) {
                     var orderById = {};
                     for(var i= 0; i<$scope.masterList.length;i++) {
                         orderById[$scope.masterList[i].id] = i;
@@ -59,10 +59,10 @@ app.directive('masterDetail', [function(){
                     if (key == 38){
                         event.stopPropagation();
                         event.preventDefault();
-                        var prevDetail = getNeighbor(-1);
+                        var prevDetail = $scope.getNeighbor(-1);
 
                         if(prevDetail) {
-                            $scope.setDetail(getNeighbor(-1));
+                            $scope.setDetail($scope.getNeighbor(-1));
 
                             var newActiveOffset = $('.list-group-item.active').prev('.list-group-item').offset().top;
                             if(newActiveOffset < scrollTop)
@@ -72,9 +72,9 @@ app.directive('masterDetail', [function(){
                     if (key == 40){
                         event.stopPropagation();
                         event.preventDefault();
-                        var nextDetail = getNeighbor(1);
+                        var nextDetail = $scope.getNeighbor(1);
                         if (nextDetail) {
-                            $scope.setDetail(getNeighbor(1));
+                            $scope.setDetail($scope.getNeighbor(1));
 
 
                             var newActiveItem = $('.list-group-item.active').next('.list-group-item');

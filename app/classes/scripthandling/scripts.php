@@ -49,6 +49,7 @@ class Scripts
         "js/services/errorDialog.js",
         "js/services/deleteService.js",
         "js/services/localStorage.js",
+        "js/services/masterDetailService.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",
