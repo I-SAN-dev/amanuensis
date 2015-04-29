@@ -24,6 +24,16 @@
     "categories": "Kategorien"
   },
 
+  "projects": {
+    "project": "Projekt",
+    "projects": "Projekte",
+    "offers": "Angebote",
+    "contracts": "Verträge",
+    "todos":"ToDo-Listen",
+    "acceptances": "Abnahmen",
+    "invoices": "Rechnungen"
+  },
+
   "login":
   {
     "invalidmail": "Ungültige Maildresse übermittelt!",
