@@ -9,6 +9,7 @@
 .detail-view
 {
   @include card(1);
+  overflow: hidden;
 }
 
 .navbar
