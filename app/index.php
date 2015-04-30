@@ -47,17 +47,16 @@ ob_start();
     ?>
 </head>
 <body data-ng-init="getLoginState()">
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid" data-ama-module="'topBar'"></div>
-    <div class="container-fluid amanu-actionbar" data-ama-module="'actionBar'"></div>
-</div>
-<div class="container-fluid">
-    <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade"></div>
 
-</div>
-
-
-
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid" data-ama-module="'topBar'"></div>
+        <div class="container-fluid amanu-actionbar" data-ama-module="'actionBar'"></div>
+    </div>
+    <div class="scrollArea">
+        <div class="container-fluid">
+            <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade"></div>
+        </div>
+    </div>
 </body>
 </html>
 <?php
