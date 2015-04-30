@@ -9,6 +9,7 @@
 .detail-view
 {
   @include card(1);
+  overflow: hidden;
 }
 
 .navbar
@@ -25,4 +26,16 @@
 a
 {
   cursor: pointer;
+}
+
+
+.btn-link
+{
+  transition: 0.3s background-color;
+  &:focus,
+  &:active
+  {
+    outline: none !important;
+    background-color: $body-bg;
+  }
 }

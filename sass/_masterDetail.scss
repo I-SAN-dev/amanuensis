@@ -9,3 +9,50 @@
     padding: 20px;
   }
 }
+
+.clientSwitch
+{
+  display: block;
+  width: 19px;
+  height: 19px;
+  border-radius: 1px;
+  overflow: hidden;
+
+  .dot
+  {
+    display: block;
+    background-color: $brand-primary;
+    width: 5px;
+    height: 5px;
+    float: left;
+    margin-right: 2px;
+    transition: 0.3s width, 0.3s margin-right;
+
+    &:nth-child(3n)
+    {
+      margin-right: 0;
+    }
+    &:nth-child(-n+6)
+    {
+      margin-bottom: 2px;
+    }
+  }
+
+  &.active
+  {
+    .dot
+    {
+      &:nth-child(3n+2)
+      {
+        width: 12px;
+        margin-right: 0;
+      }
+      &:nth-child(3n)
+      {
+        width: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+}

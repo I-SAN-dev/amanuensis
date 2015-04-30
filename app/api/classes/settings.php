@@ -33,6 +33,7 @@ class settings {
         /* Censor some config values, they only can be set but not read */
         $array["db"]["password"] = '*****';
         $array["appsecret"] = '*****';
+        $array["mail"]["password"] = '*****';
 
         json_response($array);
     }

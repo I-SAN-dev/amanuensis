@@ -8,7 +8,7 @@
     </div>
     </form>
     <div class="list-group">
-        <a class="list-group-item" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
+        <a class="list-group-item ng-trans ng-trans-scale-up" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == client.id}"
            data-ng-click="setDetail(client)">
             <h4>{{client.companyname}}</h4>
