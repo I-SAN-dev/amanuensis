@@ -19,13 +19,21 @@ app.constant('modules', {
             actions: [
                 {
                     name: 'new',
-                    sref: 'app.clientCreation'
+                    sref: 'app.clientCreation',
+                    icon: 'md md-person-add'
+                },
+                {
+                    name: 'categories',
+                    sref: 'app.clientCategories',
+                    icon: 'md md-link'
                 }
             ]
         }
     },
     // Navs
-    mainNav: {},
+    mainNav: {
+        additionalClasses: 'navbar-nav'
+    },
     topRightNav: {
         additionalClasses: 'navbar-nav navbar-right'
     }
