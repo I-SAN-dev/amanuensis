@@ -3,8 +3,12 @@
         <div data-ama-menu data-menuname="'mainNav'"></div>
     </div>
     <div class="col-sm-8">
-        <button class="btn" data-ng-class="action.class" data-ng-repeat="action in module.content.actions" data-ui-sref="{{action.sref}}">
-            <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name|translate}}
-        </button>
+        <div id="actionMenu">
+            <div class="ng-trans ng-trans-fade" data-ng-repeat="action in module.content.actions">
+                <button class="btn ng-trans ng-trans-fade" data-ng-class="action.class"  data-ui-sref="{{action.sref}}">
+                    <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name}}
+                </button>
+            </div>
+        </div>
     </div>
 </div>

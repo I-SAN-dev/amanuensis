@@ -8409,7 +8409,41 @@ a {
   font-weight: normal;
   line-height: 64px; }
 .navbar .amanu-actionbar {
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  height: 32px; }
+  .navbar .amanu-actionbar #mainNav > div,
+  .navbar .amanu-actionbar #actionMenu > div {
+    display: inline; }
+  .navbar .amanu-actionbar #mainNav a, .navbar .amanu-actionbar #mainNav button,
+  .navbar .amanu-actionbar #actionMenu a,
+  .navbar .amanu-actionbar #actionMenu button {
+    padding: 2px 22px 0 22px;
+    line-height: 28px;
+    border-right: none !important;
+    border-left: none !important;
+    border-top: none !important;
+    background-color: #ffffff;
+    color: #546E7A;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #ffffff;
+    transition: 0.3s color, 0.3s border-bottom-color, 0.3s background-color; }
+    .navbar .amanu-actionbar #mainNav a:hover, .navbar .amanu-actionbar #mainNav a:active, .navbar .amanu-actionbar #mainNav button:hover, .navbar .amanu-actionbar #mainNav button:active,
+    .navbar .amanu-actionbar #actionMenu a:hover,
+    .navbar .amanu-actionbar #actionMenu a:active,
+    .navbar .amanu-actionbar #actionMenu button:hover,
+    .navbar .amanu-actionbar #actionMenu button:active {
+      color: #35454d;
+      background-color: #EEEEEE;
+      border-bottom-color: #EEEEEE; }
+  .navbar .amanu-actionbar #mainNav .active a,
+  .navbar .amanu-actionbar #mainNav button.active,
+  .navbar .amanu-actionbar #actionMenu .active a,
+  .navbar .amanu-actionbar #actionMenu button.active {
+    background-color: #ffffff;
+    border-bottom-color: #546E7A !important;
+    padding-bottom: 0;
+    color: #546E7A; }
 
 .detail-view {
   padding: 20px;
