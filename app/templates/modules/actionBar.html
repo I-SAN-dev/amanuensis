@@ -6,7 +6,7 @@
         <div id="actionMenu">
             <div class="ng-trans ng-trans-fade" data-ng-repeat="action in module.content.actions">
                 <button class="btn ng-trans ng-trans-fade" data-ng-class="action.class"  data-ui-sref="{{action.sref}}">
-                    <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name}}
+                    <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name|translate}}
                 </button>
             </div>
         </div>

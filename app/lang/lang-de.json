@@ -1,7 +1,13 @@
 {
   "hello": "Hallo",
+  "dashboard":{
+    "menuName": "Dashboard",
+    "menuTitle": "Übersicht über Kunden und Projekte"
+  },
 
   "clients": {
+    "menuName": "Kunden",
+    "menuTitle": "Liste aller Kunden",
     "client": "Kunde",
     "clients": "Kunden",
     "newClient":"Neuer Kunde",
@@ -21,10 +27,16 @@
     "phone": "Telefon",
     "comment": "Kommentar",
     "refnumber":"Kunden-Nr.",
-    "categories": "Kategorien"
+    "categories": "Kategorien",
+    "actions": {
+      "new": "Neuer Kunde",
+      "categories": "Kategorien"
+    }
   },
 
   "projects": {
+    "menuName": "Projekte",
+    "menuTitle": "Liste aller Projekte",
     "project": "Projekt",
     "projects": "Projekte",
     "offers": "Angebote",
