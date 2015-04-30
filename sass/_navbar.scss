@@ -12,13 +12,7 @@
     line-height: $navbar-height;
   }
 
-  &.amanu-actionbar{
-    margin-top: $navbar-height;
-    min-height: $actionbar-height;
-
-    .navbar-nav>li>a {
-      padding-bottom: 6px;
-      padding-top: 6px;
-    }
+  .amanu-actionbar{
+    background-color: #ffffff;
   }
 }

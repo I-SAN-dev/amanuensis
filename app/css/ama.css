@@ -8355,40 +8355,24 @@ a {
     .ipe .ipe-empty:hover {
       color: #263238; }
 
-/*.nav#mainNav
-{
-  @include card(1);
+.nav#mainNav {
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   position: fixed;
-  top: $navbar-height;
+  top: 64px;
   bottom: 0;
   left: 0;
-  background-color: #fff;
+  background-color: #fff; }
+  .nav#mainNav li a {
+    padding: 15px 22px 15px 22px;
+    cursor: pointer;
+    transition: 0.3s background-color, 0.3s color; }
+    .nav#mainNav li a:hover {
+      background-color: #ECEFF1 !important;
+      color: #546E7A !important; }
+  .nav#mainNav li.active a {
+    background-color: #ECEFF1;
+    color: #263238 !important; }
 
-  li
-  {
-
-    a {
-      padding: 15px 22px 15px 22px;
-      cursor: pointer;
-      transition: 0.3s background-color, 0.3s color;
-
-      &:hover {
-        background-color: $body-bg !important;
-        color: $brand-primary !important;
-      }
-    }
-
-    &.active
-    {
-      a
-      {
-        background-color: $body-bg;
-        color: $text-color !important;
-      }
-    }
-
-  }
-}*/
 .navbar.navbar-inverse {
   color: #fff; }
 .navbar h1 {
@@ -8396,12 +8380,8 @@ a {
   padding: 0;
   font-weight: normal;
   line-height: 64px; }
-.navbar.amanu-actionbar {
-  margin-top: 64px;
-  min-height: 32px; }
-  .navbar.amanu-actionbar .navbar-nav > li > a {
-    padding-bottom: 6px;
-    padding-top: 6px; }
+.navbar .amanu-actionbar {
+  background-color: #ffffff; }
 
 .detail-view {
   padding: 20px;
