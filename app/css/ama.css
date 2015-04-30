@@ -8041,6 +8041,12 @@ button.close {
 a {
   cursor: pointer; }
 
+.btn-link {
+  transition: 0.3s background-color; }
+  .btn-link:focus, .btn-link:active {
+    outline: none !important;
+    background-color: #ECEFF1; }
+
 .form-control {
   height: 30.33333px;
   padding: 10.5px 0 5.25px;
@@ -8111,5 +8117,30 @@ a {
   .detail-view .btn-toolbar {
     margin: -20px -20px 20px;
     padding: 20px; }
+
+.clientSwitch {
+  display: block;
+  width: 19px;
+  height: 19px;
+  border-radius: 1px;
+  overflow: hidden; }
+  .clientSwitch .dot {
+    display: block;
+    background-color: #546E7A;
+    width: 5px;
+    height: 5px;
+    float: left;
+    margin-right: 2px;
+    transition: 0.3s width, 0.3s margin-right; }
+    .clientSwitch .dot:nth-child(3n) {
+      margin-right: 0; }
+    .clientSwitch .dot:nth-child(-n+6) {
+      margin-bottom: 2px; }
+  .clientSwitch.active .dot:nth-child(3n+2) {
+    width: 12px;
+    margin-right: 0; }
+  .clientSwitch.active .dot:nth-child(3n) {
+    width: 0;
+    margin-right: 0; }
 
 /*# sourceMappingURL=ama.css.map */

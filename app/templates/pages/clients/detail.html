@@ -2,8 +2,11 @@
     <div class="btn-toolbar">
         <div class="btn-group btn-group-sm pull-right">
             <button class="btn btn-link" data-ng-click="client.showProjects = !client.showProjects">
-                <i data-ng-if="!client.showProjects" class="md md-lg md-folder"></i>
-                <i data-ng-if="client.showProjects" class="md md-lg md-details"></i>
+                <span ng-class="{clientSwitch: true, active: client.showProjects}">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </span>
             </button>
             <button class="btn btn-link" data-ng-click="client.deleteClient()"><i class="md md-lg md-delete"></i></button>
         </div>
