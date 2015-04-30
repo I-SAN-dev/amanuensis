@@ -1,6 +1,21 @@
+html, body
+{
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+.scrollArea
+{
+  height: calc(100% - #{$navbar-height + $actionbar-height});
+  min-height: calc(100% - #{$navbar-height + $actionbar-height});
+  margin-top: $navbar-height +$actionbar-height;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 #mainContent
 {
-  margin-top: $navbar-height +$actionbar-height + 16;
+  margin-top: 16px;
 }
 
 .panel,
