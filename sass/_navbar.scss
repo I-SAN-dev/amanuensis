@@ -12,8 +12,7 @@
     line-height: $navbar-height;
   }
 
-  &.amanu-actionbar{
-    margin-top: $navbar-height;
-    min-height: $actionbar-height;
+  .amanu-actionbar{
+    background-color: #ffffff;
   }
 }

@@ -8380,9 +8380,8 @@ a {
   padding: 0;
   font-weight: normal;
   line-height: 64px; }
-.navbar.amanu-actionbar {
-  margin-top: 64px;
-  min-height: 32px; }
+.navbar .amanu-actionbar {
+  background-color: #ffffff; }
 
 .detail-view {
   padding: 20px;
