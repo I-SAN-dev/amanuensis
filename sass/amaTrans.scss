@@ -1,0 +1,22 @@
+/**
+  * This extends ng-trans
+  */
+.ng-trans-inplace-container
+{
+  width: 200%;
+  transition: 0.3s height;
+
+  .ng-trans-inplace
+  {
+    float: left;
+    width: 50%;
+
+    &:last-child
+    {
+      float: right;
+      position: relative;
+      left: -50%;
+    }
+  }
+}
+

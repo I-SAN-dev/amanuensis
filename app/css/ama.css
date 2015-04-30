@@ -8418,4 +8418,18 @@ a {
     width: 0;
     margin-right: 0; }
 
+/**
+  * This extends ng-trans
+  */
+.ng-trans-inplace-container {
+  width: 200%;
+  transition: 0.3s height; }
+  .ng-trans-inplace-container .ng-trans-inplace {
+    float: left;
+    width: 50%; }
+    .ng-trans-inplace-container .ng-trans-inplace:last-child {
+      float: right;
+      position: relative;
+      left: -50%; }
+
 /*# sourceMappingURL=ama.css.map */
