@@ -54,7 +54,7 @@ ob_start();
     <div class="container-fluid" data-ama-module="'actionBar'"></div>
 </div>
 <div class="container-fluid">
-    <div data-ui-view="mainContent" id="mainContent"></div>
+    <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade"></div>
 
 </div>
 
