@@ -9,8 +9,10 @@ app.controller('ClientsCtrl',
         '$scope',
         '$stateParams',
         'DeleteService',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService) {
+        'MasterDetailService',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService) {
             this.clientList = LocalStorage.getData('clients');
+            MasterDetailService.setMaster(this);
 
 
             var self = this;

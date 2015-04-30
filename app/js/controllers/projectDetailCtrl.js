@@ -4,8 +4,10 @@ app.controller('ProjectDetailCtrl',
         'LocalStorage',
         '$scope',
         '$stateParams',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams) {
+        'MasterDetailService',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, MasterDetailService) {
             var self = this;
+            MasterDetailService.setDetail(this);
             this.contracts = [];
 
             /**

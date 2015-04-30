@@ -5,7 +5,7 @@
                 <i data-ng-if="!client.showProjects" class="md md-lg md-folder"></i>
                 <i data-ng-if="client.showProjects" class="md md-lg md-details"></i>
             </button>
-            <button class="btn btn-link" data-ng-controller="ClientsCtrl as list" data-ng-click="list.deleteClient(client.client.id)"><i class="md md-lg md-delete"></i></button>
+            <button class="btn btn-link" data-ng-click="client.deleteClient()"><i class="md md-lg md-delete"></i></button>
         </div>
     </div>
     <h2><span data-in-place-edit

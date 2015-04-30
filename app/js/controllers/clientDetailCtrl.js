@@ -6,11 +6,13 @@ app.controller('ClientDetailCtrl',
         'LocalStorage',
         '$scope',
         '$stateParams',
-        '$filter',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, $filter) {
+        'DeleteService',
+        'MasterDetailService',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService) {
 
             var self = this;
 
+            MasterDetailService.setDetail(this);
 
 
             /**
@@ -106,6 +108,10 @@ app.controller('ClientDetailCtrl',
             };
 
 
+
+            this.deleteClient = function () {
+                MasterDetailService.notifyMaster('deleteClient', self.client.id);
+            }
 
 
         }

@@ -21,14 +21,22 @@ app.directive('masterDetail', [function(){
                 this.filterText = $stateParams.filter || '';
                 var self = this;
 
+                /**
+                 * Sets a new detail item and notifies other controllers that the detail has changed
+                 * @param detail - the new detail object
+                 */
                 $scope.setDetail = function(detail){
                     $stateParams.id = detail.id;
                     self.detail = detail;
-                    console.log(self.detail);
                     $scope.$broadcast('detailChanged', detail);
                     $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false });
                 };
 
+                /**
+                 * Looks for the next or previous item in the master list
+                 * @param offset - specifies how many items to go back or forward in the list
+                 * @returns {*} - the reuested neighbor object
+                 */
                 var getNeighbor = function (offset) {
                     var orderById = {};
                     for(var i= 0; i<$scope.masterList.length;i++) {
@@ -40,17 +48,17 @@ app.directive('masterDetail', [function(){
                     return $scope.masterList[oldPos+offset];
                 };
 
+                // navigate to the next or previous item when up or down key is pressed
                 $document.unbind('keydown');
                 $document.on('keydown', function (event) {
                     var key = event.keyCode;
-
-
 
                     var animation = {
                         duration:500,
                         queue:false
                     };
-                    var documentOffset = 70;
+                    var documentOffset = 110;
+                    var newActiveOffset;
 
                     var viewportHeight = window.innerHeight;
                     var scrollTop = $document.scrollTop();
@@ -64,7 +72,7 @@ app.directive('masterDetail', [function(){
                         if(prevDetail) {
                             $scope.setDetail(getNeighbor(-1));
 
-                            var newActiveOffset = $('.list-group-item.active').prev('.list-group-item').offset().top;
+                            newActiveOffset = $('.list-group-item.active').prev('.list-group-item').offset().top;
                             if(newActiveOffset < scrollTop)
                                 $('html, body').animate({scrollTop:newActiveOffset-documentOffset}, animation);
                         }
@@ -78,7 +86,7 @@ app.directive('masterDetail', [function(){
 
 
                             var newActiveItem = $('.list-group-item.active').next('.list-group-item');
-                            var newActiveOffset = newActiveItem.height() + newActiveItem.offset().top;
+                            newActiveOffset = newActiveItem.height() + newActiveItem.offset().top;
 
                             if(newActiveOffset > viewPortBottom) {
                                 $('html, body').animate({scrollTop: newActiveOffset-viewportHeight+documentOffset}, animation);
@@ -87,6 +95,11 @@ app.directive('masterDetail', [function(){
                     }
                 });
 
+                /**
+                 * Set a new template for the detail view
+                 * TODO: check if this still works...
+                 * @param templateUrl
+                 */
                 $scope.setDetailTpl = function(templateUrl) {
                     console.log('tralaala');
                     self.detailTpl = templateUrl;
