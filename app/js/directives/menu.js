@@ -58,6 +58,12 @@ app.controller('NavCtrl',[
                 $state.go(item.name);
             };
 
+            $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+                angular.forEach(menuItems, function (value, key) {
+                    value.active = value.name == toState.name;
+                })
+            });
+
             // read additional classes for the menu list from the modules constant
             this.additionalClasses = modules[name].additionalClasses || '';
 
