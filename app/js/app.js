@@ -154,7 +154,8 @@ app.constant('sites', [
         menus: {
             mainNav: {
                 name: 'Dashboard',
-                title: 'App Dashboard'
+                title: 'App Dashboard',
+                icon: 'md md-home'
             }
         }
     },
@@ -171,7 +172,8 @@ app.constant('sites', [
         menus: {
             mainNav: {
                 name: 'Clients',
-                title: 'Clients'
+                title: 'Clients',
+                icon: 'md md-people'
             }
         }
     },
@@ -210,12 +212,6 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/offers.html'
                 }
             }
-        },
-        menus: {
-            mainNav: {
-                name: 'Offers',
-                title: 'Offers'
-            }
         }
     },
     {
@@ -231,7 +227,8 @@ app.constant('sites', [
         menus: {
             mainNav: {
                 name: 'Projects',
-                title: 'Projects'
+                title: 'Projects',
+                icon: 'md md-folder'
         }
     }
     },
@@ -244,12 +241,6 @@ app.constant('sites', [
                     templateUrl: 'templates/pages/acceptances.html'
                 }
             }
-        },
-        menus: {
-            mainNav: {
-                name: 'Acceptances',
-                title: 'Acceptances'
-            }
         }
     },
     {
@@ -260,12 +251,6 @@ app.constant('sites', [
                 'appContent': {
                     templateUrl: 'templates/pages/invoices.html'
                 }
-            }
-        },
-        menus: {
-            mainNav: {
-                name: 'Invoices',
-                title: 'Invoices'
             }
         }
     },

@@ -1,8 +1,10 @@
 <div class="row">
-    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div data-ama-menu data-menuname="'mainNav'"></div>
+    </div>
     <div class="col-sm-8">
         <button class="btn" data-ng-class="action.class" data-ng-repeat="action in module.content.actions" data-ui-sref="{{action.sref}}">
-            {{action.name}}
+            <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name}}
         </button>
     </div>
 </div>
