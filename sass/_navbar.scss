@@ -1,3 +1,5 @@
+$navbar-bottomline-height: 2px;
+
 .navbar
 {
   &.navbar-inverse {
@@ -14,5 +16,47 @@
 
   .amanu-actionbar{
     background-color: #ffffff;
+    height: $actionbar-height;
+
+    #mainNav,
+    #actionMenu
+    {
+      > div
+      {
+        display: inline;
+      }
+      a, button
+      {
+        padding: $navbar-bottomline-height 22px 0 22px;
+        line-height: $actionbar-height - 2*$navbar-bottomline-height;
+        border-right: none !important;
+        border-left: none !important;
+        border-top: none !important;
+        background-color: #ffffff;
+        color: $link-color;
+        border-bottom-width: $navbar-bottomline-height;
+        border-bottom-style: solid;
+        border-bottom-color: #ffffff;
+        transition: 0.3s color, 0.3s border-bottom-color, 0.3s background-color;
+
+        &:hover,
+        &:active
+        {
+          color: $link-hover-color;
+          background-color: $gray-lighter;
+          border-bottom-color: $gray-lighter;
+        }
+      }
+
+      .active a,
+      button.active
+      {
+        background-color: #ffffff;
+        border-bottom-color: $brand-primary !important;
+        padding-bottom: 0;
+        color: $link-color;
+      }
+    }
+
   }
 }
