@@ -153,8 +153,8 @@ app.constant('sites', [
         },
         menus: {
             mainNav: {
-                name: 'Dashboard',
-                title: 'App Dashboard',
+                name: 'dashboard.menuName',
+                title: 'dashboard.menuTitle',
                 icon: 'md md-home'
             }
         }
@@ -171,8 +171,8 @@ app.constant('sites', [
         },
         menus: {
             mainNav: {
-                name: 'Clients',
-                title: 'Clients',
+                name: 'clients.menuName',
+                title: 'clients.menuTitle',
                 icon: 'md md-people'
             }
         }
@@ -226,8 +226,8 @@ app.constant('sites', [
         },
         menus: {
             mainNav: {
-                name: 'Projects',
-                title: 'Projects',
+                name: 'projects.menuName',
+                title: 'projects.menuTitle',
                 icon: 'md md-folder'
         }
     }

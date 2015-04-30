@@ -1,8 +1,8 @@
 <ul class="nav {{nav.additionalClasses}}" id="{{name}}">
     <li data-ng-repeat="item in nav.navItems" data-ng-class="{'active' : item.active}">
-        <a data-ng-click="nav.goTo(item)" title="{{item.menus[name].title}}">
+        <a data-ng-click="nav.goTo(item)" title="{{item.menus[name].title|translate}}">
             <i data-ng-if="item.menus[name].icon" class="{{item.menus[name].icon}}"></i>
-            <span data-ng-if="!item.menus[name].iconOnly">{{item.menus[name].name}}</span>
+            <span data-ng-if="!item.menus[name].iconOnly">{{item.menus[name].name|translate}}</span>
         </a>
     </li>
 </ul>

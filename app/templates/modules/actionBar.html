@@ -4,7 +4,7 @@
     </div>
     <div class="col-sm-8">
         <button class="btn" data-ng-class="action.class" data-ng-repeat="action in module.content.actions" data-ui-sref="{{action.sref}}">
-            <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name}}
+            <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name|translate}}
         </button>
     </div>
 </div>
