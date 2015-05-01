@@ -13,10 +13,6 @@ app.controller('ModuleCtrl', ['$scope', 'modules', '$state', '$rootScope', funct
         }
     };
 
-    /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        getContent(toState.name);
-    });*/
-
     $rootScope.$on('$viewContentLoaded', function (event) {
         getContent($state.current.name);
     });

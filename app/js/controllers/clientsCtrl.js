@@ -42,7 +42,8 @@ app.controller('ClientsCtrl',
 
             // (re)set a flag indicating if the Controller was fully loaded
             // needed for setting transition classes
-            $scope.$on('$stateChangeStart', function () {
+            $scope.$on('$stateChangeStart', function (event, toState) {
+                console.log(toState);
                 self.loaded = false;
             });
             setTimeout(function () {

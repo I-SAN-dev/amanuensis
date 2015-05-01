@@ -4,7 +4,7 @@
  */
 app.factory('MasterDetailService', [
     function () {
-        var master, detail, masterDetail;
+        var master, detail;
         var processParams = function (params) {
             var params = [];
             for (var i = 1; i<params.length; i++){
@@ -22,9 +22,6 @@ app.factory('MasterDetailService', [
             },
             setDetail: function(ctrl) {
                 detail = ctrl;
-            },
-            setMasterDetail: function (ctrl) {
-                masterDetail = ctrl;
             },
             notifyMaster: function() {
                 var fnName = arguments[0];
