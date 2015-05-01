@@ -32,7 +32,8 @@ app.directive('masterDetail', [function(){
                 $scope.setDetail = function(detail){
                     $stateParams.id = detail.id;
                     self.detail = detail;
-                    $scope.$broadcast('detailChanged', detail);
+                    console.log(detail);
+                    MasterDetailService.notifyDetail('detailChanged', detail);
                     $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false, reload: true});
                 };
 

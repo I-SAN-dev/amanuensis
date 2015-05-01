@@ -37,11 +37,11 @@ app.controller('ClientDetailCtrl',
             };
 
             // call getClient when the detail view is requested
-            $scope.$on('detailChanged', function(event, data){
+            this.detailChanged = function(data){
                 self.client = data;
                 getClient(data.id);
                 getProjects(data.id);
-            });
+            };
 
             // if the client state is entered with a certain id, we want to set the client detail for this id
             if($stateParams.id){

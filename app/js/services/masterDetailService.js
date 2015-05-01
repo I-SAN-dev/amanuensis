@@ -5,10 +5,10 @@
 app.factory('MasterDetailService', [
     function () {
         var master, detail;
-        var processParams = function (params) {
+        var processParams = function (args) {
             var params = [];
-            for (var i = 1; i<params.length; i++){
-                params.push(params[i]);
+            for (var i = 1; i<args.length; i++){
+                params.push(args[i]);
             }
             return params;
         };
