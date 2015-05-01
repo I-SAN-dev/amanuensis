@@ -4,7 +4,14 @@
  */
 app.factory('MasterDetailService', [
     function () {
-        var master, detail;
+        var master, detail, masterDetail;
+        var processParams = function (params) {
+            var params = [];
+            for (var i = 1; i<params.length; i++){
+                params.push(params[i]);
+            }
+            return params;
+        };
         return {
             /**
              * References the masterCtrl
@@ -16,21 +23,16 @@ app.factory('MasterDetailService', [
             setDetail: function(ctrl) {
                 detail = ctrl;
             },
+            setMasterDetail: function (ctrl) {
+                masterDetail = ctrl;
+            },
             notifyMaster: function() {
                 var fnName = arguments[0];
-                var params = [];
-                for (var i = 1; i<arguments.length; i++) {
-                    params.push(arguments[i]);
-                }
-                master[fnName].apply(null,params);
+                master[fnName].apply(null,processParams(arguments));
             },
             notifyDetail: function () {
                 var fnName = arguments[0];
-                var params = [];
-                for (var i = 1; i<arguments.length; i++) {
-                    params.push(arguments[i]);
-                }
-                detail[fnName].apply(null,params);
+                detail[fnName].apply(null,processParams(arguments));
             }
         }
     }

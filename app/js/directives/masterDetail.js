@@ -2,10 +2,11 @@ app.directive('masterDetail', [function(){
     return {
         restrict: 'A',
         scope: {
-            masterList: '=',
             masterTpl: '=',
             detail: '=',
-            detailTpl: '='
+            detailTpl: '=',
+            masterList: '=',
+            masterLoaded: '='
         },
         transclude: true,
         templateUrl: 'templates/directives/masterDetail.html',
@@ -14,12 +15,17 @@ app.directive('masterDetail', [function(){
             '$state',
             '$stateParams',
             '$document',
-            function ($scope, $state, $stateParams, $document) {
+            'MasterDetailService',
+            function ($scope, $state, $stateParams, $document, MasterDetailService) {
                 this.detail = $scope.detail;
                 this.masterTpl = $scope.masterTpl;
                 this.detailTpl = $scope.detailTpl;
                 this.filterText = $stateParams.filter || '';
+
                 var self = this;
+
+                MasterDetailService.setMasterDetail(this);
+                console.log(this);
 
                 /**
                  * Sets a new detail item and notifies other controllers that the detail has changed
