@@ -8408,6 +8408,13 @@ a {
   padding: 0;
   font-weight: normal;
   line-height: 64px; }
+.navbar .applogo {
+  padding: 12px 0;
+  display: block;
+  height: 64px; }
+  .navbar .applogo img {
+    width: 26px;
+    height: auto; }
 .navbar .amanu-actionbar {
   background-color: #ffffff;
   height: 32px; }

@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Create the Firefox webapp manifest
+RewriteRule manifest.webapp api/ffmanifest.php [L]
+
 # Don't rewrite files or directories
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
