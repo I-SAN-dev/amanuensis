@@ -48,6 +48,9 @@
 
   "login":
   {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "login": "Anmelden",
     "invalidmail": "Ungültige Maildresse übermittelt!",
     "unknownmail": "Es wurde kein Benutzer mit dieser Mailadresse gefunden",
     "invalid": "Falscher Username und/oder Passwort eingegeben",

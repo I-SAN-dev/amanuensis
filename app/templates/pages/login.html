@@ -1,12 +1,16 @@
-<form ng-controller="AuthCtrl as auth" ng-submit="auth.submit(auth.email, password)">
+<form data-ng-controller="AuthCtrl as auth" data-ng-submit="auth.submit(auth.email, password)">
     <p>{{auth.message}}</p>
-    <div><!-- ng-if="auth.loggedIn == false">-->
-        <label for="email">E-Mail</label>
-        <input type="email" name="email" ng-model="auth.email">
-        <label for="password">Passwort</label>
-        <input type="password" name="password" ng-model="password">
-    </div>
-    <button type="submit">Login</button>
-    <button type="button" ng-click="auth.logout()">Logout</button>
-    <button type="button" ng-click="auth.getUser()">Get User</button>
+    <div data-material-input
+         data-input-label="{{'login.email'|translate}}"
+         data-input-type="email"
+         data-input-id="email"
+         data-ng-model="auth.email"
+         data-input-required="true"></div>
+    <div data-material-input
+         data-input-label="{{'login.password'|translate}}"
+         data-input-type="password"
+         data-input-id="password"
+         data-ng-model="password"
+         data-input-required="true"></div>
+    <button class="btn btn-success btn-lg" type="submit">{{'login.login'|translate}}</button>
 </form>
