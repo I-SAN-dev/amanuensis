@@ -49,7 +49,7 @@ app.controller('ClientsCtrl',
             setTimeout(function () {
                 self.loaded = true;
                 $scope.$apply();
-            }, 0);
+            }, 1000);
 
 
             /**
