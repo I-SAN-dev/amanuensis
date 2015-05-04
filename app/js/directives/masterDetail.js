@@ -16,7 +16,8 @@ app.directive('masterDetail', [function(){
             '$stateParams',
             '$document',
             'MasterDetailService',
-            function ($scope, $state, $stateParams, $document, MasterDetailService) {
+            '$filter',
+            function ($scope, $state, $stateParams, $document, MasterDetailService, $filter) {
                 this.detail = $scope.detail;
                 this.masterTpl = $scope.masterTpl;
                 this.detailTpl = $scope.detailTpl;
@@ -43,8 +44,10 @@ app.directive('masterDetail', [function(){
                  */
                 var getNeighbor = function (offset) {
                     var orderById = {};
-                    for(var i= 0; i<$scope.masterList.length;i++) {
-                        orderById[$scope.masterList[i].id] = i;
+                    var list = $filter('filter')($scope.masterList, self.filterText);
+                    console.log(list);
+                    for(var i= 0; i<list.length;i++) {
+                        orderById[list[i].id] = i;
                     }
 
                     var oldPos;
@@ -53,8 +56,11 @@ app.directive('masterDetail', [function(){
                     else
                         oldPos = -offset;
 
-                    return $scope.masterList[oldPos+offset];
+                    return list[oldPos+offset];
                 };
+
+
+
 
                 // navigate to the next or previous item when up or down key is pressed
                 $document.unbind('keydown');
@@ -93,6 +99,7 @@ app.directive('masterDetail', [function(){
                         if (nextDetail) {
                             $scope.setDetail(nextDetail);
                             var newActiveItem = $('.list-group-item.active').next('.list-group-item');
+                            console.log(newActiveItem);
                             newActiveOffset = newActiveItem.height() + newActiveItem.position().top;
 
                             if(newActiveOffset > viewportHeight) {
