@@ -8367,6 +8367,80 @@ a {
     .ipe .ipe-empty:hover {
       color: #263238; }
 
+/*
+ * Material Design Inputs: https://scotch.io/tutorials/google-material-design-input-boxes-in-css3
+ */
+.group {
+  position: relative;
+  /*margin-bottom: 45px;*/
+  /* LABEL ======================================= */
+  /* BOTTOM BARS ================================= */
+  /* active state */
+  /* HIGHLIGHTER ================================== */
+  /* active state */
+  /* ANIMATIONS ================ */ }
+  .group input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #BDBDBD;
+    background-color: transparent; }
+  .group input:focus {
+    outline: none; }
+  .group label {
+    visibility: hidden; }
+  .group .bar {
+    position: relative;
+    display: block;
+    width: 100%; }
+  .group .bar:before, .group .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #546E7A;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all; }
+  .group .bar:before {
+    left: 50%; }
+  .group .bar:after {
+    right: 50%; }
+  .group input:focus ~ .bar:before, .group input:focus ~ .bar:after {
+    width: 50%; }
+  .group .highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5; }
+  .group input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease; }
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #546E7A; }
+  to {
+    width: 0;
+    background: transparent; } }
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #546E7A; }
+  to {
+    width: 0;
+    background: transparent; } }
+@keyframes inputHighlighter {
+  from {
+    background: #546E7A; }
+  to {
+    width: 0;
+    background: transparent; } }
 /*.nav#mainNav
 {
   @include card(1);
