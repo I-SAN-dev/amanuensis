@@ -32,7 +32,6 @@ app.directive('masterDetail', [function(){
                 $scope.setDetail = function(detail){
                     $stateParams.id = detail.id;
                     self.detail = detail;
-                    console.log(detail);
                     MasterDetailService.notifyDetail('detailChanged', detail);
                     $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false, reload: true});
                 };
@@ -62,12 +61,12 @@ app.directive('masterDetail', [function(){
                         duration:500,
                         queue:false
                     };
-                    var documentOffset = 110;
+                    var documentOffset = 40;
                     var newActiveOffset;
+                    var scrollArea = $('.scrollArea');
 
-                    var viewportHeight = window.innerHeight;
-                    var scrollTop = $document.scrollTop();
-                    var viewPortBottom = viewportHeight + scrollTop;
+                    var viewportHeight = scrollArea.height();
+                    var scrollTop = scrollArea.scrollTop();
 
                     if (key == 38){
                         event.stopPropagation();
@@ -75,11 +74,10 @@ app.directive('masterDetail', [function(){
                         var prevDetail = getNeighbor(-1);
 
                         if(prevDetail) {
-                            $scope.setDetail(getNeighbor(-1));
-
-                            newActiveOffset = $('.list-group-item.active').prev('.list-group-item').offset().top;
+                            $scope.setDetail(prevDetail);
+                            newActiveOffset = $('.list-group-item.active').prev('.list-group-item').position().top;
                             if(newActiveOffset < scrollTop)
-                                $('html, body').animate({scrollTop:newActiveOffset-documentOffset}, animation);
+                                scrollArea.animate({scrollTop:newActiveOffset-documentOffset}, animation);
                         }
                     }
                     if (key == 40){
@@ -87,14 +85,12 @@ app.directive('masterDetail', [function(){
                         event.preventDefault();
                         var nextDetail = getNeighbor(1);
                         if (nextDetail) {
-                            $scope.setDetail(getNeighbor(1));
-
-
+                            $scope.setDetail(nextDetail);
                             var newActiveItem = $('.list-group-item.active').next('.list-group-item');
-                            newActiveOffset = newActiveItem.height() + newActiveItem.offset().top;
+                            newActiveOffset = newActiveItem.height() + newActiveItem.position().top;
 
-                            if(newActiveOffset > viewPortBottom) {
-                                $('html, body').animate({scrollTop: newActiveOffset-viewportHeight+documentOffset}, animation);
+                            if(newActiveOffset > viewportHeight) {
+                                scrollArea.animate({scrollTop: scrollTop + newActiveItem.height()+documentOffset}, animation);
                             }
                         }
                     }
