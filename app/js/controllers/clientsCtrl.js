@@ -17,7 +17,10 @@ app.controller('ClientsCtrl',
 
             var self = this;
 
-
+            /**
+             * Process the list of clients coming from the api after GET or DELETE request
+             * @param data - the apiData object
+             */
             var setClientList = function (data) {
                 for(var i= 0; i<data.length; i++){
                     // process contact name if companyname is not set
@@ -30,15 +33,31 @@ app.controller('ClientsCtrl',
                 }
                 self.clientList = data;
                 LocalStorage.setData('clients', self.clientList);
-
             };
 
-            // Get the client list
+            // get the client list
             ApiAbstractionLayer('GET','client').then(function (data) {
                 setClientList(data);
             });
 
+            // (re)set a flag indicating if the Controller was fully loaded
+            // needed for setting transition classes
+            $scope.$on('$stateChangeStart', function (event, toState) {
+                console.log(toState);
+                self.loaded = false;
+            });
+            setTimeout(function () {
+                self.loaded = true;
+                $scope.$apply();
+            }, 1000);
 
+
+            /**
+             * Delete the link between client and client category
+             * TODO: test if this still works...
+             * @param client - the client's id
+             * @param category - the category
+             */
             this.deleteCategoryLink = function (client, category) {
                 ApiAbstractionLayer('DELETE', {name:'client_categories', data: {id:self.allCategories[category].id, clientid: client}});
             };

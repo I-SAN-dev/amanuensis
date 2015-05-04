@@ -8500,4 +8500,7 @@ a {
       position: relative;
       left: -50%; }
 
+.ng-trans {
+  -webkit-backface-visibility: hidden; }
+
 /*# sourceMappingURL=ama.css.map */
