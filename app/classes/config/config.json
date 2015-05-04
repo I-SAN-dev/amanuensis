@@ -16,11 +16,18 @@
   "company_addition":"vertreten durch Sebastian Antosch & Christian Baur",
   "address":
   {
-    "street":"Augustusstrßae 5c",
+    "street":"Augustusstraße 5c",
     "city":"Königsbrunn",
     "zip":"86343",
     "country": "Deutschland",
-    "web":"http://i-san.de"
+    "web":"http://i-san.de",
+    "telephone":"+49 1578 8562613",
+    "fax":"1234 567890"
+  },
+  "design":
+  {
+    "color":"#0097AB",
+    "logo":"http://i-san.de/templates/i-san2014template/images/i-san.de-logo.png"
   },
 
   "lang":"de",
@@ -54,11 +61,11 @@
 
   "templates":
   {
-    "offer":"pdftemplates/offer.phtml",
-    "contract":"pdftemplates/contract.phtml",
-    "acceptance":"pdftemplates/acceptance.ptml",
-    "invoice":"pdftemplates/invoice.phtml",
-    "reminder":"pdftemplates/reminder.phtml"
+    "offer":"user_templates/pdf/offer.phtml",
+    "contract":"user_templates/pdf/contract.phtml",
+    "acceptance":"user_templates/pdf/acceptance.ptml",
+    "invoice":"user_templates/pdf/invoice.phtml",
+    "reminder":"user_templates/pdf/reminder.phtml"
   },
 
   "pricing":
