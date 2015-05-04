@@ -1,0 +1,26 @@
+.logincontainer
+{
+  position: relative;
+  margin-top: 100px;
+
+
+  .login-left
+  {
+    background-color: $brand-primary;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    #login-arrow
+    {
+      font-size: 120px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      margin-top: -60px;
+      margin-left: -60px;
+    }
+  }
+}

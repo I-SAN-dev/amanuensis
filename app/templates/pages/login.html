@@ -1,16 +1,36 @@
-<form data-ng-controller="AuthCtrl as auth" data-ng-submit="auth.submit(auth.email, password)">
-    <p>{{auth.message}}</p>
-    <div data-material-input
-         data-input-label="{{'login.email'|translate}}"
-         data-input-type="email"
-         data-input-id="email"
-         data-ng-model="auth.email"
-         data-input-required="true"></div>
-    <div data-material-input
-         data-input-label="{{'login.password'|translate}}"
-         data-input-type="password"
-         data-input-id="password"
-         data-ng-model="password"
-         data-input-required="true"></div>
-    <button class="btn btn-success btn-lg" type="submit">{{'login.login'|translate}}</button>
-</form>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+        <div class="logincontainer panel panel-default">
+
+            <div class="row">
+                <div class="col-xs-3 login-left">
+                    <i id="login-arrow" class="md-chevron-right"></i>
+                </div>
+                <div class="col-xs-9 col-xs-offset-3">
+                    <div class="panel-body">
+                        <form data-ng-controller="AuthCtrl as auth" data-ng-submit="auth.submit(auth.email, password)">
+                            <p>{{auth.message}}</p>
+                            <div data-material-input
+                                 data-input-label="{{'login.email'|translate}}"
+                                 data-input-type="email"
+                                 data-input-id="email"
+                                 data-ng-model="auth.email"
+                                 data-input-required="true"></div>
+                            <div data-material-input
+                                 data-input-label="{{'login.password'|translate}}"
+                                 data-input-type="password"
+                                 data-input-id="password"
+                                 data-ng-model="password"
+                                 data-input-required="true"></div>
+                            <button class="btn btn-success pull-right" type="submit">{{'login.login'|translate}} <i class="md md-lock-outline"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
