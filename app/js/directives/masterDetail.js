@@ -26,6 +26,7 @@ app.directive('masterDetail', [function(){
                 var self = this;
 
 
+
                 /**
                  * Sets a new detail item and notifies other controllers that the detail has changed
                  * @param detail - the new detail object
@@ -34,8 +35,12 @@ app.directive('masterDetail', [function(){
                     $stateParams.id = detail.id;
                     self.detail = detail;
                     MasterDetailService.notifyDetail('detailChanged', detail);
-                    $state.transitionTo($state.$current.name, {id: detail.id},{ location: true, inherit: true, relative: $state.$current, notify: false, reload: true});
+
+                    //$state.go($state.$current.name, {id: detail.id});
                 };
+                $scope.$on('$stateChangeSuccess', function () {
+                    console.log('success;');
+                });
 
                 /**
                  * Looks for the next or previous item in the master list
@@ -119,10 +124,6 @@ app.directive('masterDetail', [function(){
                     self.detailTpl = templateUrl;
                     $scope.$broadcast('detailTemplateChanged', self.detail);
                 };
-
-                $scope.$on('$stateChangeSuccess', function (event, toState, toParams) {
-                    console.log(toState.name, toParams);
-                });
 
 
             }],

@@ -15,6 +15,7 @@ app.controller('ClientDetailCtrl',
             MasterDetailService.setDetail(this);
 
 
+            var calls = 0;
             /**
              * Gets a client from the API
              * @param {int} id - the client id to query for
@@ -38,6 +39,8 @@ app.controller('ClientDetailCtrl',
 
             // call getClient when the detail view is requested
             this.detailChanged = function(data){
+                calls += 1;
+                console.log(calls);
                 self.client = data;
                 getClient(data.id);
                 getProjects(data.id);
