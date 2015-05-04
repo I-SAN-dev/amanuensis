@@ -173,7 +173,7 @@ class AmaMail {
         $breaks = array("<br />","<br>","<br/>");
         $html = str_ireplace($breaks, "\r\n", $html);
 
-        echo $html;
+        return $html;
 
     }
 

@@ -21,10 +21,12 @@ class test {
      */
     public static function get()
     {
-        /*
+
         $mail = new AmaMail('Ich','sebastian-antosch@t-online.de','test');
-        $html = file_get_contents('http://i-san.de/webdesign');
-        $mail->html2text($html);*/
+        $mail->setContent('<p>Dies ist ein Test!</p>');
+        $mail->addAttachment('archive/2015/09/offer/2015-09-10__123.pdf');
+        $mail->send();
+
     }
 
     /**
