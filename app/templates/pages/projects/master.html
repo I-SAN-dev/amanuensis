@@ -1,8 +1,8 @@
 <div>
     <div data-material-input data-ng-model="MasterDetailCtrl.filterText" data-input-id="filter" data-input-type="text" data-input-label="Filter"></div>
     <div class="list-group">
-        <a class="list-group-item ng-trans ng-trans-scale-up" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText"
-           data-ng-class="{active:MasterDetailCtrl.detail.id == project.id}"
+        <a class="list-group-item" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText"
+           data-ng-class="{active:MasterDetailCtrl.detail.id == project.id,'ng-trans ng-trans-scale-up':masterLoaded}"
            data-ng-click="setDetail(project)">
             <h4>{{project.name}}</h4>
         </a>
