@@ -206,7 +206,7 @@ app.constant('sites', [
     {
         name: 'app.offers',
         stateObject: {
-            url: '/offers',
+            url: '/offers/:id',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/offers.html'
@@ -235,7 +235,7 @@ app.constant('sites', [
     {
         name: 'app.acceptances',
         stateObject: {
-            url: '/acceptances',
+            url: '/acceptances/:id',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/acceptances.html'
@@ -246,7 +246,7 @@ app.constant('sites', [
     {
         name:'app.invoices',
         stateObject: {
-            url: '/invoices',
+            url: '/invoices/:id',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/invoices.html'

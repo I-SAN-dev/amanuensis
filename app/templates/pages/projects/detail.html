@@ -39,7 +39,7 @@
     <h3>{{'projects.offers'|translate}}</h3>
     <ul>
         <li data-ng-repeat="offer in project.project.offers">
-            {{offer.name}}
+            <a data-ui-sref="app.offers({id:{{offer.id}}})">{{offer.name}}</a>
         </li>
     </ul>
     <h3>{{'projects.contracts'|translate}}</h3>
@@ -57,13 +57,13 @@
     <h3>{{'projects.acceptances'|translate}}</h3>
     <ul>
         <li data-ng-repeat="acceptance in project.project.acceptances">
-            {{acceptance.name}}
+            <a data-ui-sref="app.acceptances({id:{{acceptance.id}}})">{{acceptance.name}}</a>
         </li>
     </ul>
     <h3>{{'projects.invoices'|translate}}</h3>
     <ul>
         <li data-ng-repeat="invoice in project.project.invoices">
-            {{invoice.name}}
+            <a data-ui-sref="app.invoices({id:{{invoice.id}}})">{{invoice.name}}</a>
         </li>
     </ul>
 </div>
