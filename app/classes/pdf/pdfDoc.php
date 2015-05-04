@@ -14,7 +14,7 @@
 require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/pdf/pdf.php');
-require_once('classes/pdf/pdfTemplate.php');
+require_once('classes/pdf/amaTemplate.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
 
@@ -184,7 +184,7 @@ class PdfDoc {
     {
         $conf = Config::getInstance();
         $path = $conf->get['templates'][$this->type];
-        $template = new PdfTemplate($path, $this->info);
+        $template = new amaTemplate($path, $this->info);
         return $template->getHTML();
     }
 

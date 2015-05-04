@@ -12,7 +12,7 @@
  * @license GPL
  */
 
-class PdfTemplate {
+class amaTemplate {
 
     /**
      * Constructor
