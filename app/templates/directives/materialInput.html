@@ -1,5 +1,9 @@
 <div class="group">
-    <input placeholder="{{label}}" type="text" id="{{id}}" data-ng-model="model">
+    <input placeholder="{{label}}"
+           type="{{type}}"
+           id="{{id}}"
+           data-ng-model="model"
+           data-ng-required="{{required || false}}">
     <span class="highlight"></span>
     <span class="bar"></span>
     <label for="{{id}}">{{label}}</label>

@@ -1,6 +1,10 @@
 <div>
-            <div data-material-input data-ng-model="MasterDetailCtrl.filterText" data-input-id="filter" data-input-label="Filter"></div>
-                <div class="list-group">
+    <div data-material-input
+         data-ng-model="MasterDetailCtrl.filterText"
+         data-input-id="filter"
+         data-input-label="Filter"
+         data-input-type="text"></div>
+    <div class="list-group">
         <a class="list-group-item" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
            data-ng-click="setDetail(client)">

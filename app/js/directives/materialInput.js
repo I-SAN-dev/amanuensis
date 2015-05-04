@@ -5,7 +5,9 @@ app.directive('materialInput', [function () {
         scope: {
             model:'=ngModel',
             id: '@inputId',
-            label: '@inputLabel'
+            label: '@inputLabel',
+            required: '@inputRequired',
+            type: '@inputType'
         },
         replace: true
     }
