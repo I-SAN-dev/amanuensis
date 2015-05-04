@@ -1,0 +1,31 @@
+<div class="detail" data-ng-controller="OfferDetailCtrl as offer">
+    <h1><span data-in-place-edit
+              data-api-id="offer.offer.id"
+              data-api-name="'offer'"
+              data-ipe-key="'name'"
+              data-ipe-value="offer.offer.name"
+              data-ipe-name="'offers.name'|translate"
+              data-ipe-deletable="false"
+            ></span><small><span data-in-place-edit
+                                 data-ipe-key="'refnumber'"
+                                 data-ipe-value="offer.offer.refnumber"
+                                 data-ipe-deletable="false"
+                                 data-api-id="offer.offer.id"
+                                 data-api-name="'offer'"
+                                 data-ipe-name="'offers.refnumber'|translate"></span></small></h1>
+    <p>{{offer.offer.date |date:offer.dateFormat}}</p>
+    <p data-in-place-edit
+       data-api-id="offer.offer.id"
+       data-api-name="'offer'"
+       data-ipe-key="'description'"
+       data-ipe-value="offer.offer.description"
+       data-ipe-name="'offers.description'|translate"
+       data-ipe-type="'textarea'"></p>
+
+    <p><a href="{{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
+
+    <ul>
+        <li data-ng-repeat="item in offer.offer.items">{{item.name}}</li>
+    </ul>
+
+</div>

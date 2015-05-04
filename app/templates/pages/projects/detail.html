@@ -19,7 +19,7 @@
         <div class="col-sm-6">
             <p data-in-place-edit
                data-api-id="project.project.id"
-               data-api-name="'poject'"
+               data-api-name="'project'"
                data-ipe-key="'description'"
                data-ipe-value="project.project.description"
                data-ipe-name="'projects.description'|translate"
@@ -39,7 +39,7 @@
     <h3>{{'projects.offers'|translate}}</h3>
     <ul>
         <li data-ng-repeat="offer in project.project.offers">
-            <a data-ui-sref="app.offers({id:{{offer.id}}})">{{offer.name}}</a>
+            <a data-ui-sref="app.offerDetail({id:{{offer.id}}})">{{offer.name}}</a>
         </li>
     </ul>
     <h3>{{'projects.contracts'|translate}}</h3>

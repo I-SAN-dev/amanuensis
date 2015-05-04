@@ -206,10 +206,21 @@ app.constant('sites', [
     {
         name: 'app.offers',
         stateObject: {
-            url: '/offers/:id',
+            url: '/offers',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/offers.html'
+                }
+            }
+        }
+    },
+    {
+        name: 'app.offerDetail',
+        stateObject: {
+            url: '/offers/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/offerDetail.html'
                 }
             }
         }
