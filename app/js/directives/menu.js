@@ -47,18 +47,25 @@ app.controller('NavCtrl',[
                 angular.forEach(menuItems, function(value, key){
                     value.active = value.name == item.name;
                 });
-                console.log(item);
+                console.log(item.name, $state.current.name);
 
                 var menuItem = item.menus[name];
                 if(menuItem.click){
                     services[menuItem.service][menuItem.click]();
                 }
 
+
                 // change state
-                $state.go(item.name);
+                $state.go(item.name).then(function(data){
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                    //$state.go(item.name);
+                });
             };
 
             $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+                console.log('stateChangeSuccess');
                 angular.forEach(menuItems, function (value, key) {
                     value.active = value.name == toState.name;
                 })
