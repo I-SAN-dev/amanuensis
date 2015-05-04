@@ -13,6 +13,16 @@
   "sessiontimeout":"60",
 
   "company":"I-SAN.de Webdesign & Hosting GbR",
+  "company_addition":"vertreten durch Sebastian Antosch & Christian Baur",
+  "address":
+  {
+    "street":"Augustusstrßae 5c",
+    "city":"Königsbrunn",
+    "zip":"86343",
+    "country": "Deutschland",
+    "web":"http://i-san.de"
+  },
+
   "lang":"de",
 
   "mail":
