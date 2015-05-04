@@ -37,11 +37,11 @@ app.controller('ProjectDetailCtrl',
             };
 
             // call getProject when the detail view is requested
-            $scope.$on('detailChanged', function(event, data){
+            this.detailChanged=function(data){
                 self.project = data;
                 self.contracts = [];
                 getProject(data.id);
-            });
+            };
 
             // if the project state is entered with a certain id, we want to set the project detail for this id
             if($stateParams.id){
