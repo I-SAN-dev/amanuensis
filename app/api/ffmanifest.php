@@ -16,30 +16,21 @@ set_include_path(getcwd());
 
 require_once 'classes/config/config.php';
 
-if(isset($_GET["test"]))
-{
-    ?>
-
-    <html>
-    <head><title>Test</title></head>
-    <body>
-    <p>
-        <button onclick="navigator.mozApps.install('http://sa.ama.i-san.de/manifest.webapp')">install</button>
-    </p>
-    </body>
-    </html>
-
-    <?php
-    die();
-}
+/*
+ *
+ * Javascript has to call navigator.mozApps.install('http://sa.ama.i-san.de/manifest.webapp')
+ *
+ */
 
 header('Content-Type: application/x-web-app-manifest+json');
 
 ob_start();
 
+$conf = Config::getInstance();
+
 $manifest = array(
     "name" => "Amanu",
-    "description" => "Test",
+    "description" => $conf->get['company'],
     "launch_path" => "/",
     "icons" => array(
         "128" => "/img/logo.svg"
