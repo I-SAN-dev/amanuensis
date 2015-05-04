@@ -14,7 +14,7 @@
                                  data-api-name="'offer'"
                                  data-ipe-name="'offers.refnumber'|translate"></span></small></h1>
     <p>!!State!!: {{offer.offer.state|amaStates:'offer'}}</p>
-    <p>{{offer.offer.date |date:offer.dateFormat}}</p>
+    <p><a data-ui-sref="app.projects({id:{{offer.offer.project.id}}})">{{offer.offer.project.name}}</a> - {{offer.offer.date |date:offer.dateFormat}}</p>
     <p data-in-place-edit
        data-api-id="offer.offer.id"
        data-api-name="'offer'"

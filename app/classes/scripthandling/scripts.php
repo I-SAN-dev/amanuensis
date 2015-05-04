@@ -57,6 +57,7 @@ class Scripts
         "js/directives/module.js",
         "js/directives/masterDetail.js",
         "js/directives/inPlaceEdit.js",
+        "js/directives/materialInput.js",
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
