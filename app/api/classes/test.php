@@ -12,6 +12,8 @@
  */
 
 if(!$thisisamanu)die('Direct access restricted');
+require_once('classes/config/config.php');
+require_once('classes/pdf/amaTemplate.php');
 require_once('classes/mail/amaMail.php');
 
 class test {
@@ -21,10 +23,13 @@ class test {
      */
     public static function get()
     {
-
-        $mail = new AmaMail('Ich','sebastian-antosch@t-online.de','test');
-        $mail->setContent('<p>Dies ist ein Test!</p>');
-        $mail->addAttachment('archive/2015/09/offer/2015-09-10__123.pdf');
+        /*
+        $conf = Config::getInstance();
+        $template = new amaTemplate('user_templates/mail/_outer.phtml', $conf->get);
+        echo($template->getHTML());
+        */
+        $mail = new AmaMail("Sebastian","sebastian-antosch@t-online.de","HTMLtest");
+        $mail->setContent('<p>Dies ist testcontent</p>');
         $mail->send();
 
     }

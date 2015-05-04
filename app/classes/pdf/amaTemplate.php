@@ -33,12 +33,33 @@ class amaTemplate {
         }
     }
 
+
     /**
      * Renders a template
      * @return string - the readymade html code
      */
     public function getHTML()
     {
+        /**
+         * Echoes an expression if a var is present
+         * @param $var
+         * @param $expression - optional, %v will be replaced by var
+         */
+        function echoIf($var, $expression = NULL)
+        {
+            if(isset($var) && $var != '')
+            {
+                if(isset($expression) && $expression != '')
+                {
+                    echo str_replace('%v', $var, $expression);
+                }
+                else
+                {
+                    echo $var;
+                }
+            }
+        }
+
         /* Start output buffering */
         ob_start();
 
@@ -51,5 +72,8 @@ class amaTemplate {
         /* Stop output buffering and return the data */
         return ob_get_clean();
     }
+
+
+
 
 }

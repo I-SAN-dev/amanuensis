@@ -89,8 +89,17 @@
       "city":"Stadt",
       "zip":"Postleitzahl",
       "country": "Land",
-      "web":"Webadresse"
+      "web":"Webadresse",
+      "telephone":"Telefonnummer",
+      "fax":"Faxnummer"
     },
+
+    "design":
+    {
+      "color":"Farbe, wird unter anderem in Emails verwendet, um diese an Ihr Corporate Design anzupassen",
+      "logo":"Pfad zu Ihrem Logo"
+    },
+
     "lang":"Sprache",
 
     "mail":
