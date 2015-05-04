@@ -82,6 +82,15 @@
     "sessiontimeout":"Session Timeout",
 
     "company":"Firmenname",
+    "company_addition":"Zusatz",
+    "address":
+    {
+      "street":"Straße",
+      "city":"Stadt",
+      "zip":"Postleitzahl",
+      "country": "Land",
+      "web":"Webadresse"
+    },
     "lang":"Sprache",
 
     "mail":
