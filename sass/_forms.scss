@@ -26,22 +26,6 @@
 // input[type="color"]
 
 .form-control {
-  height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-  padding: (1.5*$font-size-base/2) 0 (1.5*$font-size-base/4);
-  margin-bottom: (1.5*$font-size-base/4);
-  color: $input-color;
-  border: 0;
-  border-bottom: 1px solid $input-border;
-  @include box-shadow(inset 0 0 0 transparent);
-  @include transition(border-bottom-width ease-in-out .25s);
-
-  // Customize the `:focus` state to imitate native WebKit styles.
-  @include form-control-focus;
-
-  &:focus {
-    border-bottom-width: 2px;
-    @include box-shadow(inset 0 0 0 transparent);
-  }
 
 
   // Disabled and read-only inputs
@@ -79,23 +63,35 @@
 /*
  * Material Design Inputs: https://scotch.io/tutorials/google-material-design-input-boxes-in-css3
  */
-.group {
+.form-group {
   position: relative;
   /*margin-bottom: 45px;*/
 
-  input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
+  input.form-control {
+
     display: block;
     width: 100%;
     border: none;
     border-bottom: 1px solid $gray-light;
     background-color: transparent;
-  }
-  input:focus {
-    outline: none;
-  }
 
+    height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: (1.5*$font-size-base/2) 0 (1.5*$font-size-base/4);
+    margin-bottom: 0;
+    color: $input-color;
+
+    @include box-shadow(inset 0 0 0 transparent);
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus;
+
+    &:focus {
+      outline: none;
+      @include box-shadow(inset 0 0 0 transparent);
+      border-bottom-color: $gray-light;
+    }
+
+  }
   /* LABEL ======================================= */
   label {
     visibility: hidden;
@@ -112,9 +108,9 @@
     content: '';
     height: 2px;
     width: 0;
-    bottom: 1px;
+    bottom: -1px;
     position: absolute;
-    background: $brand-primary;
+    background-color: $brand-primary;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -131,51 +127,16 @@
     width: 50%;
   }
 
-  /* HIGHLIGHTER ================================== */
-  .highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
+  .ng-invalid.ng-touched ~ .bar:before,
+  .ng-invalid.ng-touched ~ .bar:after
+  {
+    background-color: $brand-danger;
   }
+}
 
-  /* active state */
-  input:focus ~ .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-  }
-
-  /* ANIMATIONS ================ */
-  @-webkit-keyframes inputHighlighter {
-    from {
-      background: $brand-primary;
-    }
-    to {
-      width: 0;
-      background: transparent;
-    }
-  }
-  @-moz-keyframes inputHighlighter {
-    from {
-      background: $brand-primary;
-    }
-    to {
-      width: 0;
-      background: transparent;
-    }
-  }
-  @keyframes inputHighlighter {
-    from {
-      background: $brand-primary;
-    }
-    to {
-      width: 0;
-      background: transparent;
-    }
-  }
-
+.btn
+{
+  border: none !important;
+  border-radius: 2px !important;
+  @include transition(all 0.3s ease);
 }

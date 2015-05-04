@@ -5584,19 +5584,19 @@ select[multiple].input-lg,
 
 .btn-success {
   color: #fff;
-  background-color: #00897B;
-  border-color: #007064; }
+  background-color: #009688;
+  border-color: #007d71; }
   .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #00564d;
-    border-color: #00322d; }
+    background-color: #00635a;
+    border-color: #003f39; }
   .btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
     background-image: none; }
   .btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled.focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled].focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success.focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
-    background-color: #00897B;
-    border-color: #007064; }
+    background-color: #009688;
+    border-color: #007d71; }
   .btn-success .badge {
-    color: #00897B;
+    color: #009688;
     background-color: #fff; }
 
 .btn-info {
@@ -6796,9 +6796,9 @@ a.label:hover, a.label:focus {
     background-color: #3f535c; }
 
 .label-success {
-  background-color: #00897B; }
+  background-color: #009688; }
   .label-success[href]:hover, .label-success[href]:focus {
-    background-color: #00564d; }
+    background-color: #00635a; }
 
 .label-info {
   background-color: #00ACC1; }
@@ -7016,7 +7016,7 @@ a.thumbnail.active {
   animation: progress-bar-stripes 2s linear infinite; }
 
 .progress-bar-success {
-  background-color: #00897B; }
+  background-color: #009688; }
   .progress-striped .progress-bar-success {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -8334,30 +8334,9 @@ a {
     outline: none !important;
     background-color: #ECEFF1; }
 
-.form-control {
-  height: 30.33333px;
-  padding: 10.5px 0 5.25px;
-  margin-bottom: 5.25px;
-  color: #263238;
-  border: 0;
-  border-bottom: 1px solid #BDBDBD;
-  -webkit-box-shadow: inset 0 0 0 transparent;
-  box-shadow: inset 0 0 0 transparent;
-  -webkit-transition: border-bottom-width ease-in-out 0.25s;
-  -o-transition: border-bottom-width ease-in-out 0.25s;
-  transition: border-bottom-width ease-in-out 0.25s; }
-  .form-control:focus {
-    border-color: #546E7A;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6); }
-  .form-control:focus {
-    border-bottom-width: 2px;
-    -webkit-box-shadow: inset 0 0 0 transparent;
-    box-shadow: inset 0 0 0 transparent; }
-  .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    color: #999;
-    border-style: dotted; }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  color: #999;
+  border-style: dotted; }
 
 .ipe {
   cursor: pointer; }
@@ -8370,77 +8349,67 @@ a {
 /*
  * Material Design Inputs: https://scotch.io/tutorials/google-material-design-input-boxes-in-css3
  */
-.group {
+.form-group {
   position: relative;
   /*margin-bottom: 45px;*/
   /* LABEL ======================================= */
   /* BOTTOM BARS ================================= */
-  /* active state */
-  /* HIGHLIGHTER ================================== */
-  /* active state */
-  /* ANIMATIONS ================ */ }
-  .group input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
+  /* active state */ }
+  .form-group input.form-control {
     display: block;
     width: 100%;
     border: none;
     border-bottom: 1px solid #BDBDBD;
-    background-color: transparent; }
-  .group input:focus {
-    outline: none; }
-  .group label {
+    background-color: transparent;
+    height: 30.33333px;
+    padding: 10.5px 0 5.25px;
+    margin-bottom: 0;
+    color: #263238;
+    -webkit-box-shadow: inset 0 0 0 transparent;
+    box-shadow: inset 0 0 0 transparent; }
+    .form-group input.form-control:focus {
+      border-color: #546E7A;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(84, 110, 122, 0.6); }
+    .form-group input.form-control:focus {
+      outline: none;
+      -webkit-box-shadow: inset 0 0 0 transparent;
+      box-shadow: inset 0 0 0 transparent;
+      border-bottom-color: #BDBDBD; }
+  .form-group label {
     visibility: hidden; }
-  .group .bar {
+  .form-group .bar {
     position: relative;
     display: block;
     width: 100%; }
-  .group .bar:before, .group .bar:after {
+  .form-group .bar:before, .form-group .bar:after {
     content: '';
     height: 2px;
     width: 0;
-    bottom: 1px;
+    bottom: -1px;
     position: absolute;
-    background: #546E7A;
+    background-color: #546E7A;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all; }
-  .group .bar:before {
+  .form-group .bar:before {
     left: 50%; }
-  .group .bar:after {
+  .form-group .bar:after {
     right: 50%; }
-  .group input:focus ~ .bar:before, .group input:focus ~ .bar:after {
+  .form-group input:focus ~ .bar:before, .form-group input:focus ~ .bar:after {
     width: 50%; }
-  .group .highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5; }
-  .group input:focus ~ .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease; }
-@-webkit-keyframes inputHighlighter {
-  from {
-    background: #546E7A; }
-  to {
-    width: 0;
-    background: transparent; } }
-@-moz-keyframes inputHighlighter {
-  from {
-    background: #546E7A; }
-  to {
-    width: 0;
-    background: transparent; } }
-@keyframes inputHighlighter {
-  from {
-    background: #546E7A; }
-  to {
-    width: 0;
-    background: transparent; } }
+  .form-group .ng-invalid.ng-touched ~ .bar:before,
+  .form-group .ng-invalid.ng-touched ~ .bar:after {
+    background-color: #F4511E; }
+
+.btn {
+  border: none !important;
+  border-radius: 2px !important;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
 /*.nav#mainNav
 {
   @include card(1);
@@ -8525,6 +8494,24 @@ a {
     border-bottom-color: #546E7A !important;
     padding-bottom: 0;
     color: #546E7A; }
+
+.logincontainer {
+  position: relative;
+  margin-top: 100px; }
+  .logincontainer .login-left {
+    background-color: #546E7A;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; }
+    .logincontainer .login-left #login-arrow {
+      font-size: 120px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      margin-top: -60px;
+      margin-left: -60px; }
 
 .detail-view {
   padding: 20px;
