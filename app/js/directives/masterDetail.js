@@ -47,7 +47,11 @@ app.directive('masterDetail', [function(){
                         orderById[$scope.masterList[i].id] = i;
                     }
 
-                    var oldPos = orderById[self.detail.id];
+                    var oldPos;
+                    if(self.detail)
+                        oldPos = orderById[self.detail.id];
+                    else
+                        oldPos = -offset;
 
                     return $scope.masterList[oldPos+offset];
                 };
@@ -83,6 +87,8 @@ app.directive('masterDetail', [function(){
                     if (key == 40){
                         event.stopPropagation();
                         event.preventDefault();
+
+
                         var nextDetail = getNeighbor(1);
                         if (nextDetail) {
                             $scope.setDetail(nextDetail);
