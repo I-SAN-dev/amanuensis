@@ -14,6 +14,10 @@ app.controller('OfferDetailCtrl', [
                 self.offer = data;
                 LocalStorage.setData('offer/'+id, data);
             });
+
+
+
+
         }
     ]
 );
