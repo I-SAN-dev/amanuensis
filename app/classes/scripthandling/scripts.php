@@ -44,6 +44,7 @@ class Scripts
     public static $scripts = array(
         // Filters
         "js/filters/sha256.js",
+        "js/filters/amaStates.js",
         // Services
         "js/services/authService.js",
         "js/services/apiAbstractionLayer.js",
