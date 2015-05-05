@@ -1,0 +1,23 @@
+<div dta-ng-controller="ProjectCreationCtrl as create">
+    <form data-ng-submit="create.addProject()">
+        <div data-material-input
+             data-input-label="{{projects.name}}"
+             data-ng-model="create.newProject.name"
+             data-input-id="name"
+             data-input-type="text"></div>
+        <div data-material-input
+             data-input-label="{{projects.description}}"
+             data-ng-model="create.newProject.description"
+             data-input-id="description"
+             data-input-type="textarea"></div>
+        <div data-material-input
+             data-input-label="{{projects.client}}"
+             data-ng-model="create.newProject.client"
+             data-input-id="client"
+             data-input-required="true"
+             data-input-type="select"
+             data-input-select-options="create.clients"
+             data-input-select-option-value="id"
+             data-input-select-option-name="companyname"></div>
+    </form>
+</div>

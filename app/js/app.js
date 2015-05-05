@@ -240,8 +240,19 @@ app.constant('sites', [
                 name: 'projects.menuName',
                 title: 'projects.menuTitle',
                 icon: 'md md-folder'
+            }
         }
-    }
+    },
+    {
+        name: 'app.projectCreation',
+        stateObject: {
+            url: '/new-project',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/projectCreation.html'
+                }
+            }
+        }
     },
     {
         name: 'app.acceptances',

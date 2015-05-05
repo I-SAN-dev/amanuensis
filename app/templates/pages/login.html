@@ -9,7 +9,7 @@
                 <div class="col-xs-9 col-xs-offset-3">
                     <div class="panel-body">
                         <form data-ng-controller="AuthCtrl as auth" data-ng-submit="auth.submit(auth.email, password)">
-                            <p>{{auth.message}}</p>
+                            <p>{{auth.email}}</p>
                             <div data-material-input
                                  data-input-label="{{'login.email'|translate}}"
                                  data-input-type="email"
@@ -22,6 +22,8 @@
                                  data-input-id="password"
                                  data-ng-model="password"
                                  data-input-required="true"></div>
+                            <input data-ng-model="auth.email">
+                            <input data-ng-model="password">
                             <button class="btn btn-success pull-right" type="submit">{{'login.login'|translate}} <i class="md md-lock-outline"></i></button>
                         </form>
                     </div>

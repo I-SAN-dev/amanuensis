@@ -1,13 +1,23 @@
 app.directive('materialInput', [function () {
     return {
         restrict: 'A',
-        templateUrl: 'templates/directives/materialInput.html',
+        templateUrl: function(elem, attr){
+            var type = attr.inputType;
+            if(type=='textarea')
+                return 'templates/directives/materialInput/textarea.html';
+            if(type=="select")
+                return 'templates/directives/materialInput/select.html';
+            return 'templates/directives/materialInput/text.html';
+        },
         scope: {
             model:'=ngModel',
             id: '@inputId',
             label: '@inputLabel',
             required: '@inputRequired',
-            type: '@inputType'
+            inputType: '@',
+            options: '=inputSelectOptions',
+            optionValue: '@inputSelectOptionValue',
+            optionName: '@inputSelectOptionName'
         },
         replace: true
     }
