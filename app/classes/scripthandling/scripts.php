@@ -67,6 +67,7 @@ class Scripts
         "js/controllers/clientCreationCtrl.js",
         "js/controllers/projectsCtrl.js",
         "js/controllers/projectDetailCtrl.js",
+        "js/controllers/projectCreationCtrl.js",
         "js/controllers/acceptancesCtrl.js",
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",

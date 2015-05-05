@@ -28,7 +28,6 @@ angular.module('ama')
          * @param password - the user's password
          */
         this.submit = function (email, password) {
-            console.log(email, password);
             AuthService.login(email, password).then(function (result) {
                 var to = $stateParams.referrer || 'app.dashboard';
                 var toParams = $stateParams.referrerParams;
