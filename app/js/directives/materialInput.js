@@ -1,24 +1,30 @@
-app.directive('materialInput', [function () {
-    return {
-        restrict: 'A',
-        templateUrl: function(elem, attr){
-            var type = attr.inputType;
-            if(type=='textarea')
-                return 'templates/directives/materialInput/textarea.html';
-            if(type=="select")
-                return 'templates/directives/materialInput/select.html';
-            return 'templates/directives/materialInput/text.html';
-        },
-        scope: {
-            model:'=ngModel',
-            id: '@inputId',
-            label: '@inputLabel',
-            required: '@inputRequired',
-            inputType: '@',
-            options: '=inputSelectOptions',
-            optionValue: '@inputSelectOptionValue',
-            optionName: '@inputSelectOptionName'
-        },
-        replace: true
-    }
-}]);
+app.directive('materialInput', [
+    '$http',
+    '$templateCache',
+    '$compile',
+    '$parse',
+    function ($http, $templateCache, $compile, $parse) {
+        return {
+            restrict: 'A',
+            scope: {
+                model:'=ngModel',
+                id: '@inputId',
+                label: '@inputLabel',
+                required: '@inputRequired',
+                inputType: '@',
+                options: '=inputSelectOptions',
+                optionValue: '@inputSelectOptionValue',
+                optionName: '@inputSelectOptionName'
+            },
+            link: function (scope, elem, attr) {
+                // we use the link function to get our template, so the directive still works when the type is not set on page load
+                var type = attr.inputType;
+                if(type!='textarea' && type != 'select')
+                    type = 'text';
+                $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
+                    elem.replaceWith($compile(tplContent)(scope));
+                });
+            },
+            replace: true
+        }
+    }]);
