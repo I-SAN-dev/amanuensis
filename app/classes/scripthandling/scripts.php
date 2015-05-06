@@ -20,12 +20,14 @@ class Scripts
     public static $libs = array(
         "lib/jquery-2.1.3.min.js",
         "lib/angular-1.3.14.min.js",
+        "lib/bootstrap.min.js",
         "lib/modules/angular-ui-router.min.js",
         "lib/modules/angular.btf-modal.min.js",
         "lib/modules/angular-translate.min.js",
         "lib/modules/angular-translate-loader-static-files.min.js",
         "lib/modules/angular-animate.min.js",
         "lib/sha256.js",
+        "lib/summernote.min.js",
         "js/app.js", // has to be loaded before the other scripts
     );
     /**
