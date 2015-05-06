@@ -179,8 +179,17 @@
   {
     float: right;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 5px;
+
+    .btn-icon-round
+    {
+      padding: 3px 6px !important;
+      i
+      {
+        margin: 0;
+      }
+    }
   }
 }
 

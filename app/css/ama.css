@@ -8328,6 +8328,14 @@ html, body {
 a {
   cursor: pointer; }
 
+button:disabled {
+  cursor: default !important; }
+
+.varcheck.var-is-false .varcheck-if-true {
+  display: none; }
+.varcheck.var-is-true .varcheck-if-false {
+  display: none; }
+
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
   border-style: dotted; }
@@ -8422,8 +8430,12 @@ a {
   .buttons-above-input .bai-buttons {
     float: right;
     position: absolute;
-    top: 0;
-    right: 0; }
+    top: 2px;
+    right: 5px; }
+    .buttons-above-input .bai-buttons .btn-icon-round {
+      padding: 3px 6px !important; }
+      .buttons-above-input .bai-buttons .btn-icon-round i {
+        margin: 0; }
 
 .btn-link {
   transition: 0.3s background-color; }
@@ -8589,6 +8601,12 @@ a {
   .clientSwitch.active .dot:nth-child(3n) {
     width: 0;
     margin-right: 0; }
+
+.panel-filter {
+  overflow: visible !important; }
+  .panel-filter input {
+    padding-left: 12px !important;
+    border-bottom: none !important; }
 
 /**
   * This extends ng-trans

@@ -61,5 +61,15 @@
       }
     }
   }
+}
 
+.panel-filter
+{
+  overflow: visible !important;
+
+  input
+  {
+    padding-left: $padding-base-horizontal !important;
+    border-bottom: none !important;
+  }
 }

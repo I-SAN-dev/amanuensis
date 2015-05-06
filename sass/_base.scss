@@ -43,7 +43,22 @@ a
   cursor: pointer;
 }
 
+button:disabled
+{
+  cursor: default !important;
+}
 
+.varcheck
+{
+  &.var-is-false .varcheck-if-true
+  {
+    display: none;
+  }
+  &.var-is-true .varcheck-if-false
+  {
+    display: none;
+  }
+}
 
 
 
