@@ -140,3 +140,90 @@
   border-radius: 2px !important;
   @include transition(all 0.3s ease);
 }
+
+
+/* Buttons in input */
+.buttons-above-input
+{
+  position: relative;
+
+  &.bai-3
+  {
+    input, textarea
+    {
+      padding-right: 100px; /* TODO define correct right padding */
+    }
+  }
+  &.bai-2
+  {
+    input, textarea
+    {
+      padding-right: 60px; /* TODO define correct right padding */
+    }
+  }
+  &.bai-1
+  {
+    input, textarea
+    {
+      padding-right: 30px; /* TODO define correct right padding */
+    }
+  }
+
+  .bai-buttons
+  {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.btn-link
+{
+  transition: 0.3s background-color;
+
+  &.btn-primary
+  {
+    color: $brand-primary;
+  }
+  &.btn-success
+  {
+    color: $brand-success;
+  }
+  &.btn-info
+  {
+    color: $brand-info;
+  }
+  &.btn-warning
+  {
+    color: $brand-warning;
+  }
+  &.btn-danger
+  {
+    color: $brand-danger;
+  }
+
+  &:hover
+  {
+    background-color: $body-bg;
+  }
+  &:focus,
+  &:active
+  {
+    outline: none !important;
+    background-color: $body-bg;
+  }
+}
+.btn-rounded
+{
+  border-radius: 999px !important;
+}
+.btn-icon-round
+{
+  @extend .btn-rounded;
+  i
+  {
+      margin: 0 -3.5px;
+  }
+}
+
