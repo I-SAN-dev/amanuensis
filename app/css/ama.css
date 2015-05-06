@@ -8328,18 +8328,14 @@ html, body {
 a {
   cursor: pointer; }
 
-.btn-link {
-  transition: 0.3s background-color; }
-  .btn-link:focus, .btn-link:active {
-    outline: none !important;
-    background-color: #ECEFF1; }
-
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
   border-style: dotted; }
 
 .ipe {
   cursor: pointer; }
+  .ipe .form-group {
+    margin-bottom: 0; }
   .ipe .ipe-empty {
     color: #EEEEEE;
     transition: 0.3s color; }
@@ -8378,7 +8374,8 @@ a {
       box-shadow: inset 0 0 0 transparent;
       border-bottom-color: #BDBDBD; }
   .form-group label {
-    visibility: hidden; }
+    /*visibility: hidden;*/
+    display: none; }
   .form-group .bar {
     position: relative;
     display: block;
@@ -8409,6 +8406,48 @@ a {
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease; }
+
+/* Buttons in input */
+.buttons-above-input {
+  position: relative; }
+  .buttons-above-input.bai-3 input, .buttons-above-input.bai-3 textarea {
+    padding-right: 100px;
+    /* TODO define correct right padding */ }
+  .buttons-above-input.bai-2 input, .buttons-above-input.bai-2 textarea {
+    padding-right: 60px;
+    /* TODO define correct right padding */ }
+  .buttons-above-input.bai-1 input, .buttons-above-input.bai-1 textarea {
+    padding-right: 30px;
+    /* TODO define correct right padding */ }
+  .buttons-above-input .bai-buttons {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0; }
+
+.btn-link {
+  transition: 0.3s background-color; }
+  .btn-link.btn-primary {
+    color: #546E7A; }
+  .btn-link.btn-success {
+    color: #009688; }
+  .btn-link.btn-info {
+    color: #00ACC1; }
+  .btn-link.btn-warning {
+    color: #FFB300; }
+  .btn-link.btn-danger {
+    color: #F4511E; }
+  .btn-link:hover {
+    background-color: #ECEFF1; }
+  .btn-link:focus, .btn-link:active {
+    outline: none !important;
+    background-color: #ECEFF1; }
+
+.btn-rounded, .btn-icon-round {
+  border-radius: 999px !important; }
+
+.btn-icon-round i {
+  margin: 0 -3.5px; }
 
 /*.nav#mainNav
 {
@@ -8521,6 +8560,10 @@ a {
   .detail-view .btn-toolbar {
     margin: -20px -20px 20px;
     padding: 20px; }
+    .detail-view .btn-toolbar h3 {
+      margin: 0;
+      padding: 0;
+      color: #546E7A; }
 
 .clientSwitch {
   display: block;

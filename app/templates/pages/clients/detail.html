@@ -1,28 +1,46 @@
 <div class="detail-view" data-ng-controller="ClientDetailCtrl as client">
+
+
     <div class="btn-toolbar">
-        <div class="btn-group btn-group-sm pull-right">
-            <button class="btn btn-link" data-ng-click="client.showProjects = !client.showProjects">
-                <span data-ng-class="{clientSwitch: true, active: client.showProjects}">
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                </span>
-            </button>
-            <button class="btn btn-link" data-ng-click="client.deleteClient()"><i class="md md-lg md-delete"></i></button>
+
+        <div class="row">
+            <div class="col-sm-8">
+
+                <h3>
+                        <span data-in-place-edit
+                             data-ipe-key="'refnumber'"
+                             data-ipe-value="client.client.refnumber"
+                             data-ipe-deletable="false"
+                             data-api-id="client.client.id"
+                             data-api-name="'client'"
+                             data-ipe-name="'clients.refnumber'|translate"></span>
+                </h3>
+
+            </div>
+            <div class="col-sm-4">
+
+                <div class="btn-group btn-group-sm pull-right">
+                    <button class="btn btn-link" data-ng-click="client.showProjects = !client.showProjects">
+                        <span data-ng-class="{clientSwitch: true, active: client.showProjects}">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </span>
+                    </button>
+                    <button class="btn btn-link" data-ng-click="client.deleteClient()"><i class="md md-lg md-delete"></i></button>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
     <h2><span data-in-place-edit
               data-api-id="client.client.id"
               data-api-name="'client'"
               data-ipe-key="'companyname'"
               data-ipe-value="client.client.companyname"
-              data-ipe-name="'clients.companyName'|translate"></span> <small><span data-in-place-edit
-                                                                                   data-ipe-key="'refnumber'"
-                                                                                   data-ipe-value="client.client.refnumber"
-                                                                                   data-ipe-deletable="false"
-                                                                                   data-api-id="client.client.id"
-                                                                                   data-api-name="'client'"
-                                                                                   data-ipe-name="'clients.refnumber'|translate"></span></small></h2>
+              data-ipe-name="'clients.companyName'|translate"></span> </h2>
     <p><span data-ng-repeat="cat in client.client.categories">{{cat}} </span></p>
 
     <div class="ng-trans-inplace-container">

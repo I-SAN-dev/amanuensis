@@ -7,6 +7,13 @@
   .btn-toolbar {
     margin: -20px -20px 20px;
     padding: 20px;
+
+    h3
+    {
+      margin: 0;
+      padding: 0;
+      color: $brand-primary;
+    }
   }
 }
 

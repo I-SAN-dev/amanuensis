@@ -47,6 +47,11 @@
 {
   cursor: pointer;
 
+  .form-group
+  {
+    margin-bottom: 0;
+  }
+
   .ipe-empty
   {
     color: $gray-lighter;
@@ -94,7 +99,8 @@
   }
   /* LABEL ======================================= */
   label {
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
   }
 
 
