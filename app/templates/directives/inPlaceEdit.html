@@ -3,12 +3,10 @@
         {{val}} <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
     </span>
     <div data-ng-switch-when="true" class="ipe buttons-above-input bai-3">
-        <div data-ng-if="ipe.type != 'textarea'"
-             data-material-input
+        <div data-material-input
              data-ng-model="ipe.val"
              data-input-type="{{ipe.type}}"
              data-input-label="{{name}}"></div>
-        <textarea data-ng-if="ipe.type == 'textarea'" data-ng-model="ipe.val"></textarea>
         <div class="bai-buttons">
             <button class="btn btn-link btn-success btn-icon-round" data-ng-click="ipe.save()"><i class="md md-check"></i></button>
             <button class="btn btn-link btn-danger btn-icon-round" data-ng-if="ipe.deletable != false" data-ng-click="ipe.deleteItem()"><i class="md md-delete"></i></button>
