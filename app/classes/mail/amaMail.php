@@ -82,6 +82,7 @@ class AmaMail {
         $template = new amaTemplate('user_templates/mail/_outer.phtml', $values);
 
         $messageHtml = $template->getHTML();
+        $this->previewHtml = $messageHtml;
         $this->mail->Body = $this->charset_decode_utf_8($messageHtml);
 
         /* automatically convert HTML to Text... a bit...*/
@@ -99,6 +100,23 @@ class AmaMail {
     public function addAttachment($path, $name = '')
     {
         $this->mail->addAttachment($path, $name);
+    }
+
+    /**
+     * Returns the complete generated Mail Markup
+     * @return string
+     * @throws Exception
+     */
+    public function getPreview()
+    {
+        if($this->contentSet && isset($this->previewHtml))
+        {
+            return $this->previewHtml;
+        }
+        else
+        {
+            throw new Exception('No mail content set.', 404);
+        }
     }
 
     /**
