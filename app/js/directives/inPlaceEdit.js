@@ -18,7 +18,8 @@ app.directive('inPlaceEdit',
                     deletableItem: '='
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
-                controller: function($scope){
+                controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
+
 
                     var self = this;
 
@@ -26,11 +27,12 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
+                        MasterDetailService.setEditor(this);
                         self.deletable = $scope.deletable;
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
-                        self.editMode = true;
+                        self.editMode = MasterDetailService.editMode = true;
                         backup = angular.copy($scope.val);
                     };
 
@@ -73,7 +75,7 @@ app.directive('inPlaceEdit',
                         self.editMode = false;
 
                     }
-                },
+                }],
                 controllerAs: 'ipe'
             };
         }

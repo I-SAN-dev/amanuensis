@@ -4,7 +4,7 @@
  */
 app.factory('MasterDetailService', [
     function () {
-        var master, detail;
+        var master, detail, editor;
         var processParams = function (args) {
             var params = [];
             for (var i = 1; i<args.length; i++){
@@ -23,6 +23,10 @@ app.factory('MasterDetailService', [
             setDetail: function(ctrl) {
                 detail = ctrl;
             },
+            setEditor: function(ctrl) {
+                editor = ctrl;
+            },
+            editMode: false,
             notifyMaster: function() {
                 var fnName = arguments[0];
                 master[fnName].apply(null,processParams(arguments));
@@ -30,6 +34,10 @@ app.factory('MasterDetailService', [
             notifyDetail: function () {
                 var fnName = arguments[0];
                 detail[fnName].apply(null,processParams(arguments));
+            },
+            notifyEditor: function () {
+                var fnName = arguments[0];
+                editor[fnName].apply(null,processParams(arguments));
             }
         }
     }

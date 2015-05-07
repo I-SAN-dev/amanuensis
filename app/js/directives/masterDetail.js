@@ -32,9 +32,14 @@ app.directive('masterDetail', [function(){
                  * @param detail - the new detail object
                  */
                 $scope.setDetail = function(detail){
+                    if(MasterDetailService.editMode) {
+                        MasterDetailService.notifyEditor('cancel');
+                        MasterDetailService.editMode = false;
+                    }
                     $stateParams.id = detail.id;
                     self.detail = detail;
                     MasterDetailService.notifyDetail('detailChanged', detail);
+
 
                     //$state.go($state.$current.name, {id: detail.id});
                 };
