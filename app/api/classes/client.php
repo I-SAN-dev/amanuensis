@@ -176,6 +176,8 @@ class client {
               customers.country,
               customers.comment,
               customers.refnumber,
+              customers.hourlyrate,
+              customers.dailyrate,
               GROUP_CONCAT(customer_category.id ORDER BY customer_category.id SEPARATOR ',') AS ids_categories,
               GROUP_CONCAT(customer_category.name ORDER BY customer_category.id SEPARATOR ',') AS names_categories
             FROM customers
@@ -253,6 +255,8 @@ class client {
                 'country' => $row['country'],
                 'comment' => $row['comment'],
                 'refnumber' => $row['refnumber'],
+                'hourlyrate' => $row['hourlyrate'],
+                'dailyrate' => $row['dailyrate'],
                 /* If the array is empty, use an empty object instead!!! */
                 'categories' => count($categories) > 0 ? $categories : new stdClass(),
                 'data' =>  count($additionalData) > 0 ? $additionalData : new stdClass()
@@ -289,7 +293,9 @@ class client {
                 'country',
                 'comment',
                 'contact_gender',
-                'refnumber'
+                'refnumber',
+                'hourlyrate',
+                'dailyrate'
             ),
             $_POST);
 
@@ -344,7 +350,9 @@ class client {
                 'country',
                 'comment',
                 'contact_gender',
-                'refnumber'
+                'refnumber',
+                'hourlyrate',
+                'dailyrate'
             ),
             $_POST);
 

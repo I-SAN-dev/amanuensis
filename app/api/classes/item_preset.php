@@ -87,7 +87,9 @@ class item_preset {
                 'description',
                 'fixedrate',
                 'hourlyrates',
+                'hourlyrate',
                 'dailyrates',
+                'dailyrate',
                 'userate'
             )
         );
@@ -109,7 +111,9 @@ class item_preset {
                 'description',
                 'fixedrate',
                 'hourlyrates',
+                'hourlyrate',
                 'dailyrates',
+                'dailyrate',
                 'userate'
             ),
             array('id', $id),
@@ -131,7 +135,9 @@ class item_preset {
                 'description',
                 'fixedrate',
                 'hourlyrates',
+                'hourlyrate',
                 'dailyrates',
+                'dailyrate',
                 'userate'
             ),
             $_POST
@@ -153,7 +159,9 @@ class item_preset {
                 'description',
                 'fixedrate',
                 'hourlyrates',
+                'hourlyrate',
                 'dailyrates',
+                'dailyrate',
                 'userate'
             ),
             $_POST);
