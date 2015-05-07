@@ -13,7 +13,26 @@ app.directive('materialInput', [
                 inputType: '@',
                 options: '=inputSelectOptions',
                 optionValue: '@inputSelectOptionValue',
-                optionName: '@inputSelectOptionName'
+                optionName: '@inputSelectOptionName',
+                buttons: '=inputButtons'
+            },
+            controller: function ($scope, $q) {
+
+                $scope.processWysiwyg = function(type) {
+
+                    if(type=='save') {
+
+                        $scope.model = $scope.editor.code();
+                        $scope.buttons[type][type]($scope.model);
+
+
+                    } else {
+                        $scope.buttons[type][type]();
+                    }
+                    console.log($scope.model);
+
+
+                };
             },
             link: function (scope, elem, attr) {
                 // we use the link function to get our template, so the directive still works when the type is not set on page load
@@ -23,11 +42,11 @@ app.directive('materialInput', [
                 $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
                     elem.replaceWith($compile(tplContent)(scope));
                     if(type=='wysiwyg') {
-                        var editor = $('.summernote');
-                        editor.summernote({
+                        scope.editor = $('.summernote');
+                        scope.editor.summernote({
                             height: 300
                         });
-                        editor.code(scope.model);
+                        scope.editor.code(scope.model);
                     }
                 });
             },

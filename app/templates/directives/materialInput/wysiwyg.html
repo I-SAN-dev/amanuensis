@@ -1,1 +1,6 @@
 <div class="summernote"></div>
+<div data-ng-if="buttons" class="{{buttons.wrapperClass}}">
+    <button class="{{buttons.save.class}}" data-ng-click="processWysiwyg('save')"><i class="{{buttons.save.iconClass}}"></i></button>
+    <button class="{{buttons.delete.class}}" data-ng-if="buttons.delete.isSet != false" data-ng-click="processWysiwyg('delete')"><i class="{{buttons.delete.iconClass}}"></i></button>
+    <button class="{{buttons.cancel.class}}" data-ng-click="processWysiwyg('cancel')"><i class="{{buttons.cancel.iconClass}}"></i></button>
+</div>

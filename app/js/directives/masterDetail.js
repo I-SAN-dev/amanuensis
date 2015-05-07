@@ -40,12 +40,7 @@ app.directive('masterDetail', [function(){
                     self.detail = detail;
                     MasterDetailService.notifyDetail('detailChanged', detail);
 
-
-                    //$state.go($state.$current.name, {id: detail.id});
                 };
-                $scope.$on('$stateChangeSuccess', function () {
-                    console.log('success;');
-                });
 
                 /**
                  * Looks for the next or previous item in the master list

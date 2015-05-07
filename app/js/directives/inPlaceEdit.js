@@ -37,6 +37,7 @@ app.directive('inPlaceEdit',
                     };
 
                     var post = function() {
+                        console.log(self.val);
                         var apiObject = {
                             name: $scope.apiName,
                             params: $scope.apiParams || {},
@@ -53,7 +54,10 @@ app.directive('inPlaceEdit',
                         });
                     };
 
-                    this.save = function () {
+                    this.save = function (newValue) {
+                        if(newValue){
+                            self.val = newValue;
+                        }
                         post();
                     };
 
@@ -74,7 +78,30 @@ app.directive('inPlaceEdit',
                         }
                         self.editMode = false;
 
+                    };
+
+                    this.buttons = {
+                        wrapper: true,
+                        wrapperClass: 'bai-buttons',
+                        iconOnly: true,
+                        save: {
+                            class: 'btn btn-link btn-success btn-icon-round',
+                            iconClass: 'md md-check',
+                            save: self.save
+                        },
+                        cancel: {
+                            class: 'btn btn-link btn-warning btn-icon-round',
+                            iconClass: 'md md-close',
+                            cancel: self.cancel
+                        },
+                        delete: {
+                            isSet: self.deletable,
+                            class: 'btn btn-link btn-danger btn-icon-round',
+                            iconClass: 'md md-delete',
+                            delete: self.deleteItem
+                        }
                     }
+
                 }],
                 controllerAs: 'ipe'
             };
