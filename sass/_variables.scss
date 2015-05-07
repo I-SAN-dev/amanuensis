@@ -24,7 +24,8 @@ $gray:                   $gray-base;
 $gray-light:             #BDBDBD;
 $gray-lighter:           #EEEEEE;
 
-$brand-primary:         #546E7A; // Blue Grey 600
+/*$brand-primary:         #546E7A; // Blue Grey 600*/
+$brand-primary:         #404877;
 $brand-success:         #009688; // Teal 500
 $brand-info:            #00ACC1; // Cyan 600
 $brand-warning:         #FFB300; // Amber 600
@@ -36,7 +37,8 @@ $brand-danger:          #F4511E; // Deep Orange 600
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #ECEFF1; // Blue grey 50
+/*$body-bg:               #ECEFF1; // Blue grey 50*/
+$body-bg:                 #f5f5f5; // Grey 100
 //** Global text color on `<body>`.
 $text-color:            #263238; // Blue grey 900
 
