@@ -5,7 +5,7 @@
  * @param identifier {string|object} - an identifier for the api action
  * @return {promise}
  */
-angular.module('ama')
+app
     .factory('ApiAbstractionLayer', [
         '$http',
         'constants',

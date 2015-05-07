@@ -1,7 +1,7 @@
 /**
  * Main application. Handles dependencies and routing.
  */
-var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate']);
+var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize']);
 app.run(function ($rootScope, $state, AuthService, $q) {
 
 

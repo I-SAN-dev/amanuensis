@@ -2,7 +2,7 @@
  * Authentication Service
  * Provides functions to log in, log out and get the login state and the current user
  */
-angular.module('ama')
+app
 .factory('AuthService', [
         '$q',
         '$http',

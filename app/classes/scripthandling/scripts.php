@@ -26,6 +26,7 @@ class Scripts
         "lib/modules/angular-translate.min.js",
         "lib/modules/angular-translate-loader-static-files.min.js",
         "lib/modules/angular-animate.min.js",
+        "lib/modules/angular-sanitize.min.js",
         "lib/sha256.js",
         "lib/summernote.min.js",
         "js/app.js", // has to be loaded before the other scripts
