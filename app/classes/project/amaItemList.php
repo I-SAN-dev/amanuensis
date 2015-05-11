@@ -42,6 +42,7 @@ class AmaItemList {
                 LIMIT 1
             ";
             $q = $dbal->prepare($query);
+            $q->bindParam(':id', $id);
             $q->execute();
             if(!$client = $q->fetch(PDO::FETCH_ASSOC))
             {
@@ -85,7 +86,8 @@ class AmaItemList {
                 $orderBy
             );
 
-            foreach($this->entries as $entry)
+            /* The & creates a reference, so we can edit the entry! */
+            foreach($this->entries as &$entry)
             {
                 /*
                  * use hourly rate
@@ -155,11 +157,9 @@ class AmaItemList {
                     $entry['total'] = $entry['fixedrate'];
                 }
 
-
                 $this->total = $this->total + $entry['total'];
 
             }
-
         }
         else
         {

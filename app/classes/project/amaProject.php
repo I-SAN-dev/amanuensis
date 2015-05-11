@@ -57,7 +57,7 @@ class AmaProject {
         {
             $this->client = $this->dbal->simpleSelect(
                 'customers',
-                array('id', 'refnumber', 'companyname', 'contact_gender', 'contact_firstname', 'contact_lastname', 'street_no', 'additional', 'zip', 'city', 'country'),
+                array('id', 'refnumber', 'companyname', 'contact_gender', 'contact_firstname', 'contact_lastname', 'street_no', 'additional', 'zip', 'city', 'country','dailyrate', 'hourlyrate'),
                 array('id', $this->clientid),
                 1);
         }
