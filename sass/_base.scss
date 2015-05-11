@@ -26,6 +26,10 @@ html, body
   @include card(1);
   overflow: hidden;
 }
+.panel-heading
+{
+  border-bottom: 1px solid $gray-lighter;
+}
 
 .navbar
 {

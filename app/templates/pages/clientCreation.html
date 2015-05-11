@@ -1,71 +1,107 @@
-<div data-ng-controller="ClientCreationCtrl as create">
-    <form>
-        <div data-material-input
-             data-input-label="{{'clients.companyName'|translate}}"
-             data-input-type="text"
-             data-input-id="companyname"
-             data-ng-model="create.newClient.companyname"></div>
-        <div data-material-input
-             data-input-label="{{'clients.refNumber'|translate}}"
-             data-input-type="text"
-             data-input-id="refnumber"
-             data-ng-model="create.newClient.refnumber"
-             data-input-required="true"></div>
-        <div class="form-group">
-            <label for="contact_gender">{{'clients.contactGender'|translate}}</label>
-            <select class="form-control" id="contact_gender" data-ng-model="create.newClient.contact_gender">
-                <option value="0">{{'clients.contactGender.male'|translate}}</option>
-                <option value="1">{{'clients.contactGender.female'|translate}}</option>
-            </select>
-        </div>
-        <div data-material-input
-             data-input-label="{{'clients.firstName'|translate}}"
-             data-input-type="text"
-             data-input-id="contact_firstname"
-             data-ng-model="create.newClient.contact_firstname"></div>
-        <div data-material-input
-             data-input-label="{{'clients.lastName'|translate}}"
-             data-input-type="text"
-             data-input-id="contact_lastname"
-             data-ng-model="create.newClient.contact_lastname"></div>
-        <div data-material-input
-             data-input-label="{{'clients.streetNo'|translate}}"
-             data-input-type="text"
-             data-input-id="street_no"
-             data-ng-model="create.newClient.street_no"></div>
-        <div data-material-input
-             data-input-label="{{'clients.additional'|translate}}"
-             data-input-type="text"
-             data-input-id="additional"
-             data-ng-model="create.newClient.additional"></div>
-        <div data-material-input
-             data-input-label="{{'clients.zip'|translate}}"
-             data-input-type="text"
-             data-input-id="zip"
-             data-ng-model="create.newClient.zip"></div>
-        <div data-material-input
-             data-input-label="{{'clients.city'|translate}}"
-             data-input-type="text"
-             data-input-id="city"
-             data-ng-model="create.newClient.city"></div>
-        <div data-material-input
-             data-input-label="{{'clients.country'|translate}}"
-             data-input-type="text"
-             data-input-id="country"
-             data-ng-model="create.newClient.country"></div>
-        <div class="form-group">
-            <label for="comment">{{'clients.comment'|translate}}</label>
-            <textarea class="form-control" id="comment" placeholder="{{'clients.comment'|translate}}" data-ng-model="create.newClient.comment"></textarea>
-        </div>
+<div  class="row" data-ng-controller="ClientCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+        <h2>{{'clients.newClient' | translate}}</h2>
 
-        <div class="form-group">
-            <label for="categories">{{'clients.categories'|translate}}</label>
-            <select multiple class="form-control" id="categories" data-ng-model="create.newClientCategories">
-                <option data-ng-repeat="cat in create.allCategories" value="{{cat.id}}">{{cat.name}}</option>
-            </select>
+        <div class="panel panel-default">
+            <form>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div data-material-input
+                                 data-input-label="{{'clients.refNumber'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="refnumber"
+                                 data-ng-model="create.newClient.refnumber"
+                                 data-input-required="true"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>{{ 'clients.companyName'|translate }}</h3>
+                            <div data-material-input
+                                 data-input-label="{{'clients.name'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="companyname"
+                                 data-ng-model="create.newClient.companyname"></div>
+                            <div data-material-input
+                                 data-input-label="{{'clients.streetNo'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="street_no"
+                                 data-ng-model="create.newClient.street_no"></div>
+                            <div data-material-input
+                                 data-input-label="{{'clients.additional'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="additional"
+                                 data-ng-model="create.newClient.additional"></div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div data-material-input
+                                         data-input-label="{{'clients.zip'|translate}}"
+                                         data-input-type="text"
+                                         data-input-id="zip"
+                                         data-ng-model="create.newClient.zip"></div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div data-material-input
+                                         data-input-label="{{'clients.city'|translate}}"
+                                         data-input-type="text"
+                                         data-input-id="city"
+                                         data-ng-model="create.newClient.city"></div>
+                                </div>
+                            </div>
+                            <div data-material-input
+                                 data-input-label="{{'clients.country'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="country"
+                                 data-ng-model="create.newClient.country"></div>
+
+                        </div>
+
+
+                        <div class="col-md-5 col-md-offset-1">
+                            <h3>{{ 'clients.contact'|translate }}</h3>
+
+                            <div data-material-input
+                                 data-input-label="{{'clients.contactGender'|translate}}"
+                                 data-input-type="select"
+                                 data-input-id="contact_gender"
+                                 data-ng-model="create.newClient.contact_gender"
+                                 data-input-select-options="create.genderOptions"
+                                 data-input-select-option-value="id"
+                                 data-input-select-option-name="name"></div>
+                            <div data-material-input
+                                 data-input-label="{{'clients.firstName'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="contact_firstname"
+                                 data-ng-model="create.newClient.contact_firstname"></div>
+                            <div data-material-input
+                                 data-input-label="{{'clients.lastName'|translate}}"
+                                 data-input-type="text"
+                                 data-input-id="contact_lastname"
+                                 data-ng-model="create.newClient.contact_lastname"></div>
+
+                            <h3>{{ 'clients.categories'|translate }}</h3>
+                            <div class="form-group">
+                                <label for="categories">{{'clients.categories'|translate}}</label>
+                                <select multiple class="form-control" id="categories" data-ng-model="create.newClientCategories">
+                                    <option data-ng-repeat="cat in create.allCategories" value="{{cat.id}}">{{cat.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">{{'clients.comment'|translate}}</label>
+                        <textarea class="form-control" id="comment" placeholder="{{'clients.comment'|translate}}" data-ng-model="create.newClient.comment"></textarea>
+                    </div>
+                    <button type="submit" data-ng-click="create.addClient()" class="btn btn-success pull-right">{{'clients.addClient'|translate}}</button>
+
+
+                </div>
+            </form>
         </div>
+    </div>
 
-        <button type="submit" data-ng-click="create.addClient()" class="btn btn-success">{{'clients.addClient'|translate}}</button>
-
-    </form>
 </div>
