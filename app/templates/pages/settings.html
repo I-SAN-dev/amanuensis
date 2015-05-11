@@ -1,4 +1,101 @@
 <div data-ng-controller="SettingsCtrl as settings">
-    Company: {{settings.company}}<br />
-    Language: {{settings.language}}
+    <p>Company: {{settings.company}}<br />
+        Language: {{settings.language}}</p>
+    <p>{{settings.settings|json}}</p>
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+        <div class="panel panel-default" role="tabpanel">
+            <div class="panel-body">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">{'settings.basicSettings'|translate}</a></li>
+                    <li role="presentation"><a data-ng-href="#paths" aria-controls="paths" role="tab" data-toggle="tab">{'settings.pathSettings'|translate}</a></li>
+                    <li role="presentation"><a data-ng-href="#server" aria-controls="server" role="tab" data-toggle="tab">{'settings.serverSettings'|translate}</a></li>
+                    <li role="presentation"><a data-ng-href="#refnumbers" aria-controls="refnumbers" role="tab" data-toggle="tab">{'settings.refnumberSettings'|translate}</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="basic">
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="paths">
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="server">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{'settings.db.host'|translate}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.db.host"
+                                     data-ipe-key="'db.host'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'settings.db.host|translate'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{'settings.db.dbName'|translate}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.db.database"
+                                     data-ipe-key="'db.database'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'settings.db.dbName|translate'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{'settings.db.port'|translate}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.db.port"
+                                     data-ipe-key="'db.port'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'settings.db.port|translate'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{'settings.db.user'|translate}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.db.user"
+                                     data-ipe-key="'db.user'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'settings.db.user|translate'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{'settings.db.password'|translate}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.db.password"
+                                     data-ipe-key="'db.password'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'settings.db.password|translate'"
+                                     data-ipe-type="'password'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="refnumbers">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
