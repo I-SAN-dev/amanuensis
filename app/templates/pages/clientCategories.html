@@ -1,20 +1,65 @@
-<div data-ng-controller="ClientCategoriesCtrl as cat">
-    <h2>Client categories</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr><th>Name</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="category in cat.allCategories">
-            <td>{{category.name}}</td>
-            <td>{{category.description}}</td>
-            <td><button data-ng-click="cat.deleteCategory(category.id)">Delete this category</button></td>
-        </tr>
-        <tr>
-            <td><input class="form-control" id="newcategoryname" data-ng-model="cat.newCategory.name"></td>
-            <td><textarea class="form-control" id="newcategorydescription" data-ng-model="cat.newCategory.description"></textarea></td>
-            <td><button data-ng-click="cat.addCategory()">Create new category</button></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="row" data-ng-controller="ClientCategoriesCtrl as cat">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+        <h2>{{'clients.clients'|translate}} {{'clients.actions.categories'|translate}}</h2>
+        <div class="panel panel-default">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{'global.name'|translate}}</th><th>{{'global.description'|translate}}</th><th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="category in cat.allCategories">
+                    <td>
+                    <span data-in-place-edit
+                          data-ipe-key="'name'"
+                          data-ipe-value="category.name"
+                          data-api-name="'client_categories'"
+                          data-api-id="category.id"
+                          data-ipe-name="'global.name'|translate"
+                          data-ipe-deletable="false"></span>
+                    </td>
+                    <td>
+                        <span data-in-place-edit
+                              data-ipe-key="'description'"
+                              data-ipe-value="category.description"
+                              data-api-name="'client_categories'"
+                              data-api-id="category.id"
+                              data-ipe-name="'global.description'|translate"
+                              data-ipe-type="'textarea'"></span>
+                    </td>
+
+                    </td>
+                    <td><button class="btn btn-link btn-danger btn-icon-round" data-ng-click="cat.deleteCategory(category.id)"><i class="md-delete"></i></button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div data-material-input
+                             data-ng-model="cat.newCategory.name"
+                             data-input-id="newcategoryname"
+                             data-input-label="{{'global.name'|translate}}"
+                             data-input-required="true"
+                        ></div>
+                    </td>
+                    <td>
+                        <div data-material-input
+                             data-ng-model="cat.newCategory.description"
+                             data-input-id="newcategorydescription"
+                             data-input-label="{{'global.description'|translate}}"
+                             data-input-type="textarea"
+                        ></div>
+                    </td>
+                    <td>
+                        <button class="btn btn-link btn-success btn-icon-round" data-ng-click="cat.addCategory()"><i class="md-add"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
+
+
+
+

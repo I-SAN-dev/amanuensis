@@ -72,7 +72,14 @@
   position: relative;
   /*margin-bottom: 45px;*/
 
-  input.form-control {
+  input.form-control
+  {
+    height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  }
+
+  input.form-control,
+  select.form-control,
+  textarea.form-control {
 
     display: block;
     width: 100%;
@@ -80,7 +87,6 @@
     border-bottom: 1px solid $gray-light;
     background-color: transparent;
 
-    height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
     padding: (1.5*$font-size-base/2) 0 (1.5*$font-size-base/4);
     margin-bottom: 0;
     color: $input-color;
@@ -92,10 +98,40 @@
 
     &:focus {
       outline: none;
+      -moz-outline: none;
       @include box-shadow(inset 0 0 0 transparent);
       border-bottom-color: $gray-light;
     }
+    &::-moz-focus-inner {
+      border:0;
+      -moz-outline: none;
+      outline: none;
+    }
 
+    .option
+    {
+
+      &:focus
+      {
+        outline: none !important;
+        -moz-outline: none;
+      }
+      &::-moz-focus-inner {
+        border:0;
+        -moz-outline: none;
+        outline: none;
+      }
+    }
+
+  }
+
+  select.form-control
+  {
+    &:active,
+    &:hover
+    {
+      outline: none !important;
+    }
   }
   /* LABEL ======================================= */
   label {
@@ -129,7 +165,9 @@
   }
 
   /* active state */
-  input:focus ~ .bar:before, input:focus ~ .bar:after {
+  input:focus ~ .bar:before, input:focus ~ .bar:after,
+  textarea:focus ~ .bar:before, textarea:focus ~ .bar:after,
+  select:focus ~ .bar:before, select:focus ~ .bar:after {
     width: 50%;
   }
 
@@ -249,3 +287,10 @@
   padding: 0 5px 5px 5px !important;
 }
 
+textarea
+{
+  resize: vertical !important;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}

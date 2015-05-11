@@ -1,6 +1,6 @@
 <div class="form-group">
-    <select id="{{id}}">
-        <option data-ng-repeat="option in options" value="{{option[optionValue]}}">{{option[optionName]}}</option>
+    <select class="form-control" id="{{id}}" data-ng-required="{{required || false}}">
+        <option data-ng-repeat="option in options" value="{{option[optionValue]}}">{{option[optionName] | translate}}</option>
     </select>
     <span class="bar"></span>
     <label for="{{id}}">{{label}}</label>

@@ -5,7 +5,14 @@
     "menuTitle": "Übersicht über Kunden und Projekte"
   },
 
+  "global":
+  {
+    "name":"Name",
+    "description":"Beschreibung"
+  },
+
   "clients": {
+    "addClient":"Neuen Kunden anlegen",
     "menuName": "Kunden",
     "menuTitle": "Liste aller Kunden",
     "client": "Kunde",
@@ -19,6 +26,7 @@
     "companyName":"Firma",
     "address": "Adresse",
     "streetNo": "Straße, Hausnummer",
+    "additional":"Zusatz",
     "streetAdditional": "Adresszusatz",
     "zip":"Postleitzahl",
     "city": "Stadt",
@@ -31,6 +39,11 @@
     "actions": {
       "new": "Neuer Kunde",
       "categories": "Kategorien"
+    },
+    "contactGender":
+    {
+      "male":"Herr",
+      "female":"Frau"
     }
   },
 
@@ -43,7 +56,18 @@
     "contracts": "Verträge",
     "todos":"ToDo-Listen",
     "acceptances": "Abnahmen",
-    "invoices": "Rechnungen"
+    "invoices": "Rechnungen",
+    "actions":
+    {
+      "new":"Neues Projekt erstellen"
+    }
+  },
+
+  "itemPresets":
+  {
+    "actions":{
+      "new":"Neues Preset erstellen"
+    }
   },
 
   "login":

@@ -122,6 +122,7 @@ class invoice {
         /* Add items */
         $itemlist = new AmaItemList('invoice', $id);
         $result["items"] = $itemlist->entries;
+        $result["total"] = $itemlist->total;
 
         /* Add project data */
         $project = new AmaProject($result['project']);

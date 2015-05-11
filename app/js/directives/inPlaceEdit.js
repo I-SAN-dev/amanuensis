@@ -79,7 +79,6 @@ app.directive('inPlaceEdit',
                         self.editMode = false;
 
                     };
-
                     this.buttons = {
                         wrapper: true,
                         wrapperClass: 'bai-buttons',
@@ -95,7 +94,7 @@ app.directive('inPlaceEdit',
                             cancel: self.cancel
                         },
                         delete: {
-                            isSet: self.deletable,
+                            isSet: $scope.deletable,
                             class: 'btn btn-link btn-danger btn-icon-round',
                             iconClass: 'md md-delete',
                             delete: self.deleteItem

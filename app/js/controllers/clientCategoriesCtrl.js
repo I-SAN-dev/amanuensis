@@ -19,6 +19,7 @@ app.controller('ClientCategoriesCtrl', ['ApiAbstractionLayer', 'LocalStorage', f
         ApiAbstractionLayer('POST', {name: 'client_categories', data: self.newCategory}).then(function (data) {
             self.allCategories.push(data);
             LocalStorage.setData('clientCategories', self.allCategories);
+            self.newCategory = null;
         });
     };
 

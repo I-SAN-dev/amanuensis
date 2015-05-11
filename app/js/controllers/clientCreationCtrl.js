@@ -33,6 +33,21 @@ app.controller('ClientCreationCtrl',
 
             this.newClient = initialNewClient;
 
+            this.genderOptions = [
+                {
+                    id: '',
+                    name: ''
+                },
+                {
+                    id: 'm',
+                    name: 'clients.contactGender.male'
+                },
+                {
+                    id: 'w',
+                    name: 'clients.contactGender.female'
+                }
+            ];
+
             // Get all client categories
             this.allCategories = LocalStorage.getData('clientCategories');
             ApiAbstractionLayer('GET', 'client_categories').then(function(data){
