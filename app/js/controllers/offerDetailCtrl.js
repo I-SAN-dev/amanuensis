@@ -2,7 +2,8 @@ app.controller('OfferDetailCtrl', [
         'ApiAbstractionLayer',
         'LocalStorage',
         '$stateParams',
-        function (ApiAbstractionLayer, LocalStorage, $stateParams, ItemService) {
+        'PdfService',
+        function (ApiAbstractionLayer, LocalStorage, $stateParams, PdfService) {
             var id = $stateParams.id;
             var self = this;
 
@@ -17,22 +18,7 @@ app.controller('OfferDetailCtrl', [
 
 
             this.generatePDF = function (preview) {
-                var method = 'POST';
-                var paramType = 'data';
-                if(preview) {
-                    method = 'GET';
-                    paramType = 'params';
-                }
-
-                var apiObject = {
-                    name: 'pdfgen'
-                };
-                apiObject[paramType] = {
-                    for: 'offer',
-                    forid: self.offer.id
-                };
-
-                ApiAbstractionLayer(method, apiObject).then(function (data) {
+                PdfService(preview, 'offer', id).then(function (data) {
                     if(preview){
 
                     } else {
@@ -40,12 +26,7 @@ app.controller('OfferDetailCtrl', [
                         LocalStorage.setData('offer/'+id, self.offer);
                     }
                 });
-            }
-
-
-
-
-
+            };
         }
     ]
 );

@@ -57,6 +57,7 @@ class Scripts
         "js/services/localStorage.js",
         "js/services/masterDetailService.js",
         "js/services/itemService.js",
+        "js/services/pdfService.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",
