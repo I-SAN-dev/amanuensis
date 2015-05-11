@@ -6,20 +6,11 @@ app.controller('ItemCreationCtrl', [
     '$stateParams',
     '$filter',
     function (ApiAbstractionLayer,LocalStorage, ItemService, $state, $stateParams, $filter) {
+
+
+
         var self = this;
 
-        var processPresets = function (presetList) {
-            var presets = [];
-            for(var i = 0; i < presetList.length; i++){
-                var preset = {
-                    name: presetList[i].name,
-                    value: presetList[i]
-                };
-                console.log(preset);
-                presets.push(preset);
-            }
-            return presets;
-        };
         this.presets = LocalStorage.getData('itemPresets')|| [];
         ApiAbstractionLayer('GET', 'item_preset').then(function (data) {
             self.presets = data;
@@ -42,7 +33,8 @@ app.controller('ItemCreationCtrl', [
 
         this.createItem = function () {
             var forType = $stateParams.for;
-            var forId = $stateParams.referrerParams.id;
+            var forId = $stateParams.forId;
+            self.newItem.id = null;
             var apiObject = {
                 name: 'item',
                 data: self.newItem,
