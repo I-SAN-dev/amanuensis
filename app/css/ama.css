@@ -10586,6 +10586,11 @@ button:disabled {
 .btn-icon-round i {
   margin: 0 -3.5px; }
 
+/* Summernote */
+.note-toolbar {
+  margin: 0 0 !important;
+  padding: 0 5px 5px 5px !important; }
+
 /*.nav#mainNav
 {
   @include card(1);

@@ -44,7 +44,13 @@ app.directive('materialInput', [
                     if(type=='wysiwyg') {
                         scope.editor = $('.summernote');
                         scope.editor.summernote({
-                            height: 300
+                            height: 300,
+                            toolbar: [
+                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['layout', ['ul', 'ol']],
+                                ['view', ['fullscreen','codeview']],
+                                ['do', ['undo', 'redo']]
+                            ]
                         });
                         scope.editor.code(scope.model);
                     }
