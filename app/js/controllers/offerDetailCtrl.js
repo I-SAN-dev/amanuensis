@@ -2,7 +2,7 @@ app.controller('OfferDetailCtrl', [
         'ApiAbstractionLayer',
         'LocalStorage',
         '$stateParams',
-        function (ApiAbstractionLayer, LocalStorage, $stateParams) {
+        function (ApiAbstractionLayer, LocalStorage, $stateParams, ItemService) {
             var id = $stateParams.id;
             var self = this;
 
@@ -14,6 +14,7 @@ app.controller('OfferDetailCtrl', [
                 self.offer = data;
                 LocalStorage.setData('offer/'+id, data);
             });
+
 
 
 

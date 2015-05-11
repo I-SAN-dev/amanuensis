@@ -303,6 +303,21 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.itemCreation',
+        stateObject: {
+            url: '/new-item/:for',
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/itemCreation.html'
+                }
+            }
+        }
+    },
+    {
         name:'app.settings',
         stateObject: {
             url: '/settings',

@@ -23,10 +23,12 @@
        data-ipe-name="'offers.description'|translate"
        data-ipe-type="'textarea'"></p>
 
-    <p><a href="{{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
+    <p><a data-ng-href="{{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
 
+    <h2>{{'offers.items'|translate}}</h2>
     <ul>
         <li data-ng-repeat="item in offer.offer.items">{{item.name}}</li>
+        <li data-ui-sref="app.itemCreation({for: 'offer', referrer:'app.offerDetail', referrerParams: {id:{{offer.offer.id}}}})">{{'offers.addItem'|translate}}</li>
     </ul>
 
 </div>
