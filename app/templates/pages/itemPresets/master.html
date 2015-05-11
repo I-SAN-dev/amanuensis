@@ -21,12 +21,10 @@
 
 
     <div class="list-group">
-        <a class="list-group-item" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
-           data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
-           data-ng-click="setDetail(client)">
-            <h4>{{client.companyname}}</h4>
-            <p>{{client.city}}<br>
-                {{client.refnumber}}</p>
+        <a class="list-group-item" data-ng-repeat="preset in masterList | filter:MasterDetailCtrl.filterText"
+           data-ng-class="{active:MasterDetailCtrl.detail.id == preset.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
+           data-ng-click="setDetail(preset)">
+            <h4>{{preset.name}}</h4>
         </a>
     </div>
 </div>

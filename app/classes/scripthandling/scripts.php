@@ -77,6 +77,8 @@ class Scripts
         "js/controllers/offersCtrl.js",
         "js/controllers/offerDetailCtrl.js",
         "js/controllers/itemPresetsCtrl.js",
+        "js/controllers/itemPresetDetailCtrl.js",
+        "js/controllers/itemPresetCreationCtrl.js",
         "js/controllers/settingsCtrl.js",
     );
 
