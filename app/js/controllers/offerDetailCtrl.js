@@ -16,6 +16,33 @@ app.controller('OfferDetailCtrl', [
             });
 
 
+            this.generatePDF = function (preview) {
+                var method = 'POST';
+                var paramType = 'data';
+                if(preview) {
+                    method = 'GET';
+                    paramType = 'params';
+                }
+
+                var apiObject = {
+                    name: 'pdfgen'
+                };
+                apiObject[paramType] = {
+                    for: 'offer',
+                    forid: self.offer.id
+                };
+
+                ApiAbstractionLayer(method, apiObject).then(function (data) {
+                    if(preview){
+
+                    } else {
+                        self.offer.path = data.path;
+                        LocalStorage.setData('offer/'+id, self.offer);
+                    }
+                });
+            }
+
+
 
 
 

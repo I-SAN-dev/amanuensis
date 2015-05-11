@@ -23,7 +23,9 @@
        data-ipe-name="'offers.description'|translate"
        data-ipe-type="'textarea'"></p>
 
-    <p><a data-ng-href="{{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
+    <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
+    <p><button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button></p>
+    <p><button class="btn btn-info" data-ng-click="offer.generatePDF(true)">!! Generate PDF Preview !!</button></p>
 
     <h2>{{'offers.items'|translate}}</h2>
     <ul>

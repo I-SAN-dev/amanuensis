@@ -36,7 +36,6 @@ app.controller('ItemCreationCtrl', [
             var forId = $stateParams.forId;
             self.newItem.id = null;
             self.newItem[forType] = forId;
-            console.log(self.newItem);
             var apiObject = {
                 name: 'item',
                 data: self.newItem,
