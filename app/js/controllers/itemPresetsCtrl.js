@@ -3,7 +3,9 @@ app.controller('ItemPresetsCtrl', [
     'LocalStorage',
     'DeleteService',
     '$filter',
-    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter) {
+    'MasterDetailService',
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, MasterDetailService) {
+        MasterDetailService.setMaster(this);
         var self = this;
         this.currency = '€'; // TODO: get this from config
         this.presets = LocalStorage.getData('itemPresets');

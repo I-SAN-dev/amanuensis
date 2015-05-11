@@ -1,56 +1,8 @@
-<div data-ng-controller="ItemPresetsCtrl as presets">
-    <button data-ng-if="!presets.addPresetFlag" class="btn btn-success" data-ng-click="presets.addPresetFlag = !presets.addPresetFlag"><i class="md md-add"></i></button>
-    <form data-ng-submit="presets.addPreset()" data-ng-if="presets.addPresetFlag">
-        <div data-material-input data-input-label="{{'items.name'|translate}}" data-input-id="name" data-ng-model="presets.newPreset.name"></div>
-        <div data-material-input data-input-label="{{'items.description'|translate}}" data-input-id="description" data-input-type="wysiwyg" data-ng-model="presets.newPreset.description"></div>
-        <div data-material-input data-input-label="{{'items.hourlyRates'|translate}}" data-input-id="hourlyrates" data-ng-model="presets.newPreset.hourlyrates"></div>
-        <div data-material-input data-input-label="{{'items.hourlyRate'|translate}}" data-input-id="hourlyrate" data-ng-model="presets.newPreset.hourlyrate"></div>
-        <div data-material-input data-input-label="{{'items.dailyRates'|translate}}" data-input-id="dailyrates" data-ng-model="presets.newPreset.dailyrates"></div>
-        <div data-material-input data-input-label="{{'items.dailyRate'|translate}}" data-input-id="dailyrate" data-ng-model="presets.newPreset.dailyrate"></div>
-        <div data-material-input data-input-label="{{'items.fixedRate'|translate}}" data-input-id="fixedrate" data-ng-model="presets.newPreset.fixedrate"></div>
-        <div data-material-input data-input-label="{{'items.useRate'|translate}}" data-input-id="userate" data-ng-model="presets.newPreset.userate" data-input-type="select" data-input-select-options="presets.useRateOptions" data-input-select-option-name="name" data-input-select-option-value="value"></div>
-        <button class="btn btn-success" type="submit">!! add preset</button>
-    </form>
-    <div data-ng-repeat="preset in presets.presets">
-        <h2>{{preset.name}}</h2>
-        <div data-in-place-edit
-             data-ipe-key="'description'"
-             data-ipe-value="preset.description"
-             data-ipe-type="'wysiwyg'"
-             data-api-name="'item_preset'"
-             data-api-id="preset.id"
-             data-ipe-name="'items.description'|translate"></div>
-        <h3>{{'items.expectedRate'|translate}}</h3>
-        <div>
-            <p>{{'items.hourlyRate'|translate}}: <span data-in-place-edit
-                                                       data-ipe-key="'hourlyrates'"
-                                                       data-ipe-value="preset.hourlyrates"
-                                                       data-api-name="'item_preset'"
-                                                       data-api-id="preset.id"
-                                                       data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
-                                                                                                                                      data-ipe-value="preset.hourlyrate"
-                                                                                                                                      data-ipe-key="'hourlyrate'"
-                                                                                                                                      data-api-name="'item_preset'"
-                                                                                                                                      data-api-id="preset.id"
-                                                                                                                                      data-ipe-name="'items.hourlyRate'|translate"></span></p>
-            <p>{{'items.dailyRate'|translate}}: <span data-in-place-edit
-                                                      data-ipe-key="'dailyrates'"
-                                                      data-ipe-value="preset.dailyrates"
-                                                      data-api-name="'item_preset'"
-                                                      data-api-id="preset.id"
-                                                      data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
-                                                                                                                                               data-ipe-value="preset.dailyrate"
-                                                                                                                                               data-ipe-key="'dailyrate'"
-                                                                                                                                               data-api-name="'item_preset'"
-                                                                                                                                               data-api-id="preset.id"
-                                                                                                                                               data-ipe-name="'items.dailyRate'|translate"></span></p>
-            <p>{{'items.fixedRate'|translate}}: <span data-in-place-edit
-                                                      data-ipe-value="preset.fixedrate"
-                                                      data-ipe-key="'fixedrate'"
-                                                      data-api-name="'item_preset'"
-                                                      data-api-id="preset.id"
-                                                      data-ipe-name="'items.fixedRate'|translate"></span></p>
-        </div>
-        <button class="btn btn-danger" data-ng-click="presets.deletePreset(preset.id)"><i class="md md-delete"></i></button>
-    </div>
+<div data-master-detail
+     data-ng-controller="ItemPresetsCtrl as presets"
+     data-master-list="presets.presets"
+     data-master-tpl="'templates/pages/itemPresets/master.html'"
+     data-detail-tpl="'templates/pages/itemPresets/detail.html'"
+     data-detail=""
+     data-master-loaded="presets.loaded">
 </div>
