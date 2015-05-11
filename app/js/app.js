@@ -305,7 +305,7 @@ app.constant('sites', [
     {
         name:'app.itemCreation',
         stateObject: {
-            url: '/new-item/:for',
+            url: '/new-item/:for/:forId',
             params: {
                 referrer: null,
                 referrerParams: null

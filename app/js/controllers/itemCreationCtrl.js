@@ -6,6 +6,9 @@ app.controller('ItemCreationCtrl', [
     '$stateParams',
     '$filter',
     function (ApiAbstractionLayer,LocalStorage, ItemService, $state, $stateParams, $filter) {
+
+
+
         var self = this;
 
         this.presets = LocalStorage.getData('itemPresets')|| [];
@@ -30,7 +33,7 @@ app.controller('ItemCreationCtrl', [
 
         this.createItem = function () {
             var forType = $stateParams.for;
-            var forId = $stateParams.referrerParams.id;
+            var forId = $stateParams.forId;
             self.newItem.id = null;
             var apiObject = {
                 name: 'item',
