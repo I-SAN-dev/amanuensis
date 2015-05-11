@@ -277,6 +277,17 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.itemPresets',
+        stateObject: {
+            url: '/item-presets/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/itemPresets.html'
+                }
+            }
+        }
+    },
+    {
         name:'app.settings',
         stateObject: {
             url: '/settings',
