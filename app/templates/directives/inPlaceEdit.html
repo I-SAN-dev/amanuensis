@@ -1,10 +1,10 @@
 <span data-ng-switch="ipe.editMode">
     <span data-ng-switch-default
           data-ng-click="ipe.enterEditMode()"
-          class="ipe"
-          data-ng-bind-html="val"></span>
+          class="ipe">
+    <span data-ng-bind-html="val"></span>
     <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
-
+</span>
     <div data-ng-switch-when="true" class="ipe buttons-above-input bai-3">
         <div data-material-input
              data-ng-model="ipe.val"
