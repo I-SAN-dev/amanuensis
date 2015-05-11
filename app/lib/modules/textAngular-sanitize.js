@@ -496,6 +496,9 @@
 // Custom logic for accepting certain style options only - textAngular
 // Currently allows only the color, background-color, text-align, float, width and height attributes
 // all other attributes should be easily done through classes.
+
+    // Edited by Sebastian Antosch | I-SAN.de Webdesign & Hosting GbR - only allow what we want to :D
+
     function validStyles(styleAttr){
         var result = '';
         var styleArray = styleAttr.split(';');
@@ -505,7 +508,15 @@
                 var key = trim(angular.lowercase(v[0]));
                 var value = trim(angular.lowercase(v[1]));
                 if(
-                    (key === 'color' || key === 'background-color') && (
+                    key === 'font-weight' && value === 'bold'
+                    ||
+                    key === 'font-style' && value === 'italic'
+                    ||
+                    key === 'text-decoration' && value === 'underline'
+                    /*
+                    ||
+
+                    key === 'color' || key === 'background-color') && (
                     value.match(/^rgb\([0-9%,\. ]*\)$/i)
                     || value.match(/^rgba\([0-9%,\. ]*\)$/i)
                     || value.match(/^hsl\([0-9%,\. ]*\)$/i)
@@ -531,7 +542,7 @@
                         value.match(/[0-9\.]*(px|em|rem|%)/)
                     )
                     || // Reference #520
-                    (key === 'direction' && value.match(/^ltr|rtl|initial|inherit$/))
+                    (key === 'direction' && value.match(/^ltr|rtl|initial|inherit$/))*/
                 ) result += key + ': ' + value + ';';
             }
         });
