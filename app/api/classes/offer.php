@@ -119,9 +119,11 @@ class offer {
             1
         );
 
+
         /* Add items */
         $itemlist = new AmaItemList('offer', $id);
         $result["items"] = $itemlist->entries;
+        $result["total"] = $itemlist->total;
 
         /* Add project data */
         $project = new AmaProject($result['project']);
