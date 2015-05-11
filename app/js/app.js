@@ -288,6 +288,21 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.itemPresetCreation',
+        stateObject: {
+            url: '/new-item-preset',
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/itemPresetCreation.html'
+                }
+            }
+        }
+    },
+    {
         name:'app.settings',
         stateObject: {
             url: '/settings',

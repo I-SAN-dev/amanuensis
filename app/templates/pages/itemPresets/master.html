@@ -21,20 +21,6 @@
 
 
     <div class="list-group">
-        <!--<div class="list-group-item">
-            <button data-ng-if="!preset.addPresetFlag" class="btn btn-success" data-ng-click="preset.addPresetFlag = !preset.addPresetFlag"><i class="md md-add"></i></button>
-            <form data-ng-submit="presets.addPreset()" data-ng-if="presets.addPresetFlag">
-                <div data-material-input data-input-label="{{'items.name'|translate}}" data-input-id="name" data-ng-model="presets.newPreset.name"></div>
-                <div data-material-input data-input-label="{{'items.description'|translate}}" data-input-id="description" data-input-type="wysiwyg" data-ng-model="presets.newPreset.description"></div>
-                <div data-material-input data-input-label="{{'items.hourlyRates'|translate}}" data-input-id="hourlyrates" data-ng-model="presets.newPreset.hourlyrates"></div>
-                <div data-material-input data-input-label="{{'items.hourlyRate'|translate}}" data-input-id="hourlyrate" data-ng-model="presets.newPreset.hourlyrate"></div>
-                <div data-material-input data-input-label="{{'items.dailyRates'|translate}}" data-input-id="dailyrates" data-ng-model="presets.newPreset.dailyrates"></div>
-                <div data-material-input data-input-label="{{'items.dailyRate'|translate}}" data-input-id="dailyrate" data-ng-model="presets.newPreset.dailyrate"></div>
-                <div data-material-input data-input-label="{{'items.fixedRate'|translate}}" data-input-id="fixedrate" data-ng-model="presets.newPreset.fixedrate"></div>
-                <div data-material-input data-input-label="{{'items.useRate'|translate}}" data-input-id="userate" data-ng-model="presets.newPreset.userate" data-input-type="select" data-input-select-options="presets.useRateOptions" data-input-select-option-name="name" data-input-select-option-value="value"></div>
-                <button class="btn btn-success" type="submit">!! add preset</button>
-            </form>
-        </div>-->
         <a class="list-group-item" data-ng-repeat="preset in masterList | filter:MasterDetailCtrl.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == preset.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
            data-ng-click="setDetail(preset)">
