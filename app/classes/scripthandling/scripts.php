@@ -80,6 +80,7 @@ class Scripts
         "js/controllers/itemPresetsCtrl.js",
         "js/controllers/itemPresetDetailCtrl.js",
         "js/controllers/itemPresetCreationCtrl.js",
+        "js/controllers/itemCreationCtrl.js",
         "js/controllers/settingsCtrl.js",
     );
 

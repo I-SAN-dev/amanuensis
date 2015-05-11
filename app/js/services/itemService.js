@@ -32,7 +32,7 @@ app.factory('ItemService',[
                         id: id
                     }
                 };
-                var lsKey = 'item/'+id;
+                var lsKey = 'item/' + id;
                 var item = LocalStorage.getData(lsKey);
                 ApiAbstractionLayer('GET', apiObject).then(function (data) {
                     LocalStorage.setData(lsKey, data);
