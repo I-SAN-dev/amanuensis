@@ -5,6 +5,12 @@
     "menuTitle": "Übersicht über Kunden und Projekte"
   },
 
+  "global":
+  {
+    "name":"Name",
+    "description":"Beschreibung"
+  },
+
   "clients": {
     "menuName": "Kunden",
     "menuTitle": "Liste aller Kunden",

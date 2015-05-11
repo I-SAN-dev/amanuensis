@@ -249,3 +249,10 @@
   padding: 0 5px 5px 5px !important;
 }
 
+textarea
+{
+  resize: vertical !important;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}

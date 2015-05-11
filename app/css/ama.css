@@ -10591,6 +10591,12 @@ button:disabled {
   margin: 0 0 !important;
   padding: 0 5px 5px 5px !important; }
 
+textarea {
+  resize: vertical !important;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%; }
+
 /*.nav#mainNav
 {
   @include card(1);
