@@ -10427,6 +10427,14 @@ html, body {
   min-height: 100%;
   overflow: hidden; }
 
+::selection {
+  background-color: #404877;
+  color: #fff; }
+
+::-moz-selection {
+  background-color: #404877;
+  color: #fff; }
+
 .scrollArea {
   height: calc(100% - 96px);
   min-height: calc(100% - 96px);
@@ -10534,6 +10542,8 @@ button:disabled {
       border: 0;
       -moz-outline: none;
       outline: none; }
+  .form-group select.form-control:active, .form-group select.form-control:hover {
+    outline: none !important; }
   .form-group label {
     /*visibility: hidden;*/
     display: none; }

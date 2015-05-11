@@ -4,6 +4,18 @@ html, body
   min-height: 100%;
   overflow: hidden;
 }
+
+::selection
+{
+  background-color: $brand-primary;
+  color: #fff;
+}
+::-moz-selection
+{
+  background-color: $brand-primary;
+  color: #fff;
+}
+
 .scrollArea
 {
   height: calc(100% - #{$navbar-height + $actionbar-height});

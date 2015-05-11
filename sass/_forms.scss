@@ -124,6 +124,15 @@
     }
 
   }
+
+  select.form-control
+  {
+    &:active,
+    &:hover
+    {
+      outline: none !important;
+    }
+  }
   /* LABEL ======================================= */
   label {
     /*visibility: hidden;*/
