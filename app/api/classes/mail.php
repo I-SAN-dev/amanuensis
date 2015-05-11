@@ -1,6 +1,6 @@
 <?php
 /**
- * Outputs a protected mail preview to a loggedin user
+ * Outputs a protected mail preview to a loggedin user or generates it or sends a mail
  *
  * This file is part of the project codename "AMANUENSIS"
  *
