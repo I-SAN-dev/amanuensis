@@ -14,7 +14,10 @@ require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/pdf/amaTemplate.php');
 require_once('classes/pdf/pdfDoc.php');
+require_once('classes/mail/amaMail.php');
 require_once('classes/project/amaProject.php');
+require_once('classes/authentication/authenticator.php');
+require_once('classes/authentication/user.php');
 
 class AmaMailDoc {
 
@@ -22,14 +25,19 @@ class AmaMailDoc {
      * Constructs a new AmaMailDoc
      * @param $type - the type of the thing that should be send, e.g. offer
      * @param $id - the id of the thing
+     * @param $additional - some additional text that can be added to the mail
      */
-    public function __construct($type, $id)
+    public function __construct($type, $id, $additional = NULL)
     {
         $this->type = $type;
         $this->id = $id;
 
         /* Gather document info */
         $this->info = $this->getInfo();
+        if(isset($additional) && $additional != '')
+        {
+            $this->info['additional'] = $additional;
+        }
 
         /* Gather mail recipients */
         $this->recipient = $this->getRecipient();
@@ -49,14 +57,28 @@ class AmaMailDoc {
     }
 
     /**
-     * Returns a preview html code of the constructed mail and recipient/attachment
+     * Returns a preview path
      * @return string
      */
     public function getPreview()
     {
+        $conf = Config::getInstance();
         $mailhtml = $this->mail->getPreview();
-        //TODO display subject/recipient/attachment
-        return '';
+        $userid = User::get(Authenticator::getUser())->id;
+        $path = 'tmp/'.$userid.'-mail.html';
+        file_put_contents($path, $mailhtml);
+
+
+        $template = new amaTemplate('templates/server/preview.phtml', array(
+            'subject' => $this->subject,
+            'recipient' => $this->recipient,
+            'attachment' => $this->attachment,
+            'mailpreviewpath' => $conf->get['baseurl'].'/api/?action=mail&path='.$path
+        ));
+
+        $previewpath = 'tmp/'.$userid.'-preview.html';
+        file_put_contents($previewpath, $template->getHTML());
+        return $previewpath;
     }
 
     /**
@@ -67,11 +89,17 @@ class AmaMailDoc {
        try
        {
            $this->mail->send();
-           //TODO update state of all!
+           $dbal = DBAL::getInstance();
+           $dbal->dynamicUpdate(
+               $this->type.'s',
+               array('id', $this->id),
+               array('state'),
+               array('state' => PDF_SENT)
+           );
        }
        catch(Exception $e)
        {
-           //TODO
+           throw $e;
        }
     }
 
@@ -157,14 +185,14 @@ class AmaMailDoc {
             }
         }
 
-        if ((isset($this->info['client']['contact_firstname']) && $this->info['client']['contact_firstname'] != '') &&
-            (isset($this->info['client']['contact_lastname']) && $this->info['client']['contact_lastname'] != ''))
+        if ((isset($this->info['project']['client']['contact_firstname']) && $this->info['project']['client']['contact_firstname'] != '') &&
+            (isset($this->info['project']['client']['contact_lastname']) && $this->info['project']['client']['contact_lastname'] != ''))
         {
-            $recipientname = $this->info['client']['contact_firstname'].' '.$this->info['client']['contact_lastname'];
+            $recipientname = $this->info['project']['client']['contact_firstname'].' '.$this->info['project']['client']['contact_lastname'];
         }
         else
         {
-            $recipientname = $this->info['client']['companyname'];
+            $recipientname = $this->info['project']['client']['companyname'];
         }
 
         return array(
@@ -200,8 +228,9 @@ class AmaMailDoc {
      */
     private function getContent()
     {
-        //TODO
-        return '';
+        $conf = Config::getInstance();
+        $template = new amaTemplate($conf->get['mail']['content_'.$this->type], $this->info);
+        return $template->getHTML();
     }
 
     /**
@@ -210,8 +239,10 @@ class AmaMailDoc {
      */
     private function getSubject()
     {
-        // TODO
-        return '';
+        $conf = Config::getInstance();
+        $subject = $conf->get['mail']['subject_'.$this->type];
+        $subject = str_replace('%ref%', $this->info['refnumber'], $subject);
+        return $subject;
     }
 
 

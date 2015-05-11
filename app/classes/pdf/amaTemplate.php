@@ -45,20 +45,24 @@ class amaTemplate {
          * @param $var
          * @param $expression - optional, %v will be replaced by var
          */
-        function echoIf($var, $expression = NULL)
+        if(!function_exists('echoIf'))
         {
-            if(isset($var) && $var != '')
+            function echoIf($var, $expression = NULL)
             {
-                if(isset($expression) && $expression != '')
+                if(isset($var) && $var != '')
                 {
-                    echo str_replace('%v', $var, $expression);
-                }
-                else
-                {
-                    echo $var;
+                    if(isset($expression) && $expression != '')
+                    {
+                        echo str_replace('%v', $var, $expression);
+                    }
+                    else
+                    {
+                        echo $var;
+                    }
                 }
             }
         }
+
 
         /* Start output buffering */
         ob_start();

@@ -47,7 +47,19 @@
     "secure":"",
     "port":"",
 
-    "template":""
+    "template":"user_templates/mail/_outer.phtml",
+
+    "subject_offer":"Ihr Angebot %ref%",
+    "content_offer":"user_templates/mail/offer.phtml",
+
+    "subject_acceptance":"Bitte um Abnahme %ref%",
+    "content_acceptance":"user_templates/mail/acceptance.phtml",
+
+    "subject_invoice":"Ihre Rechnung %ref%",
+    "content_invoice":"user_templates/mail/invoice.phtml",
+
+    "subject_reminder":"Zahlungserinnerung %ref%",
+    "content_reminder":"user_templates/mail/reminder.phtml"
   },
 
   "debug":"1",
