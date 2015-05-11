@@ -176,6 +176,14 @@
       "idminlength": "Mindestlänge der fortlaufenden ID",
       "scheme": "Schema"
     }
+  },
+  "items": {
+    "expectedRate": "Veranschlagter Preis",
+    "fixedRate": "Fixpreis",
+    "hourlyRate": "Stundensatz",
+    "dailyRate": "Tagessatz",
+    "hours": "Stunden",
+    "days": "Tage"
   }
 
 

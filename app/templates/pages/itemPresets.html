@@ -1,0 +1,12 @@
+<div data-ng-controller="ItemPresetsCtrl as presets">
+    <div data-ng-repeat="preset in presets.presets">
+        <h2>{{preset.name}}</h2>
+        <div>{{preset.description}}</div>
+        <h3>{{'items.expectedRate'|translate}}</h3>
+        <div data-ng-switch="preset.userate">
+            <p>{{'items.hourlyRate'|translate}}: {{preset.hourlyrates}} {{'items.days'|translate}} à {{preset.hourlyrate|currency:presets.currency}}</p>
+            <p>{{'items.dailyRate'|translate}}: {{preset.dailyrates}} {{'items.hours'|translate}} à {{preset.dailyrate|currency:presets.currency}}</p>
+            <p>{{'items.fixedRate'|translate}}: {{preset.fixedrate|currency:presets.currency}}</p>
+        </div>
+    </div>
+</div>
