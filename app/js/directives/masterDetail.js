@@ -49,8 +49,14 @@ app.directive('masterDetail', [function(){
                  */
                 var getNeighbor = function (offset) {
                     var orderById = {};
+
+
                     var list = $filter('filter')($scope.masterList, self.filterText);
                     console.log(list);
+                    if(list.indexOf(self.detail) > -1){
+                        list.push(self.detail);
+                        console.log(list);
+                    }
                     for(var i= 0; i<list.length;i++) {
                         orderById[list[i].id] = i;
                     }
@@ -70,6 +76,7 @@ app.directive('masterDetail', [function(){
                 // navigate to the next or previous item when up or down key is pressed
                 $document.unbind('keydown');
                 $document.on('keydown', function (event) {
+
                     var key = event.keyCode;
 
                     var animation = {
