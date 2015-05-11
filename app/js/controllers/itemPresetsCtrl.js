@@ -1,8 +1,8 @@
 app.controller('ItemPresetsCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
-    '$scope',
-    function (ApiAbstractionLayer, LocalStorage, $scope) {
+    'DeleteService',
+    function (ApiAbstractionLayer, LocalStorage, DeleteService) {
         var self = this;
         this.currency = '€'; // TODO: get this from config
         this.presets = LocalStorage.getData('itemPresets');
@@ -10,6 +10,13 @@ app.controller('ItemPresetsCtrl', [
         ApiAbstractionLayer('GET', 'item_preset').then(function (data) {
             self.presets = data;
             LocalStorage.setData('itemPresets', data);
-        })
+        });
+
+        this.deletePreset = function (id) {
+            DeleteService('item_preset', id).then(function (data) {
+                self.presets = data;
+                LocalStorage.setData('itemPresets', data);
+            })
+        };
     }
 ]);
