@@ -1,12 +1,43 @@
 <div data-ng-controller="ItemPresetsCtrl as presets">
     <div data-ng-repeat="preset in presets.presets">
         <h2>{{preset.name}}</h2>
-        <div>{{preset.description}}</div>
+        <div data-in-place-edit
+             data-ipe-key="'description'"
+             data-ipe-value="preset.description"
+             data-ipe-type="'wysiwyg'"
+             data-api-name="'item_preset'"
+             data-api-id="preset.id"
+             data-ipe-name="'items.description'|translate"></div>
         <h3>{{'items.expectedRate'|translate}}</h3>
-        <div data-ng-switch="preset.userate">
-            <p>{{'items.hourlyRate'|translate}}: {{preset.hourlyrates}} {{'items.days'|translate}} à {{preset.hourlyrate|currency:presets.currency}}</p>
-            <p>{{'items.dailyRate'|translate}}: {{preset.dailyrates}} {{'items.hours'|translate}} à {{preset.dailyrate|currency:presets.currency}}</p>
-            <p>{{'items.fixedRate'|translate}}: {{preset.fixedrate|currency:presets.currency}}</p>
+        <div>
+            <p>{{'items.hourlyRate'|translate}}: <span data-in-place-edit
+                                                       data-ipe-key="'hourlyrates'"
+                                                       data-ipe-value="preset.hourlyrates"
+                                                       data-api-name="'item_preset'"
+                                                       data-api-id="preset.id"
+                                                       data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
+                                                                                                                                      data-ipe-value="preset.hourlyrate"
+                                                                                                                                      data-ipe-key="'hourlyrate'"
+                                                                                                                                      data-api-name="'item_preset'"
+                                                                                                                                      data-api-id="preset.id"
+                                                                                                                                      data-ipe-name="'items.hourlyRate'|translate"></span></p>
+            <p>{{'items.dailyRate'|translate}}: <span data-in-place-edit
+                                                      data-ipe-key="'dailyrates'"
+                                                      data-ipe-value="preset.dailyrates"
+                                                      data-api-name="'item_preset'"
+                                                      data-api-id="preset.id"
+                                                      data-ipe-name="'items.dailyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
+                                                                                                                                               data-ipe-value="preset.dailyrate"
+                                                                                                                                               data-ipe-key="'dailyrate'"
+                                                                                                                                               data-api-name="'item_preset'"
+                                                                                                                                               data-api-id="preset.id"
+                                                                                                                                               data-ipe-name="'items.dailyRate'|translate"></span></p>
+            <p>{{'items.fixedRate'|translate}}: <span data-in-place-edit
+                                                      data-ipe-value="preset.fixedrate"
+                                                      data-ipe-key="'fixedrate'"
+                                                      data-api-name="'item_preset'"
+                                                      data-api-id="preset.id"
+                                                      data-ipe-name="'items.fixedRate'|translate"></span></p>
         </div>
     </div>
 </div>
