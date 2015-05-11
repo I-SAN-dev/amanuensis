@@ -24,6 +24,22 @@ app.factory('ItemService',[
                 }, function () {
                     return items;
                 });
+            },
+            getItem: function (id) {
+                var apiObject = {
+                    name: 'item',
+                    data: {
+                        id: id
+                    }
+                };
+                var lsKey = 'item/'+id;
+                var item = LocalStorage.getData(lsKey);
+                ApiAbstractionLayer('GET', apiObject).then(function (data) {
+                    LocalStorage.setData(lsKey, data);
+                    return data;
+                }, function () {
+                    return item;
+                });
             }
         }
     }
