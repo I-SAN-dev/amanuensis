@@ -2,7 +2,11 @@
  * Controller for the client categories list view.
  * Gets the client categories list and holds functions to add and delete client categories in the database.
  */
-app.controller('ClientCategoriesCtrl', ['ApiAbstractionLayer', 'LocalStorage', function (ApiAbstractionLayer, LocalStorage) {
+app.controller('ClientCategoriesCtrl', [
+    'ApiAbstractionLayer',
+    'LocalStorage',
+    'DeleteService',
+    function (ApiAbstractionLayer, LocalStorage, DeleteService) {
 
     // Get all client categories
     this.allCategories = LocalStorage.getData('clientCategories');
@@ -27,7 +31,7 @@ app.controller('ClientCategoriesCtrl', ['ApiAbstractionLayer', 'LocalStorage', f
      * Deletes a client category by given ID
      */
     this.deleteCategory = function (id) {
-        ApiAbstractionLayer('DELETE', {name: 'client_categories', data: {id: id}}).then(function (data) {
+        DeleteService('client_categories', id).then(function (data) {
             self.allCategories = data;
             LocalStorage.setData('clientCategories', self.allCategories);
         });
