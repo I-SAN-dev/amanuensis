@@ -4,7 +4,8 @@ app.factory('DeleteService',
         'btfModal',
         '$q',
         'LocalStorage',
-        function(ApiAbstractionLayer, btfModal, $q, LocalStorage){
+        'ErrorDialog',
+        function(ApiAbstractionLayer, btfModal, $q, LocalStorage, ErrorDialog){
     return function (apiAction, id) {
         var defer = $q.defer();
         var modal = btfModal({
@@ -12,10 +13,14 @@ app.factory('DeleteService',
             controller: function(){
 
                 this.accept = function () {
-                    ApiAbstractionLayer('DELETE', {name: apiAction, data: {id:id}}).then(function (data) {
+                    ApiAbstractionLayer('DELETE', {name: apiAction, data: {id:id}}, true).then(function (data) {
                         modal.deactivate();
                         LocalStorage.removeItem(apiAction+'/'+id);
                         defer.resolve(data);
+                    }, function (data) {
+                        modal.deactivate();
+                        ErrorDialog(data.error).activate();
+                        defer.reject(data);
                     });
                 };
 
