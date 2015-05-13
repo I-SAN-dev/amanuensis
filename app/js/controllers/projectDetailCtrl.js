@@ -47,6 +47,10 @@ app.controller('ProjectDetailCtrl',
             if($stateParams.id){
                 $scope.$parent.setDetail({id:$stateParams.id});
             }
+
+            this.deleteProject = function(){
+                MasterDetailService.notifyMaster('deleteProject', self.project.id);
+            };
         }
     ]
 );
