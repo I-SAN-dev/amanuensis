@@ -194,11 +194,10 @@ final class DBAL {
      * Takes a tablename and a where representation that should be deleted
      * @param string $table - the name of the table to insert into,
      * @param array $where - column:value for the where clause
-     * @param boolean $cascade - whether or not the delete shall cascade
      * @throws Exception
      * @return int rowCount - the number of rows deleted
      */
-    public function deleteRow($table, array $where, $cascade = false)
+    public function deleteRow($table, array $where)
     {
         if(!isset($where) || !isset($where[0]) || !isset($where[1]))
         {
