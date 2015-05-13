@@ -30,13 +30,13 @@ html, body
   margin-top: 16px;
 }
 
-.panel,
+
 .list-group,
 .navbar,
 .detail-view
 {
   @include card(1);
-  overflow: visible;
+  overflow: hidden;
 }
 .panel-heading
 {

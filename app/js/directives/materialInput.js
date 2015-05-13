@@ -2,7 +2,8 @@ app.directive('materialInput', [
     '$http',
     '$templateCache',
     '$compile',
-    function ($http, $templateCache, $compile) {
+    '$document',
+    function ($http, $templateCache, $compile, $document) {
         return {
             restrict: 'A',
             scope: {
@@ -18,6 +19,7 @@ app.directive('materialInput', [
                 searchable: '@inputSelectSearchable'
             },
             controller: function ($scope, $log) {
+
 
                 $scope.processWysiwyg = function(type) {
 
@@ -69,8 +71,12 @@ app.directive('materialInput', [
                         }
 
 
-                    }
+                    };
                 }
+
+
+
+
 
             },
             link: function (scope, elem, attr) {
@@ -94,6 +100,13 @@ app.directive('materialInput', [
                         scope.editor.code(scope.model);
                     }
                 });
+
+                scope.showDropdown = false;
+                scope.hideDropdown = function () {
+                    scope.showDropdown = false;
+                    console.log(scope.showDropdown);
+                };
+
             },
             replace: true
         }

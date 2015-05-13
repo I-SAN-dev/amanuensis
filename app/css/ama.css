@@ -10445,12 +10445,11 @@ html, body {
 #mainContent {
   margin-top: 16px; }
 
-.panel,
 .list-group,
 .navbar,
 .detail-view {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
-  overflow: visible; }
+  overflow: hidden; }
 
 .panel-heading {
   border-bottom: 1px solid #EEEEEE; }

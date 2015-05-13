@@ -114,9 +114,29 @@ app.controller('ClientDetailCtrl',
 
             this.deleteClient = function () {
                 MasterDetailService.notifyMaster('deleteClient', self.client.id);
-            }
+            };
 
 
+            this.addProject = function () {
+                var apiObject = {
+                    name: 'project',
+                    data: {
+                        name: self.newProject.name,
+                        description: self.newProject.description,
+                        client: self.client.id
+                    }
+                };
+                ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                    LocalStorage.setData('project/'+data.id, data);
+                    var clientProjects = LocalStorage.getData('client/'+self.client.id+'/projects');
+                    clientProjects.push(data);
+                    LocalStorage.setData('client/'+self.client.id+'/projects', clientProjects);
+                    self.newProject = null;
+                    var projectList = LocalStorage.getData('projects');
+                    projectList.push(data);
+                    LocalStorage.setData('projects', projectList);
+                });
+            };
         }
     ]
 );
