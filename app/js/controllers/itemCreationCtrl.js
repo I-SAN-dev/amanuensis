@@ -11,9 +11,23 @@ app.controller('ItemCreationCtrl', [
 
         var self = this;
 
-        this.presets = LocalStorage.getData('itemPresets')|| [];
+        var presets = LocalStorage.getData('itemPresets')|| [];
+        this.presetList = [];
+        var setPresetList = function () {
+            for(var i = 0; i < presets.length; i++){
+                self.presetList.push({
+                    name: presets[i].name,
+                    value: presets[i]
+                });
+            }
+        };
+        setPresetList();
+
+
         ApiAbstractionLayer('GET', 'item_preset').then(function (data) {
-            self.presets = data;
+            presets = data;
+            setPresetList();
+            LocalStorage.setData('itemPresets', data);
         });
 
         this.useRateOptions = [

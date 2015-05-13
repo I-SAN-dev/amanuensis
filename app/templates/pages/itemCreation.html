@@ -1,15 +1,13 @@
 <div data-ng-controller="ItemCreationCtrl as create">
-    <p>New Item: {{create.newItem|json}}</p>
     <form data-ng-submit="create.createItem()">
-        <!--<div data-material-input
+        <div data-material-input
              data-input-label="{{'items.fromPreset'|translate}}"
              data-input-id="preset"
              data-ng-model="create.newItem"
              data-input-type="select"
-             data-input-select-options="create.presets"
+             data-input-select-options="create.presetList"
              data-input-select-option-name="name"
-             data-input-select-option-value="value"></div>-->
-        <select data-ng-model="create.newItem" data-ng-options="preset as preset.name for preset in create.presets"></select>
+             data-input-select-option-value="value"></div>
         <div data-material-input
              data-input-label="{{'items.name'|translate}}"
              data-input-id="name"
