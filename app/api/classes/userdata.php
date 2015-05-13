@@ -14,6 +14,7 @@
 if(!$thisisamanu)die('Direct access restricted');
 
 require_once('classes/authentication/authenticator.php');
+require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 
 class userdata {
@@ -24,23 +25,51 @@ class userdata {
     */
     public static function get()
     {
-        $response = array();
-        if(!Authenticator::isLoggedin())
+        Authenticator::onlyFor(0,1);
+
+        /* output current user */
+        if(!isset($_GET["list"]) || $_GET["list"] == '')
         {
-            $error = new amaException(NULL, 401, "Not logged in");
-            $error->renderJSONerror();
-            $error->setHeaders();
-            die();
+            $response = array();
+            if(!Authenticator::isLoggedin())
+            {
+                $error = new amaException(NULL, 401, "Not logged in");
+                $error->renderJSONerror();
+                $error->setHeaders();
+                die();
+            }
+            else
+            {
+                $user = Authenticator::getUser();
+                $response["id"] = $user->id;
+                $response["username"] = $user->username;
+                $response["email"] = $user->email;
+                $response["accessgroup"] = $user->accessgroup;
+                $response["fe_key"] = $user->fe_key;
+            }
+            json_response($response);
         }
+        /* output a list of all users */
         else
         {
-            $user = Authenticator::getUser();
-            $response["id"] = $user->id;
-            $response["username"] = $user->username;
-            $response["email"] = $user->email;
-            $response["accessgroup"] = $user->accessgroup;
+            $dbal = DBAL::getInstance();
+            $result = $dbal->simpleSelect(
+                'users',
+                array(
+                    'id',
+                    'email',
+                    'username',
+                    'last_failed_login_attempt',
+                    'accessgroup'
+                )
+            );
+            /* Convert timestamp to human readable date */
+            foreach($result as &$entry)
+            {
+                $entry['last_failed_login_attempt'] = date("Y-m-d H:i:s", $entry['last_failed_login_attempt']);
+            }
+            json_response($result);
         }
-        json_response($response);
     }
 
     /**
@@ -49,6 +78,7 @@ class userdata {
     */
     public function post()
     {
+        Authenticator::onlyFor(0);
 
         //TODO: Authentication!
         //TODO: Sanitation!

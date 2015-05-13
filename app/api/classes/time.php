@@ -152,7 +152,7 @@ class time {
         $dbal = DBAL::getInstance();
 
         /* Add current logged in user */
-        $user = User::get(Authenticator::getUser());
+        $user = Authenticator::getUser();
         $_POST['user'] = $user->id;
 
         /* use current time if not specifically set */

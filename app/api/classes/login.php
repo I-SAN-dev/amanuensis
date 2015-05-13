@@ -90,6 +90,7 @@ class login {
                 $response["username"] = $user->username;
                 $response["email"] = $user->email;
                 $response["accessgroup"] = $user->accessgroup;
+                $response["fe_key"] = $user->fe_key;
             }
             else
             {

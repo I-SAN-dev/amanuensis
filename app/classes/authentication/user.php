@@ -12,6 +12,7 @@
  */
 
 require_once('classes/database/dbal.php');
+require_once('classes/config/config.php');
 
 class User {
 
@@ -42,6 +43,7 @@ class User {
             $user->id = $result["id"];
             $user->created = $result["created"];
             $user->last_failed_login_attempt = $result["last_failed_login_attempt"];
+            $user->fe_key = $result['fe_key'];
 
             return $user;
         }
@@ -90,6 +92,7 @@ class User {
 
             $result = User::userdataByMail($this->email);
             $this->id = $result["id"];
+            $this->fe_key = $result["fe_key"];
         }
     }
 
@@ -100,7 +103,7 @@ class User {
     public function setEmail($email)
     {
         $otheruser = self::userdataByMail($email);
-        if(!otheruser)
+        if(!$otheruser)
         {
             $dbal = DBAL::getInstance();
             $q = $dbal->prepare("UPDATE users SET email=:email WHERE id=:id");
@@ -181,7 +184,19 @@ class User {
         $q->bindParam(':email', $email);
         $q->execute();
 
-        return $q->fetch();
+        if($result = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $conf= Config::getInstance();
+            $secret = $conf->get['appsecret'];
+            $result['fe_key'] = hash('sha256', $result['created'].$result['id'].$secret);
+
+            return $result;
+        }
+        else
+        {
+            return NULL;
+        }
+
     }
 
 }

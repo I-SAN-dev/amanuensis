@@ -64,7 +64,7 @@ class AmaMailDoc {
     {
         $conf = Config::getInstance();
         $mailhtml = $this->mail->getPreview();
-        $userid = User::get(Authenticator::getUser())->id;
+        $userid = Authenticator::getUser()->id;
         $path = 'tmp/'.$userid.'-mail.html';
         file_put_contents($path, $mailhtml);
 
