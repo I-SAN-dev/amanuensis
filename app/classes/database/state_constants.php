@@ -23,7 +23,8 @@ define("PROJECT_TODOS_FULFILLED", 3);
 define("PROJECT_ACCEPTANCE_SENT", 4);
 define("PROJECT_INVOICE_SENT", 5);
 define("PROJECT_INVOICE_OVERDUE", 6);
-define("PROJECT_PAID_FINISHED", 7);
+define("PROJECT_PAID", 7);
+define("PROJECT_FINISHED", 8);
 
 /**
  * global

@@ -14,6 +14,7 @@
 if(!$thisisamanu)die('Direct access restricted');
 
 require_once('classes/database/dbal.php');
+require_once('classes/database/state_constants.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/project/amaProject.php');
 require_once('classes/authentication/authenticator.php');
@@ -93,18 +94,28 @@ class project {
                     'client',
                     'state'
                 ),
-                array('client', $_GET["client"])
+                array('client', $_GET["client"]),
+                0,
+                'state ASC'
             );
             json_response($result);
         }
         else
         {
-            /* List of all projects */
+            $where = '';
+            if(isset($_GET["current"]) && $_GET["current"] != '')
+            {
+                $where = ' WHERE state < '.PROJECT_FINISHED;
+            }
+            if(isset($_GET["archive"]) && $_GET["archive"] != '')
+            {
+                $where = ' WHERE state >= '.PROJECT_FINISHED;
+            }
 
-            $q = $dbal->prepare('
+            /* List of all projects */
+            $q = $dbal->prepare("
                 SELECT projects.id, projects.name, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
-                FROM projects LEFT JOIN customers ON projects.client = customers.id
-            ');
+                FROM projects LEFT JOIN customers ON projects.client = customers.id ".$where." ORDER BY state ASC ");
 
             $q->execute();
             json_response($q->fetchAll(PDO::FETCH_ASSOC));
