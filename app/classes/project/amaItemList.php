@@ -14,6 +14,7 @@
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/config/config.php');
+require_once('classes/project/amaItem.php');
 
 class AmaItemList {
 
@@ -89,76 +90,10 @@ class AmaItemList {
             /* The & creates a reference, so we can edit the entry! */
             foreach($this->entries as &$entry)
             {
-                /*
-                 * use hourly rate
-                 */
-                if($entry['userate'] == 1)
-                {
-                    /* check hourlyrates */
-                    if(!isset($entry['hourlyrates']) || $entry['hourlyrates'] == '')
-                    {
-                        $entry['hourlyrates'] = 0;
-                    }
-                    /* get hourlyrate - from item, client or config */
-                    if(isset($entry['hourlyrate']) && $entry['hourlyrate'] != '' && $entry['hourlyrate'] != 0)
-                    {
-                        $hourlyrate = $entry['hourlyrate'];
-                    }
-                    else if(isset($client['hourlyrate']) && $client['hourlyrate'] != '' && $client['hourlyrate'] != 0)
-                    {
-                        $hourlyrate = $client['hourlyrate'];
-                    }
-                    else
-                    {
-                        $hourlyrate = $conf->get['pricing']['hourlyrate'];
-                    }
-
-                    /* set total value */
-                    $entry['total'] = $entry['hourlyrates'] * $hourlyrate;
-
-                }
-                /*
-                 * use daily rate
-                 */
-                else if($entry['usertate'] == 2)
-                {
-                    /* check hourlyrates */
-                    if(!isset($entry['dailyrates']) || $entry['dailyrates'] == '')
-                    {
-                        $entry['dailyrates'] = 0;
-                    }
-                    /* get hourlyrate - from item, client or config */
-                    if(isset($entry['dailyrate']) && $entry['dailyrate'] != '' && $entry['dailyrate'] != 0)
-                    {
-                        $dailyrate = $entry['dailyrate'];
-                    }
-                    else if(isset($client['dailyrate']) && $client['dailyrate'] != '' && $client['dailyrate'] != 0)
-                    {
-                        $dailyrate = $client['dailyrate'];
-                    }
-                    else
-                    {
-                        $dailyrate = $conf->get['pricing']['dailyrate'];
-                    }
-
-                    /* set total value */
-                    $entry['total'] = $entry['dailyates'] * $dailyrate;
-
-                }
-                /*
-                 * use fixed rate
-                 */
-                else
-                {
-                    if(!isset($entry['fixedrate']) || $entry['fixedrate'] == '' )
-                    {
-                        $entry['fixedrate'] = 0;
-                    }
-                    $entry['total'] = $entry['fixedrate'];
-                }
+                $e = new AmaItem(NULL, $entry);
+                $entry = $e->get();
 
                 $this->total = $this->total + $entry['total'];
-
             }
         }
         else

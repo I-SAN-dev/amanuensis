@@ -20,6 +20,27 @@ require_once 'classes/errorhandling/amaException.php';
 /* Enable output buffer */
 ob_start();
 
+/**
+ * This function catches all uncaught Exceptions!
+ * @param Exception $e
+ */
+function catchAll($e)
+{
+    $conf = Config::getInstance();
+    if($conf->get["debug"])
+    {
+        $error = new amaException($e);
+    }
+    else
+    {
+        $error = new amaException(NULL, 500, "An error occurred");
+    }
+    $error->renderJSONerror();
+    $error->setHeaders();
+    die();
+}
+set_exception_handler('catchAll');
+
 /*
  *  Check the request method
  */
@@ -27,8 +48,8 @@ $method = $_SERVER['REQUEST_METHOD'];
 if ($method != 'GET' && $method != 'POST' && $method != 'DELETE')
 {
     $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed! (only GET and POST and DELETE)");
-    $error->setHeaders();
     $error->renderJSONerror();
+    $error->setHeaders();
     die();
 }
 
@@ -69,8 +90,8 @@ else if ($method === 'DELETE' && isset($_DELETE['action']))
 else
 {
     $error = new amaException(NULL, 400, "Action not defined");
-    $error->setHeaders();
     $error->renderJSONerror();
+    $error->setHeaders();
     die();
 }
 
@@ -80,8 +101,8 @@ else
 if (!preg_match("/^[_a-zA-Z][_a-zA-Z0-9]*$/", $action))
 {
     $error = new amaException(NULL, 400, "Invalid action");
-    $error->setHeaders();
     $error->renderJSONerror();
+    $error->setHeaders();
     die();
 }
 
@@ -93,8 +114,8 @@ $includefile = 'api/classes/'.$action.'.php';
 if(!file_exists($includefile))
 {
     $error = new amaException(NULL, 400, "Unsupported action");
-    $error->setHeaders();
     $error->renderJSONerror();
+    $error->setHeaders();
     die();
 }
 $thisisamanu = true;
@@ -152,16 +173,16 @@ if(is_callable($callarray))
         {
             $error = new amaException(NULL, 500, "An error occurred");
         }
-        $error->setHeaders();
         $error->renderJSONerror();
+        $error->setHeaders();
         die();
     }
 }
 else
 {
     $error = new amaException(NULL, 405, "Request Method '".$method."' not allowed for action '".$action."'!");
-    $error->setHeaders();
     $error->renderJSONerror();
+    $error->setHeaders();
     die();
 }
 

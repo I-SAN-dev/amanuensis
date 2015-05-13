@@ -105,6 +105,18 @@ class item {
                 'global_order'
             )
         );
+        /* postprocess the items */
+        foreach($result as &$entry)
+        {
+            try{
+                $e = new AmaItem(NULL, $entry);
+                $entry = $e->get();
+            }
+            catch(Exception $e)
+            {
+                /* Just ignore them, better raw data than nothing here */
+            }
+        }
         json_response($result);
     }
 
@@ -139,6 +151,14 @@ class item {
             array('id', $id),
             1
         );
+        try {
+            $item = new AmaItem(NULL, $result);
+            $result = $item->get();
+        }
+        catch(Exception $e)
+        {
+            /* Just ignore them, better raw data than nothing */
+        }
         json_response($result);
     }
 
