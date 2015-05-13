@@ -138,6 +138,21 @@ class User {
     }
 
     /**
+     * Sets the access group
+     * @param int $accessgroup
+     */
+    public function setAccessgroup($accessgroup)
+    {
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare("UPDATE users SET accessgroup=:accessgroup WHERE email=:email");
+        $q->bindParam(':accessgroup', $accessgroup);
+        $q->bindParam(':email', $this->email);
+        $q->execute();
+
+        $this->accessgroup = $accessgroup;
+    }
+
+    /**
      * Sets the password
      * @param String $password - the one time hashed password
      */
