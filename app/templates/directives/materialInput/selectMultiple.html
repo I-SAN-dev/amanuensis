@@ -1,12 +1,26 @@
-<div class="form-group">
+<div class="form-group" xmlns="http://www.w3.org/1999/html">
     <div class="multiselect">
-        <ul>
-            <li data-ng-repeat="option in options" data-ng-click="toggleMultiSelected(option)" data-ng-class="{'selected':option.selected}">{{option[optionName]|translate}}</li>
-        </ul>
+        <div class="select chosen dropdown-toggle" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
+            <i class="md md-arrow-drop-down pull-right"></i>
+            <span class="multiselect-chosen-item" data-ng-repeat="chosen in chosen">{{chosen[optionName]|translate}} <i data-ng-click="toggleMultiSelected(chosen)" class="md md-clear"></i></span>
+        </div>
+        <span class="bar"></span>
+        </div>
+        <div data-ng-show="showDropdown" class="dropdown-menu" data-ng-class="{show:showDropdown}">
+            <div class="list-group">
+                <div data-ng-show="searchable" class="list-group-item">
+                    <div class="form-group">
+                        <input  placeholder="{{global.filter|translate}}"
+                                data-ng-model="filterText"
+                                class="form-control">
+                        <span class="bar"></span>
+                    </div>
+
+                </div>
+                <div  class="list-group-item" data-ng-repeat="option in options|filter:filterText"
+                  data-ng-click="toggleMultiSelected(option)"
+                  data-ng-class="{'active':option.selected}">{{option[optionName]|translate}}</div>
+            </div>
+        </div>
     </div>
-    <!--<select multiple class="form-control" id="{{id}}" data-ng-required="{{required || false}}">
-        <option  value="{{}}"></option>
-    </select>
-    <span class="bar"></span>
-    <label for="{{id}}">{{label}}</label>-->
 </div>

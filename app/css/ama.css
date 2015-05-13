@@ -10495,11 +10495,13 @@ button:disabled {
   /* LABEL ======================================= */
   /* BOTTOM BARS ================================= */
   /* active state */ }
-  .form-group input.form-control {
+  .form-group input.form-control,
+  .form-group .multiselect > .select {
     height: 30.33333px; }
   .form-group input.form-control,
   .form-group select.form-control,
-  .form-group textarea.form-control {
+  .form-group textarea.form-control,
+  .form-group .multiselect > .select {
     display: block;
     width: 100%;
     border: none;
@@ -10512,14 +10514,16 @@ button:disabled {
     box-shadow: inset 0 0 0 transparent; }
     .form-group input.form-control:focus,
     .form-group select.form-control:focus,
-    .form-group textarea.form-control:focus {
+    .form-group textarea.form-control:focus,
+    .form-group .multiselect > .select:focus {
       border-color: #404877;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(64, 72, 119, 0.6);
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(64, 72, 119, 0.6); }
     .form-group input.form-control:focus,
     .form-group select.form-control:focus,
-    .form-group textarea.form-control:focus {
+    .form-group textarea.form-control:focus,
+    .form-group .multiselect > .select:focus {
       outline: none;
       -moz-outline: none;
       -webkit-box-shadow: inset 0 0 0 transparent;
@@ -10527,18 +10531,21 @@ button:disabled {
       border-bottom-color: #BDBDBD; }
     .form-group input.form-control::-moz-focus-inner,
     .form-group select.form-control::-moz-focus-inner,
-    .form-group textarea.form-control::-moz-focus-inner {
+    .form-group textarea.form-control::-moz-focus-inner,
+    .form-group .multiselect > .select::-moz-focus-inner {
       border: 0;
       -moz-outline: none;
       outline: none; }
     .form-group input.form-control .option:focus,
     .form-group select.form-control .option:focus,
-    .form-group textarea.form-control .option:focus {
+    .form-group textarea.form-control .option:focus,
+    .form-group .multiselect > .select .option:focus {
       outline: none !important;
       -moz-outline: none; }
     .form-group input.form-control .option::-moz-focus-inner,
     .form-group select.form-control .option::-moz-focus-inner,
-    .form-group textarea.form-control .option::-moz-focus-inner {
+    .form-group textarea.form-control .option::-moz-focus-inner,
+    .form-group .multiselect > .select .option::-moz-focus-inner {
       border: 0;
       -moz-outline: none;
       outline: none; }
@@ -10567,7 +10574,8 @@ button:disabled {
     right: 50%; }
   .form-group input:focus ~ .bar:before, .form-group input:focus ~ .bar:after,
   .form-group textarea:focus ~ .bar:before, .form-group textarea:focus ~ .bar:after,
-  .form-group select:focus ~ .bar:before, .form-group select:focus ~ .bar:after {
+  .form-group select:focus ~ .bar:before, .form-group select:focus ~ .bar:after,
+  .form-group .select.focussed ~ .bar:before, .form-group .select.focussed ~ .bar:after {
     width: 50%; }
   .form-group .ng-invalid.ng-touched ~ .bar:before,
   .form-group .ng-invalid.ng-touched ~ .bar:after {

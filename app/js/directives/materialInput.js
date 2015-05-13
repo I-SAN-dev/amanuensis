@@ -14,9 +14,10 @@ app.directive('materialInput', [
                 options: '=inputSelectOptions',
                 optionValue: '@inputSelectOptionValue',
                 optionName: '@inputSelectOptionName',
-                buttons: '=inputButtons'
+                buttons: '=inputButtons',
+                searchable: '@inputSelectSearchable'
             },
-            controller: function ($scope, $q) {
+            controller: function ($scope, $log) {
 
                 $scope.processWysiwyg = function(type) {
 
@@ -34,17 +35,32 @@ app.directive('materialInput', [
 
                 };
 
-                $scope.toggleMultiSelected = function(option) {
-                    if(option.selected){
-                        option.selected = false
-                    } else {
-                        if (angular.isArray($scope.model)) {
-                            $scope.model.push(option[$scope.optionValue]);
-                        } else {
-                            $scope.model = [];
-                            $scope.model.push(option[$scope.optionValue]);
+                if($scope.inputType == 'selectMultiple') {
+
+                    $scope.chosen = [];
+                    if (angular.isArray($scope.model)) {
+                        for(var i = 0; i<$scope.options.length; i++) {
+                            for(var j = 0; j<$scope.model.length; j++){
+                                if($scope.options[i][$scope.optionValue] == $scope.model[j])
+                                    $scope.chosen.push($scope.options[i]);
+                            }
                         }
-                        option.selected = true;
+                    } else {
+                        $scope.model = [];
+                    }
+                    $scope.toggleMultiSelected = function (option) {
+                        if (option.selected) {
+                            var index = $scope.model.indexOf(option[$scope.optionValue]);
+                            $scope.model.splice(index, 1);
+                            $scope.chosen.splice(index, 1);
+                            option.selected = false;
+                        } else {
+                            option.selected = true;
+                            $scope.model.push(option[$scope.optionValue]);
+                            $scope.chosen.push(option);
+                        }
+
+
                     }
                 }
 

@@ -72,14 +72,16 @@
   position: relative;
   /*margin-bottom: 45px;*/
 
-  input.form-control
+  input.form-control,
+  .multiselect>.select
   {
     height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   }
 
   input.form-control,
   select.form-control,
-  textarea.form-control {
+  textarea.form-control,
+  .multiselect>.select{
 
     display: block;
     width: 100%;
@@ -167,7 +169,8 @@
   /* active state */
   input:focus ~ .bar:before, input:focus ~ .bar:after,
   textarea:focus ~ .bar:before, textarea:focus ~ .bar:after,
-  select:focus ~ .bar:before, select:focus ~ .bar:after {
+  select:focus ~ .bar:before, select:focus ~ .bar:after,
+  .select.focussed ~ .bar:before, .select.focussed ~ .bar:after{
     width: 50%;
   }
 
