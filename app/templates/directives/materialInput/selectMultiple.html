@@ -1,0 +1,12 @@
+<div class="form-group">
+    <div class="multiselect">
+        <ul>
+            <li data-ng-repeat="option in options" data-ng-click="toggleMultiSelected(option)" data-ng-class="{'selected':option.selected}">{{option[optionName]|translate}}</li>
+        </ul>
+    </div>
+    <!--<select multiple class="form-control" id="{{id}}" data-ng-required="{{required || false}}">
+        <option  value="{{}}"></option>
+    </select>
+    <span class="bar"></span>
+    <label for="{{id}}">{{label}}</label>-->
+</div>

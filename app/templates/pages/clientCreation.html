@@ -84,12 +84,20 @@
                                  data-ng-model="create.newClient.contact_lastname"></div>
 
                             <h3>{{ 'clients.categories'|translate }}</h3>
-                            <div class="form-group">
+                            <div data-material-input
+                                 data-input-label="{{'clients.categories'|translate}}"
+                                 data-input-type="selectMultiple"
+                                 data-input-id="categories"
+                                 data-ng-model="create.newClientCategories"
+                                 data-input-select-options="create.allCategories"
+                                 data-input-select-option-value="id"
+                                 data-input-select-option-name="name"></div>
+                            <!--<div class="form-group">
                                 <label for="categories">{{'clients.categories'|translate}}</label>
                                 <select multiple class="form-control" id="categories" data-ng-model="create.newClientCategories">
                                     <option data-ng-repeat="cat in create.allCategories" value="{{cat.id}}">{{cat.name}}</option>
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class="form-group">

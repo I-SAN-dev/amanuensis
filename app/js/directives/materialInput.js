@@ -33,11 +33,26 @@ app.directive('materialInput', [
 
 
                 };
+
+                $scope.toggleMultiSelected = function(option) {
+                    if(option.selected){
+                        option.selected = false
+                    } else {
+                        if (angular.isArray($scope.model)) {
+                            $scope.model.push(option[$scope.optionValue]);
+                        } else {
+                            $scope.model = [];
+                            $scope.model.push(option[$scope.optionValue]);
+                        }
+                        option.selected = true;
+                    }
+                }
+
             },
             link: function (scope, elem, attr) {
                 // we use the link function to get our template, so the directive still works when the type is not set on page load
                 var type = attr.inputType;
-                if(type!='textarea' && type != 'select' && type != 'wysiwyg')
+                if(type!='textarea' && type != 'select' && type != 'wysiwyg' && type != 'selectMultiple')
                     type = 'text';
                 $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
                     elem.replaceWith($compile(tplContent)(scope));
