@@ -78,6 +78,7 @@ class Scripts
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",
         "js/controllers/offerDetailCtrl.js",
+        "js/controllers/offerCreationCtrl.js",
         "js/controllers/itemPresetsCtrl.js",
         "js/controllers/itemPresetDetailCtrl.js",
         "js/controllers/itemPresetCreationCtrl.js",
