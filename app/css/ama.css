@@ -10450,7 +10450,7 @@ html, body {
 .navbar,
 .detail-view {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
-  overflow: hidden; }
+  overflow: visible; }
 
 .panel-heading {
   border-bottom: 1px solid #EEEEEE; }
@@ -10501,7 +10501,7 @@ button:disabled {
   .form-group input.form-control,
   .form-group select.form-control,
   .form-group textarea.form-control,
-  .form-group .multiselect > .select {
+  .form-group .select.form-control {
     display: block;
     width: 100%;
     border: none;
@@ -10515,7 +10515,7 @@ button:disabled {
     .form-group input.form-control:focus,
     .form-group select.form-control:focus,
     .form-group textarea.form-control:focus,
-    .form-group .multiselect > .select:focus {
+    .form-group .select.form-control:focus {
       border-color: #404877;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(64, 72, 119, 0.6);
@@ -10523,7 +10523,7 @@ button:disabled {
     .form-group input.form-control:focus,
     .form-group select.form-control:focus,
     .form-group textarea.form-control:focus,
-    .form-group .multiselect > .select:focus {
+    .form-group .select.form-control:focus {
       outline: none;
       -moz-outline: none;
       -webkit-box-shadow: inset 0 0 0 transparent;
@@ -10532,20 +10532,20 @@ button:disabled {
     .form-group input.form-control::-moz-focus-inner,
     .form-group select.form-control::-moz-focus-inner,
     .form-group textarea.form-control::-moz-focus-inner,
-    .form-group .multiselect > .select::-moz-focus-inner {
+    .form-group .select.form-control::-moz-focus-inner {
       border: 0;
       -moz-outline: none;
       outline: none; }
     .form-group input.form-control .option:focus,
     .form-group select.form-control .option:focus,
     .form-group textarea.form-control .option:focus,
-    .form-group .multiselect > .select .option:focus {
+    .form-group .select.form-control .option:focus {
       outline: none !important;
       -moz-outline: none; }
     .form-group input.form-control .option::-moz-focus-inner,
     .form-group select.form-control .option::-moz-focus-inner,
     .form-group textarea.form-control .option::-moz-focus-inner,
-    .form-group .multiselect > .select .option::-moz-focus-inner {
+    .form-group .select.form-control .option::-moz-focus-inner {
       border: 0;
       -moz-outline: none;
       outline: none; }
@@ -10644,6 +10644,46 @@ textarea {
   width: 100%;
   min-width: 100%;
   max-width: 100%; }
+
+/* Select fields */
+.select.form-control:after {
+  font-family: "Material Design Iconic Font";
+  content: '\f295';
+  float: right;
+  margin: 0 5px; }
+
+.select .placeholder {
+  color: #9E9E9E; }
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 0 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  width: 100%; }
+  .dropdown .form-group {
+    margin-bottom: 3px;
+    padding: 0 10px; }
+  .dropdown .list-group {
+    margin-bottom: 0;
+    max-height: 250px;
+    overflow-y: scroll; }
+    .dropdown .list-group .list-group-item {
+      min-height: 40.0px; }
 
 /*.nav#mainNav
 {

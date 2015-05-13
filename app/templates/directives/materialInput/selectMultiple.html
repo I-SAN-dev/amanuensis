@@ -1,22 +1,30 @@
 <div class="form-group" xmlns="http://www.w3.org/1999/html">
     <div class="multiselect">
-        <div class="select chosen dropdown-toggle" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
-            <i class="md md-arrow-drop-down pull-right"></i>
+        <div class="select form-control chosen dropdown-toggle" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
+            <span class="placeholder" data-ng-if="!chosen">{{label|translate}}</span>
             <span class="multiselect-chosen-item" data-ng-repeat="chosen in chosen">{{chosen[optionName]|translate}} <i data-ng-click="toggleMultiSelected(chosen)" class="md md-clear"></i></span>
         </div>
         <span class="bar"></span>
         </div>
-        <div data-ng-show="showDropdown" class="dropdown-menu" data-ng-class="{show:showDropdown}">
-            <div class="list-group">
-                <div data-ng-show="searchable" class="list-group-item">
-                    <div class="form-group">
-                        <input  placeholder="{{global.filter|translate}}"
-                                data-ng-model="filterText"
-                                class="form-control">
-                        <span class="bar"></span>
-                    </div>
-
+        <div data-ng-show="showDropdown" class="dropdown" data-ng-class="{show:showDropdown}">
+            <div class="buttons-above-input bai-1" data-ng-show="searchable">
+                <div class="form-group">
+                    <input  placeholder="{{global.filter|translate}}"
+                            data-ng-model="filterText"
+                            class="form-control">
+                    <span class="bar"></span>
                 </div>
+                <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[!filterText]">
+                    <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
+                        <i class="md md-search"></i>
+                    </button>
+                    <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
+                             data-ng-click="filterText = ''">
+                        <i class="md md-close"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="list-group">
                 <div  class="list-group-item" data-ng-repeat="option in options|filter:filterText"
                   data-ng-click="toggleMultiSelected(option)"
                   data-ng-class="{'active':option.selected}">{{option[optionName]|translate}}</div>

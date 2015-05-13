@@ -35,6 +35,14 @@ app.directive('materialInput', [
 
                 };
 
+                if($scope.inputType == 'select'){
+                    $scope.toggleSingleSelected = function(option){
+                        $scope.model = option[$scope.optionValue];
+                        $scope.selected = option[$scope.optionName];
+                        $scope.showDropdown = false;
+                    };
+                }
+
                 if($scope.inputType == 'selectMultiple') {
 
                     $scope.chosen = [];
