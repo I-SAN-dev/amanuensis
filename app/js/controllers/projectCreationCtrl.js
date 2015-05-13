@@ -3,20 +3,20 @@ app.controller('ProjectCreationCtrl',[
         'LocalStorage',
         function (ApiAbstractionLayer, LocalStorage) {
             var self = this;
-            this.clients = LocalStorage.getData('clients');
-            ApiAbstractionLayer('GET','client').then(function (data) {
-                for(var i= 0; i<data.length; i++){
-                    // process contact name if companyname is not set
-                    if(!data[i].companyname){
-                        data[i].companyname =
-                            (data[i].contact_firstname || '')
-                            +' '
-                            +(data[i].contact_lastname || '');
+            this.addProject = function (client) {
+                var apiObject = {
+                    name: 'project',
+                    data: {
+                        name: self.newProject.name,
+                        description: self.newProject.description,
+                        client: client
                     }
-                }
-                self.clients = data;
-                LocalStorage.setData('clients', self.clients);
-            })
+                };
+                ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                    LocalStorage.setData('project/'+data.id, data);
+                    self.newProject = null;
+                });
+            };
         }
     ]
 );

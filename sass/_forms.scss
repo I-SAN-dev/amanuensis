@@ -81,7 +81,7 @@
   input.form-control,
   select.form-control,
   textarea.form-control,
-  .multiselect>.select{
+  .select.form-control{
 
     display: block;
     width: 100%;
@@ -296,4 +296,53 @@ textarea
   width: 100%;
   min-width: 100%;
   max-width: 100%;
+}
+
+/* Select fields */
+.select.form-control:after{
+  font-family: "Material Design Iconic Font";
+  content: '\f295';
+  float: right;
+  margin: 0 5px;
+}
+.select{
+  .placeholder {
+    color: $gray-base;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: $zindex-dropdown;
+  float: left;
+  min-width: 160px;
+  padding: 0;
+  margin: 2px 0 0; // override default ul
+  list-style: none;
+  font-size: $font-size-base;
+  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  background-color: $dropdown-bg;
+  border: 1px solid $dropdown-fallback-border; // IE8 fallback
+  border: 1px solid $dropdown-border;
+  border-radius: $border-radius-base;
+  @include box-shadow(0 6px 12px rgba(0, 0, 0, .175));
+  background-clip: padding-box;
+  width: 100%;
+
+  .form-group {
+    margin-bottom: 3px;
+    padding: 0 10px;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+    max-height: 250px;
+    overflow-y: scroll;
+
+    .list-group-item {
+      min-height: $line-height-base*$font-size-base+20px;
+    }
+  }
 }

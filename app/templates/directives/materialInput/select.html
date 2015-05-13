@@ -1,7 +1,32 @@
 <div class="form-group">
-    <select data-ng-model="model" class="form-control" id="{{id}}" data-ng-required="{{required || false}}">
-        <option data-ng-repeat="option in options" value="{{option[optionValue]}}">{{option[optionName] | translate}}</option>
-    </select>
-    <span class="bar"></span>
-    <label for="{{id}}">{{label}}</label>
+    <div class="single-select">
+        <div class="select form-control" id="{{id}}" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
+            {{selected | translate}}
+            <span class="placeholder" data-ng-if="!selected">{{label|translate}}</span>
+        </div>
+        <span class="bar"></span>
+    </div>
+    <div data-ng-show="showDropdown" class="dropdown" data-ng-class="{show:showDropdown}">
+        <div data-ng-show="searchable" class="buttons-above-input bai-1">
+            <div class="form-group">
+                <input placeholder="{{global.filter|translate}}"
+                        data-ng-model="filterText"
+                        class="form-control">
+                <span class="bar"></span>
+            </div>
+            <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[!filterText]">
+                <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
+                    <i class="md md-search"></i>
+                </button>
+                <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
+                         data-ng-click="filterText = ''">
+                    <i class="md md-close"></i>
+                </button>
+            </div>
+        </div>
+        <div class="list-group">
+            <div  class="list-group-item" data-ng-repeat="option in options|filter:filterText"
+                  data-ng-click="toggleSingleSelected(option)">{{option[optionName]|translate}}</div>
+        </div>
+    </div>
 </div>

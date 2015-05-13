@@ -5,8 +5,9 @@ app.controller('ProjectsCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'MasterDetailService',
+    'DeleteService',
     '$scope',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, $scope){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope){
         var self = this;
         MasterDetailService.setMaster(this);
         this.projects = LocalStorage.getData('projects');
@@ -24,4 +25,11 @@ app.controller('ProjectsCtrl', [
             self.loaded = true;
             $scope.$apply();
         }, 1000);
+
+        this.deleteProject = function (id) {
+            DeleteService('project',id).then(function (data) {
+                self.projects = data;
+            });
+
+        };
 }]);

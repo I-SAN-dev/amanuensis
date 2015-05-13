@@ -1,7 +1,7 @@
 <div class="detail-view" data-ng-controller="ProjectDetailCtrl as project">
     <div class="btn-toolbar">
         <div class="btn-group btn-group-sm pull-right">
-            <button class="btn btn-link" data-ng-controller="ProjectsCtrl as list" data-ng-click="list.deleteClient(project.project.id)"><i class="md md-lg md-delete"></i></button>
+            <button class="btn btn-link" data-ng-click="project.deleteProject()"><i class="md md-lg md-delete"></i></button>
         </div>
     </div>
     <h1>

@@ -20,14 +20,15 @@
             <div class="col-sm-4">
 
                 <div class="btn-group btn-group-sm pull-right">
-                    <button class="btn btn-link" data-ng-click="client.showProjects = !client.showProjects">
+                    <button class="btn btn-link" data-ng-click="client.showAddProject = true;">Add Proj</button>
+                    <button class="btn btn-link" data-ng-click="client.showProjects = !client.showProjects; client.showAddProject = false;">
                         <span data-ng-class="{clientSwitch: true, active: client.showProjects}">
                             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                         </span>
                     </button>
-                    <button class="btn btn-link" data-ng-click="client.deleteClient()"><i class="md md-lg md-delete"></i></button>
+                    <button class="btn btn-link" data-ng-click="client.deleteClient();"><i class="md md-lg md-delete"></i></button>
                 </div>
 
             </div>
@@ -45,7 +46,7 @@
 
     <div class="ng-trans-inplace-container">
 
-        <div data-ng-if="!client.showProjects" class="ng-trans ng-trans-slide-left ng-trans-inplace">
+        <div data-ng-if="!client.showProjects && !client.addProject" class="ng-trans ng-trans-slide-left ng-trans-inplace">
             <div class="row">
                 <div class="col-sm-3">
                     {{'clients.contact'|translate}}
@@ -190,6 +191,7 @@
                 </div>
             </div>
         </div>
+
         <div data-ng-if="client.showProjects" class="ng-trans ng-trans-slide-right ng-trans-inplace">
             <div data-ng-repeat="project in client.projects" class="list-group">
                 <a class="list-group-item" data-ui-sref="app.projects({id:{{project.id}}})">
@@ -199,5 +201,21 @@
             </div>
         </div>
 
+
+        <div data-ng-if="client.showAddProject" class="ng-trans ng-trans-slide-right ng-trans-inplace">
+                <form data-ng-submit="client.addProject()">
+                    <div data-material-input
+                         data-input-label="{{projects.name}}"
+                         data-ng-model="client.newProject.name"
+                         data-input-id="name"
+                         data-input-type="text"></div>
+                    <div data-material-input
+                         data-input-label="{{projects.description}}"
+                         data-ng-model="client.newProject.description"
+                         data-input-id="description"
+                         data-input-type="textarea"></div>
+                    <button class="btn btn-success" type="submit">{{'projects.create'|translate}}</button>
+                </form>
+        </div>
     </div>
 </div>

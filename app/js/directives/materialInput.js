@@ -2,7 +2,8 @@ app.directive('materialInput', [
     '$http',
     '$templateCache',
     '$compile',
-    function ($http, $templateCache, $compile) {
+    '$document',
+    function ($http, $templateCache, $compile, $document) {
         return {
             restrict: 'A',
             scope: {
@@ -19,6 +20,7 @@ app.directive('materialInput', [
             },
             controller: function ($scope, $log) {
 
+
                 $scope.processWysiwyg = function(type) {
 
                     if(type=='save') {
@@ -34,6 +36,14 @@ app.directive('materialInput', [
 
 
                 };
+
+                if($scope.inputType == 'select'){
+                    $scope.toggleSingleSelected = function(option){
+                        $scope.model = option[$scope.optionValue];
+                        $scope.selected = option[$scope.optionName];
+                        $scope.showDropdown = false;
+                    };
+                }
 
                 if($scope.inputType == 'selectMultiple') {
 
@@ -61,8 +71,12 @@ app.directive('materialInput', [
                         }
 
 
-                    }
+                    };
                 }
+
+
+
+
 
             },
             link: function (scope, elem, attr) {
@@ -86,6 +100,13 @@ app.directive('materialInput', [
                         scope.editor.code(scope.model);
                     }
                 });
+
+                scope.showDropdown = false;
+                scope.hideDropdown = function () {
+                    scope.showDropdown = false;
+                    console.log(scope.showDropdown);
+                };
+
             },
             replace: true
         }
