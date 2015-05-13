@@ -9,16 +9,36 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">{'settings.basicSettings'|translate}</a></li>
-                    <li role="presentation"><a data-ng-href="#paths" aria-controls="paths" role="tab" data-toggle="tab">{'settings.pathSettings'|translate}</a></li>
-                    <li role="presentation"><a data-ng-href="#server" aria-controls="server" role="tab" data-toggle="tab">{'settings.serverSettings'|translate}</a></li>
-                    <li role="presentation"><a data-ng-href="#refnumbers" aria-controls="refnumbers" role="tab" data-toggle="tab">{'settings.refnumberSettings'|translate}</a></li>
+                    <li role="presentation" class="active">
+                        <a data-target="#basic" aria-controls="basic" role="tab" data-toggle="tab">{{'config.basicSettings'|translate}}</a>
+                    </li>
+                    <li role="presentation">
+                        <a data-target="#paths" aria-controls="paths" role="tab" data-toggle="tab">{{'config.pathSettings'|translate}}</a>
+                    </li>
+                    <li role="presentation">
+                        <a data-target="#server" aria-controls="server" role="tab" data-toggle="tab">{{'config.serverSettings'|translate}}</a>
+                    </li>
+                    <li role="presentation">
+                        <a data-target="#refnumbers" aria-controls="refnumbers" role="tab" data-toggle="tab">{{'config.refnumberSettings'|translate}}</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="basic">
-
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{{'config.company'|translate}}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.company"
+                                     data-ipe-key="'company'"
+                                     data-ipe-name="'config.company'|translate"
+                                     data-ipe-deletable="false"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="paths">
 
@@ -26,66 +46,124 @@
                     <div role="tabpanel" class="tab-pane" id="server">
                         <div class="row">
                             <div class="col-sm-4">
-                                <p>{'settings.db.host'|translate}</p>
+                                <p>{{'config.baseurl'|translate}}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.baseurl"
+                                     data-ipe-key="'baseurl'"
+                                     data-ipe-deletable="false"
+                                     data-ipe-name="'config.baseurl'|translate"
+                                     data-ipe-type="'url'"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{{'config.secureurl'|translate}}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.secureurl"
+                                     data-ipe-key="'secureurl'"
+                                     data-ipe-name="'config.secureurl'|translate"
+                                     data-ipe-type="'url'"
+                                     data-ipe-deletable="false"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{{'config.appsecret'|translate}}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.appsecret"
+                                     data-ipe-key="'appsecret'"
+                                     data-ipe-name="'config.appsecret'|translate"
+                                     data-ipe-type="'password'"
+                                     data-ipe-deletable="false"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{{'config.sessiontimeout'|translate}}</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div data-in-place-edit
+                                     data-ipe-value="settings.settings.sessiontimeout"
+                                     data-ipe-key="'sessiontimeout'"
+                                     data-ipe-name="'config.sessiontimeout'|translate"
+                                     data-ipe-type="'number'"
+                                     data-ipe-deletable="false"
+                                     data-api-name="'settings'"></div>
+                            </div>
+                        </div>
+
+                        <h3>{{'config.databaseSettings'|translate}}</h3>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>{{'config.db.host'|translate}}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div data-in-place-edit
                                      data-ipe-value="settings.settings.db.host"
                                      data-ipe-key="'db.host'"
                                      data-ipe-deletable="false"
-                                     data-ipe-name="'settings.db.host|translate'"
+                                     data-ipe-name="'config.db.host'|translate"
                                      data-api-name="'settings'"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <p>{'settings.db.dbName'|translate}</p>
+                                <p>{{'config.db.database'|translate}}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div data-in-place-edit
                                      data-ipe-value="settings.settings.db.database"
                                      data-ipe-key="'db.database'"
                                      data-ipe-deletable="false"
-                                     data-ipe-name="'settings.db.dbName|translate'"
+                                     data-ipe-name="'config.db.database'|translate"
                                      data-api-name="'settings'"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <p>{'settings.db.port'|translate}</p>
+                                <p>{{'config.db.port'|translate}}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div data-in-place-edit
                                      data-ipe-value="settings.settings.db.port"
                                      data-ipe-key="'db.port'"
                                      data-ipe-deletable="false"
-                                     data-ipe-name="'settings.db.port|translate'"
+                                     data-ipe-name="'config.db.port'|translate"
                                      data-api-name="'settings'"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <p>{'settings.db.user'|translate}</p>
+                                <p>{{'config.db.user'|translate}}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div data-in-place-edit
                                      data-ipe-value="settings.settings.db.user"
                                      data-ipe-key="'db.user'"
                                      data-ipe-deletable="false"
-                                     data-ipe-name="'settings.db.user|translate'"
+                                     data-ipe-name="'config.db.user'|translate"
                                      data-api-name="'settings'"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <p>{'settings.db.password'|translate}</p>
+                                <p>{{'config.db.password'|translate}}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div data-in-place-edit
                                      data-ipe-value="settings.settings.db.password"
                                      data-ipe-key="'db.password'"
                                      data-ipe-deletable="false"
-                                     data-ipe-name="'settings.db.password|translate'"
+                                     data-ipe-name="'config.db.password'|translate"
                                      data-ipe-type="'password'"
                                      data-api-name="'settings'"></div>
                             </div>

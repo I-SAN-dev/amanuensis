@@ -2,7 +2,8 @@ app.controller('SettingsCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'constants',
-    function (ApiAbstractionLayer, LocalStorage, constants) {
+    '$scope',
+    function (ApiAbstractionLayer, LocalStorage, constants, $scope) {
         var self = this;
         this.settings = LocalStorage.getData('settings');
         ApiAbstractionLayer('GET', 'settings').then(function (data) {
@@ -10,5 +11,9 @@ app.controller('SettingsCtrl', [
         });
         this.company = constants.COMPANY;
         this.language = constants.LANGUAGE;
+
+
+
+
     }
 ]);

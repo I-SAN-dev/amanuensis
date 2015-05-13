@@ -95,6 +95,11 @@
 
   "config":
   {
+    "basicSettings":"Basiseinstellungen",
+    "pathSettings": "Pfade",
+    "serverSettings": "Servereinstellungen",
+    "refnumberSettings":"Referenznummern",
+    "databaseSettings":"Datenbank-Einstellungen",
     "db":{
       "host":"Hostadresse der Datenbank",
       "database":"Datenbankname",
