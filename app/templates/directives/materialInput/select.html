@@ -1,6 +1,6 @@
-<div class="form-group">
+<div tabindex="-1" data-ng-blur="hideDropdown()" class="form-group">
     <div class="single-select">
-        <div class="select form-control" id="{{id}}" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
+        <div class="select form-control" id="{{id}}" data-ng-click="showDropdown = true" data-ng-class="{focussed:showDropdown}">
             {{selected | translate}}
             <span class="placeholder" data-ng-if="!selected">{{label|translate}}</span>
         </div>

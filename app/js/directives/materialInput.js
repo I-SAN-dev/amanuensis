@@ -78,6 +78,7 @@ app.directive('materialInput', [
 
 
                     };
+
                 }
 
 
@@ -137,6 +138,10 @@ app.directive('materialInput', [
                 scope.showDropdown = false;
                 scope.hideDropdown = function () {
                     scope.showDropdown = false;
+                };
+                scope.openDropdown = function () {
+                    $(elem).focus();
+                    scope.showDropdown = true;
                 };
 
 

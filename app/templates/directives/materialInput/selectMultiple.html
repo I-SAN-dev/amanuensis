@@ -1,13 +1,13 @@
 
-<div class="form-group">
+<div tabindex="-1" data-ng-blur="hideDropdown()" class="form-group">
     <div class="multiselect">
-        <div class="select form-control chosen dropdown-toggle" data-ng-click="showDropdown = !showDropdown" data-ng-class="{focussed:showDropdown}">
+        <div class="select form-control chosen dropdown-toggle" data-ng-click="showDropdown = true" data-ng-class="{focussed:showDropdown}">
             <span class="placeholder" data-ng-if="!chosen">{{label|translate}}</span>
             <span class="multiselect-chosen-item" data-ng-repeat="chosen in chosen">{{chosen[optionName]|translate}} <i data-ng-click="toggleMultiSelected(chosen)" class="md md-clear"></i></span>
         </div>
         <span class="bar"></span>
         </div>
-        <div data-ng-show="showDropdown" class="dropdown" data-ng-class="{show:showDropdown}">
+        <div data-ng-show="showDropdown" class="dropdown"  data-ng-class="{show:showDropdown}">
             <div class="buttons-above-input bai-1" data-ng-show="searchable">
                 <div class="form-group">
                     <input  placeholder="{{global.filter|translate}}"
