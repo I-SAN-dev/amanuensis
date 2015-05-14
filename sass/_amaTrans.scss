@@ -22,3 +22,26 @@
 .ng-trans{
   -webkit-backface-visibility: hidden;
 }
+
+
+.slideanim3
+{
+  width: 300%;
+  transition: 0.3s margin-left;
+
+  .slideanim-item
+  {
+    width: 33.333333%;
+    float: left;
+    padding: 0 20px;
+  }
+
+  &.panel2
+  {
+    margin-left: -100%;
+  }
+  &.panel3
+  {
+    margin-left: -200%;
+  }
+}

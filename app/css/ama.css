@@ -10435,21 +10435,50 @@ html, body {
   background-color: #404877;
   color: #fff; }
 
-.scrollArea {
-  height: calc(100% - 96px);
-  min-height: calc(100% - 96px);
-  margin-top: 96px;
-  overflow-x: hidden;
-  overflow-y: scroll; }
+#mainCanvas {
+  height: calc(100% - 106px);
+  min-height: calc(100% - 106px);
+  margin-top: 106px;
+  overflow: hidden; }
 
 #mainContent {
-  margin-top: 16px; }
+  padding-top: 16px;
+  padding-bottom: 16px; }
+
+/* we need this on many many divs so we can style our main content with relative height */
+.fullheight,
+.next-fullheight > div {
+  height: 100%; }
+
+.max-fullheight {
+  max-height: 100%; }
+
+.scroll-y {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important; }
+
+.scroll-y-permanent {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important; }
+
+.list-under-filter {
+  height: calc(100% - 53px); }
 
 .list-group,
 .navbar,
 .detail-view {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   overflow: hidden; }
+
+.list-group,
+.navbar,
+.detail-view,
+.panel-default {
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
+
+.list-group {
+  background-color: #fff; }
 
 .panel-heading {
   border-bottom: 1px solid #EEEEEE; }
@@ -10734,7 +10763,7 @@ textarea {
     height: auto; }
 .navbar .amanu-actionbar {
   background-color: #ffffff;
-  height: 32px; }
+  height: 42px; }
   .navbar .amanu-actionbar #mainNav > div,
   .navbar .amanu-actionbar #actionMenu > div {
     display: inline; }
@@ -10742,10 +10771,11 @@ textarea {
   .navbar .amanu-actionbar #actionMenu a,
   .navbar .amanu-actionbar #actionMenu button {
     padding: 2px 22px 0 22px;
-    line-height: 28px;
+    line-height: 38px;
     border-right: none !important;
     border-left: none !important;
     border-top: none !important;
+    border-radius: 0 !important;
     background-color: #ffffff;
     color: #404877;
     border-bottom-width: 2px;
@@ -10760,6 +10790,10 @@ textarea {
       color: #252a45;
       background-color: #EEEEEE;
       border-bottom-color: #EEEEEE; }
+  .navbar .amanu-actionbar #mainNav button,
+  .navbar .amanu-actionbar #actionMenu button {
+    line-height: 40px;
+    /* warum? ja ├ñhm... aus... Gr├╝nden... */ }
   .navbar .amanu-actionbar #mainNav .active a,
   .navbar .amanu-actionbar #mainNav button.active,
   .navbar .amanu-actionbar #actionMenu .active a,
@@ -10787,18 +10821,47 @@ textarea {
       margin-top: -60px;
       margin-left: -60px; }
 
+.masterlist h3 {
+  text-align: right;
+  line-height: 1.0;
+  padding: 0 0 10px 0;
+  font-size: 14px;
+  color: #BDBDBD;
+  margin: 0; }
+.masterlist h2 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5; }
+
 .detail-view {
-  padding: 20px;
+  padding: 0;
   background: #fff;
-  margin-top: 51px;
+  /*margin-top: 51px;*/
   border-left: none; }
+  .detail-view .detail-inner {
+    padding: 0 20px; }
   .detail-view .btn-toolbar {
-    margin: -20px -20px 20px;
-    padding: 20px; }
+    margin: 0px 0px 20px;
+    padding: 0px;
+    line-height: 64px; }
+    .detail-view .btn-toolbar .btn-group button.btn {
+      height: 64px;
+      line-height: 60px;
+      font-size: 12px;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important; }
+      .detail-view .btn-toolbar .btn-group button.btn:hover, .detail-view .btn-toolbar .btn-group button.btn:active, .detail-view .btn-toolbar .btn-group button.btn:focus {
+        text-decoration: none; }
+      .detail-view .btn-toolbar .btn-group button.btn.active {
+        border-bottom: 2px solid #404877 !important; }
     .detail-view .btn-toolbar h3 {
       margin: 0;
-      padding: 0;
-      color: #404877; }
+      padding: 15px 20px;
+      color: #404877;
+      line-height: 34px; }
 
 .clientSwitch {
   display: block;
@@ -10831,6 +10894,94 @@ textarea {
     padding-left: 12px !important;
     border-bottom: none !important; }
 
+.tile {
+  display: block;
+  position: relative;
+  background-color: #EEEEEE;
+  height: 192px;
+  padding: 0px;
+  margin-bottom: 30px;
+  color: #263238; }
+  .tile.tile-disabled h4.tile-heading {
+    background-color: #757575; }
+  .tile:hover, .tile:active {
+    text-decoration: none; }
+  .tile h4.tile-heading {
+    font-size: 18px;
+    padding: 87px 15px 15px 15px;
+    margin: 0;
+    background-color: #404877;
+    color: #fff; }
+  .tile .tile-text {
+    padding: 15px 15px 0 15px;
+    height: 55px;
+    overflow: hidden;
+    position: relative; }
+    .tile .tile-text:after {
+      position: absolute;
+      right: 15px;
+      width: 30%;
+      bottom: 0;
+      height: 20.0px;
+      content: ' ';
+      text-indent: -9999px;
+      pointer-events: none;
+      display: block;
+      background-image: -webkit-linear-gradient(left, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-image: -o-linear-gradient(left, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-image: linear-gradient(to right, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00EEEEEE', endColorstr='#FFEEEEEE', GradientType=1); }
+  .tile .tile-icon {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #fff;
+    display: inline-block;
+    font: normal normal normal 40px/1 'Material Design Iconic Font';
+    speak: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+    .tile .tile-icon.tile-icon-add:before {
+      content: "\f0fe";
+      /* md-add-circle-outline */ }
+    .tile .tile-icon.tile-icon-0:before {
+      content: "\f060";
+      /* md-settings */ }
+    .tile .tile-icon.tile-icon-1:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #00ACC1; }
+    .tile .tile-icon.tile-icon-2:before {
+      content: "\f060";
+      /* md-settings */
+      color: #FFB300; }
+    .tile .tile-icon.tile-icon-3:before {
+      content: "\f023";
+      /* md-done */
+      color: #FFB300; }
+    .tile .tile-icon.tile-icon-4:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #00ACC1; }
+    .tile .tile-icon.tile-icon-5:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #009688; }
+    .tile .tile-icon.tile-icon-6:before {
+      content: "\f0a0";
+      /* md-error */
+      color: #F4511E; }
+    .tile .tile-icon.tile-icon-7:before {
+      content: "\f023";
+      /* md-done */
+      color: #009688; }
+    .tile .tile-icon.tile-icon-8:before {
+      content: "\f024";
+      /* md-done-all */
+      color: #009688; }
+
 /**
   * This extends ng-trans
   */
@@ -10847,5 +10998,17 @@ textarea {
 
 .ng-trans {
   -webkit-backface-visibility: hidden; }
+
+.slideanim3 {
+  width: 300%;
+  transition: 0.3s margin-left; }
+  .slideanim3 .slideanim-item {
+    width: 33.333333%;
+    float: left;
+    padding: 0 20px; }
+  .slideanim3.panel2 {
+    margin-left: -100%; }
+  .slideanim3.panel3 {
+    margin-left: -200%; }
 
 /*# sourceMappingURL=ama.css.map */

@@ -45,6 +45,7 @@ $navbar-bottomline-height: 2px;
         border-right: none !important;
         border-left: none !important;
         border-top: none !important;
+        border-radius: 0 !important;
         background-color: #ffffff;
         color: $link-color;
         border-bottom-width: $navbar-bottomline-height;
@@ -59,6 +60,10 @@ $navbar-bottomline-height: 2px;
           background-color: $gray-lighter;
           border-bottom-color: $gray-lighter;
         }
+      }
+      button
+      {
+        line-height: $actionbar-height - $navbar-bottomline-height; /* warum? ja ähm... aus... Gründen... */
       }
 
       .active a,
