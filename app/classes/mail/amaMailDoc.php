@@ -18,6 +18,7 @@ require_once('classes/mail/amaMail.php');
 require_once('classes/project/amaProject.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/authentication/user.php');
+require_once('classes/config/config.php');
 
 class AmaMailDoc {
 
@@ -29,6 +30,7 @@ class AmaMailDoc {
      */
     public function __construct($type, $id, $additional = NULL)
     {
+        $conf = Config::getInstance();
         $this->type = $type;
         $this->id = $id;
 
@@ -38,12 +40,15 @@ class AmaMailDoc {
         {
             $this->info['additional'] = $additional;
         }
+        $this->info['company'] = $conf->get['company'];
+        $this->info['company_addition'] = $conf->get['company_addition'];
+
 
         /* Gather mail recipients */
         $this->recipient = $this->getRecipient();
 
         /* Gather attachment */
-        $this->attachment = $this->getAttachment();
+        $this->attachments = $this->getAttachments();
 
         /* Gather Mail content */
         $this->content = $this->getContent();
@@ -53,7 +58,11 @@ class AmaMailDoc {
 
         $this->mail = new AmaMail($this->recipient['name'], $this->recipient['mail'], $this->subject);
         $this->mail->setContent($this->content);
-        $this->mail->addAttachment($this->attachment);
+        foreach($this->attachments as $attachment)
+        {
+            $this->mail->addAttachment($attachment);
+        }
+
     }
 
     /**
@@ -72,7 +81,7 @@ class AmaMailDoc {
         $template = new amaTemplate('templates/server/preview.phtml', array(
             'subject' => $this->subject,
             'recipient' => $this->recipient,
-            'attachment' => $this->attachment,
+            'attachments' => $this->attachments,
             'mailpreviewpath' => $conf->get['baseurl'].'/api/?action=mail&path='.$path
         ));
 
@@ -139,13 +148,15 @@ class AmaMailDoc {
         }
         else
         {
-            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $info['invoice']), 1);
+            $invoice = $dbal->simpleSelect('invoices', array('project, name, description, refnumber, date, path'), array('id', $info['invoice']), 1);
+            $info['invoice'] = $invoice;
             $project = new AmaProject($invoice['project']);
         }
         $info['project'] = $project->getProjectData();
 
         /* Add current date as date, if not existent (acceptance) */
         $info['date'] = isset($info["date"]) ? date_create($info["date"]) : date('Y-m-d');
+
 
         return $info;
     }
@@ -205,8 +216,10 @@ class AmaMailDoc {
      * Gathers the Attachment path and ensures it existence
      * @return string
      */
-    private function getAttachment()
+    private function getAttachments()
     {
+        $attachments = array();
+        /* Add main document */
         if(
             !isset($this->info['path']) ||
             $this->info['path'] == '' ||
@@ -214,12 +227,37 @@ class AmaMailDoc {
         )
         {
             $pdf = new PdfDoc($this->type, $this->id);
-            return $pdf->saveToDisk();
+            array_push($attachments, $pdf->saveToDisk());
         }
         else
         {
-            return $this->info['path'];
+            array_push($attachments, $this->info['path']);
         }
+        /* Add Invoice to reminders */
+        if(isset($this->info['invoice']))
+        {
+            if(
+                !isset($this->info['invoice']['path']) ||
+                $this->info['invoice']['path'] == '' ||
+                !file_exists($this->info['invoice']['path'])
+            )
+            {
+                $pdf = new PdfDoc('invoice', $this->info['invoice']['id']);
+                array_push($attachments, $pdf->saveToDisk());
+            }
+            else
+            {
+                array_push($attachments, $this->info['invoice']['path']);
+            }
+        }
+        /* Add additional attachment from config */
+        $conf = Config::getInstance();
+        if(isset($conf->get['mail']['attachment_'.$this->type]) && file_exists($conf->get['mail']['attachment_'.$this->type]))
+        {
+            array_push($attachments, $conf->get['mail']['attachment_'.$this->type]);
+        }
+
+        return $attachments;
     }
 
     /**

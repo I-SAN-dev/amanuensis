@@ -51,15 +51,19 @@
 
     "subject_offer":"Ihr Angebot %ref%",
     "content_offer":"user_templates/mail/offer.phtml",
+    "attachment_offer":"user_templates/attachments/agb-i-san.pdf",
 
     "subject_acceptance":"Bitte um Abnahme %ref%",
     "content_acceptance":"user_templates/mail/acceptance.phtml",
+    "attachment_acceptance":"",
 
     "subject_invoice":"Ihre Rechnung %ref%",
     "content_invoice":"user_templates/mail/invoice.phtml",
+    "attachment_invoice":"user_templates/attachments/agb-i-san.pdf",
 
     "subject_reminder":"Zahlungserinnerung %ref%",
-    "content_reminder":"user_templates/mail/reminder.phtml"
+    "content_reminder":"user_templates/mail/reminder.phtml",
+    "attachment_reminder":""
   },
 
   "debug":"1",
