@@ -26,10 +26,6 @@
                    data-ipe-name="'offers.description'|translate"
                    data-ipe-type="'textarea'"></p>
 
-                <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
-                <p><button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button></p>
-                <p><button class="btn btn-info" data-ng-click="offer.generatePDF(true)">!! Generate PDF Preview !!</button></p>
-
             </div>
         </div>
         <div class="panel panel-default">
@@ -44,8 +40,15 @@
              data-detail=""
              data-master-loaded="offer.loaded"></div>
         <div class="row">
-            <div class="col-sm-4">
-                <p>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</p>
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <p>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</p>
+                        <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
+                        <p><button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button></p>
+                        <p><a class="btn btn-info" data-ng-click="offer.openPdfPreview()" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

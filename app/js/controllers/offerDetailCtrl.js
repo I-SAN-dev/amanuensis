@@ -6,7 +6,8 @@ app.controller('OfferDetailCtrl', [
         'PdfService',
         '$stateParams',
         '$scope',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, $stateParams, $scope) {
+        'constants',
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -41,6 +42,14 @@ app.controller('OfferDetailCtrl', [
                         LocalStorage.setData('offer/'+id, self.offer);
                     }
                 });
+            };
+
+            this.openPdfPreview = function () {
+                window.open(
+                    constants.BASEURL+'/api?action=pdfgen&for=offer&forid='+self.offer.id,
+                    '',
+                    'height=500,width=900'
+                );
             };
 
             this.deleteItem = function (itemId) {
