@@ -10436,9 +10436,9 @@ html, body {
   color: #fff; }
 
 .scrollArea {
-  height: calc(100% - 96px);
-  min-height: calc(100% - 96px);
-  margin-top: 96px;
+  height: calc(100% - 106px);
+  min-height: calc(100% - 106px);
+  margin-top: 106px;
   overflow-x: hidden;
   overflow-y: scroll; }
 
@@ -10739,7 +10739,7 @@ textarea {
     height: auto; }
 .navbar .amanu-actionbar {
   background-color: #ffffff;
-  height: 32px; }
+  height: 42px; }
   .navbar .amanu-actionbar #mainNav > div,
   .navbar .amanu-actionbar #actionMenu > div {
     display: inline; }
@@ -10747,10 +10747,11 @@ textarea {
   .navbar .amanu-actionbar #actionMenu a,
   .navbar .amanu-actionbar #actionMenu button {
     padding: 2px 22px 0 22px;
-    line-height: 28px;
+    line-height: 38px;
     border-right: none !important;
     border-left: none !important;
     border-top: none !important;
+    border-radius: 0 !important;
     background-color: #ffffff;
     color: #404877;
     border-bottom-width: 2px;
@@ -10765,6 +10766,10 @@ textarea {
       color: #252a45;
       background-color: #EEEEEE;
       border-bottom-color: #EEEEEE; }
+  .navbar .amanu-actionbar #mainNav button,
+  .navbar .amanu-actionbar #actionMenu button {
+    line-height: 40px;
+    /* warum? ja ├ñhm... aus... Gr├╝nden... */ }
   .navbar .amanu-actionbar #mainNav .active a,
   .navbar .amanu-actionbar #mainNav button.active,
   .navbar .amanu-actionbar #actionMenu .active a,
@@ -10795,8 +10800,14 @@ textarea {
 .detail-view {
   padding: 0;
   background: #fff;
-  margin-top: 51px;
-  border-left: none; }
+  /*margin-top: 51px;*/
+  border-left: none;
+  /* Make it fixed */
+  position: fixed;
+  top: 121px;
+  bottom: 15px;
+  margin-right: 30px;
+  margin-left: 15px; }
   .detail-view .detail-inner {
     padding: 0 20px; }
   .detail-view .btn-toolbar {

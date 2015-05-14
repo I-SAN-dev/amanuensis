@@ -1,8 +1,15 @@
 .detail-view {
   padding: 0;
   background: #fff;
-  margin-top: 51px;
+  /*margin-top: 51px;*/
   border-left: none;
+
+  /* Make it fixed */
+  position: fixed;
+  top: $navbar-height + $actionbar-height + 15px;
+  bottom: 15px;
+  margin-right: 30px;
+  margin-left: 15px;
 
   .detail-inner
   {
