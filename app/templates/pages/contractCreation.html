@@ -1,0 +1,25 @@
+<div class="row" data-ng-controller="ContractCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+        <h2>!!Create contract for project {{create.projectName}}</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form data-ng-submit="create.createContract()">
+                    <div data-material-input
+                         data-ng-model="create.newContract.name"
+                         data-input-id="name"
+                         data-input-label="{{'global.name'|translate}}"></div>
+                    <div data-material-input
+                         data-ng-model="create.newContract.description"
+                         data-input-id="description"
+                         data-input-type="wysiwyg"
+                         data-input-label="{{'global.description'|translate}}"></div>
+                    <div data-material-input
+                         data-ng-model="create.newContract.refnumber"
+                         data-input-id="refnumber"
+                         data-input-label="{{'contracts.refNumber'|translate}}"></div>
+                    <button class="btn btn-success" type="submit">{{'contracts.createContracts'|translate}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -58,6 +58,8 @@ class Scripts
         "js/services/masterDetailService.js",
         "js/services/itemService.js",
         "js/services/pdfService.js",
+        "js/services/refnumberService.js",
+        "js/services/itemContainerService.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",
@@ -78,6 +80,8 @@ class Scripts
         "js/controllers/invoicesCtrl.js",
         "js/controllers/offersCtrl.js",
         "js/controllers/offerDetailCtrl.js",
+        "js/controllers/offerCreationCtrl.js",
+        "js/controllers/contractCreationCtrl.js",
         "js/controllers/itemPresetsCtrl.js",
         "js/controllers/itemPresetDetailCtrl.js",
         "js/controllers/itemPresetCreationCtrl.js",

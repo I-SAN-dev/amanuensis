@@ -1,0 +1,25 @@
+<div class="row" data-ng-controller="OfferCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+        <h2>!!Create offer for project {{create.projectName}}</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form data-ng-submit="create.createOffer()">
+                    <div data-material-input
+                         data-ng-model="create.newOffer.name"
+                         data-input-id="name"
+                         data-input-label="{{'global.name'|translate}}"></div>
+                    <div data-material-input
+                         data-ng-model="create.newOffer.description"
+                         data-input-id="description"
+                         data-input-type="wysiwyg"
+                         data-input-label="{{'global.description'|translate}}"></div>
+                    <div data-material-input
+                         data-ng-model="create.newOffer.refnumber"
+                         data-input-id="refnumber"
+                         data-input-label="{{'offers.refNumber'|translate}}"></div>
+                    <button class="btn btn-success" type="submit">{{'offers.createOffer'|translate}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
