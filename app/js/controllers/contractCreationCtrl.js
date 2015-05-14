@@ -1,11 +1,9 @@
 app.controller('ContractCreationCtrl', [
-    'ApiAbstractionLayer',
-    'LocalStorage',
     'RefnumberService',
     'ItemContainerService',
     '$stateParams',
     '$state',
-    function (ApiAbstractionLayer, LocalStorage, RefnumberService, ItemContainerService, $stateParams, $state) {
+    function (RefnumberService, ItemContainerService, $stateParams, $state) {
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
