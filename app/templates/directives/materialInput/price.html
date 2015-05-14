@@ -1,6 +1,7 @@
+<div class="form-inline">
 <div class="form-group">
+    <div class="input-group">
     <input  placeholder="{{label}}"
-            type="number"
             step="1"
             pattern="(\d*)"
             id="{{id}}"
@@ -8,8 +9,26 @@
             data-ng-blur="processPrice()"
             data-ng-required="{{required || false}}"
             class="form-control">
+        <div class="input-group-addon">,</div>
     <span class="bar"></span>
     <label for="{{id}}">{{label}}</label>
+
+    </div>
+</div>
+
+    <div class="form-group">
+        <input  type="text"
+                pattern="(\d*)"
+                id="{{id}}-cents"
+                data-ng-model="priceModel.cents"
+                data-ng-blur="processPrice()"
+                data-ng-required="{{required || false}}"
+                size="2"
+                maxlength="2"
+                class="form-control">
+        <span class="bar"></span>
+        <label for="{{id}}-cents">{{label}}</label>
+    </div>
 </div>
 <div data-ng-if="buttons" class="{{buttons.wrapperClass}}">
     <button class="{{buttons.save.class}}" data-ng-click="buttons.save.save()"><i class="{{buttons.save.iconClass}}"></i></button>

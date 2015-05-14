@@ -86,23 +86,19 @@ app.directive('materialInput', [
                         cents: '00'
                     };
                     $scope.processPrice = function () {
-                        var value = angular.copy($scope.priceModel);
-                        if(!value.euros){
-                            $scope.priceModel.euros = null;
-                            return;
-                        }
-                        value.euros = value.euros.toString();
-                        console.log(value);
-
+                        var value = $scope.priceModel;
                         if(!value.cents){
                             value.cents = '00';
-                        } else {
-                            value.cents = value.cents.toString();
+                        }
+                        if(!value.euros){
+                            value.euros = null;
+                            return;
                         }
 
+
+
                         $scope.model = value.euros+'.'+value.cents;
-                        $scope.priceModel.cents = angular.copy(parseInt(value.cents));
-                        $scope.priceModel.euros = angular.copy(parseInt(value.euros));
+
                         console.log($scope.model,$scope.priceModel.euros);
                     }
                 }
