@@ -47,6 +47,11 @@ class amaTemplate {
          */
         if(!function_exists('echoIf'))
         {
+            /**
+             * Outputs something if it is existent, with a wrapper
+             * @param $var - the variable
+             * @param null $expression - an expression to output, %v will be replaced with the var
+             */
             function echoIf($var, $expression = NULL)
             {
                 if(isset($var) && $var != '')
@@ -60,6 +65,35 @@ class amaTemplate {
                         echo $var;
                     }
                 }
+            }
+        }
+        if(!function_exists('exists'))
+        {
+            /**
+             * Checks if an input is existent
+             * @param $var - the variable
+             * @return bool
+             */
+            function exists($var)
+            {
+                return (
+                    isset($var)
+                    && (!is_string($var) || strlen($var) > 0)
+                    && $var != ''
+                );
+            }
+        }
+        if(!function_exists('formatDate'))
+        {
+            /**
+             * Formats a date in format yyyy-MM-dd to dd.MM.yyyy
+             * @param string $date - the date
+             * @return string
+             */
+            function formatDate($date)
+            {
+                $dateTime = DateTime::createFromFormat('Y-m-d', $date);
+                return $dateTime->format('m/d/Y');
             }
         }
 

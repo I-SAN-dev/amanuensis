@@ -1,1 +1,25 @@
-Hello World
+<?php
+
+    if(exists($project['client']['contact_lastname']) && $project['client']['contact_gender'] == 'm')
+    {
+        $anrede = 'Sehr geehrter Herr '.$project['client']['contact_lastname'];
+    }
+    else if (exists($project['client']['contact_lastname']) && $project['client']['contact_gender'] == 'f')
+    {
+        $anrede = 'Sehr geehrte Frau '.$project['client']['contact_lastname'];
+    }
+    else
+    {
+        $anrede = 'Sehr geehrte Damen und Herren';
+    }
+?>
+
+<?= $anrede ?>, <br/>
+<br/>
+Sie erhalten heute wie gewünscht Ihr Angebot <?= $refnumber ?>.<br/>
+Wir hoffen, dieses entspricht Ihren Vorstellungen, wir freuen uns auf Ihren Auftrag.<br/>
+<br/>
+<? echoIf($additional, '%v<br/><br/>') ?>
+Mit freundlichen Grüßen,<br/>
+<?= $company ?><br/>
+<? echoIf($company_addition, '%v<br/>') ?>
