@@ -46,7 +46,8 @@
                         <p>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</p>
                         <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
                         <p><button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button></p>
-                        <p><a class="btn btn-info" data-ng-click="offer.openPdfPreview()" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a></p>
+                        <p><a class="btn btn-info" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a></p>
+                        <p><a class="btn btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View Mail Preview !!</a></p>
                     </div>
                 </div>
             </div>

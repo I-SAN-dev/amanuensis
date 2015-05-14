@@ -58,6 +58,7 @@ class Scripts
         "js/services/masterDetailService.js",
         "js/services/itemService.js",
         "js/services/pdfService.js",
+        "js/services/mailService.js",
         "js/services/refnumberService.js",
         "js/services/itemContainerService.js",
         // Directives

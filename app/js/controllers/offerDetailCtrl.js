@@ -4,10 +4,11 @@ app.controller('OfferDetailCtrl', [
         'MasterDetailService',
         'DeleteService',
         'PdfService',
+        'MailService',
         '$stateParams',
         '$scope',
         'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, $stateParams, $scope, constants) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -44,12 +45,18 @@ app.controller('OfferDetailCtrl', [
                 });
             };
 
-            this.openPdfPreview = function () {
+            this.openPdfPreview = function (event) {
+                event.preventDefault();
                 window.open(
                     constants.BASEURL+'/api?action=pdfgen&for=offer&forid='+self.offer.id,
                     '',
                     'height=500,width=900'
                 );
+            };
+
+            this.openMailPreview = function (event) {
+                event.preventDefault();
+                MailService.showPreview('offer',self.offer.id);
             };
 
             this.deleteItem = function (itemId) {
