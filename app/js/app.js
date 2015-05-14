@@ -40,7 +40,6 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         // if loggedIn is not set yet, wait for getLoginState
         if($rootScope.loggedIn === undefined)
         {
-            console.log('loggedin is undefined');
             getLoginState().then(function () {
                 loginLogic(event, toState, toParams);
             });
@@ -69,7 +68,6 @@ app.run(function ($rootScope, $state, AuthService, $q) {
         if(wasLoaded === null) {
             setTimeout(function () {
                 wasLoaded = true;
-                console.log(wasLoaded);
             },0);
         }
 

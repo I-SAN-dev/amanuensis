@@ -36,7 +36,6 @@ app
                             if (password && result.salt && result.token) {
                                 var token = result.token;
                                 var salt = result.salt;
-                                LocalStorage.setData('salt', result.salt, false);
 
                                 var hashedPass = sha256Filter(password);
                                 var passSalt = sha256Filter(hashedPass + salt);
@@ -50,6 +49,7 @@ app
                             })
                                 .then(function (data) {
                                     $rootScope.loggedIn = true;
+                                    LocalStorage.setData('fe_key', data.fe_key, false);
                                     deferred.resolve(data);
                                 }, function (error) {
                                     deferred.reject(error);

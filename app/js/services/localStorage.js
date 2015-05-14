@@ -116,7 +116,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
             }
 
             if(encrypted != false) {
-                processedValue = encrypt(processedValue, $window.localStorage.getItem('salt'));
+                processedValue = encrypt(processedValue, $window.localStorage.getItem('fe_key'));
             }
 
             /* Store the Data */
@@ -147,7 +147,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
         getData: function(key, encrypted){
             var jsonString = $window.localStorage.getItem(cleanKey(key));
             if(encrypted != false){
-                jsonString = decrypt(jsonString, $window.localStorage.getItem('salt'));
+                jsonString = decrypt(jsonString, $window.localStorage.getItem('fe_key'));
             }
             return tryParseJSON(jsonString);
         },
