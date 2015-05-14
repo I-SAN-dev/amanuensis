@@ -65,11 +65,17 @@
         <li data-ng-repeat="acceptance in project.project.acceptances">
             <a data-ui-sref="app.acceptances({id:{{acceptance.id}}})">{{acceptance.name}}</a>
         </li>
+        <li>
+            <a data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">{{'projects.newAcceptance'|translate}}</a>
+        </li>
     </ul>
     <h3>{{'projects.invoices'|translate}}</h3>
     <ul>
         <li data-ng-repeat="invoice in project.project.invoices">
             <a data-ui-sref="app.invoices({id:{{invoice.id}}})">{{invoice.name}}</a>
+        </li>
+        <li>
+            <a data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">{{'projects.newInvoice'|translate}}</a>
         </li>
     </ul>
 </div>
