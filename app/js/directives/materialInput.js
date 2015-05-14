@@ -19,6 +19,9 @@ app.directive('materialInput', [
                 searchable: '@inputSelectSearchable'
             },
             controller: function ($scope, $log) {
+                if($scope.inputType=='wysiwyg'){
+
+                }
 
 
                 $scope.processWysiwyg = function(type) {
@@ -95,7 +98,10 @@ app.directive('materialInput', [
                                 ['layout', ['ul', 'ol']],
                                 ['view', ['fullscreen','codeview']],
                                 ['do', ['undo', 'redo']]
-                            ]
+                            ],
+                            onBlur: function(e) {
+                                scope.model = scope.editor.code();
+                            }
                         });
                         scope.editor.code(scope.model);
                     }
