@@ -50,6 +50,9 @@
         <li data-ng-repeat="contract in project.contracts | orderBy:'date'">
             {{contract.name}} {{contract.type}}
         </li>
+        <li>
+            <a data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">{{'projects.newContract'|translate}}</a>
+        </li>
     </ul>
     <h3>{{'projects.todos'|translate}}</h3>
     <ul>

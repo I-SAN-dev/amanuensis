@@ -242,6 +242,22 @@ app.constant('sites', [
         }
     },
     {
+        name: 'app.contractCreation',
+        stateObject: {
+            url: '/new-contract',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/contractCreation.html'
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
         name: 'app.projects',
         stateObject: {
             url: '/projects/:id',
