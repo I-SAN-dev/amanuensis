@@ -35,9 +35,18 @@ html, body
 .navbar,
 .detail-view
 {
-  @include card(1);
   overflow: hidden;
 }
+.list-group,
+.navbar,
+.detail-view,
+.panel-default
+{
+  @include card(1);
+}
+
+
+
 .panel-heading
 {
   border-bottom: 1px solid $gray-lighter;

@@ -18,7 +18,7 @@
     "client": "Kunde",
     "clients": "Kunden",
     "newClient":"Neuer Kunde",
-    "deleteClient":"Diesen Kunden entfernen",
+    "deleteClient":"Kunde löschen",
     "contact": "Ansprechpartner",
     "name": "Name",
     "firstName": "Vorname",
@@ -45,7 +45,8 @@
     {
       "male":"Herr",
       "female":"Frau"
-    }
+    },
+    "data":"Kundendaten"
   },
 
   "projects": {
@@ -53,6 +54,8 @@
     "menuTitle": "Liste aller Projekte",
     "project": "Projekt",
     "projects": "Projekte",
+    "new":"Neues Projekt",
+    "none":"Dieser Kunde hat keine aktiven Projekte!",
     "offers": "Angebote",
     "contracts": "Verträge",
     "todos":"ToDo-Listen",

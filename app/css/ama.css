@@ -10448,8 +10448,13 @@ html, body {
 .list-group,
 .navbar,
 .detail-view {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   overflow: hidden; }
+
+.list-group,
+.navbar,
+.detail-view,
+.panel-default {
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
 
 .panel-heading {
   border-bottom: 1px solid #EEEEEE; }
@@ -10788,17 +10793,34 @@ textarea {
       margin-left: -60px; }
 
 .detail-view {
-  padding: 20px;
+  padding: 0;
   background: #fff;
   margin-top: 51px;
   border-left: none; }
+  .detail-view .detail-inner {
+    padding: 0 20px; }
   .detail-view .btn-toolbar {
-    margin: -20px -20px 20px;
-    padding: 20px; }
+    margin: 0px 0px 20px;
+    padding: 0px;
+    line-height: 64px; }
+    .detail-view .btn-toolbar .btn-group button.btn {
+      height: 64px;
+      line-height: 60px;
+      font-size: 12px;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important; }
+      .detail-view .btn-toolbar .btn-group button.btn:hover, .detail-view .btn-toolbar .btn-group button.btn:active, .detail-view .btn-toolbar .btn-group button.btn:focus {
+        text-decoration: none; }
+      .detail-view .btn-toolbar .btn-group button.btn.active {
+        border-bottom: 2px solid #404877 !important; }
     .detail-view .btn-toolbar h3 {
       margin: 0;
-      padding: 0;
-      color: #404877; }
+      padding: 15px 20px;
+      color: #404877;
+      line-height: 34px; }
 
 .clientSwitch {
   display: block;
@@ -10847,5 +10869,17 @@ textarea {
 
 .ng-trans {
   -webkit-backface-visibility: hidden; }
+
+.slideanim3 {
+  width: 300%;
+  transition: 0.3s margin-left; }
+  .slideanim3 .slideanim-item {
+    width: 33.333333%;
+    float: left;
+    padding: 0 20px; }
+  .slideanim3.panel2 {
+    margin-left: -100%; }
+  .slideanim3.panel3 {
+    margin-left: -200%; }
 
 /*# sourceMappingURL=ama.css.map */

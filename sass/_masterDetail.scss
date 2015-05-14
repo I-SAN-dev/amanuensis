@@ -1,18 +1,50 @@
 .detail-view {
-  padding: 20px;
+  padding: 0;
   background: #fff;
   margin-top: 51px;
   border-left: none;
 
+  .detail-inner
+  {
+    padding: 0 20px;
+  }
+
   .btn-toolbar {
-    margin: -20px -20px 20px;
-    padding: 20px;
+    margin: 0px 0px 20px;
+    padding: 0px;
+    line-height: 64px;
+
+    .btn-group button.btn
+    {
+      height: 64px;
+      line-height: 60px;
+      font-size: $font-size-small;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important;
+
+      &:hover,
+      &:active,
+      &:focus
+      {
+        text-decoration: none;
+      }
+
+      &.active
+      {
+        border-bottom: 2px solid $brand-primary !important;
+      }
+    }
 
     h3
     {
       margin: 0;
-      padding: 0;
+      padding: 15px 20px;
       color: $brand-primary;
+      line-height: 34px;
+
     }
   }
 }
