@@ -10,6 +10,6 @@ app.controller('ItemDetailCtrl', [
         };
         this.deleteItem = function () {
             MasterDetailService.notifyMaster('deleteItem', self.item.id);
-        }
+        };
     }
 ]);
