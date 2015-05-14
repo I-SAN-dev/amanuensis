@@ -4,6 +4,14 @@ app.directive('materialInput', [
     '$compile',
     '$document',
     function ($http, $templateCache, $compile, $document) {
+        var inputTypes = {
+            text: true,
+            textarea: true,
+            wysiwyg: true,
+            select: true,
+            selectMultiple: true,
+            price: true
+        };
         return {
             restrict: 'A',
             scope: {
@@ -19,9 +27,7 @@ app.directive('materialInput', [
                 searchable: '@inputSelectSearchable'
             },
             controller: function ($scope, $log) {
-                if($scope.inputType=='wysiwyg'){
-
-                }
+                $scope.currencySymbol = '€';
 
 
                 $scope.processWysiwyg = function(type) {
@@ -35,9 +41,6 @@ app.directive('materialInput', [
                     } else {
                         $scope.buttons[type][type]();
                     }
-                    console.log($scope.model);
-
-
                 };
 
                 if($scope.inputType == 'select'){
@@ -78,6 +81,33 @@ app.directive('materialInput', [
                 }
 
 
+                if($scope.inputType == 'price'){
+                    $scope.priceModel = {
+                        cents: '00'
+                    };
+                    $scope.processPrice = function () {
+                        var value = angular.copy($scope.priceModel);
+                        if(!value.euros){
+                            $scope.priceModel.euros = null;
+                            return;
+                        }
+                        value.euros = value.euros.toString();
+                        console.log(value);
+
+                        if(!value.cents){
+                            value.cents = '00';
+                        } else {
+                            value.cents = value.cents.toString();
+                        }
+
+                        $scope.model = value.euros+'.'+value.cents;
+                        $scope.priceModel.cents = angular.copy(parseInt(value.cents));
+                        $scope.priceModel.euros = angular.copy(parseInt(value.euros));
+                        console.log($scope.model,$scope.priceModel.euros);
+                    }
+                }
+
+
 
 
 
@@ -85,8 +115,9 @@ app.directive('materialInput', [
             link: function (scope, elem, attr) {
                 // we use the link function to get our template, so the directive still works when the type is not set on page load
                 var type = attr.inputType;
-                if(type!='textarea' && type != 'select' && type != 'wysiwyg' && type != 'selectMultiple')
+                if(!inputTypes[type]) {
                     type = 'text';
+                }
                 $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
                     elem.replaceWith($compile(tplContent)(scope));
                     if(type=='wysiwyg') {
@@ -110,8 +141,8 @@ app.directive('materialInput', [
                 scope.showDropdown = false;
                 scope.hideDropdown = function () {
                     scope.showDropdown = false;
-                    console.log(scope.showDropdown);
                 };
+
 
             },
             replace: true

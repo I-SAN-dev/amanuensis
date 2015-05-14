@@ -1,0 +1,18 @@
+<div class="form-group">
+    <input  placeholder="{{label}}"
+            type="number"
+            step="1"
+            pattern="(\d*)"
+            id="{{id}}"
+            data-ng-model="priceModel.euros"
+            data-ng-blur="processPrice()"
+            data-ng-required="{{required || false}}"
+            class="form-control">
+    <span class="bar"></span>
+    <label for="{{id}}">{{label}}</label>
+</div>
+<div data-ng-if="buttons" class="{{buttons.wrapperClass}}">
+    <button class="{{buttons.save.class}}" data-ng-click="buttons.save.save()"><i class="{{buttons.save.iconClass}}"></i></button>
+    <button class="{{buttons.delete.class}}" data-ng-if="buttons.delete.isSet != false" data-ng-click="buttons.delete.delete()"><i class="{{buttons.delete.iconClass}}"></i></button>
+    <button class="{{buttons.cancel.class}}" data-ng-click="buttons.cancel.cancel()"><i class="{{buttons.cancel.iconClass}}"></i></button>
+</div>
