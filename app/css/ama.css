@@ -10853,6 +10853,94 @@ textarea {
     padding-left: 12px !important;
     border-bottom: none !important; }
 
+.tile {
+  display: block;
+  position: relative;
+  background-color: #EEEEEE;
+  height: 192px;
+  padding: 0px;
+  margin-bottom: 30px;
+  color: #263238; }
+  .tile.tile-disabled h4.tile-heading {
+    background-color: #757575; }
+  .tile:hover, .tile:active {
+    text-decoration: none; }
+  .tile h4.tile-heading {
+    font-size: 18px;
+    padding: 87px 15px 15px 15px;
+    margin: 0;
+    background-color: #404877;
+    color: #fff; }
+  .tile .tile-text {
+    padding: 15px 15px 0 15px;
+    height: 55px;
+    overflow: hidden;
+    position: relative; }
+    .tile .tile-text:after {
+      position: absolute;
+      right: 15px;
+      width: 30%;
+      bottom: 0;
+      height: 20.0px;
+      content: ' ';
+      text-indent: -9999px;
+      pointer-events: none;
+      display: block;
+      background-image: -webkit-linear-gradient(left, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-image: -o-linear-gradient(left, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-image: linear-gradient(to right, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00EEEEEE', endColorstr='#FFEEEEEE', GradientType=1); }
+  .tile .tile-icon {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #fff;
+    display: inline-block;
+    font: normal normal normal 40px/1 'Material Design Iconic Font';
+    speak: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+    .tile .tile-icon.tile-icon-add:before {
+      content: "\f0fe";
+      /* md-add-circle-outline */ }
+    .tile .tile-icon.tile-icon-0:before {
+      content: "\f060";
+      /* md-settings */ }
+    .tile .tile-icon.tile-icon-1:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #00ACC1; }
+    .tile .tile-icon.tile-icon-2:before {
+      content: "\f060";
+      /* md-settings */
+      color: #FFB300; }
+    .tile .tile-icon.tile-icon-3:before {
+      content: "\f023";
+      /* md-done */
+      color: #FFB300; }
+    .tile .tile-icon.tile-icon-4:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #00ACC1; }
+    .tile .tile-icon.tile-icon-5:before {
+      content: "\f05e";
+      /* md-schedule */
+      color: #009688; }
+    .tile .tile-icon.tile-icon-6:before {
+      content: "\f0a0";
+      /* md-error */
+      color: #F4511E; }
+    .tile .tile-icon.tile-icon-7:before {
+      content: "\f023";
+      /* md-done */
+      color: #009688; }
+    .tile .tile-icon.tile-icon-8:before {
+      content: "\f024";
+      /* md-done-all */
+      color: #009688; }
+
 /**
   * This extends ng-trans
   */

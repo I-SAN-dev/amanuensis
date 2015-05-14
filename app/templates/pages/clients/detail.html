@@ -192,23 +192,19 @@
 
         <div class="slideanim-item">
             <div class="row">
-                <div class="col-md-4 col-sm-2 col-xs-12" data-ng-hide="client.projects.length > 0">
-                    <div class="tile">
-                        <h4 class="tile-heading">&nbsp;</h4>
-                        <p class="tile-text">{{'projects.none' | translate }}</p>
-                    </div>
-                </div>
-                <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-2 col-xs-12">
+                <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-6 col-xs-12">
                     <a class="tile" data-ui-sref="app.projects({id:{{project.id}}})">
+                        <i class="tile-icon tile-icon-{{project.state}}"></i>
                         <h4 class="tile-heading">{{project.name}}</h4>
                         <p class="tile-text">{{project.description}}</p>
                     </a>
                 </div>
-                <div class="col-md-4 col-sm-2 col-xs-12">
-                    <a class="tile" data-ng-click="client.showPage = 3">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <a class="tile tile-disabled" data-ng-click="client.showPage = 3">
+                        <i class="tile-icon tile-icon-add"></i>
                         <h4 class="tile-heading">{{'projects.new'|translate}}</h4>
                         <p class="tile-text">
-                            <i class="md md-lg md-add-circle-outline"></i>
+                            <span data-ng-hide="client.projects.length > 0">{{'projects.none' | translate }}</span>
                         </p>
                     </a>
                 </div>

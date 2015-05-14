@@ -1,0 +1,121 @@
+.tile
+{
+  display: block;
+  position: relative;
+  background-color: $gray-lighter;
+  height: 192px;
+  padding: 0px;
+  margin-bottom: 30px;
+  color: $text-color;
+
+  &.tile-disabled
+  {
+    h4.tile-heading
+    {
+      background-color: $gray-dark;
+    }
+  }
+
+  &:hover,
+  &:active
+  {
+    text-decoration: none;
+  }
+
+  h4.tile-heading
+  {
+    font-size: 18px;
+    padding: 87px 15px 15px 15px;
+    margin: 0;
+    background-color: $brand-primary;
+    color: #fff;
+  }
+  .tile-text
+  {
+    padding: 15px 15px 0 15px;
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+
+    &:after
+    {
+      position: absolute;
+      right: 15px;
+      width: 30%;
+      bottom: 0;
+      height: $font-size-base*$line-height-base;
+      content: ' ';
+      text-indent: -9999px;
+      pointer-events: none;
+      display: block;
+      @include gradient-horizontal(rgba($gray-lighter, 0.0), $gray-lighter, 0%, 100%);
+    }
+  }
+
+  .tile-icon
+  {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #fff;
+
+    display: inline-block;
+    font: normal normal normal 40px/1 'Material Design Iconic Font';
+    speak: none;
+    text-rendering: auto;
+
+    // Better Font Rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.tile-icon-add:before
+    {
+      content: "\f0fe"; /* md-add-circle-outline */
+    }
+    &.tile-icon-0:before
+    {
+      content: "\f060"; /* md-settings */
+    }
+    &.tile-icon-1:before
+    {
+      content: "\f05e"; /* md-schedule */
+      color: $brand-info;
+    }
+    &.tile-icon-2:before
+    {
+      content: "\f060"; /* md-settings */
+      color: $brand-warning;
+    }
+    &.tile-icon-3:before
+    {
+      content: "\f023"; /* md-done */
+      color: $brand-warning;
+    }
+    &.tile-icon-4:before
+    {
+      content: "\f05e"; /* md-schedule */
+      color: $brand-info;
+    }
+    &.tile-icon-5:before
+    {
+      content: "\f05e"; /* md-schedule */
+      color: $brand-success;
+    }
+    &.tile-icon-6:before
+    {
+      content: "\f0a0"; /* md-error */
+      color: $brand-danger;
+    }
+    &.tile-icon-7:before
+    {
+      content: "\f023"; /* md-done */
+      color: $brand-success;
+    }
+    &.tile-icon-8:before,
+    {
+      content: "\f024"; /* md-done-all */
+      color: $brand-success;
+    }
+  }
+
+}
