@@ -1,0 +1,30 @@
+<div>
+    <div class="panel panel-default panel-filter">
+        <div class="ipe buttons-above-input bai-1">
+            <div data-material-input
+                 data-ng-model="MasterDetailCtrl.filterText"
+                 data-input-id="filter"
+                 data-input-label="Filter"
+                 data-input-type="text">
+            </div>
+            <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[MasterDetailCtrl.filterText == '']">
+                <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
+                    <i class="md md-search"></i>
+                </button>
+                <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
+                         data-ng-click="MasterDetailCtrl.filterText = ''">
+                    <i class="md md-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="list-group">
+        <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
+           data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
+           data-ng-click="setDetail(item)">
+            <h4>{{item.name}}</h4>
+        </a>
+    </div>
+</div>
