@@ -72,11 +72,11 @@ ob_start();
         <div class="container-fluid" data-ama-module="'topBar'"></div>
         <div class="container-fluid amanu-actionbar" data-ama-module="'actionBar'"></div>
     </div>
-    <div class="scrollArea">
-        <div class="container-fluid">
-            <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade"></div>
-        </div>
+
+    <div id="mainCanvas" class="container-fluid">
+        <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade fullheight"></div>
     </div>
+
 </body>
 </html>
 <?php

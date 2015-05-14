@@ -134,7 +134,7 @@ app.constant('sites', [
             },
             views: {
                 'mainContent': {
-                    template: '<div data-ui-view="appContent"></div>'
+                    template: '<div data-ui-view="appContent" class="fullheight next-fullheight"></div>'
                 }
             }
         }

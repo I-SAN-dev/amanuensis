@@ -10435,15 +10435,36 @@ html, body {
   background-color: #404877;
   color: #fff; }
 
-.scrollArea {
+#mainCanvas {
   height: calc(100% - 106px);
   min-height: calc(100% - 106px);
   margin-top: 106px;
-  overflow-x: hidden;
-  overflow-y: scroll; }
+  overflow: hidden; }
 
 #mainContent {
-  margin-top: 16px; }
+  padding-top: 16px;
+  padding-bottom: 16px; }
+
+/* we need this on many many divs so we can style our main content with relative height */
+.fullheight,
+.next-fullheight > div {
+  height: 100%; }
+
+.max-fullheight {
+  max-height: 100%; }
+
+.scroll-y {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important; }
+
+.scroll-y-permanent {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important; }
+
+.list-under-filter {
+  height: calc(100% - 53px); }
 
 .list-group,
 .navbar,
@@ -10455,6 +10476,9 @@ html, body {
 .detail-view,
 .panel-default {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
+
+.list-group {
+  background-color: #fff; }
 
 .panel-heading {
   border-bottom: 1px solid #EEEEEE; }
@@ -10801,13 +10825,7 @@ textarea {
   padding: 0;
   background: #fff;
   /*margin-top: 51px;*/
-  border-left: none;
-  /* Make it fixed */
-  position: fixed;
-  top: 121px;
-  bottom: 15px;
-  margin-right: 30px;
-  margin-left: 15px; }
+  border-left: none; }
   .detail-view .detail-inner {
     padding: 0 20px; }
   .detail-view .btn-toolbar {
