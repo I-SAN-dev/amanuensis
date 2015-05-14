@@ -214,18 +214,19 @@
 
 
         <div class="slideanim-item">
+            <h3>{{'projects.actions.new'|translate}}:</h3>
                 <form data-ng-submit="client.addProject()">
                     <div data-material-input
-                         data-input-label="{{projects.name}}"
+                         data-input-label="{{'global.name'|translate}}"
                          data-ng-model="client.newProject.name"
                          data-input-id="name"
                          data-input-type="text"></div>
                     <div data-material-input
-                         data-input-label="{{projects.description}}"
+                         data-input-label="{{'global.description'|translate}}"
                          data-ng-model="client.newProject.description"
                          data-input-id="description"
                          data-input-type="textarea"></div>
-                    <button class="btn btn-success" type="submit">{{'projects.create'|translate}}</button>
+                    <button class="btn btn-success" type="submit">{{'projects.actions.new'|translate}}</button>
                 </form>
         </div>
     </div>
