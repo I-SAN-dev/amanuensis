@@ -192,13 +192,6 @@
 
         <div class="slideanim-item">
             <div class="row">
-                <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-6 col-xs-12">
-                    <a class="tile" data-ui-sref="app.projects({id:{{project.id}}})">
-                        <i class="tile-icon tile-icon-{{project.state}}"></i>
-                        <h4 class="tile-heading">{{project.name}}</h4>
-                        <p class="tile-text">{{project.description}}</p>
-                    </a>
-                </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <a class="tile tile-disabled" data-ng-click="client.showPage = 3">
                         <i class="tile-icon tile-icon-add"></i>
@@ -206,6 +199,13 @@
                         <p class="tile-text">
                             <span data-ng-hide="client.projects.length > 0">{{'projects.none' | translate }}</span>
                         </p>
+                    </a>
+                </div>
+                <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-6 col-xs-12">
+                    <a class="tile" data-ui-sref="app.projects({id:{{project.id}}})">
+                        <i class="tile-icon tile-icon-{{project.state}}"></i>
+                        <h4 class="tile-heading">{{project.name}}</h4>
+                        <p class="tile-text">{{project.description}}</p>
                     </a>
                 </div>
             </div>

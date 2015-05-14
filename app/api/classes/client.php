@@ -142,7 +142,7 @@ class client {
             array_push($list, array(
                 'id' => $row['id'],
                 'companyname' => $row['companyname'],
-                'contact_firstname' => $row['contact_firstame'],
+                'contact_firstname' => $row['contact_firstname'],
                 'contact_lastname' => $row['contact_lastname'],
                 'contact_gender' => $row['contact_gender'],
                 'city' => $row['city'],

@@ -10821,6 +10821,18 @@ textarea {
       margin-top: -60px;
       margin-left: -60px; }
 
+.masterlist h3 {
+  text-align: right;
+  line-height: 1.0;
+  padding: 0 0 10px 0;
+  font-size: 14px;
+  color: #BDBDBD;
+  margin: 0; }
+.masterlist h2 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5; }
+
 .detail-view {
   padding: 0;
   background: #fff;
