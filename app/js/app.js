@@ -258,6 +258,38 @@ app.constant('sites', [
         }
     },
     {
+        name: 'app.acceptanceCreation',
+        stateObject: {
+            url: '/new-acceptance',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/acceptanceCreation.html'
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: 'app.invoiceCreation',
+        stateObject: {
+            url: '/new-invoice',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/invoiceCreation.html'
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
         name: 'app.projects',
         stateObject: {
             url: '/projects/:id',
