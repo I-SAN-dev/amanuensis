@@ -1,4 +1,4 @@
-<div class="detail-view fullheight" data-ng-controller="ClientDetailCtrl as client">
+<div class="detail-view fullheight scroll-y" data-ng-controller="ClientDetailCtrl as client">
 
 
     <div class="btn-toolbar">
@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-6">
 
-                <div class="btn-group btn-group-sm pull-right" ng-init="client.showPage = 1">
+                <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
                     <button class="btn btn-link" data-ng-click="client.showPage = 1" data-ng-class="{active: client.showPage==1}"><i class="md md-lg md-people"></i> {{'clients.data' | translate}}</button>
                     <button class="btn btn-link" data-ng-click="client.showPage = 2" data-ng-class="{active: client.showPage==2}"><i class="md md-lg md-folder"></i> {{'projects.projects' | translate}}</button>
                     <button class="btn btn-link" data-ng-click="client.showPage = 3" data-ng-class="{active: client.showPage==3}"><i class="md md-lg md-add-circle-outline"></i> {{'projects.new'|translate}}</button>
@@ -40,7 +40,7 @@
                   data-ipe-value="client.client.companyname"
                   data-ipe-name="'clients.companyName'|translate"></span> </h2>
         <p><span data-ng-repeat="cat in client.client.categories">{{cat}} </span></p>
-    </div>
+
 
     <div class="slideanim3" data-ng-class="{panel2: client.showPage==2, panel3: client.showPage==3}">
 
@@ -230,4 +230,5 @@
                 </form>
         </div>
     </div>
+</div>
 </div>
