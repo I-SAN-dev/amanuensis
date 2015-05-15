@@ -46,19 +46,23 @@ app.directive('listNavigation',[
                     return oldPos + offset;
                 };
 
-
-                // navigate to the next or previous item when up or down key is pressed
+                // select the only element left in the list when the list is filtered down to one element
                 $document.unbind('keyup');
                 $document.on('keyup', function (event) {
+                    var list = $filter('filter')(scope.list, scope.filterText);
+                    if (list.length == 1) {
+                        callback(list[0]);
+                    }
+                });
+
+                // navigate to the next or previous item when up or down key is pressed
+                $document.unbind('keydown');
+                $document.on('keydown', function (event) {
                     var list = $filter('filter')(scope.list, scope.filterText);
 
                     var domList = elem[0].children;
 
-                    console.log(event);
-                    if(list.length==1){
-                        callback(list[0]);
-                        return;
-                    }
+
                     var active = scope.active || null;
                     var key = event.keyCode;
 
