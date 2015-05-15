@@ -30,7 +30,7 @@ app.directive('masterDetail', [function(){
                  * Sets a new detail item and notifies other controllers that the detail has changed
                  * @param detail - the new detail object
                  */
-                $scope.setDetail = function(detail){
+                $scope.setDetail = function(detail, keyboard){
                     console.log(detail);
                     if(MasterDetailService.editMode) {
                         MasterDetailService.notifyEditor('cancel');
@@ -38,7 +38,7 @@ app.directive('masterDetail', [function(){
                     }
                     $stateParams.id = detail.id;
                     self.detail = detail;
-                    MasterDetailService.notifyDetail('detailChanged', detail);
+                    MasterDetailService.notifyDetail('detailChanged', detail, keyboard);
                 };
 
 

@@ -20,7 +20,11 @@
     </div>
 
 
-    <div class="list-group">
+    <div class="list-group"
+         data-list-navigation="setDetail"
+         data-list="masterList"
+         data-active="MasterDetailCtrl.detail"
+         data-filter-text="MasterDetailCtrl.filterText">
         <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
            data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
            data-ng-click="setDetail(item)">

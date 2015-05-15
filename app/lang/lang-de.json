@@ -245,6 +245,15 @@
     "dailyRate": "Tagessatz",
     "hours": "Stunden",
     "days": "Tage"
+  },
+  "offers": {
+    "states":{
+      "created": "Angebot erstellt",
+      "pdfGenerated": "PDF generiert",
+      "pdfSent": "PDf verschickt",
+      "clientAccepted": "Vom Kunden angenommen",
+      "clientDeclined": "Vom Kunden abgelehnt"
+    }
   }
 
 

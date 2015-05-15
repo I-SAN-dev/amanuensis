@@ -86,7 +86,7 @@ app.directive('listNavigation',[
                         var prevDetail = list[position];
 
                         if (prevDetail) {
-                            callback(prevDetail);
+                            callback(prevDetail, true);
                             if(domList[position]) {
                                 newActiveOffset = $(domList[position]).position();
                                 newActiveOffset = newActiveOffset.top - domList[position].offsetHeight;
@@ -109,7 +109,7 @@ app.directive('listNavigation',[
                         var nextDetail = list[position];
                         console.log(nextDetail);
                         if (nextDetail) {
-                            callback(nextDetail);
+                            callback(nextDetail, true);
                             if(domList[position]) {
                                 var newActiveItem = $(domList[position]);
 
