@@ -62,5 +62,15 @@
         color: $brand-primary;
       }
     }
+    td.tabletd,
+    th.tabletd
+    {
+      width: 50%;
+    }
+    td.tabletd
+    {
+      padding: 0;
+    }
+
   }
 }

@@ -89,6 +89,7 @@
     "dailyrate": "300",
     "hourlyrate": "40"
   },
+  "invoice_due_days":"14",
 
   "refnumber_offers":
   {

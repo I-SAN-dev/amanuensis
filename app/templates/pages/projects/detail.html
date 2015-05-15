@@ -219,7 +219,7 @@
                         <th class="date">{{'global.date' | translate}}</th>
                         <th class="date">{{'invoice.due' | translate}}</th>
                         <th class="state"></th>
-                        <th class="table">{{'invoice.reminders' | translate}}</th>
+                        <th class="tabletd">{{'invoice.reminders' | translate}}</th>
                     </tr>
                     </thead>
                     <tr data-ng-repeat="invoice in project.project.invoices" data-ui-sref="app.invoices({id:{{invoice.id}}})">
@@ -238,8 +238,8 @@
                         <td class="state">
                             {{invoice.state}}
                         </td>
-                        <td class="table">
-                            <table data-ng-show="invoice.reminders.length > 0" class="table table-hover">
+                        <td class="tabletd">
+                            <table data-ng-show="invoice.reminders.length > 0" class="table table-hover table-condensed table-striped">
                                 <thead>
                                 <tr>
                                     <th class="name">{{'global.name'|translate}}</th>
