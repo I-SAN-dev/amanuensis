@@ -29,6 +29,7 @@ app.controller('ProjectDetailCtrl',
                     for (var j=0; j < data.fileContracts.length; j++) {
                         contract = data.fileContracts[j];
                         contract.type = 'file';
+                        contract.refnumber = contract.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use basename as refnumber */
                         contracts.push(contract);
                     }
                     self.contracts = contracts;
