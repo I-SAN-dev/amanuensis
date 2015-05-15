@@ -11077,6 +11077,11 @@ textarea {
       .table-box .table-box-body .table-hover thead tr th {
         font-weight: 300;
         color: #404877; }
+    .table-box .table-box-body td.tabletd,
+    .table-box .table-box-body th.tabletd {
+      width: 50%; }
+    .table-box .table-box-body td.tabletd {
+      padding: 0; }
 
 /**
   * This extends ng-trans

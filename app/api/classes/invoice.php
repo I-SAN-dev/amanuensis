@@ -80,6 +80,7 @@ class invoice {
      */
     private static function getInvoiceList()
     {
+        $conf = Config::getInstance();
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'invoices',
@@ -93,6 +94,15 @@ class invoice {
                 'path'
             )
         );
+
+        /* Add due dates */
+        foreach($result as &$invoice)
+        {
+            $date = new DateTime($invoice['date']);
+            $date->add(date_interval_create_from_date_string($conf->get['invoice_due_days'].' days'));
+            $invoice['due'] = $date->format("Y-m-d");
+        }
+
         json_response($result);
     }
 
@@ -102,6 +112,7 @@ class invoice {
      */
     private static function getInvoice($id)
     {
+        $conf = Config::getInstance();
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'invoices',
@@ -127,6 +138,11 @@ class invoice {
         /* Add project data */
         $project = new AmaProject($result['project']);
         $result['project'] = $project->getProjectData();
+
+        /* Add due date */
+        $date = new DateTime($result['date']);
+        $date->add(date_interval_create_from_date_string($conf->get['invoice_due_days'].' days'));
+        $result['due'] = $date->format("Y-m-d");
 
         json_response($result);
     }

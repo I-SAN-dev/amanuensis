@@ -162,6 +162,31 @@ class AmaProject {
                 array('id', 'refnumber', 'name', 'date', 'path', 'state'),
                 array('project', $this->id)
             );
+            $conf = Config::getInstance();
+            foreach($this->invoices as &$invoice)
+            {
+                /* Add due date */
+                $date = new DateTime($invoice['date']);
+                $date->add(date_interval_create_from_date_string($conf->get['invoice_due_days'].' days'));
+                $invoice['due'] = $date->format("Y-m-d");
+
+
+                /* Add reminders */
+                $invoice['reminders'] = $this->dbal->simpleSelect(
+                    'reminders',
+                    array(
+                        'id',
+                        'name',
+                        'refnumber',
+                        'date',
+                        'state'
+                    ),
+                    array('invoice', $invoice['id']),
+                    0,
+                    'date ASC'
+                );
+
+            }
         }
         return $this->invoices;
     }
