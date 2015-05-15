@@ -68,6 +68,7 @@ class Scripts
         "js/directives/inPlaceEdit.js",
         "js/directives/materialInput.js",
         "js/directives/clientBox.js",
+        "js/directives/listNavigation.js",
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
