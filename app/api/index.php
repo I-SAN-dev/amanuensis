@@ -87,6 +87,11 @@ else if ($method === 'DELETE' && isset($_DELETE['action']))
 {
     $action = $_DELETE['action'];
 }
+/* neded for combined get/post requests when file uploading */
+else if($method === 'POST' && isset($_GET["uploadfor"]))
+{
+    $action = 'fileContract';
+}
 else
 {
     $error = new amaException(NULL, 400, "Action not defined");
