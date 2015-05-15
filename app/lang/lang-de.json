@@ -8,7 +8,8 @@
   "global":
   {
     "name":"Name",
-    "description":"Beschreibung"
+    "description":"Beschreibung",
+    "date":"Datum"
   },
 
   "clients": {
@@ -61,9 +62,15 @@
     "todos":"ToDo-Listen",
     "acceptances": "Abnahmen",
     "invoices": "Rechnungen",
+    "newOffer": "Neues Angebot erstellen",
+    "newContract": "Neuen Vertrag erstellen oder hinterlegen",
+    "newAcceptance": "Neues Abnahmeformular anlegen",
+    "newInvoice": "Neue Rechnung erstellen",
+    "newTodo": "Neue ToDo Liste erstellen",
     "actions":
     {
-      "new":"Neues Projekt erstellen"
+      "new":"Neues Projekt erstellen",
+      "delete":"Projekt löschen"
     }
   },
 
@@ -72,6 +79,17 @@
     "actions":{
       "new":"Neues Preset erstellen"
     }
+  },
+
+  "contract":
+  {
+    "type":"Typ"
+  },
+
+  "invoice":
+  {
+    "due":"Fällig",
+    "reminders":"Zahlungserinnerungen"
   },
 
   "login":
