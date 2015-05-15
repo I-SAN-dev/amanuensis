@@ -1,0 +1,66 @@
+.table-box
+{
+  margin-bottom: 20px;
+
+  .table-box-head
+  {
+    background-color: $brand-primary;
+    color: #fff;
+
+    h3
+    {
+      margin: 0;
+      padding: 0 8px;
+      color: #fff;
+      line-height: 38px;
+    }
+    button.btn
+    {
+      font-size: 16px;
+      color: #fff;
+      line-height: 38px;
+      border: none;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-radius: 0;
+      transition: 0.3s color;
+      float: right;
+
+      &:hover,
+      &:active
+      {
+        background-color: transparent;
+        color: $brand-success;
+      }
+      &:focus
+      {
+        background-color: transparent !important;
+        color: $gray-lighter;
+      }
+    }
+  }
+  .table-box-body
+  {
+    border: 1px solid $gray-light;
+    border-top: none !important;
+
+    .table
+    {
+      margin-bottom: 0;
+    }
+    .table-hover tr
+    {
+      cursor: pointer;
+    }
+    .table-hover thead tr
+    {
+      cursor: default;
+
+      th
+      {
+        font-weight: 300;
+        color: $brand-primary;
+      }
+    }
+  }
+}

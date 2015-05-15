@@ -10839,10 +10839,13 @@ textarea {
   /*margin-top: 51px;*/
   border-left: none; }
   .detail-view .detail-inner {
-    padding: 0 20px; }
+    padding: 20px 20px 0 20px;
+    height: calc(100% - 64px); }
+    .detail-view .detail-inner h1 {
+      margin-top: 0; }
   .detail-view .btn-toolbar {
-    margin: 0px 0px 20px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     line-height: 64px; }
     .detail-view .btn-toolbar .btn-group button.btn {
       height: 64px;
@@ -10906,6 +10909,14 @@ textarea {
     background-color: #757575; }
   .tile:hover, .tile:active {
     text-decoration: none; }
+  .tile .ipe .ipe-empty {
+    color: #BDBDBD; }
+    .tile .ipe .ipe-empty:hover {
+      color: #263238; }
+  .tile .tile-inner {
+    padding: 15px; }
+    .tile .tile-inner h1, .tile .tile-inner h2 {
+      margin-top: 0; }
   .tile h4.tile-heading {
     font-size: 18px;
     padding: 87px 15px 15px 15px;
@@ -10981,6 +10992,91 @@ textarea {
       content: "\f024";
       /* md-done-all */
       color: #009688; }
+
+.state-icon {
+  display: inline-block;
+  font: normal normal normal 40px/1 'Material Design Iconic Font';
+  speak: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+  .state-icon.state-icon-add:before {
+    content: "\f0fe";
+    /* md-add-circle-outline */ }
+  .state-icon.state-icon-0:before {
+    content: "\f060";
+    /* md-settings */ }
+  .state-icon.state-icon-1:before {
+    content: "\f05e";
+    /* md-schedule */
+    color: #00ACC1; }
+  .state-icon.state-icon-2:before {
+    content: "\f060";
+    /* md-settings */
+    color: #FFB300; }
+  .state-icon.state-icon-3:before {
+    content: "\f023";
+    /* md-done */
+    color: #FFB300; }
+  .state-icon.state-icon-4:before {
+    content: "\f05e";
+    /* md-schedule */
+    color: #00ACC1; }
+  .state-icon.state-icon-5:before {
+    content: "\f05e";
+    /* md-schedule */
+    color: #009688; }
+  .state-icon.state-icon-6:before {
+    content: "\f0a0";
+    /* md-error */
+    color: #F4511E; }
+  .state-icon.state-icon-7:before {
+    content: "\f023";
+    /* md-done */
+    color: #009688; }
+  .state-icon.state-icon-8:before {
+    content: "\f024";
+    /* md-done-all */
+    color: #009688; }
+
+.table-box {
+  margin-bottom: 20px; }
+  .table-box .table-box-head {
+    background-color: #404877;
+    color: #fff; }
+    .table-box .table-box-head h3 {
+      margin: 0;
+      padding: 0 8px;
+      color: #fff;
+      line-height: 38px; }
+    .table-box .table-box-head button.btn {
+      font-size: 16px;
+      color: #fff;
+      line-height: 38px;
+      border: none;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-radius: 0;
+      transition: 0.3s color;
+      float: right; }
+      .table-box .table-box-head button.btn:hover, .table-box .table-box-head button.btn:active {
+        background-color: transparent;
+        color: #009688; }
+      .table-box .table-box-head button.btn:focus {
+        background-color: transparent !important;
+        color: #EEEEEE; }
+  .table-box .table-box-body {
+    border: 1px solid #BDBDBD;
+    border-top: none !important; }
+    .table-box .table-box-body .table {
+      margin-bottom: 0; }
+    .table-box .table-box-body .table-hover tr {
+      cursor: pointer; }
+    .table-box .table-box-body .table-hover thead tr {
+      cursor: default; }
+      .table-box .table-box-body .table-hover thead tr th {
+        font-weight: 300;
+        color: #404877; }
 
 /**
   * This extends ng-trans

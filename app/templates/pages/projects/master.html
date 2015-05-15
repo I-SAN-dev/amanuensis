@@ -1,4 +1,4 @@
-<div>
+<div class="fullheight">
     <div class="panel panel-default panel-filter">
         <div class="ipe buttons-above-input bai-1">
             <div data-material-input
@@ -20,12 +20,14 @@
     </div>
 
 
-
-    <div class="list-group">
-        <a class="list-group-item" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText"
-           data-ng-class="{active:MasterDetailCtrl.detail.id == project.id,'ng-trans ng-trans-scale-up':masterLoaded}"
-           data-ng-click="setDetail(project)">
-            <h4>{{project.name}}</h4>
-        </a>
+    <div class="list-under-filter">
+        <div class="list-group max-fullheight scroll-y masterlist">
+            <a class="list-group-item" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText"
+               data-ng-class="{active:MasterDetailCtrl.detail.id == project.id,'ng-trans ng-trans-scale-up':masterLoaded}"
+               data-ng-click="setDetail(project)">
+                <h3>{{project.companyname}}</h3>
+                <h2>{{project.name}}</h2>
+            </a>
+        </div>
     </div>
 </div>

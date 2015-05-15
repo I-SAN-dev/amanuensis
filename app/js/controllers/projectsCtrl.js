@@ -10,10 +10,29 @@ app.controller('ProjectsCtrl', [
     function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope){
         var self = this;
         MasterDetailService.setMaster(this);
-        this.projects = LocalStorage.getData('projects');
-        ApiAbstractionLayer('GET','project').then(function (data) {
-            LocalStorage.setData('projects', data);
+
+        /**
+         * Process the list of clients coming from the api after GET or DELETE request
+         * @param data - the apiData object
+         */
+        var setProjectList = function (data) {
+            for(var i= 0; i<data.length; i++){
+                // process contact name if companyname is not set
+                if(!data[i].companyname){
+                    data[i].companyname =
+                        (data[i].contact_firstname || '')
+                        +' '
+                        +(data[i].contact_lastname || '');
+                }
+            }
             self.projects = data;
+            LocalStorage.setData('projects', self.projects);
+        };
+
+
+        setProjectList(LocalStorage.getData('projects'));
+        ApiAbstractionLayer('GET','project').then(function (data) {
+            setProjectList(data)
         });
 
         // (re)set a flag indicating if the Controller was fully loaded

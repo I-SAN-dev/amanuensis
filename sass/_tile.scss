@@ -22,6 +22,21 @@
     text-decoration: none;
   }
 
+  .ipe .ipe-empty
+  {
+    color: $gray-light;
+    &:hover {color: $text-color;}
+  }
+  .tile-inner
+  {
+    padding: 15px;
+
+    h1, h2
+    {
+      margin-top: 0;
+    }
+  }
+
   h4.tile-heading
   {
     font-size: 18px;
@@ -111,11 +126,72 @@
       content: "\f023"; /* md-done */
       color: $brand-success;
     }
-    &.tile-icon-8:before,
+    &.tile-icon-8:before
     {
       content: "\f024"; /* md-done-all */
       color: $brand-success;
     }
   }
+}
 
+
+.state-icon
+{
+  display: inline-block;
+  font: normal normal normal 40px/1 'Material Design Iconic Font';
+  speak: none;
+  text-rendering: auto;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.state-icon-add:before
+  {
+    content: "\f0fe"; /* md-add-circle-outline */
+  }
+  &.state-icon-0:before
+  {
+    content: "\f060"; /* md-settings */
+  }
+  &.state-icon-1:before
+  {
+    content: "\f05e"; /* md-schedule */
+    color: $brand-info;
+  }
+  &.state-icon-2:before
+  {
+    content: "\f060"; /* md-settings */
+    color: $brand-warning;
+  }
+  &.state-icon-3:before
+  {
+    content: "\f023"; /* md-done */
+    color: $brand-warning;
+  }
+  &.state-icon-4:before
+  {
+    content: "\f05e"; /* md-schedule */
+    color: $brand-info;
+  }
+  &.state-icon-5:before
+  {
+    content: "\f05e"; /* md-schedule */
+    color: $brand-success;
+  }
+  &.state-icon-6:before
+  {
+    content: "\f0a0"; /* md-error */
+    color: $brand-danger;
+  }
+  &.state-icon-7:before
+  {
+    content: "\f023"; /* md-done */
+    color: $brand-success;
+  }
+  &.state-icon-8:before
+  {
+    content: "\f024"; /* md-done-all */
+    color: $brand-success;
+  }
 }
