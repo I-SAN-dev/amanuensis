@@ -85,6 +85,15 @@
   {
     "type":"Typ"
   },
+  "upload":
+  {
+    "onlyPdf":"Nur PDF-Dateien erlaubt!",
+    "toBig":"Die Datei ist zu groß!",
+    "partial":"Die Datei wurde nur teilweise übertragen. Bitte versuchen Sie es erneut.",
+    "noFile":"Es wurde keine Datei hochgeladen",
+    "server":"Auf dem Server ist ein Problem aufgetreten",
+    "alreadyExists":"Eine Datei mit diesem Namen existiert bereits."
+  },
 
   "invoice":
   {
