@@ -75,6 +75,7 @@ app.directive('listNavigation',[
 
 
                     var viewportHeight = scrollArea.height();
+                    console.log(viewportHeight);
                     var scrollTop = scrollArea.scrollTop();
 
                     var position;
@@ -86,11 +87,16 @@ app.directive('listNavigation',[
 
                         if (prevDetail) {
                             callback(prevDetail);
-                            if(domList[position-1]) {
-                                newActiveOffset = $(domList[position - 1]).position().top;
-                                console.log(newActiveOffset);
-                                if (newActiveOffset < scrollTop)
-                                    scrollArea.animate({scrollTop: newActiveOffset - documentOffset}, animation);
+                            if(domList[position]) {
+                                newActiveOffset = $(domList[position]).position();
+                                newActiveOffset = newActiveOffset.top - domList[position].offsetHeight;
+                                console.log(newActiveOffset,scrollTop);
+                                if (newActiveOffset < 0) {
+                                    var newScrollTop = scrollTop + newActiveOffset ;
+                                    console.log(newScrollTop);
+                                    scrollArea.animate({scrollTop: newScrollTop}, animation);
+                                }
+
                             }
                         }
                     }
@@ -104,13 +110,14 @@ app.directive('listNavigation',[
                         console.log(nextDetail);
                         if (nextDetail) {
                             callback(nextDetail);
-                            if(domList[position+1]) {
-                                var newActiveItem = $(domList[position + 1]);
-                                console.log(newActiveItem);
-                                newActiveOffset = newActiveItem.height() + newActiveItem.position().top;
+                            if(domList[position]) {
+                                var newActiveItem = $(domList[position]);
 
+                                newActiveOffset = newActiveItem.position();
+                                newActiveOffset = newActiveItem.height() + newActiveOffset.top;
+                                console.log(newActiveOffset);
                                 if (newActiveOffset > viewportHeight) {
-                                    scrollArea.animate({scrollTop: scrollTop + newActiveItem.height() + documentOffset}, animation);
+                                    scrollArea.animate({scrollTop: scrollTop + (newActiveOffset - viewportHeight)}, animation);
                                 }
                             }
                         }

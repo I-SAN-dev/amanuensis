@@ -100,7 +100,6 @@ app.directive('materialInput', [
 
                         $scope.model = value.euros+'.'+value.cents;
 
-                        console.log($scope.model,$scope.priceModel.euros);
                     }
                 }
 
