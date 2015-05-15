@@ -144,6 +144,21 @@ class invoice {
         $date->add(date_interval_create_from_date_string($conf->get['invoice_due_days'].' days'));
         $result['due'] = $date->format("Y-m-d");
 
+        /* Add reminders */
+        $result['reminders'] = $dbal->simpleSelect(
+            'reminders',
+            array(
+                'id',
+                'name',
+                'refnumber',
+                'date',
+                'state'
+            ),
+            array('invoice', $result['id']),
+            0,
+            'date ASC'
+        );
+
         json_response($result);
     }
 
