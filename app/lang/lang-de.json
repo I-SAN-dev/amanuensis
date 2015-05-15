@@ -70,7 +70,8 @@
     "actions":
     {
       "new":"Neues Projekt erstellen",
-      "delete":"Projekt löschen"
+      "delete":"Projekt löschen",
+      "archive": "Projektarchiv"
     }
   },
 

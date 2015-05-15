@@ -7,9 +7,23 @@ app.controller('ProjectsCtrl', [
     'MasterDetailService',
     'DeleteService',
     '$scope',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope){
+    '$state',
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope, $state){
         var self = this;
         MasterDetailService.setMaster(this);
+        var apiObject = {
+            name: 'project',
+            params: {}
+        };
+        var lsIdentifier = 'projects';
+        if($state.current.name == 'app.projects'){
+            apiObject.params.current = 1;
+        }
+        if($state.current.name == 'app.projectArchive'){
+            apiObject.params.archive = 1;
+            lsIdentifier = 'projectArchive';
+        }
+
 
         /**
          * Process the list of clients coming from the api after GET or DELETE request
@@ -26,12 +40,13 @@ app.controller('ProjectsCtrl', [
                 }
             }
             self.projects = data;
-            LocalStorage.setData('projects', self.projects);
+            LocalStorage.setData(lsIdentifier, self.projects);
         };
 
 
-        setProjectList(LocalStorage.getData('projects'));
-        ApiAbstractionLayer('GET','project').then(function (data) {
+
+        setProjectList(LocalStorage.getData(lsIdentifier)|| []);
+        ApiAbstractionLayer('GET',apiObject).then(function (data) {
             setProjectList(data)
         });
 

@@ -328,6 +328,17 @@ app.constant('sites', [
         }
     },
     {
+        name: 'app.projectArchive',
+        stateObject: {
+            url: '/project-archive/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/projects.html'
+                }
+            }
+        }
+    },
+    {
         name: 'app.acceptances',
         stateObject: {
             url: '/acceptances/:id',
