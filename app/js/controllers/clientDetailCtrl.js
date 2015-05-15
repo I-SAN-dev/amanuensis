@@ -132,9 +132,11 @@ app.controller('ClientDetailCtrl',
                     clientProjects.push(data);
                     LocalStorage.setData('client/'+self.client.id+'/projects', clientProjects);
                     self.newProject = null;
+                    self.projects = clientProjects;
                     var projectList = LocalStorage.getData('projects');
                     projectList.push(data);
                     LocalStorage.setData('projects', projectList);
+                    self.showPage = 2;
                 });
             };
         }
