@@ -48,10 +48,17 @@ app.directive('listNavigation',[
 
 
                 // navigate to the next or previous item when up or down key is pressed
-                $document.unbind('keydown');
-                $document.on('keydown', function (event) {
+                $document.unbind('keyup');
+                $document.on('keyup', function (event) {
                     var list = $filter('filter')(scope.list, scope.filterText);
+
                     var domList = elem[0].children;
+
+                    console.log(event);
+                    if(list.length==1){
+                        callback(list[0]);
+                        return;
+                    }
                     var active = scope.active || null;
                     var key = event.keyCode;
 
