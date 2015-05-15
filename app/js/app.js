@@ -317,6 +317,17 @@ app.constant('sites', [
         }
     },
     {
+        name: 'app.projectDetail',
+        stateObject: {
+            url: '/project/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/projects/detail.html'
+                }
+            }
+        }
+    },
+    {
         name: 'app.acceptances',
         stateObject: {
             url: '/acceptances/:id',

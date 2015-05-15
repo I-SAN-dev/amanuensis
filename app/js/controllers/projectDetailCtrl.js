@@ -46,7 +46,10 @@ app.controller('ProjectDetailCtrl',
 
             // if the project state is entered with a certain id, we want to set the project detail for this id
             if($stateParams.id){
-                $scope.$parent.setDetail({id:$stateParams.id});
+                if($scope.$parent.setDetail)
+                    $scope.$parent.setDetail({id:$stateParams.id});
+                else
+                    getProject($stateParams.id);
             }
 
             this.deleteProject = function(){
