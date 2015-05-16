@@ -247,6 +247,7 @@
     "days": "Tage"
   },
   "offers": {
+    "state": "Angebotsstatus",
     "states":{
       "created": "Angebot erstellt",
       "pdfGenerated": "PDF generiert",
@@ -256,6 +257,7 @@
     }
   },
   "errors": {
+    "additionalInformation": "Weitere Informationen zu diesem Fehler:",
     "codes": {
       "400": {
         "message":"Fehler 400 - Unzureichende Anfrage",

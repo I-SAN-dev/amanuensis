@@ -1,4 +1,4 @@
-<div class="row detail" data-ng-controller="OfferDetailCtrl as offer">
+<div class="row detail scroll-y" data-ng-controller="OfferDetailCtrl as offer">
     <div class="col-sm-4">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -16,7 +16,7 @@
                                              data-api-id="offer.offer.id"
                                              data-api-name="'offer'"
                                              data-ipe-name="'offers.refnumber'|translate"></span></small></h1>
-                <p>!!State!!: {{offer.offer.state|amaStates:'offer'|translate}}</p>
+                <p>{{'offers.state'|translate}}: {{offer.offer.state|amaStates:'offer'|translate}}</p>
                 <p><a data-ui-sref="app.projects({id:{{offer.offer.project.id}}})">{{offer.offer.project.name}}</a> - {{offer.offer.date |date:offer.dateFormat}}</p>
                 <p data-in-place-edit
                    data-api-id="offer.offer.id"
@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-body">
                         <p>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</p>
                         <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
