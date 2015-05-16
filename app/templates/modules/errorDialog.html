@@ -3,9 +3,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-ng-click="error.close()"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{error.code}}</h4>
+                <h4 class="modal-title">{{error.code|amaStates:'error'|translate}}</h4>
             </div>
             <div class="modal-body">
+                <p>{{error.code|amaStates:'errorDescription'|translate}}</p>
+                <p>{{'errors.additionalInformation'|translate}}</p>
                 <p>{{error.message}}</p>
             </div>
             <div class="modal-footer">

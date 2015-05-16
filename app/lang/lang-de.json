@@ -254,6 +254,34 @@
       "clientAccepted": "Vom Kunden angenommen",
       "clientDeclined": "Vom Kunden abgelehnt"
     }
+  },
+  "errors": {
+    "codes": {
+      "400": {
+        "message":"Fehler 400 - Unzureichende Anfrage",
+        "description":"Die Anfrage an den Server enthielt keine oder nicht ausreichend Daten, um sie zu verarbeiten."
+      },
+      "401": {
+        "message":"Fehler 401 - Nicht autorisiert",
+        "description":"Sie sind derzeit nicht berechtigt, diese Aktion durchzuführen."
+      },
+      "403": {
+        "message":"Fehler 403 - Nicht erlaubt",
+        "description":"Der Server verweigert die Annahme der Anfrage."
+      },
+      "404": {
+        "message":"Fehler 404 - Element nicht gefunden",
+        "description":"Die angefragte Ressource konnte nicht gefunden werden."
+      },
+      "405": {
+        "message":"Fehler 405 - Methode nicht erlaubt",
+        "description":"Die Anfrage muss mit einer anderen Methode gesendet werden."
+      },
+      "500": {
+        "message":"Fehler 500 - Server-Fehler",
+        "description":"Es gab einen unerwarteten Server-Fehler bei der Verarbeitung der Anfrage."
+      }
+    }
   }
 
 
