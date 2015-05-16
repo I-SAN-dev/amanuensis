@@ -69,6 +69,7 @@ class Scripts
         "js/directives/materialInput.js",
         "js/directives/clientBox.js",
         "js/directives/listNavigation.js",
+        "js/directives/fileUpload.js",
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",

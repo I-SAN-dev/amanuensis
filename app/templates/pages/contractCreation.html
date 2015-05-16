@@ -1,4 +1,4 @@
-<div class="row" data-ng-controller="ContractCreationCtrl as create">
+<div class="row scroll-y" data-ng-controller="ContractCreationCtrl as create">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
         <h2>!!Create contract for project {{create.projectName}}</h2>
         <div class="panel panel-default">
@@ -13,10 +13,18 @@
                          data-input-id="description"
                          data-input-type="wysiwyg"
                          data-input-label="{{'global.description'|translate}}"></div>
-                    <div data-material-input
-                         data-ng-model="create.newContract.refnumber"
-                         data-input-id="refnumber"
-                         data-input-label="{{'contracts.refNumber'|translate}}"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div data-material-input
+                                 data-ng-model="create.newContract.refnumber"
+                                 data-input-id="refnumber"
+                                 data-input-label="{{'contracts.refNumber'|translate}}"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="file" data-file-upload="create.fileContract">
+                        </div>
+                    </div>
+
                     <button class="btn btn-success" type="submit">{{'contracts.createContracts'|translate}}</button>
                 </form>
             </div>

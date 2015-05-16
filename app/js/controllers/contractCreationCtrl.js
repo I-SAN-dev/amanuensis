@@ -1,9 +1,13 @@
 app.controller('ContractCreationCtrl', [
+    'ApiAbstractionLayer',
+    'LocalStorage',
     'RefnumberService',
     'ItemContainerService',
+    'fileUploadService',
     '$stateParams',
     '$state',
-    function (RefnumberService, ItemContainerService, $stateParams, $state) {
+    '$http',
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, $http) {
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
@@ -18,13 +22,28 @@ app.controller('ContractCreationCtrl', [
                 self.newContract.refnumber = data.refnumber;
             }
         });
+
         this.createContract = function () {
-            ItemContainerService.createItemContainer('contract', projectId, self.newContract).then(function (data) {
-                // go to where we came from
-                var to = $stateParams.referrer;
-                var toParams = $stateParams.referrerParams;
-                $state.go(to,toParams);
-            });
+            if(self.fileContract){
+                ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {
+                    var file = self.fileContract;
+                    console.log(file);
+                    var uploadUrl = 'http://cb.ama.i-san.de/api/?action=fileContract&uploadfor='+data.id;
+                    $http.post(uploadUrl, file, {
+                        transformRequest: angular.identity,
+                        headers: {'Content-Type': undefined}}
+                    );
+
+                });
+
+            } else {
+                ItemContainerService.createItemContainer('contract', projectId, self.newContract).then(function (data) {
+                    // go to where we came from
+                    var to = $stateParams.referrer;
+                    var toParams = $stateParams.referrerParams;
+                    $state.go(to,toParams);
+                });
+            }
         };
     }
 ]);

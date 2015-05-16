@@ -25,7 +25,7 @@ app.factory('ItemContainerService',[
                     LocalStorage.setData('contract/'+data.id, data);
 
                     var project = LocalStorage.getData('project/'+projectId);
-                    var list = project[containerMap[type]];
+                    var list = project[containerMap[type]] || [];
                     list.push(data);
                     LocalStorage.setData('project/'+projectId, project);
                     defer.resolve(data);
