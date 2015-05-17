@@ -8,7 +8,8 @@ app.controller('ClientDetailCtrl',
         '$stateParams',
         'DeleteService',
         'MasterDetailService',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService) {
+        'btfModal',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, btfModal) {
 
             var self = this;
 
@@ -138,6 +139,26 @@ app.controller('ClientDetailCtrl',
                     LocalStorage.setData('projects', projectList);
                     self.showPage = 2;
                 });
+            };
+
+            this.openCategoryModal = function(){
+                ApiAbstractionLayer('GET', 'client_categories').then(function (data) {
+                    var allCategories = data;
+                });
+                var modal = btfModal({
+                    templateUrl: 'templates/pages/clients/categoryDialog.html',
+                    controller: function(){
+                        this.activeCategories = self.client.categories;
+                        this.allCategories = allCategories;
+
+                        this.close = function () {
+                            console.log('close');
+                            modal.deactivate();
+                        };
+                    },
+                    controllerAs: 'categories'
+                });
+                return modal;
             };
         }
     ]

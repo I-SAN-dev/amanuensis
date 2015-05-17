@@ -241,10 +241,13 @@
   "items": {
     "expectedRate": "Veranschlagter Preis",
     "fixedRate": "Fixpreis",
+    "hourlyRates":"Anzahl Stunden",
     "hourlyRate": "Stundensatz",
+    "dailyRates": "Anzahl Tage",
     "dailyRate": "Tagessatz",
     "hours": "Stunden",
-    "days": "Tage"
+    "days": "Tage",
+    "totalPrice": "Gesamtkosten"
   },
   "offers": {
     "state": "Angebotsstatus",

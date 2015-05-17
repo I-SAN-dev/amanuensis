@@ -28,10 +28,14 @@ app.controller('OfferDetailCtrl', [
             this.dateFormat = 'dd.MM.yyyy';
 
             this.offer = LocalStorage.getData('offer/'+id);
-            ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
-                self.offer = data;
-                LocalStorage.setData('offer/'+id, data);
-            });
+            var getOffer = function () {
+                ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
+                    self.offer = data;
+                    LocalStorage.setData('offer/'+id, data);
+                });
+            };
+
+            getOffer();
 
 
             this.generatePDF = function (preview) {
@@ -65,6 +69,11 @@ app.controller('OfferDetailCtrl', [
                     LocalStorage.setData('offer/'+id, self.offer);
                 });
             };
+
+            this.priceChanged = function (item) {
+               getOffer();
+
+            }
         }
     ]
 );
