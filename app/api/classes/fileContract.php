@@ -55,7 +55,7 @@ class fileContract {
         {
             self::uploadFile($_GET["uploadfor"]);
         }
-        if(isset($_POST["uploadfor"]) && $_POST["uploadfor"] != '')
+        else if(isset($_POST["uploadfor"]) && $_POST["uploadfor"] != '')
         {
             self::uploadFile($_POST["uploadfor"]);
         }
