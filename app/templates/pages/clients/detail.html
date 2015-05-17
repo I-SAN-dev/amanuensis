@@ -43,7 +43,7 @@
 
         <div class="client-categories">
             <div class="chip" data-ng-repeat="(catid, cat) in client.client.categories">
-                <span >{{cat}}</span> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
+                <a data-ng-click="MasterDetailCtrl.filterText = cat">{{cat}}</a> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
             </div>
             <div class="chip" data-ng-click="console.log('argh'); client.openCategoryModal()">
                 <span >{{'category.add'|translate}}</span> <button class="btn btn-link btn-icon-round" ><i class="md-add"></i></button>
