@@ -126,8 +126,26 @@ class AmaProject {
             $this->todos = $this->dbal->simpleSelect(
                 'todos',
                 array('id', 'name', 'due'),
-                array('project', $this->id)
+                array('project', $this->id),
+                0,
+                'ORDER BY due ASC'
             );
+            /* Count items and done items*/
+            foreach($this->todos AS &$todo)
+            {
+                $q = $this->dbal->prepare('
+                    SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+                ');
+                $q->bindParam(':todo', $todo['id']);
+                $q->execute();
+                /* items not done */
+                $undone = $q->fetch(PDO::FETCH_ASSOC);
+                /* items done */
+                $done = $q->fetch(PDO::FETCH_ASSOC);
+
+                $todo['items_total'] = $undone['items'] + $done['items'];
+                $todo['items_done'] = $done['items'];
+            }
         }
         return $this->todos;
     }

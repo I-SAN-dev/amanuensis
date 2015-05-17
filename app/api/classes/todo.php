@@ -19,7 +19,7 @@ require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
 
-class project {
+class todo {
 
     /**
      * This method reacts to GET Requests
@@ -90,6 +90,22 @@ class project {
                 'project'
             )
         );
+        /* Count items and done items*/
+        foreach($result AS &$todo)
+        {
+            $q = $dbal->prepare('
+                    SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+                ');
+            $q->bindParam(':todo', $todo['id']);
+            $q->execute();
+            /* items not done */
+            $undone = $q->fetch(PDO::FETCH_ASSOC);
+            /* items done */
+            $done = $q->fetch(PDO::FETCH_ASSOC);
+
+            $todo['items_total'] = $undone['items'] + $done['items'];
+            $todo['items_done'] = $done['items'];
+        }
         json_response($result);
     }
 
@@ -111,6 +127,20 @@ class project {
             array('id', $id),
             1
         );
+        /* Count items and done items*/
+        $q = $dbal->prepare('
+                SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+            ');
+        $q->bindParam(':todo', $result['id']);
+        $q->execute();
+        /* items not done */
+        $undone = $q->fetch(PDO::FETCH_ASSOC);
+        /* items done */
+        $done = $q->fetch(PDO::FETCH_ASSOC);
+
+        $result['items_total'] = $undone['items'] + $done['items'];
+        $result['items_done'] = $done['items'];
+
 
         /* Add items */
         $itemlist = new AmaItemList('todo', $id);
