@@ -128,7 +128,7 @@ class AmaProject {
                 array('id', 'name', 'due'),
                 array('project', $this->id),
                 0,
-                'ORDER BY due ASC'
+                'due ASC'
             );
             /* Count items and done items*/
             foreach($this->todos AS &$todo)
