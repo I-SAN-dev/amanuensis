@@ -29,10 +29,15 @@ app.controller('ContractCreationCtrl', [
                     var file = self.fileContract;
                     console.log(file);
                     var uploadUrl = 'http://cb.ama.i-san.de/api/?action=fileContract&uploadfor='+data.id;
-                    $http.post(uploadUrl, file, {
-                        transformRequest: angular.identity,
-                        headers: {'Content-Type': undefined}}
-                    );
+                    fileUploadService.uploadFile(file,uploadUrl).then(function(path){
+                        ApiAbstractionLayer('POST', {name:'fileContract', data: {id: data.id, path: path}}).then(function (data) {
+                            ItemContainerService.updateLocalStorage('fileContract', projectId, data);
+                            // go to where we came from
+                            var to = $stateParams.referrer;
+                            var toParams = $stateParams.referrerParams;
+                            $state.go(to,toParams);
+                        });
+                    });
 
                 });
 
