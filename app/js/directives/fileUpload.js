@@ -17,7 +17,7 @@ app.directive('fileUpload', ['$parse', function ($parse) {
     };
 }])
     .service('fileUploadService', ['$http', '$q', function ($http, $q) {
-        this.uploadFileToUrl = function(file, uploadUrl){
+        this.uploadFile = function(file, uploadUrl){
             var fd = new FormData();
             fd.append('file', file);
             var defer = $q.defer();
@@ -25,8 +25,8 @@ app.directive('fileUpload', ['$parse', function ($parse) {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
-                .success(function(path){
-                    defer.resolve(path);
+                .success(function(data){
+                    defer.resolve(data.path);
                 })
                 .error(function(error){
                     defer.reject(error)

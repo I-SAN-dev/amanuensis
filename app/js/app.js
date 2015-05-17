@@ -322,7 +322,7 @@ app.constant('sites', [
             url: '/project/:id',
             views: {
                 'appContent': {
-                    templateUrl: 'templates/pages/projects/detail.html'
+                    templateUrl: 'templates/pages/projectDetail.html'
                 }
             }
         }
@@ -339,23 +339,34 @@ app.constant('sites', [
         }
     },
     {
-        name: 'app.acceptances',
+        name: 'app.contractDetail',
         stateObject: {
-            url: '/acceptances/:id',
+            url: '/contracts/:id',
             views: {
                 'appContent': {
-                    templateUrl: 'templates/pages/acceptances.html'
+                    templateUrl: 'templates/pages/contractDetail.html'
                 }
             }
         }
     },
     {
-        name:'app.invoices',
+        name: 'app.acceptanceDetail',
+        stateObject: {
+            url: '/acceptances/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/acceptanceDetail.html'
+                }
+            }
+        }
+    },
+    {
+        name:'app.invoiceDetail',
         stateObject: {
             url: '/invoices/:id',
             views: {
                 'appContent': {
-                    templateUrl: 'templates/pages/invoices.html'
+                    templateUrl: 'templates/pages/invoiceDetail.html'
                 }
             }
         }

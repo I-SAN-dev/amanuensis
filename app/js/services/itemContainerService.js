@@ -7,9 +7,19 @@ app.factory('ItemContainerService',[
         var containerMap = {
             offer: 'offers',
             contract: 'contracts',
+            fileContract: 'fileContracts',
             acceptance: 'acceptances',
             invoice: 'invoices',
             reminder: 'reminders'
+        };
+        var updateLocalStorage = function (type, projectId, container) {
+            LocalStorage.setData(type+'/'+container.id, container);
+
+            var project = LocalStorage.getData('project/'+projectId);
+            var list = project[containerMap[type]] || [];
+            list.push(container);
+            LocalStorage.setData('project/'+projectId, project);
+
         };
         return {
             createItemContainer: function(type, projectId, newContainer) {
@@ -22,15 +32,13 @@ app.factory('ItemContainerService',[
                     data: newContainer
                 };
                 ApiAbstractionLayer('POST', apiObject).then(function (data) {
-                    LocalStorage.setData('contract/'+data.id, data);
-
-                    var project = LocalStorage.getData('project/'+projectId);
-                    var list = project[containerMap[type]] || [];
-                    list.push(data);
-                    LocalStorage.setData('project/'+projectId, project);
+                    updateLocalStorage(type,projectId,data);
                     defer.resolve(data);
                 });
                 return defer.promise;
+            },
+            updateLocalStorage: function (type, projectId, container) {
+                updateLocalStorage(type, projectId, container);
             }
         }
     }
