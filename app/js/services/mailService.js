@@ -14,6 +14,17 @@ app.factory('MailService', [
                 ApiAbstractionLayer('POST',apiObject).then(function (data) {
                     window.open(constants.BASEURL+'/api?action=mail&path='+data.previewpath,'','height=500,width=900');
                 });
+            },
+            send: function(type, id) {
+                var apiObject = {
+                    name: 'mail',
+                    data: {
+                        type: type,
+                        id: id,
+                        send: true
+                    }
+                };
+                return ApiAbstractionLayer('POST', apiObject);
             }
         }
     }

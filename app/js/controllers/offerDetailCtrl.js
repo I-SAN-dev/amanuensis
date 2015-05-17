@@ -63,6 +63,10 @@ app.controller('OfferDetailCtrl', [
                 MailService.showPreview('offer',self.offer.id);
             };
 
+            this.send = function () {
+                MailService.send('offer',self.offer.id);
+            };
+
             this.deleteItem = function (itemId) {
                 DeleteService('item', itemId).then(function (data) {
                     self.offer.items = data;

@@ -45,11 +45,21 @@
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <p>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</p>
-                        <p><a data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}" target="_blank">!! Link to file !!</a></p>
-                        <p><button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button></p>
-                        <p><a class="btn btn-info" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a></p>
-                        <p><a class="btn btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View Mail Preview !!</a></p>
+                        <div class="btn-toolbar">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div>
+                                        <button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button>
+                                        <a class="btn btn-info" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a>
+                                        <a class="btn btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View Mail Preview !!</a>
+                                        <button class="btn btn-success" data-ng-click="offer.send()">!! Send offer !!</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="text-right"><strong>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
