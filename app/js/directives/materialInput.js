@@ -24,7 +24,8 @@ app.directive('materialInput', [
                 optionValue: '@inputSelectOptionValue',
                 optionName: '@inputSelectOptionName',
                 buttons: '=inputButtons',
-                searchable: '@inputSelectSearchable'
+                searchable: '@inputSelectSearchable',
+                blur:'=ngBlur'
             },
             controller: function ($scope, $log) {
                 $scope.currencySymbol = '€';
@@ -100,6 +101,7 @@ app.directive('materialInput', [
 
                         $scope.model = value.euros+'.'+value.cents;
 
+
                     }
                 }
 
@@ -115,7 +117,14 @@ app.directive('materialInput', [
                     type = 'text';
                 }
                 $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
-                    elem.replaceWith($compile(tplContent)(scope));
+                    var element = $compile(tplContent)(scope);
+                    elem.replaceWith(element);
+
+                    if(attr.inputAutofocus){
+                        var input = element.children('input').first();
+                        input.focus();
+                    }
+
                     if(type=='wysiwyg') {
                         scope.editor = $('.summernote');
                         scope.editor.summernote({
@@ -142,6 +151,7 @@ app.directive('materialInput', [
                     $(elem).focus();
                     scope.showDropdown = true;
                 };
+
 
 
             },
