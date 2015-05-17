@@ -40,6 +40,10 @@
     "addEmail": "E-Mail Adresse hinzufügen",
     "addPhone": "Telefonnummer hinzufügen",
     "addFax": "Faxnummer hinzufügen",
+    "defaultMailAddress":"Dies ist die Standard-Mailadresse des Kunden",
+    "setDefaultMailAddress":"Diese Adresse zur Standard-Mailadresse des Kunden machen.",
+    "sendMail":"Eine E-Mail senden",
+    "call":"Anrufen",
     "actions": {
       "new": "Neuer Kunde",
       "categories": "Kategorien"

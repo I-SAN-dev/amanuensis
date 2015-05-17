@@ -144,6 +144,17 @@
                                           data-ipe-name="'clients.mailAddress'|translate"></span>
                                 </div>
                                 <div class="col-sm-2">
+                                    <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.sendMail' | translate}}" href="mailto:{{mail.value}}">
+                                        <i class="md md-mail"></i>
+                                    </a>
+                                    <span class="varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[mail.isdefault == 1]">
+                                        <button class="varcheck-if-true btn btn-info btn-link btn-icon-round" disabled title="{{'clients.defaultMailAddress' | translate}}">
+                                            <i class="md md-radio-button-on"></i>
+                                        </button>
+                                        <button class="varcheck-if-false btn btn-link btn-icon-round" data-ng-click="client.makeMailDefault(mail.id)" title="{{'clients.setDefaultMailAddress' | translate}}">
+                                            <i class="md md-radio-button-off"></i>
+                                        </button>
+                                    </span>
 
                                 </div>
                             </div>
@@ -191,7 +202,7 @@
                                           data-deletable-item="true"
                                           data-ipe-name="'clients.phone'|translate"></span>
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     <span data-in-place-edit
                                           data-ipe-key="'value'"
                                           data-ipe-value="phone.value"
@@ -199,6 +210,11 @@
                                           data-api-id="phone.id"
                                           data-deletable-item="true"
                                           data-ipe-name="'clients.phoneNumber'|translate"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.call' | translate}}" href="tel:{{phone.value}}">
+                                        <i class="md md-call"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row striped varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.phone]">

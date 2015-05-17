@@ -81,6 +81,11 @@ $detail-toolbar-height: 64px;
     }
   }
 }
+.note-editor .btn-toolbar .btn-group button.btn
+{
+  height:34px !important;
+  line-height: 30px !important;
+}
 
 .clientSwitch
 {

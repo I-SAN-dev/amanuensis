@@ -119,6 +119,10 @@ app.controller('ClientDetailCtrl',
                 MasterDetailService.notifyMaster('deleteClient', self.client.id);
             };
 
+            /**
+             * Removes a category with a given catid from the client
+             * @param catid - the id of the category to be removed from the client
+             */
             this.removeCategory = function(catid)
             {
                 var apiObject = {
@@ -137,6 +141,14 @@ app.controller('ClientDetailCtrl',
 
             };
 
+            /**
+             * Makes the mail with the given id the dfault mail address
+             * @param id - the id of the mailaddress
+             */
+            this.makeMailDefault = function(id)
+            {
+                alert('TODO: Make this Mailadress default');
+            };
 
 
             this.addProject = function () {
