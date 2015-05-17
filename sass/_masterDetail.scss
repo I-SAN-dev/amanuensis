@@ -148,3 +148,54 @@ $detail-toolbar-height: 64px;
     background-color: $brand-success;
   }
 }
+
+.sidelabel
+{
+  margin: 0 0 0 -20px;
+  padding: 5px 5px 5px 20px;
+  color: #ffffff;
+  background-color: $brand-primary;
+  font-size: $font-size-base;
+}
+.detail-block
+{
+  margin-bottom: 30px;
+
+
+  .row
+  {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .form-group
+    {
+      margin-bottom: 0;
+    }
+
+    .btn.btn-link
+    {
+      margin-top: -5px;
+      margin-bottom: -5px;
+      margin-left: -5px;
+    }
+
+
+    &.striped:nth-child(odd)
+    {
+      background-color: $gray-lighter;
+
+      .ipe-empty
+      {
+        color: $gray-light;
+        &:hover
+        {
+          color: $text-color;
+        }
+      }
+    }
+    &.striped:last-child
+    {
+      border-bottom: 1px solid $gray-lighter;
+    }
+  }
+}

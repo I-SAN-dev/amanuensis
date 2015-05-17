@@ -10904,6 +10904,33 @@ textarea {
   .client-categories .chip:last-child .btn-icon-round:hover {
     background-color: #009688; }
 
+.sidelabel {
+  margin: 0 0 0 -20px;
+  padding: 5px 5px 5px 20px;
+  color: #ffffff;
+  background-color: #404877;
+  font-size: 14px; }
+
+.detail-block {
+  margin-bottom: 30px; }
+  .detail-block .row {
+    padding-top: 5px;
+    padding-bottom: 5px; }
+    .detail-block .row .form-group {
+      margin-bottom: 0; }
+    .detail-block .row .btn.btn-link {
+      margin-top: -5px;
+      margin-bottom: -5px;
+      margin-left: -5px; }
+    .detail-block .row.striped:nth-child(odd) {
+      background-color: #EEEEEE; }
+      .detail-block .row.striped:nth-child(odd) .ipe-empty {
+        color: #BDBDBD; }
+        .detail-block .row.striped:nth-child(odd) .ipe-empty:hover {
+          color: #263238; }
+    .detail-block .row.striped:last-child {
+      border-bottom: 1px solid #EEEEEE; }
+
 .tile {
   display: block;
   position: relative;

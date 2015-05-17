@@ -108,6 +108,8 @@ app.controller('ClientDetailCtrl',
                         self.client.data[type] = [{id: data.id, name: name, value: value}];
                     }
                     LocalStorage.setData('client/'+self.client.id, self.client);
+                    self.newConnection[type].name = '';
+                    self.newConnection[type].value = '';
                 });
             };
 

@@ -37,6 +37,9 @@
     "comment": "Kommentar",
     "refnumber":"Kunden-Nr.",
     "categories": "Kategorien",
+    "addEmail": "E-Mail Adresse hinzufügen",
+    "addPhone": "Telefonnummer hinzufügen",
+    "addFax": "Faxnummer hinzufügen",
     "actions": {
       "new": "Neuer Kunde",
       "categories": "Kategorien"
