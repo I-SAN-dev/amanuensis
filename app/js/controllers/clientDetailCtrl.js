@@ -117,6 +117,25 @@ app.controller('ClientDetailCtrl',
                 MasterDetailService.notifyMaster('deleteClient', self.client.id);
             };
 
+            this.removeCategory = function(catid)
+            {
+                var apiObject = {
+                    name: 'client_categories',
+                    data: {
+                        id: catid,
+                        clientid: this.client.id
+                    }
+                };
+                ApiAbstractionLayer('DELETE', apiObject).then(function (data) {
+                    if(data.success)
+                    {
+                        delete self.client.categories[catid];
+                    }
+                });
+
+            };
+
+
 
             this.addProject = function () {
                 var apiObject = {

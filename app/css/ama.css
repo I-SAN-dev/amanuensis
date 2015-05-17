@@ -10841,7 +10841,9 @@ textarea {
   .detail-view .detail-inner {
     padding: 20px 20px 0 20px;
     height: calc(100% - 64px); }
-    .detail-view .detail-inner h1 {
+    .detail-view .detail-inner .seamless {
+      margin: 0 -20px; }
+    .detail-view .detail-inner h1, .detail-view .detail-inner h2 {
       margin-top: 0; }
   .detail-view .btn-toolbar {
     margin: 0;
@@ -10896,6 +10898,11 @@ textarea {
   .panel-filter input {
     padding-left: 12px !important;
     border-bottom: none !important; }
+
+.client-categories {
+  margin-bottom: 15px; }
+  .client-categories .chip:last-child .btn-icon-round:hover {
+    background-color: #009688; }
 
 .tile {
   display: block;
@@ -11082,6 +11089,29 @@ textarea {
       width: 50%; }
     .table-box .table-box-body td.tabletd {
       padding: 0; }
+
+.chip {
+  background-color: #EEEEEE;
+  border-radius: 13px;
+  display: inline-block;
+  padding: 0 0 0 13px;
+  line-height: 26px;
+  height: 26px;
+  margin-right: 15px;
+  cursor: default; }
+  .chip span, .chip i {
+    line-height: 26px; }
+  .chip .btn-icon-round {
+    height: 26px !important;
+    line-height: 26px !important;
+    padding: 0 9px 0 9px;
+    position: relative;
+    top: -2px;
+    margin-left: 3px;
+    transition: 0.3s background-color, 0.3s color; }
+    .chip .btn-icon-round:hover {
+      background-color: #F4511E;
+      color: #fff; }
 
 /**
   * This extends ng-trans

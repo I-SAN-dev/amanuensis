@@ -31,7 +31,12 @@ $detail-toolbar-height: 64px;
     padding: 20px 20px 0 20px;
     height: calc(100% - #{$detail-toolbar-height});
 
-    h1
+    .seamless
+    {
+      margin: 0 -20px;
+    }
+
+    h1, h2
     {
       margin-top: 0;
     }
@@ -131,5 +136,15 @@ $detail-toolbar-height: 64px;
   {
     padding-left: $padding-base-horizontal !important;
     border-bottom: none !important;
+  }
+}
+
+.client-categories
+{
+  margin-bottom: 15px;
+
+  .chip:last-child .btn-icon-round:hover
+  {
+    background-color: $brand-success;
   }
 }

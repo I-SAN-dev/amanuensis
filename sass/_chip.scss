@@ -1,0 +1,33 @@
+.chip
+{
+  background-color: $gray-lighter;
+  border-radius: 13px;
+  display: inline-block;
+  padding: 0 0 0 13px;
+  line-height: 26px;
+  height: 26px;
+  margin-right: 15px;
+  cursor: default;
+
+  span, i
+  {
+    line-height: 26px;
+  }
+
+  .btn-icon-round
+  {
+    height: 26px !important;
+    line-height: 26px !important;
+    padding: 0 9px 0 9px;
+    position: relative;
+    top: -2px;
+    margin-left: 3px;
+    transition: 0.3s background-color, 0.3s color;
+
+    &:hover
+    {
+      background-color: $brand-danger;
+      color: #fff;
+    }
+  }
+}
