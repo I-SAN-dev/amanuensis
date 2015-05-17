@@ -213,7 +213,8 @@ class client {
               id,
               datatype,
               name,
-              value
+              value,
+              isdefault
             FROM customer_data
             WHERE customer = :id
             "
@@ -229,7 +230,8 @@ class client {
                 $data = array(
                     'id' => $entry['id'],
                     'name' => $entry['name'],
-                    'value' => $entry['value']
+                    'value' => $entry['value'],
+                    'isdefault' => $entry['isdefault']
                 );
 
                 if(!isset($additionalData[$type]))
@@ -310,7 +312,8 @@ class client {
                         'datatype' => $datatype,
                         'name' => $entry->name,
                         'value' => $entry->value,
-                        'customer' => $id
+                        'customer' => $id,
+                        'isdefault' => $entry->isdefault
                     );
                     $dbal->dynamicInsert(
                         'customer_data',
@@ -318,7 +321,8 @@ class client {
                             'datatype',
                             'name',
                             'value',
-                            'customer'
+                            'customer',
+                            'isdefault'
                         ),
                         $todb
                     );
