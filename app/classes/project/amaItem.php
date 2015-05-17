@@ -123,7 +123,7 @@ class AmaItem {
         /*
          * use daily rate
          */
-        else if($entry['usertate'] == 2)
+        else if($entry['userate'] == 2)
         {
             /* check hourlyrates */
             if(!isset($entry['dailyrates']) || $entry['dailyrates'] == '')
@@ -145,7 +145,7 @@ class AmaItem {
             }
 
             /* set total value */
-            $entry['total'] = $entry['dailyates'] * $dailyrate;
+            $entry['total'] = $entry['dailyrates'] * $dailyrate;
 
         }
         /*
