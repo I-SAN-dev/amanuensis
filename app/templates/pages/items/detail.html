@@ -48,7 +48,7 @@
                     <div class="radio">
                         <label>
                             <input type="radio" value="1" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.hourlyRate'|translate}}: <span data-in-place-edit
+                            {{'items.hourlyRate'|translate}}:</label><span data-in-place-edit
                                                                     data-ipe-key="'hourlyrates'"
                                                                     data-ipe-value="item.item.hourlyrates"
                                                                     data-api-name="'item'"
@@ -61,12 +61,12 @@
                                                                                                                                                               data-ipe-type="'price'"
                                                                                                                                                               data-api-id="item.item.id"
                                                                                                                                                               data-ipe-name="'items.hourlyRate'|translate"></span>
-                        </label>
+
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" value="2" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.dailyRate'|translate}}: <span data-in-place-edit
+                            {{'items.dailyRate'|translate}}:</label> <span data-in-place-edit
                                                                    data-ipe-key="'dailyrates'"
                                                                    data-ipe-type="'text'"
                                                                    data-ipe-value="item.item.dailyrates"
@@ -79,19 +79,18 @@
                                                                                                                                                            data-ipe-type="'price'"
                                                                                                                                                            data-api-id="item.item.id"
                                                                                                                                                            data-ipe-name="'items.dailyRate'|translate"></span>
-                        </label>
+
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" value="0" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.fixedRate'|translate}}: <span data-in-place-edit
+                            {{'items.fixedRate'|translate}}:</label> <span data-in-place-edit
                                                                    data-ipe-value="item.item.fixedrate"
                                                                    data-ipe-key="'fixedrate'"
                                                                    data-api-name="'item'"
                                                                    data-ipe-type="'price'"
                                                                    data-api-id="item.item.id"
                                                                    data-ipe-name="'items.fixedRate'|translate"></span>
-                        </label>
                     </div>
                 </div>
 
