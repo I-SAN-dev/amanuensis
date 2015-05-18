@@ -25,83 +25,86 @@
     <div class="detail-inner nopadding">
 
 
-            <div class="slideanim3 fullheight" data-ng-class="{panel2: item.showPage==2, panel3: item.showPage==3}">
+        <div class="slideanim3 fullheight" data-ng-class="{panel2: item.showPage==2, panel3: item.showPage==3}">
 
-                <div class="slideanim-item fullheight">
+            <div class="slideanim-item fullheight">
 
-                    <div class="ipe-wysiwyg-fullheight">
-                        <p data-in-place-edit
-                             data-ipe-key="'description'"
-                             data-ipe-value="item.item.description"
-                             data-ipe-type="'wysiwyg'"
-                             data-api-name="'item'"
-                             data-api-id="item.item.id"
-                             data-ipe-name="'global.description'|translate"></p>
+                <div class="ipe-wysiwyg-fullheight">
+                    <p data-in-place-edit
+                       data-ipe-key="'description'"
+                       data-ipe-value="item.item.description"
+                       data-ipe-type="'wysiwyg'"
+                       data-api-name="'item'"
+                       data-api-id="item.item.id"
+                       data-ipe-name="'global.description'|translate"></p>
+                </div>
+
+            </div>
+
+            <div class="slideanim-item fullheight scroll-y">
+
+                <h3>{{'items.expectedRate'|translate}}</h3>
+                <div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="1" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
+                            {{'items.hourlyRate'|translate}}: <span data-in-place-edit
+                                                                    data-ipe-key="'hourlyrates'"
+                                                                    data-ipe-value="item.item.hourlyrates"
+                                                                    data-api-name="'item'"
+                                                                    data-ipe-type="'text'"
+                                                                    data-api-id="item.item.id"
+                                                                    data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
+                                                                                                                                                              data-ipe-value="item.item.hourlyrate"
+                                                                                                                                                              data-ipe-key="'hourlyrate'"
+                                                                                                                                                              data-api-name="'item'"
+                                                                                                                                                              data-ipe-type="'price'"
+                                                                                                                                                              data-api-id="item.item.id"
+                                                                                                                                                              data-ipe-name="'items.hourlyRate'|translate"></span>
+                        </label>
                     </div>
-
-                </div>
-
-                <div class="slideanim-item fullheight scroll-y">
-
-                    <h3>{{'items.expectedRate'|translate}}</h3>
-                    <div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" value="1" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                                {{'items.hourlyRate'|translate}}: <span data-in-place-edit
-                                                                        data-ipe-key="'hourlyrates'"
-                                                                        data-ipe-value="item.item.hourlyrates"
-                                                                        data-api-name="'item'"
-                                                                        data-api-id="item.item.id"
-                                                                        data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
-                                                                                                                                                                  data-ipe-value="item.item.hourlyrate"
-                                                                                                                                                                  data-ipe-key="'hourlyrate'"
-                                                                                                                                                                  data-api-name="'item'"
-                                                                                                                                                                  data-ipe-type="'price'"
-                                                                                                                                                                  data-api-id="item.item.id"
-                                                                                                                                                                  data-ipe-name="'items.hourlyRate'|translate"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" value="2" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                                {{'items.dailyRate'|translate}}: <span data-in-place-edit
-                                                                       data-ipe-key="'dailyrates'"
-                                                                       data-ipe-value="item.item.dailyrates"
-                                                                       data-api-name="'item'"
-                                                                       data-api-id="item.item.id"
-                                                                       data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
-                                                                                                                                                               data-ipe-value="item.item.dailyrate"
-                                                                                                                                                               data-ipe-key="'dailyrate'"
-                                                                                                                                                               data-api-name="'item'"
-                                                                                                                                                               data-ipe-type="'price'"
-                                                                                                                                                               data-api-id="item.item.id"
-                                                                                                                                                               data-ipe-name="'items.dailyRate'|translate"></span>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" value="0" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                                {{'items.fixedRate'|translate}}: <span data-in-place-edit
-                                                                       data-ipe-value="item.item.fixedrate"
-                                                                       data-ipe-key="'fixedrate'"
-                                                                       data-api-name="'item'"
-                                                                       data-ipe-type="'price'"
-                                                                       data-api-id="item.item.id"
-                                                                       data-ipe-name="'items.fixedRate'|translate"></span>
-                            </label>
-                        </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="2" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
+                            {{'items.dailyRate'|translate}}: <span data-in-place-edit
+                                                                   data-ipe-key="'dailyrates'"
+                                                                   data-ipe-type="'text'"
+                                                                   data-ipe-value="item.item.dailyrates"
+                                                                   data-api-name="'item'"
+                                                                   data-api-id="item.item.id"
+                                                                   data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
+                                                                                                                                                           data-ipe-value="item.item.dailyrate"
+                                                                                                                                                           data-ipe-key="'dailyrate'"
+                                                                                                                                                           data-api-name="'item'"
+                                                                                                                                                           data-ipe-type="'price'"
+                                                                                                                                                           data-api-id="item.item.id"
+                                                                                                                                                           data-ipe-name="'items.dailyRate'|translate"></span>
+                        </label>
                     </div>
-
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="0" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
+                            {{'items.fixedRate'|translate}}: <span data-in-place-edit
+                                                                   data-ipe-value="item.item.fixedrate"
+                                                                   data-ipe-key="'fixedrate'"
+                                                                   data-api-name="'item'"
+                                                                   data-ipe-type="'price'"
+                                                                   data-api-id="item.item.id"
+                                                                   data-ipe-name="'items.fixedRate'|translate"></span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="slideanim-item fullheight scroll-y">
+            </div>
 
-                    <button class="btn btn-link" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i></button>
+            <div class="slideanim-item fullheight scroll-y">
 
-                </div>
+                <button class="btn btn-link" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i></button>
+
+            </div>
 
 
 
+        </div>
     </div>
 </div>
