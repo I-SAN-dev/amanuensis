@@ -161,6 +161,13 @@ $detail-toolbar-height: 64px;
   color: #ffffff;
   background-color: $brand-primary;
   font-size: $font-size-base;
+
+  .md
+  {
+    position: relative;
+    top: -1px;
+    padding-right: 5px;
+  }
 }
 .detail-block
 {

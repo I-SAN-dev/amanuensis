@@ -10920,6 +10920,10 @@ textarea {
   color: #ffffff;
   background-color: #404877;
   font-size: 14px; }
+  .sidelabel .md {
+    position: relative;
+    top: -1px;
+    padding-right: 5px; }
 
 .detail-block {
   margin-bottom: 30px; }
