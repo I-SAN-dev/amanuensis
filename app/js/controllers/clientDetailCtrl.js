@@ -30,6 +30,10 @@ app.controller('ClientDetailCtrl',
             };
 
             this.showProjects = false;
+            /**
+             * gets the projects associated with the client specified by param id
+             * @param id - the client's id
+             */
             var getProjects = function (id) {
                 self.projects = LocalStorage.getData('client/'+id+'/projects');
                 ApiAbstractionLayer('GET', {name:'project',params:{client: id}}).then(function (data) {
@@ -115,7 +119,18 @@ app.controller('ClientDetailCtrl',
             };
 
 
+            /**
+             * Updates the view and the cache after a client - client_data connection was deleted
+             * @param updatedList - the updated list of client_data which doesn't contain the deleted item
+             */
+            this.connectionDeleted = function (updatedList) {
+                self.client.data = updatedList;
+                LocalStorage.setData('client/'+self.client.id, self.client);
+            };
 
+            /**
+             * Deletes the current client
+             */
             this.deleteClient = function () {
                 MasterDetailService.notifyMaster('deleteClient', self.client.id);
             };
@@ -176,6 +191,9 @@ app.controller('ClientDetailCtrl',
             };
 
 
+            /**
+             * Adds a project to the current client
+             */
             this.addProject = function () {
                 var apiObject = {
                     name: 'project',
@@ -199,6 +217,10 @@ app.controller('ClientDetailCtrl',
                 });
             };
 
+            /**
+             * Opens a modal with a list of all available client categories
+             * and handles adding/removal of categories to the current client
+             */
             this.openCategoryModal = function(){
                 var categoriesBackup = angular.copy(self.client.categories);
                 var selectedCategories = [];
@@ -217,6 +239,10 @@ app.controller('ClientDetailCtrl',
                         controller: function(){
                             var cats = this;
                             this.allCategories = allCategories;
+                            /**
+                             * Toggles the selection of a category
+                             * @param category - the category to be toggled
+                             */
                             this.toggleSelectCategory = function (category) {
                                 var indexSelect = selectedCategories.indexOf(category);
                                 var indexUnselect = unSelectedCategories.indexOf(category);
@@ -243,6 +269,9 @@ app.controller('ClientDetailCtrl',
                             };
 
 
+                            /**
+                             * Adds new and removes old categories from the client and closes the modal.
+                             */
                             this.accept = function () {
                                 console.log(unSelectedCategories);
                                 if(selectedCategories.length > 0) {
@@ -267,6 +296,9 @@ app.controller('ClientDetailCtrl',
                                 modal.deactivate();
                             };
 
+                            /**
+                             * resets the client categories and closes the modal
+                             */
                             this.close = function () {
                                 self.client.categories = categoriesBackup;
                                 modal.deactivate();
