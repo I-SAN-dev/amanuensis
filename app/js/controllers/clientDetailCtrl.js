@@ -200,23 +200,84 @@ app.controller('ClientDetailCtrl',
             };
 
             this.openCategoryModal = function(){
+                var categoriesBackup = angular.copy(self.client.categories);
+                var selectedCategories = [];
+                var unSelectedCategories = [];
                 ApiAbstractionLayer('GET', 'client_categories').then(function (data) {
-                    var allCategories = data;
-                });
-                var modal = btfModal({
-                    templateUrl: 'templates/pages/clients/categoryDialog.html',
-                    controller: function(){
-                        this.activeCategories = self.client.categories;
-                        this.allCategories = allCategories;
 
-                        this.close = function () {
-                            console.log('close');
-                            modal.deactivate();
-                        };
-                    },
-                    controllerAs: 'categories'
+                    for(var i = 0; i<data.length; i++){
+                        if (categoriesBackup[data[i].id]) {
+                            data[i].selected = true;
+                            selectedCategories.push(data[i]);
+                        }
+                    }
+                    var allCategories = data;
+                    var modal = btfModal({
+                        templateUrl: 'templates/pages/clients/categoryDialog.html',
+                        controller: function(){
+                            var cats = this;
+                            this.allCategories = allCategories;
+                            this.toggleSelectCategory = function (category) {
+                                var indexSelect = selectedCategories.indexOf(category);
+                                var indexUnselect = unSelectedCategories.indexOf(category);
+                                var indexAll = cats.allCategories.indexOf(category);
+                                if(indexSelect != -1){
+                                    selectedCategories.splice(indexSelect,1);
+                                    unSelectedCategories.push(category);
+                                    console.log(unSelectedCategories);
+                                    delete self.client.categories[category.id];
+
+                                } else {
+                                    if(indexUnselect != -1)
+                                        unSelectedCategories.splice(indexUnselect,1);
+                                    selectedCategories.push(category);
+                                    self.client.categories[category.id] = category.name;
+                                }
+
+                                if(cats.allCategories[indexAll].selected){
+                                    cats.allCategories[indexAll].selected = false;
+                                } else {
+                                    cats.allCategories[indexAll].selected = true;
+                                }
+
+                            };
+
+
+                            this.accept = function () {
+                                console.log(unSelectedCategories);
+                                if(selectedCategories.length > 0) {
+                                    for (var i = 0; i < selectedCategories.length; i++) {
+                                        if(!categoriesBackup[selectedCategories[i].id])
+                                            ApiAbstractionLayer('POST', {
+                                                name: 'client_categories',
+                                                data: {id: selectedCategories[i].id, clientid: self.client.id}
+                                            });
+                                    }
+                                }
+                                if(unSelectedCategories.length > 0){
+                                    for (var j = 0; j < unSelectedCategories.length; j++){
+                                        if(categoriesBackup[unSelectedCategories[j].id])
+                                            ApiAbstractionLayer('DELETE',{
+                                                name: 'client_categories',
+                                                data: {id: unSelectedCategories[j].id, clientid: self.client.id}
+                                            });
+
+                                    }
+                                }
+                                modal.deactivate();
+                            };
+
+                            this.close = function () {
+                                self.client.categories = categoriesBackup;
+                                modal.deactivate();
+                            };
+                        },
+                        controllerAs: 'categories'
+                    });
+                    modal.activate();
                 });
-                return modal;
+
+
             };
         }
     ]

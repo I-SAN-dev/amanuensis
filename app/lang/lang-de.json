@@ -9,7 +9,9 @@
   {
     "name":"Name",
     "description":"Beschreibung",
-    "date":"Datum"
+    "date":"Datum",
+    "ok": "OK",
+    "cancel": "Abbrechen"
   },
 
   "clients": {
