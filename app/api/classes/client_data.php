@@ -110,7 +110,7 @@ class client_data {
     {
         $dbal = DBAL::getInstance();
 
-        $client = $dbal->simpleSelect('client_data', array('client'), array('id', $_DELETE['id']), 1);
+        $client = $dbal->simpleSelect('customer_data', array('client'), array('id', $_DELETE['id']), 1);
 
         try
         {
@@ -127,7 +127,7 @@ class client_data {
         {
             json_response(
                 $dbal->simpleSelect(
-                    'client_data',
+                    'customer_data',
                     array(
                         'id',
                         'datatype',
