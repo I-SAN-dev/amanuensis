@@ -164,6 +164,11 @@ final class DBAL {
             /* Bind data */
             foreach($realcolumns as $column)
             {
+                /* make empty string NULL - needed to delete not-string datatypes */
+                if($data[$column] == '')
+                {
+                    $data[$column] = NULL;
+                }
                 $q->bindParam(':'.$column, $data[$column]);
             }
             /* Bind where statement */

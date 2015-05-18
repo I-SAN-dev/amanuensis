@@ -1,39 +1,153 @@
-<div class="row detail scroll-y" data-ng-controller="OfferDetailCtrl as offer">
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h1><span data-in-place-edit
-                          data-api-id="offer.offer.id"
-                          data-api-name="'offer'"
-                          data-ipe-key="'name'"
-                          data-ipe-value="offer.offer.name"
-                          data-ipe-name="'global.name'|translate"
-                          data-ipe-deletable="false"
-                        ></span><small><span data-in-place-edit
-                                             data-ipe-key="'refnumber'"
-                                             data-ipe-value="offer.offer.refnumber"
-                                             data-ipe-deletable="false"
-                                             data-api-id="offer.offer.id"
-                                             data-api-name="'offer'"
-                                             data-ipe-name="'offers.refnumber'|translate"></span></small></h1>
-                <p>{{'offers.state'|translate}}: {{offer.offer.state|amaStates:'offer'|translate}}</p>
-                <p><a data-ui-sref="app.projects({id:{{offer.offer.project.id}}})">{{offer.offer.project.name}}</a> - {{offer.offer.date |date:offer.dateFormat}}</p>
-                <p data-in-place-edit
-                   data-api-id="offer.offer.id"
-                   data-api-name="'offer'"
-                   data-ipe-key="'description'"
-                   data-ipe-value="offer.offer.description"
-                   data-ipe-name="'global.description'|translate"
-                   data-ipe-type="'textarea'"></p>
+<div class="row detail fullheight" data-ng-controller="OfferDetailCtrl as offer">
+    <div class="col-sm-4 fullheight">
 
+        <div class="panel panel-default fullheight">
+            <div class="panel-heading panel-heading-primary">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
+                        {{'offer.name' | translate}}
+                    </div>
+                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                        <span data-in-place-edit
+                              data-ipe-key="'refnumber'"
+                              data-ipe-value="offer.offer.refnumber"
+                              data-ipe-deletable="false"
+                              data-api-id="offer.offer.id"
+                              data-api-name="'offer'"
+                              data-ipe-name="'offers.refnumber'|translate"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="under-panel-heading">
+                <div class="halfheight scroll-y">
+                    <div class="panel-body">
+
+                        <h1><span data-in-place-edit
+                                  data-api-id="offer.offer.id"
+                                  data-api-name="'offer'"
+                                  data-ipe-key="'name'"
+                                  data-ipe-value="offer.offer.name"
+                                  data-ipe-name="'global.name'|translate"
+                                  data-ipe-deletable="false"
+                                ></span>
+                        </h1>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'offers.state'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg-7 col-md-6 col-sm-12">
+                                <p>
+                                    {{offer.offer.state|amaStates:'offer'|translate}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'global.date'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <p>
+                                    <span data-in-place-edit
+                                          data-api-id="offer.offer.id"
+                                          data-api-name="'offer'"
+                                          data-ipe-key="'date'"
+                                          data-ipe-value="offer.offer.date"
+                                          data-ipe-name="'global.date'|translate"
+                                          data-ipe-deletable="false"
+                                          data-ipe-type="date"
+                                          ></span>
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'projects.project'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <p>
+                                <a data-ui-sref="app.projects({id:{{offer.offer.project.id}}})">{{offer.offer.project.name}}</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'clients.client'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <div data-client-box="offer.offer.project.client"></div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="halfheight">
+
+                    <div class="btn-toolbar inpanel-tabbar">
+                        <div class="btn-group btn-group-sm pull-right" data-ng-init="offer.showPage = 1">
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==1}" data-ng-click="offer.showPage = 1"><i class="md md-lg md-comment"></i> {{'offer.description' | translate}}</button>
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==2}" data-ng-click="offer.showPage = 2"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="under-inpanel-tabbar">
+
+                        <div class="slideanim2 fullheight" data-ng-class="{panel2: offer.showPage==2}">
+
+                            <div class="slideanim-item fullheight scroll-y">
+
+                                <div class="ipe-wysiwyg-fullheight">
+                                    <p data-in-place-edit
+                                       data-api-id="offer.offer.id"
+                                       data-api-name="'offer'"
+                                       data-ipe-key="'description'"
+                                       data-ipe-value="offer.offer.description"
+                                       data-ipe-name="'global.description'|translate"
+                                       data-ipe-type="'wysiwyg'"></p>
+                                </div>
+
+                            </div>
+
+                            <div class="slideanim-item nopadding fullheight">
+
+                                <div class="wysiwyg-fullheight">
+                                    <div data-material-input
+                                         data-ng-model="offer.mailtext"
+                                         data-input-id="mailtext"
+                                         data-input-label="'mail.mailtext'|translate"
+                                         data-input-type="wysiwyg"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-body" data-client-box="offer.offer.project.client"></div>
-        </div>
     </div>
-    <div class="col-sm-8">
-        <div class="fullheight">
+
+
+    <div class="col-sm-8 fullheight">
+        <div class="over-detail-bottom-bar next-fullheight">
         <div data-master-detail
              data-master-list="offer.offer.items"
              data-master-tpl="'templates/pages/items/master.html'"
@@ -41,11 +155,11 @@
              data-detail=""
              data-master-loaded="offer.loaded"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
+        <div class="row detail-bottom-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight">
                     <div class="panel-body">
-                        <div class="btn-toolbar">
+
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div>
@@ -59,7 +173,7 @@
                                     <p class="text-right"><strong>{{'items.totalPrice'|translate}}: {{offer.offer.total}}</strong></p>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

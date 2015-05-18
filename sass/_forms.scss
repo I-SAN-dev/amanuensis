@@ -65,11 +65,11 @@
   }
 }
 
-h1 .ipe .form-control
+.ipe .form-control
 {
   font-size: inherit;
-  height: auto !important;
-  line-height: 1.0;
+  height: auto;
+  line-height: inherit !important;
   padding-top: 0 !important;
 }
 
@@ -228,7 +228,7 @@ h1 .ipe .form-control
   {
     float: right;
     position: absolute;
-    top: 2px;
+    top: -2px;
     right: 5px;
 
     .btn-icon-round
@@ -353,4 +353,9 @@ textarea
       min-height: $line-height-base*$font-size-base+20px;
     }
   }
+}
+
+.panel-filter
+{
+  padding-top: 6px;
 }

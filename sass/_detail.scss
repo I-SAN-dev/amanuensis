@@ -1,0 +1,38 @@
+.detail-bottom-bar
+{
+  height: 63px;
+}
+.over-detail-bottom-bar
+{
+  height: calc(100% - 63px - 20px);
+  margin-bottom: 20px;
+}
+
+.panel-heading.panel-heading-primary
+{
+  height: 34px;
+  color: #fff;
+  background-color: $brand-primary;
+  border: none;
+  padding: 7px 15px;
+
+  .ipe .form-group input.form-control
+  {
+    color: #fff;
+  }
+  .ipe .bar:after,
+  .ipe .bar:before
+  {
+    background-color: $gray-lighter !important;
+  }
+}
+
+.under-panel-heading
+{
+  height: calc(100% - 34px);
+}
+.under-inpanel-tabbar
+{
+  height: calc(100% - 64px);
+  overflow: hidden;
+}

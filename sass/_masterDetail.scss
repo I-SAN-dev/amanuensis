@@ -41,46 +41,49 @@ $detail-toolbar-height: 64px;
       margin-top: 0;
     }
   }
+}
 
-  .btn-toolbar {
-    margin: 0;
-    padding: 0;
-    line-height: $detail-toolbar-height;
+.detail-view .btn-toolbar,
+.btn-toolbar.inpanel-tabbar {
+  margin: 0;
+  padding: 0;
+  line-height: $detail-toolbar-height;
 
-    .btn-group button.btn
-    {
-      height: $detail-toolbar-height;
-      line-height: $detail-toolbar-height - 4px;
-      font-size: $font-size-small;
-      padding: 0 10px;
-      border-top: 2px solid transparent !important;
-      border-bottom: 2px solid transparent !important;
-      transition: 0.3s border-bottom, 0.3s background-color;
-      border-radius: 0 !important;
+  &.inpanel-tabbar
+  {
+    border-top: 1px solid $gray-lighter;
+  }
 
-      &:hover,
-      &:active,
-      &:focus
-      {
-        text-decoration: none;
-      }
+  .btn-group button.btn {
+    height: $detail-toolbar-height;
+    line-height: $detail-toolbar-height - 4px;
+    font-size: $font-size-small;
+    padding: 0 10px;
+    border-top: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
+    transition: 0.3s border-bottom, 0.3s background-color;
+    border-radius: 0 !important;
 
-      &.active
-      {
-        border-bottom: 2px solid $brand-primary !important;
-      }
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
     }
 
-    h3
-    {
-      margin: 0;
-      padding: 15px 20px;
-      color: $brand-primary;
-      line-height: 34px;
-
+    &.active {
+      border-bottom: 2px solid $brand-primary !important;
     }
   }
+
+  h3
+  {
+    color: $brand-primary;
+    padding: 20px 20px 0 20px;
+    line-height: 23px;
+    margin: 0;
+  }
 }
+
 .note-editor .btn-toolbar .btn-group button.btn
 {
   height:34px !important;
@@ -156,11 +159,12 @@ $detail-toolbar-height: 64px;
 
 .sidelabel
 {
-  margin: 0 0 0 -20px;
-  padding: 5px 5px 5px 20px;
-  color: #ffffff;
-  background-color: $brand-primary;
-  font-size: $font-size-base;
+  margin: 0 0 0 -20px !important;
+  padding: 5px 5px 5px 20px !important;
+  color: #ffffff !important;
+  background-color: $brand-primary !important;
+  font-size: $font-size-base !important;
+  line-height: $line-height-base !important;
 
   .md
   {
@@ -168,6 +172,10 @@ $detail-toolbar-height: 64px;
     top: -1px;
     padding-right: 5px;
   }
+}
+.sidelabel-right
+{
+  padding: 5px 0;
 }
 .detail-block
 {

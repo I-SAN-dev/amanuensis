@@ -96,6 +96,12 @@
     }
   },
 
+  "offer":
+  {
+    "name":"Angebot",
+    "description":"Beschreibungstext"
+  },
+
   "itemPresets":
   {
     "actions":{
@@ -275,11 +281,16 @@
     "states":{
       "created": "Angebot erstellt",
       "pdfGenerated": "PDF generiert",
-      "pdfSent": "PDf verschickt",
+      "pdfSent": "PDF verschickt",
       "clientAccepted": "Vom Kunden angenommen",
       "clientDeclined": "Vom Kunden abgelehnt"
     }
   },
+  "mail":
+  {
+    "mailtext":"Mailtext"
+  },
+
   "errors": {
     "additionalInformation": "Weitere Informationen zu diesem Fehler:",
     "codes": {
