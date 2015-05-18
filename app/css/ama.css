@@ -10949,6 +10949,8 @@ textarea {
   padding: 0px;
   margin-bottom: 30px;
   color: #263238; }
+  .tile.tile-autoheight {
+    height: auto; }
   .tile.tile-disabled h4.tile-heading {
     background-color: #757575; }
   .tile:hover, .tile:active {
