@@ -2,8 +2,8 @@ app.directive('materialInput', [
     '$http',
     '$templateCache',
     '$compile',
-    '$document',
-    function ($http, $templateCache, $compile, $document) {
+    '$timeout',
+    function ($http, $templateCache, $compile, $timeout) {
         var inputTypes = {
             text: true,
             textarea: true,
@@ -25,7 +25,7 @@ app.directive('materialInput', [
                 optionName: '@inputSelectOptionName',
                 buttons: '=inputButtons',
                 searchable: '@inputSelectSearchable',
-                blur:'=ngBlur'
+                inputBlur:'=ngBlur'
             },
             controller: function ($scope, $log) {
                 $scope.currencySymbol = '€';
@@ -103,6 +103,40 @@ app.directive('materialInput', [
 
 
                     }
+                }
+
+                /*
+                 * Chooses the action to be taken on blur.
+                 * If one of the buttons is clicked, the button action replaces the default blur action.
+                 */
+                $scope.blurField = function (event) {
+
+                    var flag = true;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var field = $(event.currentTarget).attr('id');
+                    var button = $(event.relatedTarget).attr('id');
+                    if('save-'+field == button)
+                    {
+
+                        $scope.buttons.save.save($scope.model);
+                        flag = false;
+
+                    }
+
+                    if('delete-'+field == button) {
+                        $scope.buttons.delete.delete();
+                        flag = false;
+                    }
+
+                    if('cancel-'+field == button) {
+                        $scope.buttons.cancel.cancel();
+                        flag = false;
+                    }
+
+                    //console.log(event);
+                    if(flag)
+                        $scope.inputBlur();
                 }
 
 
