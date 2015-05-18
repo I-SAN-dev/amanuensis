@@ -10538,11 +10538,6 @@ h1, h2 {
           .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
             display: none; }
 
-.detail-inner .ipe-wysiwyg-fullheight > p > span div.ipe {
-  margin-bottom: 0 !important; }
-  .detail-inner .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor {
-    height: calc(100% + 20px) !important; }
-
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
   border-style: dotted; }
