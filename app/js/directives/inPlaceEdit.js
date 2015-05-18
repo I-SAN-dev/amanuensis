@@ -28,7 +28,7 @@ app.directive('inPlaceEdit',
                     var backup = null;
 
                     this.enterEditMode = function () {
-                        MasterDetailService.setEditor(this);
+                        MasterDetailService.setEditor(self);
                         self.deletable = $scope.deletable;
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
@@ -59,6 +59,9 @@ app.directive('inPlaceEdit',
                             backup = null;
                             if($scope.apiId)
                                 LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
+                            if($scope.type == 'price'){
+                                MasterDetailService.notifyMaster('priceChanged')
+                            }
 
                         });
                     };

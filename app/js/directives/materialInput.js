@@ -164,7 +164,8 @@ app.directive('materialInput', [
                     elem.replaceWith(element);
 
                     if(attr.inputAutofocus){
-                        var input = element.children('input').first();
+                        var input = element.find('input').first();
+                        console.log(element);
                         input.focus();
                     }
 
