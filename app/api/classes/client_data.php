@@ -125,19 +125,36 @@ class client_data {
         }
         if($count)
         {
-            json_response(
-                $dbal->simpleSelect(
-                    'customer_data',
-                    array(
-                        'id',
-                        'datatype',
-                        'name',
-                        'value',
-                        'isdefault'
-                    ),
-                    array('customer', $client['customer'])
-                )
+            $result = $dbal->simpleSelect(
+                'customer_data',
+                array(
+                    'id',
+                    'datatype',
+                    'name',
+                    'value',
+                    'isdefault'
+                ),
+                array('customer', $client['customer'])
             );
+            /* process additional data */
+            $additionalData = array();
+            foreach($result as $entry)
+            {
+                $type = $entry['datatype'];
+                $data = array(
+                    'id' => $entry['id'],
+                    'name' => $entry['name'],
+                    'value' => $entry['value'],
+                    'isdefault' => $entry['isdefault']
+                );
+
+                if(!isset($additionalData[$type]))
+                {
+                    $additionalData[$type] = array();
+                }
+                array_push($additionalData[$type], $data);
+            }
+            json_response($additionalData);
         }
         else
         {
