@@ -300,6 +300,61 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.fax'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="row striped" data-ng-repeat="fax in client.client.data.fax">
+                                <div class="col-sm-4">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="fax.name"
+                                          data-api-name="'client_data'"
+                                          data-api-id="fax.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.fax'|translate"></span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'value'"
+                                          data-ipe-value="fax.value"
+                                          data-api-name="'client_data'"
+                                          data-api-id="fax.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.faxNumber'|translate"></span>
+                                </div>
+                            </div>
+                            <div class="row striped varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.fax]">
+                                <div class="col-sm-12 varcheck-if-false">
+                                    <span class="btn btn-link btn-success" data-ng-click="client.setNewConnectionFlag('fax')" ><i class="md md-add"></i>{{'clients.addFax' | translate}}</span>
+                                </div>
+                                <form class="varcheck-if-true" data-ng-submit="client.addConnection('fax')">
+                                    <div class="col-sm-4 ">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.fax.name"
+                                             data-input-id="fax-name"
+                                             data-input-label="{{'global.name' |translate}}"
+                                             data-input-type="text"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.fax.value"
+                                             data-input-id="fax-value"
+                                             data-input-label="{{'clients.fax' |translate}}"
+                                             data-input-type="text"
+                                             data-input-required="true"></div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-icon-round btn-link btn-success" type="submit"><i class="md md-check"></i></button>
+                                        <button class="btn btn-icon-round btn-link btn-warning" data-ng-click="client.setNewConnectionFlag('fax')" type="button"><i class="md md-close"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row detail-block">
                         <div class="col-sm-3">
                             <h3 class="sidelabel">{{'clients.comment'|translate}}</h3>
