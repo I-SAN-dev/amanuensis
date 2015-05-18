@@ -125,7 +125,7 @@ class contract {
         /* Add project data */
         $project = new AmaProject($result['project']);
         $result['project'] = $project->getProjectData();
-        $result["total"] = $itemlist->total;
+        $result["costs"] = $itemlist->costs;
 
         json_response($result);
     }

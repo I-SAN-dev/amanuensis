@@ -30,7 +30,7 @@ class AmaItemList {
             $dbal = DBAL::getInstance();
             $conf = Config::getInstance();
 
-            $this->total = 0.0;
+            $this->costs = array('total' => 0.00);
 
             /* Fetch client */
             $table = $column.'s';
@@ -93,7 +93,18 @@ class AmaItemList {
                 $e = new AmaItem(NULL, $entry);
                 $entry = $e->get();
 
-                $this->total = $this->total + $entry['total'];
+                $this->costs['total'] = $this->costs['total'] + $entry['total'];
+            }
+
+            /* Calculate the tax */
+            if($conf->get['pricing']['calc_tax'] && $conf->get['pricing']['tax'] != '' && $conf->get['pricing']['tax'] > 0 )
+            {
+                $taxrate = 1 + $conf->get['pricing']['tax']/100;
+                $beforetax = floor($this->costs['total'] * 100 / $taxrate) / 100; // We round the tax up to please the state
+
+                $this->costs['beforetax'] = $beforetax;
+                $this->costs['tax'] = $this->costs['total'] - $this->costs['beforetax'];
+                $this->costs['taxlabel'] = $conf->get['pricing']['tax'].'% '.$conf->get['pricing']['tax_label'];
             }
         }
         else

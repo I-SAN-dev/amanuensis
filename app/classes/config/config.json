@@ -87,7 +87,10 @@
   "pricing":
   {
     "dailyrate": "300",
-    "hourlyrate": "40"
+    "hourlyrate": "40",
+    "calc_tax": "1",
+    "tax":"19",
+    "tax_label":"Umsatzsteuer"
   },
   "invoice_due_days":"14",
 

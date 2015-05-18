@@ -123,7 +123,7 @@ class offer {
         /* Add items */
         $itemlist = new AmaItemList('offer', $id);
         $result["items"] = $itemlist->entries;
-        $result["total"] = $itemlist->total;
+        $result["costs"] = $itemlist->costs;
 
         /* Add project data */
         $project = new AmaProject($result['project']);
