@@ -8,6 +8,11 @@
   margin-bottom: 30px;
   color: $text-color;
 
+  &.tile-autoheight
+  {
+    height: auto;
+  }
+
   &.tile-disabled
   {
     h4.tile-heading

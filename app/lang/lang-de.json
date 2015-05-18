@@ -26,6 +26,7 @@
     "lastName":"Nachname",
     "companyName":"Firma",
     "address": "Adresse",
+    "gender":"Anrede",
     "streetNo": "Straße, Hausnummer",
     "additional":"Zusatz",
     "streetAdditional": "Adresszusatz",
@@ -54,7 +55,10 @@
       "male":"Herr",
       "female":"Frau"
     },
-    "data":"Kundendaten"
+    "data":"Kundendaten",
+    "pricing":"Preise",
+    "defaultHourlyrate":"Standard-Stundensatz",
+    "defaultDailyrate":"Standard-Tagessatz"
   },
   "category":
   {
