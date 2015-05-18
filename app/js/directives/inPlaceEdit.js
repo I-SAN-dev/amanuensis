@@ -23,6 +23,7 @@ app.directive('inPlaceEdit',
 
                     var self = this;
 
+
                     this.editMode = false;
                     var backup = null;
 
@@ -37,26 +38,34 @@ app.directive('inPlaceEdit',
                     };
 
                     var post = function() {
-                        console.log(self.val);
+                        console.log($scope.val);
                         var apiObject = {
                             name: $scope.apiName,
                             params: $scope.apiParams || {},
                             data: {id:$scope.apiId}
                         };
 
-                        apiObject.data[$scope.key] = self.val;
+                        if($scope.apiName == 'settings'){
+                            apiObject.data.key = $scope.key;
+                            apiObject.data.value = self.val;
+                        } else {
+                            apiObject.data[$scope.key] = self.val;
+                        }
+
 
                         ApiAbstractionLayer('POST', apiObject).then(function (data) {
                             self.editMode = false;
                             $scope.val = self.val;
                             backup = null;
-                            LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
+                            if($scope.apiId)
+                                LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
+
                         });
                     };
 
                     this.save = function (newValue) {
                         if(newValue){
-                            self.val = newValue;
+                            $scope.val = newValue;
                         }
                         post();
                     };
