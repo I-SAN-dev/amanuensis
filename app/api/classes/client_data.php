@@ -109,6 +109,9 @@ class client_data {
     private static function deleteData($_DELETE)
     {
         $dbal = DBAL::getInstance();
+
+        $client = $dbal->simpleSelect('client_data', array('client'), array('id', $_DELETE['id']), 1);
+
         try
         {
             $count = $dbal->deleteRow('customer_data', array('id', $_DELETE['id']));
@@ -122,7 +125,19 @@ class client_data {
         }
         if($count)
         {
-            json_response(array('success' => true));
+            json_response(
+                $dbal->simpleSelect(
+                    'client_data',
+                    array(
+                        'id',
+                        'datatype',
+                        'name',
+                        'value',
+                        'isdefault'
+                    ),
+                    array('client', $client['client'])
+                )
+            );
         }
         else
         {
