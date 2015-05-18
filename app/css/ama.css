@@ -10923,6 +10923,10 @@ textarea {
   color: #ffffff;
   background-color: #404877;
   font-size: 14px; }
+  .sidelabel .md {
+    position: relative;
+    top: -1px;
+    padding-right: 5px; }
 
 .detail-block {
   margin-bottom: 30px; }
@@ -10943,6 +10947,20 @@ textarea {
           color: #263238; }
     .detail-block .row.striped:last-child {
       border-bottom: 1px solid #EEEEEE; }
+
+.client-heading {
+  height: 94px;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #EEEEEE; }
+  .client-heading .client-categories {
+    margin-right: -20px;
+    height: 28px; }
+
+.under-client-heading {
+  height: calc(100% - 94px); }
 
 .tile {
   display: block;
@@ -11178,7 +11196,7 @@ textarea {
   .slideanim3 .slideanim-item {
     width: 33.333333%;
     float: left;
-    padding: 0 20px; }
+    padding: 20px; }
   .slideanim3.panel2 {
     margin-left: -100%; }
   .slideanim3.panel3 {

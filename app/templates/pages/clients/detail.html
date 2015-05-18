@@ -33,35 +33,35 @@
 
     </div>
 
-    <div class="detail-inner scroll-y">
-        <h1><span data-in-place-edit
-                  data-api-id="client.client.id"
-                  data-api-name="'client'"
-                  data-ipe-key="'companyname'"
-                  data-ipe-value="client.client.companyname"
-                  data-ipe-name="'clients.companyName'|translate"></span> </h1>
-
-        <div class="client-categories">
-            <div class="chip" data-ng-repeat="(catid, cat) in client.client.categories">
-                <a data-ng-click="MasterDetailCtrl.filterText = cat">{{cat}}</a> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
-            </div>
-            <div class="chip" data-ng-click="console.log('argh'); client.openCategoryModal()">
-                <span >{{'category.add'|translate}}</span> <button class="btn btn-link btn-icon-round" ><i class="md-add"></i></button>
+    <div class="detail-inner">
+        <div class="client-heading">
+            <h1>
+                <span data-in-place-edit
+                      data-api-id="client.client.id"
+                      data-api-name="'client'"
+                      data-ipe-key="'companyname'"
+                      data-ipe-value="client.client.companyname"
+                      data-ipe-name="'clients.companyName'|translate"></span>
+            </h1>
+            <div class="client-categories scroll-y">
+                <div class="chip" data-ng-repeat="(catid, cat) in client.client.categories">
+                    <a data-ng-click="MasterDetailCtrl.filterText = cat">{{cat}}</a> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
+                </div>
+                <div class="chip" data-ng-click="console.log('argh'); client.openCategoryModal()">
+                    <span >{{'category.add'|translate}}</span> <button class="btn btn-link btn-icon-round" ><i class="md-add"></i></button>
+                </div>
             </div>
         </div>
+        <div class="seamless under-client-heading">
+             <div class="slideanim3 fullheight" data-ng-class="{panel2: client.showPage==2, panel3: client.showPage==3}">
 
-
-
-        <div class="seamless">
-             <div class="slideanim3" data-ng-class="{panel2: client.showPage==2, panel3: client.showPage==3}">
-
-                <div class="slideanim-item">
+                <div class="slideanim-item fullheight scroll-y">
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row detail-block">
                                 <div class="col-sm-6">
-                                    <h3 class="sidelabel">{{'clients.contact'|translate}}</h3>
+                                    <h3 class="sidelabel"><i class="md md-person"></i> {{'clients.contact'|translate}}</h3>
                                 </div>
                                 <div class="col-sm-6">
                                     <span data-in-place-edit
@@ -90,7 +90,7 @@
                             </div>
                             <div class="row detail-block">
                                 <div class="col-sm-6">
-                                    <h3 class="sidelabel">{{'clients.address'|translate}}</h3>
+                                    <h3 class="sidelabel"><i class="md md-place"></i> {{'clients.address'|translate}}</h3>
                                 </div>
                                 <div class="col-sm-6">
                                     <address>
@@ -157,7 +157,7 @@
                                         <div class="col-xs-8">
                                             <span data-in-place-edit
                                                   data-ipe-key="'dailyrate'"
-                                                  data-ipe-value="client.client.dailyyrate"
+                                                  data-ipe-value="client.client.dailyrate"
                                                   data-api-name="'client'"
                                                   data-api-id="client.client.id"
                                                   data-ipe-type="price"
@@ -176,7 +176,7 @@
 
                     <div class="row detail-block">
                         <div class="col-sm-3">
-                            <h3 class="sidelabel">{{'clients.mail'|translate}}</h3>
+                            <h3 class="sidelabel"><i class="md md-mail"></i> {{'clients.mail'|translate}}</h3>
                         </div>
                         <div class="col-sm-9">
                             <div class="row striped" data-ng-repeat="mail in client.client.data.mail">
@@ -244,7 +244,7 @@
                     </div>
                     <div class="row detail-block">
                         <div class="col-sm-3">
-                            <h3 class="sidelabel">{{'clients.phone'|translate}}</h3>
+                            <h3 class="sidelabel"><i class="md md-phone"></i> {{'clients.phone'|translate}}</h3>
                         </div>
                         <div class="col-sm-9">
                             <div class="row striped" data-ng-repeat="phone in client.client.data.phone">
@@ -300,9 +300,64 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row detail-block">
                         <div class="col-sm-3">
-                            <h3 class="sidelabel">{{'clients.comment'|translate}}</h3>
+                            <h3 class="sidelabel"><i class="md md-print"></i> {{'clients.fax'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="row striped" data-ng-repeat="fax in client.client.data.fax">
+                                <div class="col-sm-4">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="fax.name"
+                                          data-api-name="'client_data'"
+                                          data-api-id="fax.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.fax'|translate"></span>
+                                </div>
+                                <div class="col-sm-8">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'value'"
+                                          data-ipe-value="fax.value"
+                                          data-api-name="'client_data'"
+                                          data-api-id="fax.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.faxNumber'|translate"></span>
+                                </div>
+                            </div>
+                            <div class="row striped varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.fax]">
+                                <div class="col-sm-12 varcheck-if-false">
+                                    <span class="btn btn-link btn-success" data-ng-click="client.setNewConnectionFlag('fax')" ><i class="md md-add"></i>{{'clients.addFax' | translate}}</span>
+                                </div>
+                                <form class="varcheck-if-true" data-ng-submit="client.addConnection('fax')">
+                                    <div class="col-sm-4 ">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.fax.name"
+                                             data-input-id="fax-name"
+                                             data-input-label="{{'global.name' |translate}}"
+                                             data-input-type="text"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.fax.value"
+                                             data-input-id="fax-value"
+                                             data-input-label="{{'clients.fax' |translate}}"
+                                             data-input-type="text"
+                                             data-input-required="true"></div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-icon-round btn-link btn-success" type="submit"><i class="md md-check"></i></button>
+                                        <button class="btn btn-icon-round btn-link btn-warning" data-ng-click="client.setNewConnectionFlag('fax')" type="button"><i class="md md-close"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel"><i class="md md-comment"></i> {{'clients.comment'|translate}}</h3>
                         </div>
                         <div class="col-sm-9">
                             <span data-in-place-edit
@@ -316,7 +371,7 @@
                     </div>
                 </div>
 
-                <div class="slideanim-item">
+                <div class="slideanim-item fullheight scroll-y">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <a class="tile tile-disabled" data-ng-click="client.showPage = 3">
@@ -339,7 +394,7 @@
                 </div>
 
 
-                <div class="slideanim-item">
+                <div class="slideanim-item fullheight scroll-y">
                     <h3>{{'projects.actions.new'|translate}}:</h3>
                     <form data-ng-submit="client.addProject()">
                         <div data-material-input
