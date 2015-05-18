@@ -99,7 +99,11 @@
   "offer":
   {
     "name":"Angebot",
-    "description":"Beschreibungstext"
+    "description":"Beschreibungstext",
+    "send":"Angebot senden",
+    "sent":"Angebot gesendet",
+    "decline":"Kunde lehnt ab",
+    "accept":"Kunde nimmt an"
   },
 
   "itemPresets":
@@ -113,6 +117,20 @@
   {
     "type":"Typ"
   },
+
+  "pdf":
+  {
+    "preview":"PDF Vorschau",
+    "generate":"PDF generieren",
+    "generated":"PDF wurde verschickt",
+    "view":"PDF anzeigen"
+  },
+  "mail":
+  {
+    "preview":"E-Mail Vorschau",
+    "mailtext":"Mailtext"
+  },
+
   "upload":
   {
     "onlyPdf":"Nur PDF-Dateien erlaubt!",
@@ -275,6 +293,7 @@
     "hours": "Stunden",
     "days": "Tage",
     "totalPrice": "Gesamtpreis",
+    "beforeTaxPrice": "Netto",
     "pricing": "Bepreisung",
     "connections": "Zuordnungen"
   },
@@ -287,10 +306,6 @@
       "clientAccepted": "Vom Kunden angenommen",
       "clientDeclined": "Vom Kunden abgelehnt"
     }
-  },
-  "mail":
-  {
-    "mailtext":"Mailtext"
   },
 
   "errors": {

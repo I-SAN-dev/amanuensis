@@ -162,19 +162,41 @@
 
                             <div class="row">
                                 <div class="col-sm-8">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
+                                            <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
+                                            <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
+                                            <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
+                                        </div>
+                                        <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
+                                            <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
+                                            <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
+                                            <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
+                                        </div>
+                                        <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
+                                            <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
+                                            <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
+                                        </div>
+                                    </div>
+
                                     <div>
-                                        <button class="btn btn-success" data-ng-click="offer.generatePDF()">!! Generate PDF !!</button>
-                                        <a class="btn btn-info" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View PDF Preview !!</a>
-                                        <a class="btn btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">!! View Mail Preview !!</a>
-                                        <button class="btn btn-success" data-ng-click="offer.send()">!! Send offer !!</button>
+
+
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <p class="text-right">
-                                        {{'items.totalPrice'|translate}}: {{offer.offer.costs.total}}<br/>
-                                        <strong>{{'items.totalPrice'|translate}}: {{offer.offer.costs.total}}</strong><br/>
-                                        <strong>{{'items.totalPrice'|translate}}: {{offer.offer.costs.total}}</strong>
-                                    </p>
+                                    <div class="row text-right">
+                                        <div class="col-xs-8">{{'items.beforeTaxPrice'|translate}}:</div>
+                                        <div class="col-xs-4">{{offer.offer.costs.beforetax}}</div>
+                                        <div class="col-xs-8">{{offer.offer.costs.taxlabel}}:</div>
+                                        <div class="col-xs-4">{{offer.offer.costs.tax}}</div>
+                                        <div class="col-xs-8"><strong class="total">{{'items.totalPrice'|translate}}:</strong></div>
+                                        <div class="col-xs-4"><strong class="total">{{offer.offer.costs.total}}</strong></div>
+                                    </div>
+
                                 </div>
                             </div>
 

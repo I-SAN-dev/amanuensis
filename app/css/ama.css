@@ -11227,10 +11227,10 @@ textarea {
       color: #fff; }
 
 .detail-bottom-bar {
-  height: 63px; }
+  height: 100px; }
 
 .over-detail-bottom-bar {
-  height: calc(100% - 63px - 20px);
+  height: calc(100% - 100px - 20px);
   margin-bottom: 20px; }
 
 .panel-heading.panel-heading-primary {
@@ -11251,6 +11251,9 @@ textarea {
 .under-inpanel-tabbar {
   height: calc(100% - 64px);
   overflow: hidden; }
+
+strong.total {
+  font-size: 20px; }
 
 /**
   * This extends ng-trans

@@ -59,6 +59,15 @@ app.controller('OfferDetailCtrl', [
                 );
             };
 
+            this.openPdf = function (event) {
+                event.preventDefault();
+                window.open(
+                    constants.BASEURL+'/api?action=protectedpdf&path='+self.offer.path,
+                    '',
+                    'height=500,width=900'
+                );
+            };
+
             this.openMailPreview = function (event) {
                 event.preventDefault();
                 MailService.showPreview('offer',self.offer.id);
