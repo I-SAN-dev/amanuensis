@@ -274,7 +274,9 @@
     "dailyRate": "Tagessatz",
     "hours": "Stunden",
     "days": "Tage",
-    "totalPrice": "Gesamtkosten"
+    "totalPrice": "Gesamtkosten",
+    "pricing": "Bepreisung",
+    "connections": "Zuordnungen"
   },
   "offers": {
     "state": "Angebotsstatus",
