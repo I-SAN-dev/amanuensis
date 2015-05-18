@@ -142,12 +142,36 @@ app.controller('ClientDetailCtrl',
             };
 
             /**
-             * Makes the mail with the given id the dfault mail address
+             * Makes the mail with the given id the default mail address
              * @param id - the id of the mailaddress
              */
             this.makeMailDefault = function(id)
             {
-                alert('TODO: Make this Mailadress default');
+                var mailAdresses = self.client.data.mail;
+                var i = 0, j = 0, k= 0;
+                var iStopped = false, jStopped = false;
+                while(i<mailAdresses.length) {
+                    if(mailAdresses[i].id!=id && !jStopped)
+                        j++;
+                    else
+                        jStopped = true;
+                    if(mailAdresses[i].isdefault == "0" && ! iStopped)
+                        k++;
+                    else
+                        iStopped = true;
+                    if(iStopped && jStopped){
+                        break;
+                    } else {
+                        i++;
+                    }
+                }
+                ApiAbstractionLayer('POST', {name:'client_data', data:{id:mailAdresses[k].id, isdefault:"0"}}).then(function () {
+                    self.client.data.mail[k].isdefault = "0";
+                    ApiAbstractionLayer('POST', {name:'client_data', data:{id:id, isdefault:"1"}}).then(function () {
+                        self.client.data.mail[j].isdefault = "1";
+                        LocalStorage.setData('client/'+self.client.id, self.client);
+                    });
+                });
             };
 
 
