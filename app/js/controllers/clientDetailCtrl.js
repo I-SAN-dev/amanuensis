@@ -108,6 +108,8 @@ app.controller('ClientDetailCtrl',
                         self.client.data[type] = [{id: data.id, name: name, value: value}];
                     }
                     LocalStorage.setData('client/'+self.client.id, self.client);
+                    self.newConnection[type].name = '';
+                    self.newConnection[type].value = '';
                 });
             };
 
@@ -115,6 +117,37 @@ app.controller('ClientDetailCtrl',
 
             this.deleteClient = function () {
                 MasterDetailService.notifyMaster('deleteClient', self.client.id);
+            };
+
+            /**
+             * Removes a category with a given catid from the client
+             * @param catid - the id of the category to be removed from the client
+             */
+            this.removeCategory = function(catid)
+            {
+                var apiObject = {
+                    name: 'client_categories',
+                    data: {
+                        id: catid,
+                        clientid: this.client.id
+                    }
+                };
+                ApiAbstractionLayer('DELETE', apiObject).then(function (data) {
+                    if(data.success)
+                    {
+                        delete self.client.categories[catid];
+                    }
+                });
+
+            };
+
+            /**
+             * Makes the mail with the given id the dfault mail address
+             * @param id - the id of the mailaddress
+             */
+            this.makeMailDefault = function(id)
+            {
+                alert('TODO: Make this Mailadress default');
             };
 
 

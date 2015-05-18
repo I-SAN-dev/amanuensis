@@ -10514,6 +10514,12 @@ button:disabled {
     .ipe .ipe-empty:hover {
       color: #263238; }
 
+h1 .ipe .form-control {
+  font-size: inherit;
+  height: auto !important;
+  line-height: 1.0;
+  padding-top: 0 !important; }
+
 /*
  * Material Design Inputs: https://scotch.io/tutorials/google-material-design-input-boxes-in-css3
  */
@@ -10841,7 +10847,9 @@ textarea {
   .detail-view .detail-inner {
     padding: 20px 20px 0 20px;
     height: calc(100% - 64px); }
-    .detail-view .detail-inner h1 {
+    .detail-view .detail-inner .seamless {
+      margin: 0 -20px; }
+    .detail-view .detail-inner h1, .detail-view .detail-inner h2 {
       margin-top: 0; }
   .detail-view .btn-toolbar {
     margin: 0;
@@ -10865,6 +10873,10 @@ textarea {
       padding: 15px 20px;
       color: #404877;
       line-height: 34px; }
+
+.note-editor .btn-toolbar .btn-group button.btn {
+  height: 34px !important;
+  line-height: 30px !important; }
 
 .clientSwitch {
   display: block;
@@ -10896,6 +10908,38 @@ textarea {
   .panel-filter input {
     padding-left: 12px !important;
     border-bottom: none !important; }
+
+.client-categories {
+  margin-bottom: 15px; }
+  .client-categories .chip:last-child .btn-icon-round:hover {
+    background-color: #009688; }
+
+.sidelabel {
+  margin: 0 0 0 -20px;
+  padding: 5px 5px 5px 20px;
+  color: #ffffff;
+  background-color: #404877;
+  font-size: 14px; }
+
+.detail-block {
+  margin-bottom: 30px; }
+  .detail-block .row {
+    padding-top: 5px;
+    padding-bottom: 5px; }
+    .detail-block .row .form-group {
+      margin-bottom: 0; }
+    .detail-block .row .btn.btn-link {
+      margin-top: -5px;
+      margin-bottom: -5px;
+      margin-left: -5px; }
+    .detail-block .row.striped:nth-child(odd) {
+      background-color: #EEEEEE; }
+      .detail-block .row.striped:nth-child(odd) .ipe-empty {
+        color: #BDBDBD; }
+        .detail-block .row.striped:nth-child(odd) .ipe-empty:hover {
+          color: #263238; }
+    .detail-block .row.striped:last-child {
+      border-bottom: 1px solid #EEEEEE; }
 
 .tile {
   display: block;
@@ -11082,6 +11126,29 @@ textarea {
       width: 50%; }
     .table-box .table-box-body td.tabletd {
       padding: 0; }
+
+.chip {
+  background-color: #EEEEEE;
+  border-radius: 13px;
+  display: inline-block;
+  padding: 0 0 0 13px;
+  line-height: 26px;
+  height: 26px;
+  margin-right: 15px;
+  cursor: default; }
+  .chip span, .chip i {
+    line-height: 26px; }
+  .chip .btn-icon-round {
+    height: 26px !important;
+    line-height: 26px !important;
+    padding: 0 9px 0 9px;
+    position: relative;
+    top: -2px;
+    margin-left: 3px;
+    transition: 0.3s background-color, 0.3s color; }
+    .chip .btn-icon-round:hover {
+      background-color: #F4511E;
+      color: #fff; }
 
 /**
   * This extends ng-trans

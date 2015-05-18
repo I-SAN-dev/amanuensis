@@ -31,7 +31,12 @@ $detail-toolbar-height: 64px;
     padding: 20px 20px 0 20px;
     height: calc(100% - #{$detail-toolbar-height});
 
-    h1
+    .seamless
+    {
+      margin: 0 -20px;
+    }
+
+    h1, h2
     {
       margin-top: 0;
     }
@@ -75,6 +80,11 @@ $detail-toolbar-height: 64px;
 
     }
   }
+}
+.note-editor .btn-toolbar .btn-group button.btn
+{
+  height:34px !important;
+  line-height: 30px !important;
 }
 
 .clientSwitch
@@ -131,5 +141,66 @@ $detail-toolbar-height: 64px;
   {
     padding-left: $padding-base-horizontal !important;
     border-bottom: none !important;
+  }
+}
+
+.client-categories
+{
+  margin-bottom: 15px;
+
+  .chip:last-child .btn-icon-round:hover
+  {
+    background-color: $brand-success;
+  }
+}
+
+.sidelabel
+{
+  margin: 0 0 0 -20px;
+  padding: 5px 5px 5px 20px;
+  color: #ffffff;
+  background-color: $brand-primary;
+  font-size: $font-size-base;
+}
+.detail-block
+{
+  margin-bottom: 30px;
+
+
+  .row
+  {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .form-group
+    {
+      margin-bottom: 0;
+    }
+
+    .btn.btn-link
+    {
+      margin-top: -5px;
+      margin-bottom: -5px;
+      margin-left: -5px;
+    }
+
+
+    &.striped:nth-child(odd)
+    {
+      background-color: $gray-lighter;
+
+      .ipe-empty
+      {
+        color: $gray-light;
+        &:hover
+        {
+          color: $text-color;
+        }
+      }
+    }
+    &.striped:last-child
+    {
+      border-bottom: 1px solid $gray-lighter;
+    }
   }
 }

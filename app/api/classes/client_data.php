@@ -75,7 +75,8 @@ class client_data {
                 'datatype',
                 'name',
                 'value',
-                'customer'
+                'customer',
+                'isdefault'
             ),
             $_POST
         );
@@ -94,7 +95,8 @@ class client_data {
             array(
                 'datatype',
                 'name',
-                'value'
+                'value',
+                'isdefault'
             ),
             $_POST);
         json_response(array('success' => true));

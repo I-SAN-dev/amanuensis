@@ -32,203 +32,279 @@
 
 
     </div>
+
     <div class="detail-inner scroll-y">
-        <h2><span data-in-place-edit
+        <h1><span data-in-place-edit
                   data-api-id="client.client.id"
                   data-api-name="'client'"
                   data-ipe-key="'companyname'"
                   data-ipe-value="client.client.companyname"
-                  data-ipe-name="'clients.companyName'|translate"></span> </h2>
-        <p><span data-ng-repeat="cat in client.client.categories">{{cat}} </span></p>
+                  data-ipe-name="'clients.companyName'|translate"></span> </h1>
 
-
-    <div class="slideanim3" data-ng-class="{panel2: client.showPage==2, panel3: client.showPage==3}">
-
-        <div class="slideanim-item">
-            <div class="row">
-                <div class="col-sm-3">
-                    {{'clients.contact'|translate}}
-                </div>
-                <div class="col-sm-9">
-                <span data-in-place-edit
-                      data-ipe-key="'contact_firstname'"
-                      data-ipe-value="client.client.contact_firstname"
-                      data-api-name="'client'"
-                      data-api-id="client.client.id"
-                      data-ipe-name="'clients.firstName'|translate"></span>
-                        <span data-in-place-edit
-                              data-ipe-key="'contact_lastname'"
-                              data-ipe-value="client.client.contact_lastname"
-                              data-api-name="'client'"
-                              data-api-id="client.client.id"
-                              data-ipe-name="'clients.lastName'|translate"></span>
-                </div>
+        <div class="client-categories">
+            <div class="chip" data-ng-repeat="(catid, cat) in client.client.categories">
+                <a data-ng-click="MasterDetailCtrl.filterText = cat">{{cat}}</a> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
             </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    {{'clients.address'|translate}}
-                </div>
-                <div class="col-sm-9">
-                    <address>
-                        <strong><span data-in-place-edit
-                                      data-ipe-key="'companyname'"
-                                      data-ipe-value="client.client.companyname"
+            <div class="chip" data-ng-click="console.log('argh'); client.openCategoryModal()">
+                <span >{{'category.add'|translate}}</span> <button class="btn btn-link btn-icon-round" ><i class="md-add"></i></button>
+            </div>
+        </div>
+
+
+
+        <div class="seamless">
+             <div class="slideanim3" data-ng-class="{panel2: client.showPage==2, panel3: client.showPage==3}">
+
+                <div class="slideanim-item">
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.contact'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <span data-in-place-edit
+                                  data-ipe-key="'contact_firstname'"
+                                  data-ipe-value="client.client.contact_firstname"
+                                  data-api-name="'client'"
+                                  data-api-id="client.client.id"
+                                  data-ipe-name="'clients.firstName'|translate"></span>
+                            <span data-in-place-edit
+                                  data-ipe-key="'contact_lastname'"
+                                  data-ipe-value="client.client.contact_lastname"
+                                  data-api-name="'client'"
+                                  data-api-id="client.client.id"
+                                  data-ipe-name="'clients.lastName'|translate"></span>
+                        </div>
+                    </div>
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.address'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <address>
+                                <strong><span data-in-place-edit
+                                              data-ipe-key="'companyname'"
+                                              data-ipe-value="client.client.companyname"
+                                              data-api-name="'client'"
+                                              data-api-id="client.client.id"
+                                              data-ipe-name="'clients.companyName'|translate"></span></strong><br>
+                                <span data-in-place-edit
+                                      data-ipe-key="'street_no'"
+                                      data-ipe-value="client.client.street_no"
                                       data-api-name="'client'"
                                       data-api-id="client.client.id"
-                                      data-ipe-name="'clients.companyName'|translate"></span></strong><br>
-                            <span data-in-place-edit
-                                  data-ipe-key="'street_no'"
-                                  data-ipe-value="client.client.street_no"
-                                  data-api-name="'client'"
-                                  data-api-id="client.client.id"
-                                  data-ipe-name="'clients.streetNo'|translate"></span><br>
-                            <span data-in-place-edit
-                                  data-ipe-key="'additional'"
-                                  data-ipe-value="client.client.additional"
-                                  data-api-name="'client'"
-                                  data-api-id="client.client.id"
-                                  data-ipe-name="'clients.additional'|translate"></span><br>
-                            <span data-in-place-edit
-                                  data-ipe-key="'zip'"
-                                  data-ipe-value="client.client.zip"
-                                  data-api-name="'client'"
-                                  data-api-id="client.client.id"
-                                  data-ipe-name="'clients.zip'|translate"></span> <span data-in-place-edit
-                                                                                        data-ipe-key="'city'"
-                                                                                        data-ipe-value="client.client.city"
-                                                                                        data-api-name="'client'"
-                                                                                        data-api-id="client.client.id"
-                                                                                        data-ipe-name="'clients.city'|translate"></span><br>
-                            <span data-in-place-edit
-                                  data-ipe-key="'country'"
-                                  data-ipe-value="client.client.country"
-                                  data-api-name="'client'"
-                                  data-api-id="client.client.id"
-                                  data-ipe-name="'clients.country'|translate"></span>
-                    </address>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    {{'clients.mail'|translate}}
-                </div>
-                <div class="col-sm-9">
-                    <ul><li data-ng-repeat="mail in client.client.data.mail">
-                    <span data-in-place-edit
-                          data-ipe-key="'name'"
-                          data-ipe-value="mail.name"
-                          data-api-name="'client_data'"
-                          data-api-id="mail.id"
-                          data-deletable-item="true"
-                          data-ipe-name="'clients.mail'|translate"></span>: <span data-in-place-edit
-                                                                                  data-ipe-key="'value'"
-                                                                                  data-ipe-value="mail.value"
-                                                                                  data-api-name="'client_data'"
-                                                                                  data-api-id="mail.id"
-                                                                                  data-deletable-item="true"
-                                                                                  data-ipe-name="'clients.mailAddress'|translate"></span>
-                    </li>
-                        <li class="ipe">
-                            <span class="ipe-empty" data-ng-click="client.setNewConnectionFlag('mail')" data-ng-if="!client.newConnectionFlag.mail">!! + email !!</span>
-
-                            <form data-ng-if="client.newConnectionFlag.mail" data-ng-submit="client.addConnection('mail')">
-                                <input data-ng-model="client.newConnection.mail.name">
-                                <input data-ng-model="client.newConnection.mail.value">
-                                <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
-                                <button class="btn btn-danger" data-ng-click="client.setNewConnectionFlag('mail')" type="button"><i class="md md-cancel"></i></button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    {{'clients.phone'|translate}}
-                </div>
-                <div class="col-sm-9">
-                    <ul>
-                        <li data-ng-repeat="phone in client.client.data.phone">
+                                      data-ipe-name="'clients.streetNo'|translate"></span><br>
                                 <span data-in-place-edit
-                                      data-ipe-key="'name'"
-                                      data-ipe-value="phone.name"
-                                      data-api-name="'client_data'"
-                                      data-api-id="phone.id"
-                                      data-deletable-item="true"
-                                      data-ipe-name="'clients.phone'|translate"></span>: <span data-in-place-edit
-                                                                                               data-ipe-key="'value'"
-                                                                                               data-ipe-value="phone.value"
-                                                                                               data-api-name="'client_data'"
-                                                                                               data-api-id="phone.id"
-                                                                                               data-deletable-item="true"
-                                                                                               data-ipe-name="'clients.phoneNumber'|translate"></span>
-                        </li>
-                        <li class="ipe">
-                            <span class="ipe-empty" data-ng-click="client.setNewConnectionFlag('phone')" data-ng-if="!client.newConnectionFlag.phone">!! + phone number !!</span>
+                                      data-ipe-key="'additional'"
+                                      data-ipe-value="client.client.additional"
+                                      data-api-name="'client'"
+                                      data-api-id="client.client.id"
+                                      data-ipe-name="'clients.additional'|translate"></span><br>
+                                <span data-in-place-edit
+                                      data-ipe-key="'zip'"
+                                      data-ipe-value="client.client.zip"
+                                      data-api-name="'client'"
+                                      data-api-id="client.client.id"
+                                      data-ipe-name="'clients.zip'|translate"></span> <span data-in-place-edit
+                                                                                            data-ipe-key="'city'"
+                                                                                            data-ipe-value="client.client.city"
+                                                                                            data-api-name="'client'"
+                                                                                            data-api-id="client.client.id"
+                                                                                            data-ipe-name="'clients.city'|translate"></span><br>
+                                <span data-in-place-edit
+                                      data-ipe-key="'country'"
+                                      data-ipe-value="client.client.country"
+                                      data-api-name="'client'"
+                                      data-api-id="client.client.id"
+                                      data-ipe-name="'clients.country'|translate"></span>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.mail'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="row striped" data-ng-repeat="mail in client.client.data.mail">
+                                <div class="col-sm-4">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="mail.name"
+                                          data-api-name="'client_data'"
+                                          data-api-id="mail.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.mail'|translate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'value'"
+                                          data-ipe-value="mail.value"
+                                          data-api-name="'client_data'"
+                                          data-api-id="mail.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.mailAddress'|translate"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.sendMail' | translate}}" href="mailto:{{mail.value}}">
+                                        <i class="md md-mail"></i>
+                                    </a>
+                                    <span class="varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[mail.isdefault == 1]">
+                                        <button class="varcheck-if-true btn btn-info btn-link btn-icon-round" disabled title="{{'clients.defaultMailAddress' | translate}}">
+                                            <i class="md md-radio-button-on"></i>
+                                        </button>
+                                        <button class="varcheck-if-false btn btn-link btn-icon-round" data-ng-click="client.makeMailDefault(mail.id)" title="{{'clients.setDefaultMailAddress' | translate}}">
+                                            <i class="md md-radio-button-off"></i>
+                                        </button>
+                                    </span>
 
-                            <form data-ng-if="client.newConnectionFlag.phone" data-ng-submit="client.addConnection('phone')">
-                                <input data-ng-model="client.newConnection.phone.name">
-                                <input data-ng-model="client.newConnection.phone.value">
-                                <button class="btn btn-success" type="submit"><i class="md md-check"></i></button>
-                                <button class="btn btn-danger" data-ng-click="client.setNewConnectionFlag('phone')" type="button"><i class="md md-cancel"></i></button>
-                            </form>
-                        </li>
-                    </ul>
+                                </div>
+                            </div>
+                            <div class="row striped varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.mail]">
+                                <div class="col-sm-12 varcheck-if-false">
+                                    <span class="btn btn-link btn-success" data-ng-click="client.setNewConnectionFlag('mail')" ><i class="md md-add"></i>{{'clients.addEmail'|translate}}</span>
+                                </div>
+                                <form class="varcheck-if-true" data-ng-submit="client.addConnection('mail')">
+                                <div class="col-sm-4 ">
+                                    <div data-material-input
+                                         data-ng-model="client.newConnection.mail.name"
+                                         data-input-id="mail-name"
+                                         data-input-label="{{'global.name' |translate}}"
+                                         data-input-type="text"></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div data-material-input
+                                         data-ng-model="client.newConnection.mail.value"
+                                         data-input-id="mail-value"
+                                         data-input-label="{{'clients.mail' |translate}}"
+                                         data-input-type="text"
+                                         data-input-required="true"></div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-icon-round btn-link btn-success" type="submit"><i class="md md-check"></i></button>
+                                    <button class="btn btn-icon-round btn-link btn-warning" data-ng-click="client.setNewConnectionFlag('mail')" type="button"><i class="md md-close"></i></button>
+                                </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.phone'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="row striped" data-ng-repeat="phone in client.client.data.phone">
+                                <div class="col-sm-4">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="phone.name"
+                                          data-api-name="'client_data'"
+                                          data-api-id="phone.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.phone'|translate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span data-in-place-edit
+                                          data-ipe-key="'value'"
+                                          data-ipe-value="phone.value"
+                                          data-api-name="'client_data'"
+                                          data-api-id="phone.id"
+                                          data-deletable-item="true"
+                                          data-ipe-name="'clients.phoneNumber'|translate"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.call' | translate}}" href="tel:{{phone.value}}">
+                                        <i class="md md-call"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row striped varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.phone]">
+                                <div class="col-sm-12 varcheck-if-false">
+                                    <span class="btn btn-link btn-success" data-ng-click="client.setNewConnectionFlag('phone')" ><i class="md md-add"></i>{{'clients.addPhone' | translate}}</span>
+                                </div>
+                                <form class="varcheck-if-true" data-ng-submit="client.addConnection('phone')">
+                                    <div class="col-sm-4 ">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.phone.name"
+                                             data-input-id="phone-name"
+                                             data-input-label="{{'global.name' |translate}}"
+                                             data-input-type="text"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div data-material-input
+                                             data-ng-model="client.newConnection.phone.value"
+                                             data-input-id="phone-value"
+                                             data-input-label="{{'clients.phone' |translate}}"
+                                             data-input-type="text"
+                                             data-input-required="true"></div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-icon-round btn-link btn-success" type="submit"><i class="md md-check"></i></button>
+                                        <button class="btn btn-icon-round btn-link btn-warning" data-ng-click="client.setNewConnectionFlag('phone')" type="button"><i class="md md-close"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row detail-block">
+                        <div class="col-sm-3">
+                            <h3 class="sidelabel">{{'clients.comment'|translate}}</h3>
+                        </div>
+                        <div class="col-sm-9">
+                            <span data-in-place-edit
+                                  data-ipe-key="'comment'"
+                                  data-ipe-value="client.client.comment"
+                                  data-ipe-type="'wysiwyg'"
+                                  data-api-name="'client'"
+                                  data-api-id="client.client.id"
+                                  data-ipe-name="'clients.comment'|translate"></span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-sm-3">
-                    {{'clients.comment'|translate}}
+                <div class="slideanim-item">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <a class="tile tile-disabled" data-ng-click="client.showPage = 3">
+                                <i class="tile-icon tile-icon-add"></i>
+                                <h4 class="tile-heading">{{'projects.new'|translate}}</h4>
+                                <p class="tile-text">
+                                    <span data-ng-hide="client.projects.length > 0">{{'projects.none' | translate }}</span>
+                                </p>
+                            </a>
+                        </div>
+                        <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-6 col-xs-12">
+                            <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
+                                <i class="tile-icon tile-icon-{{project.state}}"></i>
+                                <h4 class="tile-heading">{{project.name}}</h4>
+                                <p class="tile-text">{{project.description}}</p>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-sm-9">
-                <span data-in-place-edit
-                      data-ipe-key="'comment'"
-                      data-ipe-value="client.client.comment"
-                      data-ipe-type="'wysiwyg'"
-                      data-api-name="'client'"
-                      data-api-id="client.client.id"
-                      data-ipe-name="'clients.comment'|translate"></span>
+
+
+                <div class="slideanim-item">
+                    <h3>{{'projects.actions.new'|translate}}:</h3>
+                    <form data-ng-submit="client.addProject()">
+                        <div data-material-input
+                             data-input-label="{{'global.name'|translate}}"
+                             data-ng-model="client.newProject.name"
+                             data-input-id="name"
+                             data-input-type="text"></div>
+                        <div data-material-input
+                             data-input-label="{{'global.description'|translate}}"
+                             data-ng-model="client.newProject.description"
+                             data-input-id="description"
+                             data-input-type="textarea"></div>
+                        <button class="btn btn-success" type="submit">{{'projects.actions.new'|translate}}</button>
+                    </form>
                 </div>
+
+
             </div>
-        </div>
-
-        <div class="slideanim-item">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <a class="tile tile-disabled" data-ng-click="client.showPage = 3">
-                        <i class="tile-icon tile-icon-add"></i>
-                        <h4 class="tile-heading">{{'projects.new'|translate}}</h4>
-                        <p class="tile-text">
-                            <span data-ng-hide="client.projects.length > 0">{{'projects.none' | translate }}</span>
-                        </p>
-                    </a>
-                </div>
-                <div data-ng-repeat="project in client.projects" class="col-md-4 col-sm-6 col-xs-12">
-                    <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
-                        <i class="tile-icon tile-icon-{{project.state}}"></i>
-                        <h4 class="tile-heading">{{project.name}}</h4>
-                        <p class="tile-text">{{project.description}}</p>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="slideanim-item">
-            <h3>{{'projects.actions.new'|translate}}:</h3>
-                <form data-ng-submit="client.addProject()">
-                    <div data-material-input
-                         data-input-label="{{'global.name'|translate}}"
-                         data-ng-model="client.newProject.name"
-                         data-input-id="name"
-                         data-input-type="text"></div>
-                    <div data-material-input
-                         data-input-label="{{'global.description'|translate}}"
-                         data-ng-model="client.newProject.description"
-                         data-input-id="description"
-                         data-input-type="textarea"></div>
-                    <button class="btn btn-success" type="submit">{{'projects.actions.new'|translate}}</button>
-                </form>
         </div>
     </div>
-</div>
+
+
 </div>
