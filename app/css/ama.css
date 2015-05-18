@@ -10983,6 +10983,9 @@ textarea {
     top: -1px;
     padding-right: 5px; }
 
+.sidelabel-right {
+  padding: 5px 0; }
+
 .detail-block {
   margin-bottom: 30px; }
   .detail-block .row {

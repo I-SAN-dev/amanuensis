@@ -98,7 +98,8 @@
 
   "offer":
   {
-    "name":"Angebot"
+    "name":"Angebot",
+    "description":"Beschreibungstext"
   },
 
   "itemPresets":
