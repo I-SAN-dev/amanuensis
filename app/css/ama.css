@@ -10456,6 +10456,9 @@ html, body {
 .fixedheight-250 {
   max-height: 250px; }
 
+.halfheight {
+  height: 50%; }
+
 .scroll-y {
   overflow: auto !important;
   overflow-x: hidden !important;
@@ -10465,6 +10468,9 @@ html, body {
   overflow: scroll !important;
   overflow-x: hidden !important;
   overflow-y: scroll !important; }
+
+.nopadding {
+  padding: 0 !important; }
 
 .list-under-filter {
   height: calc(100% - 53px); }
@@ -10503,6 +10509,40 @@ button:disabled {
 .varcheck.var-is-true .varcheck-if-false {
   display: none; }
 
+h1, h2 {
+  margin-top: 0; }
+
+.wysiwyg-fullheight {
+  height: 100%; }
+  .wysiwyg-fullheight .note-editor {
+    height: 100% !important; }
+    .wysiwyg-fullheight .note-editor .note-codeable,
+    .wysiwyg-fullheight .note-editor .note-editable {
+      height: calc(100% - 45px) !important; }
+
+.ipe-wysiwyg-fullheight {
+  height: 100%; }
+  .ipe-wysiwyg-fullheight > p {
+    height: 100%; }
+    .ipe-wysiwyg-fullheight > p > span {
+      height: 100%; }
+      .ipe-wysiwyg-fullheight > p > span div.ipe {
+        height: 100%;
+        margin: -20px; }
+        .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor {
+          height: calc(100% + 40px) !important;
+          /* 40px = 2* negative margin*/ }
+          .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-codeable,
+          .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-editable {
+            height: calc(100% - 45px) !important; }
+          .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
+            display: none; }
+  .ipe-wysiwyg-fullheight .note-editor {
+    height: 100% !important; }
+    .ipe-wysiwyg-fullheight .note-editor .note-codeable,
+    .ipe-wysiwyg-fullheight .note-editor .note-editable {
+      height: calc(100% - 45px) !important; }
+
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
   border-style: dotted; }
@@ -10517,10 +10557,10 @@ button:disabled {
     .ipe .ipe-empty:hover {
       color: #263238; }
 
-h1 .ipe .form-control {
+.ipe .form-control {
   font-size: inherit;
-  height: auto !important;
-  line-height: 1.0;
+  height: auto;
+  line-height: inherit !important;
   padding-top: 0 !important; }
 
 /*
@@ -10640,7 +10680,7 @@ h1 .ipe .form-control {
   .buttons-above-input .bai-buttons {
     float: right;
     position: absolute;
-    top: 2px;
+    top: -2px;
     right: 5px; }
     .buttons-above-input .bai-buttons .btn-icon-round {
       padding: 3px 6px !important; }
@@ -10721,6 +10761,9 @@ textarea {
     overflow-y: scroll; }
     .dropdown .list-group .list-group-item {
       min-height: 40.0px; }
+
+.panel-filter {
+  padding-top: 6px; }
 
 /*.nav#mainNav
 {
@@ -10854,28 +10897,39 @@ textarea {
       margin: 0 -20px; }
     .detail-view .detail-inner h1, .detail-view .detail-inner h2 {
       margin-top: 0; }
-  .detail-view .btn-toolbar {
-    margin: 0;
-    padding: 0;
-    line-height: 64px; }
-    .detail-view .btn-toolbar .btn-group button.btn {
-      height: 64px;
-      line-height: 60px;
-      font-size: 12px;
-      padding: 0 10px;
-      border-top: 2px solid transparent !important;
-      border-bottom: 2px solid transparent !important;
-      transition: 0.3s border-bottom, 0.3s background-color;
-      border-radius: 0 !important; }
-      .detail-view .btn-toolbar .btn-group button.btn:hover, .detail-view .btn-toolbar .btn-group button.btn:active, .detail-view .btn-toolbar .btn-group button.btn:focus {
-        text-decoration: none; }
-      .detail-view .btn-toolbar .btn-group button.btn.active {
-        border-bottom: 2px solid #404877 !important; }
-    .detail-view .btn-toolbar h3 {
-      margin: 0;
-      padding: 15px 20px;
-      color: #404877;
-      line-height: 34px; }
+
+.detail-view .btn-toolbar,
+.btn-toolbar.inpanel-tabbar {
+  margin: 0;
+  padding: 0;
+  line-height: 64px; }
+  .detail-view .btn-toolbar.inpanel-tabbar,
+  .btn-toolbar.inpanel-tabbar.inpanel-tabbar {
+    border-top: 1px solid #EEEEEE; }
+  .detail-view .btn-toolbar .btn-group button.btn,
+  .btn-toolbar.inpanel-tabbar .btn-group button.btn {
+    height: 64px;
+    line-height: 60px;
+    font-size: 12px;
+    padding: 0 10px;
+    border-top: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
+    transition: 0.3s border-bottom, 0.3s background-color;
+    border-radius: 0 !important; }
+    .detail-view .btn-toolbar .btn-group button.btn:hover, .detail-view .btn-toolbar .btn-group button.btn:active, .detail-view .btn-toolbar .btn-group button.btn:focus,
+    .btn-toolbar.inpanel-tabbar .btn-group button.btn:hover,
+    .btn-toolbar.inpanel-tabbar .btn-group button.btn:active,
+    .btn-toolbar.inpanel-tabbar .btn-group button.btn:focus {
+      text-decoration: none; }
+    .detail-view .btn-toolbar .btn-group button.btn.active,
+    .btn-toolbar.inpanel-tabbar .btn-group button.btn.active {
+      border-bottom: 2px solid #404877 !important; }
+  .detail-view .btn-toolbar h3,
+  .btn-toolbar.inpanel-tabbar h3 {
+    color: #404877;
+    padding: 20px 20px 0 20px;
+    line-height: 23px;
+    margin: 0; }
 
 .note-editor .btn-toolbar .btn-group button.btn {
   height: 34px !important;
@@ -10918,11 +10972,12 @@ textarea {
     background-color: #009688; }
 
 .sidelabel {
-  margin: 0 0 0 -20px;
-  padding: 5px 5px 5px 20px;
-  color: #ffffff;
-  background-color: #404877;
-  font-size: 14px; }
+  margin: 0 0 0 -20px !important;
+  padding: 5px 5px 5px 20px !important;
+  color: #ffffff !important;
+  background-color: #404877 !important;
+  font-size: 14px !important;
+  line-height: 1.42857 !important; }
   .sidelabel .md {
     position: relative;
     top: -1px;
@@ -11173,6 +11228,32 @@ textarea {
       background-color: #F4511E;
       color: #fff; }
 
+.detail-bottom-bar {
+  height: 63px; }
+
+.over-detail-bottom-bar {
+  height: calc(100% - 63px - 20px);
+  margin-bottom: 20px; }
+
+.panel-heading.panel-heading-primary {
+  height: 34px;
+  color: #fff;
+  background-color: #404877;
+  border: none;
+  padding: 7px 15px; }
+  .panel-heading.panel-heading-primary .ipe .form-group input.form-control {
+    color: #fff; }
+  .panel-heading.panel-heading-primary .ipe .bar:after,
+  .panel-heading.panel-heading-primary .ipe .bar:before {
+    background-color: #EEEEEE !important; }
+
+.under-panel-heading {
+  height: calc(100% - 34px); }
+
+.under-inpanel-tabbar {
+  height: calc(100% - 64px);
+  overflow: hidden; }
+
 /**
   * This extends ng-trans
   */
@@ -11201,5 +11282,15 @@ textarea {
     margin-left: -100%; }
   .slideanim3.panel3 {
     margin-left: -200%; }
+
+.slideanim2 {
+  width: 200%;
+  transition: 0.3s margin-left; }
+  .slideanim2 .slideanim-item {
+    width: 50%;
+    float: left;
+    padding: 20px; }
+  .slideanim2.panel2 {
+    margin-left: -100%; }
 
 /*# sourceMappingURL=ama.css.map */

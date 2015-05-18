@@ -45,3 +45,21 @@
     margin-left: -200%;
   }
 }
+
+.slideanim2
+{
+  width: 200%;
+  transition: 0.3s margin-left;
+
+  .slideanim-item
+  {
+    width: 50%;
+    float: left;
+    padding: 20px;
+  }
+
+  &.panel2
+  {
+    margin-left: -100%;
+  }
+}
