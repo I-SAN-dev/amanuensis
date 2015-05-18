@@ -32,6 +32,7 @@ app.controller('OfferDetailCtrl', [
                 ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
                     self.offer = data;
                     LocalStorage.setData('offer/'+id, data);
+                    self.loaded = true;
                 });
             };
 
@@ -75,8 +76,8 @@ app.controller('OfferDetailCtrl', [
             };
 
             this.priceChanged = function (item) {
-               getOffer();
-
+                self.loaded = false;
+                getOffer();
             }
         }
     ]

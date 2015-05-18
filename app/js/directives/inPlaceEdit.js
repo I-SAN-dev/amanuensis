@@ -59,6 +59,9 @@ app.directive('inPlaceEdit',
                             backup = null;
                             if($scope.apiId)
                                 LocalStorage.setData($scope.apiName+'/'+$scope.apiId, data);
+                            if($scope.type == 'price'){
+                                MasterDetailService.notifyMaster('priceChanged')
+                            }
 
                         });
                     };
