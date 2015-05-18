@@ -84,22 +84,30 @@ app.directive('materialInput', [
 
 
                 if($scope.inputType == 'price'){
-                    $scope.priceModel = {
-                        cents: '00'
-                    };
-                    $scope.processPrice = function () {
+
+                    if($scope.model)
+                        $scope.priceModel = $scope.model.split('.');
+                    else
+                        $scope.priceModel = new Array(2);
+                    $scope.processPrice = function (event) {
                         var value = $scope.priceModel;
-                        if(!value.cents){
-                            value.cents = '00';
+                        if(!value[1]){
+                            value[1] = '00';
                         }
-                        if(!value.euros){
-                            value.euros = null;
+                        if(!value[0]){
+                            value[0] = null;
                             return;
                         }
 
 
 
-                        $scope.model = value.euros+'.'+value.cents;
+                        $scope.model = value[0]+'.'+value[1];
+
+                        var field = $(event.currentTarget).attr('id');
+                        field = field.slice(0,-2);
+                        console.log(field);
+
+                        $scope.blurField(event, field);
 
 
                     }
@@ -109,12 +117,13 @@ app.directive('materialInput', [
                  * Chooses the action to be taken on blur.
                  * If one of the buttons is clicked, the button action replaces the default blur action.
                  */
-                $scope.blurField = function (event) {
+                $scope.blurField = function (event, fieldId) {
+                    var field = fieldId || $(event.currentTarget).attr('id');
 
                     var flag = true;
                     event.preventDefault();
                     event.stopPropagation();
-                    var field = $(event.currentTarget).attr('id');
+
                     var button = $(event.relatedTarget).attr('id');
                     if('save-'+field == button)
                     {
@@ -135,7 +144,7 @@ app.directive('materialInput', [
                     }
 
                     //console.log(event);
-                    if(flag)
+                    if(flag && $scope.inputBlur)
                         $scope.inputBlur();
                 }
 
