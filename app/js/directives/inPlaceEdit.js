@@ -82,7 +82,9 @@ app.directive('inPlaceEdit',
                     this.deleteItem = function () {
                         if(self.deletable != false) {
                             if(self.deletableItem){
-                                DeleteService($scope.apiName, $scope.apiId);
+                                DeleteService($scope.apiName, $scope.apiId).then(function (data) {
+                                    self.deletableItem(data);
+                                });
                             } else{
                                 self.val = '';
                                 post();
