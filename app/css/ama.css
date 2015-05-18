@@ -10537,11 +10537,11 @@ h1, h2 {
             height: calc(100% - 45px) !important; }
           .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
             display: none; }
-  .ipe-wysiwyg-fullheight .note-editor {
-    height: 100% !important; }
-    .ipe-wysiwyg-fullheight .note-editor .note-codeable,
-    .ipe-wysiwyg-fullheight .note-editor .note-editable {
-      height: calc(100% - 45px) !important; }
+
+.detail-inner .ipe-wysiwyg-fullheight > p > span div.ipe {
+  margin-bottom: 0 !important; }
+  .detail-inner .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor {
+    height: calc(100% + 20px) !important; }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
