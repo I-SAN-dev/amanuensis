@@ -59,7 +59,8 @@ app.controller('ClientDetailCtrl',
             // TODO: do this dynamically
             this.newConnectionFlag = {
                 phone: false,
-                mail: false
+                mail: false,
+                fax: false
             };
 
             /**
