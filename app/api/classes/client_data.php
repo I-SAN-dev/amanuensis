@@ -110,7 +110,7 @@ class client_data {
     {
         $dbal = DBAL::getInstance();
 
-        $client = $dbal->simpleSelect('customer_data', array('client'), array('id', $_DELETE['id']), 1);
+        $client = $dbal->simpleSelect('customer_data', array('customer'), array('id', $_DELETE['id']), 1);
 
         try
         {
@@ -135,7 +135,7 @@ class client_data {
                         'value',
                         'isdefault'
                     ),
-                    array('client', $client['client'])
+                    array('customer', $client['customer'])
                 )
             );
         }
