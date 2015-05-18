@@ -4,14 +4,14 @@
             <input  placeholder="{{label}}"
                     step="1"
                     pattern="(\d*)"
-                    id="{{id}}"
-                    data-ng-model="priceModel.euros"
-                    data-ng-blur="processPrice()"
+                    id="{{id}}-0"
+                    data-ng-model="priceModel[0]"
+                    data-ng-blur="processPrice($event)"
                     data-ng-required="{{required || false}}"
                     class="form-control">
             <div class="input-group-addon">,</div>
             <span class="bar"></span>
-            <label for="{{id}}">{{label}}</label>
+            <label for="{{id}}-0">{{label}}</label>
 
         </div>
     </div>
@@ -19,15 +19,15 @@
     <div class="form-group">
         <input  type="text"
                 pattern="(\d*)"
-                id="{{id}}-cents"
-                data-ng-model="priceModel.cents"
-                data-ng-blur="processPrice()"
+                id="{{id}}-1"
+                data-ng-model="priceModel[1]"
+                data-ng-blur="processPrice($event)"
                 data-ng-required="{{required || false}}"
                 size="2"
                 maxlength="2"
                 class="form-control">
         <span class="bar"></span>
-        <label for="{{id}}-cents">{{label}}</label>
+        <label for="{{id}}-1">{{label}}</label>
     </div>
 </div>
 <div data-ng-if="buttons" class="{{buttons.wrapperClass}}">
