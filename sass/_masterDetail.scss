@@ -211,3 +211,24 @@ $detail-toolbar-height: 64px;
     }
   }
 }
+
+.client-heading
+{
+  height: 94px;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid $gray-lighter;
+
+  .client-categories
+  {
+    margin-right: -20px;
+    height: 28px;
+  }
+}
+
+.under-client-heading
+{
+  height: calc(100% - 94px);
+}
