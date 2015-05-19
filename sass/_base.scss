@@ -45,6 +45,10 @@ html, body
 .halfheight
 {
   height: 50%;
+  &.panel
+  {
+    height: calc(50% - 10px); /* substract half bottom margin */
+  }
 }
 .scroll-y
 {
