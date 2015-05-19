@@ -1,4 +1,4 @@
-<div>
+<div class="fullheight">
     <div class="panel panel-default panel-filter">
         <div class="ipe buttons-above-input bai-1">
             <div data-material-input
@@ -28,7 +28,8 @@
             <a class="list-group-item" data-ng-repeat="preset in masterList | filter:MasterDetailCtrl.filterText"
                data-ng-class="{active:MasterDetailCtrl.detail.id == preset.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
                data-ng-click="setDetail(preset)">
-                <h4>{{preset.name}}</h4>
+                <h3>{{preset.total | price}}</h3>
+                <h2>{{preset.name}}</h2>
             </a>
         </div>
     </div>

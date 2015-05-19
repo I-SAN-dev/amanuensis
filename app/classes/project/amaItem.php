@@ -19,69 +19,120 @@ class AmaItem {
     /**
      * @param mixed $id - the id of the item to get, if NULL, an $entry must be given
      * @param mixed $entry - optional, if no $id is passed, an entry can be passed directly
+     * @param boolean $ispreset - if it is only an item preset
      * @throws Exception
      */
-    public function __construct($id = NULL, $entry = NULL)
+    public function __construct($id = NULL, $entry = NULL, $ispreset = false)
     {
-        /* check $entry validity */
-        if(
-            isset($entry)
-            && is_array($entry)
-            && isset($entry['id'])
-            && isset($entry['userate'])
-            && isset($entry['name'])
-            && (
-                isset($entry['offer'])
-                || isset($entry['contract'])
-                || isset($entry['todo'])
-                || isset($entry['acceptance'])
-                || isset($entry['invoice'])
+        if(!$ispreset)
+        {
+            /* check $entry validity */
+            if(
+                isset($entry)
+                && is_array($entry)
+                && isset($entry['id'])
+                && isset($entry['userate'])
+                && isset($entry['name'])
+                && (
+                    isset($entry['offer'])
+                    || isset($entry['contract'])
+                    || isset($entry['todo'])
+                    || isset($entry['acceptance'])
+                    || isset($entry['invoice'])
+                )
             )
-        )
-        {
-            $this->entry = $entry;
-        }
-        /* If $entry is crap, check if we can get nice data from the db */
-        else if (isset($id))
-        {
-            $dbal = DBAL::getInstance();
-            $this->entry = $dbal->simpleSelect(
-                'items',
-                array(
-                    'id',
-                    'name',
-                    'description',
-                    'fixedrate',
-                    'hourlyrate',
-                    'hourlyrates',
-                    'dailyrate',
-                    'dailyrates',
-                    'userate',
-                    'offer',
-                    'contract',
-                    'todo',
-                    'acceptance',
-                    'invoice',
-                    'todo_done',
-                    'todo_order',
-                    'global_order'
-                ),
-                array('id', $id),
-                1
-            );
-
-            if(!$this->entry)
             {
-                throw new Exception('No item found with id '.$id , 404);
+                $this->entry = $entry;
             }
+            /* If $entry is crap, check if we can get nice data from the db */
+            else if (isset($id))
+            {
+                $dbal = DBAL::getInstance();
+                $this->entry = $dbal->simpleSelect(
+                    'items',
+                    array(
+                        'id',
+                        'name',
+                        'description',
+                        'fixedrate',
+                        'hourlyrate',
+                        'hourlyrates',
+                        'dailyrate',
+                        'dailyrates',
+                        'userate',
+                        'offer',
+                        'contract',
+                        'todo',
+                        'acceptance',
+                        'invoice',
+                        'todo_done',
+                        'todo_order',
+                        'global_order'
+                    ),
+                    array('id', $id),
+                    1
+                );
+
+                if(!$this->entry)
+                {
+                    throw new Exception('No item found with id '.$id , 404);
+                }
+            }
+            else
+            {
+                throw new Exception('No usable Data given', 500);
+            }
+
+            $this->entry = $this->calcPrizes($this->entry);
+            $this->entry['used_time'] = $this->calcTimeFor($this->entry['id']);
         }
         else
         {
-            throw new Exception('No usable Data given', 500);
+            /* check $entry validity */
+            if(
+                isset($entry)
+                && is_array($entry)
+                && isset($entry['id'])
+                && isset($entry['userate'])
+                && isset($entry['name'])
+            )
+            {
+                $this->entry = $entry;
+            }
+            /* If $entry is crap, check if we can get nice data from the db */
+            else if (isset($id))
+            {
+                $dbal = DBAL::getInstance();
+                $this->entry = $dbal->simpleSelect(
+                    'item_presets',
+                    array(
+                        'id',
+                        'name',
+                        'description',
+                        'fixedrate',
+                        'hourlyrate',
+                        'hourlyrates',
+                        'dailyrate',
+                        'dailyrates',
+                        'userate'
+                    ),
+                    array('id', $id),
+                    1
+                );
+
+                if(!$this->entry)
+                {
+                    throw new Exception('No item_preset found with id '.$id , 404);
+                }
+            }
+            else
+            {
+                throw new Exception('No usable Data given', 500);
+            }
+
+            $this->entry = $this->calcPrizes($this->entry);
         }
 
-        $this->entry = $this->calcPrizes($this->entry);
-        $this->entry['used_time'] = $this->calcTimeFor($this->entry['id']);
     }
 
     /**
