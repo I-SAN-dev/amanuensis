@@ -114,7 +114,7 @@ class project {
 
             /* List of all projects */
             $q = $dbal->prepare("
-                SELECT projects.id, projects.name, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
+                SELECT projects.id, projects.name, projects.description, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
                 FROM projects LEFT JOIN customers ON projects.client = customers.id ".$where." ORDER BY state ASC ");
 
             $q->execute();

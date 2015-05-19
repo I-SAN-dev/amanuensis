@@ -190,11 +190,11 @@
                                 <div class="col-sm-4">
                                     <div class="row text-right">
                                         <div class="col-xs-8">{{'items.beforeTaxPrice'|translate}}:</div>
-                                        <div class="col-xs-4">{{offer.offer.costs.beforetax}}</div>
+                                        <div class="col-xs-4">{{offer.offer.costs.beforetax | price}}</div>
                                         <div class="col-xs-8">{{offer.offer.costs.taxlabel}}:</div>
-                                        <div class="col-xs-4">{{offer.offer.costs.tax}}</div>
+                                        <div class="col-xs-4">{{offer.offer.costs.tax | price}}</div>
                                         <div class="col-xs-8"><strong class="total">{{'items.totalPrice'|translate}}:</strong></div>
-                                        <div class="col-xs-4"><strong class="total">{{offer.offer.costs.total}}</strong></div>
+                                        <div class="col-xs-4"><strong class="total">{{offer.offer.costs.total | price}}</strong></div>
                                     </div>
 
                                 </div>

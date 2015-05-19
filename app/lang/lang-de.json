@@ -11,7 +11,8 @@
     "description":"Beschreibung",
     "date":"Datum",
     "ok": "OK",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "delete": "Löschen"
   },
 
   "clients": {

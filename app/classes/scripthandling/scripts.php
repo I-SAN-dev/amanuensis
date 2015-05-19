@@ -51,6 +51,7 @@ class Scripts
         "js/filters/sha256.js",
         "js/filters/amaStates.js",
         "js/filters/noSpace.js",
+        "js/filters/price.js",
         // Services
         "js/services/authService.js",
         "js/services/apiAbstractionLayer.js",

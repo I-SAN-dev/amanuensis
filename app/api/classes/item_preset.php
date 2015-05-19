@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaItem.php');
 
 class item_preset {
 
@@ -93,6 +94,18 @@ class item_preset {
                 'userate'
             )
         );
+        /* postprocess the items */
+        foreach($result as &$entry)
+        {
+            try{
+                $e = new AmaItem(NULL, $entry, true);
+                $entry = $e->get();
+            }
+            catch(Exception $e)
+            {
+                /* Just ignore them, better raw data than nothing here */
+            }
+        }
         json_response($result);
     }
 
@@ -119,6 +132,14 @@ class item_preset {
             array('id', $id),
             1
         );
+        try {
+            $item = new AmaItem(NULL, $result, true);
+            $result = $item->get();
+        }
+        catch(Exception $e)
+        {
+            /* Just ignore them, better raw data than nothing */
+        }
         json_response($result);
     }
 

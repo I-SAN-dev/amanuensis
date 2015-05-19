@@ -28,7 +28,8 @@
             <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
                data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
                data-ng-click="setDetail(item)">
-                <h4>{{item.name}}</h4>
+                <h3>{{item.total | price}}</h3>
+                <h2>{{item.name}}</h2>
             </a>
         </div>
     </div>
