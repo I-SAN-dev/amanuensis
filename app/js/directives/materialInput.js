@@ -33,15 +33,10 @@ app.directive('materialInput', [
 
                 $scope.processWysiwyg = function(type) {
 
-                    if(type=='save') {
-
-                        $scope.model = $scope.editor.code();
+                    if (type=='save')
                         $scope.buttons[type][type]($scope.model);
-
-
-                    } else {
+                    else
                         $scope.buttons[type][type]();
-                    }
                 };
 
                 if($scope.inputType == 'select'){
@@ -170,8 +165,9 @@ app.directive('materialInput', [
                     }
 
                     if(type=='wysiwyg') {
-                        scope.editor = $('.summernote');
-                        scope.editor.summernote({
+                        scope.editors = element;
+                        console.log(element);
+                        element.summernote({
                             height: 300,
                             toolbar: [
                                 ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -179,11 +175,15 @@ app.directive('materialInput', [
                                 ['view', ['fullscreen','codeview']],
                                 ['do', ['undo', 'redo']]
                             ],
+                            onInit: function () {
+                                element.code(scope.model);
+                            },
                             onBlur: function(e) {
-                                scope.model = scope.editor.code();
+                                scope.model = element.code();
+                                console.log(scope.model);
                             }
                         });
-                        scope.editor.code(scope.model);
+                        scope.editors.code(scope.model);
                     }
                 });
 

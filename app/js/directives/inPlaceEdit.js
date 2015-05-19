@@ -67,8 +67,9 @@ app.directive('inPlaceEdit',
                     };
 
                     this.save = function (newValue) {
+                        console.log(newValue);
                         if(newValue){
-                            $scope.val = newValue;
+                            self.val = newValue;
                         }
                         post();
                     };
