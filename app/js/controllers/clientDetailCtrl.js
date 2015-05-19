@@ -16,6 +16,17 @@ app.controller('ClientDetailCtrl',
             MasterDetailService.setDetail(this);
 
 
+            this.genders = [
+                {
+                    name: 'clients.contactGender.male',
+                    id: 'm'
+                },
+                {
+                    name: 'clients.contactGender.female',
+                    id: 'f'
+                }
+            ];
+
             var calls = 0;
             /**
              * Gets a client from the API
@@ -308,6 +319,8 @@ app.controller('ClientDetailCtrl',
                     });
                     modal.activate();
                 });
+
+
 
 
             };

@@ -9,7 +9,9 @@ app.directive('inPlaceEdit',
                     key: '=ipeKey',
                     val: '=ipeValue',
                     type: '=ipeType',
-                    options: '=ipeOptions',
+                    options: '=ipeSelectOptions',
+                    optionValue: '@ipeSelectOptionValue',
+                    optionName: '@ipeSelectOptionName',
                     name: '=ipeName',
                     apiName: '=',
                     apiParams: '=',
@@ -20,6 +22,7 @@ app.directive('inPlaceEdit',
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
 
+                    console.log($scope.options);
 
                     var self = this;
 
