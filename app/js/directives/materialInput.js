@@ -10,7 +10,8 @@ app.directive('materialInput', [
             wysiwyg: true,
             select: true,
             selectMultiple: true,
-            price: true
+            price: true,
+            date: true
         };
         return {
             restrict: 'A',
@@ -141,6 +142,17 @@ app.directive('materialInput', [
                     //console.log(event);
                     if(flag && $scope.inputBlur)
                         $scope.inputBlur();
+                };
+
+
+                if($scope.inputType == 'date'){
+                    var initialDate = angular.copy($scope.model);
+                    $scope.processDate = function () {
+                        if(initialDate != $scope.model) {
+                            $scope.selectDate = false;
+                            initialDate = angular.copy($scope.model);
+                        }
+                    }
                 }
 
 

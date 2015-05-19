@@ -1,7 +1,7 @@
 /**
  * Main application. Handles dependencies and routing.
  */
-var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize']);
+var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate']);
 app.run(function ($rootScope, $state, AuthService, $q) {
 
 
@@ -438,7 +438,7 @@ app.constant('sites', [
  * App Config
  * Configures i18n and app states
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants, $locationProvider,pickadateI18nProvider) {
     /*
      * Configure the i18n service
      */
@@ -460,4 +460,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
 
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/dashboard');
+
+    pickadateI18nProvider.translations = {
+            prev: '<i class="md md-chevron-left"></i>',
+            next: '<i class="md md-chevron-right"></i>'
+    }
 });
