@@ -85,7 +85,7 @@ app.directive('materialInput', [
                         $scope.priceModel = $scope.model.split('.');
                     else
                         $scope.priceModel = new Array(2);
-                    $scope.processPrice = function (event) {
+                    $scope.processPrice = function () {
                         var value = $scope.priceModel;
                         if(!value[1]){
                             value[1] = '00';
@@ -98,12 +98,6 @@ app.directive('materialInput', [
 
 
                         $scope.model = value[0]+'.'+value[1];
-
-                        var field = $(event.currentTarget).attr('id');
-                        field = field.slice(0,-2);
-                        console.log(field);
-
-                        $scope.blurField(event, field);
 
 
                     }
