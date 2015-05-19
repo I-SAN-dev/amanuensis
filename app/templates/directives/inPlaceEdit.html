@@ -2,20 +2,20 @@
     <span data-ng-switch-default
           data-ng-click="ipe.enterEditMode()"
           class="ipe">
-    <span data-ng-bind-html="val"></span>
-    <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
-</span>
+        <span data-ng-bind-html="val"></span>
+        <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
+    </span>
     <div data-ng-switch-when="true" class="ipe buttons-above-input bai-3">
         <div data-material-input
              data-ng-model="ipe.val"
              data-input-type="{{ipe.type}}"
              data-input-label="{{name}}"
              data-input-id="ipe-{{name|nospace}}-{{apiName}}-{{apiID}}"
-             data-input-buttons="ipe.buttons" data-ng-blur="ipe.cancel" data-input-autofocus="true"></div>
-        <!--<div class="bai-buttons">
-            <button class="btn btn-link btn-success btn-icon-round" data-ng-click="ipe.save()"><i class="md md-check"></i></button>
-            <button class="btn btn-link btn-danger btn-icon-round" data-ng-if="ipe.deletable != false" data-ng-click="ipe.deleteItem()"><i class="md md-delete"></i></button>
-            <button class="btn btn-link btn-warning btn-icon-round" data-ng-click="ipe.cancel()"><i class="md md-close"></i></button>
-        </div>-->
+             data-input-buttons="ipe.buttons"
+             data-ng-blur="ipe.cancel"
+             data-input-autofocus="true"
+             data-input-select-options="options"
+             data-input-select-option-name="{{optionName}}"
+             data-input-select-option-value="{{optionValue}}"></div>
     </div>
 </span>

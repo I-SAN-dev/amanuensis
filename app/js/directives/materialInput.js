@@ -178,8 +178,7 @@ app.directive('materialInput', [
 
                     if(type=='wysiwyg') {
                         scope.editors = element;
-                        console.log(element);
-                        element.summernote({
+                        $(element[0]).summernote({
                             height: 300,
                             toolbar: [
                                 ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -192,7 +191,6 @@ app.directive('materialInput', [
                             },
                             onBlur: function(e) {
                                 scope.model = element.code();
-                                console.log(scope.model);
                             }
                         });
                         scope.editors.code(scope.model);
