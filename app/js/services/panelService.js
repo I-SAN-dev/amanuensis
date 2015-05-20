@@ -6,7 +6,7 @@ app.factory('PanelService', [
             offers: 2
         };
 
-        var panels;
+        var panels = {};
 
         return {
             getPanel: function (site) {
