@@ -194,11 +194,18 @@ app.directive('materialInput', [
                 scope.showDropdown = false;
                 scope.hideDropdown = function () {
                     scope.showDropdown = false;
+                    if(scope.buttons){
+                        scope.buttons.save.save();
+                    }
                 };
                 scope.openDropdown = function () {
                     $(elem).focus();
                     scope.showDropdown = true;
                 };
+
+                if(attr.ipe && type == 'select'){
+                    scope.openDropdown();
+                }
 
 
 
