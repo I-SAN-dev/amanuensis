@@ -10419,6 +10419,67 @@ button.close {
       opacity: 0.7;
       filter: alpha(opacity=70); }
 
+/* Animation mixins */
+/* Animation mixins end */
+.colorbar-container {
+  width: 100%;
+  margin-left: -15px;
+  height: 4px;
+  position: absolute;
+  z-index: 9999;
+  top: calc(64px - 4px);
+  background-color: #BDBDBD; }
+
+.colorbar {
+  height: 4px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 25%;
+  transition: 0.5s width, 0.5s background-color;
+  background-color: #FFB300;
+  -webkit-animation: colorbar-animation 2.5s;
+  -moz-animation: colorbar-animation 2.5s;
+  -o-animation: colorbar-animation 2.5s;
+  animation: colorbar-animation 2.5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear; }
+
+.notloading .colorbar {
+  width: 100%;
+  background-color: #404877;
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none; }
+
+@-webkit-keyframes colorbar-animation {
+  0% {
+    left: -25%; }
+  100% {
+    left: 100%; } }
+@-moz-keyframes colorbar-animation {
+  0% {
+    left: -25%; }
+  100% {
+    left: 100%; } }
+@-o-keyframes colorbar-animation {
+  0% {
+    left: -25%; }
+  100% {
+    left: 100%; } }
+@keyframes colorbar-animation {
+  0% {
+    left: -25%; }
+  100% {
+    left: 100%; } }
 .pickadate {
   font-family: 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif; }
   .pickadate a {
@@ -10981,6 +11042,7 @@ textarea {
 .btn-toolbar.inpanel-tabbar {
   margin: 0;
   padding: 0;
+  height: 64px;
   line-height: 64px; }
   .detail-view .btn-toolbar.inpanel-tabbar,
   .btn-toolbar.inpanel-tabbar.inpanel-tabbar {

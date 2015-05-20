@@ -47,6 +47,7 @@ $detail-toolbar-height: 64px;
 .btn-toolbar.inpanel-tabbar {
   margin: 0;
   padding: 0;
+  height: $detail-toolbar-height;
   line-height: $detail-toolbar-height;
 
   &.inpanel-tabbar
