@@ -24,6 +24,10 @@ app.directive('masterDetail', [function(){
 
                 var self = this;
 
+                this.getStateParams = function(forState){
+                    console.log('getStateParams');
+                    return MasterDetailService.notifyMaster('getStateParams', forState);
+                };
 
 
                 /**

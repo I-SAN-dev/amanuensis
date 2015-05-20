@@ -88,6 +88,19 @@ app.controller('OfferDetailCtrl', [
                 self.loaded = false;
                 getOffer();
             };
+
+            this.getStateParams = function(forState){
+                if(forState == 'itemCreation'){
+                    return {
+                        referrer: 'app.offerDetail',
+                        referrerParams: {
+                            id: id
+                        },
+                        for: 'offer',
+                        forId: id
+                    };
+                }
+            };
         }
     ]
 );

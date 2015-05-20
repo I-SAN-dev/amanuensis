@@ -13,6 +13,7 @@ app.controller('ModuleCtrl', [
         setTimeout(function () {
             console.log($rootScope.loaded);
         }, 5000);
+
         var getContent = function (state) {
             console.log(state);
             var module = modules[$scope.name];

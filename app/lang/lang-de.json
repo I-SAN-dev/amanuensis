@@ -300,7 +300,8 @@
     "totalPrice": "Gesamtpreis",
     "beforeTaxPrice": "Netto",
     "pricing": "Bepreisung",
-    "connections": "Zuordnungen"
+    "connections": "Zuordnungen",
+    "create": "Neuer Posten"
   },
   "offers": {
     "state": "Angebotsstatus",

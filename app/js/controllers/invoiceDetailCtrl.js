@@ -2,10 +2,12 @@ app.controller('InvoiceDetailCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'MasterDetailService',
+    'MailService',
+    'PdfService',
+    'DeleteService',
     '$stateParams',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, $stateParams, $scope) {
-        var self = this;
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, $stateParams, $scope) {
 
         MasterDetailService.setMaster(this);
         var self = this;
@@ -79,6 +81,19 @@ app.controller('InvoiceDetailCtrl', [
         this.priceChanged = function (item) {
             self.loaded = false;
             getInvoice();
+        };
+
+        this.getStateParams = function(forState){
+            if(forState == 'itemCreation'){
+                return {
+                    referrer: 'app.invoiceDetail',
+                    referrerParams: {
+                        id: id
+                    },
+                    for: 'invoice',
+                    forId: id
+                };
+            }
         };
     }
 ]);
