@@ -87,7 +87,7 @@ app.controller('OfferDetailCtrl', [
             this.priceChanged = function (item) {
                 self.loaded = false;
                 getOffer();
-            }
+            };
         }
     ]
 );
