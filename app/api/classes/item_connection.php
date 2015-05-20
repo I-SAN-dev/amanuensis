@@ -137,7 +137,9 @@ class item_connection {
         /* Here comes the sick sql shit */
 
         $query = '
-            SELECT DISTINCT items.id, items.name, items.fixedrate, items.hourlyrates, items.hourlyrate, items.dailyrates, items.dailyrate, items.userate, items.todo_done, items.global_order
+            SELECT DISTINCT
+              items.id, items.name, items.fixedrate, items.hourlyrates, items.hourlyrate, items.dailyrates, items.dailyrate, items.userate, items.todo_done, items.global_order,
+              items.offer, items.contract, items.todo, items.acceptance, items.invoice
             FROM items
                   LEFT JOIN offers ON (items.offer = offers.id)
                   LEFT JOIN contracts ON (items.contract = contracts.id)
@@ -154,7 +156,25 @@ class item_connection {
 
         $result = $q->fetchAll(PDO::FETCH_ASSOC);
 
-        json_response($result);
+        /* Postprocess the result */
+        $response = array();
+        foreach($result as $entry)
+        {
+            try
+            {
+                $item = new AmaItem(NULL, $entry, $client);
+                array_push($response, $item->get());
+            }
+            catch(Exception $e)
+            {
+                /* Use raw data instead */
+                $entry['error'] = 'failed to process';
+                array_push($response, $entry);
+            }
+
+        }
+
+        json_response($response);
     }
 
 

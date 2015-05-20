@@ -90,10 +90,17 @@ class AmaItemList {
             /* The & creates a reference, so we can edit the entry! */
             foreach($this->entries as &$entry)
             {
-                $e = new AmaItem(NULL, $entry, $client);
-                $entry = $e->get();
+                try
+                {
+                    $e = new AmaItem(NULL, $entry, $client);
+                    $entry = $e->get();
 
-                $this->costs['total'] = $this->costs['total'] + $entry['total'];
+                    $this->costs['total'] = $this->costs['total'] + $entry['total'];
+                }
+                catch (Exception $e)
+                {
+                    $entry['error'] = 'failed to process';
+                }
             }
 
             /* Calculate the tax */

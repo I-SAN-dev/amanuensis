@@ -165,6 +165,7 @@ class item {
         catch(Exception $e)
         {
             /* Just ignore them, better raw data than nothing */
+            $result['error'] = 'failed to process';
         }
         json_response($result);
     }
