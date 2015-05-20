@@ -1,0 +1,79 @@
+/* Animation mixins */
+@mixin animation($value) {
+  -webkit-animation: unquote($value);
+  -moz-animation: unquote($value);
+  -o-animation: unquote($value);
+  animation: unquote($value);
+}
+
+@mixin animation-property($property, $value) {
+  -webkit-animation-#{$property}: unquote($value);
+  -moz-animation-#{$property}: unquote($value);
+  -o-animation-#{$property}: unquote($value);
+  animation-#{$property}: unquote($value);
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} { @content; }
+  @-moz-keyframes #{$name} { @content; }
+  @-o-keyframes #{$name} { @content; }
+  @keyframes #{$name} { @content; }
+}
+
+@mixin animation-clear
+{
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+
+/* Animation mixins end */
+
+
+.colorbar-container
+{
+  width: 100%;
+  margin-left: -15px;
+  height: 4px;
+  position: absolute;
+  z-index: 9999;
+  top: calc(#{$navbar-height} - 4px);
+  background-color: $gray-light;
+}
+
+$cb-startwidth: 25%;
+
+
+.colorbar
+{
+  height: 4px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $cb-startwidth;
+  transition: 0.5s width, 0.5s background-color;
+  background-color: $brand-warning;
+  @include animation('colorbar-animation 2.5s');
+  @include animation-property('iteration-count', 'infinite');
+  @include animation-property('timing-function', 'linear');
+}
+
+.notloading .colorbar
+{
+  width: 100%;
+  background-color: $brand-primary;
+  @include animation-clear;
+}
+
+
+
+@include keyframes('colorbar-animation') {
+  0% {
+    left: -$cb-startwidth;
+  }
+  100% {
+    left: 100%;
+  ;}
+}
