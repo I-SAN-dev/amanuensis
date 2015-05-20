@@ -106,6 +106,15 @@
     "decline":"Kunde lehnt ab",
     "accept":"Kunde nimmt an"
   },
+  "invoice":{
+    "name": "Rechnung",
+    "description": "Beschreibungstext",
+    "send": "Rechnung senden",
+    "createReminder": "Mahnung erstellen",
+    "wasPaid": "Rechnung wurde bezahlt",
+    "due":"Fällig",
+    "reminders":"Zahlungserinnerungen"
+  },
 
   "itemPresets":
   {
@@ -142,11 +151,6 @@
     "alreadyExists":"Eine Datei mit diesem Namen existiert bereits."
   },
 
-  "invoice":
-  {
-    "due":"Fällig",
-    "reminders":"Zahlungserinnerungen"
-  },
 
   "login":
   {
@@ -306,6 +310,17 @@
       "pdfSent": "PDF verschickt",
       "clientAccepted": "Vom Kunden angenommen",
       "clientDeclined": "Vom Kunden abgelehnt"
+    }
+  },
+  "invoices": {
+    "state": "Rechnungsstatus",
+    "states": {
+      "created": "Rechnung erstellt",
+      "pdfGenerated": "PDF generiert",
+      "pdfSent": "Rechnung verschickt",
+      "paid": "Rechnung ist bezahlt",
+      "overdueNoReminder": "Rechnung ist überfällig. Es wurde noch keine Mahnung erstellt.",
+      "overdueReminderCreated": "Mahnung erstellt."
     }
   },
 

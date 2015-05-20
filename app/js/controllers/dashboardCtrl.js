@@ -12,6 +12,7 @@ app.controller('DashboardCtrl', [
         };
         ApiAbstractionLayer('GET', apiObject).then(function (data) {
             self.currentProjects = data;
+            LocalStorage.setData('currentProjects', data);
         });
     }
 ]);

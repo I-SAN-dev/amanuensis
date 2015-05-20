@@ -222,7 +222,7 @@
                         <th class="tabletd">{{'invoice.reminders' | translate}}</th>
                     </tr>
                     </thead>
-                    <tr data-ng-repeat="invoice in project.project.invoices" data-ui-sref="app.invoices({id:{{invoice.id}}})">
+                    <tr data-ng-repeat="invoice in project.project.invoices" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
                         <td class="name">
                             {{invoice.name}}
                         </td>

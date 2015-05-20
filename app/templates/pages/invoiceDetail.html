@@ -1,5 +1,202 @@
-<div data-ng-controller="InvoicesCtrl as inv">
-<p>There are no invoices</p>
-{{inv.invoices|json}}
+<div class="row detail fullheight" data-ng-controller="InvoiceDetailCtrl as inv">
+    <div class="col-sm-4 fullheight">
 
+        <div class="panel panel-default fullheight">
+            <div class="panel-heading panel-heading-primary">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
+                        {{'invoice.name' | translate}}
+                    </div>
+                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                        <span data-in-place-edit
+                              data-ipe-key="'refnumber'"
+                              data-ipe-value="inv.invoice.refnumber"
+                              data-ipe-deletable="false"
+                              data-api-id="inv.invoice.id"
+                              data-api-name="'invoice'"
+                              data-ipe-name="'invoices.refnumber'|translate"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="under-panel-heading">
+                <div class="halfheight scroll-y">
+                    <div class="panel-body">
+
+                        <h1><span data-in-place-edit
+                                  data-api-id="inv.invoice.id"
+                                  data-api-name="'invoice'"
+                                  data-ipe-key="'name'"
+                                  data-ipe-value="inv.invoice.name"
+                                  data-ipe-name="'global.name'|translate"
+                                  data-ipe-deletable="false"
+                                ></span>
+                        </h1>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'invoices.state'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg-7 col-md-6 col-sm-12">
+                                <p>
+                                    {{inv.invoice.state|amaStates:'invoice'|translate}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'global.date'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <p>
+                                    <span data-in-place-edit
+                                          data-api-id="inv.invoice.id"
+                                          data-api-name="'invoice'"
+                                          data-ipe-key="'date'"
+                                          data-ipe-value="inv.invoice.date"
+                                          data-ipe-name="'global.date'|translate"
+                                          data-ipe-deletable="false"
+                                          data-ipe-type="'date'"
+                                            ></span>
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'projects.project'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <p>
+                                    <a data-ui-sref="app.projects({id:{{inv.invoice.project.id}}})">{{inv.invoice.project.name}}</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6 col-sm-7">
+                                <p>
+                                    {{'clients.client'|translate}}:
+                                </p>
+                            </div>
+                            <div class="col-lg--7 col-md-6 col-sm-12">
+                                <div data-client-box="inv.invoice.project.client"></div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="halfheight">
+
+                    <div class="btn-toolbar inpanel-tabbar">
+                        <div class="btn-group btn-group-sm pull-right" data-ng-init="inv.showPage = 1">
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: inv.showPage==1}" data-ng-click="inv.showPage = 1"><i class="md md-lg md-comment"></i> {{'invoice.description' | translate}}</button>
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: inv.showPage==2}" data-ng-click="inv.showPage = 2"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="under-inpanel-tabbar">
+
+                        <div class="slideanim2 fullheight" data-ng-class="{panel2: inv.showPage==2}">
+
+                            <div class="slideanim-item fullheight scroll-y">
+
+                                <div class="ipe-wysiwyg-fullheight">
+                                    <p data-in-place-edit
+                                       data-api-id="inv.invoice.id"
+                                       data-api-name="'invoice'"
+                                       data-ipe-key="'description'"
+                                       data-ipe-value="inv.invoice.description"
+                                       data-ipe-name="'global.description'|translate"
+                                       data-ipe-type="'wysiwyg'"></p>
+                                </div>
+
+                            </div>
+
+                            <div class="slideanim-item nopadding fullheight">
+
+                                <div class="wysiwyg-fullheight">
+                                    <div data-material-input
+                                         data-ng-model="inv.mailtext"
+                                         data-input-id="mailtext"
+                                         data-input-label="'mail.mailtext'|translate"
+                                         data-input-type="wysiwyg"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-8 fullheight">
+        <div class="over-detail-bottom-bar next-fullheight">
+            <div data-master-detail
+                 data-master-list="inv.invoice.items"
+                 data-master-tpl="'templates/pages/items/master.html'"
+                 data-detail-tpl="'templates/pages/items/detail.html'"
+                 data-detail=""
+                 data-master-loaded="inv.loaded"></div>
+        </div>
+        <div class="row detail-bottom-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <a class="btn btn-block btn-info" data-ng-if="inv.invoice.state <= 1" data-ng-click="inv.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=invoice&forid={{inv.invoice.id}}">{{'pdf.preview'|translate}}</a>
+                                        <button class="btn btn-block btn-success" data-ng-if="inv.invoice.state <= 1" data-ng-click="inv.generatePDF()">{{'pdf.generate'|translate}}</button>
+                                        <a class="btn btn-block btn-info" data-ng-if="inv.invoice.state > 1" data-ng-click="inv.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{inv.invoice.path}}">{{'pdf.view'|translate}}</a>
+                                        <button disabled class="btn btn-block btn-success disabled" data-ng-if="inv.invoice.state > 1">{{'pdf.generated'|translate}}</button>
+                                    </div>
+                                    <div class="col-sm-4" data-ng-if="inv.invoice.state >= 1">
+                                        <a class="btn btn-block btn-info" data-ng-click="inv.openMailPreview($event)">{{'mail.preview'|translate}}</a>
+                                        <button data-ng-if="inv.invoice.state == 1" class="btn btn-block btn-success" data-ng-click="inv.send()">{{'invoice.send'|translate}}</button>
+                                        <button disabled data-ng-if="inv.invoice.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
+                                    </div>
+                                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
+                                        <button class="btn btn-block btn-danger" data-ng-click="inv.createReminder()">{{'invoice.createReminder' |translate}}</button>
+                                        <button class="btn btn-block btn-success" data-ng-click="inv.pay()">{{'invoice.wasPaid'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row text-right">
+                                    <div class="col-xs-8">{{'items.beforeTaxPrice'|translate}}:</div>
+                                    <div class="col-xs-4">{{inv.invoice.costs.beforetax | price}}</div>
+                                    <div class="col-xs-8">{{inv.invoice.costs.taxlabel}}:</div>
+                                    <div class="col-xs-4">{{inv.invoice.costs.tax | price}}</div>
+                                    <div class="col-xs-8"><strong class="total">{{'items.totalPrice'|translate}}:</strong></div>
+                                    <div class="col-xs-4"><strong class="total">{{inv.invoice.costs.total | price}}</strong></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
