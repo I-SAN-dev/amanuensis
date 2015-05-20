@@ -44,7 +44,11 @@ app.directive('materialInput', [
                     $scope.toggleSingleSelected = function(option){
                         $scope.model = option[$scope.optionValue];
                         $scope.selected = option[$scope.optionName];
-                        $scope.showDropdown = false;
+
+                        if($scope.buttons){
+                            $scope.hideDropdown(true, true);
+                        } else
+                            $scope.hideDropdown();
                     };
                 }
 
@@ -189,23 +193,31 @@ app.directive('materialInput', [
                         });
                         scope.editors.code(scope.model);
                     }
+
+
+
+                    scope.showDropdown = false;
+                    scope.hideDropdown = function (blur, save) {
+                        if(save && scope.buttons)
+                            scope.buttons.save.save(scope.model);
+
+                        if(blur) {
+                            $(element[0]).blur();
+                        }
+                        else
+                            scope.showDropdown = false;
+                    };
+                    scope.openDropdown = function () {
+                        $(element[0]).focus();
+                        scope.showDropdown = true;
+                    };
+
+                    if(attr.ipe && type == 'select'){
+                        scope.openDropdown();
+                    }
                 });
 
-                scope.showDropdown = false;
-                scope.hideDropdown = function () {
-                    scope.showDropdown = false;
-                    if(scope.buttons){
-                        scope.buttons.save.save();
-                    }
-                };
-                scope.openDropdown = function () {
-                    $(elem).focus();
-                    scope.showDropdown = true;
-                };
 
-                if(attr.ipe && type == 'select'){
-                    scope.openDropdown();
-                }
 
 
 
