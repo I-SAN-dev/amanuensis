@@ -39,9 +39,11 @@ app
 
 
                 var defer = $q.defer();
+                $rootScope.loaded = false;
                 // perform the HTTP request
                 $http(config)
                     .success(function (data) {
+                        $rootScope.loaded = true;
                         defer.resolve(data);
                     })
                     .error(function (data, status, headers, config) {
@@ -54,6 +56,7 @@ app
                             $rootScope.loggedIn = false;
                             $state.go('login', {referrer: $state.current.name, referrerParams: $stateParams});
                         }
+                        $rootScope.loaded = true;
                         defer.reject(data);
                     });
                 return defer.promise;
