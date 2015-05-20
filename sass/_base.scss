@@ -50,6 +50,29 @@ html, body
     height: calc(50% - 10px); /* substract half bottom margin */
   }
 }
+.thirdheight
+{
+  height: 33%;
+  &.panel
+  {
+    height: calc(33% - 13.3px) /* substract one third ofa 2 bottom margins (2 gaps divided on 3 panels) */
+  }
+}
+.col-fixedwith-130
+{
+  padding-left: $padding-base-horizontal;
+  padding-right: $padding-base-horizontal;
+  width: 130px + 2*$padding-base-horizontal;
+  float: left;
+}
+.col-beneath-fixedwith-130
+{
+  padding-left: $padding-base-horizontal;
+  padding-right: $padding-base-horizontal;
+  width: calc(100% - #{130px + 2*$padding-base-horizontal});
+  float: left;
+}
+
 .scroll-y
 {
   overflow: auto !important;

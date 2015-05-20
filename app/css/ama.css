@@ -4180,7 +4180,7 @@ pre {
   @media (min-width: 992px) {
     .container {
       width: 970px; } }
-  @media (min-width: 1200px) {
+  @media (min-width: 1500px) {
     .container {
       width: 1170px; } }
 
@@ -4678,7 +4678,7 @@ pre {
 
   .col-md-offset-12 {
     margin-left: 100%; } }
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
     float: left; }
 
@@ -8197,7 +8197,7 @@ button.close {
   .visible-sm-inline-block {
     display: inline-block !important; } }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1499px) {
   .visible-md {
     display: block !important; }
 
@@ -8210,19 +8210,19 @@ button.close {
   th.visible-md,
   td.visible-md {
     display: table-cell !important; } }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1499px) {
   .visible-md-block {
     display: block !important; } }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1499px) {
   .visible-md-inline {
     display: inline !important; } }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1499px) {
   .visible-md-inline-block {
     display: inline-block !important; } }
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .visible-lg {
     display: block !important; }
 
@@ -8235,15 +8235,15 @@ button.close {
   th.visible-lg,
   td.visible-lg {
     display: table-cell !important; } }
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .visible-lg-block {
     display: block !important; } }
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .visible-lg-inline {
     display: inline !important; } }
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .visible-lg-inline-block {
     display: inline-block !important; } }
 
@@ -8253,10 +8253,10 @@ button.close {
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-sm {
     display: none !important; } }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1499px) {
   .hidden-md {
     display: none !important; } }
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .hidden-lg {
     display: none !important; } }
 .visible-print {
@@ -10604,6 +10604,23 @@ html, body {
     height: calc(50% - 10px);
     /* substract half bottom margin */ }
 
+.thirdheight {
+  height: 33%; }
+  .thirdheight.panel {
+    height: calc(33% - 13.3px); }
+
+.col-fixedwith-130 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 154px;
+  float: left; }
+
+.col-beneath-fixedwith-130 {
+  padding-left: 12px;
+  padding-right: 12px;
+  width: calc(100% - 154px);
+  float: left; }
+
 .scroll-y {
   overflow: auto !important;
   overflow-x: hidden !important;
@@ -10682,6 +10699,42 @@ h1, h2 {
             height: calc(100% - 45px) !important; }
           .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
             display: none; }
+
+.fastbutton {
+  display: block;
+  height: 20%;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid #EEEEEE;
+  transition: 0.3s color, 0.3s background-color; }
+  .fastbutton:last-child {
+    border-bottom: none; }
+  .fastbutton i {
+    display: block;
+    width: 100%;
+    font-size: 40px;
+    line-height: 1.0;
+    margin-top: -30.0px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0; }
+  .fastbutton span {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px; }
+  .fastbutton:hover, .fastbutton:focus {
+    background-color: #EEEEEE;
+    outline: none; }
+  .fastbutton:active {
+    outline: none;
+    color: #fff;
+    background-color: #404877;
+    transition-duration: 0s; }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
@@ -11396,7 +11449,9 @@ textarea {
 
 .under-inpanel-tabbar {
   height: calc(100% - 64px);
-  overflow: hidden; }
+  overflow: hidden;
+  width: 100%;
+  /* we don't know why this is necessary, but it actually is... very strange */ }
 
 strong.total {
   font-size: 20px; }

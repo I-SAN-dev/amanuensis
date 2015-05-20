@@ -35,6 +35,7 @@
 {
   height: calc(100% - 64px);
   overflow: hidden;
+  width: 100%; /* we don't know why this is necessary, but it actually is... very strange */
 }
 
 strong.total

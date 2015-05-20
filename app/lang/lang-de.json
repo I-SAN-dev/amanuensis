@@ -109,6 +109,8 @@
 
   "itemPresets":
   {
+    "itemPreset":"Baustein",
+    "itemPresets":"Bausteine",
     "actions":{
       "new":"Neues Preset erstellen"
     }

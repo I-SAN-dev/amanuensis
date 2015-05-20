@@ -1,64 +1,82 @@
 <div data-ng-controller="DashboardCtrl as dashboard" class="dashboard fullheight">
     <div class="row fullheight">
-        <div class="col-sm-3 col-md-2 fullheight">
+        <div class="col-fixedwith-130 fullheight">
             <div class="panel panel-default fullheight">
-                <div class="panel-body">
-                    <ul>
-                        <li>
-                            <a data-ui-sref="app.projects">Projects</a>
-                        </li>
-                        <li>
-                            <a data-ui-sref="app.clients">Clients</a>
-                        </li>
-                        <li>
-                            <a data-ui-sref="app.itemPresets">Item Presets</a>
-                        </li>
-                    </ul>
-                    <h1>Schnellzugriffe hierher</h1>
-                </div>
+
+                    <a class="fastbutton" data-ui-sref="app.clientCreation">
+                        <i class="md-person-add"></i>
+                        <span>{{'clients.newClient'| translate}}</span>
+                    </a>
+
+                    <a class="fastbutton" data-ui-sref="app.clients">
+                        <i class="md-group"></i>
+                        <span>{{'clients.clients' | translate}}</span>
+                    </a>
+
+                    <a class="fastbutton" data-ng-click="dashboard.newProject()" href="/clients/">
+                        <i class="md-add"></i>
+                        <span>{{'projects.new' | translate}}</span>
+                    </a>
+
+                    <a class="fastbutton" data-ui-sref="app.projectArchive">
+                        <i class="md-folder"></i>
+                        <span>{{'projects.actions.archive' | translate}}</span>
+                    </a>
+
+                    <a class="fastbutton" data-ui-sref="app.itemPresets">
+                        <i class="md-extension"></i>
+                        <span>{{'itemPresets.itemPresets' | translate}}</span>
+                    </a>
+
             </div>
 
         </div>
-        <div class="col-sm-6 col-md-8 fullheight">
-            <div class="detail-view fullheight">
-                <div class="btn-toolbar">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3>!!test</h3>
+        <div class="col-beneath-fixedwith-130 fullheight">
+
+            <div class="row fullheight">
+                <div class="col-sm-6 col-md-8 fullheight">
+                    <div class="detail-view fullheight">
+                        <div class="btn-toolbar">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3>!!test</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
+                                        <!-- Some Buttons here? -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
-                                <!-- Some Buttons here? -->
+                        <div class="detail-inner scroll-y">
+                            <div class="row">
+                                <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
+                                        <i class="tile-icon tile-icon-{{project.state}}"></i>
+                                        <h4 class="tile-heading">{{project.name}}</h4>
+                                        <p class="tile-text">{{project.description}}</p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <div class="detail-inner scroll-y">
-                    <div class="row">
-                        <div data-ng-repeat="project in dashboard.currentProjects" class="col-md-4 col-sm-6 col-xs-12">
-                            <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
-                                <i class="tile-icon tile-icon-{{project.state}}"></i>
-                                <h4 class="tile-heading">{{project.name}}</h4>
-                                <p class="tile-text">{{project.description}}</p>
-                            </a>
+                <div class="col-sm-6 col-md-4 fullheight">
+                    <div class="panel panel-default halfheight scroll-y">
+                        <div class="panel-body">
+                            <h1>Stream o.ä</h1>
+                        </div>
+                    </div>
+                    <div class="panel panel-default halfheight scroll-y">
+                        <div class="panel-body">
+                            <h1>Statistiken</h1>
+                            <p>anzahl offene Projekte, zu erwartendes Einkommen, etc</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </div>
-        <div class="col-sm-3 col-md-2 fullheight">
-            <div class="panel panel-default halfheight scroll-y">
-                <div class="panel-body">
-                    <h1>Stream o.ä</h1>
-                </div>
-            </div>
-            <div class="panel panel-default halfheight scroll-y">
-                <div class="panel-body">
-                    <h1>Statistiken</h1>
-                    <p>anzahl offene Projekte, zu erwartendes Einkommen, etc</p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
