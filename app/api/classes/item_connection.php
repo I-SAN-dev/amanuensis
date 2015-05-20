@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaProject.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaItem.php');
 
@@ -105,9 +106,55 @@ class item_connection {
 
     }
 
+    /**
+     * Gets a list of all items which belong to the project of the given thing,
+     * which are not yet connected to a thing of the same class as the given one
+     * @param $for
+     * @param $forid
+     */
     private static function getAvailableItems($for, $forid)
     {
+        if(!in_array($for, array('offer','contract','todo','acceptance','invoice')))
+        {
+            $error = new amaException(NULL, 400, "Invalid parameter 'for'");
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
 
+        /* get the project id */
+        $dbal = DBAL::getInstance();
+        /* Get the thing */
+        $thing = $dbal->simpleSelect(
+            $for.'s',
+            array('project'),
+            array('id', $forid),
+            1
+        );
+
+        $project = new AmaProject($thing['project']);
+        $client = $project->getClient();
+
+        /* Here comes the sick sql shit */
+
+        $query = '
+            SELECT DISTINCT items.id, items.name, items.fixedrate, items.hourlyrates, items.hourlyrate, items.dailyrates, items.dailyrate, items.userate, items.todo_done, items.global_order
+            FROM items
+                  LEFT JOIN offers ON (items.offer = offers.id)
+                  LEFT JOIN contracts ON (items.contract = contracts.id)
+                  LEFT JOIN todos ON (items.todo = todos.id)
+                  LEFT JOIN acceptances ON (items.acceptance = acceptances.id)
+                  LEFT JOIN invoices ON (items.invoice = invoices.id)
+            WHERE (offers.project = :projectid OR contracts.project = :projectid OR todos.project = :projectid OR acceptances.project = :projectid OR invoices.project = :projectid)
+            AND items.'.$for.' IS NULL ORDER BY items.global_order ASC
+        ';
+
+        $q = $dbal->prepare($query);
+        $q->bindParam(':projectid', $project->id);
+        $q->execute();
+
+        $result = $q->fetchAll(PDO::FETCH_ASSOC);
+
+        json_response($result);
     }
 
 

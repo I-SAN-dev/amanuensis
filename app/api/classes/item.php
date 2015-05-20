@@ -18,6 +18,7 @@ require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaItem.php');
+require_once('classes/project/amaProject.php');
 
 class item {
 
@@ -106,8 +107,13 @@ class item {
                 'global_order'
             )
         );
+        /*
+         * Actually, this API is never used,
+         * so we will not postprocess items, because the price calculation will be possibly incorrect without a client,
+         * because we can not get the client hourlyrate/dailyrate
+         */
         /* postprocess the items */
-        foreach($result as &$entry)
+        /*foreach($result as &$entry)
         {
             try{
                 $e = new AmaItem(NULL, $entry);
@@ -115,9 +121,9 @@ class item {
             }
             catch(Exception $e)
             {
-                /* Just ignore them, better raw data than nothing here */
+                /* Just ignore them, better raw data than nothing here */ /*
             }
-        }
+        }*/
         json_response($result);
     }
 
@@ -153,7 +159,7 @@ class item {
             1
         );
         try {
-            $item = new AmaItem(NULL, $result);
+            $item = new AmaItem(NULL, $result); // the client will be fetched by the AmaItem itself.
             $result = $item->get();
         }
         catch(Exception $e)
