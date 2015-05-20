@@ -7,6 +7,14 @@ app.filter('amaStates', function () {
             '3': 'offers.states.clientAccepted',
             '-1': 'offers.states.clientDeclined'
         },
+        invoice: {
+            '0': 'invoices.states.created',
+            '1': 'invoices.states.pdfGenerated',
+            '2': 'invoices.states.pdfSent',
+            '3': 'invoices.states.paid',
+            '4': 'invoices.states.overdueNoReminder',
+            '5': 'invoices.states.overdueReminderCreated'
+        },
         error: {
             "400": "errors.codes.400.message",
             "401": "errors.codes.401.message",

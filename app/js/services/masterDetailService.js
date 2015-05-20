@@ -29,15 +29,15 @@ app.factory('MasterDetailService', [
             editMode: false,
             notifyMaster: function() {
                 var fnName = arguments[0];
-                master[fnName].apply(null,processParams(arguments));
+                return master[fnName].apply(null,processParams(arguments));
             },
             notifyDetail: function () {
                 var fnName = arguments[0];
-                detail[fnName].apply(null,processParams(arguments));
+                return detail[fnName].apply(null,processParams(arguments));
             },
             notifyEditor: function () {
                 var fnName = arguments[0];
-                editor[fnName].apply(null,processParams(arguments));
+                return editor[fnName].apply(null,processParams(arguments));
             }
         }
     }

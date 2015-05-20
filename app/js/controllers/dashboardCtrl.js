@@ -1,7 +1,9 @@
 app.controller('DashboardCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
-    function (ApiAbstractionLayer, LocalStorage) {
+    'PanelService',
+    '$state',
+    function (ApiAbstractionLayer, LocalStorage, PanelService, $state) {
         var self = this;
         this.currentProjects = LocalStorage.getData('currentProjects');
         var apiObject = {
@@ -12,6 +14,12 @@ app.controller('DashboardCtrl', [
         };
         ApiAbstractionLayer('GET', apiObject).then(function (data) {
             self.currentProjects = data;
+            LocalStorage.setData('currentProjects', data);
         });
+
+        this.newProject = function () {
+            PanelService.setPanel('clients', 3);
+            $state.go('app.clients');
+        }
     }
 ]);

@@ -8,10 +8,13 @@ app.controller('ClientDetailCtrl',
         '$stateParams',
         'DeleteService',
         'MasterDetailService',
+        'PanelService',
         'btfModal',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, btfModal) {
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, PanelService, btfModal) {
 
             var self = this;
+
+            this.showPage = PanelService.getPanel('clients');
 
             MasterDetailService.setDetail(this);
 

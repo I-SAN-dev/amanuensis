@@ -64,6 +64,7 @@ class Scripts
         "js/services/mailService.js",
         "js/services/refnumberService.js",
         "js/services/itemContainerService.js",
+        "js/services/panelService.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",
@@ -92,6 +93,7 @@ class Scripts
         "js/controllers/contractCreationCtrl.js",
         "js/controllers/acceptanceCreationCtrl.js",
         "js/controllers/invoiceCreationCtrl.js",
+        "js/controllers/invoiceDetailCtrl.js",
         "js/controllers/itemPresetsCtrl.js",
         "js/controllers/itemPresetDetailCtrl.js",
         "js/controllers/itemPresetCreationCtrl.js",
