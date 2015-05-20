@@ -1,4 +1,4 @@
-<div class="dashboard fullheight">
+<div data-ng-controller="DashboardCtrl as dashboard" class="dashboard fullheight">
     <div class="row fullheight">
         <div class="col-sm-3 col-md-2 fullheight">
             <div class="panel panel-default fullheight">
@@ -23,6 +23,7 @@
             <div class="panel panel-default fullheight scroll-y">
                 <div class="panel-body">
                     <h1>gekachelte aktuelle Projekte hier</h1>
+                    <p>{{dashboard.currentProjects}}</p>
                 </div>
             </div>
         </div>

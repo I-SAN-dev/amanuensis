@@ -76,6 +76,7 @@ class Scripts
         //Controllers
         //"js/controllers/rootCtrl.js",
         "js/controllers/authCtrl.js",
+        "js/controllers/dashboardCtrl.js",
         "js/controllers/clientsCtrl.js",
         "js/controllers/clientDetailCtrl.js",
         "js/controllers/clientCategoriesCtrl.js",
