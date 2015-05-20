@@ -20,12 +20,32 @@
 
         </div>
         <div class="col-sm-6 col-md-8 fullheight">
-            <div class="panel panel-default fullheight scroll-y">
-                <div class="panel-body">
-                    <h1>gekachelte aktuelle Projekte hier</h1>
-                    <p>{{dashboard.currentProjects}}</p>
+            <div class="detail-view fullheight">
+                <div class="btn-toolbar">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>!!test</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
+                                <!-- Some Buttons here? -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-inner scroll-y">
+                    <div class="row">
+                        <div data-ng-repeat="project in dashboard.currentProjects" class="col-md-4 col-sm-6 col-xs-12">
+                            <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
+                                <i class="tile-icon tile-icon-{{project.state}}"></i>
+                                <h4 class="tile-heading">{{project.name}}</h4>
+                                <p class="tile-text">{{project.description}}</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="col-sm-3 col-md-2 fullheight">
             <div class="panel panel-default halfheight scroll-y">
