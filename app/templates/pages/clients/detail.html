@@ -73,7 +73,8 @@
                                           data-ipe-select-options="client.genders"
                                           data-ipe-select-option-value="id"
                                           data-ipe-select-option-name="name"
-                                          data-ipe-name="'clients.gender'|translate"></span><br/>
+                                          data-ipe-name="'clients.gender'|translate"
+                                          data-output-value="client.client.contact_gender | gender"></span><br/>
                                     <span data-in-place-edit
                                           data-ipe-key="'contact_firstname'"
                                           data-ipe-value="client.client.contact_firstname"
@@ -148,8 +149,9 @@
                                                   data-ipe-value="client.client.hourlyrate"
                                                   data-api-name="'client'"
                                                   data-api-id="client.client.id"
-                                                  data-ipe-type="price"
-                                                  data-ipe-name="'clients.defaultHourlyrate'|translate"></span>
+                                                  data-ipe-type="'price'"
+                                                  data-ipe-name="'clients.defaultHourlyrate'|translate"
+                                                  data-output-value="client.client.hourlyrate|price"></span>
                                         </div>
                                         <div class="col-xs-4">
                                             {{'items.dailyRate' | translate}}:
@@ -160,8 +162,9 @@
                                                   data-ipe-value="client.client.dailyrate"
                                                   data-api-name="'client'"
                                                   data-api-id="client.client.id"
-                                                  data-ipe-type="price"
-                                                  data-ipe-name="'clients.defaultDailyrate'|translate"></span>
+                                                  data-ipe-type="'price'"
+                                                  data-ipe-name="'clients.defaultDailyrate'|translate"
+                                                  data-output-value="client.client.dailyrate|price"></span>
                                         </div>
                                     </div>
                                 </div>

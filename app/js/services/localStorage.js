@@ -74,11 +74,13 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     };
 
     var encrypt = function (actual, key) {
-        var result = "";
-        for (var i = 0; i < actual.length; i++) {
-            result += String.fromCharCode(actual.charCodeAt(i) + key.charCodeAt(i % key.length));
+        if(actual && key) {
+            var result = "";
+            for (var i = 0; i < actual.length; i++) {
+                result += String.fromCharCode(actual.charCodeAt(i) + key.charCodeAt(i % key.length));
+            }
+            return result;
         }
-        return result;
     };
 
     var decrypt = function (encrypted, key) {
