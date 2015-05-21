@@ -19,11 +19,14 @@ class AmaItem {
     /**
      * @param mixed $id - the id of the item to get, if NULL, an $entry must be given
      * @param mixed $entry - optional, if no $id is passed, an entry can be passed directly
+     * @param mixed $client - a client object, needed if we want to calc some prizes
      * @param boolean $ispreset - if it is only an item preset
      * @throws Exception
      */
-    public function __construct($id = NULL, $entry = NULL, $ispreset = false)
+    public function __construct($id = NULL, $entry = NULL, $client = NULL, $ispreset = false)
     {
+        $dbal = DBAL::getInstance();
+
         if(!$ispreset)
         {
             /* check $entry validity */
@@ -45,9 +48,8 @@ class AmaItem {
                 $this->entry = $entry;
             }
             /* If $entry is crap, check if we can get nice data from the db */
-            else if (isset($id))
-            {
-                $dbal = DBAL::getInstance();
+            else if (isset($id))            {
+
                 $this->entry = $dbal->simpleSelect(
                     'items',
                     array(
@@ -83,7 +85,36 @@ class AmaItem {
                 throw new Exception('No usable Data given', 500);
             }
 
-            $this->entry = $this->calcPrizes($this->entry);
+            /* fetch client data if necessary */
+            if(!isset($client))
+            {
+                /* Here comes the sickest SQL shit i will ever do... */
+                $query = '
+                SELECT DISTINCT customers.hourlyrate, customers.dailyrate
+                FROM customers
+                      LEFT JOIN projects ON (projects.client = customers.id)
+                      LEFT JOIN offers ON (offers.project = projects.id)
+                      LEFT JOIN contracts ON (contracts.project = projects.id)
+                      LEFT JOIN todos ON (todos.project = projects.id)
+                      LEFT JOIN acceptances ON (acceptances.project = projects.id)
+                      LEFT JOIN invoices ON (invoices.project = projects.id)
+                      LEFT JOIN items ON (
+                              (items.offer = offers.id) OR
+                              (items.contract = contracts.id) OR
+                              (items.todo = todos.id) OR
+                              (items.acceptance = acceptances.id) OR
+                              (items.invoice = invoices.id)
+                      )
+                      WHERE (items.id = :id)
+                      LIMIT 1
+                ';
+                $q = $dbal->prepare($query);
+                $q->bindParam(':id', $this->entry['id']);
+                $q->execute();
+                $client = $q->fetch(PDO::FETCH_ASSOC);
+            }
+
+            $this->entry = $this->calcPrizes($this->entry, $client);
             $this->entry['used_time'] = $this->calcTimeFor($this->entry['id']);
         }
         else
@@ -137,9 +168,10 @@ class AmaItem {
 
     /**
      * @param $entry - the array representing the item entry
+     * @param $client - an array with possible hourlyrate and dailyrate to be used if set
      * @return array updated $entry
      */
-    private function calcPrizes($entry)
+    private function calcPrizes($entry, $client = NULL)
     {
         $conf = Config::getInstance();
 

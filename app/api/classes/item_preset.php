@@ -98,7 +98,7 @@ class item_preset {
         foreach($result as &$entry)
         {
             try{
-                $e = new AmaItem(NULL, $entry, true);
+                $e = new AmaItem(NULL, $entry, NULL, true);
                 $entry = $e->get();
             }
             catch(Exception $e)
@@ -133,7 +133,7 @@ class item_preset {
             1
         );
         try {
-            $item = new AmaItem(NULL, $result, true);
+            $item = new AmaItem(NULL, $result, NULL, true);
             $result = $item->get();
         }
         catch(Exception $e)
