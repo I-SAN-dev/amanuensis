@@ -29,15 +29,21 @@ app.factory('MasterDetailService', [
             editMode: false,
             notifyMaster: function() {
                 var fnName = arguments[0];
-                return master[fnName].apply(null,processParams(arguments));
+                if(typeof master[fnName] === 'function') {
+                    return master[fnName].apply(null, processParams(arguments));
+                }
             },
             notifyDetail: function () {
                 var fnName = arguments[0];
-                return detail[fnName].apply(null,processParams(arguments));
+                if(typeof detail[fnName] === 'function') {
+                    return detail[fnName].apply(null,processParams(arguments));
+                }
             },
             notifyEditor: function () {
                 var fnName = arguments[0];
-                return editor[fnName].apply(null,processParams(arguments));
+                if(typeof editor[fnName] === 'function') {
+                    return editor[fnName].apply(null, processParams(arguments));
+                }
             }
         }
     }

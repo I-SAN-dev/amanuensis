@@ -1,8 +1,10 @@
 app.directive('inPlaceEdit',
-    ['ApiAbstractionLayer',
+    [
+        'ApiAbstractionLayer',
         'LocalStorage',
         'DeleteService',
-        function (ApiAbstractionLayer, LocalStorage, DeleteService) {
+        '$filter',
+        function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter) {
             return {
                 restrict: 'A',
                 scope: {
@@ -17,15 +19,13 @@ app.directive('inPlaceEdit',
                     apiParams: '=',
                     apiId: '=',
                     deletable: '=ipeDeletable',
-                    deletableItem: '='
+                    deletableItem: '=',
+                    outputVal: '=outputValue'
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
 
-                    console.log($scope.options);
-
                     var self = this;
-
 
                     this.editMode = false;
                     var backup = null;
@@ -70,6 +70,7 @@ app.directive('inPlaceEdit',
                     };
 
                     this.save = function (newValue) {
+
                         console.log(newValue);
                         if(newValue){
                             self.val = newValue;
@@ -91,6 +92,7 @@ app.directive('inPlaceEdit',
                                 });
                             } else{
                                 self.val = '';
+                                $scope.outputVal = '';
                                 post();
                             }
                         }
