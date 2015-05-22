@@ -3,7 +3,7 @@
     <div class="multiselect">
         <div class="select form-control chosen dropdown-toggle" data-ng-click="showDropdown = true" data-ng-class="{focussed:showDropdown}">
             <span class="placeholder" data-ng-if="!chosen">{{label|translate}}</span>
-            <span class="multiselect-chosen-item" data-ng-repeat="chosen in chosen">{{chosen[optionName]|translate}} <i data-ng-click="toggleMultiSelected(chosen,$event)" class="md md-clear"></i></span>
+            <div class="chip multiselect-chosen-item" data-ng-repeat="chosen in chosen">{{chosen[optionName]|translate}} <button class="btn btn-link btn-icon-round"><i data-ng-click="toggleMultiSelected(chosen,$event)" class="md md-clear"></i></button></div>
         </div>
         <span class="bar"></span>
         </div>
