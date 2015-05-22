@@ -1,10 +1,11 @@
 app.controller('ItemDetailCtrl', [
     'ApiAbstractionLayer',
+    'LocalStorage',
     'MasterDetailService',
     'DeleteService',
     '$scope',
     '$timeout',
-    function (ApiAbstractionLayer, MasterDetailService, DeleteService, $scope,$timeout) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope,$timeout) {
         MasterDetailService.setDetail(this);
         var self = this;
         this.detailChanged = function (item, keyboard) {
@@ -12,11 +13,22 @@ app.controller('ItemDetailCtrl', [
             if(keyboard) {
                 $scope.$apply();
             }
-            self.time = [];
+
+            self.time = LocalStorage.getData('item/'+self.item.id+'/time') || [];
             ApiAbstractionLayer('GET', {name:'time',params:{forid: self.item.id}}).then(function (data) {
                 self.time = data;
+                LocalStorage.setData('item/'+self.item.id+'/time', data);
+            });
+
+            self.connections = LocalStorage.getData('item/'+self.item.id+'/connections')||[];
+            self.isConnected = getIsConnected();
+            ApiAbstractionLayer('GET',{name:'item_connection', params:{id:self.item.id}}).then(function (data) {
+                self.connections = data;
+                self.isConnected = getIsConnected();
+                LocalStorage.setData('item/'+self.item.id+'/connections',data);
             });
         };
+
         this.deleteItem = function () {
             MasterDetailService.notifyMaster('deleteItem', self.item.id);
         };
@@ -64,6 +76,23 @@ app.controller('ItemDetailCtrl', [
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
                 self.time = data;
             });
+        };
+
+        var getIsConnected = function () {
+            var count = 0;
+            if(self.connections.offer.id)
+                count++;
+            if(self.connections.contract.id)
+                count++;
+            if(self.connections.todo.id)
+                count++;
+            if(self.connections.acceptance.id)
+                count++;
+            if(self.connections.invoice.id)
+                count++;
+
+            return count>1;
+
         }
     }
 ]);

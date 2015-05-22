@@ -308,7 +308,9 @@
     "pricing": "Bepreisung",
     "connections": "Zuordnungen",
     "create": "Neuer Posten",
-    "newTime": "Zeit erfassen"
+    "newTime": "Zeit erfassen",
+    "alsoIn": "Dieser Posten befindet sich auch in:",
+    "alsoInNone": "Dieser Posten ist keinen weiteren Dokumenten zugeordnet."
   },
   "offers": {
     "state": "Angebotsstatus",

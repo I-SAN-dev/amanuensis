@@ -125,6 +125,27 @@
             <div class="slideanim-item fullheight scroll-y">
 
                 <button class="btn btn-link" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i></button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>{{'items.alsoIn'|translate}}</h3>
+                        <ul data-ng-if="item.isConnected">
+                            <li data-ng-if="item.connection.contract">
+                                <a data-ui-sref="app.contracts({id:item.connections.contract.id})">{{item.connections.contract.name}}</a>
+                            </li>
+                            <li data-ng-if="item.connection.todo">
+                                <a data-ui-sref="app.todos({id:item.connections.todo.id})">{{item.connections.todo.name}}</a>
+                            </li>
+                            <li data-ng-if="item.connection.acceptance">
+                                <a data-ui-sref="app.contracts({id:item.connections.acceptance.id})">{{item.connections.acceptance.name}}</a>
+                            </li>
+                            <li data-ng-if="item.connection.invoice">
+                                <a data-ui-sref="app.invoices({id:item.connections.invoice.id})">{{item.connections.invoice.name}}</a>
+                            </li>
+                        </ul>
+                        <p data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
+                    </div>
+
+                </div>
 
             </div>
 
