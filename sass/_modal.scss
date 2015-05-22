@@ -1,0 +1,39 @@
+.modal
+{
+  background-color: rgba(#fff, 0.7);
+
+  .modal-dialog
+  {
+    margin-top: 30px + $navbar-height;
+
+    .modal-content
+    {
+      @include card(5);
+      border-radius: 2px;
+
+      .modal-header
+      {
+        h4, h3
+        {
+          margin: 0;
+          padding: 0;
+          font-size: $font-size-h3;
+        }
+      }
+
+
+
+    }
+  }
+
+  .list-group
+  {
+    margin-bottom: 0;
+    @include card(0);
+  }
+}
+
+.close
+{
+  transition: 0.3s opacity;
+}

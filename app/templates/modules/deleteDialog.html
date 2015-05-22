@@ -1,16 +1,16 @@
-<div class="modal show">
+<div class="modal show ng-trans ng-trans-fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-ng-click="delete.cancel()"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-ng-click="delete.cancel()"><i class="md md-close"></i></button>
                 <h4>{{'delete.warning'|translate}}</h4>
             </div>
             <div class="modal-body">
                 <p>{{'delete.message'|translate}}</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" data-ng-click="delete.accept()">OK</button>
-                <button class="btn btn-info" data-ng-click="delete.cancel()">Cancel</button>
+                <button class="btn btn-danger" data-ng-click="delete.accept()">{{'global.ok'|translate}}</button>
+                <button class="btn btn-info" data-ng-click="delete.cancel()">{{'global.cancel'|translate}}</button>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
-<div class="modal show">
+<div class="modal show ng-trans ng-trans-fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-ng-click="error.close()"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-ng-click="error.close()"><i class="md md-close"></i></button>
                 <h4 class="modal-title">{{error.code|amaStates:'error'|translate}}</h4>
             </div>
             <div class="modal-body">
@@ -11,7 +11,7 @@
                 <p>{{error.message}}</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-info" type="button" data-ng-click="error.close()">OK</button>
+                <button class="btn btn-info" type="button" data-ng-click="error.close()">{{'global.ok'|tranlsate}}</button>
             </div>
         </div>
     </div>
