@@ -20,7 +20,15 @@ app.controller('ItemDetailCtrl', [
                 LocalStorage.setData('item/'+self.item.id+'/time', data);
             });
 
-            self.connections = LocalStorage.getData('item/'+self.item.id+'/connections')||[];
+            self.connections = LocalStorage.getData('item/'+self.item.id+'/connections')
+            ||
+            {
+                offer:{},
+                contract: {},
+                todo: {},
+                acceptance: {},
+                invoice: {}
+            };
             self.isConnected = getIsConnected();
             ApiAbstractionLayer('GET',{name:'item_connection', params:{id:self.item.id}}).then(function (data) {
                 self.connections = data;
@@ -91,6 +99,7 @@ app.controller('ItemDetailCtrl', [
             if(self.connections.invoice.id)
                 count++;
 
+            console.log(count);
             return count>1;
 
         }
