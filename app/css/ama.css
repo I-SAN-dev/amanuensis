@@ -10597,7 +10597,7 @@ html, body {
   max-height: 100%; }
 
 .fixedheight-250 {
-  max-height: 250px; }
+  height: 250px; }
 
 .halfheight {
   height: 50%; }
@@ -11518,5 +11518,23 @@ strong.total {
     padding: 20px; }
   .slideanim2.panel2 {
     margin-left: -100%; }
+
+.modal {
+  background-color: rgba(255, 255, 255, 0.7); }
+  .modal .modal-dialog {
+    margin-top: 94px; }
+    .modal .modal-dialog .modal-content {
+      box-shadow: 0 7.5px 12px rgba(0, 0, 0, 0.11), 0 9.5px 38px rgba(0, 0, 0, 0.15);
+      border-radius: 2px; }
+      .modal .modal-dialog .modal-content .modal-header h4, .modal .modal-dialog .modal-content .modal-header h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 16px; }
+  .modal .list-group {
+    margin-bottom: 0;
+    box-shadow: 0px 0px 0px 0px transparent; }
+
+.close {
+  transition: 0.3s opacity; }
 
 /*# sourceMappingURL=ama.css.map */
