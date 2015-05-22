@@ -2,7 +2,7 @@
     <div class="btn-toolbar">
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
 
                 <h3 data-in-place-edit
                     data-ipe-key="'name'"
@@ -12,7 +12,7 @@
                     data-ipe-name="'items.name'|translate"></h3>
 
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-7">
 
                 <div class="btn-group btn-group-sm pull-right" data-ng-init="item.showPage = 1">
                     <button class="btn btn-link" data-ng-click="item.showPage = 1" data-ng-class="{active: item.showPage==1}"><i class="md md-lg md-comment"></i> {{'global.description' | translate}}</button>
@@ -91,6 +91,32 @@
                                                                    data-ipe-type="'price'"
                                                                    data-api-id="item.item.id"
                                                                    data-ipe-name="'items.fixedRate'|translate"></span>
+                    </div>
+
+                    <div class="detail-block">
+                        <div class="row striped" data-ng-repeat="time in item.time">
+                            <div class="col-sm-4">
+                                {{time.username}}
+                            </div>
+                            <div class="col-sm-3">
+                                {{time.start|amaDate:'dd.MM.yyyy HH:mm'}}
+                            </div>
+                            <div class="col-sm-3">
+                                {{time.end|amaDate:'dd.MM.yyyy HH:mm'}}
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-link btn-icon-round btn-warning" data-ng-if="!time.end" data-ng-click="item.stopTime(time.id)"><i class="md md-stop"></i></button>
+                                <button class="btn btn-link btn-icon-round btn-danger" data-ng-click="item.deleteTime(time.id)"><i class="md md-delete"></i></button>
+                            </div>
+                        </div>
+                        <div class="row striped">
+                            <div class="col-sm-4">
+                                {{'items.newTime'|translate}}
+                            </div>
+                            <div class="col-sm-2 col-sm-offset-6">
+                                <button class="btn btn-link btn-icon-round btn-success" data-ng-click="item.startTime()"><i class="md md-play-arrow"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
