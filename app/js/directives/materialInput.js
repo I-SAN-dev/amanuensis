@@ -2,8 +2,8 @@ app.directive('materialInput', [
     '$http',
     '$templateCache',
     '$compile',
-    '$timeout',
-    function ($http, $templateCache, $compile, $timeout) {
+    '$rootScope',
+    function ($http, $templateCache, $compile, $rootScope) {
         var inputTypes = {
             text: true,
             textarea: true,
@@ -28,7 +28,7 @@ app.directive('materialInput', [
                 searchable: '@inputSelectSearchable',
                 inputBlur:'=ngBlur'
             },
-            controller: function ($scope, $log) {
+            controller: function ($scope) {
                 $scope.currencySymbol = '€';
 
 
@@ -46,7 +46,7 @@ app.directive('materialInput', [
                         $scope.selected = option[$scope.optionName];
 
                         if($scope.buttons){
-                            $scope.hideDropdown(true, true);
+                            $scope.hideDropdown(null,true, true);
                         } else
                             $scope.hideDropdown();
                     };
@@ -65,12 +65,16 @@ app.directive('materialInput', [
                     } else {
                         $scope.model = [];
                     }
-                    $scope.toggleMultiSelected = function (option) {
+                    $scope.toggleMultiSelected = function (option, event) {
                         if (option.selected) {
                             var index = $scope.model.indexOf(option[$scope.optionValue]);
                             $scope.model.splice(index, 1);
                             $scope.chosen.splice(index, 1);
                             option.selected = false;
+                            if(event){
+                                event.stopPropagation();
+                            }
+
                         } else {
                             option.selected = true;
                             $scope.model.push(option[$scope.optionValue]);
@@ -197,7 +201,10 @@ app.directive('materialInput', [
 
 
                     scope.showDropdown = false;
+
                     scope.hideDropdown = function (blur, save) {
+
+
                         if(save && scope.buttons)
                             scope.buttons.save.save(scope.model);
 
@@ -207,6 +214,7 @@ app.directive('materialInput', [
                         else
                             scope.showDropdown = false;
                     };
+
                     scope.openDropdown = function () {
                         $(element[0]).focus();
                         scope.showDropdown = true;
@@ -215,7 +223,22 @@ app.directive('materialInput', [
                     if(attr.ipe && type == 'select'){
                         scope.openDropdown();
                     }
+                    if(type=="selectMultiple"){
+
+                        var toggle = $(element).find('.multiselect-container');
+                        scope.$on("documentClicked", function(event,target) {
+                            console.log('click');
+                            if (!$(target[0]).is(toggle) && !$(target[0]).parents(toggle.selector).length > 0) {
+                                scope.$apply(function () {
+                                    scope.showDropdown = false;
+                                    console.log('click');
+                                });
+                            }
+                        });
+                    }
                 });
+
+
 
 
 
