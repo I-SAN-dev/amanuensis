@@ -4,6 +4,7 @@ app.factory('MailService', [
     function (ApiAbstractionLayer, constants) {
         return {
             showPreview: function(type, id){
+                var preview = window.open('','','height=500,width=900');
                 var apiObject = {
                     name: 'mail',
                     data: {
@@ -12,7 +13,7 @@ app.factory('MailService', [
                     }
                 };
                 ApiAbstractionLayer('POST',apiObject).then(function (data) {
-                    window.open(constants.BASEURL+'/api?action=mail&path='+data.previewpath,'','height=500,width=900');
+                    preview.location.href = constants.BASEURL+'/api?action=mail&path='+data.previewpath;
                 });
             },
             send: function(type, id) {
