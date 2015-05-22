@@ -73,6 +73,10 @@ app.run(function ($rootScope, $state, AuthService, $q) {
 
     };
 
+    angular.element(document).on("click", function(e) {
+        $rootScope.$broadcast("documentClicked", angular.element(e.target));
+    });
+
 });
 /**
  * The 'sites' constant.
