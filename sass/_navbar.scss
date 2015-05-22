@@ -3,7 +3,8 @@ $navbar-bottomline-height: 2px;
 .navbar
 {
   &.navbar-inverse {
-    color: #fff;
+    background-color: #fff;
+    color: $text-color;
   }
 
   h1
@@ -14,16 +15,21 @@ $navbar-bottomline-height: 2px;
     line-height: $navbar-height;
   }
 
+
   .applogo
   {
-    padding: 12px 0 12px 5px;
+    padding: 12px;
     display: block;
     height: $navbar-height;
+    background-color: $brand-primary;
+    float: left;
+    position: relative;
+    left: -15px;
 
     img
     {
       width: 46px;
-      height: auto;
+      height: 40px;
     }
   }
 
