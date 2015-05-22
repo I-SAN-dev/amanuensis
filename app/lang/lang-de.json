@@ -121,7 +121,7 @@
     "itemPreset":"Baustein",
     "itemPresets":"Bausteine",
     "actions":{
-      "new":"Neues Preset erstellen"
+      "new":"Neuer Baustein"
     }
   },
 
@@ -177,6 +177,10 @@
     "notavailable":"amanu ist für Ihre Platform leider nicht als App verfügbar. Dies tut uns leid."
   },
 
+  "settings":
+  {
+    "settings":"Einstellungen"
+  },
   "config":
   {
     "basicSettings":"Basiseinstellungen",

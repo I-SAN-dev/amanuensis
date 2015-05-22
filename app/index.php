@@ -70,7 +70,6 @@ ob_start();
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid" data-ama-module="'topBar'"></div>
-        <div class="container-fluid amanu-actionbar" data-ama-module="'actionBar'"></div>
     </div>
 
     <div id="mainCanvas" class="container-fluid">

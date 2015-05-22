@@ -3,19 +3,9 @@ app.constant('modules', {
         content: {
             title: 'Amanu'
         },
+        actions: {},
         'app.clients': {
-            title: 'clients.clients'
-        },
-        'app.projects': {
-            title: 'projects.projects'
-        }
-    },
-    actionBar: {
-        content: {
-            actions: {},
-            controller:''
-        },
-        'app.clients': {
+            title: 'clients.clients',
             actions: [
                 {
                     name: 'clients.actions.new',
@@ -30,6 +20,7 @@ app.constant('modules', {
             ]
         },
         'app.projects': {
+            title: 'projects.projects',
             actions: [
                 {
                     name: 'projects.actions.archive',
@@ -38,7 +29,23 @@ app.constant('modules', {
                 }
             ]
         },
+        'app.projectArchive': {
+            title: 'projects.actions.archive'
+        },
+        'app.clientCreation': {
+            title: 'clients.addClient'
+        },
+        'app.projectCreation': {
+            title: 'projects.new'
+        },
+        'app.itemPresetCreation': {
+            title: 'itemPresets.actions.new'
+        },
+        'app.settings': {
+            title: 'settings.settings'
+        },
         'app.itemPresets': {
+            title: 'itemPresets.itemPresets',
             actions: [
                 {
                     name: 'itemPresets.actions.new',

@@ -5,16 +5,8 @@ $navbar-bottomline-height: 2px;
   &.navbar-inverse {
     background-color: #fff;
     color: $text-color;
+    @include card(1);
   }
-
-  h1
-  {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    line-height: $navbar-height;
-  }
-
 
   .applogo
   {
@@ -33,21 +25,34 @@ $navbar-bottomline-height: 2px;
     }
   }
 
-  .amanu-actionbar{
-    background-color: #ffffff;
-    height: $actionbar-height;
+  .apptitle
+  {
+    h1
+    {
+      font-size: $font-size-large;
+      line-height: $navbar-height / 2;
+      height: $navbar-height / 2;
+      padding: 0;
+      margin: 0;
+    }
 
     #mainNav,
     #actionMenu
     {
-      > div
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: $navbar-height / 2;
+
+      li
       {
-        display: inline;
+        display: inline-block;
       }
+
       a, button
       {
-        padding: $navbar-bottomline-height 22px 0 22px;
-        line-height: $actionbar-height - 2*$navbar-bottomline-height;
+        padding: $navbar-bottomline-height  15px 0 15px;
+        line-height: $navbar-height/2 - 2*$navbar-bottomline-height;
         border-right: none !important;
         border-left: none !important;
         border-top: none !important;
@@ -66,10 +71,16 @@ $navbar-bottomline-height: 2px;
           background-color: $gray-lighter;
           border-bottom-color: $gray-lighter;
         }
+
+        i
+        {
+          position: relative;
+          top: -1px;
+        }
       }
       button
       {
-        line-height: $actionbar-height - $navbar-bottomline-height; /* warum? ja ähm... aus... Gründen... */
+        padding-bottom: 2*$navbar-bottomline-height;
       }
 
       .active a,
@@ -81,7 +92,27 @@ $navbar-bottomline-height: 2px;
         color: $link-color;
       }
     }
+    #mainNav
+    {
+      margin-left: -15px;
+    }
+  }
+  #topRightNav.navbar-nav
+  {
+    li
+    {
+      a
+      {
+        transition: 0.3s background-color;
+      }
+      a:hover,
+      a:active,
+      a:focus
+      {
+        outline: none;
+        background-color: $gray-lighter !important;
+      }
+    }
 
   }
 }
-

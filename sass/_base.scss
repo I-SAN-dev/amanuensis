@@ -18,9 +18,9 @@ html, body
 
 #mainCanvas
 {
-  height: calc(100% - #{$navbar-height + $actionbar-height});
-  min-height: calc(100% - #{$navbar-height + $actionbar-height});
-  margin-top: $navbar-height +$actionbar-height;
+  height: calc(100% - #{$navbar-height});
+  min-height: calc(100% - #{$navbar-height});
+  margin-top: $navbar-height;
   overflow: hidden;
 }
 
@@ -106,7 +106,7 @@ html, body
 .detail-view,
 .panel-default
 {
-  @include card(1);
+  @include card(3);
 }
 .list-group
 {

@@ -10422,21 +10422,22 @@ button.close {
 /* Animation mixins */
 /* Animation mixins end */
 .colorbar-container {
-  width: 100%;
-  margin-left: -15px;
+  left: 70px;
+  right: 0;
   height: 4px;
   position: absolute;
   z-index: 9999;
-  top: calc(64px - 4px);
-  background-color: #BDBDBD; }
+  top: 0;
+  background-color: transparent;
+  pointer-events: none;
+  overflow: hidden; }
 
 .colorbar {
-  height: 4px;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 25%;
+  width: 33%;
   transition: 0.5s width, 0.5s background-color;
   background-color: #FFB300;
   -webkit-animation: colorbar-animation 2.5s;
@@ -10454,7 +10455,7 @@ button.close {
 
 .notloading .colorbar {
   width: 100%;
-  background-color: #404877;
+  background-color: transparent;
   -webkit-animation: none;
   -moz-animation: none;
   -o-animation: none;
@@ -10462,22 +10463,22 @@ button.close {
 
 @-webkit-keyframes colorbar-animation {
   0% {
-    left: -25%; }
+    left: -33%; }
   100% {
     left: 100%; } }
 @-moz-keyframes colorbar-animation {
   0% {
-    left: -25%; }
+    left: -33%; }
   100% {
     left: 100%; } }
 @-o-keyframes colorbar-animation {
   0% {
-    left: -25%; }
+    left: -33%; }
   100% {
     left: 100%; } }
 @keyframes colorbar-animation {
   0% {
-    left: -25%; }
+    left: -33%; }
   100% {
     left: 100%; } }
 .pickadate {
@@ -10578,9 +10579,9 @@ html, body {
   color: #fff; }
 
 #mainCanvas {
-  height: calc(100% - 106px);
-  min-height: calc(100% - 106px);
-  margin-top: 106px;
+  height: calc(100% - 64px);
+  min-height: calc(100% - 64px);
+  margin-top: 64px;
   overflow: hidden; }
 
 #mainContent {
@@ -10646,7 +10647,7 @@ html, body {
 .navbar,
 .detail-view,
 .panel-default {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.115), 0 5px 20px rgba(0, 0, 0, 0.095); }
 
 .list-group {
   background-color: #fff; }
@@ -10994,12 +10995,8 @@ textarea {
 }*/
 .navbar.navbar-inverse {
   background-color: #fff;
-  color: #263238; }
-.navbar h1 {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  line-height: 64px; }
+  color: #263238;
+  box-shadow: 0 0.75px 2px rgba(0, 0, 0, 0.12), 0 0.75px 3px rgba(0, 0, 0, 0.06); }
 .navbar .applogo {
   padding: 12px;
   display: block;
@@ -11011,17 +11008,26 @@ textarea {
   .navbar .applogo img {
     width: 46px;
     height: 40px; }
-.navbar .amanu-actionbar {
-  background-color: #ffffff;
-  height: 42px; }
-  .navbar .amanu-actionbar #mainNav > div,
-  .navbar .amanu-actionbar #actionMenu > div {
-    display: inline; }
-  .navbar .amanu-actionbar #mainNav a, .navbar .amanu-actionbar #mainNav button,
-  .navbar .amanu-actionbar #actionMenu a,
-  .navbar .amanu-actionbar #actionMenu button {
-    padding: 2px 22px 0 22px;
-    line-height: 38px;
+.navbar .apptitle h1 {
+  font-size: 20px;
+  line-height: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0; }
+.navbar .apptitle #mainNav,
+.navbar .apptitle #actionMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 32px; }
+  .navbar .apptitle #mainNav li,
+  .navbar .apptitle #actionMenu li {
+    display: inline-block; }
+  .navbar .apptitle #mainNav a, .navbar .apptitle #mainNav button,
+  .navbar .apptitle #actionMenu a,
+  .navbar .apptitle #actionMenu button {
+    padding: 2px 15px 0 15px;
+    line-height: 28px;
     border-right: none !important;
     border-left: none !important;
     border-top: none !important;
@@ -11032,26 +11038,39 @@ textarea {
     border-bottom-style: solid;
     border-bottom-color: #ffffff;
     transition: 0.3s color, 0.3s border-bottom-color, 0.3s background-color; }
-    .navbar .amanu-actionbar #mainNav a:hover, .navbar .amanu-actionbar #mainNav a:active, .navbar .amanu-actionbar #mainNav button:hover, .navbar .amanu-actionbar #mainNav button:active,
-    .navbar .amanu-actionbar #actionMenu a:hover,
-    .navbar .amanu-actionbar #actionMenu a:active,
-    .navbar .amanu-actionbar #actionMenu button:hover,
-    .navbar .amanu-actionbar #actionMenu button:active {
+    .navbar .apptitle #mainNav a:hover, .navbar .apptitle #mainNav a:active, .navbar .apptitle #mainNav button:hover, .navbar .apptitle #mainNav button:active,
+    .navbar .apptitle #actionMenu a:hover,
+    .navbar .apptitle #actionMenu a:active,
+    .navbar .apptitle #actionMenu button:hover,
+    .navbar .apptitle #actionMenu button:active {
       color: #252a45;
       background-color: #EEEEEE;
       border-bottom-color: #EEEEEE; }
-  .navbar .amanu-actionbar #mainNav button,
-  .navbar .amanu-actionbar #actionMenu button {
-    line-height: 40px;
-    /* warum? ja ├ñhm... aus... Gr├╝nden... */ }
-  .navbar .amanu-actionbar #mainNav .active a,
-  .navbar .amanu-actionbar #mainNav button.active,
-  .navbar .amanu-actionbar #actionMenu .active a,
-  .navbar .amanu-actionbar #actionMenu button.active {
+    .navbar .apptitle #mainNav a i, .navbar .apptitle #mainNav button i,
+    .navbar .apptitle #actionMenu a i,
+    .navbar .apptitle #actionMenu button i {
+      position: relative;
+      top: -1px; }
+  .navbar .apptitle #mainNav button,
+  .navbar .apptitle #actionMenu button {
+    padding-bottom: 4px; }
+  .navbar .apptitle #mainNav .active a,
+  .navbar .apptitle #mainNav button.active,
+  .navbar .apptitle #actionMenu .active a,
+  .navbar .apptitle #actionMenu button.active {
     background-color: #ffffff;
     border-bottom-color: #404877 !important;
     padding-bottom: 0;
     color: #404877; }
+.navbar .apptitle #mainNav {
+  margin-left: -15px; }
+.navbar #topRightNav.navbar-nav li a {
+  transition: 0.3s background-color; }
+.navbar #topRightNav.navbar-nav li a:hover,
+.navbar #topRightNav.navbar-nav li a:active,
+.navbar #topRightNav.navbar-nav li a:focus {
+  outline: none;
+  background-color: #EEEEEE !important; }
 
 .logincontainer {
   position: relative;

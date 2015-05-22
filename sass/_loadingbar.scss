@@ -33,21 +33,22 @@
 
 .colorbar-container
 {
-  width: 100%;
-  margin-left: -15px;
+  left: 70px;
+  right: 0;
   height: 4px;
   position: absolute;
   z-index: 9999;
-  top: calc(#{$navbar-height} - 4px);
-  background-color: $gray-light;
+  top: 0;
+  background-color: transparent;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-$cb-startwidth: 25%;
+$cb-startwidth: 33%;
 
 
 .colorbar
 {
-  height: 4px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -63,7 +64,7 @@ $cb-startwidth: 25%;
 .notloading .colorbar
 {
   width: 100%;
-  background-color: $brand-primary;
+  background-color: transparent;
   @include animation-clear;
 }
 
