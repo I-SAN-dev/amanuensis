@@ -124,7 +124,7 @@
 
             <div class="slideanim-item fullheight scroll-y">
 
-                <button class="btn btn-link" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i></button>
+
                 <div class="row">
                     <div class="col-sm-6">
                         <h3>{{'items.alsoIn'|translate}}</h3>
@@ -148,7 +148,8 @@
                         <p data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
                     </div>
                     <div class="col-sm-6">
-
+                        <button class="btn btn-block btn-success" data-ng-click="item.moveItem()"><i class="md md-lg md-forward"></i> {{'items.moveItem'|translate}}</button>
+                        <button class="btn btn-block btn-danger" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i> {{'items.deleteItem'|translate}}</button>
                     </div>
                 </div>
 

@@ -310,7 +310,8 @@
     "create": "Neuer Posten",
     "newTime": "Zeit erfassen",
     "alsoIn": "Dieser Posten befindet sich auch in:",
-    "alsoInNone": "Dieser Posten ist keinen weiteren Dokumenten zugeordnet."
+    "alsoInNone": "Dieser Posten ist keinen weiteren Dokumenten zugeordnet.",
+    "deleteItem": "Diesen Posten löschen."
   },
   "offers": {
     "state": "Angebotsstatus",
