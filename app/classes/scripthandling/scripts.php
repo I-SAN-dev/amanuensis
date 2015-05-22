@@ -53,6 +53,7 @@ class Scripts
         "js/filters/noSpace.js",
         "js/filters/price.js",
         "js/filters/gender.js",
+        "js/filters/amaDate.js",
         // Services
         "js/services/authService.js",
         "js/services/apiAbstractionLayer.js",

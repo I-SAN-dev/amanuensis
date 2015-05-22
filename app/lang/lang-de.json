@@ -303,7 +303,8 @@
     "beforeTaxPrice": "Netto",
     "pricing": "Bepreisung",
     "connections": "Zuordnungen",
-    "create": "Neuer Posten"
+    "create": "Neuer Posten",
+    "newTime": "Zeit erfassen"
   },
   "offers": {
     "state": "Angebotsstatus",
