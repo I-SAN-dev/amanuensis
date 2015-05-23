@@ -30,12 +30,40 @@ class settings {
         $conf = Config::getInstance();
 
         $array = $conf->get;
+
         /* Censor some config values, they only can be set but not read */
         $array["db"]["password"] = '*****';
         $array["appsecret"] = '*****';
         $array["mail"]["password"] = '*****';
 
-        json_response($array);
+        /* define some groups */
+        $d = array();
+        $d['settings.company'] = array('company', 'company_addition','address', '|', 'pricing', 'invoice_due_days');
+        $d['settings.design'] = array('design', '|', 'templates');
+        $d['settings.mail'] = array('mail');
+        $d['settings.refnumbers'] = array('refnumber_offers', '|', 'refnumber_contracts', '|', 'refnumber_acceptances', '|', 'refnumber_invoices', '|', 'refnumber_reminders', '|', 'refnumber_customers' );
+        $d['settings.server'] = array('baseurl','secureurl','appsecret','sessiontimeout','|', 'debug', 'errorlogging', 'errorlogpath', '|', 'lang', '|', 'path', '|', 'db');
+
+        /* create the groups groups*/
+        $out = array();
+        foreach($d as $groupname => $keys)
+        {
+            $out[$groupname] = array();
+            foreach($keys as $key)
+            {
+                if($key == '|')
+                {
+                    $out[$groupname]['spacer'.count($out[$groupname])] = '%spacer%';
+                }
+                else
+                {
+                    $out[$groupname][$key] = $array[$key];
+                    unset($array[$key]);
+                }
+            }
+        };
+        $out['settings.other'] = $array;
+        json_response($out);
     }
 
     /**

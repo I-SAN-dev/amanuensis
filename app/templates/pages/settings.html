@@ -1,176 +1,66 @@
 <div data-ng-controller="SettingsCtrl as settings">
-    <p>Company: {{settings.company}}<br />
-        Language: {{settings.language}}</p>
-    <p>{{settings.settings|json}}</p>
 
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
         <div class="panel panel-default" role="tabpanel">
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]" data-ng-class="{active: $first}">
+                    <a data-target="#tab-{{$index}}" aria-controls="tab-{{$index}}" role="tab" data-toggle="tab">{{key|translate}}</a>
+                </li>
+            </ul>
+
             <div class="panel-body">
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a data-target="#basic" aria-controls="basic" role="tab" data-toggle="tab">{{'config.basicSettings'|translate}}</a>
-                    </li>
-                    <li role="presentation">
-                        <a data-target="#paths" aria-controls="paths" role="tab" data-toggle="tab">{{'config.pathSettings'|translate}}</a>
-                    </li>
-                    <li role="presentation">
-                        <a data-target="#server" aria-controls="server" role="tab" data-toggle="tab">{{'config.serverSettings'|translate}}</a>
-                    </li>
-                    <li role="presentation">
-                        <a data-target="#refnumbers" aria-controls="refnumbers" role="tab" data-toggle="tab">{{'config.refnumberSettings'|translate}}</a>
-                    </li>
-                </ul>
-
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="basic">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.company'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.company"
-                                     data-ipe-key="'company'"
-                                     data-ipe-name="'config.company'|translate"
-                                     data-ipe-deletable="false"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="paths">
+                    <div data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]" data-ng-class="{active: $first}"
+                         role="tabpanel" class="tab-pane" id="tab-{{$index}}">
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="server">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.baseurl'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.baseurl"
-                                     data-ipe-key="'baseurl'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.baseurl'|translate"
-                                     data-ipe-type="'url'"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.secureurl'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.secureurl"
-                                     data-ipe-key="'secureurl'"
-                                     data-ipe-name="'config.secureurl'|translate"
-                                     data-ipe-type="'url'"
-                                     data-ipe-deletable="false"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.appsecret'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.appsecret"
-                                     data-ipe-key="'appsecret'"
-                                     data-ipe-name="'config.appsecret'|translate"
-                                     data-ipe-type="'password'"
-                                     data-ipe-deletable="false"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.sessiontimeout'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.sessiontimeout"
-                                     data-ipe-key="'sessiontimeout'"
-                                     data-ipe-name="'config.sessiontimeout'|translate"
-                                     data-ipe-type="'number'"
-                                     data-ipe-deletable="false"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
+                        <div class="row" data-ng-repeat="settingkey in settings.objectKeys(settinglist)" data-ng-init="settingvalue = settinglist[settingkey]">
 
-                        <h3>{{'config.databaseSettings'|translate}}</h3>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.db.host'|translate}}</p>
+                            <div class="col-xs-12" data-ng-if="settingvalue == '%spacer%'">
+                                <hr/>
                             </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.db.host"
-                                     data-ipe-key="'db.host'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.db.host'|translate"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.db.database'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.db.database"
-                                     data-ipe-key="'db.database'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.db.database'|translate"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.db.port'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.db.port"
-                                     data-ipe-key="'db.port'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.db.port'|translate"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.db.user'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.db.user"
-                                     data-ipe-key="'db.user'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.db.user'|translate"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <p>{{'config.db.password'|translate}}</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div data-in-place-edit
-                                     data-ipe-value="settings.settings.db.password"
-                                     data-ipe-key="'db.password'"
-                                     data-ipe-deletable="false"
-                                     data-ipe-name="'config.db.password'|translate"
-                                     data-ipe-type="'password'"
-                                     data-api-name="'settings'"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="refnumbers">
 
+                            <div data-ng-if="settings.isSettingSet(settingvalue)">
+                                <div class="col-xs-12">
+                                    <h3>{{'setting.sub.'+settingkey|translate}}</h3>
+                                    <div class="row" data-ng-repeat="settingkey3 in settings.objectKeys(settingvalue)" data-ng-init="settingvalue3 = settingvalue[settingkey3]">
+                                        <div class="col-sm-4">
+                                            <p>{{'config.'+settingkey+'.'+settingkey3|translate}}</p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            {{settingvalue3}}
+                                            <!--TODO binding to input -->
+                                            <div data-in-place-edit
+                                                 data-ipe-value="settings.settings.company"
+                                                 data-ipe-key="'company'"
+                                                 data-ipe-name="'config.company'|translate"
+                                                 data-ipe-deletable="false"
+                                                 data-api-name="'settings'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-ng-if="settings.isSetting(settingvalue)">
+                                <div class="col-sm-4">
+                                    <p>{{'config.'+settingkey|translate}}</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{settingvalue}}
+                                    <!--TODO binding to input -->
+                                    <div data-in-place-edit
+                                         data-ipe-value="settings.settings.company"
+                                         data-ipe-key="'company'"
+                                         data-ipe-name="'config.company'|translate"
+                                         data-ipe-deletable="false"
+                                         data-api-name="'settings'"></div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
