@@ -113,7 +113,32 @@ class time {
         $q->execute();
         $result = $q->fetchAll(PDO::FETCH_ASSOC);
 
-        json_response($result);
+        /* calc total time */
+        $totaltime = 0;
+
+        foreach($result as $time)
+        {
+            if(
+                isset($time['start']) && $time['start'] != ''
+                && isset($time['end']) && $time['end'] != ''
+            )
+            {
+                $start = StrToTime($time['start']);
+                $end = StrToTime($time['end']);
+                $intervallInSeconds = $end - $start;
+                $totaltime = $totaltime + $intervallInSeconds;
+            }
+        }
+
+        /* convert totaltime to hours */
+        $totaltime = $totaltime / 3600;
+
+        /* Format to 2 decimals */
+
+        json_response(array(
+            "times" => $result,
+            "totaltime" => round($totaltime, 2)
+        ));
     }
 
     /**
