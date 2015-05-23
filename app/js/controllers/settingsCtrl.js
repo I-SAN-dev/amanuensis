@@ -39,11 +39,14 @@ app.controller('SettingsCtrl', [
             return((val != '%spacer%') && (typeof(val) === 'object'));
         };
 
-        this.settings = LocalStorage.getData('settings');
+        this.response =  LocalStorage.getData('settings');
+        this.settings = this.response ? this.response.settings : {};
+        this.settingtypes = this.response ? this.response.types: {};
         this.settingkeys = this.objectKeys(this.settings);
 
         ApiAbstractionLayer('GET', 'settings').then(function (data) {
-            self.settings = data;
+            self.settings = data.settings;
+            self.settingtypes = data.types;
             self.settingkeys = self.objectKeys(self.settings);
         });
 
