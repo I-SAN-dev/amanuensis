@@ -31,11 +31,9 @@
                                             <p>{{'config.'+settingkey+'.'+settingkey3|translate}}</p>
                                         </div>
                                         <div class="col-sm-8">
-                                            {{settingvalue3}}
-                                            <!--TODO binding to input -->
                                             <div data-in-place-edit
-                                                 data-ipe-value="settings.settings.company"
-                                                 data-ipe-key="'company'"
+                                                 data-ipe-value="settingvalue3"
+                                                 data-ipe-key="settingkey+'.'+settingkey3"
                                                  data-ipe-name="'config.company'|translate"
                                                  data-ipe-deletable="false"
                                                  data-api-name="'settings'"></div>
@@ -49,11 +47,9 @@
                                     <p>{{'config.'+settingkey|translate}}</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{settingvalue}}
-                                    <!--TODO binding to input -->
                                     <div data-in-place-edit
-                                         data-ipe-value="settings.settings.company"
-                                         data-ipe-key="'company'"
+                                         data-ipe-value="settingvalue"
+                                         data-ipe-key="settingkey"
                                          data-ipe-name="'config.company'|translate"
                                          data-ipe-deletable="false"
                                          data-api-name="'settings'"></div>
