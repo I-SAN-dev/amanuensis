@@ -40,7 +40,7 @@ class settings {
         $d = array();
         $d['settings.company'] = array('company', 'company_addition','address', '|', 'pricing', 'invoice_due_days');
         $d['settings.design'] = array('design', '|', 'templates');
-        $d['settings.mail'] = array('mail');
+        $d['settings.mail'] = array('mailcontent','|','mail');
         $d['settings.refnumbers'] = array('refnumber_offers', '|', 'refnumber_contracts', '|', 'refnumber_acceptances', '|', 'refnumber_invoices', '|', 'refnumber_reminders', '|', 'refnumber_customers' );
         $d['settings.server'] = array('baseurl','secureurl','appsecret','sessiontimeout','|', 'debug', 'errorlogging', 'errorlogpath', '|', 'lang', '|', 'path', '|', 'db');
 
@@ -62,8 +62,57 @@ class settings {
                 }
             }
         };
-        $out['settings.other'] = $array;
-        json_response($out);
+        if(count($array) > 0)
+        {
+            $out['settings.other'] = $array;
+        }
+
+        /* Change the type of some */
+        $types = array();
+        foreach($conf->get as $key=>$value)
+        {
+            if(!is_array($value))
+            {
+                $types[$key] = 'text';
+            }
+            else
+            {
+                foreach($value as $subkey=>$subvalue)
+                {
+                    $types[$key.'.'.$subkey] = 'text';
+                }
+            }
+        }
+
+        /* Define the types */
+        $number = 'number';
+        $bool = 'bool';
+        $price = 'price';
+
+        $types['sessiontimeout'] = $number;
+        $types['mail.usesmtp'] = $bool;
+        $types['mail.smtpauth'] = $bool;
+        $types['mail.port'] = $number;
+        $types['debug'] = $bool;
+        $types['errorlogging'] = $bool;
+        $types['pricing.dailyrate'] = $price;
+        $types['pricing.hourlyrate'] = $price;
+        $types['pricing.calc_tax'] = $bool;
+        $types['pricing.tax'] = $number;
+        $types['invoice_due_days'] = $number;
+        $types['refnumber_offers.idminlength'] = $number;
+        $types['refnumber_contracts.idminlength'] = $number;
+        $types['refnumber_acceptances.idminlength'] = $number;
+        $types['refnumber_invoices.idminlength'] = $number;
+        $types['refnumber_reminders.idminlength'] = $number;
+        $types['refnumber_customers.idminlength'] = $number;
+
+
+        /* Output that stuff */
+        json_response(array(
+            'settings' => $out,
+            'types' => $types
+        ));
     }
 
     /**

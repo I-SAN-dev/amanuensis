@@ -1,4 +1,4 @@
-<div class="fullheight" data-ng-controller="SettingsCtrl as settings">
+<div class="fullheight settings" data-ng-controller="SettingsCtrl as settings">
 
     <div class="fullheight col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
         <div class="fullheight panel panel-default" role="tabpanel">
@@ -25,7 +25,7 @@
 
                             <div data-ng-if="settings.isSettingSet(settingvalue)">
                                 <div class="col-xs-12">
-                                    <h3>{{'setting.sub.'+settingkey|translate}}</h3>
+                                    <h3>{{'settings.sub.'+settingkey|translate}}</h3>
                                     <div class="row" data-ng-repeat="settingkey3 in settings.objectKeys(settingvalue)" data-ng-init="settingvalue3 = settingvalue[settingkey3]">
                                         <div class="col-sm-4">
                                             <p>{{'config.'+settingkey+'.'+settingkey3|translate}}</p>
@@ -34,8 +34,9 @@
                                             <div data-in-place-edit
                                                  data-ipe-value="settingvalue3"
                                                  data-ipe-key="settingkey+'.'+settingkey3"
-                                                 data-ipe-name="'config.company'|translate"
+                                                 data-ipe-name="'config.'+settingkey+'.'+settingkey3|translate"
                                                  data-ipe-deletable="false"
+                                                 data-ipe-type="settings.settingtypes[settingkey+'.'+settingkey3]"
                                                  data-api-name="'settings'"></div>
                                         </div>
                                     </div>
@@ -50,8 +51,9 @@
                                     <div data-in-place-edit
                                          data-ipe-value="settingvalue"
                                          data-ipe-key="settingkey"
-                                         data-ipe-name="'config.company'|translate"
+                                         data-ipe-name="'config.'+settingkey|translate"
                                          data-ipe-deletable="false"
+                                         data-ipe-type="settings.settingtypes[settingkey]"
                                          data-api-name="'settings'"></div>
                                 </div>
                             </div>
