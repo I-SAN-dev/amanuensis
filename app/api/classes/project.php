@@ -130,31 +130,8 @@ class project {
      */
     private static function getProject($id)
     {
-        $dbal = DBAL::getInstance();
-        $result = $dbal->simpleSelect(
-            'projects',
-            array(
-                'id',
-                'name',
-                'description',
-                'client',
-                'state'
-            ),
-            array('id', $id),
-            1
-        );
-
-        /* Additional data */
-        $project = new AmaProject($result['id']);
-        $result['client'] = $project->getClient();
-        $result['offers'] = $project->getOffers();
-        $result['contracts'] = $project->getContracts();
-        $result['fileContracts'] = $project->getFileContracts();
-        $result['todos'] = $project->getTodos();
-        $result['acceptances'] = $project->getAcceptances();
-        $result['invoices'] = $project->getInvoices();
-
-        json_response($result);
+        $project = new AmaProject($id);
+        json_response($project->getProjectData());
     }
 
     /**

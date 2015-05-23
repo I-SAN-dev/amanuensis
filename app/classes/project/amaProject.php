@@ -43,7 +43,13 @@ class AmaProject {
             'name' => $this->name,
             'description' => $this->description,
             'state' => $this->state,
-            'client' => $this->getClient()
+            'client' => $this->getClient(),
+            'offers' => $this->getOffers(),
+            'contracts' => $this->getContracts(),
+            'fileContracts' => $this->getFileContracts(),
+            'todos' => $this->getTodos(),
+            'acceptances' => $this->getAcceptances(),
+            'invoices' => $this->getInvoices()
         );
     }
 
