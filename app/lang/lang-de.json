@@ -177,123 +177,6 @@
     "notavailable":"amanu ist für Ihre Platform leider nicht als App verfügbar. Dies tut uns leid."
   },
 
-  "settings":
-  {
-    "settings":"Einstellungen"
-  },
-  "config":
-  {
-    "basicSettings":"Basiseinstellungen",
-    "pathSettings": "Pfade",
-    "serverSettings": "Servereinstellungen",
-    "refnumberSettings":"Referenznummern",
-    "databaseSettings":"Datenbank-Einstellungen",
-    "db":{
-      "host":"Hostadresse der Datenbank",
-      "database":"Datenbankname",
-      "port":"Port",
-      "user":"Datenbankbenutzer",
-      "password":"Passwort"
-    },
-
-    "baseurl":"Basisurl der Amanu-Installation",
-    "secureurl":"Alternative sichere URL der Amanu-Installation",
-    "appsecret":"Secret zur Loginverschlüsselung",
-    "sessiontimeout":"Session Timeout",
-
-    "company":"Firmenname",
-    "company_addition":"Zusatz",
-    "address":
-    {
-      "street":"Straße",
-      "city":"Stadt",
-      "zip":"Postleitzahl",
-      "country": "Land",
-      "web":"Webadresse",
-      "telephone":"Telefonnummer",
-      "fax":"Faxnummer"
-    },
-
-    "design":
-    {
-      "color":"Farbe, wird unter anderem in Emails verwendet, um diese an Ihr Corporate Design anzupassen",
-      "logo":"Pfad zu Ihrem Logo"
-    },
-
-    "lang":"Sprache",
-
-    "mail":
-    {
-      "sender":"Absenderadresse",
-      "replyto":"Antwortadresse",
-      "archive":"Archivadresse (erhält eine Kopie jeder gesendeten Mail)",
-      "admin":"Administratoradresse (erhält Hinweise)",
-
-      "usesmtp": "SMTP-Konto für Mailversand verwenden",
-      "smtphost":"SMTP-Host (Adresse des SMTP-Servers, z.B. mail.ihredomain.de)",
-      "smtpauth":"Authentifizierung erforderlich",
-      "username":"Nutzername",
-      "password":"Passwort",
-      "secure":"Sichere Verbindung (leer, tls oder ssl)",
-      "port":"Port",
-
-      "template":"Pfad zum Emailtemplate"
-    },
-
-    "debug":"Debuggingmodus",
-    "errorlogging":"Errorlogging",
-    "errorlogpath":"Pfad zur Logdatei",
-
-    "path":{
-      "scriptsbytemplate":"Pfad zum Ordner mit .jst (JavaScriptTemplate) Dateien",
-      "generated":"Pfad zum Ordner mit generierten Javascriptdateien"
-    },
-
-    "templates":
-    {
-      "offer":"Pfad zum angebotstemplate",
-      "invoice":"Pfad zum Rechnungstemplate",
-      "approval":"Pfad zum Abnahmeformulartemplate",
-      "reminder":"Pfad zum Mahnungstemplate"
-    },
-
-    "pricing":
-    {
-      "dailyrate": "Tagessatz",
-      "hourlyrate": "Stundensatz"
-    },
-
-    "refnumber_offers":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    },
-    "refnumber_contracts":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    },
-    "refnumber_acceptances":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    },
-    "refnumber_invoices":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    },
-    "refnumber_reminders":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    },
-    "refnumber_customers":
-    {
-      "idminlength": "Mindestlänge der fortlaufenden ID",
-      "scheme": "Schema"
-    }
-  },
   "items": {
     "expectedRate": "Veranschlagter Preis",
     "fixedRate": "Fixpreis",
@@ -363,7 +246,164 @@
         "description":"Es gab einen unerwarteten Server-Fehler bei der Verarbeitung der Anfrage."
       }
     }
-  }
+  },
 
+  "settings": {
+    "settings":"Einstellungen",
+    "company":"Firma",
+    "design":"Design",
+    "mail":"E-Mails",
+    "refnumbers":"Referenznummern",
+    "server":"Server",
+    "other":"Andere",
+    "sub": {
+      "address":"Anschrift",
+      "pricing":"Preisgestaltung",
+      "design":"Design",
+      "templates":"Templates",
+      "mail":"E-Mail Versand",
+      "mailcontent": "E-Mail Inhalte",
+      "refnumber_offers":"Angebots-Referenzummern",
+      "refnumber_contracts":"Vertrags-Referenznummern",
+      "refnumber_acceptances":"Abnahmeformular-Referenznummern",
+      "refnumber_invoices":"Rechnungs-Referenznummern / Rechnungsnummern",
+      "refnumber_reminders":"Zahlugserinnerungs-Refernznummern",
+      "refnumber_customers":"Kunden-Referenznummern / Kundenummern",
+      "path":"Systempfade",
+      "db":"Datenbankanbindung"
+    }
+  },
+
+  "config":
+  {
+    "basicSettings":"Basiseinstellungen",
+    "pathSettings": "Pfade",
+    "serverSettings": "Servereinstellungen",
+    "refnumberSettings":"Referenznummern",
+    "databaseSettings":"Datenbank-Einstellungen",
+    "db":{
+      "host":"Hostadresse der Datenbank",
+      "database":"Datenbankname",
+      "port":"Port",
+      "user":"Datenbankbenutzer",
+      "password":"Passwort"
+    },
+
+    "baseurl":"Basisurl der Amanu-Installation",
+    "secureurl":"Alternative sichere URL der Amanu-Installation",
+    "appsecret":"Secret zur Loginverschlüsselung",
+    "sessiontimeout":"Session Timeout",
+
+    "company":"Firmenname",
+    "company_addition":"Zusatz",
+    "address":
+    {
+      "street":"Straße",
+      "city":"Stadt",
+      "zip":"Postleitzahl",
+      "country": "Land",
+      "web":"Webadresse",
+      "telephone":"Telefonnummer",
+      "fax":"Faxnummer"
+    },
+
+    "design":
+    {
+      "color":"Farbe, wird unter anderem in Emails verwendet, um diese an Ihr Corporate Design anzupassen",
+      "logo":"Pfad zu Ihrem Logo"
+    },
+
+    "lang":"Sprache",
+
+    "mail": {
+      "sender": "Absenderadresse",
+      "replyto": "Antwortadresse",
+      "archive": "Archivadresse (erhält eine Kopie jeder gesendeten Mail)",
+      "admin": "Administratoradresse (erhält Hinweise)",
+      "usesmtp": "SMTP-Konto für Mailversand verwenden",
+      "smtphost": "SMTP-Host (Adresse des SMTP-Servers, z.B. mail.ihredomain.de)",
+      "smtpauth": "Authentifizierung erforderlich",
+      "username": "Nutzername",
+      "password": "Passwort",
+      "secure": "Sichere Verbindung (leer, tls oder ssl)",
+      "port": "Port"
+    },
+    "mailcontent":
+    {
+      "template":"Pfad zum Emailtemplate",
+
+      "subject_offer":"Betreff Angebotsmail",
+      "content_offer":"Template Angebotsmail",
+      "attachment_offer":"Zusätzlicher Anhang für Angebotsmail",
+      "subject_acceptance":"Betreff Abnahmeformularmail",
+      "content_acceptance":"Template Abnahmeformularmail",
+      "attachment_acceptance":"Zusätzlicher Anhang für Abnahmeformularmail",
+      "subject_invoice":"Betreff Rechnungsmail",
+      "content_invoice":"Template Rechnungsmail",
+      "attachment_invoice":"Zusätzlicher Anhang für Rechnungsmail",
+      "subject_reminder":"Betreff Zahlungserinnerungsmail",
+      "content_reminder":"Template Zahlungserinnerungsmail",
+      "attachment_reminder":"Zusätzlicher Anhang für Zahlungserinnerungsmail"
+    },
+
+    "debug":"Debuggingmodus",
+    "errorlogging":"Errorlogging",
+    "errorlogpath":"Pfad zur Logdatei",
+
+    "path":{
+      "scriptsbytemplate":"Pfad zum Ordner mit .jst (JavaScriptTemplate) Dateien",
+      "generated":"Pfad zum Ordner mit generierten Javascriptdateien"
+    },
+
+    "templates":
+    {
+      "offer":"Pfad zum Angebotstemplate",
+      "contract":"Pfad zum Vertragstemplate",
+      "acceptance":"Pfad zum Abnahmeformulartemplate",
+      "invoice":"Pfad zum Rechnungstemplate",
+      "reminder":"Pfad zum Zahlungserinnerungsstemplate"
+    },
+
+    "pricing":
+    {
+      "dailyrate": "Tagessatz",
+      "hourlyrate": "Stundensatz",
+      "calc_tax": "Steuer ausweisen",
+      "tax": "Steuersatz (%)",
+      "tax_label": "Steuerbezeichnung"
+    },
+    "invoice_due_days":"Zahlungsziel für Rechnungen in Tagen",
+
+    "refnumber_offers":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_contracts":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_acceptances":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_invoices":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_reminders":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    },
+    "refnumber_customers":
+    {
+      "idminlength": "Mindestlänge der fortlaufenden ID",
+      "scheme": "Schema"
+    }
+  }
 
 }

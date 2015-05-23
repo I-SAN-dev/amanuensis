@@ -79,7 +79,7 @@ class AmaMail {
         $conf = Config::getInstance();
         $values = $conf->get;
         $values['content'] = $html;
-        $template = new amaTemplate($values['mail']['template'], $values);
+        $template = new amaTemplate($values['mailcontent']['template'], $values);
 
         $messageHtml = $template->getHTML();
         $this->previewHtml = $messageHtml;

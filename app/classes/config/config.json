@@ -32,21 +32,21 @@
 
   "lang":"de",
 
-  "mail":
-  {
-    "sender":"kontakt@i-san.de",
-    "replyto":"kontakt@i-san.de",
-    "archive":"kontakt@i-san.de",
-    "admin":"kontakt@i-san.de",
-
+  "mail": {
+    "sender": "kontakt@i-san.de",
+    "replyto": "kontakt@i-san.de",
+    "archive": "kontakt@i-san.de",
+    "admin": "kontakt@i-san.de",
     "usesmtp": "0",
-    "smtphost":"",
-    "smtpauth":"1",
-    "username":"",
-    "password":"",
-    "secure":"",
-    "port":"",
-
+    "smtphost": "",
+    "smtpauth": "1",
+    "username": "",
+    "password": "",
+    "secure": "",
+    "port": ""
+  },
+  "mailcontent":
+  {
     "template":"user_templates/mail/_outer.phtml",
 
     "subject_offer":"Ihr Angebot %ref%",

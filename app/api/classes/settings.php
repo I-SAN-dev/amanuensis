@@ -40,7 +40,7 @@ class settings {
         $d = array();
         $d['settings.company'] = array('company', 'company_addition','address', '|', 'pricing', 'invoice_due_days');
         $d['settings.design'] = array('design', '|', 'templates');
-        $d['settings.mail'] = array('mail');
+        $d['settings.mail'] = array('mailcontent','|','mail');
         $d['settings.refnumbers'] = array('refnumber_offers', '|', 'refnumber_contracts', '|', 'refnumber_acceptances', '|', 'refnumber_invoices', '|', 'refnumber_reminders', '|', 'refnumber_customers' );
         $d['settings.server'] = array('baseurl','secureurl','appsecret','sessiontimeout','|', 'debug', 'errorlogging', 'errorlogpath', '|', 'lang', '|', 'path', '|', 'db');
 
@@ -62,8 +62,10 @@ class settings {
                 }
             }
         };
-        $out['settings.other'] = $array;
-
+        if(count($array) > 0)
+        {
+            $out['settings.other'] = $array;
+        }
 
         /* Change the type of some */
         $types = array();

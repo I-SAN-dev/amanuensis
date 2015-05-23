@@ -252,9 +252,9 @@ class AmaMailDoc {
         }
         /* Add additional attachment from config */
         $conf = Config::getInstance();
-        if(isset($conf->get['mail']['attachment_'.$this->type]) && file_exists($conf->get['mail']['attachment_'.$this->type]))
+        if(isset($conf->get['mailcontent']['attachment_'.$this->type]) && file_exists($conf->get['mailcontent']['attachment_'.$this->type]))
         {
-            array_push($attachments, $conf->get['mail']['attachment_'.$this->type]);
+            array_push($attachments, $conf->get['mailcontent']['attachment_'.$this->type]);
         }
 
         return $attachments;
@@ -267,7 +267,7 @@ class AmaMailDoc {
     private function getContent()
     {
         $conf = Config::getInstance();
-        $template = new amaTemplate($conf->get['mail']['content_'.$this->type], $this->info);
+        $template = new amaTemplate($conf->get['mailcontent']['content_'.$this->type], $this->info);
         return $template->getHTML();
     }
 
@@ -278,7 +278,7 @@ class AmaMailDoc {
     private function getSubject()
     {
         $conf = Config::getInstance();
-        $subject = $conf->get['mail']['subject_'.$this->type];
+        $subject = $conf->get['mailcontent']['subject_'.$this->type];
         $subject = str_replace('%ref%', $this->info['refnumber'], $subject);
         return $subject;
     }
