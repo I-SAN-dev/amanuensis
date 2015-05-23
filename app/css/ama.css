@@ -10746,6 +10746,8 @@ h1, h2 {
 
 .ipe {
   cursor: pointer; }
+  .ipe.ipe-active {
+    cursor: default; }
   .ipe .form-group {
     margin-bottom: 0; }
   .ipe .ipe-empty {
@@ -10868,12 +10870,24 @@ h1, h2 {
   .buttons-above-input.bai-3 input, .buttons-above-input.bai-3 textarea {
     padding-right: 100px;
     /* TODO define correct right padding */ }
+  .buttons-above-input.bai-3.ipe-price .form-inline {
+    padding-right: 100px; }
+  .buttons-above-input.bai-3.ipe-price input {
+    padding-right: 0; }
   .buttons-above-input.bai-2 input, .buttons-above-input.bai-2 textarea {
     padding-right: 60px;
     /* TODO define correct right padding */ }
+  .buttons-above-input.bai-2.ipe-price .form-inline {
+    padding-right: 60px; }
+  .buttons-above-input.bai-2.ipe-price input {
+    padding-right: 0; }
   .buttons-above-input.bai-1 input, .buttons-above-input.bai-1 textarea {
     padding-right: 30px;
     /* TODO define correct right padding */ }
+  .buttons-above-input.bai-1.ipe-price .form-inline {
+    padding-right: 30px; }
+  .buttons-above-input.bai-1.ipe-price input {
+    padding-right: 0; }
   .buttons-above-input .bai-buttons {
     float: right;
     position: absolute;
@@ -10961,6 +10975,10 @@ textarea {
 
 .panel-filter {
   padding-top: 6px; }
+
+.input-group-addon {
+  background-color: transparent;
+  border: 0 none; }
 
 /*.nav#mainNav
 {

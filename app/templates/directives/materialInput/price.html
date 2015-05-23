@@ -1,20 +1,18 @@
 <div class="form-inline">
     <div class="form-group">
-        <div class="input-group">
-            <input  placeholder="{{label}}"
+        <input  placeholder="{{label}}"
                     step="1"
                     pattern="(\d*)"
                     id="{{id}}-0"
                     data-ng-model="priceModel[0]"
                     data-ng-required="{{required || false}}"
-                    class="form-control">
-            <div class="input-group-addon">,</div>
+                    class="form-control"
+                    size="5">
+
             <span class="bar"></span>
             <label for="{{id}}-0">{{label}}</label>
-
-        </div>
     </div>
-
+    <span>,</span>
     <div class="form-group">
         <input  type="text"
                 pattern="(\d*)"

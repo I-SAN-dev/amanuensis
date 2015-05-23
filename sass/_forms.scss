@@ -46,6 +46,9 @@
 .ipe
 {
   cursor: pointer;
+  &.ipe-active {
+    cursor: default;
+  }
 
   .form-group
   {
@@ -208,6 +211,14 @@
     {
       padding-right: 100px; /* TODO define correct right padding */
     }
+    &.ipe-price{
+      .form-inline {
+        padding-right: 100px;
+      }
+      input {
+        padding-right: 0;
+      }
+    }
   }
   &.bai-2
   {
@@ -215,12 +226,29 @@
     {
       padding-right: 60px; /* TODO define correct right padding */
     }
+
+    &.ipe-price{
+      .form-inline {
+        padding-right: 60px;
+      }
+      input {
+        padding-right: 0;
+      }
+    }
   }
   &.bai-1
   {
     input, textarea
     {
       padding-right: 30px; /* TODO define correct right padding */
+    }
+    &.ipe-price{
+      .form-inline {
+        padding-right: 30px;
+      }
+      input {
+        padding-right: 0;
+      }
     }
   }
 
@@ -358,4 +386,9 @@ textarea
 .panel-filter
 {
   padding-top: 6px;
+}
+
+.input-group-addon {
+  background-color: transparent;
+  border: 0 none;
 }

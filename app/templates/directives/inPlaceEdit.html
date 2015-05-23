@@ -5,7 +5,7 @@
         <span data-ng-bind-html="outputVal || val"></span>
         <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
     </span>
-    <div data-ng-switch-when="true" class="ipe buttons-above-input bai-3">
+    <div data-ng-switch-when="true" class="ipe ipe-active buttons-above-input bai-3 ipe-{{ipe.type}}">
         <div data-material-input
              data-ipe="true"
              data-ng-model="ipe.val"
