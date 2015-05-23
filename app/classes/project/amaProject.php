@@ -14,6 +14,7 @@
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/config/config.php');
+require_once('classes/project/amaClient.php');
 
 class AmaProject {
 
@@ -61,11 +62,8 @@ class AmaProject {
     {
         if(!isset($this->client))
         {
-            $this->client = $this->dbal->simpleSelect(
-                'customers',
-                array('id', 'refnumber', 'companyname', 'contact_gender', 'contact_firstname', 'contact_lastname', 'street_no', 'additional', 'zip', 'city', 'country','dailyrate', 'hourlyrate'),
-                array('id', $this->clientid),
-                1);
+            $client = new AmaClient($this->clientid);
+            $this->client = $client->get();
         }
         return $this->client;
     }
