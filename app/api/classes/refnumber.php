@@ -61,6 +61,7 @@ class refnumber {
                 '%yy%' => date('Y'),
                 '%m%' => date('n'),
                 '%mm%' => date('m'),
+                '%q%' => ceil(date('n') / 3),
                 '%d%' => date('j'),
                 '%dd%' => date('d'),
                 '%ddd%' => date('z'),
