@@ -2,55 +2,89 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
-            <form data-ng-submit="create.createItem()">
-                <div data-material-input
-                     data-input-label="{{'items.fromPreset'|translate}}"
-                     data-input-id="preset"
-                     data-ng-model="create.newItem"
-                     data-input-type="select"
-                     data-input-select-options="create.presetList"
-                     data-input-select-option-name="name"
-                     data-input-select-option-value="value"></div>
-                <div data-material-input
-                     data-input-label="{{'items.name'|translate}}"
-                     data-input-id="name"
-                     data-ng-model="create.newItem.name"></div>
-                <div data-material-input
-                     data-input-label="{{'items.description'|translate}}"
-                     data-input-id="description"
-                     data-input-type="wysiwyg"
-                     data-ng-model="create.newItem.description"></div>
-                <div data-material-input
-                     data-input-label="{{'items.hourlyRates'|translate}}"
-                     data-input-id="hourlyrates"
-                     data-ng-model="create.newItem.hourlyrates"></div>
-                <div data-material-input
-                     data-input-label="{{'items.hourlyRate'|translate}}"
-                     data-input-id="hourlyrate"
-                     data-ng-model="create.newItem.hourlyrate"></div>
-                <div data-material-input
-                     data-input-label="{{'items.dailyRates'|translate}}"
-                     data-input-id="dailyrates"
-                     data-ng-model="create.newItem.dailyrates"></div>
-                <div data-material-input
-                     data-input-label="{{'items.dailyRate'|translate}}"
-                     data-input-id="dailyrate"
-                     data-input-type="price"
-                     data-ng-model="create.newItem.dailyrate"></div>
-                <div data-material-input
-                     data-input-label="{{'items.fixedRate'|translate}}"
-                     data-input-id="fixedrate"
-                     data-ng-model="create.newItem.fixedrate"></div>
-                <div data-material-input
-                     data-input-label="{{'items.useRate'|translate}}"
-                     data-input-id="userate"
-                     data-ng-model="create.newItem.userate"
-                     data-input-type="select"
-                     data-input-select-options="create.useRateOptions"
-                     data-input-select-option-name="name"
-                     data-input-select-option-value="value"></div>
-                <button class="btn btn-success" type="submit">{{'items.addItem'|translate}}</button>
-            </form>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form data-ng-submit="create.createItem()">
+                            <div data-material-input
+                                 data-input-label="{{'items.fromPreset'|translate}}"
+                                 data-input-id="preset"
+                                 data-ng-model="create.newItem"
+                                 data-input-type="select"
+                                 data-input-select-options="create.presetList"
+                                 data-input-select-option-name="name"
+                                 data-input-select-option-value="value"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.name'|translate}}"
+                                 data-input-id="name"
+                                 data-ng-model="create.newItem.name"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.description'|translate}}"
+                                 data-input-id="description"
+                                 data-input-type="wysiwyg"
+                                 data-ng-model="create.newItem.description"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.hourlyRates'|translate}}"
+                                 data-input-id="hourlyrates"
+                                 data-ng-model="create.newItem.hourlyrates"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.hourlyRate'|translate}}"
+                                 data-input-id="hourlyrate"
+                                 data-ng-model="create.newItem.hourlyrate"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.dailyRates'|translate}}"
+                                 data-input-id="dailyrates"
+                                 data-ng-model="create.newItem.dailyrates"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.dailyRate'|translate}}"
+                                 data-input-id="dailyrate"
+                                 data-input-type="price"
+                                 data-ng-model="create.newItem.dailyrate"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.fixedRate'|translate}}"
+                                 data-input-id="fixedrate"
+                                 data-ng-model="create.newItem.fixedrate"></div>
+                            <div data-material-input
+                                 data-input-label="{{'items.useRate'|translate}}"
+                                 data-input-id="userate"
+                                 data-ng-model="create.newItem.userate"
+                                 data-input-type="select"
+                                 data-input-select-options="create.useRateOptions"
+                                 data-input-select-option-name="name"
+                                 data-input-select-option-value="value"></div>
+                            <button data-ng-if="create.newItem" class="btn btn-success" type="submit">{{'items.addItem'|translate}}</button>
+                            <button data-ng-if="!create.newItem" class="btn btn-success disabled" disabled>{{'items.addItem'|translate}}</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <form data-ng-submit="create.importItem()">
+                            <div data-material-input
+                                 data-input-label="{{'items.fromProject'|translate}}"
+                                 data-input-id="projectItems"
+                                 data-ng-model="create.itemFromProject"
+                                 data-input-type="select"
+                                 data-input-select-options="create.projectItems"
+                                 data-input-select-option-name="name"
+                                 data-input-select-option-value="value"></div>
+                            <div data-ng-if="create.itemFromProject">
+                                <h2>{{create.itemFromProject.name}}</h2>
+                                <div>{{create.itemFromProject.description}}</div>
+                                <h3>{{'items.pricing'|translate}}</h3>
+
+                                <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.hourlyrate|price}} ({{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}})</p>
+
+                                <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.dailyrate|price}} ({{create.itemFromProject.dailyrates}} {{'items.days'|translate}})</p>
+
+                                <p>{{'items.fixedRate'|translate}}: {{create.itemFromProject.fixedrate|price}}</p>
+                            </div>
+                            <p>{{create.itemFromProject}}</p>
+
+                            <button class="btn btn-success" data-ng-if="create.itemFromProject" type="submit">{{'items.importItem'|translate}}</button>
+                            <button class="btn btn-success disabled" disabled data-ng-if="!create.itemFromProject">{{'items.importItem'|translate}}</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

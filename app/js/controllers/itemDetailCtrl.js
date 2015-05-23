@@ -53,18 +53,10 @@ app.controller('ItemDetailCtrl', [
             });
         };
 
-        var timer = function (index) {
-            return $timeout(function () {
-                self.time[index].duration += 1;
-                timer(index);
-            },1000);
-        };
-        var timeouts = [];
         this.startTime = function () {
             ApiAbstractionLayer('POST',{name:'time', data: {item: self.item.id}}).then(function (data) {
                 self.time.duration = 0;
                 self.time.push(data);
-                timeouts[self.time.length-1] = timer(self.time.length-1);
             });
         };
 
@@ -73,7 +65,6 @@ app.controller('ItemDetailCtrl', [
                 for(var i = 0; i<self.time.length; i++){
                     if(self.time[i].id == data.id){
                         self.time[i] = data;
-                        timeouts[i].cancel();
                         break;
                     }
                 }
@@ -102,6 +93,10 @@ app.controller('ItemDetailCtrl', [
             console.log(count);
             return count>1;
 
-        }
+        };
+
+        this.moveItem = function () {
+            // TODO: this
+        };
     }
 ]);
