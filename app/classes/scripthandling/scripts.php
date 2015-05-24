@@ -67,6 +67,7 @@ class Scripts
         "js/services/refnumberService.js",
         "js/services/itemContainerService.js",
         "js/services/panelService.js",
+        "js/services/stateManager.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",

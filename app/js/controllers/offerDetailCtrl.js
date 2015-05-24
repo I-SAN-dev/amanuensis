@@ -5,10 +5,11 @@ app.controller('OfferDetailCtrl', [
         'DeleteService',
         'PdfService',
         'MailService',
+        'StateManager',
         '$stateParams',
         '$scope',
         'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, $stateParams, $scope, constants) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -100,6 +101,20 @@ app.controller('OfferDetailCtrl', [
                         forId: id
                     };
                 }
+            };
+
+            var changeState=function(toState){
+                StateManager.setState('offer', id,toState).then(function (data) {
+                    self.offer = data;
+                });
+            };
+            this.decline = function(){
+                changeState(-1);
+            };
+
+            this.accept = function () {
+                changeState(3);
+                // TODO: ask for what's next
             };
         }
     ]
