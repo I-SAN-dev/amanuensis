@@ -11,7 +11,8 @@ app.directive('materialInput', [
             select: true,
             selectMultiple: true,
             price: true,
-            date: true
+            date: true,
+            bool: true
         };
         return {
             restrict: 'A',
@@ -153,6 +154,15 @@ app.directive('materialInput', [
                         if(initialDate != $scope.model) {
                             $scope.selectDate = false;
                             initialDate = angular.copy($scope.model);
+                        }
+                    }
+                }
+
+                if($scope.inputType == 'bool'){
+                    $scope.toggleBool = function () {
+                        $scope.model = !$scope.model;
+                        if($scope.buttons){
+                            $scope.buttons.save.save();
                         }
                     }
                 }

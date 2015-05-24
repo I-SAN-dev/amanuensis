@@ -190,6 +190,48 @@
   {
     background-color: $brand-danger;
   }
+
+  input[type="checkbox"].switch{
+    display: none;
+
+    +.switch-indicator {
+      display: inline-block;
+      cursor: pointer;
+      width: 30px;
+      height: 10px;
+      border-radius: 10px;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: -5px;
+        border-radius: 100%;
+        transition: all 250ms ease-in-out;
+      }
+    }
+    &[data-ng-checked="false"]+.switch-indicator {
+      background-color: $gray-light;
+
+      &:after {
+        background-color: $gray;
+        margin-left: -10px;
+      }
+    }
+    &[data-ng-checked="true"]+.switch-indicator {
+      background-color: $brand-success;
+
+      &:after {
+        background-color: $brand-primary;
+        margin-left: 20px;
+      }
+    }
+  }
+
 }
 
 .btn

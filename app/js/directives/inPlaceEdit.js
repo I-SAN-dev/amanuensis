@@ -30,6 +30,7 @@ app.directive('inPlaceEdit',
                     this.editMode = false;
                     var backup = null;
 
+
                     this.enterEditMode = function () {
                         MasterDetailService.setEditor(self);
                         self.deletable = $scope.deletable;
@@ -40,6 +41,9 @@ app.directive('inPlaceEdit',
                         backup = angular.copy($scope.val);
                     };
 
+                    if($scope.type=='bool'){
+                        self.enterEditMode();
+                    }
                     var post = function() {
                         console.log($scope.val);
                         var apiObject = {
@@ -57,7 +61,7 @@ app.directive('inPlaceEdit',
 
 
                         ApiAbstractionLayer('POST', apiObject).then(function (data) {
-                            self.editMode = false;
+                            self.editMode = $scope.type == 'bool';
                             $scope.val = self.val;
                             backup = null;
                             if($scope.apiId)

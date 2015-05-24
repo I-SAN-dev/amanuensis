@@ -1,0 +1,10 @@
+<div class="form-group">
+    <input  placeholder="{{label}}"
+            type="checkbox"
+            id="{{id}}"
+            data-ng-checked="{{model}}"
+            data-ng-required="{{required || false}}"
+            class="switch">
+    <span data-ng-click="toggleBool()" class="switch-indicator"></span>
+    <label for="{{id}}">{{label}}</label>
+</div>

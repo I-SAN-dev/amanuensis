@@ -10856,6 +10856,35 @@ h1, h2 {
   .form-group .ng-invalid.ng-touched ~ .bar:before,
   .form-group .ng-invalid.ng-touched ~ .bar:after {
     background-color: #F4511E; }
+  .form-group input[type="checkbox"].switch {
+    display: none; }
+    .form-group input[type="checkbox"].switch + .switch-indicator {
+      display: inline-block;
+      cursor: pointer;
+      width: 30px;
+      height: 10px;
+      border-radius: 10px;
+      position: relative; }
+      .form-group input[type="checkbox"].switch + .switch-indicator:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: -5px;
+        border-radius: 100%;
+        transition: all 250ms ease-in-out; }
+    .form-group input[type="checkbox"].switch[data-ng-checked="false"] + .switch-indicator {
+      background-color: #BDBDBD; }
+      .form-group input[type="checkbox"].switch[data-ng-checked="false"] + .switch-indicator:after {
+        background-color: #9E9E9E;
+        margin-left: -10px; }
+    .form-group input[type="checkbox"].switch[data-ng-checked="true"] + .switch-indicator {
+      background-color: #009688; }
+      .form-group input[type="checkbox"].switch[data-ng-checked="true"] + .switch-indicator:after {
+        background-color: #404877;
+        margin-left: 20px; }
 
 .btn {
   border: none !important;
