@@ -55,16 +55,15 @@ app.controller('ItemDetailCtrl', [
 
         this.startTime = function () {
             ApiAbstractionLayer('POST',{name:'time', data: {item: self.item.id}}).then(function (data) {
-                self.time.duration = 0;
-                self.time.push(data);
+                self.time.times.push(data);
             });
         };
 
         this.stopTime = function (id) {
             ApiAbstractionLayer('POST', {name: 'time', data:{id:id,endnow:true}}).then(function (data) {
-                for(var i = 0; i<self.time.length; i++){
-                    if(self.time[i].id == data.id){
-                        self.time[i] = data;
+                for(var i = 0; i<self.time.times.length; i++){
+                    if(self.time.times[i].id == data.id){
+                        self.time.times[i] = data;
                         break;
                     }
                 }
@@ -73,7 +72,7 @@ app.controller('ItemDetailCtrl', [
         
         this.deleteTime = function (id) {
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
-                self.time = data;
+                self.time.times = data;
             });
         };
 

@@ -187,6 +187,7 @@
     "hours": "Stunden",
     "days": "Tage",
     "totalPrice": "Gesamtpreis",
+    "totalTime":"Gesamtzeit",
     "beforeTaxPrice": "Netto",
     "pricing": "Bepreisung",
     "connections": "Zuordnungen",
