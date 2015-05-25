@@ -11590,4 +11590,10 @@ strong.total {
 .close {
   transition: 0.3s opacity; }
 
+.pickadate {
+  font-family: "Roboto", Helvetica, Arial, sans-serif; }
+
+.pickadate-cell .pickadate-active {
+  background-color: #404877; }
+
 /*# sourceMappingURL=ama.css.map */
