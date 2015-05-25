@@ -1,0 +1,204 @@
+\hypertarget{class_d_b_a_l}{}\section{D\+B\+A\+L Class Reference}
+\label{class_d_b_a_l}\index{D\+B\+A\+L@{D\+B\+A\+L}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_b_a_l_a008a39a69d47048bd395c3c63c529ed5}{prepare} (\$query)
+\item 
+\hyperlink{class_d_b_a_l_a95860e8df75ae87cb665e6f6f6d00016}{dynamic\+Insert} (\$table, array \$columns, array \$data)
+\item 
+\hyperlink{class_d_b_a_l_ac55b38f92f3f092e60b00ecf0ac56d2d}{dynamic\+Update} (\$table, array \$where, array \$columns, array \$data)
+\item 
+\hyperlink{class_d_b_a_l_a1c2972b596a6b8923bd8930301e165f5}{delete\+Row} (\$table, array \$where)
+\item 
+\hyperlink{class_d_b_a_l_af9b4977008273145eb78c0746bcd07bc}{simple\+Select} (\$table, array \$columns, array \$where=N\+U\+L\+L, \$limit=0, \$order\+By=N\+U\+L\+L)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_d_b_a_l_ac93fbec81f07e5d15f80db907e63dc10}{get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_d_b_a_l_ad9d7ce33ebb142b70e58b68052ca0ea8}{\$instance}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_b_a_l_ad0cb87b388bc74d63dc884accdca8713}{\+\_\+\+\_\+clone} ()
+\item 
+\hyperlink{class_d_b_a_l_a095c5d389db211932136b53f25f39685}{\+\_\+\+\_\+construct} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Database Abstraction Layer, uses P\+D\+O, implements Singleton pattern (we only want O\+N\+E D\+B connection)
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_d_b_a_l_a095c5d389db211932136b53f25f39685}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_d_b_a_l_a095c5d389db211932136b53f25f39685}
+Constructor will create the Database connection 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_b_a_l_ac93fbec81f07e5d15f80db907e63dc10}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{get\+Instance}]{\setlength{\rightskip}{0pt plus 5cm}static get\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_d_b_a_l_ac93fbec81f07e5d15f80db907e63dc10}
+Will return the instance of the \hyperlink{class_d_b_a_l}{D\+B\+A\+L} \begin{DoxyReturn}{Returns}
+D\+B\+A\+L-\/ a \hyperlink{class_d_b_a_l}{D\+B\+A\+L} object 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_ad0cb87b388bc74d63dc884accdca8713}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}}
+\index{\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{\+\_\+\+\_\+clone}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_d_b_a_l_ad0cb87b388bc74d63dc884accdca8713}
+Manage proper cloning \begin{DoxyReturn}{Returns}
+\hyperlink{class_d_b_a_l}{D\+B\+A\+L} -\/ a \hyperlink{class_d_b_a_l}{D\+B\+A\+L} instance 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_a008a39a69d47048bd395c3c63c529ed5}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!prepare@{prepare}}
+\index{prepare@{prepare}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{prepare}]{\setlength{\rightskip}{0pt plus 5cm}prepare (
+\begin{DoxyParamCaption}
+\item[{}]{\$query}
+\end{DoxyParamCaption}
+)}\label{class_d_b_a_l_a008a39a69d47048bd395c3c63c529ed5}
+Returns a P\+D\+O prepared statement 
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$query} & -\/ the query to be prepared \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+P\+D\+Ostatement 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_a95860e8df75ae87cb665e6f6f6d00016}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!dynamic\+Insert@{dynamic\+Insert}}
+\index{dynamic\+Insert@{dynamic\+Insert}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{dynamic\+Insert}]{\setlength{\rightskip}{0pt plus 5cm}dynamic\+Insert (
+\begin{DoxyParamCaption}
+\item[{}]{\$table, }
+\item[{array}]{\$columns, }
+\item[{array}]{\$data}
+\end{DoxyParamCaption}
+)}\label{class_d_b_a_l_a95860e8df75ae87cb665e6f6f6d00016}
+Takes a tablename, a list of column names to be inserted and and array of data containing the data that should be inserted 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$table} & -\/ the name of the table to insert into, \\
+\hline
+array & {\em \$columns} & -\/ the column names that should be inserted \\
+\hline
+array & {\em \$data} & -\/ an array that holds the data that should be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/ the id of the inserted row 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_ac55b38f92f3f092e60b00ecf0ac56d2d}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!dynamic\+Update@{dynamic\+Update}}
+\index{dynamic\+Update@{dynamic\+Update}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{dynamic\+Update}]{\setlength{\rightskip}{0pt plus 5cm}dynamic\+Update (
+\begin{DoxyParamCaption}
+\item[{}]{\$table, }
+\item[{array}]{\$where, }
+\item[{array}]{\$columns, }
+\item[{array}]{\$data}
+\end{DoxyParamCaption}
+)}\label{class_d_b_a_l_ac55b38f92f3f092e60b00ecf0ac56d2d}
+Takes a tablename, a list of column names to be inserted and and array of data containing the data that should be inserted 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$table} & -\/ the name of the table to insert into, \\
+\hline
+array & {\em \$where} & -\/ column\+:value for the where clause \\
+\hline
+array & {\em \$columns} & -\/ the column names that should be inserted \\
+\hline
+array & {\em \$data} & -\/ an array that holds the data that should be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/ the id of the inserted row 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_a1c2972b596a6b8923bd8930301e165f5}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!delete\+Row@{delete\+Row}}
+\index{delete\+Row@{delete\+Row}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{delete\+Row}]{\setlength{\rightskip}{0pt plus 5cm}delete\+Row (
+\begin{DoxyParamCaption}
+\item[{}]{\$table, }
+\item[{array}]{\$where}
+\end{DoxyParamCaption}
+)}\label{class_d_b_a_l_a1c2972b596a6b8923bd8930301e165f5}
+Takes a tablename and a where representation that should be deleted 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$table} & -\/ the name of the table to insert into, \\
+\hline
+array & {\em \$where} & -\/ column\+:value for the where clause \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+int row\+Count -\/ the number of rows deleted 
+\end{DoxyReturn}
+\hypertarget{class_d_b_a_l_af9b4977008273145eb78c0746bcd07bc}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!simple\+Select@{simple\+Select}}
+\index{simple\+Select@{simple\+Select}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{simple\+Select}]{\setlength{\rightskip}{0pt plus 5cm}simple\+Select (
+\begin{DoxyParamCaption}
+\item[{}]{\$table, }
+\item[{array}]{\$columns, }
+\item[{array}]{\$where = {\ttfamily NULL}, }
+\item[{}]{\$limit = {\ttfamily 0}, }
+\item[{}]{\$order\+By = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}\label{class_d_b_a_l_af9b4977008273145eb78c0746bcd07bc}
+Takes a tablename and a where representation and a set of columnnames and performs a simple S\+E\+L\+E\+C\+T 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$table} & -\/ the name of the table to insert into, \\
+\hline
+array & {\em \$columns} & -\/ the columns to be responded \\
+\hline
+array & {\em \$where} & -\/ column\+:value for the where clause \\
+\hline
+int & {\em \$limit} & -\/ limits the select to X, 0 = no limit \\
+\hline
+string & {\em \$order\+By} & -\/ an optional order by statement \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+array -\/ (2-\/dimensional) 
+\end{DoxyReturn}
+
+
+\subsection{Field Documentation}
+\hypertarget{class_d_b_a_l_ad9d7ce33ebb142b70e58b68052ca0ea8}{}\index{D\+B\+A\+L@{D\+B\+A\+L}!\$instance@{\$instance}}
+\index{\$instance@{\$instance}!D\+B\+A\+L@{D\+B\+A\+L}}
+\subsubsection[{\$instance}]{\setlength{\rightskip}{0pt plus 5cm}\$instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{class_d_b_a_l_ad9d7ce33ebb142b70e58b68052ca0ea8}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/database/\hyperlink{dbal_8php}{dbal.\+php}\end{DoxyCompactItemize}

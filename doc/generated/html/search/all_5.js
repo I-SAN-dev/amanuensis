@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['dbal',['DBAL',['../class_d_b_a_l.html',1,'']]],
+  ['dbal_2ephp',['dbal.php',['../dbal_8php.html',1,'']]],
+  ['delete',['delete',['../classacceptance.html#a598da63ff0199f442adaa4dfb0fe1447',1,'acceptance\delete()'],['../classclient.html#a598da63ff0199f442adaa4dfb0fe1447',1,'client\delete()'],['../classclient__categories.html#a598da63ff0199f442adaa4dfb0fe1447',1,'client_categories\delete()'],['../classclient__data.html#a598da63ff0199f442adaa4dfb0fe1447',1,'client_data\delete()'],['../classcontract.html#a598da63ff0199f442adaa4dfb0fe1447',1,'contract\delete()'],['../classfile_contract.html#a598da63ff0199f442adaa4dfb0fe1447',1,'fileContract\delete()'],['../classhello_world.html#a598da63ff0199f442adaa4dfb0fe1447',1,'helloWorld\delete()'],['../classinvoice.html#a598da63ff0199f442adaa4dfb0fe1447',1,'invoice\delete()'],['../classitem.html#a598da63ff0199f442adaa4dfb0fe1447',1,'item\delete()'],['../classitem__preset.html#a598da63ff0199f442adaa4dfb0fe1447',1,'item_preset\delete()'],['../classoffer.html#a598da63ff0199f442adaa4dfb0fe1447',1,'offer\delete()'],['../classproject.html#a598da63ff0199f442adaa4dfb0fe1447',1,'project\delete()'],['../classreminder.html#a598da63ff0199f442adaa4dfb0fe1447',1,'reminder\delete()'],['../classtest.html#a598da63ff0199f442adaa4dfb0fe1447',1,'test\delete()'],['../classtime.html#a598da63ff0199f442adaa4dfb0fe1447',1,'time\delete()'],['../classtodo.html#a598da63ff0199f442adaa4dfb0fe1447',1,'todo\delete()'],['../classuserdata.html#a06b2068f0636a8662805d4f2b0d7b0f3',1,'userdata\delete()']]],
+  ['deleteacceptance',['deleteAcceptance',['../classacceptance.html#afda926cb8e1b5dcf608e6364284f344d',1,'acceptance']]],
+  ['deletecategory',['deleteCategory',['../classclient__categories.html#af22055a5098ca5c58d1e4f29629c049b',1,'client_categories']]],
+  ['deletecategorylink',['deleteCategoryLink',['../classclient__categories.html#aa66700a84026a52b1b29da3c788ad42a',1,'client_categories']]],
+  ['deletecontract',['deleteContract',['../classcontract.html#a5e0ef07165565e8d1e1a4597cf7c26d5',1,'contract']]],
+  ['deletedata',['deleteData',['../classclient__data.html#a5dfbc69fb5dd3a5afce639a8e960a84c',1,'client_data']]],
+  ['deletefilecontract',['deleteFileContract',['../classfile_contract.html#a59b1222816aff91a512c82aefb93c0cf',1,'fileContract']]],
+  ['deleteinvoice',['deleteInvoice',['../classinvoice.html#adbcfa09a892758d95740bf5b1dd26cc2',1,'invoice']]],
+  ['deleteitem',['deleteItem',['../classitem.html#aef0557b5b1d8a2b1c9e5a16b42f00af8',1,'item']]],
+  ['deleteitempreset',['deleteItemPreset',['../classitem__preset.html#a258b0404796885321f632fd4b1db22ac',1,'item_preset']]],
+  ['deleteoffer',['deleteOffer',['../classoffer.html#a7061c06b9fe9e22ee4ba9c185456a322',1,'offer']]],
+  ['deleteproject',['deleteProject',['../classproject.html#ac93b641bff4bf69182697dc77e8b8708',1,'project']]],
+  ['deletereminder',['deleteReminder',['../classreminder.html#affd4b7d0108d3d900879c19a402e9fd8',1,'reminder']]],
+  ['deleterow',['deleteRow',['../class_d_b_a_l.html#a1c2972b596a6b8923bd8930301e165f5',1,'DBAL']]],
+  ['deletetime',['deleteTime',['../classtime.html#a2591450369ab5c8b103aa7c5952e69bd',1,'time']]],
+  ['deletetodo',['deleteTodo',['../classtodo.html#ac7f553fb0bd84fe86fe1042bc9b83f4b',1,'todo']]],
+  ['destroy',['destroy',['../class_ama_session.html#a93d4348dfe017e3b97a7131f03897121',1,'AmaSession']]],
+  ['dynamicinsert',['dynamicInsert',['../class_d_b_a_l.html#a95860e8df75ae87cb665e6f6f6d00016',1,'DBAL']]],
+  ['dynamicupdate',['dynamicUpdate',['../class_d_b_a_l.html#ac55b38f92f3f092e60b00ecf0ac56d2d',1,'DBAL']]]
+];

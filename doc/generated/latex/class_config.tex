@@ -1,0 +1,108 @@
+\hypertarget{class_config}{}\section{Config Class Reference}
+\label{class_config}\index{Config@{Config}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_config_afc8a3c62679cf00ade9f15fb2a6d6132}{save} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_config_ac93fbec81f07e5d15f80db907e63dc10}{get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_config_ad9d7ce33ebb142b70e58b68052ca0ea8}{\$instance}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_config_ad0cb87b388bc74d63dc884accdca8713}{\+\_\+\+\_\+clone} ()
+\item 
+\hyperlink{class_config_a095c5d389db211932136b53f25f39685}{\+\_\+\+\_\+construct} ()
+\item 
+\hyperlink{class_config_a55c3dd2c0ad1c883a3fc76a679eabbe9}{read\+Config\+File} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_config_a0722441477f957078ee2437054556cbc}{\$filename} = \textquotesingle{}classes/config/config.\+json\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Loads the config json and grants access to it. Implements the singleton pattern (h8ters gonna h8..), but therefore we ensure that the config file is only loaded O\+N\+C\+E
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_config_a095c5d389db211932136b53f25f39685}{}\index{Config@{Config}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Config@{Config}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_config_a095c5d389db211932136b53f25f39685}
+Constructor will read and parse the config file 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_config_ac93fbec81f07e5d15f80db907e63dc10}{}\index{Config@{Config}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Config@{Config}}
+\subsubsection[{get\+Instance}]{\setlength{\rightskip}{0pt plus 5cm}static get\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_config_ac93fbec81f07e5d15f80db907e63dc10}
+Will return the instance of the config \begin{DoxyReturn}{Returns}
+\hyperlink{class_config}{Config} -\/ a config object 
+\end{DoxyReturn}
+\hypertarget{class_config_ad0cb87b388bc74d63dc884accdca8713}{}\index{Config@{Config}!\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}}
+\index{\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}!Config@{Config}}
+\subsubsection[{\+\_\+\+\_\+clone}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_config_ad0cb87b388bc74d63dc884accdca8713}
+Manage proper cloning \begin{DoxyReturn}{Returns}
+\hyperlink{class_config}{Config} -\/ a config instance 
+\end{DoxyReturn}
+\hypertarget{class_config_a55c3dd2c0ad1c883a3fc76a679eabbe9}{}\index{Config@{Config}!read\+Config\+File@{read\+Config\+File}}
+\index{read\+Config\+File@{read\+Config\+File}!Config@{Config}}
+\subsubsection[{read\+Config\+File}]{\setlength{\rightskip}{0pt plus 5cm}read\+Config\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_config_a55c3dd2c0ad1c883a3fc76a679eabbe9}
+Reads the config .json file and returns an array \begin{DoxyReturn}{Returns}
+array -\/ an array with config data 
+\end{DoxyReturn}
+\hypertarget{class_config_afc8a3c62679cf00ade9f15fb2a6d6132}{}\index{Config@{Config}!save@{save}}
+\index{save@{save}!Config@{Config}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}save (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_config_afc8a3c62679cf00ade9f15fb2a6d6132}
+Saves the current config back to the file 
+
+\subsection{Field Documentation}
+\hypertarget{class_config_ad9d7ce33ebb142b70e58b68052ca0ea8}{}\index{Config@{Config}!\$instance@{\$instance}}
+\index{\$instance@{\$instance}!Config@{Config}}
+\subsubsection[{\$instance}]{\setlength{\rightskip}{0pt plus 5cm}\$instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{class_config_ad9d7ce33ebb142b70e58b68052ca0ea8}
+\hypertarget{class_config_a0722441477f957078ee2437054556cbc}{}\index{Config@{Config}!\$filename@{\$filename}}
+\index{\$filename@{\$filename}!Config@{Config}}
+\subsubsection[{\$filename}]{\setlength{\rightskip}{0pt plus 5cm}\$filename = \textquotesingle{}classes/config/config.\+json\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_config_a0722441477f957078ee2437054556cbc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/config/\hyperlink{config_8php}{config.\+php}\end{DoxyCompactItemize}
