@@ -1,3 +1,9 @@
+/**
+ * The clientBox directive
+ * Shows client data
+ *
+ * @author Christian Baur
+ */
 app.directive('clientBox', [
     function () {
         return {

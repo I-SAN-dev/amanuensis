@@ -1,3 +1,9 @@
+/**
+ * The listNavigation directive
+ * Shows a list and handles keyboard inputs to navigate through that list
+ *
+ * @author Christian Baur
+ */
 app.directive('listNavigation',[
     '$document',
     '$filter',
@@ -22,8 +28,6 @@ app.directive('listNavigation',[
                  * @returns {*} - the requested neighbor object
                  */
                 var getNeighbor = function (offset, active, list) {
-
-                    //console.log(list);
                     var oldPos;
                     if (active) {
                         oldPos = list.indexOf(active);
@@ -36,13 +40,11 @@ app.directive('listNavigation',[
                                     break;
                                 }
                             }
-                            //console.log(list);
                         }
                     } else {
                         oldPos = -offset;
                     }
 
-                    console.log(oldPos);
                     return oldPos + offset;
                 };
 
@@ -75,7 +77,6 @@ app.directive('listNavigation',[
 
 
                     var viewportHeight = scrollArea.height();
-                    console.log(viewportHeight);
                     var scrollTop = scrollArea.scrollTop();
 
                     var position;
@@ -90,24 +91,21 @@ app.directive('listNavigation',[
                             if(domList[position]) {
                                 newActiveOffset = $(domList[position]).position();
                                 newActiveOffset = newActiveOffset.top - domList[position].offsetHeight;
-                                console.log(newActiveOffset,scrollTop);
                                 if (newActiveOffset < 0) {
+                                    // scroll to the element
                                     var newScrollTop = scrollTop + newActiveOffset ;
-                                    console.log(newScrollTop);
                                     scrollArea.animate({scrollTop: newScrollTop}, animation);
                                 }
 
                             }
                         }
                     }
-                    if (key == 40) {
+                    if (key == 40) { // arrow down
                         event.stopPropagation();
                         event.preventDefault();
 
-
                         position = getNeighbor(1, active, list);
                         var nextDetail = list[position];
-                        console.log(nextDetail);
                         if (nextDetail) {
                             callback(nextDetail, true);
                             if(domList[position]) {
@@ -115,8 +113,8 @@ app.directive('listNavigation',[
 
                                 newActiveOffset = newActiveItem.position();
                                 newActiveOffset = newActiveItem.height() + newActiveOffset.top;
-                                console.log(newActiveOffset);
                                 if (newActiveOffset > viewportHeight) {
+                                    // scroll to the element
                                     scrollArea.animate({scrollTop: scrollTop + (newActiveOffset - viewportHeight)}, animation);
                                 }
                             }

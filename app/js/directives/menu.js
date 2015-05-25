@@ -2,6 +2,8 @@
  * Controller for menus (amaMenu directive) and navigation items
  * builds a navigation list from the sites and modules constants
  * and handles clicks on menu items
+ *
+ * @author Christian Baur
  */
 app.controller('NavCtrl',[
         'AuthService',
@@ -47,7 +49,6 @@ app.controller('NavCtrl',[
                 angular.forEach(menuItems, function(value, key){
                     value.active = value.name == item.name;
                 });
-                console.log(item.name, $state.current.name);
 
                 var menuItem = item.menus[name];
                 if(menuItem.click){
@@ -65,7 +66,6 @@ app.controller('NavCtrl',[
             };
 
             $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-                console.log('stateChangeSuccess');
                 angular.forEach(menuItems, function (value, key) {
                     value.active = value.name == toState.name;
                 })

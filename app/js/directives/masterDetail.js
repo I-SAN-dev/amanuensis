@@ -1,3 +1,11 @@
+/**
+ * The masterDetail directive
+ * Shows a master detail view. A template for master and detail must be specified.
+ * Furthermore a controller for detail can be supplied.
+ * Integrates with the masterDetailService
+ *
+ * @author Christian Baur
+ */
 app.directive('masterDetail', [function(){
     return {
         restrict: 'A',
@@ -24,8 +32,12 @@ app.directive('masterDetail', [function(){
 
                 var self = this;
 
+                /**
+                 * Gets the stateParams from master
+                 * @param forState
+                 * @returns {*}
+                 */
                 this.getStateParams = function(forState){
-                    console.log('getStateParams');
                     return MasterDetailService.notifyMaster('getStateParams', forState);
                 };
 
