@@ -455,6 +455,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
      */
     $translateProvider.preferredLanguage(constants.LANGUAGE);
 
+
+
+
     // create all app states based on the 'sites' constant
     var states = sites;
     for(var i= 0; i<states.length; i++){

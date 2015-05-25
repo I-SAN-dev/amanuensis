@@ -178,6 +178,7 @@ app.directive('materialInput', [
                 if(!inputTypes[type]) {
                     type = 'text';
                 }
+                console.log(type);
                 $http.get('templates/directives/materialInput/'+type+'.html', {cache: $templateCache}).success(function(tplContent){
                     var element = $compile(tplContent)(scope);
                     elem.replaceWith(element);
