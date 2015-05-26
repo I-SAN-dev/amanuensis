@@ -43,12 +43,15 @@ app.controller('NavCtrl',[
                 }
             });
 
+            var setActiveClass = function (stateName) {
+                angular.forEach(menuItems, function(value, key){
+                    value.active = value.name == stateName;
+                });
+            };
             // Handle clicks on menu items
             // value.active will set an active class on the menu item
             this.goTo = function(item){
-                angular.forEach(menuItems, function(value, key){
-                    value.active = value.name == item.name;
-                });
+                setActiveClass(item.name);
 
                 var menuItem = item.menus[name];
                 if(menuItem.click){
@@ -74,6 +77,7 @@ app.controller('NavCtrl',[
             // read additional classes for the menu list from the modules constant
             this.additionalClasses = modules[name].additionalClasses || '';
 
+            setActiveClass($state.current.name);
 
         }
     ]
