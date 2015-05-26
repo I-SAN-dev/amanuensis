@@ -49,7 +49,7 @@ app
                             })
                                 .then(function (data) {
                                     $rootScope.loggedIn = true;
-                                    LocalStorage.setData('fe_key', data.fe_key, false);
+                                    LocalStorage.setKey(data.fe_key);
                                     deferred.resolve(data);
                                 }, function (error) {
                                     deferred.reject(error);
