@@ -17,6 +17,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaClient.php');
+require_once('classes/project/amaStream.php');
 
 class client {
 
@@ -67,6 +68,9 @@ class client {
             $dbal = DBAL::getInstance();
             try
             {
+                $stream = AmaStream::getInstance();
+                $stream->addItem('delete','client', $_DELETE["id"]);
+
                 $count = $dbal->deleteRow('customers', array('id', $_DELETE['id']));
             }
             catch(Exception $e)
@@ -219,6 +223,9 @@ class client {
                 }
             }
         }
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','client', $id);
 
         self::getClient($id);
     }

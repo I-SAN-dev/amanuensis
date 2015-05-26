@@ -17,6 +17,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/pdf/pdfDoc.php');
+require_once('classes/project/amaStream.php');
 
 
 
@@ -67,6 +68,9 @@ class pdfgen {
         {
             $pdfdoc = new PdfDoc($_POST["for"], $_POST["forid"]);
             $path = $pdfdoc->saveToDisk();
+
+            $stream = AmaStream::getInstance();
+            $stream->addItem('generate', $_POST["for"], $_POST["forid"]);
 
             $response = array('success' => true, 'path' => $path);
             json_response($response);
