@@ -33,6 +33,9 @@ class Scripts
         "lib/summernote.min.js",
         "js/app.js", // has to be loaded before the other scripts
     );
+
+
+
     /**
      * @var array $byTemplate
      * Holds the path to all templates that should be compiled

@@ -4,7 +4,8 @@
 app.controller('OffersCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
-    function(ApiAbstractionLayer, LocalStorage){
+    'MasterDetailService',
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService){
         var self = this;
         this.offers = LocalStorage.getData('offers');
         ApiAbstractionLayer('GET','offer').then(function (data) {

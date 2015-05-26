@@ -1,4 +1,8 @@
 /**
+ *
+ * The fileUpload directive & service.
+ * Handles file uploads.
+ *
  * Attribution: http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
  */
 app.directive('fileUpload', ['$parse', function ($parse) {
@@ -17,6 +21,12 @@ app.directive('fileUpload', ['$parse', function ($parse) {
     };
 }])
     .service('fileUploadService', ['$http', '$q', function ($http, $q) {
+        /**
+         * Uploads the specified file to the specified url.
+         * @param file
+         * @param uploadUrl
+         * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*} - a promise
+         */
         this.uploadFile = function(file, uploadUrl){
             var fd = new FormData();
             fd.append('file', file);

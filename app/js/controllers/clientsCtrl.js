@@ -36,9 +36,15 @@ app.controller('ClientsCtrl',
             };
 
             // get the client list
-            ApiAbstractionLayer('GET','client').then(function (data) {
-                setClientList(data);
-            });
+            if(!$stateParams.noReload) {
+                ApiAbstractionLayer('GET', 'client').then(function (data) {
+                    setClientList(data);
+                    if (!$stateParams.id) {
+                        MasterDetailService.notifyController('setDetail', self.clientList[0]);
+                        $stateParams.id = self.clientList[0].id;
+                    }
+                });
+            }
 
             // (re)set a flag indicating if the Controller was fully loaded
             // needed for setting transition classes

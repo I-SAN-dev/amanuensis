@@ -1,3 +1,9 @@
+/**
+ * The amaModule directive.
+ * Shows a module with content specified in 'js/scriptsbytemplate/modules.jst'
+ *
+ * @author Christian Baur
+ */
 app.controller('ModuleCtrl', [
     '$scope',
     'modules',
@@ -8,14 +14,11 @@ app.controller('ModuleCtrl', [
 
         var self = this;
 
-
-        console.log($rootScope.loaded);
-        setTimeout(function () {
-            console.log($rootScope.loaded);
-        }, 5000);
-
+        /**
+         * gets the module's content for the specified state
+         * @param state - name of the ui-router state
+         */
         var getContent = function (state) {
-            console.log(state);
             var module = modules[$scope.name];
             var specificModule = module[state];
             self.content = module.content;
@@ -30,7 +33,8 @@ app.controller('ModuleCtrl', [
 
 
 
-    }]);
+    }
+]);
 app.directive('amaModule', [function(){
     return {
         restrict: 'A',

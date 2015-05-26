@@ -75,6 +75,15 @@ ob_start();
     <div id="mainCanvas" class="container-fluid">
         <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade fullheight"></div>
     </div>
+<?php
+    // basic Angular i18n
+    $lang = $conf->get['lang'];
+    if($lang != 'en'):
+?>
+    <script src="lib/angular-locales/angular-locale_<?php echo $lang; ?>.js"></script>
+<?php
+endif;
+?>
 
 </body>
 </html>
