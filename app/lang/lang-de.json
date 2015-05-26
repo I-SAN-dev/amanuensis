@@ -248,6 +248,21 @@
       }
     }
   },
+  "stream":
+  {
+    "create":"erstellte",
+    "generate":"generierte ein PDF für",
+    "send":"versendete",
+    "delete":"löschte",
+    "client":"den Kunden",
+    "project":"das Projekt",
+    "offer":"das Angebot",
+    "contract":"den Vertrag",
+    "todo":"die ToDo-Liste",
+    "acceptance":"das Abnahmeformular",
+    "invoice":"die Rechnung",
+    "reminder":"die Zahlungserinnerung"
+  },
 
   "settings": {
     "settings":"Einstellungen",

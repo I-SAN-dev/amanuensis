@@ -10740,6 +10740,12 @@ h1, h2 {
     background-color: #404877;
     transition-duration: 0s; }
 
+.stream-entry .stream-date {
+  color: #9E9E9E; }
+.stream-entry h3 {
+  margin: 5px 0 0 0;
+  line-height: 1.5; }
+
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;
   border-style: dotted; }

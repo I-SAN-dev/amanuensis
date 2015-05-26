@@ -142,7 +142,7 @@ final class AmaStream {
             FROM stream
                 LEFT JOIN users ON (stream.user_id = users.id)
                 LEFT JOIN customers ON (stream.client_id = customers.id)
-            ORDER BY stream.create_time ASC
+            ORDER BY stream.create_time DESC
             LIMIT 50
         ');
 

@@ -51,3 +51,16 @@ $numOfFastButtons: 5;
     transition-duration: 0s;
   }
 }
+
+.stream-entry
+{
+  .stream-date
+  {
+    color: $gray-base;
+  }
+  h3
+  {
+    margin: 5px 0 0 0;
+    line-height: 1.5;
+  }
+}
