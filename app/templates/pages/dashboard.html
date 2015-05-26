@@ -62,12 +62,29 @@
                     </div>
 
                 </div>
+
                 <div class="col-sm-6 col-md-4 fullheight">
                     <div class="panel panel-default halfheight scroll-y">
-                        <div class="panel-body">
-                            <h1>Stream o.ä</h1>
-                        </div>
+                            <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
+                                    <div class="row">
+                                        <div class="stream-date col-xs-6">
+                                            {{entry.create_time | amaDate:'dd.MM.yyyy - HH:mm'}}
+                                        </div>
+                                        <div class="col-xs-6 stream-client text-right">
+                                            <a data-ng-if="dashboard.clientLinkable(entry)" data-ng-click="dashboard.goto('client', entry.client.id)">{{entry.client.name}}</a>
+                                            <span data-ng-if="!dashboard.clientLinkable(entry)">{{entry.client.name}}</span>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h3>
+                                                <a href="mailto:{{entry.user.email}}">{{entry.user.name}}</a> {{ 'stream.'+entry.action | translate}} {{ 'stream.'+entry.type | translate }}
+                                                <a data-ng-if="dashboard.linkable(entry)" data-ng-click="dashboard.goto(entry.type, entry.id)">{{entry.title}}</a>
+                                                <span data-ng-if="!dashboard.linkable(entry)">{{entry.title}}</span>
+                                            </h3>
+                                        </div>
+                                    </div>
+                            </div>
                     </div>
+
                     <div class="panel panel-default halfheight scroll-y">
                         <div class="panel-body">
                             <h1>Statistiken</h1>
