@@ -3,8 +3,8 @@
  * Allows sharing functions between master and detail controllers.
  */
 app.factory('MasterDetailService', [
-
-    function () {
+    '$state',
+    function ($state) {
         var master, detail, editor, controller;
         var processParams = function (args) {
             var params = [];
@@ -60,12 +60,13 @@ app.factory('MasterDetailService', [
                 }
             },
             setDetailView: function(detail, keyboard){
-                console.log('hallo');
                 if(self.editMode) {
                     self.notifyEditor('cancel');
                     self.editMode = false;
                 }
-                //$stateParams.id = detail.id;
+
+                if($state.params.hasDetails)
+                    $state.go($state.current.name, {id: detail.id});
                 self.notifyDetail('detailChanged', detail, keyboard);
                 return detail;
             }

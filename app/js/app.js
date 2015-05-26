@@ -164,12 +164,22 @@ app.constant('sites', [
     {
         name: 'app.clients',
         stateObject: {
-            url: '/clients/:id',
+            url: '/clients',
+            abstract: true,
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/clients.html'
                 }
+            },
+            params: {
+                hasDetails: true
             }
+        }
+    },
+    {
+        name: 'app.clients.list',
+        stateObject: {
+            url: '/:id'
         },
         menus: {
             mainNav: {
@@ -291,7 +301,7 @@ app.constant('sites', [
             }
         }
     },
-    {
+    /*{
         name: 'app.projects',
         stateObject: {
             url: '/projects/:id',
@@ -308,7 +318,7 @@ app.constant('sites', [
                 icon: 'md md-folder'
             }
         }
-    },
+    },*/
     {
         name: 'app.projectCreation',
         stateObject: {
@@ -334,12 +344,22 @@ app.constant('sites', [
     {
         name: 'app.projectArchive',
         stateObject: {
-            url: '/project-archive/:id',
+            url: '/project-archive',
+            abstract: true,
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/projects.html'
                 }
+            },
+            params: {
+                hasDetails: true
             }
+        }
+    },
+    {
+        name: 'app.projectArchive.detail',
+        stateObject:{
+            url: '/:id'
         }
     },
     {
