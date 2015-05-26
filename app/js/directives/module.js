@@ -28,6 +28,7 @@ app.controller('ModuleCtrl', [
         };
 
         $rootScope.$on('$viewContentLoaded', function (event) {
+            console.log('view content loaded');
             getContent($state.current.name);
         });
 

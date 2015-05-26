@@ -4,6 +4,8 @@
  * @author Christian Baur, Sebastian Antosch
  */
 app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootScope){
+    var encryptionKey;
+
     angular.element($window).on('storage', function(event){
         $rootScope.$apply();
     });
@@ -73,21 +75,21 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
         console.log('LocalStorage cleaned!');
     };
 
-    var encrypt = function (actual, key) {
-        if(actual && key) {
+    var encrypt = function (actual) {
+        if(actual && encryptionKey) {
             var result = "";
             for (var i = 0; i < actual.length; i++) {
-                result += String.fromCharCode(actual.charCodeAt(i) + key.charCodeAt(i % key.length));
+                result += String.fromCharCode(actual.charCodeAt(i) + encryptionKey.charCodeAt(i % encryptionKey.length));
             }
             return result;
         }
     };
 
-    var decrypt = function (encrypted, key) {
-        if(encrypted) {
+    var decrypt = function (encrypted) {
+        if(encrypted && encryptionKey) {
             var result = "";
             for (var i = 0; i < encrypted.length; i++) {
-                result += String.fromCharCode(encrypted.charCodeAt(i) - key.charCodeAt(i % key.length));
+                result += String.fromCharCode(encrypted.charCodeAt(i) - encryptionKey.charCodeAt(i % encryptionKey.length));
             }
             return result;
         }
@@ -118,7 +120,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
             }
 
             if(encrypted != false) {
-                processedValue = encrypt(processedValue, $window.localStorage.getItem('fe_key'));
+                processedValue = encrypt(processedValue);
             }
 
             /* Store the Data */
@@ -149,7 +151,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
         getData: function(key, encrypted){
             var jsonString = $window.localStorage.getItem(cleanKey(key));
             if(encrypted != false){
-                jsonString = decrypt(jsonString, $window.localStorage.getItem('fe_key'));
+                jsonString = decrypt(jsonString);
             }
             return tryParseJSON(jsonString);
         },
@@ -167,6 +169,14 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          */
         removeCache: function () {
             $window.localStorage.clear();
+        },
+
+        /**
+         * Sets the key for encryption
+         * @param {string} key - a key coming from the API which will be used to encrypt the cache
+         */
+        setKey: function(key){
+            encryptionKey = key;
         }
     }
 }]);

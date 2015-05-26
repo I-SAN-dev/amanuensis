@@ -2,10 +2,13 @@ app.controller('ProjectDetailCtrl',
     [
         'ApiAbstractionLayer',
         'LocalStorage',
+        'DeleteService',
+        'PanelService',
         '$scope',
+        '$state',
         '$stateParams',
         'MasterDetailService',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, MasterDetailService) {
+        function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, $scope, $state, $stateParams, MasterDetailService) {
             var self = this;
             MasterDetailService.setDetail(this);
             this.contracts = [];
@@ -54,7 +57,11 @@ app.controller('ProjectDetailCtrl',
             }
 
             this.deleteProject = function(){
-                MasterDetailService.notifyMaster('deleteProject', self.project.id);
+                var client = self.project.client.id;
+                DeleteService('project',self.project.id).then(function (data) {
+                    PanelService.setPanel('clients',2);
+                    $state.go('app.clients.detail',{id:client})
+                });
             };
         }
     ]
