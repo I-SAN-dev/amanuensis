@@ -128,12 +128,51 @@ final class AmaStream {
 
     /**
      * Returns the stream data and triggers the cleanup
+     * @return array
      */
     public function getStream()
     {
+        $dbal = DBAL::getInstance();
 
+        $q = $dbal->prepare('
+            SELECT    stream.create_time,
+                    users.id AS user_id, users.username AS user_name, users.email AS user_email,
+                    stream.associated_action AS action, stream.associated_title AS title, stream.associated_type AS type, stream.associated_id AS id,
+                    customers.id AS client_id, customers.companyname AS client_companyname, customers.contact_firstname AS client_firstname, customers.contact_lastname AS client_lastname
+            FROM stream
+                LEFT JOIN users ON (stream.user_id = users.id)
+                LEFT JOIN customers ON (stream.client_id = customers.id)
+            ORDER BY stream.create_time ASC
+            LIMIT 50
+        ');
 
+        $q->execute();
+        $entries = $q->fetchAll(PDO::FETCH_ASSOC);
 
+        /* Reconstruct this moloch */
+        foreach($entries as &$e)
+        {
+            /* user */
+            $e['user'] = array(
+                'id' => $e['user_id'],
+                'name' => $e['user_name'],
+                'email' => $e['user_email'],
+            );
+            unset($e['user_id']);
+            unset($e['user_name']);
+            unset($e['user_email']);
+
+            /* client */
+            $e['client'] = array(
+                'id' => $e['client_id'],
+                'name' => (isset($e['client_companyname']) && $e['client_companyname'] != '') ? $e['client_companyname'] : $e['client_firstname'].' '.$e['client_lastname']
+            );
+            unset($e['client_id']);
+            unset($e['client_companyname']);
+            unset($e['client_firstname']);
+            unset($e['client_lastname']);
+        }
+        return $entries;
     }
 
     /**
