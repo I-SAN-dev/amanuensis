@@ -2,7 +2,7 @@
  * Main application. Handles dependencies and routing.
  */
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate']);
-app.run(function ($rootScope, $state, AuthService, $q) {
+app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
 
 
     /**
@@ -13,8 +13,9 @@ app.run(function ($rootScope, $state, AuthService, $q) {
     var getLoginState = function(){
         console.log('loggedIn',$rootScope.loggedIn);
         var defer = $q.defer();
-        AuthService.isLoggedIn().then(function (data) {
-            $rootScope.loggedIn = data.loggedin;
+        AuthService.currentUser().then(function (data) {
+            LocalStorage.setKey(data.fe_key);
+            $rootScope.loggedIn = true;
             defer.resolve();
 
         });
