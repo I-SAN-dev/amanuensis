@@ -398,12 +398,22 @@ app.constant('sites', [
     {
         name:'app.itemPresets',
         stateObject: {
-            url: '/item-presets/:id',
+            abstract: true,
+            url: '/item-presets',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/itemPresets.html'
                 }
+            },
+            params: {
+                hasDetails: true
             }
+        }
+    },
+    {
+        name: 'app.itemPresets.detail',
+        stateObject: {
+            url: '/:id'
         }
     },
     {

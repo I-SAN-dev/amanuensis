@@ -39,7 +39,7 @@ app.controller('ClientsCtrl',
             if(!$stateParams.noReload) {
                 ApiAbstractionLayer('GET', 'client').then(function (data) {
                     setClientList(data);
-                    if (!$stateParams.id) {
+                    if (!$stateParams.id && self.clientList.length > 0) {
                         MasterDetailService.notifyController('setDetail', self.clientList[0]);
                         $stateParams.id = self.clientList[0].id;
                     }
