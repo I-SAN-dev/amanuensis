@@ -17,6 +17,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/mail/amaMailDoc.php');
+require_once('classes/project/amaStream.php');
 
 class mail {
 
@@ -84,6 +85,10 @@ class mail {
             try
             {
                 $mail->send();
+
+                $stream = AmaStream::getInstance();
+                $stream->addItem('send', $_POST["type"], $_POST["id"]);
+
                 json_response(array(
                     'success' => true
                 ));

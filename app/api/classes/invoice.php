@@ -18,6 +18,7 @@ require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
+require_once('classes/project/amaStream.php');
 
 class invoice {
 
@@ -181,6 +182,10 @@ class invoice {
             ),
             $_POST
         );
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','invoice', $id);
+
         self::getInvoice($id);
     }
 
@@ -214,6 +219,9 @@ class invoice {
         $dbal = DBAL::getInstance();
         try
         {
+            $stream = AmaStream::getInstance();
+            $stream->addItem('delete','invoice', $_DELETE["id"]);
+
             $count = $dbal->deleteRow('invoices', array('id', $_DELETE['id']));
         }
         catch(Exception $e)

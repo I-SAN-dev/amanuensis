@@ -18,6 +18,7 @@ require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
+require_once('classes/project/amaStream.php');
 
 class todo {
 
@@ -168,6 +169,10 @@ class todo {
             ),
             $_POST
         );
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','todo', $id);
+
         self::getTodo($id);
     }
 
@@ -197,6 +202,9 @@ class todo {
         $dbal = DBAL::getInstance();
         try
         {
+            $stream = AmaStream::getInstance();
+            $stream->addItem('delete','todo', $_DELETE["id"]);
+
             $count = $dbal->deleteRow('todos', array('id', $_DELETE['id']));
         }
         catch(Exception $e)

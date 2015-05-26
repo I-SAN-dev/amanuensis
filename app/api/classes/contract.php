@@ -18,6 +18,7 @@ require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaItemList.php');
 require_once('classes/project/amaProject.php');
+require_once('classes/project/amaStream.php');
 
 class contract {
 
@@ -148,6 +149,10 @@ class contract {
             ),
             $_POST
         );
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','contract', $id);
+
         self::getContract($id);
     }
 
@@ -156,7 +161,6 @@ class contract {
      */
     private static function modifyContract()
     {
-        //TODO select table and fields
         $dbal = DBAL::getInstance();
         $affectedid = $dbal->dynamicUpdate(
             'contracts',
@@ -181,7 +185,9 @@ class contract {
         $dbal = DBAL::getInstance();
         try
         {
-            //TODO select table!
+            $stream = AmaStream::getInstance();
+            $stream->addItem('delete','contract', $_DELETE["id"]);
+
             $count = $dbal->deleteRow('contracts', array('id', $_DELETE['id']));
         }
         catch(Exception $e)

@@ -16,6 +16,7 @@ if(!$thisisamanu)die('Direct access restricted');
 require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaStream.php');
 
 class reminder {
 
@@ -140,6 +141,10 @@ class reminder {
             ),
             $_POST
         );
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','reminder', $id);
+
         self::getReminder($id);
     }
 
@@ -173,6 +178,9 @@ class reminder {
         $dbal = DBAL::getInstance();
         try
         {
+            $stream = AmaStream::getInstance();
+            $stream->addItem('delete','reminder', $_DELETE["id"]);
+
             $count = $dbal->deleteRow('reminders', array('id', $_DELETE['id']));
         }
         catch(Exception $e)

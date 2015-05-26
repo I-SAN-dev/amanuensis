@@ -18,6 +18,7 @@ require_once('classes/database/state_constants.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/project/amaProject.php');
 require_once('classes/authentication/authenticator.php');
+require_once('classes/project/amaStream.php');
 
 class project {
 
@@ -150,6 +151,10 @@ class project {
             ),
             $_POST
         );
+
+        $stream = AmaStream::getInstance();
+        $stream->addItem('create','project', $id);
+
         self::getProject($id);
     }
 
@@ -180,6 +185,9 @@ class project {
         $dbal = DBAL::getInstance();
         try
         {
+            $stream = AmaStream::getInstance();
+            $stream->addItem('delete','project', $_DELETE["id"]);
+
             $count = $dbal->deleteRow('projects', array('id', $_DELETE['id']));
         }
         catch(Exception $e)
