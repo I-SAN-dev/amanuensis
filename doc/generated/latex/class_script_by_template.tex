@@ -1,0 +1,80 @@
+\hypertarget{class_script_by_template}{}\section{Script\+By\+Template Class Reference}
+\label{class_script_by_template}\index{Script\+By\+Template@{Script\+By\+Template}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_script_by_template_a3387125924c13e72878c47ecad75faca}{\+\_\+\+\_\+construct} (\$filename)
+\item 
+\hyperlink{class_script_by_template_afde88292c44dc59faf017738dae6dffb}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_script_by_template_ab5fc580656acd4c894f79ae7f25b3ab3}{replace\+Markers} (\$filecont)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class, that reads .jst files, compiles them to js and writes them back to disc
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_script_by_template_a3387125924c13e72878c47ecad75faca}{}\index{Script\+By\+Template@{Script\+By\+Template}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Script\+By\+Template@{Script\+By\+Template}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$filename}
+\end{DoxyParamCaption}
+)}\label{class_script_by_template_a3387125924c13e72878c47ecad75faca}
+Creates an instance of the class referenzing a .jst file 
+\begin{DoxyParams}{Parameters}
+{\em \$filename} & -\/ the filename of the .jst file in the scriptybytemplate directory \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_script_by_template_afde88292c44dc59faf017738dae6dffb}{}\index{Script\+By\+Template@{Script\+By\+Template}!render@{render}}
+\index{render@{render}!Script\+By\+Template@{Script\+By\+Template}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_script_by_template_afde88292c44dc59faf017738dae6dffb}
+Reads the .jst file, replaces the marker with the values from the config file \begin{DoxyReturn}{Returns}
+String -\/ the path to the destinationfile 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & -\/ for failing file system operations \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_script_by_template_ab5fc580656acd4c894f79ae7f25b3ab3}{}\index{Script\+By\+Template@{Script\+By\+Template}!replace\+Markers@{replace\+Markers}}
+\index{replace\+Markers@{replace\+Markers}!Script\+By\+Template@{Script\+By\+Template}}
+\subsubsection[{replace\+Markers}]{\setlength{\rightskip}{0pt plus 5cm}replace\+Markers (
+\begin{DoxyParamCaption}
+\item[{}]{\$filecont}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_script_by_template_ab5fc580656acd4c894f79ae7f25b3ab3}
+Fills a template with strings from the config 
+\begin{DoxyParams}{Parameters}
+{\em \$filecont} & -\/ The template string that contains the markers that should be repalced \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String -\/ the parsed file content 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/scripthandling/\hyperlink{script_by_template_8php}{script\+By\+Template.\+php}\end{DoxyCompactItemize}
