@@ -177,7 +177,7 @@ app.constant('sites', [
         }
     },
     {
-        name: 'app.clients.list',
+        name: 'app.clients.detail',
         stateObject: {
             url: '/:id'
         },
