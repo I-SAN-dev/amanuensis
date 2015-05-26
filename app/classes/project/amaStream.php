@@ -176,11 +176,16 @@ final class AmaStream {
     }
 
     /**
-     * Deletes old stream entries
+     * Deletes old stream entries, older than 90 days
      */
     private function cleanUpOld()
     {
-        //TODO
+        $dbal = DBAL::getInstance();
+        $q = $dbal->prepare('
+            DELETE FROM stream
+            WHERE create_time < NOW() - INTERVAL 90 DAY
+        ');
+        $q->execute();
     }
 
 }
