@@ -37,6 +37,7 @@ app.controller('ItemDetailCtrl', [
             });
         };
 
+
         this.deleteItem = function () {
             MasterDetailService.notifyMaster('deleteItem', self.item.id);
         };
@@ -97,5 +98,10 @@ app.controller('ItemDetailCtrl', [
         this.moveItem = function () {
             // TODO: this
         };
+
+        // set the first element of the list active
+        if($scope.masterList.length > 0)
+            MasterDetailService.setDetailView($scope.masterList[0]);
+
     }
 ]);

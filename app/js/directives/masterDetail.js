@@ -11,7 +11,7 @@ app.directive('masterDetail', [function(){
         restrict: 'A',
         scope: {
             masterTpl: '=',
-            detail: '=',
+            detail: '=?',
             detailTpl: '=',
             masterList: '=',
             masterLoaded: '='
@@ -32,6 +32,8 @@ app.directive('masterDetail', [function(){
 
                 var self = this;
 
+
+
                 /**
                  * Gets the stateParams from master
                  * @param forState
@@ -45,19 +47,11 @@ app.directive('masterDetail', [function(){
                 /**
                  * Sets a new detail item and notifies other controllers that the detail has changed
                  * @param detail - the new detail object
+                 * @param keyboard - indicates if the detail was changed by keyboard input
                  */
                 $scope.setDetail = function(detail, keyboard){
-                    console.log(detail);
-                    if(MasterDetailService.editMode) {
-                        MasterDetailService.notifyEditor('cancel');
-                        MasterDetailService.editMode = false;
-                    }
-                    $stateParams.id = detail.id;
-                    self.detail = detail;
-                    MasterDetailService.notifyDetail('detailChanged', detail, keyboard);
+                    self.detail = MasterDetailService.setDetailView(detail,keyboard);
                 };
-
-
 
 
 
@@ -72,7 +66,7 @@ app.directive('masterDetail', [function(){
                     $scope.$broadcast('detailTemplateChanged', self.detail);
                 };
 
-
+                MasterDetailService.setController($scope);
             }],
         controllerAs: 'MasterDetailCtrl'
     }

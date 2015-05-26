@@ -67,7 +67,7 @@ app.controller('ClientDetailCtrl',
 
             // if the client state is entered with a certain id, we want to set the client detail for this id
             if($stateParams.id){
-                $scope.$parent.setDetail({id:$stateParams.id});
+                MasterDetailService.notifyController('setDetail',{id:$stateParams.id});
             }
 
             // the next few lines contain code to create a new client - client_data connection
