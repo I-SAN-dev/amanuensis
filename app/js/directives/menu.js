@@ -30,11 +30,6 @@ app.controller('NavCtrl',[
             }
 
             // only show the menu when user is logged in
-            AuthService.isLoggedIn().then(function(data) {
-                if(data.loggedin)
-                    self.navItems = menuItems;
-            });
-
             $rootScope.$watch('loggedIn', function (newValue, oldValue) {
                 if(newValue === true){
                     self.navItems = menuItems;
