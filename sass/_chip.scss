@@ -1,13 +1,18 @@
 .chip
 {
-  background-color: $gray-lighter;
+  border: 1px solid $gray-lighter;
   border-radius: 13px;
   display: inline-block;
   padding: 0 0 0 13px;
   line-height: 26px;
   height: 26px;
   margin-right: 15px;
+  margin-bottom: 10px;
   cursor: default;
+
+  &:hover {
+    background-color: $gray-lighter;
+  }
 
   span, i
   {

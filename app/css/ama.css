@@ -10704,6 +10704,10 @@ h1, h2 {
           .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
             display: none; }
 
+.less-important {
+  font-size: 12.6px;
+  color: #BDBDBD; }
+
 .fastbutton {
   display: block;
   height: 20%;
@@ -11164,7 +11168,7 @@ textarea {
   /*margin-top: 51px;*/
   border-left: none; }
   .detail-view .detail-inner {
-    padding: 20px 20px 0 20px;
+    padding: 0 20px;
     height: calc(100% - 64px); }
     .detail-view .detail-inner .seamless {
       margin: 0 -20px; }
@@ -11246,38 +11250,35 @@ textarea {
     background-color: #009688; }
 
 .sidelabel {
-  margin: 0 0 0 -20px !important;
-  padding: 5px 5px 5px 20px !important;
-  color: #ffffff !important;
-  background-color: #404877 !important;
-  font-size: 14px !important;
+  margin: 0 !important;
+  color: #404877 !important;
+  font-size: 28px !important;
   line-height: 1.42857 !important; }
-  .sidelabel .md {
-    position: relative;
-    top: -1px;
-    padding-right: 5px; }
 
 .sidelabel-right {
   padding: 5px 0; }
 
 .detail-block {
   margin-bottom: 30px; }
-  .detail-block .row {
-    padding-top: 5px;
-    padding-bottom: 5px; }
-    .detail-block .row .form-group {
+  .detail-block .listinfo-row {
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 15px; }
+  .detail-block .detail-value {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    .detail-block .detail-value .form-group {
       margin-bottom: 0; }
-    .detail-block .row .btn.btn-link {
+    .detail-block .detail-value .btn.btn-link {
       margin-top: -5px;
       margin-bottom: -5px;
       margin-left: -5px; }
-    .detail-block .row.striped:nth-child(odd) {
+    .detail-block .detail-value.striped:nth-child(odd) {
       background-color: #EEEEEE; }
-      .detail-block .row.striped:nth-child(odd) .ipe-empty {
+      .detail-block .detail-value.striped:nth-child(odd) .ipe-empty {
         color: #BDBDBD; }
-        .detail-block .row.striped:nth-child(odd) .ipe-empty:hover {
+        .detail-block .detail-value.striped:nth-child(odd) .ipe-empty:hover {
           color: #263238; }
-    .detail-block .row.striped:last-child {
+    .detail-block .detail-value.striped:last-child {
       border-bottom: 1px solid #EEEEEE; }
 
 .client-heading {
@@ -11316,6 +11317,16 @@ textarea {
     padding: 15px; }
     .tile .tile-inner h1, .tile .tile-inner h2 {
       margin-top: 0; }
+    .tile .tile-inner .pricetile-icon {
+      color: #fff; }
+    .tile .tile-inner .pricetile-text {
+      color: #757575;
+      font-size: 22px; }
+      .tile .tile-inner .pricetile-text .pricetile-price .ipe-inactive {
+        color: #263238;
+        font-size: 30px; }
+      .tile .tile-inner .pricetile-text .pricetile-price .ipe-active {
+        font-size: 14px; }
   .tile h4.tile-heading {
     font-size: 18px;
     padding: 87px 15px 15px 15px;
@@ -11483,14 +11494,17 @@ textarea {
       padding: 0; }
 
 .chip {
-  background-color: #EEEEEE;
+  border: 1px solid #EEEEEE;
   border-radius: 13px;
   display: inline-block;
   padding: 0 0 0 13px;
   line-height: 26px;
   height: 26px;
   margin-right: 15px;
+  margin-bottom: 10px;
   cursor: default; }
+  .chip:hover {
+    background-color: #EEEEEE; }
   .chip span, .chip i {
     line-height: 26px; }
   .chip .btn-icon-round {
