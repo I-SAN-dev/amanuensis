@@ -12,7 +12,9 @@
     "date":"Datum",
     "ok": "OK",
     "cancel": "Abbrechen",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "hour": "Stunde",
+    "day": "Tag"
   },
 
   "clients": {

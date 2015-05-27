@@ -72,6 +72,9 @@ app.directive('materialInput', [
                 if($scope.inputType == 'selectMultiple') {
                     // setup an array for chosen elements
                     $scope.chosen = [];
+                    if(!$scope.options){
+                        $scope.options = [];
+                    }
                     if (angular.isArray($scope.model)) {
                         for(var i = 0; i<$scope.options.length; i++) {
                             for(var j = 0; j<$scope.model.length; j++){

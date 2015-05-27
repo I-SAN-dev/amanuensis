@@ -211,3 +211,9 @@ h1, h2
     }
   }
 }
+
+
+.less-important {
+  font-size: 0.9*$font-size-base;
+  color: $gray-light;
+}

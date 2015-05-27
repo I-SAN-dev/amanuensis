@@ -40,6 +40,23 @@
     {
       margin-top: 0;
     }
+
+    .pricetile-icon{
+      color: #fff;
+    }
+    .pricetile-text {
+      color: $gray-dark;
+      font-size: 22px;
+      .pricetile-price {
+        .ipe-inactive {
+          color: $text-color;
+          font-size: 30px;
+        }
+        .ipe-active {
+          font-size: $font-size-base;
+        }
+      }
+    }
   }
 
   h4.tile-heading

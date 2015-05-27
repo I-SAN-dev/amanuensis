@@ -1,12 +1,6 @@
-<span data-ng-switch="ipe.editMode">
-    <span data-ng-switch-default
+<span data-ng-switch="ipe.editMode"><span data-ng-switch-default
           data-ng-click="ipe.enterEditMode()"
-          class="ipe">
-        <span data-ng-bind-html="outputVal || val"></span>
-        <span data-ng-if="!val" class="ipe-empty">+ {{name}}</span>
-    </span>
-    <div data-ng-switch-when="true" class="ipe ipe-active buttons-above-input bai-3 ipe-{{ipe.type}}">
-        <div data-material-input
+          class="ipe"><span class="ipe-inactive" data-ng-bind-html="outputVal || val"></span><span data-ng-if="!val" class="ipe-empty">+ {{name}}</span></span><div data-ng-switch-when="true" class="ipe ipe-active buttons-above-input bai-3 ipe-{{ipe.type}}"><div data-material-input
              data-ipe="true"
              data-ng-model="ipe.val"
              data-input-type="{{ipe.type}}"
@@ -17,6 +11,4 @@
              data-input-autofocus="true"
              data-input-select-options="options"
              data-input-select-option-name="{{optionName}}"
-             data-input-select-option-value="{{optionValue}}"></div>
-    </div>
-</span>
+             data-input-select-option-value="{{optionValue}}"></div></div></span>
