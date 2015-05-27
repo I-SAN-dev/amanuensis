@@ -37,9 +37,9 @@
     "replyto": "kontakt@i-san.de",
     "archive": "kontakt@i-san.de",
     "admin": "kontakt@i-san.de",
-    "usesmtp": "0",
+    "usesmtp": false,
     "smtphost": "",
-    "smtpauth": "1",
+    "smtpauth": true,
     "username": "",
     "password": "",
     "secure": "",
@@ -66,8 +66,8 @@
     "attachment_reminder":""
   },
 
-  "debug":"1",
-  "errorlogging":"1",
+  "debug":true,
+  "errorlogging":true,
   "errorlogpath":"logs/errorlog.csv",
 
   "path":{
@@ -88,7 +88,7 @@
   {
     "dailyrate": "300",
     "hourlyrate": "40",
-    "calc_tax": "1",
+    "calc_tax": true,
     "tax":"19",
     "tax_label":"Umsatzsteuer"
   },
