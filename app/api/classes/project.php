@@ -119,7 +119,12 @@ class project {
                 FROM projects LEFT JOIN customers ON projects.client = customers.id ".$where." ORDER BY state ASC ");
 
             $q->execute();
-            json_response($q->fetchAll(PDO::FETCH_ASSOC));
+            $projects = $q->fetchAll(PDO::FETCH_ASSOC);
+
+            /* postprocess the projects */
+            $response = self::process($projects);
+
+            json_response($response);
         }
 
 
@@ -208,6 +213,68 @@ class project {
             $error->renderJSONerror();
             $error->setHeaders();
         }
+    }
+
+    /**
+     * Processes a list of projects and is adding total costs/worth information
+     * @param $projects - an array with projects data
+     * @return array - an array with more projects data
+     */
+    private static function process($projects)
+    {
+        $response = array(
+            'list' => array(),
+            'info' => array()
+        );
+
+        $overdues = array();
+        $overdue_total = 0.0;
+        $to_pay = array();
+        $to_pay_total = 0.0;
+        $day_xs = array();
+        $day_x_total = 0.0;
+
+
+        /* Attach stats to projects */
+        foreach($projects as $project)
+        {
+            $projectObj = new AmaProject($project['id']);
+            $pstats = $projectObj->getEstimatedProjectWorths();
+            $project['stats'] = $pstats;
+            array_push($response['list'], $project);
+
+            /* Total overdue */
+            if($pstats['overdue'] > 0)
+            {
+                array_push($overdues, array('sum'=> $pstats['overdue'], 'project'=> $project['id']));
+                $overdue_total = $overdue_total + $pstats['overdue'];
+            }
+
+            /* Total to pay */
+            foreach($pstats['toPay'] as $payEvent)
+            {
+                $payEvent['project_id'] = $project['id'];
+                array_push($to_pay, $payEvent);
+                $to_pay_total = $to_pay_total + $payEvent['sum'];
+            }
+
+            /* Total day x */
+            if($pstats['toPayDayX'] > 0)
+            {
+                array_push($day_xs, array('sum'=> $pstats['toPayDayX'], 'project'=> $project['id']));
+                $day_x_total = $day_x_total + $pstats['toPayDayX'];
+            }
+
+        }
+
+        $response['info']['overdue'] = $overdues;
+        $response['info']['overdue_total'] = $overdue_total;
+        $response['info']['to_pay'] = $to_pay;
+        $response['info']['to_pay_total'] = $to_pay_total;
+        $response['info']['day_x'] = $day_xs;
+        $response['info']['day_x_total'] = $day_x_total;
+
+        return $response;
     }
 
 }

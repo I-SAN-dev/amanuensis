@@ -16,10 +16,10 @@ app.controller('ProjectsCtrl', [
             params: {}
         };
         var lsIdentifier = 'projects';
-        if($state.current.name == 'app.projects'){
+        if($state.current.name == 'app.projects.detail'){
             apiObject.params.current = 1;
         }
-        if($state.current.name == 'app.projectArchive'){
+        if($state.current.name == 'app.projectArchive.detail'){
             apiObject.params.archive = 1;
             lsIdentifier = 'projectArchive';
         }
@@ -47,7 +47,7 @@ app.controller('ProjectsCtrl', [
 
         setProjectList(LocalStorage.getData(lsIdentifier)|| []);
         ApiAbstractionLayer('GET',apiObject).then(function (data) {
-            setProjectList(data)
+            setProjectList(data.list);
         });
 
         // (re)set a flag indicating if the Controller was fully loaded
@@ -62,7 +62,8 @@ app.controller('ProjectsCtrl', [
 
         this.deleteProject = function (id) {
             DeleteService('project',id).then(function (data) {
-                self.projects = data;
+                self.projects = data.list;
+                //TODO actually this is wrong. This does not consider that we differentiate between archived and current projects
             });
 
         };
