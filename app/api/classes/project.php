@@ -86,7 +86,7 @@ class project {
         if(isset($_GET["client"]) && $_GET["client"] != '')
         {
             /* List of all projects of given client */
-            $result = $dbal->simpleSelect(
+            $projects = $dbal->simpleSelect(
                 'projects',
                 array(
                     'id',
@@ -99,7 +99,12 @@ class project {
                 0,
                 'state ASC'
             );
-            json_response($result);
+
+            /* postprocess the projects */
+            $response = self::process($projects);
+
+            json_response($response);
+
         }
         else
         {
