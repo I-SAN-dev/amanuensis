@@ -11539,6 +11539,66 @@ strong.total {
 .settings .nav-tabs li:first-child a {
   border-left: none !important; }
 
+.payment-stats .timeline-container {
+  padding: 70px 50px 0 50px;
+  border-bottom: 1px solid #EEEEEE; }
+.payment-stats .timeline {
+  position: relative; }
+  .payment-stats .timeline .t-entry {
+    position: absolute;
+    bottom: -7px; }
+    .payment-stats .timeline .t-entry .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #009688;
+      position: relative;
+      left: -7px; }
+    .payment-stats .timeline .t-entry .info {
+      display: block;
+      visibility: hidden;
+      opacity: 0.0;
+      transition: 0.3s opacity;
+      position: absolute;
+      width: 100px;
+      margin-left: -50px;
+      height: 50px;
+      top: -64px;
+      background-color: #009688;
+      color: #fff;
+      padding: 5px 10px; }
+      .payment-stats .timeline .t-entry .info:after {
+        content: " ";
+        display: block;
+        text-indent: -9999px;
+        font-size: 0;
+        line-height: 0;
+        width: 28px;
+        height: 28px;
+        border-width: 14px;
+        border-style: solid;
+        border-top-color: #009688;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        position: absolute;
+        bottom: -28px;
+        left: 50%;
+        margin-left: -14px; }
+    .payment-stats .timeline .t-entry .dot:hover + .info,
+    .payment-stats .timeline .t-entry .t-entry:hover .info,
+    .payment-stats .timeline .t-entry .info:hover {
+      visibility: visible;
+      opacity: 1.0; }
+.payment-stats .today,
+.payment-stats .enddate {
+  padding: 14px 15px 0 15px;
+  color: #BDBDBD; }
+.payment-stats .today {
+  border-left: 1px solid #EEEEEE; }
+.payment-stats .enddate {
+  border-right: 1px solid #EEEEEE; }
+
 /**
   * This extends ng-trans
   */

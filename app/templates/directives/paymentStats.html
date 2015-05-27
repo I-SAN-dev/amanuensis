@@ -1,0 +1,43 @@
+<div class="payment-stats">
+
+
+
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="ps-overdue" data-ng-class="{allgood: overdue == 0}">
+                {{overdue | price}}
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <div class="ps-dayx" data-ng-class="{nothing: day_x == 0}">
+                {{dayx | price}}
+            </div>
+        </div>
+    </div>
+    <div class="timeline-container">
+        <div class="timeline">
+            <div class="t-entry" data-ng-repeat="pe in payEvents" style="left: {{calcLeft(pe.date)}}%">
+                <div class="dot"></div>
+                <div class="info">
+                    {{pe.date | amaDate:'dd.MM.yyyy'}}
+                    {{pe.sum | price}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div clasS="col-xs-6">
+            <div class="today">
+                {{'global.today'|translate}}
+            </div>
+        </div>
+        <div clasS="col-xs-6 text-right">
+            <div class="enddate">
+                {{enddate}}
+            </div>
+        </div>
+    </div>
+
+
+</div>

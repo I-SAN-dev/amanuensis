@@ -30,7 +30,8 @@
       "10":"Oktober",
       "11":"November",
       "12":"Dezember"
-    }
+    },
+    "today":"Heute"
   },
 
   "clients": {

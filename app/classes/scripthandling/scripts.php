@@ -75,6 +75,7 @@ class Scripts
         "js/directives/menu.js",
         "js/directives/module.js",
         "js/directives/masterDetail.js",
+        "js/directives/paymentStats.js",
         "js/directives/inPlaceEdit.js",
         "js/directives/materialInput.js",
         "js/directives/clientBox.js",

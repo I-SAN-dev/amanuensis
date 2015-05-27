@@ -16,6 +16,7 @@ app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
         AuthService.currentUser().then(function (data) {
             LocalStorage.setKey(data.fe_key);
             $rootScope.loggedIn = true;
+            $rootScope.currentUserName = data.username;
             defer.resolve();
 
         });

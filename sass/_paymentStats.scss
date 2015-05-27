@@ -1,0 +1,92 @@
+$dot-size: 14px;
+
+.payment-stats
+{
+  .timeline-container
+  {
+    padding: 70px 50px 0 50px;
+    border-bottom: 1px solid $gray-lighter;
+  }
+
+  .timeline
+  {
+    position: relative;
+
+    .t-entry
+    {
+      position: absolute;
+      bottom: -$dot-size/2;
+
+      .dot
+      {
+        width: $dot-size;
+        height: $dot-size;
+        border-radius: $dot-size/2;
+        background-color: $brand-success;
+        position: relative;
+        left: -$dot-size/2;
+      }
+
+      .info
+      {
+        display: block;
+        visibility: hidden;
+        opacity: 0.0;
+        transition: 0.3s opacity;
+        position: absolute;
+        width: 100px;
+        margin-left: -50px;
+        height: 50px;
+        top: -(50px + $dot-size);
+        background-color: $brand-success;
+        color: #fff;
+        padding: 5px 10px;
+
+        &:after
+        {
+          content: " ";
+          display: block;
+          text-indent: -9999px;
+          font-size: 0;
+          line-height: 0;
+          width: 2*$dot-size;
+          height: 2*$dot-size;
+          border-width: $dot-size;
+          border-style: solid;
+          border-top-color: $brand-success;
+          border-right-color: transparent;
+          border-left-color: transparent;
+          border-bottom-color: transparent;
+          position: absolute;
+          bottom: -2*$dot-size;
+          left: 50%;
+          margin-left: -$dot-size;
+        }
+      }
+
+      .dot:hover+.info,
+      .t-entry:hover .info,
+      .info:hover
+      {
+        visibility: visible;
+        opacity: 1.0;
+      }
+
+    }
+  }
+
+  .today,
+  .enddate
+  {
+    padding: $dot-size 15px 0 15px;
+    color: $gray-light;
+  }
+  .today
+  {
+    border-left: 1px solid $gray-lighter;
+  }
+  .enddate
+  {
+    border-right: 1px solid $gray-lighter;
+  }
+}
