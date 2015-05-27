@@ -8,6 +8,7 @@ app.controller('DashboardCtrl', [
 
         /* projects */
         this.currentProjects = LocalStorage.getData('currentProjects');
+        this.statistics = LocalStorage.getData('statistics');
         var apiObject = {
             name: 'project',
             params: {
@@ -15,8 +16,10 @@ app.controller('DashboardCtrl', [
             }
         };
         ApiAbstractionLayer('GET', apiObject).then(function (data) {
-            self.currentProjects = data;
-            LocalStorage.setData('currentProjects', data);
+            self.currentProjects = data.list;
+            self.statistics = data.info;
+            LocalStorage.setData('currentProjects', data.list);
+            LocalStorage.setData('statistics', data.info);
         });
 
         /* Stream */

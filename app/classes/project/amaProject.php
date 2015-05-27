@@ -15,6 +15,7 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/config/config.php');
 require_once('classes/project/amaClient.php');
+require_once('classes/project/amaItemList.php');
 
 class AmaProject {
 
@@ -50,7 +51,8 @@ class AmaProject {
             'fileContracts' => $this->getFileContracts(),
             'todos' => $this->getTodos(),
             'acceptances' => $this->getAcceptances(),
-            'invoices' => $this->getInvoices()
+            'invoices' => $this->getInvoices(),
+            'stats' => $this->getEstimatedProjectWorths()
         );
     }
 
@@ -211,6 +213,85 @@ class AmaProject {
             }
         }
         return $this->invoices;
+    }
+
+
+    /**
+     * Calculates a number of project payment and cashflow overviews
+     */
+    public function getEstimatedProjectWorths()
+    {
+        if(!isset($this->stats))
+        {
+            $invoices = $this->getInvoices();
+            $offers = $this->getOffers();
+
+            /* Get total offered and accepted sum */
+            $offeredSum = 0.0;
+            foreach($offers as $offer)
+            {
+                if($offer['state'] == 3)
+                {
+                    $itemList = new AmaItemList('offer',$offer['id']);
+                    $offeredSum = $offeredSum + $itemList['costs']['total'];
+                }
+            }
+
+            /* Get invoiced sum */
+            $invoicedTotal = 0.0;
+            $overdueSum = 0.0;
+            $paidSum = 0.0;
+            $toPay = array();
+            foreach($invoices as $invoice)
+            {
+                $itemList = new AmaItemList('invoice',$invoice['id']);
+                $invoicedTotal = $invoicedTotal + $itemList->costs['total'];
+
+                /* check if overdue */
+                if($invoice['state'] >= 4)
+                {
+                    $overdueSum = $overdueSum + $itemList->costs['total'];
+                }
+                /* check if paid */
+                else if($invoice['state'] == 3)
+                {
+                    $paidSum = $paidSum + $itemList->costs['total'];
+                }
+                /* check if open */
+                else if($invoice['state'] <= 2)
+                {
+                    $payEvent = array();
+                    $payEvent['sum'] = $itemList->costs['total'];
+                    $payEvent['date'] = $invoice['date'];
+                    $payEvent['invoice_id'] = $invoice['id'];
+
+                    array_push($toPay, $payEvent);
+                }
+            }
+
+            /* Calc the results */
+            if($invoicedTotal >= $offeredSum)
+            {
+                $total_day_x = 0;
+                $total_project = $invoicedTotal;
+            }
+            else
+            {
+                $total_day_x = $offeredSum - $invoicedTotal;
+                $total_project = $offeredSum;
+            }
+
+            $result = array(
+                'paid' => $paidSum,
+                'overdue' => $overdueSum,
+                'toPay' => $toPay,
+                'toPayDayX' => $total_day_x,
+                'totalProjectWorth' => $total_project
+            );
+
+            $this->stats = $result;
+        }
+        return $this->stats;
     }
 
 }

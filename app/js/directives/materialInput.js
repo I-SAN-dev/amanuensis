@@ -202,7 +202,7 @@ app.directive('materialInput', [
                     $scope.toggleBool = function () {
                         $scope.model = !$scope.model;
                         if($scope.buttons){
-                            $scope.buttons.save.save();
+                            $scope.buttons.save.save($scope.model);
                         }
                     }
                 }

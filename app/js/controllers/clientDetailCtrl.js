@@ -50,9 +50,12 @@ app.controller('ClientDetailCtrl',
              */
             var getProjects = function (id) {
                 self.projects = LocalStorage.getData('client/'+id+'/projects');
+                self.projectStatistics = LocalStorage.getData('client/'+id+'/statistics')
                 ApiAbstractionLayer('GET', {name:'project',params:{client: id}}).then(function (data) {
-                    self.projects = data;
-                    LocalStorage.setData('client/'+id+'/projects', data);
+                    self.projects = data.list;
+                    self.projectStatistics = data.info;
+                    LocalStorage.setData('client/'+id+'/projects', data.list);
+                    LocalStorage.setData('client/'+id+'/statistics', data.info);
                 });
             };
 

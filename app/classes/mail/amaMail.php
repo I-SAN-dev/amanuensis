@@ -32,11 +32,11 @@ class AmaMail {
         $this->mail = new PHPMailer(true);
 
         /* SMTP config */
-        if($this->options['usesmtp'] == 1 )
+        if($this->options['usesmtp'] = true)
         {
             $this->mail->isSMTP();
             $this->mail->Host = $this->options['smtphost'];
-            $this->mail->SMTPAuth = $this->options['smtpauth']==1 ? true : false;
+            $this->mail->SMTPAuth = $this->options['smtpauth']== true ? true : false;
             $this->mail->Username = $this->options['username'];
             $this->mail->Password = $this->options['password'];
 

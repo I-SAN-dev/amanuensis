@@ -110,7 +110,7 @@ app.directive('inPlaceEdit',
                      */
                     this.save = function (newValue) {
                         // if a newValue is given, use that one
-                        if(newValue){
+                        if(newValue !== undefined){
                             self.val = newValue;
                         }
                         // Post to the API
