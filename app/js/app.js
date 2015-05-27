@@ -51,26 +51,9 @@ app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
     });
 
 
-    var wasLoaded = null;
     // trigger a refresh whenever user clicks history buttons
     window.onpopstate = function (e) {
-        console.log(wasLoaded);
-        // Safari hack
-        if(wasLoaded === null) {
-            wasLoaded = true;
-        } else {
-            location.reload();
-            wasLoaded = null;
-        }
-    };
-    window.onload = function () {
-
-
-        if(wasLoaded === null) {
-            setTimeout(function () {
-                wasLoaded = true;
-            },0);
-        }
+        $state.reload();
 
     };
 
