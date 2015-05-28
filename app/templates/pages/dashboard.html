@@ -37,9 +37,16 @@
                             <div class="row">
                                 <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
+                                        <span class="tile-total"
+                                              data-ng-if="project.stats.totalProjectWorth > 0"
+                                              data-ng-class="{overdue: project.stats.overdue > 0}">
+                                            {{ project.stats.totalProjectWorth | price}}
+                                        </span>
                                         <i class="tile-icon tile-icon-{{project.state}}"></i>
                                         <h4 class="tile-heading">{{project.name}}</h4>
-                                        <p class="tile-text">{{project.description}}</p>
+                                        <p class="tile-text">
+                                            {{project.companyname}}<span data-ng-if="!project.companyname || project.companyname == ''">{{project.contact_firstname}} {{project.contact_lastname}}</span>
+                                        </p>
                                     </a>
                                 </div>
                             </div>

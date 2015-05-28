@@ -11455,6 +11455,15 @@ textarea {
       background-image: linear-gradient(to right, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%);
       background-repeat: repeat-x;
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00EEEEEE', endColorstr='#FFEEEEEE', GradientType=1); }
+  .tile .tile-total {
+    position: absolute;
+    top: 15px;
+    right: 70px;
+    font-size: 26px;
+    color: #fff;
+    line-height: 40px; }
+    .tile .tile-total.overdue {
+      color: #F4511E; }
   .tile .tile-icon {
     position: absolute;
     right: 15px;
