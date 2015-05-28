@@ -38,23 +38,25 @@ app.directive('paymentStats', [
 
 
                         /* calc time interval */
-                        $scope.leftendtime = Date.now() / 1000;
-                        var rightendtime = Date.now() / 1000;
-                        var enddate = amaDateFilter(new Date().toDateString(),'dd.MM.yyyy');
-
-                        for(var i = 0; i < $scope.payEvents.length; i++)
+                        if($scope.payEvents.length > 0)
                         {
-                            var time = new Date($scope.payEvents[i].date).getTime() / 1000;
-                            console.log(time);
-                            if(time > rightendtime)
+                            $scope.leftendtime = Date.now() / 1000;
+                            var rightendtime = Date.now() / 1000;
+                            var enddate = amaDateFilter(new Date().toDateString(),'dd.MM.yyyy');
+
+                            for(var i = 0; i < $scope.payEvents.length; i++)
                             {
-                                rightendtime = time;
-                                enddate = amaDateFilter($scope.payEvents[i].date, 'dd.MM.yyyy');
+                                var time = new Date($scope.payEvents[i].date).getTime() / 1000;
+                                if(time > rightendtime)
+                                {
+                                    rightendtime = time;
+                                    enddate = amaDateFilter($scope.payEvents[i].date, 'dd.MM.yyyy');
+                                }
                             }
+                            $scope.rightendtime = rightendtime;
+                            $scope.enddate = enddate;
+                            $scope.timeintervall = $scope.rightendtime - $scope.leftendtime;
                         }
-                        $scope.rightendtime = rightendtime;
-                        $scope.enddate = enddate;
-                        $scope.timeintervall = $scope.rightendtime - $scope.leftendtime;
                     }
 
                 });
