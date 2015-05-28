@@ -11581,7 +11581,8 @@ strong.total {
       top: -64px;
       background-color: #009688;
       color: #fff;
-      padding: 5px 10px; }
+      padding: 5px 10px;
+      text-align: center; }
       .payment-stats .timeline .t-entry .info:after {
         content: " ";
         display: block;
@@ -11600,6 +11601,8 @@ strong.total {
         bottom: -28px;
         left: 50%;
         margin-left: -14px; }
+      .payment-stats .timeline .t-entry .info .date {
+        font-size: 12px; }
     .payment-stats .timeline .t-entry .dot:hover + .info,
     .payment-stats .timeline .t-entry .t-entry:hover .info,
     .payment-stats .timeline .t-entry .info:hover {

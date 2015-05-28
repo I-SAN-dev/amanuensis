@@ -43,6 +43,7 @@ $ps-total-size: 140px;
         background-color: $brand-success;
         color: #fff;
         padding: 5px 10px;
+        text-align: center;
 
         &:after
         {
@@ -64,6 +65,12 @@ $ps-total-size: 140px;
           left: 50%;
           margin-left: -$dot-size;
         }
+
+        .date
+        {
+          font-size: $font-size-small;
+        }
+
       }
 
       .dot:hover+.info,

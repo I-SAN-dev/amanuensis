@@ -45,11 +45,6 @@
                                         <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
                                     </h3>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
-                                        <!-- Some Buttons here? -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="detail-inner scroll-y">
@@ -69,10 +64,11 @@
 
                 <div class="col-sm-6 col-md-4 fullheight">
 
-                    <div class="panel panel-default halfheight scroll-y">
-                        <div class="panel-body">
-                            <h1>Statistiken</h1>
-                            <p>anzahl offene Projekte, zu erwartendes Einkommen, etc</p>
+                    <div class="panel panel-default halfheight ">
+                        <div class="panel-heading">
+                            {{'global.estimatedIncome' | translate}}
+                        </div>
+                        <div class="panel-body scroll-y">
                             <div data-payment-stats="dashboard.statistics"></div>
                         </div>
                     </div>

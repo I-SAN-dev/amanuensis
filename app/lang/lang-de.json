@@ -36,7 +36,8 @@
     "today":"Heute",
     "overdue":"Überfällig",
     "dayx":"Tag X",
-    "total":"Gesamt"
+    "total":"Gesamt",
+    "estimatedIncome": "Geschätzte voraussichtliche Einnahmen"
   },
 
   "clients": {
