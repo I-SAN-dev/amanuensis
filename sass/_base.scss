@@ -74,6 +74,19 @@ html, body
   float: left;
 }
 
+.fixedheight-360
+{
+  height: 360px;
+}
+.under-fixedheight-360
+{
+  height: calc(100% - 360px);
+  &.panel
+  {
+    height: calc(100% - 380px); /* remember the margin! */
+  }
+}
+
 .scroll-y
 {
   overflow: auto !important;
@@ -216,4 +229,32 @@ h1, h2
 .less-important {
   font-size: 0.9*$font-size-base;
   color: $gray-light;
+}
+
+$panel-heading-height: 64px;
+.panel-default
+{
+  .panel-heading
+  {
+    height: $panel-heading-height;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border-bottom: 1px solid $gray-lighter;
+
+    >*
+    {
+      line-height: $panel-heading-height;
+      padding: 0 20px;
+      margin: 0;
+    }
+    h3
+    {
+      color: $brand-primary;
+    }
+  }
+  .panel-heading+.panel-body
+  {
+    height: calc(100% - #{$panel-heading-height});
+  }
 }

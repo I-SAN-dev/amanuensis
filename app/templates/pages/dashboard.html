@@ -64,16 +64,16 @@
 
                 <div class="col-sm-6 col-md-4 fullheight">
 
-                    <div class="panel panel-default halfheight ">
+                    <div class="panel panel-default fixedheight-360 ">
                         <div class="panel-heading">
-                            {{'global.estimatedIncome' | translate}}
+                            <h3>{{'global.estimatedIncome' | translate}}</h3>
                         </div>
                         <div class="panel-body scroll-y">
                             <div data-payment-stats="dashboard.statistics"></div>
                         </div>
                     </div>
 
-                    <div class="panel panel-default halfheight scroll-y">
+                    <div class="panel panel-default under-fixedheight-360 scroll-y">
                         <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
                             <div class="row">
                                 <div class="stream-date col-xs-6">

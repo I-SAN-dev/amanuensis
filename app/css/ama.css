@@ -10622,6 +10622,15 @@ html, body {
   width: calc(100% - 154px);
   float: left; }
 
+.fixedheight-360 {
+  height: 360px; }
+
+.under-fixedheight-360 {
+  height: calc(100% - 360px); }
+  .under-fixedheight-360.panel {
+    height: calc(100% - 380px);
+    /* remember the margin! */ }
+
 .scroll-y {
   overflow: auto !important;
   overflow-x: hidden !important;
@@ -10707,6 +10716,21 @@ h1, h2 {
 .less-important {
   font-size: 12.6px;
   color: #BDBDBD; }
+
+.panel-default .panel-heading {
+  height: 64px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #EEEEEE; }
+  .panel-default .panel-heading > * {
+    line-height: 64px;
+    padding: 0 20px;
+    margin: 0; }
+  .panel-default .panel-heading h3 {
+    color: #404877; }
+.panel-default .panel-heading + .panel-body {
+  height: calc(100% - 64px); }
 
 .fastbutton {
   display: block;
