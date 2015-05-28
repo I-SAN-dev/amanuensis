@@ -32,7 +32,10 @@ app.directive('paymentStats', [
                             $scope.overdue_items = [];
                         }
                         $scope.dayx = $scope.stats.day_x_total !== undefined ? $scope.stats.day_x_total : $scope.stats.toPayDayX;
-                        $scope.dayx_items = $scope.stats.day_x || []
+                        $scope.dayx_items = $scope.stats.day_x || [];
+
+                        $scope.total = $scope.stats.totalProjectWorth !== undefined ? $scope.stats.totalProjectWorth : $scope.stats.overdue_total + $scope.stats.to_pay_total + $scope.stats.day_x_total;
+
 
                         /* calc time interval */
                         $scope.leftendtime = Date.now() / 1000;

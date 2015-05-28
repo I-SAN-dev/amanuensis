@@ -1,4 +1,5 @@
 $dot-size: 14px;
+$ps-total-size: 140px;
 
 .payment-stats
 {
@@ -16,6 +17,7 @@ $dot-size: 14px;
     {
       position: absolute;
       bottom: -$dot-size/2;
+      z-index: 99;
 
       .dot
       {
@@ -80,6 +82,7 @@ $dot-size: 14px;
   {
     padding: $dot-size 15px 0 15px;
     color: $gray-light;
+    text-transform: uppercase;
   }
   .today
   {
@@ -89,4 +92,126 @@ $dot-size: 14px;
   {
     border-right: 1px solid $gray-lighter;
   }
+  .ps-overdue-container,
+  .ps-dayx-container
+  {
+    padding-bottom: 70px;
+    margin-bottom: -70px;
+
+    .ps-overdue,
+    .ps-dayx
+    {
+      display: inline-block;
+      border-top: 1px solid $gray-lighter;
+      padding: 15px;
+
+      span
+      {
+        display: block;
+
+        &.price
+        {
+          font-size: $font-size-large;
+        }
+        &.price-caption
+        {
+          color: $gray-light
+        }
+      }
+
+    }
+  }
+
+  .ps-overdue-container
+  {
+    border-left: 1px solid $gray-lighter;
+
+    .ps-overdue
+    {
+      .price
+      {
+        color: $brand-danger;
+      }
+      &.allgood
+      {
+        .price
+        {
+          color: $gray-light;
+        }
+      }
+    }
+  }
+
+  .ps-dayx-container
+  {
+    border-right: 1px solid $gray-lighter;
+
+    .ps-dayx
+    {
+      .price
+      {
+        color: $gray-dark;
+      }
+      &.nothing
+      {
+        .price
+        {
+          color: $gray-light;
+        }
+      }
+    }
+  }
+  .ps-total-container-outer
+  {
+    width: 30%;
+    margin: 0 auto;
+
+    .ps-total-container
+    {
+      height: 0;
+      padding-bottom: 100%;
+      margin-bottom: -50%;
+      position: relative;
+
+      .ps-total
+      {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        background-color: $brand-success;
+
+        z-index: 89;
+
+        text-align: center;
+        padding-top: 30%;
+
+        &.nototal
+        {
+          background-color: $gray-dark;
+        }
+
+        span
+        {
+          display: block;
+          color: #fff;
+
+          &.price
+          {
+            font-size: $font-size-large;
+          }
+        }
+
+      }
+    }
+  }
+  .price-caption
+  {
+    text-transform: uppercase;
+  }
+
 }

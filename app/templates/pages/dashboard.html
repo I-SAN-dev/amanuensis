@@ -38,14 +38,14 @@
                     <div class="detail-view fullheight">
                         <div class="btn-toolbar">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h3>
                                         {{'global.greeting'|translate}} {{$root.currentUserName}},
                                         <span data-ng-if="dashboard.currentProjects.length != 1">{{'global.youhavexprojects'|translate:dashboard.currentProjects}}</span>
                                         <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
                                     </h3>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="btn-group btn-group-sm pull-right" data-ng-init="client.showPage = 1">
                                         <!-- Some Buttons here? -->
                                     </div>

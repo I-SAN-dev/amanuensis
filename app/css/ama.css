@@ -11560,7 +11560,8 @@ strong.total {
   position: relative; }
   .payment-stats .timeline .t-entry {
     position: absolute;
-    bottom: -7px; }
+    bottom: -7px;
+    z-index: 99; }
     .payment-stats .timeline .t-entry .dot {
       width: 14px;
       height: 14px;
@@ -11607,11 +11608,80 @@ strong.total {
 .payment-stats .today,
 .payment-stats .enddate {
   padding: 14px 15px 0 15px;
-  color: #BDBDBD; }
+  color: #BDBDBD;
+  text-transform: uppercase; }
 .payment-stats .today {
   border-left: 1px solid #EEEEEE; }
 .payment-stats .enddate {
   border-right: 1px solid #EEEEEE; }
+.payment-stats .ps-overdue-container,
+.payment-stats .ps-dayx-container {
+  padding-bottom: 70px;
+  margin-bottom: -70px; }
+  .payment-stats .ps-overdue-container .ps-overdue,
+  .payment-stats .ps-overdue-container .ps-dayx,
+  .payment-stats .ps-dayx-container .ps-overdue,
+  .payment-stats .ps-dayx-container .ps-dayx {
+    display: inline-block;
+    border-top: 1px solid #EEEEEE;
+    padding: 15px; }
+    .payment-stats .ps-overdue-container .ps-overdue span,
+    .payment-stats .ps-overdue-container .ps-dayx span,
+    .payment-stats .ps-dayx-container .ps-overdue span,
+    .payment-stats .ps-dayx-container .ps-dayx span {
+      display: block; }
+      .payment-stats .ps-overdue-container .ps-overdue span.price,
+      .payment-stats .ps-overdue-container .ps-dayx span.price,
+      .payment-stats .ps-dayx-container .ps-overdue span.price,
+      .payment-stats .ps-dayx-container .ps-dayx span.price {
+        font-size: 20px; }
+      .payment-stats .ps-overdue-container .ps-overdue span.price-caption,
+      .payment-stats .ps-overdue-container .ps-dayx span.price-caption,
+      .payment-stats .ps-dayx-container .ps-overdue span.price-caption,
+      .payment-stats .ps-dayx-container .ps-dayx span.price-caption {
+        color: #BDBDBD; }
+.payment-stats .ps-overdue-container {
+  border-left: 1px solid #EEEEEE; }
+  .payment-stats .ps-overdue-container .ps-overdue .price {
+    color: #F4511E; }
+  .payment-stats .ps-overdue-container .ps-overdue.allgood .price {
+    color: #BDBDBD; }
+.payment-stats .ps-dayx-container {
+  border-right: 1px solid #EEEEEE; }
+  .payment-stats .ps-dayx-container .ps-dayx .price {
+    color: #757575; }
+  .payment-stats .ps-dayx-container .ps-dayx.nothing .price {
+    color: #BDBDBD; }
+.payment-stats .ps-total-container-outer {
+  width: 30%;
+  margin: 0 auto; }
+  .payment-stats .ps-total-container-outer .ps-total-container {
+    height: 0;
+    padding-bottom: 100%;
+    margin-bottom: -50%;
+    position: relative; }
+    .payment-stats .ps-total-container-outer .ps-total-container .ps-total {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background-color: #009688;
+      z-index: 89;
+      text-align: center;
+      padding-top: 30%; }
+      .payment-stats .ps-total-container-outer .ps-total-container .ps-total.nototal {
+        background-color: #757575; }
+      .payment-stats .ps-total-container-outer .ps-total-container .ps-total span {
+        display: block;
+        color: #fff; }
+        .payment-stats .ps-total-container-outer .ps-total-container .ps-total span.price {
+          font-size: 20px; }
+.payment-stats .price-caption {
+  text-transform: uppercase; }
 
 /**
   * This extends ng-trans

@@ -33,7 +33,10 @@
     },
     "hour": "Stunde",
     "day": "Tag",
-    "today":"Heute"
+    "today":"Heute",
+    "overdue":"Überfällig",
+    "dayx":"Tag X",
+    "total":"Gesamt"
   },
 
   "clients": {

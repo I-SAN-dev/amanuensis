@@ -1,17 +1,31 @@
 <div class="payment-stats">
-
-
-
-
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ps-total-container-outer">
+                <div class="ps-total-container">
+                    <div class="ps-total" data-ng-class="{nototal: total == 0}">
+                        <span class="price">{{total | price}}</span>
+                        <span class="price-caption">{{'global.total'|translate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-6">
-            <div class="ps-overdue" data-ng-class="{allgood: overdue == 0}">
-                {{overdue | price}}
+            <div class="ps-overdue-container">
+                <div class="ps-overdue" data-ng-class="{allgood: overdue == 0}">
+                    <span class="price">{{overdue | price}}</span>
+                    <span class="price-caption">{{'global.overdue' | translate}}</span>
+                </div>
             </div>
         </div>
         <div class="col-xs-6 text-right">
-            <div class="ps-dayx" data-ng-class="{nothing: day_x == 0}">
-                {{dayx | price}}
+            <div class="ps-dayx-container">
+                <div class="ps-dayx" data-ng-class="{nothing: dayx == 0}">
+                    <span class="price">{{dayx | price}}</span>
+                    <span class="price-caption">{{'global.dayx'|translate}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -38,6 +52,4 @@
             </div>
         </div>
     </div>
-
-
-</div>
+    </div>
