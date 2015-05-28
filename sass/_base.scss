@@ -73,6 +73,20 @@ html, body
   width: calc(100% - #{130px + 2*$padding-base-horizontal});
   float: left;
 }
+.col-fixedwith-46
+{
+  padding-left: $padding-base-horizontal;
+  padding-right: $padding-base-horizontal;
+  width: 46px + 2*$padding-base-horizontal;
+  float: left;
+}
+.col-beneath-fixedwith-46
+{
+  padding-left: $padding-base-horizontal;
+  padding-right: $padding-base-horizontal;
+  width: calc(100% - #{46px + 2*$padding-base-horizontal});
+  float: left;
+}
 
 .fixedheight-360
 {
@@ -263,4 +277,31 @@ $panel-heading-height: 64px;
   {
     height: calc(100% - #{$panel-heading-height});
   }
+}
+
+/* Shadow classes */
+.shadow-0
+{
+  @include card(0);
+  border: 1px solid $gray-lighter;
+}
+.shadow-1
+{
+  @include card(1);
+}
+.shadow-2
+{
+  @include card(2);
+}
+.shadow-3
+{
+  @include card(3);
+}
+.shadow-4
+{
+  @include card(4);
+}
+.shadow-5
+{
+  @include card(5);
 }

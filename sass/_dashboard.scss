@@ -54,13 +54,74 @@ $numOfFastButtons: 5;
 
 .stream-entry
 {
+  border-left: none !important;
+  border-right: none !important;
+  border-color: $gray-lighter !important;
+  padding: 15px 25px;
+
   .stream-date
   {
     color: $gray-base;
   }
   h3
   {
-    margin: 5px 0 0 0;
+    margin: 0 0 5px 0;
     line-height: 1.5;
+    font-size: $font-size-h4;
   }
+
+  .icon-bubble
+  {
+    display: inline-block;
+    font: normal normal normal 24px/1 'Material Design Iconic Font';
+    speak: none;
+    text-rendering: auto;
+    height: 46px;
+    line-height: 46px;
+    width: 46px;
+    text-align: center;
+    border-radius: 23px;
+    background-color: $gray-light;
+    color: #fff;
+    opacity: 0.5;
+
+    // Better Font Rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.icon-delete
+    {
+      &:before
+      {
+        content: "\f020"; /* md-delete */
+      }
+      background-color: $brand-danger;
+    }
+    &.icon-create
+    {
+      &:before
+      {
+        content: "\f0fb"; /* md-add */
+      }
+      background-color: $brand-primary;
+    }
+    &.icon-generate
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+      background-color: $brand-warning;
+    }
+    &.icon-send:before
+    {
+      &:before
+      {
+        content: "\f119"; /* md-send */
+      }
+      background-color: $brand-success;
+    }
+
+  }
+
 }
