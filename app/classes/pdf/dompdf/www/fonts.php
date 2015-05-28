@@ -2,23 +2,27 @@
 include "head.inc"; 
 require_once "../dompdf_config.inc.php"; 
 
-function to_bytes($string) {
-  $string = strtolower(trim($string));
-  
-  if (!preg_match("/(.*)([kmgt])/", $string, $matches)) {
-    return intval($string);
+if(!function_exists('to_bytes'))
+{
+  function to_bytes($string) {
+    $string = strtolower(trim($string));
+
+    if (!preg_match("/(.*)([kmgt])/", $string, $matches)) {
+      return intval($string);
+    }
+
+    list($string, $value, $suffix) = $matches;
+    switch($suffix) {
+      case 't': $value *= 1024;
+      case 'g': $value *= 1024;
+      case 'm': $value *= 1024;
+      case 'k': $value *= 1024;
+    }
+
+    return intval($value);
   }
-  
-  list($string, $value, $suffix) = $matches;
-  switch($suffix) {
-    case 't': $value *= 1024;     
-    case 'g': $value *= 1024;
-    case 'm': $value *= 1024;
-    case 'k': $value *= 1024;
-  }
-  
-  return intval($value);
 }
+
 
 ?>
 

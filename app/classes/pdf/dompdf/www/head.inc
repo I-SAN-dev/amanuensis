@@ -5,12 +5,18 @@ session_start();
 require_once "../dompdf_config.inc.php";
 require_once "functions.inc.php";
 
-function li_arrow() {
-  return '<li style="list-style-image: url(\'images/arrow_0' . rand(1,6) . '.gif\');">';  
+if(!function_exists('li_arrow'))
+{
+  function li_arrow() {
+    return '<li style="list-style-image: url(\'images/arrow_0' . rand(1,6) . '.gif\');">';
+  }
 }
 
-function li_star() {
-  return '<li style="list-style-image: url(\'images/star_0' . rand(1,5) . '.gif\');">';  
+if(!function_exists('li_star'))
+{
+  function li_star() {
+    return '<li style="list-style-image: url(\'images/star_0' . rand(1,5) . '.gif\');">';
+  }
 }
 
 auth_check();
