@@ -10801,6 +10801,9 @@ h1, h2 {
     background-color: #0095a8;
     outline: none;
     text-decoration: none; }
+  .fastbutton:active {
+    color: #EEEEEE;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.115), 0 1.5px 6px rgba(0, 0, 0, 0.08); }
 
 .stream-entry {
   border-left: none !important;
@@ -11700,7 +11703,8 @@ strong.total {
         position: absolute;
         bottom: -28px;
         left: 50%;
-        margin-left: -14px; }
+        margin-left: -14px;
+        cursor: pointer; }
       .payment-stats .timeline .t-entry .info .date {
         font-size: 12px; }
     .payment-stats .timeline .t-entry .dot:hover + .info,

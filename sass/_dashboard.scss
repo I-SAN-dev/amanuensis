@@ -46,6 +46,11 @@ $fastButtonSize: 56px;
     outline: none;
     text-decoration: none;
   }
+  &:active
+  {
+    color: $gray-lighter;
+    @include card(2);
+  }
 }
 
 .stream-entry
