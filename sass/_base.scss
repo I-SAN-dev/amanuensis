@@ -241,12 +241,18 @@ $panel-heading-height: 64px;
     margin: 0;
     background-color: #fff;
     border-bottom: 1px solid $gray-lighter;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
     >*
     {
       line-height: $panel-heading-height;
       padding: 0 20px;
       margin: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     h3
     {

@@ -35,19 +35,16 @@
 
             <div class="row fullheight">
                 <div class="col-sm-6 col-md-8 fullheight">
-                    <div class="detail-view fullheight">
-                        <div class="btn-toolbar">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h3>
-                                        {{'global.greeting'|translate}} {{$root.currentUserName}},
-                                        <span data-ng-if="dashboard.currentProjects.length != 1">{{'global.youhavexprojects'|translate:dashboard.currentProjects}}</span>
-                                        <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
-                                    </h3>
-                                </div>
-                            </div>
+
+                    <div class="panel panel-default fullheight">
+                        <div class="panel-heading">
+                            <h3>
+                                {{'global.greeting'|translate}} {{$root.currentUserName}},
+                                <span data-ng-if="dashboard.currentProjects.length != 1">{{'global.youhavexprojects'|translate:dashboard.currentProjects}}</span>
+                                <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
+                            </h3>
                         </div>
-                        <div class="detail-inner scroll-y">
+                        <div class="panel-body scroll-y">
                             <div class="row">
                                 <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
