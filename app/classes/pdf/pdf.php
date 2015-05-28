@@ -59,7 +59,8 @@ class PDF {
     public function stream()
     {
         $dompdf = new DOMPDF();
-        $dompdf->load_html($this->html);
+        $dompdf->set_base_path(getcwd());
+        $dompdf->load_html($this->html, 'UTF-8');
         $dompdf->render();
         $dompdf->stream($this->name, array('Attachment' => false));
     }
@@ -73,7 +74,8 @@ class PDF {
     public function saveToDisk($path)
     {
         $dompdf = new DOMPDF();
-        $dompdf->load_html($this->html);
+        $dompdf->set_base_path(getcwd());
+        $dompdf->load_html($this->html, 'UTF-8');
         $dompdf->render();
         $content = $dompdf->output();
 

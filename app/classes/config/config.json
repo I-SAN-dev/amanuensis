@@ -27,7 +27,9 @@
   "design":
   {
     "color":"#0097AB",
-    "logo":"http://i-san.de/templates/i-san2014template/images/i-san.de-logo.png"
+    "logo":"http://i-san.de/templates/i-san2014template/images/i-san.de-logo.png",
+    "fontname":"Share",
+    "googlefontlink":"http://fonts.googleapis.com/css?family=Share:400"
   },
 
   "lang":"de",
@@ -77,6 +79,7 @@
 
   "templates":
   {
+    "paper":"user_templates/pdf/_outer.phtml",
     "offer":"user_templates/pdf/offer.phtml",
     "contract":"user_templates/pdf/contract.phtml",
     "acceptance":"user_templates/pdf/acceptance.ptml",

@@ -32,6 +32,7 @@ class PdfDoc {
 
         /* Gather document info */
         $this->info = $this->getInfo();
+        $this->info['type'] = $this->type;
 
         $this->refnumber = $this->info["refnumber"];
         $this->date = $this->info['date'];
@@ -183,9 +184,18 @@ class PdfDoc {
     private function generateHTML()
     {
         $conf = Config::getInstance();
+
+        $this->info['conf'] = $conf->get;
+
         $path = $conf->get['templates'][$this->type];
-        $template = new amaTemplate($path, $this->info);
-        return $template->getHTML();
+        $innertemplate = new amaTemplate($path, $this->info);
+        $inner = $innertemplate->getHTML();
+
+        $this->info['content'] = $inner;
+        $outerpath = $conf->get['templates']['paper'];
+        $outertemplate = new amaTemplate($outerpath, $this->info);
+
+        return $outertemplate->getHTML();
     }
 
 }

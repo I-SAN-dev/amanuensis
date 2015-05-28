@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title><?= $refnumber.' - '.$name ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echoIf($conf['design']['googlefontlink'], '<link href="%v" rel="stylesheet" type="text/css" media="all">') ?>
+        <link href="user_templates/pdf/pdf.css" rel="stylesheet" type="text/css" media="all">
+        <style type="text/css">
+            html, body
+            {
+                font-family: <?php echoIf($conf['design']['fontname'], "'%v', ");?>Arial, Helvetica, sans-serif;
+            }
+            a,
+            a:link,
+            a:visited
+            {
+                color: <?= $conf['design']['color']; ?>
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="header">
+            <table>
+                <tr>
+                    <td align="right">
+                        <span class="big"><?= $conf['company'] ?></span><br/>
+                        <? echoIf($conf['company_addition'], '<span class="small">%v</span><br/>') ?>
+                        <? echoIf($conf['address']['web'],'<a href="%v" target="_blank">%v</a> - '); echoIf($conf['mail']['replyto'], '<a href="mailto:%v">%v</a>') ?>
+                    </td>
+                    <td width="100" align="right">
+                        <img width="100" src="<?= $conf['design']['logo'] ?>" alt="Logo" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p class="page">Seite </p>
+        </div>
+
+        <div class="intro">
+            <p><!-- Address Block -->
+                <?
+                    echoIf($project['client']['companyname'],'%v<br/>');
+                    valFromKey($project['client']['contact_gender'], array('m'=>'Herr', 'f' => 'Frau'), '%v ');
+                    echoIf($project['client']['contact_firstname'],'%v ');
+                    echoIf($project['client']['contact_lastname'],'%v<br/>');
+                    echoIf($project['client']['street_no'],'%v<br/>');
+                    echoIf($project['client']['street_additional'],'%v<br/>');
+                    echoIf($project['client']['zip'],'%v ');
+                    echoIf($project['client']['city'],'%v<br/>');
+                    echoIf($project['client']['country'],'%v');
+                ?>
+            </p>
+            <p class="right">
+                <? echoIf($conf['address']['city'],'%v, den '); ?>
+                <? echo formatDate($date) ?>
+            </p>
+            <p class="big">
+                <? valFromKey($type,
+                                array(
+                                    'offer' => 'Angebotsreferenz',
+                                    'contract' => 'Vertragsreferenz',
+                                    'acceptance' => 'Abnahmereferenz',
+                                    'invoice' => 'Rechnugnsnummer',
+                                    'reminder' => 'Zahlungserinnerung'
+                                 ),
+                                 '%v: ') ?>
+                <?= $refnumber ?>
+            </p>
+        </div>
+
+        <div class="content">
+            <p>
+                <? valFromKey($project['client']['contact_gender'],
+                    array(
+                        'm'=>'Sehr geehrter Herr '.$project['client']['contact_lastname'],
+                        'f' => 'Sehr geehrte Frau '.$project['client']['contact_lastname'],
+                        '__default' => 'Sehr geehrte Damen und Herren'),
+                    '%v,<br/>'
+                    ); ?>
+            </p>
+            <?= $content ?>
+        </div>
+
+        <div class="legal">
+            TODO: Anschrift, Steuernummer etc.
+        </div>
+
+    </body>
+</html>

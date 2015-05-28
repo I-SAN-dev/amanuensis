@@ -86,14 +86,60 @@ class amaTemplate {
         if(!function_exists('formatDate'))
         {
             /**
-             * Formats a date in format yyyy-MM-dd to dd.MM.yyyy
-             * @param string $date - the date
+             * Formats a date in format yyyy-MM-dd or a date object to dd.MM.yyyy
+             * @param mixed $date - the date as string in format yyyy-MM-dd or a DateO object
              * @return string
              */
             function formatDate($date)
             {
-                $dateTime = DateTime::createFromFormat('Y-m-d', $date);
-                return $dateTime->format('m/d/Y');
+                if(exists($date))
+                {
+                    if(is_string($date))
+                    {
+                        $dateTime = DateTime::createFromFormat('Y-m-d', $date);
+                    }
+                    else
+                    {
+                        $dateTime = $date;
+                    }
+                    return $dateTime->format('d.m.Y');
+                }
+                else
+                {
+                    return '';
+                }
+            }
+        }
+        if(!function_exists('pageBreak'))
+        {
+            /**
+             * Inserts a forced page Break, use only in pdfs
+             * @return string
+             */
+            function pageBreak()
+            {
+                echo('<p style="page-break-before: always;"></p>');
+            }
+        }
+        if(!function_exists('valFromKey'))
+        {
+            /**
+             * Echoes the value of the given key of the given array, or if not present, the value of the key '__default'
+             * @param mixed $key
+             * @param array $values
+             * @param $expression - will be passed through the echoIf function
+             * @return string
+             */
+            function valFromKey($key, $values, $expression = NULL)
+            {
+                if(isset($values[$key]) && $values[$key] != '')
+                {
+                    echoIf($values[$key], $expression);
+                }
+                else
+                {
+                    echoIf($values['__default'], $expression);
+                }
             }
         }
 

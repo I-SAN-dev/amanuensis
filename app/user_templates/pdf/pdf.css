@@ -1,0 +1,81 @@
+/* page stuff */
+@page
+{
+    margin: 180px 50px 100px 50px;
+}
+html, body
+{
+    font-weight: normal;
+    font-size: 15px;
+}
+.header
+{
+    position: fixed;
+    left: 0px;
+    top: -180px;
+    right: 0px;
+    height: 150px;
+    padding-top: 30px;
+}
+.footer
+{
+    position: fixed;
+    left: 0px;
+    bottom: -100px;
+    right: 0px;
+    height: 90px;
+}
+.footer .page
+{
+    text-align: right;
+}
+.footer .page:after
+{
+    content: counter(page, decimal);
+}
+
+/* paragraphs */
+p
+{
+    padding: 0;
+    margin-bottom: 15px;
+}
+.small
+{
+    font-size: 12px;
+}
+.big
+{
+    font-size: 18px;
+}
+.right
+{
+    text-align: right;
+}
+/* links */
+a,
+a:link,
+a:visited
+{
+    text-decoration: none;
+}
+a:hover,
+a:active
+{
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/* images */
+img
+{
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* tables */
+table
+{
+    width: 100%;
+}
