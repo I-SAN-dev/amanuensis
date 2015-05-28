@@ -1,50 +1,39 @@
 <div data-ng-controller="DashboardCtrl as dashboard" class="dashboard fullheight">
+
     <div class="row fullheight">
-        <div class="col-fixedwith-130 fullheight">
-            <div class="panel panel-default fullheight shadow-5">
+        <div class="col-sm-6 col-md-8 fullheight">
 
-                    <a class="fastbutton" data-ui-sref="app.clientCreation">
-                        <i class="md-person-add"></i>
-                        <span>{{'clients.newClient'| translate}}</span>
-                    </a>
+            <div class="panel panel-default buttons-left fullheight shadow-3">
+                <div class="panel-heading">
+                    <h3>
+                        {{'global.greeting'|translate}} {{$root.currentUserName}},
+                        <span data-ng-if="dashboard.currentProjects.length != 1">{{'global.youhavexprojects'|translate:dashboard.currentProjects}}</span>
+                        <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row fullheight">
+                        <div class="col-fixedwith-35 fullheight">
+                            <a class="fastbutton action" data-ng-click="dashboard.newProject()" data-ng-href="/clients/" title="{{'projects.new' | translate}}">
+                                <i class="md-add"></i>
+                            </a>
 
-                    <a class="fastbutton" data-ui-sref="app.clients.detail">
-                        <i class="md-group"></i>
-                        <span>{{'clients.clients' | translate}}</span>
-                    </a>
+                            <a class="fastbutton action" data-ui-sref="app.clientCreation" title="{{'clients.newClient'| translate}}">
+                                <i class="md-person-add"></i>
+                            </a>
 
-                    <a class="fastbutton" data-ng-click="dashboard.newProject()" data-ng-href="/clients/">
-                        <i class="md-add"></i>
-                        <span>{{'projects.new' | translate}}</span>
-                    </a>
+                            <a class="fastbutton" data-ui-sref="app.clients.detail" title="{{'clients.clients' | translate}}">
+                                <i class="md-group"></i>
+                            </a>
+                            <a class="fastbutton" data-ui-sref="app.projectArchive.detail" title="{{'projects.actions.archive' | translate}}">
+                                <i class="md-folder"></i>
+                            </a>
 
-                    <a class="fastbutton" data-ui-sref="app.projectArchive.detail">
-                        <i class="md-folder"></i>
-                        <span>{{'projects.actions.archive' | translate}}</span>
-                    </a>
-
-                    <a class="fastbutton" data-ui-sref="app.itemPresets.detail">
-                        <i class="md-extension"></i>
-                        <span>{{'itemPresets.itemPresets' | translate}}</span>
-                    </a>
-
-            </div>
-
-        </div>
-        <div class="col-beneath-fixedwith-130 fullheight">
-
-            <div class="row fullheight">
-                <div class="col-sm-6 col-md-8 fullheight">
-
-                    <div class="panel panel-default fullheight shadow-3">
-                        <div class="panel-heading">
-                            <h3>
-                                {{'global.greeting'|translate}} {{$root.currentUserName}},
-                                <span data-ng-if="dashboard.currentProjects.length != 1">{{'global.youhavexprojects'|translate:dashboard.currentProjects}}</span>
-                                <span data-ng-if="dashboard.currentProjects.length == 1">{{'global.youhaveoneproject'|translate}}</span>
-                            </h3>
+                            <a class="fastbutton" data-ui-sref="app.itemPresets.detail" title="{{'itemPresets.itemPresets' | translate}}">
+                                <i class="md-extension"></i>
+                            </a>
                         </div>
-                        <div class="panel-body scroll-y">
+                        <div class="col-beneath-fixedwith-35 fullheight scroll-y">
                             <div class="row">
                                 <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <a class="tile" data-ui-sref="app.projectDetail({id:{{project.id}}})">
@@ -58,48 +47,53 @@
                     </div>
 
                 </div>
+            </div>
 
-                <div class="col-sm-6 col-md-4 fullheight">
+        </div>
 
-                    <div class="panel panel-default fixedheight-360 shadow-1">
-                        <div class="panel-heading">
-                            <h3>{{'global.estimatedIncome' | translate}}</h3>
+        <div class="col-sm-6 col-md-4 fullheight">
+
+            <div class="panel panel-default fixedheight-360 shadow-1">
+                <div class="panel-heading">
+                    <h3>{{'global.estimatedIncome' | translate}}</h3>
+                </div>
+                <div class="panel-body scroll-y">
+                    <div data-payment-stats="dashboard.statistics"></div>
+                </div>
+            </div>
+
+            <div class="panel panel-default under-fixedheight-360 shadow-0 scroll-y">
+                <div class="stream-entry list-group-item" data-ng-if="dashboard.stream.length == 0">
+                    <h3>{{'stream.nothing'}}</h3>
+                </div>
+                <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
+                    <div class="row">
+                        <div class="col-fixedwith-46">
+                           <span class="icon-bubble icon-{{entry.action}}"></span>
                         </div>
-                        <div class="panel-body scroll-y">
-                            <div data-payment-stats="dashboard.statistics"></div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default under-fixedheight-360 shadow-0 scroll-y">
-                        <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
+                        <div class="col-beneath-fixedwith-46">
                             <div class="row">
-                                <div class="col-fixedwith-46">
-                                   <span class="icon-bubble icon-{{entry.action}}"></span>
+                                <div class="col-xs-12">
+                                    <h3>
+                                        <a href="mailto:{{entry.user.email}}">{{entry.user.name}}</a> {{ 'stream.'+entry.action | translate}} {{ 'stream.'+entry.type | translate }}
+                                        <a data-ng-if="dashboard.linkable(entry)" data-ng-click="dashboard.goto(entry.type, entry.id)">{{entry.title}}</a>
+                                        <span data-ng-if="!dashboard.linkable(entry)">{{entry.title}}</span>
+                                    </h3>
                                 </div>
-                                <div class="col-beneath-fixedwith-46">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <h3>
-                                                <a href="mailto:{{entry.user.email}}">{{entry.user.name}}</a> {{ 'stream.'+entry.action | translate}} {{ 'stream.'+entry.type | translate }}
-                                                <a data-ng-if="dashboard.linkable(entry)" data-ng-click="dashboard.goto(entry.type, entry.id)">{{entry.title}}</a>
-                                                <span data-ng-if="!dashboard.linkable(entry)">{{entry.title}}</span>
-                                            </h3>
-                                        </div>
-                                        <div class="stream-date col-xs-12">
-                                            {{entry.create_time | amaDate:'dd.MM.yyyy - HH:mm'}} -
-                                            <a data-ng-if="dashboard.clientLinkable(entry)" data-ng-click="dashboard.goto('client', entry.client.id)">{{entry.client.name}}</a>
-                                            <span data-ng-if="!dashboard.clientLinkable(entry)">{{entry.client.name}}</span>
-                                        </div>
-                                    </div>
+                                <div class="stream-date col-xs-12">
+                                    {{entry.create_time | amaDate:'dd.MM.yyyy - HH:mm'}} -
+                                    <a data-ng-if="dashboard.clientLinkable(entry)" data-ng-click="dashboard.goto('client', entry.client.id)">{{entry.client.name}}</a>
+                                    <span data-ng-if="!dashboard.clientLinkable(entry)">{{entry.client.name}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
         </div>
     </div>
+
+
 </div>
 

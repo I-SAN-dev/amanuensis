@@ -286,7 +286,8 @@
     "todo":"die ToDo-Liste",
     "acceptance":"das Abnahmeformular",
     "invoice":"die Rechnung",
-    "reminder":"die Zahlungserinnerung"
+    "reminder":"die Zahlungserinnerung",
+    "nothing":"In den letzten 180 Tagen ist nichts passiert!"
   },
 
   "settings": {
