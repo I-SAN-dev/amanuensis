@@ -52,6 +52,18 @@ p
 {
     text-align: right;
 }
+.left
+{
+    text-align: left;
+}
+.center
+{
+    text-align: center;
+}
+.heading
+{
+    font-size: 22px;
+}
 /* links */
 a,
 a:link,
@@ -75,7 +87,28 @@ img
 
 
 /* tables */
+
 table
 {
     width: 100%;
+}
+table.table
+{
+    border: 1px solid #999999;
+    border-collapse: collapse;
+}
+table.table th
+{
+    background-color: #EEEEEE;
+    font-weight: normal;
+}
+table.table td,
+table.table th
+{
+    border: 1px solid #999999;
+    padding: 0px;
+}
+.cellpadding
+{
+    padding: 10px;
 }
