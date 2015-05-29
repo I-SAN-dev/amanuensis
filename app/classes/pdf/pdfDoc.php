@@ -200,7 +200,9 @@ class PdfDoc {
         /* Make it valid XHTML */
         $html = str_replace('<br>','<br/>', $html);
 
-        //echo($html); die();
+
+
+       //echo($html); die();
         return $outertemplate->getHTML();
     }
 

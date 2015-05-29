@@ -5,18 +5,12 @@ session_start();
 require_once "../dompdf_config.inc.php";
 require_once "functions.inc.php";
 
-if(!function_exists('li_arrow'))
-{
-  function li_arrow() {
-    return '<li style="list-style-image: url(\'images/arrow_0' . rand(1,6) . '.gif\');">';
-  }
+function li_arrow() {
+  return '<li style="list-style-image: url(\'images/arrow_0' . rand(1,6) . '.gif\');">';  
 }
 
-if(!function_exists('li_star'))
-{
-  function li_star() {
-    return '<li style="list-style-image: url(\'images/star_0' . rand(1,5) . '.gif\');">';
-  }
+function li_star() {
+  return '<li style="list-style-image: url(\'images/star_0' . rand(1,5) . '.gif\');">';  
 }
 
 auth_check();
@@ -41,9 +35,9 @@ auth_check();
 
 <div id="header" class="bar">
   <a href="index.php"><img id="logo" src="images/title.gif" alt="dompdf"/></a>
-  <a href="http://www.dompdf.com/" target="_blank">www.dompdf.com</a>
+  <a href="http://dompdf.github.com/" target="_blank">dompdf.github.com</a>
   &mdash; 
-  Send bug reports to <a href="http://code.google.com/p/dompdf/issues/list">the bug tracker</a> 
+  Send bug reports to <a href="https://github.com/dompdf/dompdf/issues">the bug tracker</a> 
   &amp; support questions to <a href="http://groups.google.com/group/dompdf">Google Groups</a>.
 </div>
 
