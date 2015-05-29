@@ -14,7 +14,7 @@ app.factory('MasterDetailService', [
             return params;
         };
         var self = this;
-        this.editMode = false;
+        var editMode = false;
         this.notifyEditor = function () {
             var fnName = arguments[0];
             if(typeof editor[fnName] === 'function') {
@@ -44,7 +44,11 @@ app.factory('MasterDetailService', [
             setController: function (ctrl) {
                 controller = ctrl;
             },
-            editMode: self.editMode,
+            editMode: function(flag){
+                if(flag !== undefined)
+                    editMode = flag;
+                return editMode;
+            },
             notifyMaster: function() {
                 var fnName = arguments[0];
                 if(typeof master[fnName] === 'function') {
@@ -60,9 +64,10 @@ app.factory('MasterDetailService', [
                 }
             },
             setDetailView: function(detail, keyboard){
-                if(self.editMode) {
+                if(editMode) {
+                    console.log('cancel edit');
                     self.notifyEditor('cancel');
-                    self.editMode = false;
+                    editMode = false;
                 }
 
                 if($state.params.hasDetails)

@@ -3,16 +3,31 @@ app.controller('ItemDetailCtrl', [
     'LocalStorage',
     'MasterDetailService',
     'DeleteService',
-    '$scope',
-    '$timeout',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope,$timeout) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService) {
         MasterDetailService.setDetail(this);
+
         var self = this;
+
+        var getIsConnected = function () {
+            var count = 0;
+            if(self.connections.offer.id)
+                count++;
+            if(self.connections.contract.id)
+                count++;
+            if(self.connections.todo.id)
+                count++;
+            if(self.connections.acceptance.id)
+                count++;
+            if(self.connections.invoice.id)
+                count++;
+
+            console.log(count);
+            return count>1;
+
+        };
+
         this.detailChanged = function (item, keyboard) {
             self.item = item;
-            if(keyboard) {
-                $scope.$apply();
-            }
 
             self.time = LocalStorage.getData('item/'+self.item.id+'/time') || [];
             ApiAbstractionLayer('GET', {name:'time',params:{forid: self.item.id}}).then(function (data) {
@@ -77,27 +92,12 @@ app.controller('ItemDetailCtrl', [
             });
         };
 
-        var getIsConnected = function () {
-            var count = 0;
-            if(self.connections.offer.id)
-                count++;
-            if(self.connections.contract.id)
-                count++;
-            if(self.connections.todo.id)
-                count++;
-            if(self.connections.acceptance.id)
-                count++;
-            if(self.connections.invoice.id)
-                count++;
 
-            console.log(count);
-            return count>1;
-
-        };
 
         this.moveItem = function () {
             // TODO: this
         };
+
 
     }
 ]);

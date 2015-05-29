@@ -29,17 +29,31 @@ app.controller('OfferDetailCtrl', [
             this.dateFormat = 'dd.MM.yyyy';
 
             this.offer = LocalStorage.getData('offer/'+id);
+
+
+
             var getOffer = function () {
                 ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
                     self.offer = data;
                     LocalStorage.setData('offer/'+id, data);
-
                     self.loaded = true;
                 });
             };
 
             getOffer();
-
+            /**
+             * Sets the first item of a provided list as active item in the MasterDetail view
+             */
+            this.setFirstItemAsDetail = function () {
+                console.log('first', self.offer);
+                if(self.offer) {
+                    var list = self.offer.items;
+                    if (list.length > 0){
+                        console.log(list);
+                        MasterDetailService.setDetailView(list[0]);
+                    }
+                }
+            };
 
             this.generatePDF = function (preview) {
                 PdfService(preview, 'offer', id).then(function (data) {
