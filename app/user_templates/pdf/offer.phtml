@@ -9,41 +9,40 @@
 <table class="table">
     <thead>
         <tr>
-            <th width="60%">
-                <div class="cellpadding">
+            <th width="70%" class="left">
+
                     Posten
-                </div>
+
             </th>
-            <th width="20%">
-                <div class="cellpadding">
+            <th width="20%" class="right">
+
                     Kosten
-                </div>
+
             </th>
-            <th width="20%">
-                <div class="cellpadding">
+            <th width="10%" class="center">
+
                     Auftrag
-                </div>
+
             </th>
         </tr>
     </thead>
     <tbody>
     <?php foreach($items['list'] as $item) { ?>
         <tr>
-            <td width="60%">
-                <div class="cellpadding">
+            <td width="70%" class="left">
+
                     <span class="big"><?= $item['name'] ?></span>
                     <? echoIf($item['description'], '<br/>%v') ?>
-                </div>
+
             </td>
-            <td width="20%">
-                <div class="cellpadding">
+            <td width="20%" class="right">
+
                     <?= $item['total'] ?>
-                </div>
+
             </td>
-            <td width="20%">
-                <div class="cellpadding">
-                    checkbox
-                </div>
+            <td width="10%" class="center">
+
+
             </td>
         </tr>
     <?php } ?>

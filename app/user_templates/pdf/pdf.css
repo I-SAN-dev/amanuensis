@@ -7,7 +7,7 @@ html, body
 {
     font-weight: normal;
     font-size: 15px;
-    line-height: 15px;
+    line-height: 1.15;
 }
 .header
 {
@@ -107,9 +107,5 @@ table.table td,
 table.table th
 {
     border: 1px solid #999999;
-    padding: 0px;
-}
-.cellpadding
-{
-   margin: 10px;
+    padding: 10px;
 }
