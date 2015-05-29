@@ -50,7 +50,7 @@ app.directive('inPlaceEdit',
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
-                        self.editMode = MasterDetailService.editMode = true;
+                        self.editMode = MasterDetailService.editMode(true);
 
                         // create a backup
                         backup = angular.copy($scope.val);
