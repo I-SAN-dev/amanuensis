@@ -243,6 +243,9 @@ class AmaItem {
             $entry['total'] = $entry['fixedrate'];
         }
 
+        /* round the item price */
+        $entry['total'] = round($entry['total'],2);
+
         return $entry;
     }
 

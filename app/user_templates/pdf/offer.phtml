@@ -1,3 +1,64 @@
-<p>Offercontent</p>
-<p><?=$name ?></p>
+<p>Sie erhalten heute wie gewünscht Ihr Angebot mit der Referenznummer <?= $refnumber ?> zum Thema "<?= $name ?>".</p>
+<? echoIf($description, '%v') ?>
+<p>TODO</p>
+
+<? //pageBreak() ?>
+
+<p class="heading"><?=$name ?></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th width="60%">
+                <div class="cellpadding">
+                    Posten
+                </div>
+            </th>
+            <th width="20%">
+                <div class="cellpadding">
+                    Kosten
+                </div>
+            </th>
+            <th width="20%">
+                <div class="cellpadding">
+                    Auftrag
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($items['list'] as $item) { ?>
+        <tr>
+            <td width="60%">
+                <div class="cellpadding">
+                    <span class="big"><?= $item['name'] ?></span>
+                    <? echoIf($item['description'], '<br/>%v') ?>
+                </div>
+            </td>
+            <td width="20%">
+                <div class="cellpadding">
+                    <?= $item['total'] ?>
+                </div>
+            </td>
+            <td width="20%">
+                <div class="cellpadding">
+                    checkbox
+                </div>
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+
+
+
+<p>Gesamt:</p>
+<p>
+    Vorsteuer:<?= $items['costs']['beforetax'] ?><br/>
+    Steuer:<?= $items['costs']['tax'] ?><br/>
+    Gesamt:<?= $items['costs']['total'] ?>
+</p>
+
+
+<?php //echo var_dump($items) ?>
 

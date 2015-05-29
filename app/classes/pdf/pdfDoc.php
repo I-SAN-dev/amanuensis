@@ -117,7 +117,7 @@ class PdfDoc {
     private function getItems()
     {
         $itemList = new AmaItemList($this->type, $this->id);
-        return $itemList->entries;
+        return array('list' => $itemList->entries, 'costs' => $itemList->costs);
     }
 
     /**
@@ -195,6 +195,12 @@ class PdfDoc {
         $outerpath = $conf->get['templates']['paper'];
         $outertemplate = new amaTemplate($outerpath, $this->info);
 
+        $html = $outertemplate->getHTML();
+
+        /* Make it valid XHTML */
+        $html = str_replace('<br>','<br/>', $html);
+
+        //echo($html); die();
         return $outertemplate->getHTML();
     }
 
