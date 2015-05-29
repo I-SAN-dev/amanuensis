@@ -99,9 +99,5 @@ app.controller('ItemDetailCtrl', [
             // TODO: this
         };
 
-        // set the first element of the list active
-        if($scope.masterList.length > 0)
-            MasterDetailService.setDetailView($scope.masterList[0]);
-
     }
 ]);

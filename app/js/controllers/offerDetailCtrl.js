@@ -33,6 +33,7 @@ app.controller('OfferDetailCtrl', [
                 ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
                     self.offer = data;
                     LocalStorage.setData('offer/'+id, data);
+
                     self.loaded = true;
                 });
             };
