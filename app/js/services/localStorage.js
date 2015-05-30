@@ -58,9 +58,9 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     var cleanUpCache = function()
     {
         var toClear = [];
-        for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+        for ( var i = 0, len = sessionStorage.length; i < len; ++i ) {
 
-            var key = localStorage.key(i);
+            var key = sessionStorage.key(i);
             if (key.indexOf('http') == 0)
             {
                 toClear.push(key);
@@ -69,7 +69,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
         /* this separation is needed due to index-changes when entrys are removed */
         for(i in toClear)
         {
-            localStorage.removeItem(toClear[i]);
+            sessionStorage.removeItem(toClear[i]);
         }
         toClear = [];
         console.log('LocalStorage cleaned!');
@@ -124,16 +124,16 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
             }
 
             /* Store the Data */
-            if($window.localStorage)
+            if($window.sessionStorage)
             {
                 try
                 {
-                    $window.localStorage.setItem(cleanKey(key), processedValue);
+                    $window.sessionStorage.setItem(cleanKey(key), processedValue);
                 }
                 catch(e)
                 {
                     cleanUpCache();
-                    $window.localStorage.setItem(cleanKey(key), processedValue);
+                    $window.sessionStorage.setItem(cleanKey(key), processedValue);
                 }
             }
             else
@@ -149,7 +149,7 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * @memberof js/services/localStorage
          */
         getData: function(key, encrypted){
-            var jsonString = $window.localStorage.getItem(cleanKey(key));
+            var jsonString = $window.sessionStorage.getItem(cleanKey(key));
             if(encrypted != false){
                 jsonString = decrypt(jsonString);
             }
@@ -161,14 +161,14 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * @param {string} key - The key of the storage's entry to be removed
          */
         removeItem: function (key) {
-            $window.localStorage.removeItem(key);
+            $window.sessionStorage.removeItem(key);
         },
 
         /**
          * Removes the entire data from the local storage
          */
         removeCache: function () {
-            $window.localStorage.clear();
+            $window.sessionStorage.clear();
         },
 
         /**
