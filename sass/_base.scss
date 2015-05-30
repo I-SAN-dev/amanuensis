@@ -69,7 +69,7 @@ html, body
 .col-beneath-fixedwith-35
 {
   padding-left: $padding-base-horizontal;
-  padding-right: $padding-base-horizontal;
+  padding-right: 2.5*$padding-base-horizontal;
   width: calc(100% - #{35px + 2*$padding-base-horizontal});
   float: left;
 }
