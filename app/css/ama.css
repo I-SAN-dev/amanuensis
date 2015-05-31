@@ -11661,6 +11661,10 @@ textarea {
 strong.total {
   font-size: 20px; }
 
+.detail-inner-padding {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
 .settings .nav-tabs li:first-child a {
   border-left: none !important; }
 
