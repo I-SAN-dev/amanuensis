@@ -352,7 +352,9 @@
     "design":
     {
       "color":"Farbe, wird unter anderem in Emails verwendet, um diese an Ihr Corporate Design anzupassen",
-      "logo":"Pfad zu Ihrem Logo"
+      "logo":"Pfad zu Ihrem Logo",
+      "fontname": "Schriftart, zur Verwendung in PDF-Dokumenten",
+      "googlefontlink": "Link zur Schriftart bei Google Fonts"
     },
 
     "lang":"Sprache",
@@ -399,6 +401,7 @@
 
     "templates":
     {
+      "paper": "Pfad zum Briefpapier-Template",
       "offer":"Pfad zum Angebotstemplate",
       "contract":"Pfad zum Vertragstemplate",
       "acceptance":"Pfad zum Abnahmeformulartemplate",
