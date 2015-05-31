@@ -65,6 +65,10 @@ p
 {
     font-size: 22px;
 }
+.less
+{
+    color: #999999;
+}
 /* links */
 a,
 a:link,
@@ -93,6 +97,8 @@ table
 {
     width: 100%;
 }
+
+/* table table */
 table.table
 {
     border: 1px solid #999999;
@@ -108,4 +114,34 @@ table.table th
 {
     border: 1px solid #999999;
     padding: 10px;
+}
+
+tr.total td
+{
+    background-color: #EEEEEE;
+}
+
+/* signature table */
+table.signature
+{
+    page-break-inside: avoid;
+    page-break-before: avoid;
+}
+
+td.signeline
+{
+    border-bottom: 1px solid #000000;
+    height: 50px;
+}
+
+/* legal */
+.legal
+{
+    margin-top: 50px;
+}
+hr
+{
+    background-color: transparent;
+    border-bottom: 1px solid #999;
+    border-top: none;
 }

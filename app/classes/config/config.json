@@ -93,7 +93,12 @@
     "hourlyrate": "40",
     "calc_tax": true,
     "tax":"19",
-    "tax_label":"Umsatzsteuer"
+    "tax_label":"Umsatzsteuer",
+    "hint_kleinunternehmerregelung":true,
+    "hint_agb":true,
+    "link_agb":"http://i-san.de/downloads/agb-webdesign-i-san.pdf",
+    "umsatzsteuerid":"",
+    "steuernummer":"102/158/21208"
   },
   "invoice_due_days":"14",
 

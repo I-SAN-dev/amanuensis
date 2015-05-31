@@ -142,6 +142,13 @@ class amaTemplate {
                 }
             }
         }
+        if(!function_exists('twoDec'))
+        {
+            function twoDec($value)
+            {
+                return number_format((float)$value, 2, ',','');
+            }
+        }
 
 
         /* Start output buffering */

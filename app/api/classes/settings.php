@@ -99,6 +99,8 @@ class settings {
         $types['pricing.hourlyrate'] = $price;
         $types['pricing.calc_tax'] = $bool;
         $types['pricing.tax'] = $number;
+        $types['pricing.hint_kleinunternehmerregelung'] = $bool;
+        $types['pricing.hint_agb'] = $bool;
         $types['invoice_due_days'] = $number;
         $types['refnumber_offers.idminlength'] = $number;
         $types['refnumber_contracts.idminlength'] = $number;

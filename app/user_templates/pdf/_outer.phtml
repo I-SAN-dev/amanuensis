@@ -14,7 +14,9 @@
             a:link,
             a:visited,
             .heading,
-            table.table th
+            table.table th,
+            tr.total td,
+            .colored
             {
                 color: <?= $conf['design']['color']; ?>
             }
@@ -38,7 +40,7 @@
         </div>
 
         <div class="footer">
-            <p class="page">Seite </p>
+            <p class="page less"><?= $refnumber ?> - Seite </p>
         </div>
 
         <div class="intro">
@@ -87,7 +89,26 @@
         </div>
 
         <div class="legal">
-            TODO: Anschrift, Steuernummer etc.
+            <hr/>
+            <p class="less">
+                <span class="big"><?= $conf['company'] ?></span><br/>
+                <? echoIf($conf['company_addition'], '<span class="small">%v</span><br/>') ?>
+                <br/>
+                <? echoIf($conf['address']['street'], '%v<br/>') ?>
+                <? echoIf($conf['address']['zip'], '%v ') ?>
+                <? echoIf($conf['address']['city'], '%v<br/>') ?>
+                <? echoIf($conf['address']['country'], '%v<br/>') ?>
+                <br/>
+                <? echoIf($conf['address']['web'], '<a href="%v" target="_blank">%v</a><br/>') ?>
+                <? echoIf($conf['address']['telephone'], 'Tel.: %v<br/>') ?>
+                <? echoIf($conf['address']['fax'], 'Fax: %v<br/>') ?>
+                <? echoIf($conf['mail']['replyto'], 'Mail: <a href="mailto:%v">%v</a><br/>') ?>
+                <br />
+                <? echoIf($conf['pricing']['umsatzsteuerid'], 'USt-ID: %v<br/>') ?>
+                <? echoIf($conf['pricing']['steuernummer'], 'Steuernummer: %v<br/>') ?>
+
+            </p>
+
         </div>
 
     </body>
