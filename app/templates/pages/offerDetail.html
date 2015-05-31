@@ -5,7 +5,14 @@
             <div class="panel-heading panel-heading-primary">
                 <div class="row">
                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
-                        {{'offer.name' | translate}}
+                        <span data-in-place-edit
+                                  data-api-id="offer.offer.id"
+                                  data-api-name="'offer'"
+                                  data-ipe-key="'name'"
+                                  data-ipe-value="offer.offer.name"
+                                  data-ipe-name="'global.name'|translate"
+                                  data-ipe-deletable="false"
+                                ></span>
                     </div>
                     <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
                         <span data-in-place-edit
@@ -23,15 +30,7 @@
                 <div class="halfheight scroll-y">
                     <div class="panel-body">
 
-                        <h1><span data-in-place-edit
-                                  data-api-id="offer.offer.id"
-                                  data-api-name="'offer'"
-                                  data-ipe-key="'name'"
-                                  data-ipe-value="offer.offer.name"
-                                  data-ipe-name="'global.name'|translate"
-                                  data-ipe-deletable="false"
-                                ></span>
-                        </h1>
+
 
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-7">

@@ -86,11 +86,11 @@ app.controller('OfferDetailCtrl', [
 
             this.openMailPreview = function (event) {
                 event.preventDefault();
-                MailService.showPreview('offer',self.offer.id);
+                MailService.showPreview('offer',self.offer.id, self.mailtext);
             };
 
             this.send = function () {
-                MailService.send('offer',self.offer.id);
+                MailService.send('offer',self.offer.id, self.mailtext);
             };
 
             this.deleteItem = function (itemId) {
