@@ -16,6 +16,14 @@
   border: none;
   padding: 7px 15px;
 
+  >* {
+    line-height: 20px;
+    padding: 0;
+  }
+  >.row{
+    margin-left: -15px;
+    margin-right: -15px;
+  }
   .ipe .form-group input.form-control
   {
     color: #fff;
@@ -41,4 +49,9 @@
 strong.total
 {
   font-size: $font-size-large;
+}
+
+.detail-inner-padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

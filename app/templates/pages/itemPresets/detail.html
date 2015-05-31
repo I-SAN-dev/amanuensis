@@ -14,69 +14,87 @@
             </div>
             <div class="col-sm-4">
 
-                <div class="btn-group btn-group-sm pull-right" data-ng-init="preset.showPage = 1">
-                    <button class="btn btn-link" data-ng-click="preset.showPage = 1" data-ng-class="{active: preset.showPage==1}"><i class="md md-lg md-comment"></i> {{'global.description' | translate}}</button>
-                    <button class="btn btn-link" data-ng-click="preset.showPage = 2" data-ng-class="{active: preset.showPage==2}"><i class="md md-lg md-payment"></i> {{'items.pricing' | translate}}</button>
+                <div class="btn-group btn-group-sm pull-right">
                     <button class="btn btn-link" data-ng-click="preset.deletePreset()"><i class="md md-lg md-delete"></i> {{'global.delete'|translate}}</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="detail-inner nopadding">
+    <div class="detail-inner scroll-y">
+        <div class="detail-inner-padding">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row detail-block">
+                        <div class="col-sm-2 col-md-1"><div class="sidelabel"><i class="md md-attach-money"></i></div></div>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="listinfo-row">
+                    <span data-in-place-edit
+                          data-ipe-key="'hourlyrates'"
+                          data-ipe-value="preset.preset.hourlyrates"
+                          data-api-name="'item_preset'"
+                          data-api-id="preset.preset.id"
+                          data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
+                                                                                                                    data-ipe-type="'price'"
+                                                                                                                    data-ipe-value="preset.preset.hourlyrate"
+                                                                                                                    data-ipe-key="'hourlyrate'"
+                                                                                                                    data-api-name="'item_preset'"
+                                                                                                                    data-api-id="preset.preset.id"
+                                                                                                                    data-ipe-name="'items.hourlyRate'|translate"  data-output-value="preset.preset.hourlyRate|price"></span>
+                                <br />
+                                <span class="less-important">{{'items.hourlyRate'|translate}}</span>
+                            </div>
+                            <div class="listinfo-row">
+                    <span data-in-place-edit
+                          data-ipe-key="'dailyrates'"
+                          data-ipe-value="preset.preset.dailyrates"
+                          data-api-name="'item_preset'"
+                          data-api-id="preset.preset.id"
+                          data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
+                                                                                                                  data-ipe-type="'price'"
+                                                                                                                  data-ipe-value="preset.preset.dailyrate"
+                                                                                                                  data-ipe-key="'dailyrate'"
+                                                                                                                  data-api-name="'item_preset'"
+                                                                                                                  data-api-id="preset.preset.id" data-ipe-name="'items.dailyRate'|translate" data-output-value="preset.preset.hourlyRate|price"></span>
+                                <br />
+                                <span class="less-important">{{'items.dailyRate'|translate}}</span>
+                            </div>
+                            <div class="listinfo-row">
+                    <span data-in-place-edit
+                          data-ipe-type="'price'"
+                          data-ipe-value="preset.preset.fixedrate"
+                          data-ipe-key="'fixedrate'"
+                          data-api-name="'item_preset'"
+                          data-api-id="preset.preset.id"
+                          data-ipe-name="'items.fixedRate'|translate" data-output-value="preset.preset.fixedrate|price"></span>
+                                <br />
+                                <span class="less-important">{{'items.fixedRate'|translate}}</span>
+                            </div>
+                        </div>
 
-
-        <div class="slideanim2 fullheight" data-ng-class="{panel2: preset.showPage==2, panel3: preset.showPage==3}">
-
-            <div class="slideanim-item fullheight">
-
-                <div class="ipe-wysiwyg-fullheight">
-                    <p data-in-place-edit
-                       data-ipe-key="'description'"
-                       data-ipe-value="preset.preset.description"
-                       data-ipe-type="'wysiwyg'"
-                       data-api-name="'item_preset'"
-                       data-api-id="preset.preset.id"
-                       data-ipe-name="'items.description'|translate"></p>
+                    </div>
                 </div>
-
-            </div>
-
-            <div class="slideanim-item fullheight scroll-y">
-
-
-
-                <h3>{{'items.expectedRate'|translate}}</h3>
-                <div>
-                    <p>{{'items.hourlyRate'|translate}}: <span data-in-place-edit
-                                                               data-ipe-key="'hourlyrates'"
-                                                               data-ipe-value="preset.preset.hourlyrates"
-                                                               data-api-name="'item_preset'"
-                                                               data-api-id="preset.preset.id"
-                                                               data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
-                                                                                                                                                         data-ipe-value="preset.preset.hourlyrate"
-                                                                                                                                                         data-ipe-key="'hourlyrate'"
-                                                                                                                                                         data-api-name="'item_preset'"
-                                                                                                                                                         data-api-id="preset.preset.id"
-                                                                                                                                                         data-ipe-name="'items.hourlyRate'|translate"></span></p>
-                    <p>{{'items.dailyRate'|translate}}: <span data-in-place-edit
-                                                              data-ipe-key="'dailyrates'"
-                                                              data-ipe-value="preset.preset.dailyrates"
-                                                              data-api-name="'item_preset'"
-                                                              data-api-id="preset.preset.id"
-                                                              data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
-                                                                                                                                                      data-ipe-value="preset.preset.dailyrate"
-                                                                                                                                                      data-ipe-key="'dailyrate'"
-                                                                                                                                                      data-api-name="'item_preset'"
-                                                                                                                                                      data-api-id="preset.preset.id"
-                                                                                                                                                      data-ipe-name="'items.dailyRate'|translate"></span></p>
-                    <p>{{'items.fixedRate'|translate}}: <span data-in-place-edit
-                                                              data-ipe-value="preset.preset.fixedrate"
-                                                              data-ipe-key="'fixedrate'"
-                                                              data-api-name="'item_preset'"
-                                                              data-api-id="preset.preset.id"
-                                                              data-ipe-name="'items.fixedRate'|translate"></span></p>
+                <div class="col-sm-6">
+                    <div class="row detail-block">
+                        <div class="col-sm-2 col-md-1">
+                            <div class="sidelabel">
+                                <i class="md md-comment"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="ipe-wysiwyg">
+                                <p data-in-place-edit
+                                   data-ipe-key="'description'"
+                                   data-ipe-value="preset.preset.description"
+                                   data-ipe-type="'wysiwyg'"
+                                   data-api-name="'item_preset'"
+                                   data-api-id="preset.preset.id"
+                                   data-ipe-name="'items.description'|translate"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
