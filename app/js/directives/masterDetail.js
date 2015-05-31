@@ -67,6 +67,8 @@ app.directive('masterDetail', [function(){
                 };
 
                 MasterDetailService.setController($scope);
+
+                this.notifyMaster = MasterDetailService.notifyMaster;
             }],
         controllerAs: 'MasterDetailCtrl'
     }

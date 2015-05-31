@@ -4,7 +4,7 @@
     <div class="btn-toolbar">
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5 col-md-6">
                 <h3>
                 <span data-in-place-edit
                       data-api-id="client.client.id"
@@ -14,14 +14,12 @@
                       data-ipe-name="'clients.companyName'|translate"></span>
                 </h3>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-7 col-md-6">
 
                 <div class="btn-group btn-group-sm pull-right">
                     <button class="btn btn-link" data-ng-click="client.showPage = 1" data-ng-class="{active: client.showPage==1}"><i class="md md-lg md-people"></i> {{'clients.data' | translate}}</button>
                     <button class="btn btn-link" data-ng-click="client.showPage = 2" data-ng-class="{active: client.showPage==2}"><i class="md md-lg md-folder"></i> {{'projects.projects' | translate}}</button>
                     <button class="btn btn-link" data-ng-click="client.showPage = 3" data-ng-class="{active: client.showPage==3}"><i class="md md-lg md-add-circle-outline"></i> {{'projects.new'|translate}}</button>
-
-                    <button class="btn btn-link" data-ng-click="client.deleteClient();"><i class="md md-lg md-delete"></i>{{'clients.deleteClient' | translate}}</button>
                 </div>
 
             </div>
@@ -39,10 +37,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-person"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
+                                <div class="col-sm-10 col-md-11">
                                     <div class="detail-value">
                                     <span data-in-place-edit
                                           data-ipe-key="'contact_gender'"
@@ -71,10 +69,10 @@
                                 </div>
                             </div>
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-place"></i></h3>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-10 col-md-11">
                                     <address class="detail-value">
                                         <strong><span data-in-place-edit
                                                       data-ipe-key="'companyname'"
@@ -115,12 +113,13 @@
                                 </div>
                             </div>
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-mail"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
-                                    <div class="row detail-value listinfo-row" data-ng-repeat="mail in client.client.data.mail">
-                                        <div class="col-sm-10">
+                                <div class="col-sm-10 col-md-11">
+                                    <div class="listinfo-row detail-value" data-ng-repeat="mail in client.client.data.mail">
+                                        <div class="row">
+                                            <div class="col-sm-9 col-md-10">
                                             <span data-in-place-edit
                                                   data-ipe-key="'value'"
                                                   data-ipe-value="mail.value"
@@ -147,13 +146,15 @@
                                                   data-api-id="mail.id"
                                                   data-deletable-item="client.connectionDeleted"
                                                   data-ipe-name="'clients.mail'|translate"></span>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.sendMail' | translate}}" href="mailto:{{mail.value}}">
-                                                <i class="md md-mail"></i>
-                                            </a>
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <a class="listinfo-action listinfo-action-icon listinfo-action-success"  title="{{'clients.sendMail' | translate}}" href="mailto:{{mail.value}}">
+                                                    <i class="md md-mail"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="row varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.mail]">
                                         <div class="col-sm-12 varcheck-if-false">
                                             <span class="btn btn-link btn-success" data-ng-click="client.setNewConnectionFlag('mail')" ><i class="md md-add"></i>{{'clients.addEmail'|translate}}</span>
@@ -184,12 +185,13 @@
                                 </div>
                             </div>
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-phone"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
-                                    <div class="row  listinfo-row detail-value" data-ng-repeat="phone in client.client.data.phone">
-                                        <div class="col-sm-10">
+                                <div class="col-sm-10 col-md-11">
+                                    <div class="listinfo-row detail-value" data-ng-repeat="phone in client.client.data.phone">
+                                        <div class="row">
+                                            <div class="col-sm-9 col-md-10">
                                             <span data-in-place-edit
                                                   data-ipe-key="'value'"
                                                   data-ipe-value="phone.value"
@@ -204,11 +206,12 @@
                                                   data-api-id="phone.id"
                                                   data-deletable-item="client.connectionDeleted"
                                                   data-ipe-name="'clients.phone'|translate"></span>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a class="btn btn-link btn-icon-round btn-success"  title="{{'clients.call' | translate}}" href="tel:{{phone.value}}">
-                                                <i class="md md-call"></i>
-                                            </a>
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <a class="listinfo-action listinfo-action-icon listinfo-action-success"  title="{{'clients.call' | translate}}" href="tel:{{phone.value}}">
+                                                    <i class="md md-call"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.phone]">
@@ -241,12 +244,13 @@
                             </div>
 
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-print"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
-                                    <div class="row detail-value listinfo-row" data-ng-repeat="fax in client.client.data.fax">
-                                        <div class="col-sm-12">
+                                <div class="col-sm-10 col-md-11">
+                                    <div class="detail-value listinfo-row" data-ng-repeat="fax in client.client.data.fax">
+                                        <div class="row">
+                                            <div class="col-sm-12">
                                             <span data-in-place-edit
                                                   data-ipe-key="'value'"
                                                   data-ipe-value="fax.value"
@@ -254,12 +258,13 @@
                                                   data-api-id="fax.id"
                                                   data-deletable-item="client.connectionDeleted"
                                                   data-ipe-name="'clients.faxNumber'|translate"></span><br /><span class="less-important" data-in-place-edit
-                                                                                                                  data-ipe-key="'name'"
-                                                                                                                  data-ipe-value="fax.name"
-                                                                                                                  data-api-name="'client_data'"
-                                                                                                                  data-api-id="fax.id"
-                                                                                                                  data-deletable-item="client.connectionDeleted"
-                                                                                                                  data-ipe-name="'clients.fax'|translate"></span>
+                                                                                                                   data-ipe-key="'name'"
+                                                                                                                   data-ipe-value="fax.name"
+                                                                                                                   data-api-name="'client_data'"
+                                                                                                                   data-api-id="fax.id"
+                                                                                                                   data-deletable-item="client.connectionDeleted"
+                                                                                                                   data-ipe-name="'clients.fax'|translate"></span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[client.newConnectionFlag.fax]">
@@ -293,7 +298,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-11 col-sm-offset-1">
+                                <div class="col-sm-10 col-sm-offset-2 col-md-11 col-md-offset-1">
                                     <div class="tile tile-autoheight">
                                         <div class="tile-inner">
                                             <div class="row">
@@ -331,8 +336,8 @@
                                 </div>
                             </div>
                             <div class="row detail-block">
-                                <div class="col-sm-1"><h3 class="sidelabel">#</h3></div>
-                                <div class="col-sm-11">
+                                <div class="col-sm-2 col-md-1"><h3 class="sidelabel">#</h3></div>
+                                <div class="col-sm-10 col-md-11">
                                     <div class="detail-value">
                                     <span data-in-place-edit
                                           data-ipe-key="'refnumber'"
@@ -348,10 +353,10 @@
 
 
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-comment"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
+                                <div class="col-sm-10 col-md-11">
                                     <div class="detail-value">
                             <span data-in-place-edit
                                   data-ipe-key="'comment'"
@@ -364,10 +369,10 @@
                                 </div>
                             </div>
                             <div class="row detail-block">
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 col-md-1">
                                     <h3 class="sidelabel"><i class="md md-link"></i></h3>
                                 </div>
-                                <div class="col-sm-11">
+                                <div class="col-sm-10 col-md-11">
                                     <div class="detail-value">
                                         <div class="chip" data-ng-repeat="(catid, cat) in client.client.categories">
                                             <a data-ng-click="MasterDetailCtrl.filterText = cat">{{cat}}</a> <button class="btn btn-link btn-icon-round" data-ng-click="client.removeCategory(catid)"><i class="md-close"></i></button>
@@ -381,12 +386,6 @@
 
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
 
                 <div class="slideanim-item fullheight scroll-y">

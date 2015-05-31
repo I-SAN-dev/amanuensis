@@ -25,16 +25,16 @@
              data-list="masterList"
              data-active="MasterDetailCtrl.detail"
              data-filter-text="MasterDetailCtrl.filterText">
-            <a class="list-group-item" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText"
-               data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
-               data-ng-click="setDetail(client)">
-
-                <h3>{{client.refnumber}}</h3>
-                <h2>{{client.companyname}}</h2>
-                <p>{{client.city}}</p>
-            </a>
+            <div class="position-relative" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText">
+                <a class="list-group-item"
+                   data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
+                   data-ng-click="setDetail(client)">
+                    <h3>{{client.refnumber}}</h3>
+                    <h2>{{client.companyname}}</h2>
+                    <p>{{client.city}}</p>
+                </a>
+                <button class="btn btn-danger btn-link btn-icon-round btn-on-list" title="{{'clients.deleteClient' | translate}}" data-ng-click="MasterDetailCtrl.notifyMaster('deleteClient',client.id);"><i class="md md-delete"></i></button>
+            </div>
         </div>
     </div>
-
-
 </div>

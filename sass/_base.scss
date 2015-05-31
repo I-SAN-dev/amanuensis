@@ -245,6 +245,10 @@ h1, h2
   color: $gray-light;
 }
 
+.position-relative {
+  position: relative;
+}
+
 $panel-heading-height: 64px;
 .panel-default
 {

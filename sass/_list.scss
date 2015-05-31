@@ -1,0 +1,29 @@
+.list-group {
+  .btn-on-list {
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 15px);
+    z-index: 1000;
+  }
+}
+
+.listinfo-row {
+  border-bottom: 1px solid $gray-lighter;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .listinfo-action {
+    display: block;
+    border-left: 1px solid $gray-lighter;
+    text-align: center;
+
+    &.listinfo-action-icon{
+      font-size: 25px;
+    }
+    &.listinfo-action-success{
+      color: $brand-success;
+    }
+
+  }
+}
