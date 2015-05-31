@@ -272,9 +272,42 @@ $panel-heading-height: 64px;
       white-space: nowrap;
       overflow: hidden;
     }
+
+    >.row
+    {
+      margin-left: -$grid-gutter-width/2;
+      margin-right: -$grid-gutter-width/2;
+    }
     h3
     {
       color: $brand-primary;
+    }
+    i.state-icon
+    {
+      line-height: $panel-heading-height;
+      margin-right: 20px;
+    }
+
+    button.btn {
+      height: $panel-heading-height;
+      line-height: $panel-heading-height - 4px;
+      font-size: $font-size-small;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+      }
+
+      &.active {
+        border-bottom: 2px solid $brand-primary !important;
+      }
+
     }
   }
   .panel-heading+.panel-body
@@ -287,6 +320,8 @@ $panel-heading-height: 64px;
     margin-left: 52px;
   }
 }
+
+
 
 /* Shadow classes */
 .shadow-0

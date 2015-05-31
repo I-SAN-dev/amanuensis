@@ -1,30 +1,288 @@
-<div class="detail-view fullheight" data-ng-controller="ProjectDetailCtrl as project">
-    <div class="btn-toolbar">
-        <div class="row">
-            <div class="col-sm-8">
-                <h3>
-                    <span data-in-place-edit
-                          data-api-id="project.project.id"
-                          data-api-name="'project'"
-                          data-ipe-key="'name'"
-                          data-ipe-value="project.project.name"
-                          data-ipe-name="'global.name'|translate"
-                          data-ipe-deletable="false"
-                            ></span>
-                </h3>
-            </div>
-            <div class="col-sm-4">
-                <div class="btn-group btn-group-sm pull-right">
-                    <button class="btn btn-link" data-ng-click="project.deleteProject()"><i class="md md-lg md-delete"></i>{{'projects.actions.delete' | translate}}</i></button>
+<div class="projectdetail" data-ng-controller="ProjectDetailCtrl as project">
+    <div class="row fullheight">
+
+
+        <div class="col-sm-6 col-md-8 fullheight">
+            <div class="panel panel-default fullheight">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h3 style="display: inline-block;">
+                                <span data-in-place-edit
+                                      data-api-id="project.project.id"
+                                      data-api-name="'project'"
+                                      data-ipe-key="'name'"
+                                      data-ipe-value="project.project.name"
+                                      data-ipe-name="'global.name'|translate"
+                                      data-ipe-deletable="false"
+                                        ></span>
+                            </h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-right">
+                                <button class="btn btn-link" data-ng-click="project.deleteProject()"><i class="md md-lg md-delete"></i>{{'projects.actions.delete' | translate}}</i></button>
+                            </div>
+                            <div class="pull-right">
+                                <i class="state-icon state-icon-{{project.project.state}}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body scroll-y">
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="table-box">
+                                <div class="table-box-head">
+                                    <div class="row">
+                                        <div class="col-xs-10"><h3>{{'projects.offers'|translate}}</h3></div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-link" title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                                <i class="md-add-circle-outline"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-box-body" data-ng-show="project.project.offers.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="name">{{'global.name'|translate}}</th>
+                                            <th class="ref">#</th>
+                                            <th class="state"></th>
+                                        </tr>
+                                        </thead>
+                                        <tr data-ng-repeat="offer in project.project.offers" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
+                                            <td class="name">
+                                                {{offer.name}}
+                                            </td>
+                                            <td class="ref">
+                                                {{offer.refnumber}}
+                                            </td>
+                                            <td class="state">
+                                                {{offer.state}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="table-box">
+                                <div class="table-box-head">
+                                    <div class="row">
+                                        <div class="col-xs-10"><h3>{{'projects.contracts'|translate}}</h3></div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-link" title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                                <i class="md-add-circle-outline"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-box-body" data-ng-show="project.contracts.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="name">{{'global.name'|translate}}</th>
+                                            <th class="ref">#</th>
+                                            <th class="type">{{'contract.type' | translate}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tr data-ng-repeat="contract in project.contracts | orderBy:'date'" data-ui-sref="app.contractDetail({id:{{contract.id}}})">
+                                            <td class="name">
+                                                {{contract.name}}
+                                            </td>
+                                            <td class="ref">
+                                                {{contract.refnumber}}
+                                            </td>
+                                            <td class="type">
+                                                {{contract.type}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="table-box">
+                                <div class="table-box-head">
+                                    <div class="row">
+                                        <div class="col-xs-10"><h3>{{'projects.todos'|translate}}</h3></div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-link" title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                                <i class="md-add-circle-outline"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-box-body" data-ng-show="project.project.todos.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="name">{{'global.name'|translate}}</th>
+                                            <th class="ref">#</th>
+                                            <th class="state"></th>
+                                        </tr>
+                                        </thead>
+                                        <tr data-ng-repeat="todo in project.project.todos" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
+                                            <td class="name">
+                                                {{todo.name}}
+                                            </td>
+                                            <td class="date">
+                                                {{todo.due}}
+                                            </td>
+                                            <td class="state">
+                                                {{todo.items_done}}/{{todo.items_total}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+
+                            <div class="table-box">
+                                <div class="table-box-head">
+                                    <div class="row">
+                                        <div class="col-xs-10"><h3>{{'projects.acceptances'|translate}}</h3></div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-link" title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                                <i class="md-add-circle-outline"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-box-body" data-ng-show="project.project.acceptances.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="name">{{'global.name'|translate}}</th>
+                                            <th class="ref">#</th>
+                                            <th class="state"></th>
+                                        </tr>
+                                        </thead>
+                                        <tr data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptances({id:{{acceptance.id}}})">
+                                            <td class="name">
+                                                {{acceptance.name}}
+                                            </td>
+                                            <td class="ref">
+                                                {{acceptance.refnumber}}
+                                            </td>
+                                            <td class="state">
+                                                {{acceptance.state}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+
+                            <div class="table-box">
+                                <div class="table-box-head">
+                                    <div class="row">
+                                        <div class="col-xs-10"><h3>{{'projects.invoices'|translate}}</h3></div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-link" title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                                <i class="md-add-circle-outline"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-box-body" data-ng-show="project.project.invoices.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="name">{{'global.name'|translate}}</th>
+                                            <th class="ref">#</th>
+                                            <th class="date">{{'global.date' | translate}}</th>
+                                            <th class="date">{{'invoice.due' | translate}}</th>
+                                            <th class="state"></th>
+                                            <th class="tabletd">{{'invoice.reminders' | translate}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tr data-ng-repeat="invoice in project.project.invoices" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
+                                            <td class="name">
+                                                {{invoice.name}}
+                                            </td>
+                                            <td class="ref">
+                                                {{invoice.refnumber}}
+                                            </td>
+                                            <td class="date">
+                                                {{invoice.date}}
+                                            </td>
+                                            <td class="date">
+                                                {{invoice.due}}
+                                            </td>
+                                            <td class="state">
+                                                {{invoice.state}}
+                                            </td>
+                                            <td class="tabletd">
+                                                <table data-ng-show="invoice.reminders.length > 0" class="table table-hover table-condensed table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="name">{{'global.name'|translate}}</th>
+                                                        <th class="ref">#</th>
+                                                        <th class="date">{{'global.date' | translate}}</th>
+                                                        <th class="state"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tr data-ng-repeat="reminder in invoice.reminders" data-ui-sref="app.reminders({id:{{reminder.id}}})">
+                                                        <td class="name">
+                                                            {{reminder.name}}
+                                                        </td>
+                                                        <td class="ref">
+                                                            {{reminder.refnumber}}
+                                                        </td>
+                                                        <td class="date">
+                                                            {{reminder.date}}
+                                                        </td>
+                                                        <td class="state">
+                                                            {{reminder.state}}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
 
-    </div>
-    <div class="detail-inner scroll-y">
-        <div class="detail-inner-padding">
-            <div class="row">
-                <div class="col-md-8 col-sm-10">
+        <div class="col-sm-6 col-md-4 fullheight">
+
+            <div class="panel panel-default fixedheight-360 shadow-1">
+                <div class="panel-heading">
+                    <h3>{{'global.estimatedIncome' | translate}}</h3>
+                </div>
+                <div class="panel-body scroll-y">
+                    <div data-payment-stats="project.project.stats"></div>
+                </div>
+            </div>
+
+            <div class="panel panel-default under-fixedheight-360 shadow-0 scroll-y">
+                <div class="panel-heading">
+                    <h3>{{'clients.client'|translate}}</h3>
+                </div>
+                <div class="panel-body">
+
 
 
                     <p data-in-place-edit
@@ -36,250 +294,15 @@
                        data-ipe-type="'textarea'"
                             ></p>
 
-                </div>
-                <div class="col-md-1 col-sm-2">
-                    <i class="state-icon state-icon-{{project.project.state}}"></i>
-                </div>
-                <div class="col-md-3 col-sm-12">
                     <div class="tile tile-blank">
                         <div class="tile-inner">
-                            <!-- This does not work yet! -->
                             <div data-client-box="project.project.client"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="table-box">
-                        <div class="table-box-head">
-                            <div class="row">
-                                <div class="col-xs-10"><h3>{{'projects.offers'|translate}}</h3></div>
-                                <div class="col-xs-2">
-                                    <button class="btn btn-link" title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-box-body" data-ng-show="project.project.offers.length > 0">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="name">{{'global.name'|translate}}</th>
-                                    <th class="ref">#</th>
-                                    <th class="state"></th>
-                                </tr>
-                                </thead>
-                                <tr data-ng-repeat="offer in project.project.offers" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
-                                    <td class="name">
-                                        {{offer.name}}
-                                    </td>
-                                    <td class="ref">
-                                        {{offer.refnumber}}
-                                    </td>
-                                    <td class="state">
-                                        {{offer.state}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-
-                    <div class="table-box">
-                        <div class="table-box-head">
-                            <div class="row">
-                                <div class="col-xs-10"><h3>{{'projects.contracts'|translate}}</h3></div>
-                                <div class="col-xs-2">
-                                    <button class="btn btn-link" title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-box-body" data-ng-show="project.contracts.length > 0">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="name">{{'global.name'|translate}}</th>
-                                    <th class="ref">#</th>
-                                    <th class="type">{{'contract.type' | translate}}</th>
-                                </tr>
-                                </thead>
-                                <tr data-ng-repeat="contract in project.contracts | orderBy:'date'" data-ui-sref="app.contractDetail({id:{{contract.id}}})">
-                                    <td class="name">
-                                        {{contract.name}}
-                                    </td>
-                                    <td class="ref">
-                                        {{contract.refnumber}}
-                                    </td>
-                                    <td class="type">
-                                        {{contract.type}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="table-box">
-                        <div class="table-box-head">
-                            <div class="row">
-                                <div class="col-xs-10"><h3>{{'projects.todos'|translate}}</h3></div>
-                                <div class="col-xs-2">
-                                    <button class="btn btn-link" title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-box-body" data-ng-show="project.project.todos.length > 0">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="name">{{'global.name'|translate}}</th>
-                                    <th class="ref">#</th>
-                                    <th class="state"></th>
-                                </tr>
-                                </thead>
-                                <tr data-ng-repeat="todo in project.project.todos" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
-                                    <td class="name">
-                                        {{todo.name}}
-                                    </td>
-                                    <td class="date">
-                                        {{todo.due}}
-                                    </td>
-                                    <td class="state">
-                                        {{todo.items_done}}/{{todo.items_total}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-
-                    <div class="table-box">
-                        <div class="table-box-head">
-                            <div class="row">
-                                <div class="col-xs-10"><h3>{{'projects.acceptances'|translate}}</h3></div>
-                                <div class="col-xs-2">
-                                    <button class="btn btn-link" title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-box-body" data-ng-show="project.project.acceptances.length > 0">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="name">{{'global.name'|translate}}</th>
-                                    <th class="ref">#</th>
-                                    <th class="state"></th>
-                                </tr>
-                                </thead>
-                                <tr data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptances({id:{{acceptance.id}}})">
-                                    <td class="name">
-                                        {{acceptance.name}}
-                                    </td>
-                                    <td class="ref">
-                                        {{acceptance.refnumber}}
-                                    </td>
-                                    <td class="state">
-                                        {{acceptance.state}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="table-box">
-                <div class="table-box-head">
-                    <div class="row">
-                        <div class="col-xs-10"><h3>{{'projects.invoices'|translate}}</h3></div>
-                        <div class="col-xs-2">
-                            <button class="btn btn-link" title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
-                                <i class="md-add-circle-outline"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-box-body" data-ng-show="project.project.invoices.length > 0">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th class="name">{{'global.name'|translate}}</th>
-                            <th class="ref">#</th>
-                            <th class="date">{{'global.date' | translate}}</th>
-                            <th class="date">{{'invoice.due' | translate}}</th>
-                            <th class="state"></th>
-                            <th class="tabletd">{{'invoice.reminders' | translate}}</th>
-                        </tr>
-                        </thead>
-                        <tr data-ng-repeat="invoice in project.project.invoices" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
-                            <td class="name">
-                                {{invoice.name}}
-                            </td>
-                            <td class="ref">
-                                {{invoice.refnumber}}
-                            </td>
-                            <td class="date">
-                                {{invoice.date}}
-                            </td>
-                            <td class="date">
-                                {{invoice.due}}
-                            </td>
-                            <td class="state">
-                                {{invoice.state}}
-                            </td>
-                            <td class="tabletd">
-                                <table data-ng-show="invoice.reminders.length > 0" class="table table-hover table-condensed table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th class="name">{{'global.name'|translate}}</th>
-                                        <th class="ref">#</th>
-                                        <th class="date">{{'global.date' | translate}}</th>
-                                        <th class="state"></th>
-                                    </tr>
-                                    </thead>
-                                    <tr data-ng-repeat="reminder in invoice.reminders" data-ui-sref="app.reminders({id:{{reminder.id}}})">
-                                        <td class="name">
-                                            {{reminder.name}}
-                                        </td>
-                                        <td class="ref">
-                                            {{reminder.refnumber}}
-                                        </td>
-                                        <td class="date">
-                                            {{reminder.date}}
-                                        </td>
-                                        <td class="state">
-                                            {{reminder.state}}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </div>
 
-
     </div>
-
 </div>

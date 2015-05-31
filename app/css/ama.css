@@ -10748,8 +10748,27 @@ h1, h2 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; }
+  .panel-default .panel-heading > .row {
+    margin-left: -15px;
+    margin-right: -15px; }
   .panel-default .panel-heading h3 {
     color: #404877; }
+  .panel-default .panel-heading i.state-icon {
+    line-height: 64px;
+    margin-right: 20px; }
+  .panel-default .panel-heading button.btn {
+    height: 64px;
+    line-height: 60px;
+    font-size: 12px;
+    padding: 0 10px;
+    border-top: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
+    transition: 0.3s border-bottom, 0.3s background-color;
+    border-radius: 0 !important; }
+    .panel-default .panel-heading button.btn:hover, .panel-default .panel-heading button.btn:active, .panel-default .panel-heading button.btn:focus {
+      text-decoration: none; }
+    .panel-default .panel-heading button.btn.active {
+      border-bottom: 2px solid #404877 !important; }
 .panel-default .panel-heading + .panel-body {
   height: calc(100% - 64px); }
 .panel-default.buttons-left {
