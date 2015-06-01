@@ -368,6 +368,28 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.todoDetail',
+        stateObject: {
+            url: '/todos/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/todoDetail.html'
+                }
+            }
+        }
+    },
+    {
+        name:'app.todoCreation',
+        stateObject: {
+            url: '/new-todo',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/todoCreation.html'
+                }
+            }
+        }
+    },
+    {
         name: 'app.acceptanceDetail',
         stateObject: {
             url: '/acceptances/:id',
