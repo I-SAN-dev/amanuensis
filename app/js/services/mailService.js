@@ -11,6 +11,7 @@ app.factory('MailService', [
                     additional: mailtext
                 }
             };
+            console.log(mailtext);
             if(mailtext){
                 apiObject.data.additional = mailtext;
             }
