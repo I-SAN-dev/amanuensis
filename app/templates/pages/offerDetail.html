@@ -77,14 +77,6 @@
 
                 <div class="margin-bottom-lg" data-payment-stats="offer.offer.costs"></div>
 
-                                <div class="wysiwyg-fullheight">
-                                    <div data-material-input
-                                         data-ng-model="mailtext"
-                                         data-input-id="mailtext"
-                                         data-input-label="'mail.mailtext'|translate"
-                                         data-input-type="wysiwyg"></div>
-                                </div>
-
                 <div class="row">
                     <div class="col-sm-4">
                         <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
@@ -141,7 +133,7 @@
 
                         <div class="wysiwyg-fullheight">
                             <div data-material-input
-                                 data-ng-model="offer.mailtext"
+                                 data-ng-model="mailtext"
                                  data-input-id="mailtext"
                                  data-input-label="'mail.mailtext'|translate"
                                  data-input-type="wysiwyg"></div>
