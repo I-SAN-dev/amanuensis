@@ -7,6 +7,13 @@ app.filter('amaStates', function () {
             '3': 'offers.states.clientAccepted',
             '-1': 'offers.states.clientDeclined'
         },
+        acceptance: {
+            '0': 'acceptances.states.created',
+            '1': 'acceptances.states.pdfGenerated',
+            '2': 'acceptances.states.pdfSent',
+            '3': 'acceptances.states.clientAccepted',
+            '-1': 'acceptances.states.clientDeclined'
+        },
         invoice: {
             '0': 'invoices.states.created',
             '1': 'invoices.states.pdfGenerated',
@@ -14,6 +21,11 @@ app.filter('amaStates', function () {
             '3': 'invoices.states.paid',
             '4': 'invoices.states.overdueNoReminder',
             '5': 'invoices.states.overdueReminderCreated'
+        },
+        reminder: {
+            '0':'reminders.states.created',
+            '1':'reminders.states.pdfGenerated',
+            '2':'reminders.states.pdfSent'
         },
         error: {
             "400": "errors.codes.400.message",

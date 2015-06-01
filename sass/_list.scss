@@ -9,9 +9,36 @@
 
 .listinfo-row {
   border-bottom: 1px solid $gray-lighter;
-  margin-bottom: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+
+  &.listinfo-link:hover, &.listinfo-link-inside>.listinfo-link:hover{
+    cursor: pointer;
+    background-color: $list-group-hover-bg;
+
+
+  }
+
+  &.listinfo-link-inside{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    >.listinfo-link{
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 10px;
+    }
+
+  }
+
+  .listinfo-row {
+    margin-left: 30px;
+
+    &:last-child{
+      border-bottom: 0 none;
+    }
+  }
 
   .listinfo-action {
     display: block;

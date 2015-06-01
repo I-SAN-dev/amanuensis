@@ -10734,8 +10734,10 @@ h1, h2 {
           .ipe-wysiwyg-fullheight > p > span div.ipe .note-editor .note-resizebar {
             display: none; }
 
+.less-important, .secondary {
+  font-size: 12.6px; }
+
 .less-important {
-  font-size: 12.6px;
   color: #BDBDBD; }
 
 .position-relative {
@@ -11902,9 +11904,24 @@ strong.total {
 
 .listinfo-row {
   border-bottom: 1px solid #EEEEEE;
-  margin-bottom: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px; }
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px; }
+  .listinfo-row.listinfo-link:hover, .listinfo-row.listinfo-link-inside > .listinfo-link:hover {
+    cursor: pointer;
+    background-color: #f5f5f5; }
+  .listinfo-row.listinfo-link-inside {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0; }
+    .listinfo-row.listinfo-link-inside > .listinfo-link {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 10px; }
+  .listinfo-row .listinfo-row {
+    margin-left: 30px; }
+    .listinfo-row .listinfo-row:last-child {
+      border-bottom: 0 none; }
   .listinfo-row .listinfo-action {
     display: block;
     border-left: 1px solid #EEEEEE;
