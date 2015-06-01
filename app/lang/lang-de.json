@@ -264,6 +264,7 @@
   "errors": {
     "error":"Fehler",
     "browsertoold":"Ihr Browser ist veraltet und unterstützt diese Funktion nicht. Bitte führen Sie ein Update durch!",
+    "noProjectSpecified": "amanu kann nicht feststellen, an welchem Projekt du gerade arbeitest. Du wirst nun auf das Dashboard weitergeleitet. Versuche es anschließend erneut.",
     "additionalInformation": "Weitere Informationen zu diesem Fehler:",
     "codes": {
       "400": {
