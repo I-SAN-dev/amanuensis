@@ -101,6 +101,19 @@ html, body
   }
 }
 
+.fixedheight-320
+{
+  height: 320px;
+}
+.under-fixedheight-320
+{
+  height: calc(100% - 320px);
+  &.panel
+  {
+    height: calc(100% - 340px); /* remember the margin! */
+  }
+}
+
 .scroll-y
 {
   overflow: auto !important;
@@ -287,7 +300,10 @@ $panel-heading-height: 64px;
       line-height: $panel-heading-height;
       margin-right: 20px;
     }
-
+    .btn-group
+    {
+      padding-right: 0;
+    }
     button.btn {
       height: $panel-heading-height;
       line-height: $panel-heading-height - 4px;
@@ -321,7 +337,47 @@ $panel-heading-height: 64px;
   }
 }
 
+.nooverflow
+{
+  overflow:hidden;
+}
+.margin-bottom
+{
+  margin-bottom: 15px;
+}
+.margin-bottom-lg
+{
+  margin-bottom: 30px;
+}
+.bg-primary
+{
+  background-color: $brand-primary;
+  color: #fff;
 
+  .ipe
+  {
+    .form-group input.form-control, .form-group select.form-control, .form-group textarea.form-control, .form-group .select.form-control
+    {
+      color: #fff;
+    }
+    .bar:after, .bar:before
+    {
+      background-color: #fff;
+    }
+  }
+  a
+  {
+    color: #ffffff;
+
+    &:hover,
+    &:active,
+    &:focus
+    {
+      text-decoration: underline;
+      color: $gray-lighter;
+    }
+  }
+}
 
 /* Shadow classes */
 .shadow-0

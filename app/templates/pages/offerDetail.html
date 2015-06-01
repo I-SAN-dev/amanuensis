@@ -1,141 +1,142 @@
 <div class="row detail fullheight" data-ng-controller="OfferDetailCtrl as offer">
-    <div class="col-sm-4 fullheight">
 
-        <div class="panel panel-default fullheight">
-            <div class="panel-heading panel-heading-primary">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
-                        <span data-in-place-edit
-                                  data-api-id="offer.offer.id"
-                                  data-api-name="'offer'"
-                                  data-ipe-key="'name'"
-                                  data-ipe-value="offer.offer.name"
-                                  data-ipe-name="'global.name'|translate"
-                                  data-ipe-deletable="false"
-                                ></span>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
-                        <span data-in-place-edit
-                              data-ipe-key="'refnumber'"
-                              data-ipe-value="offer.offer.refnumber"
-                              data-ipe-deletable="false"
-                              data-api-id="offer.offer.id"
-                              data-api-name="'offer'"
-                              data-ipe-name="'offers.refnumber'|translate"></span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="under-panel-heading">
-                <div class="halfheight scroll-y">
+
+    <div class="col-lg-8 col-md-8 col-sm-7 fullheight">
+
+        <div class="row detail-top-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight shadow-0 bg-primary">
                     <div class="panel-body">
-
-
-
                         <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-7">
-                                <p>
-                                    {{'offers.state'|translate}}:
-                                </p>
-                            </div>
-                            <div class="col-lg-7 col-md-6 col-sm-12">
-                                <p>
-                                    {{offer.offer.state|amaStates:'offer'|translate}}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-7">
-                                <p>
-                                    {{'global.date'|translate}}:
-                                </p>
-                            </div>
-                            <div class="col-lg--7 col-md-6 col-sm-12">
-                                <p>
+                            <div class="col-sm-8">
+                                <h1>
                                     <span data-in-place-edit
                                           data-api-id="offer.offer.id"
                                           data-api-name="'offer'"
-                                          data-ipe-key="'date'"
-                                          data-ipe-value="offer.offer.date"
-                                          data-ipe-name="'global.date'|translate"
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="offer.offer.name"
+                                          data-ipe-name="'global.name'|translate"
                                           data-ipe-deletable="false"
-                                          data-ipe-type="'date'"
-                                          data-output-value="offer.offer.date|amaDate:'dd.MM.yyyy'"
-                                          ></span>
-
-                                </p>
+                                            ></span>
+                                </h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <span data-in-place-edit
+                                      data-ipe-key="'refnumber'"
+                                      data-ipe-value="offer.offer.refnumber"
+                                      data-ipe-deletable="false"
+                                      data-api-id="offer.offer.id"
+                                      data-api-name="'offer'"
+                                      data-ipe-name="'offers.refnumber'|translate"></span>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-7">
-                                <p>
-                                    {{'projects.project'|translate}}:
-                                </p>
-                            </div>
-                            <div class="col-lg--7 col-md-6 col-sm-12">
-                                <p>
-                                <a data-ui-sref="app.projectDetail({id: offer.offer.project.id})">{{offer.offer.project.name}}</a>
-                                </p>
+                        {{offer.offer.state|amaStates:'offer'|translate}}
+                        <div class="detail-inline">
+                            <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: offer.offer.project.id})">{{offer.offer.project.name}}</a>
+                        </div>
+                        <div class="detail-inline detail-inline-date">
+                            <i class="md md-schedule"></i>
+                            <div class="date-container">
+                                <span data-in-place-edit
+                                      data-api-id="offer.offer.id"
+                                      data-api-name="'offer'"
+                                      data-ipe-key="'date'"
+                                      data-ipe-value="offer.offer.date"
+                                      data-ipe-name="'global.date'|translate"
+                                      data-ipe-deletable="false"
+                                      data-ipe-type="'date'"
+                                      data-output-value="offer.offer.date|amaDate:'dd.MM.yyyy'"
+                                        ></span>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-7">
-                                <p>
-                                    {{'clients.client'|translate}}:
-                                </p>
-                            </div>
-                            <div class="col-lg--7 col-md-6 col-sm-12">
-                                <div data-client-box="offer.offer.project.client"></div>
-                            </div>
-                        </div>
-
-
 
 
 
                     </div>
                 </div>
-                <div class="halfheight">
+            </div>
+        </div>
 
-                    <div class="btn-toolbar inpanel-tabbar">
-                        <div class="btn-group btn-group-sm pull-right" data-ng-init="offer.showPage = 1">
-                            <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==1}" data-ng-click="offer.showPage = 1"><i class="md md-lg md-comment"></i> {{'offer.description' | translate}}</button>
-                            <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==2}" data-ng-click="offer.showPage = 2"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
-                        </div>
+        <div class="under-detail-top-bar next-fullheight">
+            <div data-master-detail
+                 data-master-list="offer.offer.items"
+                 data-master-tpl="'templates/pages/items/master.html'"
+                 data-detail-tpl="'templates/pages/items/detail.html'"
+                 data-detail="offer.offer.items[0]"
+                 data-master-loaded="offer.loaded"></div>
+            </div>
+
+    </div>
+
+
+    <div class="col-lg-4 col-md-4 col-sm-5 fullheight">
+
+        <div class="panel panel-default fixedheight-320 shadow-1">
+            <div class="panel-body">
+
+                <div class="margin-bottom-lg" data-payment-stats="offer.offer.costs"></div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
+                        <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
+                        <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
-                    <div class="under-inpanel-tabbar">
+                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
+                        <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
+                        <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
+                        <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
+                    </div>
+                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
+                        <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
+                        <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <div class="slideanim2 fullheight" data-ng-class="{panel2: offer.showPage==2}">
 
-                            <div class="slideanim-item fullheight scroll-y">
+        <div class="panel panel-default under-fixedheight-320">
+            <div class="panel-heading">
+                <div class="btn-group btn-group-sm pull-right" data-ng-init="offer.showPage = 1">
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==1}" data-ng-click="offer.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.client' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==2}" data-ng-click="offer.showPage = 2"><i class="md md-lg md-comment"></i> {{'offer.description' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: offer.showPage==3}" data-ng-click="offer.showPage = 3"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
+                </div>
+            </div>
+            <div class="panel-body nopadding nooverflow">
+                <div class="slideanim3 fullheight" data-ng-class="{panel2: offer.showPage==2, panel3: offer.showPage==3}">
 
-                                <div class="ipe-wysiwyg-fullheight">
-                                    <p data-in-place-edit
-                                       data-api-id="offer.offer.id"
-                                       data-api-name="'offer'"
-                                       data-ipe-key="'description'"
-                                       data-ipe-value="offer.offer.description"
-                                       data-ipe-name="'global.description'|translate"
-                                       data-ipe-type="'wysiwyg'"></p>
-                                </div>
+                    <div class="slideanim-item fullheight scroll-y">
 
-                            </div>
+                        <div data-client-box="offer.offer.project.client"></div>
 
-                            <div class="slideanim-item nopadding fullheight">
+                    </div>
 
-                                <div class="wysiwyg-fullheight">
-                                    <div data-material-input
-                                         data-ng-model="mailtext"
-                                         data-input-id="mailtext"
-                                         data-input-label="'mail.mailtext'|translate"
-                                         data-input-type="wysiwyg"></div>
-                                </div>
+                    <div class="slideanim-item fullheight scroll-y">
 
-                            </div>
+                        <div class="ipe-wysiwyg-fullheight">
+                            <p data-in-place-edit
+                               data-api-id="offer.offer.id"
+                               data-api-name="'offer'"
+                               data-ipe-key="'description'"
+                               data-ipe-value="offer.offer.description"
+                               data-ipe-name="'global.description'|translate"
+                               data-ipe-type="'wysiwyg'"></p>
+                        </div>
 
+                    </div>
+
+                    <div class="slideanim-item nopadding fullheight">
+
+                        <div class="wysiwyg-fullheight">
+                            <div data-material-input
+                                 data-ng-model="mailtext"
+                                 data-input-id="mailtext"
+                                 data-input-label="'mail.mailtext'|translate"
+                                 data-input-type="wysiwyg"></div>
                         </div>
 
                     </div>
@@ -143,66 +144,8 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
-    <div class="col-sm-8 fullheight">
-        <div class="over-detail-bottom-bar next-fullheight">
-        <div data-master-detail
-             data-master-list="offer.offer.items"
-             data-master-tpl="'templates/pages/items/master.html'"
-             data-detail-tpl="'templates/pages/items/detail.html'"
-             data-detail="offer.offer.items[0]"
-             data-master-loaded="offer.loaded"></div>
-        </div>
-        <div class="row detail-bottom-bar">
-            <div class="col-sm-12 fullheight">
-                <div class="panel panel-default fullheight">
-                    <div class="panel-body">
-
-                            <div class="row">
-                                <div class="col-sm-8">
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
-                                            <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
-                                            <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
-                                            <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
-                                        </div>
-                                        <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
-                                            <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
-                                            <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
-                                            <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
-                                        </div>
-                                        <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
-                                            <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
-                                            <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
-                                        </div>
-                                    </div>
-
-                                    <div>
-
-
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="row text-right">
-                                        <div class="col-xs-8">{{'items.beforeTaxPrice'|translate}}:</div>
-                                        <div class="col-xs-4">{{offer.offer.costs.beforetax | price}}</div>
-                                        <div class="col-xs-8">{{offer.offer.costs.taxlabel}}:</div>
-                                        <div class="col-xs-4">{{offer.offer.costs.tax | price}}</div>
-                                        <div class="col-xs-8"><strong class="total">{{'items.totalPrice'|translate}}:</strong></div>
-                                        <div class="col-xs-4"><strong class="total">{{offer.offer.costs.total | price}}</strong></div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
