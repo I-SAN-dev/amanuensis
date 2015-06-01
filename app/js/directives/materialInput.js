@@ -38,17 +38,31 @@ app.directive('materialInput', [
             controller: function ($scope) {
                 $scope.currencySymbol = '€';
 
+                // wysiwyg
+                if($scope.inputType == 'wysiwyg') {
 
-                /**
-                 * Reacts on button clicks when inputType = wysiwyg
-                 * @param type - the type of the button that was clicked (can be one of 'save', 'cancel' or 'delete')
-                 */
-                $scope.processWysiwyg = function(type) {
-                    if (type=='save')
-                        $scope.buttons[type][type]($scope.model);
-                    else
-                        $scope.buttons[type][type]();
-                };
+                    /**
+                     * Reacts on button clicks when inputType = wysiwyg
+                     * @param type - the type of the button that was clicked (can be one of 'save', 'cancel' or 'delete')
+                     */
+                    $scope.processWysiwyg = function (type) {
+                        if (type == 'save')
+                            $scope.buttons[type][type]($scope.model);
+                        else
+                            $scope.buttons[type][type]();
+                    };
+
+
+                    /**
+                     * passes the model of a wysiwyg field back to the parent scope
+                     * @param id - identifier of the wysiwyg field
+                     * @returns {*}
+                     */
+                    $scope.$parent.getValueFromWysiwyg = function (id) {
+                        if (id == $scope.id)
+                            return $scope.model;
+                    };
+                }
 
                 // Select fields
                 if($scope.inputType == 'select'){
@@ -241,6 +255,7 @@ app.directive('materialInput', [
                             },
                             onBlur: function(e) {
                                 scope.model = element.code();
+                                console.log(scope.model);
                             }
                         });
                         scope.editors.code(scope.model);

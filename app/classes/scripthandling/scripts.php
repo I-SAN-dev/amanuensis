@@ -71,6 +71,7 @@ class Scripts
         "js/services/itemContainerService.js",
         "js/services/panelService.js",
         "js/services/stateManager.js",
+        "js/services/nextStepModal.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",

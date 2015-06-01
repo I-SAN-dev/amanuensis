@@ -6,14 +6,16 @@ app.controller('OfferDetailCtrl', [
         'PdfService',
         'MailService',
         'StateManager',
+        'NextStepModal',
         '$stateParams',
         '$scope',
         'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, $stateParams, $scope, constants) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
 
+            $scope.mailtext = '';
             // (re)set a flag indicating if the Controller was fully loaded
             // needed for setting transition classes
             $scope.$on('$stateChangeStart', function (event, toState) {
@@ -86,11 +88,13 @@ app.controller('OfferDetailCtrl', [
 
             this.openMailPreview = function (event) {
                 event.preventDefault();
-                MailService.showPreview('offer',self.offer.id, self.mailtext);
+                $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+                MailService.showPreview('offer',self.offer.id, $scope.mailtext);
             };
 
             this.send = function () {
-                MailService.send('offer',self.offer.id, self.mailtext);
+                $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+                MailService.send('offer',self.offer.id, $scope.mailtext);
             };
 
             this.deleteItem = function (itemId) {
@@ -129,6 +133,7 @@ app.controller('OfferDetailCtrl', [
 
             this.accept = function () {
                 changeState(3);
+                NextStepModal('offer',self.offer);
                 // TODO: ask for what's next
             };
         }
