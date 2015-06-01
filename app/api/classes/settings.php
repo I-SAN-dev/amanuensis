@@ -88,8 +88,13 @@ class settings {
         $number = 'number';
         $bool = 'bool';
         $price = 'price';
+        $mail = 'email';
 
         $types['sessiontimeout'] = $number;
+        $types['mail.sender'] = $mail;
+        $types['mail.replyto'] = $mail;
+        $types['mail.archive'] = $mail;
+        $types['mail.admin'] = $mail;
         $types['mail.usesmtp'] = $bool;
         $types['mail.smtpauth'] = $bool;
         $types['mail.port'] = $number;
