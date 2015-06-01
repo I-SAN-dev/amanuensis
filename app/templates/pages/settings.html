@@ -6,7 +6,13 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]" data-ng-class="{active: $first}">
+                <li role="presentation" class="active">
+                    <a data-target="#tab-apps" aria-controls="tab-apps" role="tab" data-toggle="tab">{{'app.apps'|translate}}</a>
+                </li>
+                <li role="presentation">
+                    <a data-target="#tab-user" aria-controls="tab-user" role="tab" data-toggle="tab">{{'user.user'|translate}}</a>
+                </li>
+                <li role="presentation" data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]">
                     <a data-target="#tab-{{$index}}" aria-controls="tab-{{$index}}" role="tab" data-toggle="tab">{{key|translate}}</a>
                 </li>
             </ul>
@@ -14,7 +20,34 @@
             <div class="panel-under-tabs scroll-y panel-body">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]" data-ng-class="{active: $first}"
+                    <div role="tabpanel" class="tab-pane active" id="tab-apps">
+                        <h3>{{'app.apps'|translate}}</h3>
+
+                        <div class="tile">
+                            <div class="tile-inner">
+                                <p data-ng-bind-html="settings.apps.message|translate"></p>
+                                <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-8">
+                                        <div class="ffapp" data-ng-if="settings.apps.displaylink == 'firefoxapp'">
+                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)">
+                                                <i class="md md-lg md-play-install"></i> {{'app.install'|translate}}
+                                            </a>
+                                        </div>
+                                        <div class="chromeapp" data-ng-if="settings.apps.displaylink == 'chromeapp'">
+                                            <a class="btn btn-block btn-lg btn-success" href="{{settings.apps.chromeapp}}" download="amanu.crx" target="_self">
+                                                <i class="md md-lg md-play-download"></i> {{'app.download'|translate}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab-user">
+                        User
+                    </div>
+                    <div data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]"
                          role="tabpanel" class="tab-pane" id="tab-{{$index}}">
 
                         <div class="row" data-ng-repeat="settingkey in settings.objectKeys(settinglist)" data-ng-init="settingvalue = settinglist[settingkey]">

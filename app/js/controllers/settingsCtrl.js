@@ -3,7 +3,8 @@ app.controller('SettingsCtrl', [
     'LocalStorage',
     'constants',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, constants, $scope) {
+    'ErrorDialog',
+    function (ApiAbstractionLayer, LocalStorage, constants, $scope, ErrorDialog) {
         var self = this;
 
         /**
@@ -39,15 +40,37 @@ app.controller('SettingsCtrl', [
             return((val != '%spacer%') && (typeof(val) === 'object'));
         };
 
+        this.installffapp = function(e)
+        {
+            e.preventDefault();
+
+            if(navigator.mozApps)
+            {
+                navigator.mozApps.install(this.apps.firefoxapp);
+            }
+            else
+            {
+                ErrorDialog({
+                    code:'1337',
+                    languagestring:'errors.browsertoold'
+                }).activate();
+            }
+        };
+
         this.response =  LocalStorage.getData('settings');
         this.settings = this.response ? this.response.settings : {};
         this.settingtypes = this.response ? this.response.types: {};
         this.settingkeys = this.objectKeys(this.settings);
 
         ApiAbstractionLayer('GET', 'settings').then(function (data) {
+            LocalStorage.setData('settings', data);
             self.settings = data.settings;
             self.settingtypes = data.types;
             self.settingkeys = self.objectKeys(self.settings);
+        });
+
+        ApiAbstractionLayer('GET','apps').then(function(data){
+            self.apps = data;
         });
 
 
