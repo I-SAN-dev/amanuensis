@@ -29,10 +29,10 @@
                                 <div class="row">
                                     <div class="col-sm-4 col-sm-offset-8">
                                         <div class="ffapp" data-ng-if="settings.apps.displaylink == 'firefoxapp'">
-                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)" data-ng-if="!settings.isInstalled()">
+                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)" data-ng-if="!ffappinstalled">
                                                 <i class="md md-lg md-play-download"></i> {{'app.install'|translate}}
                                             </a>
-                                            <a class="btn btn-block btn-lg btn-success disabled" data-ng-if="settings.isInstalled()">
+                                            <a class="btn btn-block btn-lg btn-success disabled" data-ng-click="settings.installffapp($event)" data-ng-if="ffappinstalled">
                                                 <i class="md md-lg md-play-install"></i> {{'app.installed'|translate}}
                                             </a>
                                         </div>

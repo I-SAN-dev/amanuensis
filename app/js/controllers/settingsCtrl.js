@@ -46,13 +46,22 @@ app.controller('SettingsCtrl', [
          * Tries to install the amanu firefox open web app
          * @param e - the click event
          */
+        $scope.ffappinstalled = false;
         this.installffapp = function(e)
         {
             e.preventDefault();
 
             if(navigator.mozApps)
             {
-                navigator.mozApps.install(this.apps.firefoxapp);
+                var app = navigator.mozApps.install(this.apps.firefoxapp);
+                app.onsuccess = function()
+                {
+                    if(app.result)
+                    {
+                        $scope.ffappinstalled = true;
+                        $scope.apply();
+                    }
+                };
             }
             else
             {
@@ -66,9 +75,20 @@ app.controller('SettingsCtrl', [
         /**
          * Checks if the ff extension is installed
          */
-        this.isInstalled = function()
+        this.checkffapp = function()
         {
-            return (navigator.mozApps.checkInstalled(this.apps.firefoxapp)) ? true : false;
+            if(navigator.mozApps)
+            {
+                var app = navigator.mozApps.checkInstalled(this.apps.firefoxapp);
+                app.onsuccess = function()
+                {
+                    if(app.result)
+                    {
+                        $scope.ffappinstalled = true;
+                        $scope.apply();
+                    }
+                };
+            }
         };
 
 
@@ -149,6 +169,7 @@ app.controller('SettingsCtrl', [
 
         ApiAbstractionLayer('GET','apps').then(function(data){
             self.apps = data;
+            self.checkffapp();
         });
 
         ApiAbstractionLayer('GET', {name: 'userdata', params: {list: 1}}).then(function(data){
