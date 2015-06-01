@@ -23,14 +23,17 @@
                     <div role="tabpanel" class="tab-pane active" id="tab-apps">
                         <h3>{{'app.apps'|translate}}</h3>
 
-                        <div class="tile">
+                        <div class="tile tile-autoheight">
                             <div class="tile-inner">
                                 <p data-ng-bind-html="settings.apps.message|translate"></p>
                                 <div class="row">
                                     <div class="col-sm-4 col-sm-offset-8">
                                         <div class="ffapp" data-ng-if="settings.apps.displaylink == 'firefoxapp'">
-                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)">
-                                                <i class="md md-lg md-play-install"></i> {{'app.install'|translate}}
+                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)" data-ng-if="!settings.isInstalled()">
+                                                <i class="md md-lg md-play-download"></i> {{'app.install'|translate}}
+                                            </a>
+                                            <a class="btn btn-block btn-lg btn-success disabled" data-ng-if="settings.isInstalled()">
+                                                <i class="md md-lg md-play-install"></i> {{'app.installed'|translate}}
                                             </a>
                                         </div>
                                         <div class="chromeapp" data-ng-if="settings.apps.displaylink == 'chromeapp'">
@@ -45,7 +48,97 @@
 
                     </div>
                     <div role="tabpanel" class="tab-pane" id="tab-user">
-                        User
+
+                        <h3>{{'user.user'|translate}}</h3>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="listinfo-row" data-ng-repeat="user in settings.users">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <span class="username" data-in-place-edit
+                                                  data-ipe-key="'username'"
+                                                  data-ipe-value="user.username"
+                                                  data-api-name="'userdata'"
+                                                  data-api-id="user.id"
+                                                  data-ipe-name="'user.username'|translate"
+                                                  data-ipe-deletable="false"
+                                                    ></span>
+                                            <br/>
+                                            <span class="secondary email" data-in-place-edit
+                                                  data-ipe-key="'email'"
+                                                  data-ipe-value="user.email"
+                                                  data-api-name="'userdata'"
+                                                  data-api-id="user.id"
+                                                  data-ipe-name="'user.email'|translate"
+                                                  data-ipe-type="email"
+                                                  data-ipe-deletable="false"
+                                                    ></span>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <a class="listinfo-action listinfo-action-icon listinfo-action-success" href="mailto:{{user.email}}" title="{{'user.sendmail'|translate}}">
+                                                <i class="md md-mail"></i>
+                                            </a>
+                                            <a class="listinfo-action listinfo-action-icon listinfo-action-danger" data-ng-click="settings.deleteUser($event, user.id)"  title="{{'user.delete'|translate}}">
+                                                <i class="md md-delete"></i>
+                                            </a>
+                                            <a class="listinfo-action listinfo-action-icon listinfo-action-warning" data-ng-click="settings.changeUserPass($event, user.id)"  title="{{'user.changepass'|translate}}">
+                                                <i class="md md-lock"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="tile tile-autoheight">
+                                    <div class="tile-inner">
+                                        <h3>{{'user.new'|translate}}</h3>
+                                        <form data-ng-submit="settings.addNewUser()">
+                                            <div data-material-input
+                                                 data-ng-model="settings.newUser.username"
+                                                 data-input-id="new-username"
+                                                 data-input-label="{{'user.username'|translate}}"
+                                                 data-input-type="text"
+                                                 data-input-required="true"></div>
+                                            <div data-material-input
+                                                 data-ng-model="settings.newUser.email"
+                                                 data-input-id="new-email"
+                                                 data-input-label="{{'user.email'|translate}}"
+                                                 data-input-type="email"
+                                                 data-input-required="true"></div>
+                                            <div data-material-input
+                                                 data-ng-model="settings.newUser.password1"
+                                                 data-input-id="new-password1"
+                                                 data-input-label="{{'user.password'|translate}}"
+                                                 data-input-type="password"
+                                                 data-input-required="true"></div>
+                                            <div data-material-input
+                                                 data-ng-model="settings.newUser.password2"
+                                                 data-input-id="new-password2"
+                                                 data-input-label="{{'user.password2'|translate}}"
+                                                 data-input-type="password"
+                                                 data-input-required="true"></div>
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <button type="button" class="btn btn-primary btn-block" title="{{'global.cancel'|translate}}" data-ng-click="settings.resetNewUser()">
+                                                        <i class="md md-close md-lg"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <button type="submit" class="btn btn-success btn-block" title="{{'user.new'|translate}}">
+                                                        <i class="md md-group-add md-lg"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                     <div data-ng-repeat="key in settings.settingkeys" data-ng-init="settinglist = settings.settings[key]"
                          role="tabpanel" class="tab-pane" id="tab-{{$index}}">

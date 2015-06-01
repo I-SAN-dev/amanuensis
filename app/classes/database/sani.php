@@ -40,7 +40,7 @@ class Sani {
      * @return string
      * @throws Exception
      */
-    public static function string($string, $options = array())
+    public static function validString($string, $options = array())
     {
         if($options['required'] && (!isset($string) || $string == ''))
         {
@@ -80,6 +80,9 @@ class Sani {
     public static function options($input, $options)
     {
         if(!in_array($input, $options))
+        {
+            throw new Exception('Input option not allowed', 400);
+        }
         return $input;
     }
 

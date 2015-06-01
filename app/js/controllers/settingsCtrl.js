@@ -4,7 +4,9 @@ app.controller('SettingsCtrl', [
     'constants',
     '$scope',
     'ErrorDialog',
-    function (ApiAbstractionLayer, LocalStorage, constants, $scope, ErrorDialog) {
+    'DeleteService',
+    'sha256Filter',
+    function (ApiAbstractionLayer, LocalStorage, constants, $scope, ErrorDialog, DeleteService, sha256Filter) {
         var self = this;
 
         /**
@@ -40,6 +42,10 @@ app.controller('SettingsCtrl', [
             return((val != '%spacer%') && (typeof(val) === 'object'));
         };
 
+        /**
+         * Tries to install the amanu firefox open web app
+         * @param e - the click event
+         */
         this.installffapp = function(e)
         {
             e.preventDefault();
@@ -54,6 +60,78 @@ app.controller('SettingsCtrl', [
                     code:'1337',
                     languagestring:'errors.browsertoold'
                 }).activate();
+            }
+        };
+
+        /**
+         * Checks if the ff extension is installed
+         */
+        this.isInstalled = function()
+        {
+            return (navigator.mozApps.checkInstalled(this.apps.firefoxapp)) ? true : false;
+        };
+
+
+        /**
+         * Deletes a user with a given id
+         * @param e - the click event
+         * @param id - the id of the user
+         */
+        this.deleteUser = function(e, id)
+        {
+            e.preventDefault();
+            DeleteService('userdata',id).then(function(data){
+                self.users = data;
+            });
+        };
+
+        /**
+         * Changes the passwort of a user with a given id
+         * @param e - the click event
+         * @param id - the id of the user
+         */
+        this.changeUserPass = function(e, id)
+        {
+            e.preventDefault();
+            alert('TODO: Christian, bau ein Modal!');
+        };
+
+        /**
+         * Resets the user creation form
+         */
+        this.resetNewUser = function()
+        {
+            this.newUser = {
+                username: '',
+                email:'',
+                password1:'',
+                password2:''
+            }
+        };
+
+        /**
+         * Adds a new user
+         */
+        this.addNewUser = function()
+        {
+            if(this.newUser.password1 != this.newUser.password2)
+            {
+                ErrorDialog({code:'1337',languagestring:'user.passwordsdontmatch'}).activate();
+            }
+            else
+            {
+                ApiAbstractionLayer('POST', {
+                    name: 'userdata',
+                    data: {
+                        username: self.newUser.username,
+                        email: self.newUser.email,
+                        password: sha256Filter(self.newUser.password1),
+                        accessgroup: 0
+                    }
+                }).then(function(data){
+                    self.users = data;
+                    self.resetNewUser();
+                });
             }
         };
 
@@ -72,6 +150,13 @@ app.controller('SettingsCtrl', [
         ApiAbstractionLayer('GET','apps').then(function(data){
             self.apps = data;
         });
+
+        ApiAbstractionLayer('GET', {name: 'userdata', params: {list: 1}}).then(function(data){
+            self.users = data;
+        });
+
+        this.resetNewUser();
+
 
 
 

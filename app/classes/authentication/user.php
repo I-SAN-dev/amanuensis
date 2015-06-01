@@ -71,6 +71,14 @@ class User {
         }
         else
         {
+            $otheruser = self::userdataByMail($email);
+            if($otheruser)
+            {
+                $error = new amaException(NULL, 400, 'E-Mail address already in use','user.emailinuse');
+                $error->renderJSONerror();
+                $error->setHeaders();
+            }
+
             $this->created = time();
 
             /* if it is a new user we get a only simply hashed password and need to salt it before storing */
@@ -115,10 +123,9 @@ class User {
         }
         else
         {
-            $error = new amaException(NULL, 500, 'E-Mail address already in use');
+            $error = new amaException(NULL, 400, 'E-Mail address already in use','user.emailinuse');
             $error->renderJSONerror();
             $error->setHeaders();
-            die();
         }
     }
 

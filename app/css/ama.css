@@ -11471,7 +11471,7 @@ textarea {
       color: #263238; }
   .tile .tile-inner {
     padding: 15px; }
-    .tile .tile-inner h1, .tile .tile-inner h2 {
+    .tile .tile-inner h1, .tile .tile-inner h2, .tile .tile-inner h3 {
       margin-top: 0; }
     .tile .tile-inner .pricetile-icon {
       color: #fff; }
@@ -11925,11 +11925,22 @@ strong.total {
   .listinfo-row .listinfo-action {
     display: block;
     border-left: 1px solid #EEEEEE;
-    text-align: center; }
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: right; }
     .listinfo-row .listinfo-action.listinfo-action-icon {
       font-size: 25px; }
+    .listinfo-row .listinfo-action.listinfo-action-primary {
+      color: #404877; }
     .listinfo-row .listinfo-action.listinfo-action-success {
       color: #009688; }
+    .listinfo-row .listinfo-action.listinfo-action-info {
+      color: #00ACC1; }
+    .listinfo-row .listinfo-action.listinfo-action-warning {
+      color: #FFB300; }
+    .listinfo-row .listinfo-action.listinfo-action-danger {
+      color: #F4511E; }
 
 /**
   * This extends ng-trans

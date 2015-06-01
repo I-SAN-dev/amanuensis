@@ -216,6 +216,7 @@
     "availableextensions":"Wenn du Google Chrome oder Mozilla Firefox verwendest, kannst du amanu als Erweiterung hinzufügen, um direkt vom Desktop aus schnellen Zugriff zu erhalten.",
     "notavailable":"amanu ist für deine Plattform leider nicht als App verfügbar. Dies tut uns leid.",
     "install":"Installieren",
+    "installed":"Installiert",
     "download":"Download"
   },
 
@@ -308,6 +309,21 @@
     "invoice":"die Rechnung",
     "reminder":"die Zahlungserinnerung",
     "nothing":"In den letzten 180 Tagen ist nichts passiert!"
+  },
+
+  "user":
+  {
+    "user":"Benutzer",
+    "new":"Neuen Benutzer anlegen",
+    "sendmail":"Diesem Benutzer eine E-Mail senden",
+    "changepass":"Passwort dieses Benutzers ändern",
+    "delete":"Diesen Benutzer löschen",
+    "username":"Benutzername",
+    "email":"E-Mail Adresse",
+    "password":"Passwort",
+    "password2":"Passwort wiederholen",
+    "passwordsdontmatch":"Die Wiederholung des Passworts stimmt nicht mit dem Passwort überein!",
+    "emailinuse":"Die eingegebene E-Mail Adresse wird bereits von einem anderen Benutzer verwendet!"
   },
 
   "settings": {

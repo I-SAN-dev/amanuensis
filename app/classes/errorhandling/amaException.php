@@ -135,6 +135,12 @@ class amaException {
             $error["file"] = $this->file;
             $error["line"] = $this->line;
         }
+        /* echo only supported types, so the frontend can display it nicely */
+        if(!in_array($error['code'], array(401,403,404,400,405,500)))
+        {
+            $error['code'] = 500;
+        }
+
         return $error;
     }
 

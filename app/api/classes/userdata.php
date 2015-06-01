@@ -64,8 +64,7 @@ class userdata {
     public function post()
     {
         Authenticator::onlyFor(0);
-
-        if(!isset($_POST["id"]) || $_POST["id"] != '')
+        if(!isset($_POST["id"]) || $_POST["id"] == '')
         {
             self::createUser();
         }
@@ -138,13 +137,13 @@ class userdata {
     private function createUser()
     {
         $email = Sani::email($_POST["email"]);
-        $username = Sani::string($_POST["username"], array(
+        $username = Sani::validString($_POST["username"], array(
             "maxlength" => 100,
             "minlength" => 2,
             "safe_chars" => true,
             "required" => true
         ));
-        $password = Sani::string($_POST["password"], array(
+        $password = Sani::validString($_POST["password"], array(
             "required" => true,
             "minlength" => 64,
             "maxlength" => 64,
@@ -154,13 +153,7 @@ class userdata {
 
         $user = new User($email, $username, $password, $accesslevel);
 
-        $response = array();
-        $response["id"] = $user->id;
-        $response["username"] = $user->username;
-        $response["email"] = $user->email;
-        $response["accessgroup"] = $user->accessgroup;
-
-        json_response($response);
+        self::getUserList();
     }
 
     /**
@@ -177,6 +170,7 @@ class userdata {
             array('id', $_POST["id"]),
             1
         );
+
         if(!$userdata)
         {
             $error = new amaException(NULL, 404, "User not found");
@@ -195,7 +189,7 @@ class userdata {
         /* update username */
         if(isset($_POST["username"]) && $_POST["username"] != '')
         {
-            $username = Sani::string($_POST["username"], array(
+            $username = Sani::validString($_POST["username"], array(
                 "maxlength" => 100,
                 "minlength" => 2,
                 "safe_chars" => true,
@@ -207,7 +201,7 @@ class userdata {
         /* update password */
         if(isset($_POST["password"]) && $_POST["password"] != '')
         {
-            $password = Sani::string($_POST["password"], array(
+            $password = Sani::validString($_POST["password"], array(
                 "required" => true,
                 "minlength" => 64,
                 "maxlength" => 64,
@@ -231,14 +225,7 @@ class userdata {
             $user->setAccessgroup($accesslevel);
         }
 
-        /* Response */
-        $response = array();
-        $response["id"] = $user->id;
-        $response["username"] = $user->username;
-        $response["email"] = $user->email;
-        $response["accessgroup"] = $user->accessgroup;
-
-        json_response($response);
+        self::getUserList();
     }
 
 }

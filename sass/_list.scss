@@ -51,8 +51,20 @@
     &.listinfo-action-icon{
       font-size: 25px;
     }
+    &.listinfo-action-primary{
+      color: $brand-primary;
+    }
     &.listinfo-action-success{
       color: $brand-success;
+    }
+    &.listinfo-action-info{
+      color: $brand-info;
+    }
+    &.listinfo-action-warning{
+      color: $brand-warning;
+    }
+    &.listinfo-action-danger{
+      color: $brand-danger;
     }
 
   }
