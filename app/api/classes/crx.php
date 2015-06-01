@@ -106,7 +106,8 @@ class crx {
 
         /* Download the crx */
 
-        header('Content-Type: application/x-chrome-extension');
+        //header('Content-Type: application/x-chrome-extension');
+        // if we send this header, chrome tries directly to install the file, which is not allowed... therefore we serve it without that header
         header("Content-Disposition: attachment; filename=\"amanu.crx\"");
 
         $file = $outputdir.'/builddir.crx';
