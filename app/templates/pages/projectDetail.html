@@ -30,6 +30,16 @@
                 </div>
                 <div class="panel-body scroll-y">
 
+                    <p data-in-place-edit
+                       data-api-id="project.project.id"
+                       data-api-name="'project'"
+                       data-ipe-key="'description'"
+                       data-ipe-value="project.project.description"
+                       data-ipe-name="'global.description'|translate"
+                       data-ipe-type="'textarea'"
+                            ></p>
+
+
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
 
@@ -277,28 +287,14 @@
                 </div>
             </div>
 
-            <div class="panel panel-default under-fixedheight-360 shadow-0 scroll-y">
+            <div class="panel panel-default under-fixedheight-360 shadow-0 ">
                 <div class="panel-heading">
                     <h3>{{'clients.client'|translate}}</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body scroll-y">
 
+                    <div data-client-box="project.project.client"></div>
 
-
-                    <p data-in-place-edit
-                       data-api-id="project.project.id"
-                       data-api-name="'project'"
-                       data-ipe-key="'description'"
-                       data-ipe-value="project.project.description"
-                       data-ipe-name="'global.description'|translate"
-                       data-ipe-type="'textarea'"
-                            ></p>
-
-                    <div class="tile tile-blank">
-                        <div class="tile-inner">
-                            <div data-client-box="project.project.client"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
