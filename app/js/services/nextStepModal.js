@@ -52,13 +52,22 @@ app.factory('NextStepModal', [
             var modal = btfModal(
                 {
                     templateUrl: 'templates/modules/nextStepModal.html',
-                    controller: function($scope){
+                    controller: ['$scope', '$filter', function($scope, $filter){
                         var self = this;
                         this.before = object;
                         this.options = others(type);
                         this.selected = this.options[0];
+                        var getPrefix = function (name) {
+                            return '['+ $filter('translate')(name) +'] ';
+                        };
+                        var prefix = getPrefix(this.selected.name);
+                        this.name = prefix + object.name;
                         this.select = function (selected, keyboard) {
                             self.selected = selected;
+                            var newPrefix = getPrefix(selected.name);
+                            if(self.name.substr(0,prefix.length)==prefix)
+                                self.name = newPrefix + self.name.substr(prefix.length);
+                            prefix = newPrefix;
                             if(keyboard) {
                                 $scope.$apply();
                             }
@@ -77,7 +86,7 @@ app.factory('NextStepModal', [
                         this.close = function () {
                             modal.deactivate();
                         };
-                    },
+                    }],
                     controllerAs: 'next'
                 }
             );
