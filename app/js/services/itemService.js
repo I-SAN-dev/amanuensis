@@ -40,6 +40,18 @@ app.factory('ItemService',[
                 }, function () {
                     return item;
                 });
+            },
+            bindItemsToContainer: function (itemIds, forType, forId) {
+                var items = itemIds.join(',');
+                var apiObject = {
+                    name: 'bulk',
+                    data: {
+                        ids: items,
+                        for: forType,
+                        forid: forId
+                    }
+                };
+                return ApiAbstractionLayer('POST',apiObject);
             }
         }
     }

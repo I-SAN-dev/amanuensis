@@ -6,14 +6,24 @@
                 <h4>{{'nextStep.transformThis'|translate:next.before}}</h4>
             </div>
             <div class="modal-body">
-                <div class="list-group"
-                     data-list-navigation="next.select"
-                     data-list="next.options"
-                     data-active="next.selected">
-                    <a class="list-group-item" data-ng-repeat="option in next.options" data-ng-class="{active:option == next.selected}" data-ng-click="next.select(option)">
-                        {{option.name|translate}}
-                    </a>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="list-group"
+                             data-list-navigation="next.select"
+                             data-list="next.options"
+                             data-active="next.selected">
+                            <a class="list-group-item" data-ng-repeat="option in next.options" data-ng-class="{active:option == next.selected}" data-ng-click="next.select(option)">
+                                {{option.name|translate}}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="checkbox" data-ng-click="next.copyItems = !next.copyItems">
+                            <i class="md" data-ng-class="{'md-check-box':next.copyItems,'md-check-box-outline-blank':!next.copyItems}"></i> {{'nextStep.copyItems'|translate}}
+                        </span>
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" data-ng-click="next.transform()">{{'global.ok'|translate}}</button>

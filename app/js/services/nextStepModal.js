@@ -52,13 +52,34 @@ app.factory('NextStepModal', [
             var modal = btfModal(
                 {
                     templateUrl: 'templates/modules/nextStepModal.html',
-                    controller: function($scope){
+                    controller: ['RefnumberService','ItemService', '$scope', '$filter', function(RefnumberService, ItemService, $scope, $filter){
                         var self = this;
+                        this.copyItems = true;
                         this.before = object;
                         this.options = others(type);
                         this.selected = this.options[0];
+                        var getPrefix = function (name) {
+                            return '['+ $filter('translate')(name) +'] ';
+                        };
+                        var prefix = getPrefix(this.selected.name);
+                        this.name = prefix + object.name;
+                        if(this.selected.api != 'todo'){
+                            RefnumberService(this.selected.api+'s',object.project.id).then(function (data) {
+                                $scope.refnumber = data.refnumber;
+                            });
+                        }
+
                         this.select = function (selected, keyboard) {
                             self.selected = selected;
+                            var newPrefix = getPrefix(selected.name);
+                            if(self.name.substr(0,prefix.length)==prefix)
+                                self.name = newPrefix + self.name.substr(prefix.length);
+                            prefix = newPrefix;
+                            if(selected.api != 'todo') {
+                                RefnumberService(selected.api + 's', object.project.id).then(function (data) {
+                                    $scope.refnumber = data.refnumber;
+                                });
+                            }
                             if(keyboard) {
                                 $scope.$apply();
                             }
@@ -68,8 +89,19 @@ app.factory('NextStepModal', [
                             delete newItemContainer.id;
                             delete newItemContainer.state;
                             delete newItemContainer.path;
+                            newItemContainer.name = self.name;
+                            newItemContainer.refnumber = $scope.refnumber;
                             newItemContainer.project = object.project.id;
+
+                            var itemsToCopy = [];
+                            for(var i = 0; i<object.items.length; i++){
+                                itemsToCopy.push(object.items[i].id);
+                            }
+
+
                             ItemContainerService.createItemContainer(this.selected.api, object.project.id, newItemContainer).then(function (data) {
+                                if(self.copyItems)
+                                    ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id);
                                 modal.deactivate();
                                 $state.go(self.selected.stateName,{id:data.id});
                             });
@@ -77,7 +109,7 @@ app.factory('NextStepModal', [
                         this.close = function () {
                             modal.deactivate();
                         };
-                    },
+                    }],
                     controllerAs: 'next'
                 }
             );

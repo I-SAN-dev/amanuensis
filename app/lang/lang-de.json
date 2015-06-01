@@ -131,6 +131,17 @@
     "decline":"Kunde lehnt ab",
     "accept":"Kunde nimmt an"
   },
+  "contract":
+  {
+    "name": "Vertrag",
+    "type":"Typ"
+  },
+  "todo": {
+    "name": "ToDo-Liste"
+  },
+  "acceptance": {
+    "name": "Abnahme"
+  },
   "invoice":{
     "name": "Rechnung",
     "description": "Beschreibungstext",
@@ -139,6 +150,9 @@
     "wasPaid": "Rechnung wurde bezahlt",
     "due":"Fällig",
     "reminders":"Zahlungserinnerungen"
+  },
+  "reminder": {
+    "name": "Zahlungserinnerung"
   },
 
   "itemPresets":
@@ -150,10 +164,7 @@
     }
   },
 
-  "contract":
-  {
-    "type":"Typ"
-  },
+
 
   "pdf":
   {
@@ -452,6 +463,7 @@
   },
 
   "nextStep": {
-    "transformThis": "{{name}} überführen in:"
+    "transformThis": "{{name}} überführen in:",
+    "copyItems": "Verfügbare Posten übernehmen"
   }
 }
