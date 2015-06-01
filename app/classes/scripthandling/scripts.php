@@ -108,6 +108,7 @@ class Scripts
         "js/controllers/itemDetailCtrl.js",
         "js/controllers/itemCreationCtrl.js",
         "js/controllers/settingsCtrl.js",
+        "js/controllers/todoDetailCtrl.js",
     );
 
     /**
