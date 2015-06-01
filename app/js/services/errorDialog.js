@@ -8,8 +8,11 @@ app.factory('ErrorDialog', function (btfModal) {
             controller: function(){
                 this.code = errorObj.code;
                 this.message = errorObj.message;
+                this.languagestring = errorObj.languagestring;
                 this.file = errorObj.file;
                 this.line = errorObj.line;
+
+
 
                 this.close = function () {
                     console.log('close');

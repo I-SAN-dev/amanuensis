@@ -2,6 +2,15 @@
  * Main application. Handles dependencies and routing.
  */
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate']);
+
+app.config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|chrome|chrome-extension):/);
+    }
+]);
+
 app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
 
 

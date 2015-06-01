@@ -206,11 +206,14 @@
 
   "app":
   {
-    "installffapp":"Installieren Sie Amanu als App für Firefox, um schneller zugreifen zu können.",
-    "installchromeapp":"Laden Sie Amanu als App für Google Chrome herunter. Öffnen Sie einen neuen Tab mit der Adresse <a href=\"chrome://extensions\" target=\"_blank\">chrome://extensions</a> und ziehen Sie das heruntergeladene .crx-File hier hinein. Über die Seite <a href=\"chrome://apps\" target=\"_blank\">chrome://apps</a> können sie die Amanu-App nun starten. Tipp: rechtsklicken Sie auf das App-Icon und wählen Sie \"in neuem Fenster starten\". Hier können Sie auch eine Verknüpfung auf Ihrem Desktop erstellen.",
-    "android":"Mithilfe von <a href=\"https://play.google.com/store/apps/details?id=org.mozilla.firefox\" target=\"_blank\">Firefox für Android</a> können Sie Amanu als App auf Ihrem Android Device installieren.",
-    "availableextensions":"Wenn Sie Google Chrome oder Mozilla Firefox verwenden, können Sie Amanu als Erweiterung hinzufügen, um direkt vom Desktop aus schnellen Zugriff zu erhalten.",
-    "notavailable":"amanu ist für Ihre Platform leider nicht als App verfügbar. Dies tut uns leid."
+    "apps":"Apps",
+    "installffapp":"Installiere amanu als App für Firefox, um schneller zugreifen zu können.",
+    "installchromeapp":"Lade amanu als App für Google Chrome herunter, um schneller zugreifen zu können. <br/><br/><ul><li>Öffne einen neuen Tab mit der Adresse <a href=\"chrome://extensions\" target=\"_blank\">chrome://extensions</a> und ziehe das heruntergeladene .crx-File hier hinein.</li><li>Über die Seite <a href=\"chrome://apps\" target=\"_blank\">chrome://apps</a> kannst du die amanu-App nun starten.</li></ul> Tipp: rechtsklicke auf das App-Icon und wähle \"in neuem Fenster starten\". Hier kannst du auch eine Verknüpfung auf deinem Desktop erstellen.",
+    "android":"Mithilfe von <a href=\"https://play.google.com/store/apps/details?id=org.mozilla.firefox\" target=\"_blank\">Firefox für Android</a> kannst du amanu als App auf deinem Android Device installieren.",
+    "availableextensions":"Wenn du Google Chrome oder Mozilla Firefox verwendest, kannst du amanu als Erweiterung hinzufügen, um direkt vom Desktop aus schnellen Zugriff zu erhalten.",
+    "notavailable":"amanu ist für deine Plattform leider nicht als App verfügbar. Dies tut uns leid.",
+    "install":"Installieren",
+    "download":"Download"
   },
 
   "items": {
@@ -256,6 +259,8 @@
   },
 
   "errors": {
+    "error":"Fehler",
+    "browsertoold":"Ihr Browser ist veraltet und unterstützt diese Funktion nicht. Bitte führen Sie ein Update durch!",
     "additionalInformation": "Weitere Informationen zu diesem Fehler:",
     "codes": {
       "400": {

@@ -3,12 +3,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-ng-click="error.close()"><i class="md md-close"></i></button>
-                <h4 class="modal-title">{{error.code|amaStates:'error'|translate}}</h4>
+                <h4 data-ng-if="error.code=='1337'" class="modal-title">{{'errors.error'|translate}}</h4>
+                <h4 data-ng-if="error.code!='1337'" class="modal-title">{{error.code|amaStates:'error'|translate}}</h4>
             </div>
             <div class="modal-body">
-                <p>{{error.code|amaStates:'errorDescription'|translate}}</p>
-                <p>{{'errors.additionalInformation'|translate}}</p>
-                <p>{{error.message}}</p>
+                <p data-ng-if="error.code!='1337' && !error.languagestring">{{error.code|amaStates:'errorDescription'|translate}}</p>
+                <p data-ng-if="error.code!='1337' && !error.languagestring">{{'errors.additionalInformation'|translate}}</p>
+                <p data-ng-if="!error.languagestring">{{error.message}}</p>
+                <p data-ng-if="error.languagestring">{{error.languagestring|translate}}</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-info" type="button" data-ng-click="error.close()">{{'global.ok'|translate}}</button>

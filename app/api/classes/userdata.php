@@ -34,7 +34,7 @@ class userdata {
             $response = array();
             if(!Authenticator::isLoggedin())
             {
-                $error = new amaException(NULL, 401, "Not logged in");
+                $error = new amaException(NULL, 401, "Not logged in", 'login.required');
                 $error->renderJSONerror();
                 $error->setHeaders();
                 die();
