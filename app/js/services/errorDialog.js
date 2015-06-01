@@ -12,6 +12,8 @@ app.factory('ErrorDialog', function (btfModal) {
                 this.file = errorObj.file;
                 this.line = errorObj.line;
 
+
+
                 this.close = function () {
                     console.log('close');
                     modal.deactivate();
