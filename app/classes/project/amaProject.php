@@ -233,7 +233,7 @@ class AmaProject {
                 if($offer['state'] == 3)
                 {
                     $itemList = new AmaItemList('offer',$offer['id']);
-                    $offeredSum = $offeredSum + $itemList['costs']['total'];
+                    $offeredSum = $offeredSum + $itemList->costs['total'];
                 }
             }
 
