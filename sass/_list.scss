@@ -44,6 +44,9 @@
     display: block;
     border-left: 1px solid $gray-lighter;
     text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: right;
 
     &.listinfo-action-icon{
       font-size: 25px;
