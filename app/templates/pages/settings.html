@@ -28,11 +28,11 @@
                                 <p data-ng-bind-html="settings.apps.message|translate"></p>
                                 <div class="row">
                                     <div class="col-sm-4 col-sm-offset-8">
-                                        <div class="ffapp" data-ng-if="settings.apps.displaylink == 'firefoxapp'">
-                                            <a class="btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)" data-ng-if="!ffappinstalled">
+                                        <div class="ffapp varcheck" data-ng-if="settings.apps.displaylink == 'firefoxapp'" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[ffappinstalled]">
+                                            <a class="varcheck-if-false btn btn-block btn-lg btn-success" data-ng-click="settings.installffapp($event)">
                                                 <i class="md md-lg md-play-download"></i> {{'app.install'|translate}}
                                             </a>
-                                            <a class="btn btn-block btn-lg btn-success disabled" data-ng-click="settings.installffapp($event)" data-ng-if="ffappinstalled">
+                                            <a class="varcheck-if-true btn btn-block btn-lg btn-success disabled" data-ng-click="settings.installffapp($event)">
                                                 <i class="md md-lg md-play-install"></i> {{'app.installed'|translate}}
                                             </a>
                                         </div>

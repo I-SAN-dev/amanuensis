@@ -59,7 +59,7 @@ app.controller('SettingsCtrl', [
                     if(app.result)
                     {
                         $scope.ffappinstalled = true;
-                        $scope.apply();
+                        $scope.$apply();
                     }
                 };
             }
@@ -85,7 +85,7 @@ app.controller('SettingsCtrl', [
                     if(app.result)
                     {
                         $scope.ffappinstalled = true;
-                        $scope.apply();
+                        $scope.$apply();
                     }
                 };
             }
