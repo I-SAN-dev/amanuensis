@@ -6,10 +6,11 @@ app.controller('OfferDetailCtrl', [
         'PdfService',
         'MailService',
         'StateManager',
+        'NextStepModal',
         '$stateParams',
         '$scope',
         'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, $stateParams, $scope, constants) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -132,6 +133,7 @@ app.controller('OfferDetailCtrl', [
 
             this.accept = function () {
                 changeState(3);
+                NextStepModal('offer',self.offer);
                 // TODO: ask for what's next
             };
         }
