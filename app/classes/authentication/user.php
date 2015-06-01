@@ -13,6 +13,8 @@
 
 require_once('classes/database/dbal.php');
 require_once('classes/config/config.php');
+require_once('classes/mail/amaMail.php');
+require_once('classes/authentication/authenticator.php');
 
 class User {
 
@@ -97,6 +99,7 @@ class User {
 
             $q->execute();
 
+            $this->sendNotification();
 
             $result = User::userdataByMail($this->email);
             $this->id = $result["id"];
@@ -191,6 +194,28 @@ class User {
         $q->execute();
 
         $this->last_failed_login_attempt = $time;
+    }
+
+    /**
+     * Notifies a new user by email
+     */
+    private function sendNotification()
+    {
+        $conf = Config::getInstance();
+        $executingUser = Authenticator::getUser();
+        $mail = new AmaMail($this->username, $this->email,'Dein Account bei amanu');
+        $mail->setContent('
+        <p>
+        Hallo '.$this->username.',<br/>
+        <br/>
+        Der Benutzer '.$executingUser->username.' hat für dich einen Account beim Projektverwaltungstool amanu von '.$conf->get["company"].' angelegt.<br/>
+        <br/>
+        Frage Ihn jetzt nach deinem Passwort!<br/>
+        <br/>
+        Mit deiner Mailadresse '.$this->email.' kannst du dich dann hier einloggen:
+        <a href="'.$conf->get["baseurl"].'">'.$conf->get["baseurl"].'</a><br/>
+        ');
+        $mail->send();
     }
 
     /**
