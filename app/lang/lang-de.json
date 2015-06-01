@@ -137,7 +137,10 @@
     "type":"Typ"
   },
   "todo": {
-    "name": "ToDo-Liste"
+    "name": "ToDo-Liste",
+    "createTodo": "ToDo-Liste erstellen",
+    "createForProject":"ToDo-Liste für das Projekt {{projectName}} erstellen",
+    "dueDate": "Fälligkeitsdatum"
   },
   "acceptance": {
     "name": "Abnahme"
