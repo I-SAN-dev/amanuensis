@@ -18,11 +18,9 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div data-material-input
-                             data-ng-model="next.name"
-                             data-input-label="{{global.name|translate}}"
-                             data-input-id="nextStepName"></div>
-                        <div data-material-input data-ng-model="next.refnumber"></div>
+                        <span class="checkbox" data-ng-click="next.copyItems = !next.copyItems">
+                            <i class="md" data-ng-class="{'md-check-box':next.copyItems,'md-check-box-outline-blank':!next.copyItems}"></i> {{'nextStep.copyItems'|translate}}
+                        </span>
                     </div>
                 </div>
 
