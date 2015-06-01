@@ -58,11 +58,12 @@ class bulk {
         $idarray = explode(',', $ids);
 
         $query = "
-            UPDATE items SET ".$for." = :forid
+            UPDATE items SET ".$for." = ?
             WHERE ".$for." IS NULL AND id IN (".str_repeat('?,', count($idarray) - 1)."?)
         ";
 
         $q = $dbal->prepare($query);
+        array_unshift($idarray, $forid);
         $q->execute($idarray);
 
         json_response(array('items_linked' => $q->rowCount()));
