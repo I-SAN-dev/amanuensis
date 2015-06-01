@@ -38,7 +38,7 @@
                                     <div class="row">
                                         <div class="col-xs-10"><h3>{{'projects.offers'|translate}}</h3></div>
                                         <div class="col-xs-2">
-                                            <button class="btn btn-link" title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                            <button class="btn btn-link" title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
                                                 <i class="md-add-circle-outline"></i>
                                             </button>
                                         </div>
@@ -76,7 +76,7 @@
                                     <div class="row">
                                         <div class="col-xs-10"><h3>{{'projects.contracts'|translate}}</h3></div>
                                         <div class="col-xs-2">
-                                            <button class="btn btn-link" title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                            <button class="btn btn-link" title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
                                                 <i class="md-add-circle-outline"></i>
                                             </button>
                                         </div>
@@ -115,7 +115,7 @@
                                     <div class="row">
                                         <div class="col-xs-10"><h3>{{'projects.todos'|translate}}</h3></div>
                                         <div class="col-xs-2">
-                                            <button class="btn btn-link" title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                            <button class="btn btn-link" title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
                                                 <i class="md-add-circle-outline"></i>
                                             </button>
                                         </div>
@@ -130,7 +130,7 @@
                                             <th class="state"></th>
                                         </tr>
                                         </thead>
-                                        <tr data-ng-repeat="todo in project.project.todos" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
+                                        <tr data-ng-repeat="todo in project.project.todos" data-ui-sref="app.todoDetail({id:{{offer.id}}})">
                                             <td class="name">
                                                 {{todo.name}}
                                             </td>
@@ -153,7 +153,7 @@
                                     <div class="row">
                                         <div class="col-xs-10"><h3>{{'projects.acceptances'|translate}}</h3></div>
                                         <div class="col-xs-2">
-                                            <button class="btn btn-link" title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                            <button class="btn btn-link" title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
                                                 <i class="md-add-circle-outline"></i>
                                             </button>
                                         </div>
@@ -168,7 +168,7 @@
                                             <th class="state"></th>
                                         </tr>
                                         </thead>
-                                        <tr data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptances({id:{{acceptance.id}}})">
+                                        <tr data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptanceDetail({id:{{acceptance.id}}})">
                                             <td class="name">
                                                 {{acceptance.name}}
                                             </td>
@@ -192,7 +192,7 @@
                                     <div class="row">
                                         <div class="col-xs-10"><h3>{{'projects.invoices'|translate}}</h3></div>
                                         <div class="col-xs-2">
-                                            <button class="btn btn-link" title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projects', referrerParams: {id:project.project.id}})">
+                                            <button class="btn btn-link" title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
                                                 <i class="md-add-circle-outline"></i>
                                             </button>
                                         </div>
