@@ -1,0 +1,9 @@
+<div data-ng-controller="TodoCreationCtrl as create">
+    <form data-ng-submit="create.createTodo()">
+        <div data-material-input data-ng-model="create.newTodo.name"></div>
+        <div data-material-input data-input-type="date" data-ng-model="create.newTodo.due" data-output-value="create.newTodo.due|amaDate:'MM.dd.yyyy'"></div>
+        <div>{{create.newTodo|json}}</div>
+        <button class="btn btn-success" type="submit">{{'todos.createTodo'|translate}}</button>
+
+    </form>
+</div>

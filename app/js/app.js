@@ -386,6 +386,11 @@ app.constant('sites', [
                 'appContent': {
                     templateUrl: 'templates/pages/todoCreation.html'
                 }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
             }
         }
     },
