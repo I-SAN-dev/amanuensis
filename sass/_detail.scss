@@ -1,8 +1,9 @@
-.detail-bottom-bar
+.detail-top-bar
 {
   height: 100px;
+  margin-bottom: 20px;
 }
-.over-detail-bottom-bar
+.under-detail-top-bar
 {
   height: calc(100% - 100px - 20px);
   margin-bottom: 20px;
@@ -54,4 +55,45 @@ strong.total
 .detail-inner-padding {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.detail-inline
+{
+  display: inline-block;
+  padding: 0 15px;
+  vertical-align: top;
+
+  &.detail-inline-date
+  {
+    width: 240px;
+
+    >i, .date-container
+    {
+      display: inline-block;
+    }
+    >i
+    {
+      vertical-align: top !important;
+    }
+
+    .date-container
+    {
+      width: 180px;
+    }
+  }
+}
+
+.pickadate
+{
+  position: absolute;
+  z-index: 99;
+  @include card(5);
+  background-color: #ffffff;
+  width: 180px;
+
+  .pickadate-head,
+  .pickadate-centered-heading
+  {
+    color: $brand-primary;
+  }
 }

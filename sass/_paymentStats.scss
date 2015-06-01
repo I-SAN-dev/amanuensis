@@ -221,6 +221,23 @@ $ps-total-size: 140px;
   .price-caption
   {
     text-transform: uppercase;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &.single
+  {
+    .ps-overdue-container,
+    .ps-dayx-container
+    {
+      padding-bottom: 20px;
+      margin-bottom: -20px;
+    }
+    .timeline-container
+    {
+      padding-top: 20px;
+    }
   }
 
 }

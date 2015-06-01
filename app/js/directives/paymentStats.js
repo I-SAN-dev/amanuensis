@@ -34,7 +34,22 @@ app.directive('paymentStats', [
                         $scope.dayx = $scope.stats.day_x_total !== undefined ? $scope.stats.day_x_total : $scope.stats.toPayDayX;
                         $scope.dayx_items = $scope.stats.day_x || [];
 
-                        $scope.total = $scope.stats.totalProjectWorth !== undefined ? $scope.stats.totalProjectWorth : $scope.stats.overdue_total + $scope.stats.to_pay_total + $scope.stats.day_x_total;
+                        if ($scope.stats.totalProjectWorth !== undefined)
+                        {
+                            $scope.total = $scope.stats.totalProjectWorth;
+                        }
+                        else if($scope.stats.total !== undefined)
+                        {
+                            $scope.total = $scope.stats.total;
+                            $scope.beforetax = $scope.stats.beforetax;
+                            $scope.tax = $scope.stats.tax;
+                            $scope.taxlabel = $scope.stats.taxlabel;
+                            $scope.singleThing = true;
+                        }
+                        else
+                        {
+                            $scope.total = $scope.stats.overdue_total + $scope.stats.to_pay_total + $scope.stats.day_x_total;
+                        }
 
 
                         /* calc time interval */

@@ -1,4 +1,4 @@
-<div class="payment-stats">
+<div class="payment-stats" data-ng-class="{single: singleThing}">
     <div class="row">
         <div class="col-xs-12">
             <div class="ps-total-container-outer">
@@ -14,17 +14,25 @@
     <div class="row">
         <div class="col-xs-6">
             <div class="ps-overdue-container">
-                <div class="ps-overdue" data-ng-class="{allgood: overdue == 0}">
+                <div class="ps-overdue" data-ng-class="{allgood: overdue == 0}" data-ng-if="!singleThing">
                     <span class="price">{{overdue | price}}</span>
                     <span class="price-caption">{{'global.overdue' | translate}}</span>
+                </div>
+                <div class="ps-overdue allgood" data-ng-if="singleThing">
+                    <span class="price">{{beforetax | price}}</span>
+                    <span class="price-caption" data-ng-if="beforetax">{{'items.beforeTaxPrice'|translate}}</span>
                 </div>
             </div>
         </div>
         <div class="col-xs-6 text-right">
             <div class="ps-dayx-container">
-                <div class="ps-dayx" data-ng-class="{nothing: dayx == 0}">
+                <div class="ps-dayx" data-ng-class="{nothing: dayx == 0}" data-ng-if="!singleThing">
                     <span class="price">{{dayx | price}}</span>
                     <span class="price-caption">{{'global.dayx'|translate}}</span>
+                </div>
+                <div class="ps-dayx nothing" data-ng-if="singleThing">
+                    <span class="price">{{tax | price}}</span>
+                    <span class="price-caption" data-ng-if="tax">{{taxlabel}}</span>
                 </div>
             </div>
         </div>
