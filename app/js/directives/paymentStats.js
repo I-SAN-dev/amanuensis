@@ -53,7 +53,7 @@ app.directive('paymentStats', [
 
 
                         /* calc time interval */
-                        if($scope.payEvents.length > 0)
+                        if($scope.payEvents && $scope.payEvents.length > 0)
                         {
                             $scope.leftendtime = Date.now() / 1000;
                             var rightendtime = Date.now() / 1000;
