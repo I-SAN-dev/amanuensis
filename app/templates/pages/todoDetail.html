@@ -64,24 +64,15 @@
         <div class="panel panel-default fixedheight-320 shadow-1">
             <div class="panel-body">
 
-                <div class="margin-bottom-lg" data-payment-stats="offer.offer.costs"></div>
+                <div class="margin-bottom-lg" data-todo-stats="todo.todo"></div>
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
-                        <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
-                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
-                        <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
-                    </div>
-                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
-                        <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
-                        <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
-                        <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
-                    </div>
-                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
-                        <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
-                        <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
-                    </div>
+                <div class="varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[todo.todo.items_done != todo.todo.items_total]">
+                    <button class="btn btn-block btn-success varcheck-if-false" data-ng-click="todo.nextStep()">
+                        {{'todo.ready'|translate}}
+                    </button>
+                    <button class="btn btn-block btn-info disabled varcheck-if-true">
+                        {{'todo.someopen'|translate}}
+                    </button>
                 </div>
             </div>
         </div>

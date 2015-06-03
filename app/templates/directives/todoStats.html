@@ -1,0 +1,42 @@
+<div class="todo-stats single">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ps-total-container-outer">
+                <div class="ps-total-container">
+                    <div class="ps-total">
+                        <div class="pie"
+                             style="
+                                background-image:
+                                    linear-gradient({{angle}}deg, transparent 50%, {{bgorfg}} 50%),
+                                    linear-gradient(90deg, #FFB300 50%, transparent 50%)
+                             "
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="ps-overdue-container">
+                <div class="ps-overdue" data-ng-class="{allgood: open == 0, default: !checkOverdue()}">
+                    <span class="price">{{open}}</span>
+                    <span class="price-caption">{{'todo.open' | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <div class="ps-dayx-container">
+                <div class="ps-dayx" data-ng-class="{nothing: done == 0}">
+                    <span class="price">{{done}}</span>
+                    <span class="price-caption">{{'todo.done'|translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="timeline-container">
+        <div class="timeline">
+
+        </div>
+    </div>
+</div>

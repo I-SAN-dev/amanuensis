@@ -10,6 +10,12 @@ app.controller('TodoDetailCtrl', [
         this.todo = LocalStorage.getData('todo/'+ id);
         ApiAbstractionLayer('GET', {name:'todo',params: {id:id}}).then(function (data) {
             self.todo = data;
-        })
+        });
+
+
+        self.nextStep = function()
+        {
+            alert('TODO: create acceptance or invoice');
+        }
     }
 ]);

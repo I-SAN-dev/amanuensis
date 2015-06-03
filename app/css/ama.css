@@ -11752,16 +11752,20 @@ strong.total {
 .settings .nav-tabs li:first-child a {
   border-left: none !important; }
 
-.payment-stats .timeline-container {
+.payment-stats .timeline-container,
+.todo-stats .timeline-container {
   padding: 70px 50px 0 50px;
   border-bottom: 1px solid #EEEEEE; }
-.payment-stats .timeline {
+.payment-stats .timeline,
+.todo-stats .timeline {
   position: relative; }
-  .payment-stats .timeline .t-entry {
+  .payment-stats .timeline .t-entry,
+  .todo-stats .timeline .t-entry {
     position: absolute;
     bottom: -7px;
     z-index: 99; }
-    .payment-stats .timeline .t-entry .dot {
+    .payment-stats .timeline .t-entry .dot,
+    .todo-stats .timeline .t-entry .dot {
       width: 14px;
       height: 14px;
       border-radius: 7px;
@@ -11769,7 +11773,8 @@ strong.total {
       position: relative;
       left: -7px;
       cursor: pointer; }
-    .payment-stats .timeline .t-entry .info {
+    .payment-stats .timeline .t-entry .info,
+    .todo-stats .timeline .t-entry .info {
       display: block;
       visibility: hidden;
       opacity: 0.0;
@@ -11783,7 +11788,8 @@ strong.total {
       color: #fff;
       padding: 5px 10px;
       text-align: center; }
-      .payment-stats .timeline .t-entry .info:after {
+      .payment-stats .timeline .t-entry .info:after,
+      .todo-stats .timeline .t-entry .info:after {
         content: " ";
         display: block;
         text-indent: -9999px;
@@ -11802,69 +11808,107 @@ strong.total {
         left: 50%;
         margin-left: -14px;
         cursor: pointer; }
-      .payment-stats .timeline .t-entry .info .date {
+      .payment-stats .timeline .t-entry .info .date,
+      .todo-stats .timeline .t-entry .info .date {
         font-size: 12px; }
     .payment-stats .timeline .t-entry .dot:hover + .info,
     .payment-stats .timeline .t-entry .t-entry:hover .info,
-    .payment-stats .timeline .t-entry .info:hover {
+    .payment-stats .timeline .t-entry .info:hover,
+    .todo-stats .timeline .t-entry .dot:hover + .info,
+    .todo-stats .timeline .t-entry .t-entry:hover .info,
+    .todo-stats .timeline .t-entry .info:hover {
       visibility: visible;
       opacity: 1.0; }
 .payment-stats .today,
-.payment-stats .enddate {
+.payment-stats .enddate,
+.todo-stats .today,
+.todo-stats .enddate {
   padding: 14px 15px 0 15px;
   color: #BDBDBD;
   text-transform: uppercase; }
-.payment-stats .today {
+.payment-stats .today,
+.todo-stats .today {
   border-left: 1px solid #EEEEEE; }
-.payment-stats .enddate {
+.payment-stats .enddate,
+.todo-stats .enddate {
   border-right: 1px solid #EEEEEE; }
 .payment-stats .ps-overdue-container,
-.payment-stats .ps-dayx-container {
+.payment-stats .ps-dayx-container,
+.todo-stats .ps-overdue-container,
+.todo-stats .ps-dayx-container {
   padding-bottom: 70px;
   margin-bottom: -70px; }
   .payment-stats .ps-overdue-container .ps-overdue,
   .payment-stats .ps-overdue-container .ps-dayx,
   .payment-stats .ps-dayx-container .ps-overdue,
-  .payment-stats .ps-dayx-container .ps-dayx {
+  .payment-stats .ps-dayx-container .ps-dayx,
+  .todo-stats .ps-overdue-container .ps-overdue,
+  .todo-stats .ps-overdue-container .ps-dayx,
+  .todo-stats .ps-dayx-container .ps-overdue,
+  .todo-stats .ps-dayx-container .ps-dayx {
     display: inline-block;
     border-top: 1px solid #EEEEEE;
     padding: 15px; }
     .payment-stats .ps-overdue-container .ps-overdue span,
     .payment-stats .ps-overdue-container .ps-dayx span,
     .payment-stats .ps-dayx-container .ps-overdue span,
-    .payment-stats .ps-dayx-container .ps-dayx span {
+    .payment-stats .ps-dayx-container .ps-dayx span,
+    .todo-stats .ps-overdue-container .ps-overdue span,
+    .todo-stats .ps-overdue-container .ps-dayx span,
+    .todo-stats .ps-dayx-container .ps-overdue span,
+    .todo-stats .ps-dayx-container .ps-dayx span {
       display: block; }
       .payment-stats .ps-overdue-container .ps-overdue span.price,
       .payment-stats .ps-overdue-container .ps-dayx span.price,
       .payment-stats .ps-dayx-container .ps-overdue span.price,
-      .payment-stats .ps-dayx-container .ps-dayx span.price {
+      .payment-stats .ps-dayx-container .ps-dayx span.price,
+      .todo-stats .ps-overdue-container .ps-overdue span.price,
+      .todo-stats .ps-overdue-container .ps-dayx span.price,
+      .todo-stats .ps-dayx-container .ps-overdue span.price,
+      .todo-stats .ps-dayx-container .ps-dayx span.price {
         font-size: 20px; }
       .payment-stats .ps-overdue-container .ps-overdue span.price-caption,
       .payment-stats .ps-overdue-container .ps-dayx span.price-caption,
       .payment-stats .ps-dayx-container .ps-overdue span.price-caption,
-      .payment-stats .ps-dayx-container .ps-dayx span.price-caption {
+      .payment-stats .ps-dayx-container .ps-dayx span.price-caption,
+      .todo-stats .ps-overdue-container .ps-overdue span.price-caption,
+      .todo-stats .ps-overdue-container .ps-dayx span.price-caption,
+      .todo-stats .ps-dayx-container .ps-overdue span.price-caption,
+      .todo-stats .ps-dayx-container .ps-dayx span.price-caption {
         color: #BDBDBD; }
-.payment-stats .ps-overdue-container {
+.payment-stats .ps-overdue-container,
+.todo-stats .ps-overdue-container {
   border-left: 1px solid #EEEEEE; }
-  .payment-stats .ps-overdue-container .ps-overdue .price {
+  .payment-stats .ps-overdue-container .ps-overdue .price,
+  .todo-stats .ps-overdue-container .ps-overdue .price {
     color: #F4511E; }
-  .payment-stats .ps-overdue-container .ps-overdue.allgood .price {
+  .payment-stats .ps-overdue-container .ps-overdue.allgood .price,
+  .todo-stats .ps-overdue-container .ps-overdue.allgood .price {
     color: #BDBDBD; }
-.payment-stats .ps-dayx-container {
-  border-right: 1px solid #EEEEEE; }
-  .payment-stats .ps-dayx-container .ps-dayx .price {
+  .payment-stats .ps-overdue-container .ps-overdue.default .price,
+  .todo-stats .ps-overdue-container .ps-overdue.default .price {
     color: #757575; }
-  .payment-stats .ps-dayx-container .ps-dayx.nothing .price {
+.payment-stats .ps-dayx-container,
+.todo-stats .ps-dayx-container {
+  border-right: 1px solid #EEEEEE; }
+  .payment-stats .ps-dayx-container .ps-dayx .price,
+  .todo-stats .ps-dayx-container .ps-dayx .price {
+    color: #757575; }
+  .payment-stats .ps-dayx-container .ps-dayx.nothing .price,
+  .todo-stats .ps-dayx-container .ps-dayx.nothing .price {
     color: #BDBDBD; }
-.payment-stats .ps-total-container-outer {
+.payment-stats .ps-total-container-outer,
+.todo-stats .ps-total-container-outer {
   width: 30%;
   margin: 0 auto; }
-  .payment-stats .ps-total-container-outer .ps-total-container {
+  .payment-stats .ps-total-container-outer .ps-total-container,
+  .todo-stats .ps-total-container-outer .ps-total-container {
     height: 0;
     padding-bottom: 100%;
     margin-bottom: -50%;
     position: relative; }
-    .payment-stats .ps-total-container-outer .ps-total-container .ps-total {
+    .payment-stats .ps-total-container-outer .ps-total-container .ps-total,
+    .todo-stats .ps-total-container-outer .ps-total-container .ps-total {
       position: absolute;
       right: 0;
       bottom: 0;
@@ -11877,24 +11921,41 @@ strong.total {
       z-index: 89;
       text-align: center;
       padding-top: 30%; }
-      .payment-stats .ps-total-container-outer .ps-total-container .ps-total.nototal {
+      .payment-stats .ps-total-container-outer .ps-total-container .ps-total.nototal,
+      .todo-stats .ps-total-container-outer .ps-total-container .ps-total.nototal {
         background-color: #757575; }
-      .payment-stats .ps-total-container-outer .ps-total-container .ps-total span {
+      .payment-stats .ps-total-container-outer .ps-total-container .ps-total span,
+      .todo-stats .ps-total-container-outer .ps-total-container .ps-total span {
         display: block;
         color: #fff; }
-        .payment-stats .ps-total-container-outer .ps-total-container .ps-total span.price {
+        .payment-stats .ps-total-container-outer .ps-total-container .ps-total span.price,
+        .todo-stats .ps-total-container-outer .ps-total-container .ps-total span.price {
           font-size: 20px; }
-.payment-stats .price-caption {
+.payment-stats .price-caption,
+.todo-stats .price-caption {
   text-transform: uppercase;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; }
 .payment-stats.single .ps-overdue-container,
-.payment-stats.single .ps-dayx-container {
+.payment-stats.single .ps-dayx-container,
+.todo-stats.single .ps-overdue-container,
+.todo-stats.single .ps-dayx-container {
   padding-bottom: 20px;
   margin-bottom: -20px; }
-.payment-stats.single .timeline-container {
+.payment-stats.single .timeline-container,
+.todo-stats.single .timeline-container {
   padding-top: 20px; }
+
+.todo-stats .ps-total {
+  background-color: #FFB300 !important;
+  padding-top: 0 !important; }
+.todo-stats .pie {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #009688;
+  transition: 0.3s all; }
 
 .list-group .btn-on-list {
   position: absolute;
