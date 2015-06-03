@@ -10579,14 +10579,13 @@ html, body {
   color: #fff; }
 
 #mainCanvas {
-  height: calc(100% - 64px);
-  min-height: calc(100% - 64px);
-  margin-top: 64px;
-  overflow: hidden; }
-
-#mainContent {
-  padding-top: 16px;
-  padding-bottom: 16px; }
+  height: calc(100% - 96px);
+  min-height: calc(100% - 96px);
+  margin-top: 80px;
+  overflow: hidden;
+  position: relative;
+  margin-left: 15px;
+  width: calc(100% - 2*15px); }
 
 /* we need this on many many divs so we can style our main content with relative height */
 .fullheight,
@@ -12095,6 +12094,34 @@ strong.total {
     padding: 20px; }
   .slideanim2.panel2 {
     margin-left: -100%; }
+
+/* main view animation */
+[data-ui-view] > div {
+  background-color: #f5f5f5; }
+
+[data-ui-view].ng-enter, [data-ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: transform 0.2s ease-out, opacity 0.2s ease; }
+
+[data-ui-view].ng-enter {
+  opacity: 0;
+  transform: scale3d(0.97, 0.97, 1); }
+
+[data-ui-view].ng-enter-active {
+  opacity: 1;
+  transform: scale3d(1, 1, 1); }
+
+[data-ui-view].ng-leave {
+  opacity: 1;
+  transform: scale3d(1, 1, 1); }
+
+[data-ui-view].ng-leave-active {
+  opacity: 0;
+  transform: scale3d(1.03, 1.03, 1.03); }
 
 .modal {
   background-color: rgba(255, 255, 255, 0.7); }
