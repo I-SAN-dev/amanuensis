@@ -15,6 +15,15 @@ app.controller('OfferDetailCtrl', [
             MasterDetailService.setMaster(this);
             var self = this;
 
+            this.viewPdf = function (event, preview, path) {
+                PdfService(event,preview,'offer',id, path).then(function (data) {
+                    if(data){
+                        self.offer.path = data.path;
+                        self.offer.state = 1;
+                        LocalStorage.setData('offer/'+id, self.offer);
+                    }
+                });
+            };
             $scope.mailtext = '';
             // (re)set a flag indicating if the Controller was fully loaded
             // needed for setting transition classes
@@ -27,8 +36,9 @@ app.controller('OfferDetailCtrl', [
             }, 1000);
 
 
-            this.generatePDF = function (event, preview) {
+            this.generatePDF = function(event, preview) {
 
+                event.preventDefault();
                 console.log(event, preview);
                 PdfService(event,preview,'offer',id, self.offer.path).then(function (data) {
                     if(data){
