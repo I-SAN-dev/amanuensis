@@ -70,7 +70,7 @@ class item_connection {
         $result = array();
 
         /* Get the data */
-        foreach(array('offer', 'todo', 'acceptance', 'invoice') as $type)
+        foreach(array('offer', 'acceptance', 'invoice') as $type)
         {
             if(isset($item[$type]))
             {
@@ -86,6 +86,20 @@ class item_connection {
                 $result[$type] = new stdClass;
             }
 
+        }
+        /* Get the todo data */
+        if(isset($item['todo']))
+        {
+            $result['todo'] = $dbal->simpleSelect(
+                'todos',
+                array('id','name'),
+                array('id', $item['todo']),
+                1
+            );
+        }
+        else
+        {
+            $result['contract'] = new stdClass;
         }
         /* Get the contract data */
         if(isset($item['contract']))
