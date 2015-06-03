@@ -1,3 +1,104 @@
-<div data-ng-controller="TodoDetailCtrl as todo">
-    {{todo.todo|json}}
+<div class="row detail fullheight" data-ng-controller="TodoDetailCtrl as todo">
+
+
+
+    <div class="col-lg-8 col-md-8 col-sm-7 fullheight">
+
+        <div class="row detail-top-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight shadow-0 bg-primary">
+                    <div class="panel-body">
+
+                        <h1>
+                            <span data-in-place-edit
+                                  data-api-id="todo.todo.id"
+                                  data-api-name="'todo'"
+                                  data-ipe-key="'name'"
+                                  data-ipe-value="todo.todo.name"
+                                  data-ipe-name="'global.name'|translate"
+                                  data-ipe-deletable="false"
+                                    ></span>
+                        </h1>
+                        <span data-ng-if="todo.todo.items_done < todo.todo.items_total">{{'todo.someopen' | translate}}</span>
+                        <span data-ng-if="todo.todo.items_done == todo.todo.items_total">{{'todo.alldone' | translate}}</span>
+                        <div class="detail-inline">
+                            <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: todo.todo.project.id})">{{todo.todo.project.name}}</a>
+                        </div>
+                        <div class="detail-inline detail-inline-date">
+                            <i class="md md-schedule"></i>
+                            <div class="date-container">
+                                <span data-in-place-edit
+                                      data-api-id="todo.todo.id"
+                                      data-api-name="'todo'"
+                                      data-ipe-key="'due'"
+                                      data-ipe-value="todo.todo.due"
+                                      data-ipe-name="'todo.due'|translate"
+                                      data-ipe-deletable="false"
+                                      data-ipe-type="'date'"
+                                      data-output-value="todo.todo.due|amaDate:'dd.MM.yyyy'"
+                                        ></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="under-detail-top-bar next-fullheight">
+            <div data-master-detail
+                 data-master-list="todo.todo.items"
+                 data-master-tpl="'templates/pages/items/master.html'"
+                 data-detail-tpl="'templates/pages/items/detail.html'"
+                 data-detail="todo.todo.items[0]"
+                 data-master-loaded="todo.loaded"></div>
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4 col-md-4 col-sm-5 fullheight">
+
+        <div class="panel panel-default fixedheight-320 shadow-1">
+            <div class="panel-body">
+
+                <div class="margin-bottom-lg" data-payment-stats="offer.offer.costs"></div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
+                        <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
+                        <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
+                    </div>
+                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
+                        <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
+                        <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
+                        <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
+                    </div>
+                    <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
+                        <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
+                        <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default under-fixedheight-320">
+            <div class="panel-heading">
+                <h3>{{'clients.client' | translate}}</h3>
+            </div>
+            <div class="panel-body">
+
+                <div data-client-box="todo.todo.project.client"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
 </div>
