@@ -5,6 +5,11 @@ html, body
   overflow: hidden;
 }
 
+iframe {
+  width: 100%;
+  border: 0 none;
+}
+
 ::selection
 {
   background-color: $brand-primary;

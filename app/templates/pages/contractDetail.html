@@ -57,13 +57,18 @@
         </div>
 
         <div class="under-detail-top-bar next-fullheight">
-            <div data-ng-if="contract.contract.items"
+            <div data-ng-if="!contract.isFileContract"
                  data-master-detail
                  data-master-list="contract.contract.items"
                  data-master-tpl="'templates/pages/items/master.html'"
                  data-detail-tpl="'templates/pages/items/detail.html'"
                  data-detail="contract.contract.items[0]"
                  data-master-loaded="contract.loaded"></div>
+            <div class="panel panel-default fullheight shadow-3">
+                <iframe class="fullheight iframe" data-ng-if="contract.isFileContract"
+                        data-ng-src="{{contract.iframeSrc}}"></iframe>
+            </div>
+
         </div>
 
     </div>

@@ -75,7 +75,7 @@
                                         <i class="md-add-circle-outline"></i>
                                     </a></h3>
                                 <div class="listinfo-row listinfo-link"
-                                     data-ng-repeat="contract in project.contracts" data-ng-click="project.goToContract(contract)">
+                                     data-ng-repeat="contract in project.contracts" data-ui-sref="app.contractDetail({id:contract.id,type:contract.type})">
                                     {{contract.name}}<br />
                                     <span class="secondary">{{contract.refnumber}}</span>
                                 </div>

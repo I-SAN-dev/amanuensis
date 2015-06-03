@@ -10570,6 +10570,10 @@ html, body {
   min-height: 100%;
   overflow: hidden; }
 
+iframe {
+  width: 100%;
+  border: 0 none; }
+
 ::selection {
   background-color: #404877;
   color: #fff; }

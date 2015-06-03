@@ -26,12 +26,12 @@ app.controller('ProjectDetailCtrl',
                     var contracts = [];
                     for (var i = 0; i < data.contracts.length; i++) {
                         var contract = data.contracts[i];
-                        contract.type = 'app';
+                        contract.type = 'contract';
                         contracts.push(contract);
                     }
                     for (var j=0; j < data.fileContracts.length; j++) {
                         contract = data.fileContracts[j];
-                        contract.type = 'file';
+                        contract.type = 'fileContract';
                         if(contract.path)
                             contract.refnumber = contract.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use basename as refnumber */
                         contracts.push(contract);
@@ -63,6 +63,8 @@ app.controller('ProjectDetailCtrl',
                     $state.go('app.clients.detail',{id:client})
                 });
             };
+
+
         }
     ]
 );

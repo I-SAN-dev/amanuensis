@@ -341,7 +341,7 @@ app.constant('sites', [
     {
         name: 'app.contractDetail',
         stateObject: {
-            url: '/contracts/:id',
+            url: '/contracts/:type/:id',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/contractDetail.html'
