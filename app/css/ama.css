@@ -11600,20 +11600,12 @@ textarea {
       /* md-settings */
       color: #FFB300; }
     .tile .tile-icon.tile-icon-3:before {
-      content: "\f023";
-      /* md-done */
-      color: #FFB300; }
+      content: "\f05e";
+      /* md-schedule */
+      color: #F4511E; }
     .tile .tile-icon.tile-icon-4:before {
-      content: "\f05e";
-      /* md-schedule */
-      color: #00ACC1; }
-    .tile .tile-icon.tile-icon-5:before {
-      content: "\f05e";
-      /* md-schedule */
-      color: #009688; }
-    .tile .tile-icon.tile-icon-6:before {
-      content: "\f0a0";
-      /* md-error */
+      content: "\f060";
+      /* md-settings */
       color: #F4511E; }
     .tile .tile-icon.tile-icon-7:before {
       content: "\f023";
@@ -11646,20 +11638,12 @@ textarea {
     /* md-settings */
     color: #FFB300; }
   .state-icon.state-icon-3:before {
-    content: "\f023";
-    /* md-done */
-    color: #FFB300; }
+    content: "\f05e";
+    /* md-schedule */
+    color: #F4511E; }
   .state-icon.state-icon-4:before {
-    content: "\f05e";
-    /* md-schedule */
-    color: #00ACC1; }
-  .state-icon.state-icon-5:before {
-    content: "\f05e";
-    /* md-schedule */
-    color: #009688; }
-  .state-icon.state-icon-6:before {
-    content: "\f0a0";
-    /* md-error */
+    content: "\f060";
+    /* md-settings */
     color: #F4511E; }
   .state-icon.state-icon-7:before {
     content: "\f023";

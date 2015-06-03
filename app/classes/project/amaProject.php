@@ -131,7 +131,7 @@ class AmaProject {
         {
             $this->todos = $this->dbal->simpleSelect(
                 'todos',
-                array('id', 'name', 'due'),
+                array('id', 'name', 'due', 'state'),
                 array('project', $this->id),
                 0,
                 'due ASC'

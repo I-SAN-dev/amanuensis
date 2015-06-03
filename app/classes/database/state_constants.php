@@ -41,3 +41,10 @@ define("CLIENT_DECLINED", -1);
 define("INVOICE_PAID", 3);
 define("INVOICE_OVERDUE", 4);
 define("INVOICE_OVERDUE_REMINDER_CREATED", 5);
+
+/**
+ * ToDo special
+ */
+define("TODO_TODO", 0);
+define("TODO_FINISHED", 1);
+define("TODO_OVERDUE", 2);
