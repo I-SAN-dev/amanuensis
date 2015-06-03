@@ -97,7 +97,7 @@ class project {
                 ),
                 array('client', $_GET["client"]),
                 0,
-                'state ASC'
+                'state DESC'
             );
 
             /* postprocess the projects */
@@ -121,7 +121,7 @@ class project {
             /* List of all projects */
             $q = $dbal->prepare("
                 SELECT projects.id, projects.name, projects.description, projects.client, projects.state, customers.companyname, customers.contact_firstname, customers.contact_lastname
-                FROM projects LEFT JOIN customers ON projects.client = customers.id ".$where." ORDER BY state ASC ");
+                FROM projects LEFT JOIN customers ON projects.client = customers.id ".$where." ORDER BY state DESC ");
 
             $q->execute();
             $projects = $q->fetchAll(PDO::FETCH_ASSOC);
