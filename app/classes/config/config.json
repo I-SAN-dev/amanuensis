@@ -82,7 +82,7 @@
     "paper":"user_templates/pdf/_outer.phtml",
     "offer":"user_templates/pdf/offer.phtml",
     "contract":"user_templates/pdf/contract.phtml",
-    "acceptance":"user_templates/pdf/acceptance.ptml",
+    "acceptance":"user_templates/pdf/acceptance.phtml",
     "invoice":"user_templates/pdf/invoice.phtml",
     "reminder":"user_templates/pdf/reminder.phtml"
   },
