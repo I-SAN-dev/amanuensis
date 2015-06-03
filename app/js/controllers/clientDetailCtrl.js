@@ -242,6 +242,7 @@ app.controller('ClientDetailCtrl',
                 var categoriesBackup = angular.copy(self.client.categories);
                 var selectedCategories = [];
                 var unSelectedCategories = [];
+                var allCategories = LocalStorage.getData('clientCategories');
                 ApiAbstractionLayer('GET', 'client_categories').then(function (data) {
 
                     for(var i = 0; i<data.length; i++){
@@ -250,12 +251,19 @@ app.controller('ClientDetailCtrl',
                             selectedCategories.push(data[i]);
                         }
                     }
-                    var allCategories = data;
+                    allCategories = data;
                     var modal = btfModal({
                         templateUrl: 'templates/pages/clients/categoryDialog.html',
                         controller: function(){
                             var cats = this;
                             this.allCategories = allCategories;
+                            var resetNewCategory = function () {
+                                return {
+                                    name: '',
+                                    description: ''
+                                };
+                            };
+                            this.newCategory = resetNewCategory();
                             /**
                              * Toggles the selection of a category
                              * @param category - the category to be toggled
@@ -283,6 +291,29 @@ app.controller('ClientDetailCtrl',
                                     cats.allCategories[indexAll].selected = true;
                                 }
 
+                            };
+
+                            /**
+                             * Creates a new category and adds it to the current client as well as the list of categories
+                             */
+                            this.addCategory = function(){
+                                if(cats.newCategory.name){
+                                    ApiAbstractionLayer('POST', {name: 'client_categories', data: cats.newCategory},true).then(function (data) {
+                                        cats.allCategories.push(data);
+                                        cats.toggleSelectCategory(data);
+                                        LocalStorage.setData('clientCategories', cats.allCategories);
+                                        cats.newCategory = resetNewCategory();
+                                        cats.showPage = 1;
+                                    });
+                                }
+                            };
+
+                            /**
+                             * Deletes a client category by given id
+                             * @param id - the id of the category to be deleted
+                             */
+                            this.deleteCategory = function (id) {
+                                // TODO
                             };
 
 
