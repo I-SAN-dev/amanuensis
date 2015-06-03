@@ -10,17 +10,19 @@ app.controller('ItemDetailCtrl', [
 
         var getIsConnected = function () {
             var count = 0;
-            if(self.connections.offer.id)
-                count++;
-            if(self.connections.contract.id)
-                count++;
-            if(self.connections.todo.id)
-                count++;
-            if(self.connections.acceptance.id)
-                count++;
-            if(self.connections.invoice.id)
-                count++;
-
+            if(self.connections)
+            {
+                if(self.connections.offer && self.connections.offer.id)
+                    count++;
+                if(self.connections.contract && self.connections.contract.id)
+                    count++;
+                if(self.connections.todo && self.connections.todo.id)
+                    count++;
+                if(self.connections.acceptance && self.connections.acceptance.id)
+                    count++;
+                if(self.connections.invoice && self.connections.invoice.id)
+                    count++;
+            }
             console.log(count);
             return count>1;
 
