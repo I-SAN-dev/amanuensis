@@ -175,7 +175,7 @@ class AmaProject {
         {
             $this->acceptances = $this->dbal->simpleSelect(
                 'acceptances',
-                array('id', 'refnumber', 'name', 'state', 'path'),
+                array('id', 'refnumber', 'name', 'state', 'date', 'path'),
                 array('project', $this->id)
             );
         }

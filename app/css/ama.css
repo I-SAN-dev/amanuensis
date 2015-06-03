@@ -11848,7 +11848,8 @@ strong.total {
   .todo-stats .ps-dayx-container .ps-dayx {
     display: inline-block;
     border-top: 1px solid #EEEEEE;
-    padding: 15px; }
+    padding: 15px;
+    min-height: 80px; }
     .payment-stats .ps-overdue-container .ps-overdue span,
     .payment-stats .ps-overdue-container .ps-dayx span,
     .payment-stats .ps-dayx-container .ps-overdue span,

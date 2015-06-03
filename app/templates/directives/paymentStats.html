@@ -20,7 +20,7 @@
                 </div>
                 <div class="ps-overdue allgood" data-ng-if="singleThing">
                     <span class="price">{{beforetax | price}}</span>
-                    <span class="price-caption" data-ng-if="beforetax">{{'items.beforeTaxPrice'|translate}}</span>
+                    <span class="price-caption" data-ng-if="beforetax !== undefined">{{'items.beforeTaxPrice'|translate}}</span>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="ps-dayx nothing" data-ng-if="singleThing">
                     <span class="price">{{tax | price}}</span>
-                    <span class="price-caption" data-ng-if="tax">{{taxlabel}}</span>
+                    <span class="price-caption" data-ng-if="tax !== undefined">{{taxlabel}}</span>
                 </div>
             </div>
         </div>

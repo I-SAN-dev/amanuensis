@@ -73,11 +73,7 @@ class PdfDoc {
      */
     private function getInfo()
     {
-        if($this->type == 'acceptance')
-        {
-            $fields = array('name','description','project','refnumber');
-        }
-        else if($this->type == 'reminder')
+        if($this->type == 'reminder')
         {
             $fields = array('name','description','invoice','refnumber','date');
         }

@@ -89,7 +89,8 @@ class acceptance {
                 'project',
                 'state',
                 'path',
-                'refnumber'
+                'refnumber',
+                'date'
             )
         );
         json_response($result);
@@ -111,7 +112,8 @@ class acceptance {
                 'project',
                 'state',
                 'path',
-                'refnumber'
+                'refnumber',
+                'date'
             ),
             array('id', $id),
             1
@@ -143,7 +145,8 @@ class acceptance {
                 'project',
                 'state',
                 'path',
-                'refnumber'
+                'refnumber',
+                'date'
             ),
             $_POST
         );
@@ -168,7 +171,8 @@ class acceptance {
                 'description',
                 'state',
                 'path',
-                'refnumber'
+                'refnumber',
+                'date'
             ),
             $_POST);
         self::getAcceptance($affectedid);
