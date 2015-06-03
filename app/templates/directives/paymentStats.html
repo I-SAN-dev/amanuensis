@@ -39,7 +39,7 @@
     </div>
     <div class="timeline-container">
         <div class="timeline">
-            <div class="t-entry" data-ng-repeat="pe in payEvents" style="left: {{calcLeft(pe.date)}}%" data-ui-sref="app.invoiceDetail({id: pe.invoice_id})">
+            <div class="t-entry" data-ng-repeat="pe in payEvents" data-ng-attr-style="left: {{calcLeft(pe.date)}}%" data-ui-sref="app.invoiceDetail({id: pe.invoice_id})">
                 <div class="dot"></div>
                 <div class="info">
                     <span class="date">{{pe.date | amaDate:'dd.MM.yyyy'}}</span>
