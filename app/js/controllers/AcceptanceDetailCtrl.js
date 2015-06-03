@@ -17,8 +17,8 @@ app.controller('AcceptanceDetailCtrl', [
             self.acceptance = data;
         });
 
-        this.viewPdf = function (event,preview,path) {
-            PdfService(event,preview,'acceptance',id, path).then(function (data) {
+        this.generatePdf = function (event,preview) {
+            PdfService(event,preview,'acceptance',id, self.acceptance.path).then(function (data) {
                 if(data){
                     self.acceptance.path = data.path;
                     self.acceptance.state = 1;
@@ -29,4 +29,4 @@ app.controller('AcceptanceDetailCtrl', [
 
 
 
-    }]);
+}]);

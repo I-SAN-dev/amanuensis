@@ -3,6 +3,13 @@ app.factory('PdfService', [
     'constants',
     '$q',
     function (ApiAbstractionLayer, constants, $q) {
+        var openPopup = function (viewPath) {
+            window.open(
+                viewPath,
+                '',
+                'height=500,width=900'
+            );
+        };
         return function (event, preview, forType, forId, pdfPath) {
             event.preventDefault();
 
@@ -10,13 +17,6 @@ app.factory('PdfService', [
 
             var defer = $q.defer();
 
-            var openPopup = function (viewPath) {
-                window.open(
-                    viewPath,
-                    '',
-                    'height=500,width=900'
-                );
-            };
 
             if(preview) {
                 openPopup(constants.BASEURL+'/api?action=pdfgen&for='+forType+'&forid='+forId);
