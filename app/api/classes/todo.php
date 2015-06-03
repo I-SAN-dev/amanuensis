@@ -95,17 +95,26 @@ class todo {
         foreach($result AS &$todo)
         {
             $q = $dbal->prepare('
-                    SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+                     SELECT COUNT(*) AS items, todo_done  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
                 ');
             $q->bindParam(':todo', $todo['id']);
             $q->execute();
-            /* items not done */
-            $undone = $q->fetch(PDO::FETCH_ASSOC);
-            /* items done */
-            $done = $q->fetch(PDO::FETCH_ASSOC);
+            /* items not done & done */
+            $first = $q->fetch(PDO::FETCH_ASSOC);
+            $second = $q->fetch(PDO::FETCH_ASSOC);
+            if($first['todo_done'] == 0)
+            {
+                $undone = $first;
+                $done = $second; // this could be NULL
+            }
+            else
+            {
+                $done = $first;
+                $undone = $second; //this will be NULL
+            }
 
-            $todo['items_total'] = $undone['items'] + $done['items'];
-            $todo['items_done'] = $done['items'];
+            $todo['items_total'] = intval($undone['items']) + intval($done['items']);
+            $todo['items_done'] = intval($done['items']);
         }
         json_response($result);
     }
@@ -130,17 +139,27 @@ class todo {
         );
         /* Count items and done items*/
         $q = $dbal->prepare('
-                SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+                SELECT COUNT(*) AS items, todo_done  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
             ');
         $q->bindParam(':todo', $result['id']);
         $q->execute();
-        /* items not done */
-        $undone = $q->fetch(PDO::FETCH_ASSOC);
-        /* items done */
-        $done = $q->fetch(PDO::FETCH_ASSOC);
+        /* items not done & done */
+        $first = $q->fetch(PDO::FETCH_ASSOC);
+        $second = $q->fetch(PDO::FETCH_ASSOC);
+        if($first['todo_done'] == 0)
+        {
+            $undone = $first;
+            $done = $second; // this could be NULL
+        }
+        else
+        {
+            $done = $first;
+            $undone = $second; //this will be NULL
+        }
 
-        $result['items_total'] = $undone['items'] + $done['items'];
-        $result['items_done'] = $done['items'];
+
+        $result['items_total'] = intval($undone['items']) + intval($done['items']);
+        $result['items_done'] = intval($done['items']);
 
 
         /* Add items */

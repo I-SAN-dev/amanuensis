@@ -140,17 +140,26 @@ class AmaProject {
             foreach($this->todos AS &$todo)
             {
                 $q = $this->dbal->prepare('
-                    SELECT COUNT(*) AS items  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
+                    SELECT COUNT(*) AS items, todo_done  FROM items WHERE todo = :todo GROUP BY todo_done ORDER BY todo_done ASC
                 ');
                 $q->bindParam(':todo', $todo['id']);
                 $q->execute();
-                /* items not done */
-                $undone = $q->fetch(PDO::FETCH_ASSOC);
-                /* items done */
-                $done = $q->fetch(PDO::FETCH_ASSOC);
+                /* items not done & done */
+                $first = $q->fetch(PDO::FETCH_ASSOC);
+                $second = $q->fetch(PDO::FETCH_ASSOC);
+                if($first['todo_done'] == 0)
+                {
+                    $undone = $first;
+                    $done = $second; // this could be NULL
+                }
+                else
+                {
+                    $done = $first;
+                    $undone = $second; //this will be NULL
+                }
 
-                $todo['items_total'] = $undone['items'] + $done['items'];
-                $todo['items_done'] = $done['items'];
+                $todo['items_total'] = intval($undone['items']) + intval($done['items']);
+                $todo['items_done'] = intval($done['items']);
             }
         }
         return $this->todos;
