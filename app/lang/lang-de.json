@@ -325,7 +325,8 @@
     "password":"Passwort",
     "password2":"Passwort wiederholen",
     "passwordsdontmatch":"Die Wiederholung des Passworts stimmt nicht mit dem Passwort überein!",
-    "emailinuse":"Die eingegebene E-Mail Adresse wird bereits von einem anderen Benutzer verwendet!"
+    "emailinuse":"Die eingegebene E-Mail Adresse wird bereits von einem anderen Benutzer verwendet!",
+    "changePassword": "Password ändern für Benutzer {{username}}"
   },
 
   "settings": {
