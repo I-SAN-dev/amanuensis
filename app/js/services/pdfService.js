@@ -1,23 +1,55 @@
 app.factory('PdfService', [
     'ApiAbstractionLayer',
-    function (ApiAbstractionLayer) {
-        return function (preview, forType, forId) {
-            var method = 'POST';
-            var paramType = 'data';
+    'constants',
+    '$q',
+    function (ApiAbstractionLayer, constants, $q) {
+        return function (event, preview, forType, forId, pdfPath) {
+            event.preventDefault();
+
+            console.log(pdfPath);
+
+            var defer = $q.defer();
+
+            var openPopup = function (viewPath) {
+                window.open(
+                    viewPath,
+                    '',
+                    'height=500,width=900'
+                );
+            };
+
             if(preview) {
-                method = 'GET';
-                paramType = 'params';
+                openPopup(constants.BASEURL+'/api?action=pdfgen&for='+forType+'&forid='+forId);
+                defer.resolve();
+
+            } else {
+                if(pdfPath){
+                    openPopup(constants.BASEURL+'/api?action=protectedpdf&path='+pdfPath);
+                    defer.resolve();
+                } else {
+                    var apiObject = {
+                        name: 'pdfgen',
+                        data: {
+                            for: forType,
+                            forid: forId
+                        }
+                    };
+
+
+                    ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                        defer.resolve(data);
+                    }, function (error) {
+                        defer.reject(error);
+                    });
+
+                }
             }
 
-            var apiObject = {
-                name: 'pdfgen'
-            };
-            apiObject[paramType] = {
-                for: forType,
-                forid: forId
-            };
+            return defer.promise;
 
-            return ApiAbstractionLayer(method, apiObject);
+
+
+
         };
     }
-])
+]);

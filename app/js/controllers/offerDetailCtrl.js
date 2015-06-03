@@ -27,6 +27,21 @@ app.controller('OfferDetailCtrl', [
             }, 1000);
 
 
+            this.generatePDF = function (event, preview) {
+
+                console.log(event, preview);
+                PdfService(event,preview,'offer',id, self.offer.path).then(function (data) {
+                    if(data){
+                        self.offer.path = data.path;
+                        self.offer.state = 1;
+                        LocalStorage.setData('offer/'+id, self.offer);
+                    }
+
+
+                });
+            };
+
+
             // TODO: load dateFormat from Config
             this.dateFormat = 'dd.MM.yyyy';
 
@@ -57,16 +72,7 @@ app.controller('OfferDetailCtrl', [
                 }
             };
 
-            this.generatePDF = function (preview) {
-                PdfService(preview, 'offer', id).then(function (data) {
-                    if(preview){
 
-                    } else {
-                        self.offer.path = data.path;
-                        LocalStorage.setData('offer/'+id, self.offer);
-                    }
-                });
-            };
 
             this.openPdfPreview = function (event) {
                 event.preventDefault();

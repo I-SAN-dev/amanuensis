@@ -79,9 +79,9 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.openPdfPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
-                        <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF()">{{'pdf.generate'|translate}}</button>
-                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.openPdf($event)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePdf($event,true)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'pdf.preview'|translate}}</a>
+                        <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.generatePDF($event,false)">{{'pdf.generate'|translate}}</button>
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.generatePdf($event,false)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
                         <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
