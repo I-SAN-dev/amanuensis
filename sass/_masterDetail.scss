@@ -239,5 +239,11 @@ $detail-toolbar-height: 64px;
   .check
   {
     position: absolute;
+    right: 30px;
+    top: -5px;
+  }
+  .list-group-item
+  {
+    min-height: 70px;
   }
 }

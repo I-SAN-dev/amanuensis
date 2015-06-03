@@ -11178,6 +11178,52 @@ textarea {
   background-color: transparent;
   border: 0 none; }
 
+.checkbox input[type="checkbox"].switch {
+  display: none; }
+  .checkbox input[type="checkbox"].switch + .switch-indicator {
+    display: inline-block;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    position: relative;
+    transition: all 300ms ease; }
+    .checkbox input[type="checkbox"].switch + .switch-indicator:after {
+      content: "\f299";
+      font: normal normal normal 24px "Material Design Iconic Font";
+      color: #fff;
+      speak: none;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      text-align: center;
+      line-height: 40px;
+      top: -2px;
+      left: -2px;
+      width: 40px;
+      height: 40px;
+      margin-top: 0;
+      border-radius: 100%;
+      transform-origin: center center;
+      transition: all 300ms cubic-bezier(1, -1.6, 0, 1.6); }
+  .checkbox input[type="checkbox"].switch[data-ng-checked="false"] + .switch-indicator {
+    background-color: transparent;
+    border: 2px solid #757575; }
+    .checkbox input[type="checkbox"].switch[data-ng-checked="false"] + .switch-indicator:after {
+      background-color: transparent;
+      margin-left: 0;
+      transform: scale(0);
+      transition: all 300ms cubic-bezier(1, 2, 0, 1); }
+  .checkbox input[type="checkbox"].switch[data-ng-checked="true"] + .switch-indicator {
+    border: 2px solid #009688;
+    background-color: #009688; }
+    .checkbox input[type="checkbox"].switch[data-ng-checked="true"] + .switch-indicator:after {
+      background-color: transparent;
+      margin-left: 0;
+      transform: scale(1);
+      transition: all 300ms cubic-bezier(1, 0, 0, 2.75); }
+
 /*.nav#mainNav
 {
   @include card(1);
@@ -11452,7 +11498,11 @@ textarea {
   height: calc(100% - 94px); }
 
 .master-todo .check {
-  position: absolute; }
+  position: absolute;
+  right: 30px;
+  top: -5px; }
+.master-todo .list-group-item {
+  min-height: 70px; }
 
 .tile {
   display: block;
