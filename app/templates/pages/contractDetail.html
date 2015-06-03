@@ -1,0 +1,125 @@
+<div class="row detail fullheight" data-ng-controller="ContractDetailCtrl as contract">
+
+
+    <div class="col-lg-8 col-md-8 col-sm-7 fullheight">
+
+        <div class="row detail-top-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight shadow-0 bg-primary">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1>
+                                    <span data-in-place-edit
+                                          data-api-id="contract.contract.id"
+                                          data-api-name="'contract'"
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="contract.contract.name"
+                                          data-ipe-name="'global.name'|translate"
+                                          data-ipe-deletable="false"
+                                            ></span>
+                                </h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <span data-in-place-edit
+                                      data-ipe-key="'refnumber'"
+                                      data-ipe-value="contract.contract.refnumber"
+                                      data-ipe-deletable="false"
+                                      data-api-id="contract.contract.id"
+                                      data-api-name="'contract'"
+                                      data-ipe-name="'contracts.refnumber'|translate"></span>
+                            </div>
+                        </div>
+                        <div class="detail-inline">
+                            <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: contract.contract.project.id})">{{contract.contract.project.name}}</a>
+                        </div>
+                        <div class="detail-inline detail-inline-date">
+                            <i class="md md-schedule"></i>
+                            <div class="date-container">
+                                <span data-in-place-edit
+                                      data-api-id="contract.contract.id"
+                                      data-api-name="'contract'"
+                                      data-ipe-key="'date'"
+                                      data-ipe-value="contract.contract.date"
+                                      data-ipe-name="'global.date'|translate"
+                                      data-ipe-deletable="false"
+                                      data-ipe-type="'date'"
+                                      data-output-value="contract.contract.date|amaDate:'dd.MM.yyyy'"
+                                        ></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="under-detail-top-bar next-fullheight">
+            <div data-ng-if="contract.contract.items"
+                 data-master-detail
+                 data-master-list="contract.contract.items"
+                 data-master-tpl="'templates/pages/items/master.html'"
+                 data-detail-tpl="'templates/pages/items/detail.html'"
+                 data-detail="contract.contract.items[0]"
+                 data-master-loaded="contract.loaded"></div>
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4 col-md-4 col-sm-5 fullheight">
+
+        <div class="panel panel-default fixedheight-320 shadow-1">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a class="btn btn-block btn-info" data-ng-click="contract.viewPdf($event,true)">{{'pdf.preview'|translate}}</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-block btn-success" data-ng-click="contract.decline()">{{'contract.decline' |translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default under-fixedheight-320">
+            <div class="panel-heading">
+                <div class="btn-group btn-group-sm pull-right" data-ng-init="contract.showPage = 1">
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: contract.showPage==1}" data-ng-click="contract.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.client' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: contract.showPage==2}" data-ng-click="contract.showPage = 2"><i class="md md-lg md-comment"></i> {{'contract.description' | translate}}</button>
+                </div>
+            </div>
+            <div class="panel-body nopadding nooverflow">
+                <div class="slideanim2 fullheight" data-ng-class="{panel2: contract.showPage==2, panel3: contract.showPage==3}">
+
+                    <div class="slideanim-item fullheight scroll-y">
+
+                        <div data-client-box="contract.contract.project.client"></div>
+
+                    </div>
+
+                    <div class="slideanim-item fullheight scroll-y">
+
+                        <div class="ipe-wysiwyg-fullheight">
+                            <p data-in-place-edit
+                               data-api-id="contract.contract.id"
+                               data-api-name="'contract'"
+                               data-ipe-key="'description'"
+                               data-ipe-value="contract.contract.description"
+                               data-ipe-name="'global.description'|translate"
+                               data-ipe-type="'wysiwyg'"></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

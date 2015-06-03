@@ -99,6 +99,7 @@ class Scripts
         "js/controllers/offersCtrl.js",
         "js/controllers/offerDetailCtrl.js",
         "js/controllers/offerCreationCtrl.js",
+        "js/controllers/contractDetailCtrl.js",
         "js/controllers/contractCreationCtrl.js",
         "js/controllers/acceptanceCreationCtrl.js",
         "js/controllers/invoiceCreationCtrl.js",
