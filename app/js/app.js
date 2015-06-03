@@ -295,24 +295,6 @@ app.constant('sites', [
             }
         }
     },
-    /*{
-        name: 'app.projects',
-        stateObject: {
-            url: '/projects/:id',
-            views: {
-                'appContent': {
-                    templateUrl: 'templates/pages/projects.html'
-                }
-            }
-        },
-        menus: {
-            mainNav: {
-                name: 'projects.menuName',
-                title: 'projects.menuTitle',
-                icon: 'md md-folder'
-            }
-        }
-    },*/
     {
         name: 'app.projectCreation',
         stateObject: {
