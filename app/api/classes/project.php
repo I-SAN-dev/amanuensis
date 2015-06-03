@@ -111,11 +111,11 @@ class project {
             $where = '';
             if(isset($_GET["current"]) && $_GET["current"] != '')
             {
-                $where = ' WHERE state < '.PROJECT_FINISHED;
+                $where = ' WHERE state < '.PROJECT_ARCHIVED;
             }
             if(isset($_GET["archive"]) && $_GET["archive"] != '')
             {
-                $where = ' WHERE state >= '.PROJECT_FINISHED;
+                $where = ' WHERE state >= '.PROJECT_ARCHIVED;
             }
 
             /* List of all projects */
