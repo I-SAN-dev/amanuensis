@@ -82,7 +82,7 @@
                                             <a class="listinfo-action listinfo-action-icon listinfo-action-danger" data-ng-click="settings.deleteUser($event, user.id)"  title="{{'user.delete'|translate}}">
                                                 <i class="md md-delete"></i>
                                             </a>
-                                            <a class="listinfo-action listinfo-action-icon listinfo-action-warning" data-ng-click="settings.changeUserPass($event, user.id)"  title="{{'user.changepass'|translate}}">
+                                            <a class="listinfo-action listinfo-action-icon listinfo-action-warning" data-ng-click="settings.changeUserPass(user)"  title="{{'user.changepass'|translate}}">
                                                 <i class="md md-lock"></i>
                                             </a>
                                         </div>
@@ -121,7 +121,7 @@
                                                  data-input-required="true"></div>
                                             <div class="row">
                                                 <div class="col-xs-3">
-                                                    <button type="button" class="btn btn-primary btn-block" title="{{'global.cancel'|translate}}" data-ng-click="settings.resetNewUser()">
+                                                    <button type="button" class="btn btn-primary btn-block" title="{{'global.cancel'|translate}}" data-ng-click="settings.reset('newUser')">
                                                         <i class="md md-close md-lg"></i>
                                                     </button>
                                                 </div>
