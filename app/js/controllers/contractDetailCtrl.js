@@ -11,7 +11,7 @@ app.controller('ContractDetailCtrl', [
     function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce){
         var self = this;
         var id = $stateParams.id;
-        var type = $stateParams.type;
+        var type = this.type = $stateParams.type;
         this.isFileContract = type == 'fileContract';
         MasterDetailService.setMaster(this);
         this.contract = LocalStorage.getData(type+'/'+id);
@@ -19,6 +19,7 @@ app.controller('ContractDetailCtrl', [
             LocalStorage.setData(type+'/'+id, data);
             self.contract = data;
             if(self.isFileContract){
+                self.fileName = data.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use filename instead of refnumber */
                 self.iframeSrc = $sce.trustAsResourceUrl('api/?action=protectedpdf&path='+data.path);
             }
         });

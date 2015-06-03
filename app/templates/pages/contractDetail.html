@@ -12,7 +12,7 @@
                                 <h1>
                                     <span data-in-place-edit
                                           data-api-id="contract.contract.id"
-                                          data-api-name="'contract'"
+                                          data-api-name="contract.type"
                                           data-ipe-key="'name'"
                                           data-ipe-value="contract.contract.name"
                                           data-ipe-name="'global.name'|translate"
@@ -21,19 +21,21 @@
                                 </h1>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <span data-in-place-edit
+                                <span data-ng-if="!contract.isFileContract"
+                                      data-in-place-edit
                                       data-ipe-key="'refnumber'"
                                       data-ipe-value="contract.contract.refnumber"
                                       data-ipe-deletable="false"
                                       data-api-id="contract.contract.id"
                                       data-api-name="'contract'"
                                       data-ipe-name="'contracts.refnumber'|translate"></span>
+                                <span data-ng-if="contract.isFileContract">{{contract.fileName}}</span>
                             </div>
                         </div>
                         <div class="detail-inline">
                             <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: contract.contract.project.id})">{{contract.contract.project.name}}</a>
                         </div>
-                        <div class="detail-inline detail-inline-date">
+                        <div data-ng-if="!contract.isFileContract" class="detail-inline detail-inline-date">
                             <i class="md md-schedule"></i>
                             <div class="date-container">
                                 <span data-in-place-edit
@@ -64,8 +66,8 @@
                  data-detail-tpl="'templates/pages/items/detail.html'"
                  data-detail="contract.contract.items[0]"
                  data-master-loaded="contract.loaded"></div>
-            <div class="panel panel-default fullheight shadow-3">
-                <iframe class="fullheight iframe" data-ng-if="contract.isFileContract"
+            <div  data-ng-if="contract.isFileContract" class="panel panel-default fullheight shadow-3">
+                <iframe class="fullheight iframe"
                         data-ng-src="{{contract.iframeSrc}}"></iframe>
             </div>
 
@@ -76,14 +78,20 @@
 
     <div class="col-lg-4 col-md-4 col-sm-5 fullheight">
 
+
+
         <div class="panel panel-default fixedheight-320 shadow-1">
             <div class="panel-body">
+
+                <div data-ng-if="!contract.isFileContract" class="margin-bottom-lg" data-payment-stats="contract.contract.costs"></div>
+
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-block btn-info" data-ng-click="contract.viewPdf($event,true)">{{'pdf.preview'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="!contract.isFileContract" data-ng-click="contract.viewPdf($event,true)"><i class="md md-print"></i> {{'pdf.print'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="contract.isFileContract" data-ng-click="contract.viewPdf($event,false,contract.contract.path)"><i class="md md-print"></i> {{'pdf.print'|translate}}</a>
                     </div>
                     <div class="col-sm-6">
-                        <button class="btn btn-block btn-success" data-ng-click="contract.decline()">{{'contract.decline' |translate}}</button>
+
                     </div>
                 </div>
             </div>
@@ -111,7 +119,7 @@
                         <div class="ipe-wysiwyg-fullheight">
                             <p data-in-place-edit
                                data-api-id="contract.contract.id"
-                               data-api-name="'contract'"
+                               data-api-name="contract.type"
                                data-ipe-key="'description'"
                                data-ipe-value="contract.contract.description"
                                data-ipe-name="'global.description'|translate"

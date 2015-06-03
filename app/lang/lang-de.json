@@ -179,7 +179,8 @@
     "preview":"PDF Vorschau",
     "generate":"PDF generieren",
     "generated":"PDF wurde verschickt",
-    "view":"PDF anzeigen"
+    "view":"PDF anzeigen",
+    "print": "Drucken"
   },
   "mail":
   {
