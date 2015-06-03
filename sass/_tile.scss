@@ -140,22 +140,12 @@
     }
     &.tile-icon-3:before
     {
-      content: "\f023"; /* md-done */
-      color: $brand-warning;
+      content: "\f05e"; /* md-schedule */
+      color: $brand-danger;
     }
     &.tile-icon-4:before
     {
-      content: "\f05e"; /* md-schedule */
-      color: $brand-info;
-    }
-    &.tile-icon-5:before
-    {
-      content: "\f05e"; /* md-schedule */
-      color: $brand-success;
-    }
-    &.tile-icon-6:before
-    {
-      content: "\f0a0"; /* md-error */
+      content: "\f060"; /* md-settings */
       color: $brand-danger;
     }
     &.tile-icon-7:before
@@ -203,24 +193,15 @@
   }
   &.state-icon-3:before
   {
-    content: "\f023"; /* md-done */
-    color: $brand-warning;
+    content: "\f05e"; /* md-schedule */
+    color: $brand-danger;
   }
   &.state-icon-4:before
   {
-    content: "\f05e"; /* md-schedule */
-    color: $brand-info;
-  }
-  &.state-icon-5:before
-  {
-    content: "\f05e"; /* md-schedule */
-    color: $brand-success;
-  }
-  &.state-icon-6:before
-  {
-    content: "\f0a0"; /* md-error */
+    content: "\f060"; /* md-settings */
     color: $brand-danger;
   }
+
   &.state-icon-7:before
   {
     content: "\f023"; /* md-done */

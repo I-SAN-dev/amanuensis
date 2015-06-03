@@ -1,0 +1,61 @@
+<div class="fullheight master-todo">
+    <div class="panel panel-default panel-filter">
+        <div class="ipe buttons-above-input bai-1">
+            <div data-material-input
+                 data-ng-model="MasterDetailCtrl.filterText"
+                 data-input-id="filter"
+                 data-input-label="Filter"
+                 data-input-type="text">
+            </div>
+            <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[MasterDetailCtrl.filterText == '']">
+                <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
+                    <i class="md md-search"></i>
+                </button>
+                <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
+                         data-ng-click="MasterDetailCtrl.filterText = ''">
+                    <i class="md md-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-under-filter">
+        <div class="list-group max-fullheight scroll-y masterlist"
+             data-list-navigation="setDetail"
+             data-list="masterList"
+             data-active="MasterDetailCtrl.detail"
+             data-filter-text="MasterDetailCtrl.filterText">
+            <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
+               data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
+               data-ng-click="setDetail(item)">
+
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h2>{{item.name}}</h2>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="check">
+                            <span class="checkbox"
+                                  data-in-place-edit
+                                  data-ipe-key="'todo_done'"
+                                  data-ipe-value="item.todo_done"
+                                  data-api-name="'item'"
+                                  data-api-id="item.id"
+                                  data-ipe-name="'todo.todo'|translate"
+                                  data-ipe-type="'bool'"
+                                  data-ipe-deletable="false"
+                                    >
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </a>
+            <a class="list-group-item" data-ui-sref="app.itemCreation(MasterDetailCtrl.getStateParams('itemCreation'))">
+                <h2><i class="md md-add"></i> {{'items.create' | translate}}</h2>
+            </a>
+        </div>
+    </div>
+</div>

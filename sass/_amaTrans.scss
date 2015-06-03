@@ -63,3 +63,35 @@
     margin-left: -100%;
   }
 }
+
+
+/* main view animation */
+[data-ui-view]>div
+{
+  background-color: $background-color;
+}
+[data-ui-view].ng-enter, [data-ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: transform 0.2s ease-out, opacity 0.2s ease;
+}
+[data-ui-view].ng-enter {
+  opacity: 0;
+  transform:scale3d(0.97, 0.97, 1);
+
+}
+[data-ui-view].ng-enter-active {
+  opacity: 1;
+  transform:scale3d(1, 1, 1);
+}
+[data-ui-view].ng-leave {
+  opacity: 1;
+  transform:scale3d(1, 1, 1);
+}
+[data-ui-view].ng-leave-active {
+  opacity: 0;
+  transform:scale3d(1.03, 1.03, 1.03);
+}

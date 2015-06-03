@@ -23,17 +23,15 @@ iframe {
 
 #mainCanvas
 {
-  height: calc(100% - #{$navbar-height});
-  min-height: calc(100% - #{$navbar-height});
-  margin-top: $navbar-height;
+  height: calc(100% - #{$navbar-height + 2*16px});
+  min-height: calc(100% - #{$navbar-height + 2*16px});
+  margin-top: $navbar-height + 16px;
   overflow: hidden;
+  position: relative;
+  margin-left: 15px;
+  width: calc(100% - 2*15px);
 }
 
-#mainContent
-{
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
 /* we need this on many many divs so we can style our main content with relative height */
 .fullheight,
 .next-fullheight>div

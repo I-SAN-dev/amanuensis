@@ -116,6 +116,7 @@ class AmaItem {
 
             $this->entry = $this->calcPrizes($this->entry, $client);
             $this->entry['used_time'] = $this->calcTimeFor($this->entry['id']);
+            $this->entry['todo_done'] = $this->entry['todo_done'] == 1 ? true : false;
         }
         else
         {

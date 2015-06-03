@@ -72,8 +72,8 @@ ob_start();
         <div class="container-fluid" data-ama-module="'topBar'"></div>
     </div>
 
-    <div id="mainCanvas" class="container-fluid">
-        <div data-ui-view="mainContent" id="mainContent" class="ng-trans ng-trans-fade fullheight"></div>
+    <div id="mainCanvas">
+            <div data-ui-view="mainContent" id="mainContent" class="fullheight"></div>
     </div>
 <?php
     // basic Angular i18n

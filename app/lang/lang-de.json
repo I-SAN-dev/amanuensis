@@ -146,6 +146,7 @@
     "type":"Typ"
   },
   "todo": {
+    "todo":"ToDo",
     "name": "ToDo-Liste",
     "createTodo": "ToDo-Liste erstellen",
     "createForProject":"ToDo-Liste für das Projekt {{projectName}} erstellen",
