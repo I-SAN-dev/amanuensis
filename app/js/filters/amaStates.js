@@ -1,5 +1,16 @@
 app.filter('amaStates', function () {
     var statusCodes = {
+        project: {
+            '0': 'projects.states.created',
+            '1': 'projects.states.waiting',
+            '2': 'projects.states.todo',
+            '3': 'projects.states.overdueWaiting',
+            '4': 'projects.states.overdueTodo',
+            '5': '',
+            '6': '',
+            '7': 'projects.states.finished',
+            '8': 'projects.states.archived'
+        },
         offer: {
             '0': 'offers.states.created',
             '1': 'offers.states.pdfGenerated',

@@ -119,6 +119,15 @@
       "new":"Neues Projekt erstellen",
       "delete":"Projekt löschen",
       "archive": "Projektarchiv"
+    },
+    "states": {
+      "created": "Projekt erstellt",
+      "waiting": "Projekt wartet auf Antwort des Kunden",
+      "todo": "Projekt sollte bearbeitet werden",
+      "overdueWaiting": "Achtung! Ein Fälligkeitsdatum für eine Antwort des Kunden ist überschritten",
+      "overdueTodo": "Achtung! Ein Fälligkeitsdatum für die Bearbeitung des Projekts ist überschritten",
+      "finished": "Projekt ist abgeschlossen",
+      "archived": "Projekt ist archiviert"
     }
   },
 

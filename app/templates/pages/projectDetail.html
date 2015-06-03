@@ -3,123 +3,126 @@
 
 
         <div class="col-sm-6 col-md-8 fullheight">
-            <div class="panel panel-default fullheight">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <h3 style="display: inline-block;">
-                                <span data-in-place-edit
-                                      data-api-id="project.project.id"
-                                      data-api-name="'project'"
-                                      data-ipe-key="'name'"
-                                      data-ipe-value="project.project.name"
-                                      data-ipe-name="'global.name'|translate"
-                                      data-ipe-deletable="false"
-                                        ></span>
-                            </h3>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="pull-right">
-                                <button class="btn btn-link" data-ng-click="project.deleteProject()"><i class="md md-lg md-delete"></i>{{'projects.actions.delete' | translate}}</i></button>
-                            </div>
-                            <div class="pull-right">
-                                <i class="state-icon state-icon-{{project.project.state}}"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body scroll-y">
+            <div class="row detail-top-bar">
+                <div class="col-sm-12 fullheight">
+                    <div class="panel panel-default fullheight shadow-0 bg-primary">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h1>
+                                    <span data-in-place-edit
+                                          data-api-id="project.project.id"
+                                          data-api-name="'project'"
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="project.project.name"
+                                          data-ipe-name="'global.name'|translate"
+                                          data-ipe-deletable="false"
+                                            ></span>
+                                    </h1>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="pull-right">
 
-                    <p data-in-place-edit
-                       data-api-id="project.project.id"
-                       data-api-name="'project'"
-                       data-ipe-key="'description'"
-                       data-ipe-value="project.project.description"
-                       data-ipe-name="'global.description'|translate"
-                       data-ipe-type="'textarea'"
-                            ></p>
-
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="detail-block">
-                                <h3>{{'projects.offers'|translate}}
-                                    <a title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </a></h3>
-                                <div class="listinfo-row listinfo-link" data-ng-repeat="offer in project.project.offers" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
-                                    {{offer.name}}<br />
-                                    <span class="secondary">{{offer.refnumber}}</span><span class="less-important"> – {{offer.state|amaStates:'offer'|translate}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="detail-block">
-                                <h3>{{'projects.todos'|translate}}
-                                    <a title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </a></h3>
-                                <div class="listinfo-row listinfo-link"
-                                     data-ng-repeat="todo in project.project.todos" data-ui-sref="app.todoDetail({id:{{todo.id}}})">
-                                    {{todo.name}}<br />
-                                    <span class="secondary">{{todo.due|amaDate:'MM.dd.yyyy'}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="detail-block">
-                                <h3>{{'projects.contracts'|translate}}
-                                    <a title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </a></h3>
-                                <div class="listinfo-row listinfo-link"
-                                     data-ng-repeat="contract in project.contracts" data-ui-sref="app.contractDetail({id:contract.id,type:contract.type})">
-                                    {{contract.name}}<br />
-                                    <span class="secondary">{{contract.refnumber}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="detail-block">
-                                <h3>{{'projects.acceptances'|translate}}
-                                    <a title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </a></h3>
-                                <div class="listinfo-row listinfo-link" data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptanceDetail({id:{{acceptance.id}}})">
-                                    {{acceptance.name}}<br />
-                                    <span class="secondary">{{acceptance.refnumber}}</span><span class="less-important"> – {{acceptance.state|amaStates:'acceptance'|translate}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="detail-block">
-                                <h3>{{'projects.invoices'|translate}}
-                                    <a title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
-                                        <i class="md-add-circle-outline"></i>
-                                    </a></h3>
-                                <div class="listinfo-row listinfo-link-inside"
-                                     data-ng-repeat="invoice in project.project.invoices">
-                                    <div class="listinfo-link" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
-                                        {{invoice.name}}<br />
-                                        <span class="secondary">{{invoice.refnumber}}</span><span class="less-important"> – {{invoice.state|amaStates:'invoice'|translate}}</span>
                                     </div>
-                                    <div class="listinfo-row listinfo-link"
-                                         data-ng-repeat="reminder in invoice.reminders" data-ui-sref="app.reminderDetail({id:{{reminder.id}}})">
-                                        {{reminder.name}}<br />
-                                        <span class="secondary">{{reminder.refnumber}}</span><span class="less-important"> – {{reminder.state|amaStates:'reminder'|translate}}</span>
+                                    <div class="pull-right">
+                                        <i class="state-icon state-icon-{{project.project.state}}"></i>
                                     </div>
                                 </div>
                             </div>
+                            {{project.project.state|amaStates:'project'|translate}}
+                            <button class="btn btn-danger btn-link btn-icon-round" data-ng-click="project.deleteProject()" title="{{'projects.actions.delete'|translate}}"><i class="md md-delete"></i></button>
+
+
                         </div>
                     </div>
-
                 </div>
-
             </div>
+            <div class="under-detail-top-bar next-fullheight">
+                <div class="panel panel-default shadow-3 fullheight">
+                    <div class="panel-body fullheight scroll-y">
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-block">
+                                    <h3>{{'projects.offers'|translate}}
+                                        <a title="{{'projects.newOffer'|translate}}" data-ui-sref="app.offerCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
+                                            <i class="md-add-circle-outline"></i>
+                                        </a></h3>
+                                    <div class="listinfo-row listinfo-link" data-ng-repeat="offer in project.project.offers" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
+                                        {{offer.name}}<br />
+                                        <span class="secondary">{{offer.refnumber}}</span><span class="less-important"> – {{offer.state|amaStates:'offer'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-block">
+                                    <h3>{{'projects.todos'|translate}}
+                                        <a title="{{'projects.newTodo'|translate}}" data-ui-sref="app.todoCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
+                                            <i class="md-add-circle-outline"></i>
+                                        </a></h3>
+                                    <div class="listinfo-row listinfo-link"
+                                         data-ng-repeat="todo in project.project.todos" data-ui-sref="app.todoDetail({id:{{todo.id}}})">
+                                        {{todo.name}}<br />
+                                        <span class="secondary">{{todo.due|amaDate:'MM.dd.yyyy'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-block">
+                                    <h3>{{'projects.contracts'|translate}}
+                                        <a title="{{'projects.newContract'|translate}}" data-ui-sref="app.contractCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
+                                            <i class="md-add-circle-outline"></i>
+                                        </a></h3>
+                                    <div class="listinfo-row listinfo-link"
+                                         data-ng-repeat="contract in project.contracts" data-ui-sref="app.contractDetail({id:contract.id,type:contract.type})">
+                                        {{contract.name}}<br />
+                                        <span class="secondary">{{contract.refnumber}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-block">
+                                    <h3>{{'projects.acceptances'|translate}}
+                                        <a title="{{'projects.newAcceptance'|translate}}" data-ui-sref="app.acceptanceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
+                                            <i class="md-add-circle-outline"></i>
+                                        </a></h3>
+                                    <div class="listinfo-row listinfo-link" data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptanceDetail({id:{{acceptance.id}}})">
+                                        {{acceptance.name}}<br />
+                                        <span class="secondary">{{acceptance.refnumber}}</span><span class="less-important"> – {{acceptance.state|amaStates:'acceptance'|translate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="detail-block">
+                                    <h3>{{'projects.invoices'|translate}}
+                                        <a title="{{'projects.newInvoice'|translate}}" data-ui-sref="app.invoiceCreation({project:{ id: project.project.id, name: project.project.name}, referrer:'app.projectDetail', referrerParams: {id:project.project.id}})">
+                                            <i class="md-add-circle-outline"></i>
+                                        </a></h3>
+                                    <div class="listinfo-row listinfo-link-inside"
+                                         data-ng-repeat="invoice in project.project.invoices">
+                                        <div class="listinfo-link" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
+                                            {{invoice.name}}<br />
+                                            <span class="secondary">{{invoice.refnumber}}</span><span class="less-important"> – {{invoice.state|amaStates:'invoice'|translate}}</span>
+                                        </div>
+                                        <div class="listinfo-row listinfo-link"
+                                             data-ng-repeat="reminder in invoice.reminders" data-ui-sref="app.reminderDetail({id:{{reminder.id}}})">
+                                            {{reminder.name}}<br />
+                                            <span class="secondary">{{reminder.refnumber}}</span><span class="less-important"> – {{reminder.state|amaStates:'reminder'|translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <div class="col-sm-6 col-md-4 fullheight">
@@ -134,13 +137,38 @@
             </div>
 
             <div class="panel panel-default under-fixedheight-360 shadow-0 ">
+
+
+
                 <div class="panel-heading">
-                    <h3>{{'clients.client'|translate}}</h3>
+                    <div class="btn-group btn-group-sm pull-right" data-ng-init="project.showPage = 1">
+                        <button class="btn btn-link ng-binding" data-ng-class="{active: project.showPage==1}" data-ng-click="project.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.client' | translate}}</button>
+                        <button class="btn btn-link ng-binding" data-ng-class="{active: project.showPage==2}" data-ng-click="project.showPage = 2"><i class="md md-lg md-comment"></i> {{'global.description' | translate}}</button>
+                    </div>
                 </div>
-                <div class="panel-body scroll-y">
+                <div class="panel-body nopadding nooverflow">
+                    <div class="slideanim2 fullheight" data-ng-class="{panel2: project.showPage==2, panel3: project.showPage==3}">
 
-                    <div data-client-box="project.project.client"></div>
+                        <div class="slideanim-item fullheight scroll-y">
 
+                            <div data-client-box="project.project.client"></div>
+
+                        </div>
+
+                        <div class="slideanim-item fullheight scroll-y">
+
+                            <div data-in-place-edit
+                                   data-api-id="project.project.id"
+                                   data-api-name="'project'"
+                                   data-ipe-key="'description'"
+                                   data-ipe-value="project.project.description"
+                                   data-ipe-name="'global.description'|translate"
+                                   data-ipe-type="'textarea'">
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
