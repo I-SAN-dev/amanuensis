@@ -141,6 +141,8 @@ final class DBAL {
      */
     public function dynamicUpdate($table, array $where, array $columns, array $data)
     {
+
+
         /* Check if is set */
         $realcolumns = array();
         foreach($columns as $column)
@@ -164,11 +166,17 @@ final class DBAL {
             /* Bind data */
             foreach($realcolumns as $column)
             {
+                /* make it work with booleans */
+                if($data[$column] === false)
+                {
+                    $data[$column] = 0;
+                }
                 /* make empty string NULL - needed to delete not-string datatypes */
-                if($data[$column] == '')
+                if($data[$column] === '')
                 {
                     $data[$column] = NULL;
                 }
+
                 $q->bindParam(':'.$column, $data[$column]);
             }
             /* Bind where statement */

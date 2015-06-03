@@ -13,9 +13,22 @@ app.controller('TodoDetailCtrl', [
         });
 
 
-        self.nextStep = function()
+        this.nextStep = function()
         {
             alert('TODO: create acceptance or invoice');
-        }
+        };
+
+        this.getStateParams = function(forState){
+            if(forState == 'itemCreation'){
+                return {
+                    referrer: 'app.todoDetail',
+                    referrerParams: {
+                        id: id
+                    },
+                    for: 'todo',
+                    forId: id
+                };
+            }
+        };
     }
 ]);

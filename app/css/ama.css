@@ -11451,6 +11451,9 @@ textarea {
 .under-client-heading {
   height: calc(100% - 94px); }
 
+.master-todo .check {
+  position: absolute; }
+
 .tile {
   display: block;
   position: relative;

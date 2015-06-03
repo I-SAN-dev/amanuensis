@@ -233,3 +233,11 @@ $detail-toolbar-height: 64px;
 {
   height: calc(100% - 94px);
 }
+
+.master-todo
+{
+  .check
+  {
+    position: absolute;
+  }
+}

@@ -41,7 +41,7 @@ app.directive('inPlaceEdit',
                     /**
                      * Turns on the edit mode for the inPlaceEdit
                      */
-                    this.enterEditMode = function () {
+                    this.enterEditMode = function (keep) {
                         // in a master detail view, the MasterDetailService has to be notified
                         MasterDetailService.setEditor(self);
 
@@ -50,7 +50,15 @@ app.directive('inPlaceEdit',
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
-                        self.editMode = MasterDetailService.editMode(true);
+                        if(!keep)
+                        {
+                            self.editMode = MasterDetailService.editMode(true);
+                        }
+                        else
+                        {
+                            self.editMode = true;
+                        }
+
 
                         // create a backup
                         backup = angular.copy($scope.val);
@@ -58,7 +66,7 @@ app.directive('inPlaceEdit',
 
                     // inputs of type bool are always in editMode
                     if($scope.type=='bool'){
-                        self.enterEditMode();
+                        self.enterEditMode(true);
                     }
 
                     /**
