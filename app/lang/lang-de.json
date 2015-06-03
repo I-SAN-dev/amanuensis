@@ -142,7 +142,10 @@
     "createForProject":"ToDo-Liste für das Projekt {{projectName}} erstellen",
     "dueDate": "Fälligkeitsdatum",
     "someopen":"Noch nicht erfüllt",
-    "alldone":"Alles erledigt"
+    "alldone":"Alles erledigt",
+    "ready":"Abschließen",
+    "open":"zu erledigen",
+    "done":"erledigt"
   },
   "acceptance": {
     "name": "Abnahme"

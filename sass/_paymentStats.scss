@@ -1,7 +1,8 @@
 $dot-size: 14px;
 $ps-total-size: 140px;
 
-.payment-stats
+.payment-stats,
+.todo-stats
 {
   .timeline-container
   {
@@ -148,6 +149,13 @@ $ps-total-size: 140px;
           color: $gray-light;
         }
       }
+      &.default
+      {
+        .price
+        {
+          color: $gray-dark;
+        }
+      }
     }
   }
 
@@ -239,5 +247,21 @@ $ps-total-size: 140px;
       padding-top: 20px;
     }
   }
+}
 
+.todo-stats
+{
+  .ps-total
+  {
+    background-color: $brand-warning !important;
+    padding-top: 0 !important;
+  }
+  .pie
+  {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $brand-success;
+    transition: 0.3s all;
+  }
 }
