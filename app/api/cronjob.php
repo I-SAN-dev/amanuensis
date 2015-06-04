@@ -20,6 +20,8 @@ require_once('classes/errorhandling/amaException.php');
 require_once('classes/database/dbal.php');
 require_once('classes/database/state_constants.php');
 require_once('classes/project/amaProject.php');
+require_once('classes/project/amaStream.php');
+require_once('classes/mail/amaMail.php');
 
 
 /**
@@ -72,6 +74,75 @@ function isPast($date, $offset = false)
         return (strtotime($date) + $seconds) < time();
     }
     return strtotime($date) < time();
+}
+
+/**
+ * Returns a name of a state
+ * @param $type
+ * @param $id
+ */
+function getState($type, $id)
+{
+    $states = array(
+        "project" => array(
+            0 => "erstellt",
+            1 => "wartend",
+            2 => "offene Aufgaben",
+            3 => "überfällig wartend",
+            4 => "überfällige Aufgaben",
+            7 => "abgeschlossen",
+            8 => "archiviert"
+        ),
+        "global" => array(
+            0 => "erstellt",
+            1 => "PDF generiert",
+            2 => "PDF verschickt",
+            3 => "angenommen",
+            -1 => "abgelehnt"
+        ),
+        "todo" => array(
+            0 => "offene Aufgaben",
+            1 => "abgeschlossen",
+            2 => "überfällige Aufgaben"
+        )
+    );
+    $states['offer'] = $states['global'];
+    $states['acceptance'] = $states['global'];
+    $states['invoice'] = $states['global'];
+    $states['reminder'] = $states['global'];
+    $states['invoice'][3] = "bezahlt";
+    $states['invoice'][4] = "überfällig";
+    $states['invoice'][5] = "überfällig, Zahlungserinnerung erstellt";
+
+    return isset($states[$type][$id]) ? $states[$type][$id] : $id;
+}
+
+/**
+ * Returns a linked name and declaration
+ * @param $event - the event
+ * @return string $html
+ */
+function getLink($event)
+{
+    $conf = Config::getInstance();
+    $data = array(
+        "project" => array('/project/:id', 'Das Projekt'),
+        "offer" => array('/offers/:id', 'Das Angebot'),
+        "todo" => array('/todos/:id', 'Die Aufgabenliste'),
+        "acceptance" => array('/acceptances/:id', 'Die Abnahme'),
+        "invoice" => array('/invoices/:id', 'Die Rechnung'),
+        "reminder" => array('/reminders/:id', 'Die Zahlungserinnerung'),
+    );
+
+    $typestring = $data[$event['type']][1];
+    $url = $conf->get['baseurl'].str_replace(':id', $event['id'], $data[$event['type']][0]);
+    $name = $event['name'];
+
+    $html = '
+        '.$typestring.' <a href="'.$url.'">'.$name.'</a>
+    ';
+
+    return $html;
 }
 
 /* Check all project states */
@@ -262,15 +333,51 @@ foreach($projectids as $projectid)
 
 }
 
-/**
- * TODO
+/*
  * add all events to stream
  */
+$stream = AmaStream::getInstance();
+foreach($events as $event)
+{
+    $stream->addItem('changestate.'.$event['type'].'.'.$event['state'], $event['type'], $event['id']);
+}
 
-/**
- * TODO
+/*
  * send a report via mail
  */
+if(count($events) > 0)
+{
+    $conf = Config::getInstance();
+    $mail = new AmaMail($conf->get['company'], $conf->get['mail']['admin'], count($events)." neue Benachrichtigungen von amanu");
+
+    $html = '
+Hallo,<br/>
+<br/>
+es gibt Neuigkeiten von <a href="'.$conf->get['baseurl'].'">amanu</a>!<br/>
+<ul>
+';
+
+    foreach($events as $event)
+    {
+        $html = $html.'
+            <li>
+                '.getLink($event).' hat jetzt den Status '.getState($event['type'], $event['state']).'
+            </li>
+        ';
+    }
+
+    $html = $html.'
+</ul>
+<br/>
+
+Gehe jetzt zu <a href="'.$conf->get['baseurl'].'">amanu</a>
+';
+
+    $mail->setContent($html);
+    $mail->send();
+}
+
+
 
 /* echo execution time */
 echo('Processed in '.(microtime(true) - $start).' seconds!');
