@@ -10892,7 +10892,11 @@ h1, h2 {
     color: #fff;
     opacity: 0.5;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; }
+    -moz-osx-font-smoothing: grayscale;
+    /* default action icons */
+    /* ToDo icons */
+    /* Project icons */
+    /* invoice icons */ }
     .stream-entry .icon-bubble.icon-delete {
       background-color: #F4511E; }
       .stream-entry .icon-bubble.icon-delete:before {
@@ -10913,6 +10917,64 @@ h1, h2 {
       .stream-entry .icon-bubble.icon-send:before {
         content: "\f119";
         /* md-send */ }
+    .stream-entry .icon-bubble.icon-changestate\.todo\.0 {
+      background-color: #FFB300; }
+      .stream-entry .icon-bubble.icon-changestate\.todo\.0:before {
+        content: "\f060";
+        /* md-settings */ }
+    .stream-entry .icon-bubble.icon-changestate\.todo\.1 {
+      background-color: #009688; }
+      .stream-entry .icon-bubble.icon-changestate\.todo\.1:before {
+        content: "\f023";
+        /* md-done */ }
+    .stream-entry .icon-bubble.icon-changestate\.todo\.2 {
+      background-color: #F4511E; }
+      .stream-entry .icon-bubble.icon-changestate\.todo\.2:before {
+        content: "\f060";
+        /* md-settings */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.0:before {
+      content: "\f060";
+      /* md-settings */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.1 {
+      background-color: #00ACC1; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.1:before {
+        content: "\f05e";
+        /* md-schedule */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.2 {
+      background-color: #FFB300; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.2:before {
+        content: "\f060";
+        /* md-settings */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.3 {
+      background-color: #F4511E; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.3:before {
+        content: "\f05e";
+        /* md-schedule */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.4 {
+      background-color: #F4511E; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.4:before {
+        content: "\f060";
+        /* md-settings */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.7 {
+      background-color: #009688; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.7:before {
+        content: "\f023";
+        /* md-done */ }
+    .stream-entry .icon-bubble.icon-changestate\.project\.8 {
+      background-color: #009688; }
+      .stream-entry .icon-bubble.icon-changestate\.project\.8:before {
+        content: "\f024";
+        /* md-done-all */ }
+    .stream-entry .icon-bubble.icon-changestate\.invoice\.3 {
+      background-color: #009688; }
+      .stream-entry .icon-bubble.icon-changestate\.invoice\.3:before {
+        content: "\f023";
+        /* md-done */ }
+    .stream-entry .icon-bubble.icon-changestate\.invoice\.4, .stream-entry .icon-bubble.icon-changestate\.invoice\.5 {
+      background-color: #F4511E; }
+      .stream-entry .icon-bubble.icon-changestate\.invoice\.4:before, .stream-entry .icon-bubble.icon-changestate\.invoice\.5:before {
+        content: "\f05e";
+        /* md-schedule */ }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   color: #999;

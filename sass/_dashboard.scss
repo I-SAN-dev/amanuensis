@@ -95,6 +95,7 @@ $fastButtonSize: 56px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    /* default action icons */
     &.icon-delete
     {
       &:before
@@ -127,6 +128,106 @@ $fastButtonSize: 56px;
       }
       background-color: $brand-success;
     }
+    /* ToDo icons */
+    &.icon-changestate\.todo\.0
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+      background-color: $brand-warning;
+    }
+    &.icon-changestate\.todo\.1
+    {
+      &:before
+      {
+        content: "\f023"; /* md-done */
+      }
+      background-color: $brand-success;
+    }
+    &.icon-changestate\.todo\.2
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+      background-color: $brand-danger;
+    }
+    /* Project icons */
+    &.icon-changestate\.project\.0
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+    }
+    &.icon-changestate\.project\.1
+    {
+      &:before
+      {
+        content: "\f05e"; /* md-schedule */
+      }
+      background-color: $brand-info;
+    }
+    &.icon-changestate\.project\.2
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+      background-color: $brand-warning;
+    }
+    &.icon-changestate\.project\.3
+    {
+      &:before
+      {
+        content: "\f05e"; /* md-schedule */
+      }
+      background-color: $brand-danger;
+    }
+    &.icon-changestate\.project\.4
+    {
+      &:before
+      {
+        content: "\f060"; /* md-settings */
+      }
+      background-color: $brand-danger;
+    }
+    &.icon-changestate\.project\.7
+    {
+      &:before
+      {
+        content: "\f023"; /* md-done */
+      }
+      background-color: $brand-success;
+    }
+    &.icon-changestate\.project\.8
+    {
+      &:before
+      {
+        content: "\f024"; /* md-done-all */
+      }
+      background-color: $brand-success;
+    }
+    /* invoice icons */
+    &.icon-changestate\.invoice\.3
+    {
+      &:before
+      {
+        content: "\f023"; /* md-done */
+      }
+      background-color: $brand-success;
+    }
+    &.icon-changestate\.invoice\.4,
+    &.icon-changestate\.invoice\.5
+    {
+      &:before
+      {
+        content: "\f05e"; /* md-schedule */
+      }
+      background-color: $brand-danger;
+    }
+
 
   }
 
