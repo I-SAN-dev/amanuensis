@@ -81,7 +81,12 @@
                         <div class="col-beneath-fixedwith-46">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h3>
+                                    <h3 data-ng-if="!entry.user.name">
+                                        {{ 'stream.'+entry.type | translate }}
+                                        <a data-ng-click="dashboard.goto(entry.type, entry.id)">{{entry.title}}</a>
+                                        {{ 'stream.'+entry.action | translate}}
+                                    </h3>
+                                    <h3 data-ng-if="entry.user.name">
                                         <a href="mailto:{{entry.user.email}}">{{entry.user.name}}</a> {{ 'stream.'+entry.action | translate}} {{ 'stream.'+entry.type | translate }}
                                         <a data-ng-if="dashboard.linkable(entry)" data-ng-click="dashboard.goto(entry.type, entry.id)">{{entry.title}}</a>
                                         <span data-ng-if="!dashboard.linkable(entry)">{{entry.title}}</span>

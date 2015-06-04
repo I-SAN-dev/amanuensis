@@ -324,7 +324,32 @@
     "acceptance":"das Abnahmeformular",
     "invoice":"die Rechnung",
     "reminder":"die Zahlungserinnerung",
-    "nothing":"In den letzten 180 Tagen ist nichts passiert!"
+    "nothing":"In den letzten 180 Tagen ist nichts passiert!",
+    "changestate":
+    {
+      "todo":
+      {
+        "0": "hat offene Aufgaben",
+        "1": "ist abgeschlossen",
+        "2": "hat überfällige Aufgaben"
+      },
+      "invoice":
+      {
+        "3": "wurde bezahlt",
+        "4": "ist überfällig",
+        "5": "ist überfällig und es wurde eine Zahlungserinnerung generiert"
+      },
+      "project":
+      {
+        "0": "ist angelegt",
+        "1": "wartet auf den Kunden",
+        "2": "hat offene Aufgaben",
+        "3": "wartet überfällig auf den Kunden",
+        "4": "hat überfällige Aufgaben",
+        "7": "ist abgeschlossen",
+        "8": "wurde archiviert"
+      }
+    }
   },
 
   "user":

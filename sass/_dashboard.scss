@@ -69,6 +69,11 @@ $fastButtonSize: 56px;
     margin: 0 0 5px 0;
     line-height: 1.5;
     font-size: $font-size-h4;
+
+    &:first-letter
+    {
+      text-transform: uppercase;
+    }
   }
 
   .icon-bubble

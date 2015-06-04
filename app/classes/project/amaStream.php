@@ -54,8 +54,9 @@ final class AmaStream {
      * @param $action - the action that was done, e.g create, send, archive, delete
      * @param $type - what was done, e.g. project, client, invoice
      * @param $id - id of the thing
+     * @param $nouser - if it is an event that shall not be connected with a user - defaults to false
      */
-    public function addItem($action, $type, $id)
+    public function addItem($action, $type, $id, $nouser = false)
     {
         $dbal = DBAL::getInstance();
 
@@ -66,8 +67,16 @@ final class AmaStream {
         );
 
         /* get user */
-        $user = Authenticator::getUser();
-        $data['user_id'] = $user->id;
+        if($nouser)
+        {
+            $data['user_id'] = NULL;
+        }
+        else
+        {
+            $user = Authenticator::getUser();
+            $data['user_id'] = $user->id;
+        }
+
 
         /* client */
         if($type == 'client')

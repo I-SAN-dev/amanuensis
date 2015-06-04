@@ -339,7 +339,7 @@ foreach($projectids as $projectid)
 $stream = AmaStream::getInstance();
 foreach($events as $event)
 {
-    $stream->addItem('changestate.'.$event['type'].'.'.$event['state'], $event['type'], $event['id']);
+    $stream->addItem('changestate.'.$event['type'].'.'.$event['state'], $event['type'], $event['id'], true);
 }
 
 /*
@@ -361,7 +361,7 @@ es gibt Neuigkeiten von <a href="'.$conf->get['baseurl'].'">amanu</a>!<br/>
     {
         $html = $html.'
             <li>
-                '.getLink($event).' hat jetzt den Status '.getState($event['type'], $event['state']).'
+                '.getLink($event).' hat jetzt den Status "'.getState($event['type'], $event['state']).'"
             </li>
         ';
     }
