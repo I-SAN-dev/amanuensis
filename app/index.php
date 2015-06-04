@@ -55,8 +55,8 @@ ob_start();
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="/manifest.json">
-    <meta name="apple-mobile-web-app-title" content="Amanu">
-    <meta name="application-name" content="Amanu">
+    <meta name="apple-mobile-web-app-title" content="amanu">
+    <meta name="application-name" content="amanu">
     <meta name="msapplication-TileColor" content="#404877">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <meta name="theme-color" content="#404877">

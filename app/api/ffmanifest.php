@@ -29,7 +29,7 @@ ob_start();
 $conf = Config::getInstance();
 
 $manifest = array(
-    "name" => "Amanu",
+    "name" => "amanu",
     "description" => $conf->get['company'],
     "launch_path" => "/",
     "icons" => array(
