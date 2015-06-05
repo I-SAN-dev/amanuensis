@@ -1,33 +1,11 @@
 app.constant('modules', {
     topBar: {
         content: {
-            title: 'Amanu'
+            title: 'amanu'
         },
         actions: {},
         'app.clients.detail': {
-            title: 'clients.clients',
-            actions: [
-                {
-                    name: 'clients.actions.new',
-                    sref: 'app.clientCreation',
-                    icon: 'md md-person-add'
-                },
-                {
-                    name: 'clients.actions.categories',
-                    sref: 'app.clientCategories',
-                    icon: 'md md-link'
-                }
-            ]
-        },
-        'app.projects': {
-            title: 'projects.projects',
-            actions: [
-                {
-                    name: 'projects.actions.archive',
-                    sref: 'app.projectArchive',
-                    icon: 'md md-archive'
-                }
-            ]
+            title: 'clients.clients'
         },
         'app.projectArchive': {
             title: 'projects.actions.archive'
@@ -44,15 +22,36 @@ app.constant('modules', {
         'app.settings': {
             title: 'settings.settings'
         },
-        'app.itemPresets': {
-            title: 'itemPresets.itemPresets',
-            actions: [
-                {
-                    name: 'itemPresets.actions.new',
-                    sref: 'app.itemPresetCreation',
-                    icon: 'md md-add'
-                }
-            ]
+        'app.itemPresets.detail': {
+            title: 'itemPresets.itemPresets'
+        },
+        'app.projectDetail':
+        {
+            title: 'projects.project'
+        },
+        'app.offerDetail':
+        {
+            title: 'offer.name'
+        },
+        'app.contractDetail':
+        {
+            title: 'contract.name'
+        },
+        'app.todoDetail':
+        {
+            title: 'todo.name'
+        },
+        'app.acceptanceDetail':
+        {
+            title: 'acceptance.name'
+        },
+        'app.invoiceDetail':
+        {
+            title: 'invoice.name'
+        },
+        'app.reminderDetail':
+        {
+            title: 'reminder.name'
         }
     },
     // Navs

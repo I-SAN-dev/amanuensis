@@ -7,13 +7,6 @@
         <div class="apptitle">
             <h1>{{module.content.title|translate}}</h1>
             <div data-ama-menu data-menuname="'mainNav'"></div>
-            <ul id="actionMenu">
-                <li class="ng-trans ng-trans-fade" data-ng-repeat="action in module.content.actions">
-                    <button class="btn ng-trans ng-trans-fade" data-ng-class="action.class"  data-ui-sref="{{action.sref}}">
-                        <i data-ng-if="action.icon" class="{{action.icon}}"></i> {{action.name|translate}}
-                    </button>
-                </li>
-            </ul>
         </div>
     </div>
     <div class="col-xs-4">
