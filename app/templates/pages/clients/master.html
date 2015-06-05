@@ -25,7 +25,7 @@
              data-list="masterList"
              data-active="MasterDetailCtrl.detail"
              data-filter-text="MasterDetailCtrl.filterText">
-            <div class="position-relative" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText | orderBy:'companyname'">
+            <div class="position-relative" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText">
                 <a class="list-group-item"
                    data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
                    data-ng-click="setDetail(client)">

@@ -10,7 +10,8 @@ app.controller('ClientsCtrl',
         '$stateParams',
         'DeleteService',
         'MasterDetailService',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService) {
+        '$filter',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, $filter) {
             this.clientList = LocalStorage.getData('clients');
             MasterDetailService.setMaster(this);
 
@@ -31,7 +32,7 @@ app.controller('ClientsCtrl',
                             +(data[i].contact_lastname || '');
                     }
                 }
-                self.clientList = data;
+                self.clientList = $filter('orderBy')(data,'companyname');
                 LocalStorage.setData('clients', self.clientList);
             };
 
