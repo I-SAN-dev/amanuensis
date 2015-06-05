@@ -7,10 +7,15 @@ app.controller('TodoDetailCtrl', [
         var self = this;
         MasterDetailService.setMaster(this);
         var id = $stateParams.id;
-        this.todo = LocalStorage.getData('todo/'+ id);
-        ApiAbstractionLayer('GET', {name:'todo',params: {id:id}}).then(function (data) {
-            self.todo = data;
-        });
+
+        var getTodo = function () {
+            self.todo = LocalStorage.getData('todo/'+ id);
+            ApiAbstractionLayer('GET', {name:'todo',params: {id:id}}).then(function (data) {
+                self.todo = data;
+                LocalStorage.setData('todo/'+id, data);
+            });
+        };
+        getTodo();
 
 
         this.nextStep = function()
@@ -30,5 +35,9 @@ app.controller('TodoDetailCtrl', [
                 };
             }
         };
+
+        this.todoItemChanged = function () {
+            getTodo();
+        }
     }
 ]);

@@ -27,7 +27,8 @@ app.directive('inPlaceEdit',
                     apiId: '=',
                     deletable: '=ipeDeletable',
                     deletableItem: '=',
-                    outputVal: '=outputValue'
+                    outputVal: '=outputValue',
+                    callback: '&ipeCallback'
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
                 controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
@@ -108,6 +109,8 @@ app.directive('inPlaceEdit',
                             if($scope.type == 'price'){
                                 MasterDetailService.notifyMaster('priceChanged')
                             }
+
+                            $scope.callback();
 
                         });
                     };
