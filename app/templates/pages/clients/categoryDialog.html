@@ -1,8 +1,8 @@
 <div class="modal show ng-trans ng-trans-fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="btn-group btn-group-sm pull-right" data-ng-init="categories.showPage = 1">
+                <div class="btn-group btn-group-sm pull-right">
                     <button class="btn btn-link ng-binding" data-ng-class="{active: categories.showPage==1}" data-ng-click="categories.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.manageCategories' | translate}}</button>
                     <button class="btn btn-link ng-binding" data-ng-class="{active: categories.showPage==2}" data-ng-click="categories.showPage = 2"><i class="md md-lg md-comment"></i> {{'clients.newCategory' | translate}}</button>
                 </div>
@@ -10,37 +10,62 @@
             <div class="panel-body nopadding nooverflow">
                 <div class="slideanim2 fullheight" data-ng-class="{panel2: categories.showPage==2}">
 
-                    <div class="slideanim-item fullheight scroll-y">
+                    <div class="slideanim-item fullheight">
 
-                        <div class="ipe buttons-above-input bai-1">
-                            <div data-material-input
-                                 data-ng-model="categories.filterText"
-                                 data-input-id="filter"
-                                 data-input-label="Filter"
-                                 data-input-type="text">
+                            <div class="ipe buttons-above-input bai-1 panel">
+                                <div data-material-input
+                                     data-ng-model="categories.filterText"
+                                     data-input-id="filter"
+                                     data-input-label="Filter"
+                                     data-input-type="text">
+                                </div>
+                                <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[categories.filterText == '']">
+                                    <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
+                                        <i class="md md-search"></i>
+                                    </button>
+                                    <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
+                                             data-ng-click="categories.filterText = ''">
+                                        <i class="md md-close"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="bai-buttons varcheck" data-ng-class="{true: 'var-is-true', false: 'var-is-false'}[categories.filterText == '']">
-                                <button  class="varcheck-if-true btn btn-link btn-primary btn-icon-round" disabled>
-                                    <i class="md md-search"></i>
-                                </button>
-                                <button  class="varcheck-if-false btn btn-link btn-primary btn-icon-round"
-                                         data-ng-click="categories.filterText = ''">
-                                    <i class="md md-close"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="list-group" >
-                            <div class="list-group-item"
-                                 data-ng-repeat="category in categories.allCategories | filter: categories.filterText"
-                                 data-ng-class="{active:category.selected}"
-                                 data-ng-click="categories.toggleSelectCategory(category)">
-                                <h2>{{category.name}}</h2>
-                                <p>{{category.description}}</p>
-                            </div>
-                        </div>
+                        <div class="fixedheight-250 scroll-y panel">
+                                    <div class="listinfo-row"
+                                         data-ng-repeat="category in categories.allCategories | filter: categories.filterText"
+                                         data-ng-class="{active:category.selected}">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-1">
+                                            <div class="checkbox nomargin" data-ng-click="categories.toggleSelectCategory(category)">
+                                                <input type="checkbox"
+                                                        data-ng-checked="{{category.selected || false}}"
+                                                        class="switch">
+                                                <span class="switch-indicator"></span>
+                                            </div>
 
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" data-ng-click="categories.accept()">{{'global.ok'|translate}}</button>
+                                            </div>
+                                            <div class="col-sm-7 col-md-9">
+                                                <strong>{{category.name}}</strong><br />
+                                                {{category.description}}
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <a class="listinfo-action listinfo-action-icon listinfo-action-danger" data-ng-if="!category.deleteMode" data-ng-click="category.deleteMode = true" title="{{'clients.deleteCategory' | translate}}">
+                                                    <i class="md md-delete"></i>
+                                                </a>
+                                                <p data-ng-if="category.deleteMode">
+                                                    {{'global.sure'|translate}}<br />
+                                                    <a class="btn btn-link btn-success btn-icon-round" data-ng-click="categories.deleteCategory(category.id)"><i class="md md-check"></i></a>
+                                                    <a class="btn btn-link btn-danger btn-icon-round" data-ng-click="category.deleteMode = false"><i class="md md-close"></i></a>
+                                                </p>
+                                            </div>
+
+
+
+                                            </div>
+                                    </div>
+
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-success" data-ng-click="categories.accept()">{{'global.ok'|translate}}</button>
                             <button class="btn btn-info" data-ng-click="categories.close()">{{'global.cancel'|translate}}</button>
                         </div>
 

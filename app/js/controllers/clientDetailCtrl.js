@@ -258,6 +258,13 @@ app.controller('ClientDetailCtrl',
                         templateUrl: 'templates/pages/clients/categoryDialog.html',
                         controller: function(){
                             var cats = this;
+                            if(allCategories.length > 0){
+                                cats.showPage = 1;
+                            } else {
+                                cats.showPage = 2;
+                            }
+
+                            this.filterText = '';
                             this.allCategories = allCategories;
                             var resetNewCategory = function () {
                                 return {
@@ -310,12 +317,40 @@ app.controller('ClientDetailCtrl',
                                 }
                             };
 
+                            var deleteFirstAppearance = function (array, id) {
+                                for(var i=0; i<array.length; i++){
+                                    if(array[i].id == id){
+                                        array.splice(i,1);
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
                             /**
                              * Deletes a client category by given id
                              * @param id - the id of the category to be deleted
                              */
                             this.deleteCategory = function (id) {
-                                // TODO
+                                // we do not use the deleteService as we are already inside a modal
+                                ApiAbstractionLayer('DELETE', {name: 'client_categories', data: {id:id}}, true).then(function () {
+                                    for(var i = 0; i < allCategories.length; i++){
+                                        if(allCategories[i].id == id){
+                                            var inBackup = false;
+                                            if(allCategories[i].selected){
+                                                inBackup = deleteFirstAppearance(selectedCategories, id);
+                                                delete self.client.categories[id];
+                                            } else {
+                                                inBackup = deleteFirstAppearance(unSelectedCategories, id);
+                                            }
+                                            if(inBackup){
+                                                deleteFirstAppearance(categoriesBackup, id);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    allCategories.splice(i,1);
+                                    LocalStorage.setData('clientCategories',allCategories);
+                                });
                             };
 
 

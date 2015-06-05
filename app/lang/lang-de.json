@@ -13,6 +13,7 @@
     "ok": "OK",
     "cancel": "Abbrechen",
     "delete": "Löschen",
+    "sure": "Sicher?",
     "greeting": "Hallo",
     "youhavexprojects": "du hast {{length}} offene Projekte!",
     "youhaveoneproject": "du hast ein offenes Projekt!",
