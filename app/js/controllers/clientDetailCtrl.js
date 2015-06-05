@@ -222,14 +222,16 @@ app.controller('ClientDetailCtrl',
                 };
                 ApiAbstractionLayer('POST', apiObject).then(function (data) {
                     LocalStorage.setData('project/'+data.id, data);
-                    var clientProjects = LocalStorage.getData('client/'+self.client.id+'/projects');
+                    var clientProjects = LocalStorage.getData('client/'+self.client.id+'/projects') || [];
                     clientProjects.push(data);
                     LocalStorage.setData('client/'+self.client.id+'/projects', clientProjects);
                     self.newProject = null;
                     self.projects = clientProjects;
-                    var projectList = LocalStorage.getData('projects');
-                    projectList.push(data);
-                    LocalStorage.setData('projects', projectList);
+                    var projectList = LocalStorage.getData('currentProjects');
+                    if(projectList){
+                        projectList.push(data);
+                        LocalStorage.setData('projects', projectList);
+                    }
                     self.showPage = 2;
                 });
             };
