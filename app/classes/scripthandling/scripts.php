@@ -29,6 +29,7 @@ class Scripts
         //"lib/modules/angular-sanitize.min.js",
         "lib/modules/textAngular-sanitize.js",
         "lib/modules/angular-pickadate.min.js",
+        "lib/modules/ng-sortable.min.js",
         "lib/sha256.js",
         "lib/summernote.min.js",
         "js/app.js", // has to be loaded before the other scripts

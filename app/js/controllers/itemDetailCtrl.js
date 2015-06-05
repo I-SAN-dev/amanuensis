@@ -3,8 +3,11 @@ app.controller('ItemDetailCtrl', [
     'LocalStorage',
     'MasterDetailService',
     'DeleteService',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService) {
+    'PanelService',
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
         MasterDetailService.setDetail(this);
+
+        this.showPage = PanelService.getPanel('items');
 
         var self = this;
 
