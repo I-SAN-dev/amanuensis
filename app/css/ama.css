@@ -10586,7 +10586,6 @@ iframe {
   height: calc(100% - 96px);
   min-height: calc(100% - 96px);
   margin-top: 80px;
-  overflow: hidden;
   position: relative;
   margin-left: 15px;
   width: calc(100% - 2*15px); }
@@ -10811,6 +10810,21 @@ h1, h2 {
     .bg-primary a:hover, .bg-primary a:active, .bg-primary a:focus {
       text-decoration: underline;
       color: #EEEEEE; }
+
+.btn.btn-fab {
+  display: block;
+  padding: 0;
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 7.5px 10px rgba(0, 0, 0, 0.165), 0 7.5px 38px rgba(0, 0, 0, 0.225);
+  border-radius: 50% !important;
+  z-index: 99; }
+  .btn.btn-fab i {
+    font-size: 24px;
+    line-height: 56px; }
 
 /* Shadow classes */
 .shadow-0 {
@@ -11571,6 +11585,11 @@ textarea {
 .master-todo .list-group-item {
   min-height: 70px; }
 
+.add-item {
+  position: absolute;
+  left: 30px;
+  top: -86px; }
+
 .tile {
   display: block;
   position: relative;
@@ -12169,18 +12188,28 @@ strong.total {
 [data-ui-view].ng-enter {
   opacity: 0;
   transform: scale3d(0.97, 0.97, 1); }
+  [data-ui-view].ng-enter .add-item {
+    transition: top 0.4s ease-out;
+    top: 20px; }
 
 [data-ui-view].ng-enter-active {
   opacity: 1;
   transform: scale3d(1, 1, 1); }
+  [data-ui-view].ng-enter-active .add-item {
+    top: -86px; }
 
 [data-ui-view].ng-leave {
   opacity: 1;
   transform: scale3d(1, 1, 1); }
+  [data-ui-view].ng-leave .add-item {
+    transition: top 0.2s ease-in;
+    top: -86px; }
 
 [data-ui-view].ng-leave-active {
   opacity: 0;
   transform: scale3d(1.03, 1.03, 1.03); }
+  [data-ui-view].ng-leave-active .add-item {
+    top: 20px; }
 
 .modal {
   background-color: rgba(255, 255, 255, 0.7); }
