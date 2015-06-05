@@ -118,7 +118,8 @@
     {
       "new":"Neues Projekt erstellen",
       "delete":"Projekt löschen",
-      "archive": "Projektarchiv"
+      "archive": "Projektarchiv",
+      "archiveProject": "Projekt archivieren"
     },
     "states": {
       "created": "Projekt erstellt",
