@@ -31,7 +31,7 @@
                             </div>
                             {{project.project.state|amaStates:'project'|translate}}
                             <button data-ng-if="project.emptyProject" class="btn btn-danger btn-link btn-icon-round" data-ng-click="project.deleteProject()" title="{{'projects.actions.delete'|translate}}"><i class="md md-delete"></i></button>
-                            <button class="btn btn-warning btn-link btn-icon-round" data-ng-click="project.changeState(8, project.wasArchived)" title="{{'projects.actions.archiveProject'|translate}}"><i class="md md-archive"></i></button>
+                            <button data-ng-if="!project.emptyProject" class="btn btn-warning btn-link btn-icon-round" data-ng-click="project.changeState(8, project.wasArchived)" title="{{'projects.actions.archiveProject'|translate}}"><i class="md md-archive"></i></button>
 
                         </div>
                     </div>
