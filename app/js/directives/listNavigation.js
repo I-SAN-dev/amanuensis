@@ -18,6 +18,14 @@ app.directive('listNavigation',[
             },
             link:function(scope, elem) {
 
+                scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                    if(!toParams.hasDetails){
+                        $document.unbind('keyup');
+                        $document.unbind('keydown');
+                    }
+                    console.log(event, toState, toParams, fromState, fromParams);
+                });
+
                 var scrollArea = angular.element(elem);
 
                 var callback = scope.callback;
