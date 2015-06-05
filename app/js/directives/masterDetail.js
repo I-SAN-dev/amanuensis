@@ -69,6 +69,18 @@ app.directive('masterDetail', [function(){
                 MasterDetailService.setController($scope);
 
                 this.notifyMaster = MasterDetailService.notifyMaster;
+
+                this.sort = {
+                    //accept: function (sourceItemHandleScope, destSortableScope) {return boolean}//override to determine drag is allowed or not. default is true.
+                    itemMoved: function (event) {
+                        console.log('itemMoved');
+                    },
+                    orderChanged: function(event) {
+                        console.log('orderChanged');
+                    },
+                    containerPositioning: 'relative'
+                    //containment: '#board'//optional param.
+                };
             }],
         controllerAs: 'MasterDetailCtrl'
     }

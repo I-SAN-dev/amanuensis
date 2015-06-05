@@ -10419,68 +10419,6 @@ button.close {
       opacity: 0.7;
       filter: alpha(opacity=70); }
 
-/* Animation mixins */
-/* Animation mixins end */
-.colorbar-container {
-  left: 70px;
-  right: 0;
-  height: 4px;
-  position: absolute;
-  z-index: 9999;
-  top: 0;
-  background-color: transparent;
-  pointer-events: none;
-  overflow: hidden; }
-
-.colorbar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 33%;
-  transition: 0.5s width, 0.5s background-color;
-  background-color: #FFB300;
-  -webkit-animation: colorbar-animation 2.5s;
-  -moz-animation: colorbar-animation 2.5s;
-  -o-animation: colorbar-animation 2.5s;
-  animation: colorbar-animation 2.5s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
-  -o-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
-  -o-animation-timing-function: linear;
-  animation-timing-function: linear; }
-
-.notloading .colorbar {
-  width: 100%;
-  background-color: transparent;
-  -webkit-animation: none;
-  -moz-animation: none;
-  -o-animation: none;
-  animation: none; }
-
-@-webkit-keyframes colorbar-animation {
-  0% {
-    left: -33%; }
-  100% {
-    left: 100%; } }
-@-moz-keyframes colorbar-animation {
-  0% {
-    left: -33%; }
-  100% {
-    left: 100%; } }
-@-o-keyframes colorbar-animation {
-  0% {
-    left: -33%; }
-  100% {
-    left: 100%; } }
-@keyframes colorbar-animation {
-  0% {
-    left: -33%; }
-  100% {
-    left: 100%; } }
 .pickadate {
   font-family: 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif; }
   .pickadate a {
@@ -10562,6 +10500,97 @@ button.close {
   padding: 0 5px 5px 5px;
   z-index: 1000; }
 
+/* ************************************** */
+/* Mandatory CSS required for ng-sortable */
+/* ************************************** */
+.as-sortable-item, .as-sortable-placeholder {
+  display: block; }
+
+.as-sortable-item {
+  -ms-touch-action: none;
+  touch-action: none; }
+
+.as-sortable-item-handle {
+  cursor: move; }
+
+.as-sortable-drag {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999; }
+
+.as-sortable-hidden {
+  display: none !important; }
+
+.as-sortable-un-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* Animation mixins */
+/* Animation mixins end */
+.colorbar-container {
+  left: 70px;
+  right: 0;
+  height: 4px;
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  background-color: transparent;
+  pointer-events: none;
+  overflow: hidden; }
+
+.colorbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 33%;
+  transition: 0.5s width, 0.5s background-color;
+  background-color: #FFB300;
+  -webkit-animation: colorbar-animation 2.5s;
+  -moz-animation: colorbar-animation 2.5s;
+  -o-animation: colorbar-animation 2.5s;
+  animation: colorbar-animation 2.5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear; }
+
+.notloading .colorbar {
+  width: 100%;
+  background-color: transparent;
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none; }
+
+@-webkit-keyframes colorbar-animation {
+  0% {
+    left: -33%; }
+  100% {
+    left: 100%; } }
+@-moz-keyframes colorbar-animation {
+  0% {
+    left: -33%; }
+  100% {
+    left: 100%; } }
+@-o-keyframes colorbar-animation {
+  0% {
+    left: -33%; }
+  100% {
+    left: 100%; } }
+@keyframes colorbar-animation {
+  0% {
+    left: -33%; }
+  100% {
+    left: 100%; } }
 /**
  * Source: https://css-tricks.com/snippets/sass/material-shadows-mixin/
  */

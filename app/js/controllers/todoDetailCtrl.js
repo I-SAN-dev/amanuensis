@@ -2,10 +2,12 @@ app.controller('TodoDetailCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'MasterDetailService',
+    'PanelService',
     '$stateParams',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, $stateParams) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
+
         var id = $stateParams.id;
 
         var getTodo = function () {

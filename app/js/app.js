@@ -1,7 +1,7 @@
 /**
  * Main application. Handles dependencies and routing.
  */
-var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate']);
+var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate','ui.sortable']);
 
 app.config( [
     '$compileProvider',
