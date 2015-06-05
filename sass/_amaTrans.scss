@@ -82,16 +82,38 @@
   opacity: 0;
   transform:scale3d(0.97, 0.97, 1);
 
+  .add-item
+  {
+    transition: top 0.4s ease-out;
+    top: 20px;
+  }
+
 }
 [data-ui-view].ng-enter-active {
   opacity: 1;
   transform:scale3d(1, 1, 1);
+
+  .add-item
+  {
+    top: -86px;
+  }
 }
 [data-ui-view].ng-leave {
   opacity: 1;
   transform:scale3d(1, 1, 1);
+
+  .add-item
+  {
+    transition: top 0.2s ease-in;
+    top: -86px;
+  }
 }
 [data-ui-view].ng-leave-active {
   opacity: 0;
   transform:scale3d(1.03, 1.03, 1.03);
+
+  .add-item
+  {
+    top: 20px;
+  }
 }

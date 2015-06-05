@@ -26,7 +26,6 @@ iframe {
   height: calc(100% - #{$navbar-height + 2*16px});
   min-height: calc(100% - #{$navbar-height + 2*16px});
   margin-top: $navbar-height + 16px;
-  overflow: hidden;
   position: relative;
   margin-left: 15px;
   width: calc(100% - 2*15px);
@@ -385,6 +384,27 @@ $panel-heading-height: 64px;
       text-decoration: underline;
       color: $gray-lighter;
     }
+  }
+}
+
+
+.btn.btn-fab
+{
+  display: block;
+  padding: 0;
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  position: relative;
+  @include card(5);
+  border-radius: 50% !important;
+  z-index: 99;
+
+  i
+  {
+    font-size: 24px;
+    line-height: 56px;
   }
 }
 
