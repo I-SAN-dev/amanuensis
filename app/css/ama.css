@@ -10878,6 +10878,20 @@ h1, h2 {
 .shadow-5 {
   box-shadow: 0 7.5px 10px rgba(0, 0, 0, 0.165), 0 7.5px 38px rgba(0, 0, 0, 0.225); }
 
+/* sometimes we need an 0.5 and 11.5 width class */
+@media (min-width: 1160px) {
+  .col-md-05,
+  .col-md-115 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+
+  .col-md-05 {
+    width: 4.1515%; }
+
+  .col-md-115 {
+    width: 95.8182%; } }
 .fastbutton {
   display: block;
   max-height: 20%;
@@ -11578,6 +11592,11 @@ textarea {
 
 .detail-block {
   margin-bottom: 30px; }
+  .detail-block i.md-add-circle-outline {
+    position: relative;
+    top: 2px; }
+  .detail-block h3 {
+    margin-top: 10px; }
   .detail-block .detail-value {
     padding-top: 10px;
     padding-bottom: 10px; }

@@ -175,6 +175,16 @@ $detail-toolbar-height: 64px;
 {
   margin-bottom: 30px;
 
+  i.md-add-circle-outline
+  {
+    position: relative;
+    top: 2px;
+  }
+  h3
+  {
+    margin-top: 10px;
+  }
+
   .detail-value
   {
     padding-top: 10px;

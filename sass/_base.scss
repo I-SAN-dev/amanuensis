@@ -434,3 +434,21 @@ $panel-heading-height: 64px;
 {
   @include card(5);
 }
+
+/* sometimes we need an 0.5 and 11.5 width class */
+@media (min-width: $screen-md)
+{
+  .col-md-05,
+  .col-md-115 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .col-md-05 {
+    width: 4.1515%;
+  }
+  .col-md-115 {
+    width: 91.6667% + 4.1515%;
+  }
+}
