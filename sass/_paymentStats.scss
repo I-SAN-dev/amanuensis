@@ -115,7 +115,7 @@ $ps-total-size: 140px;
       border-top: 1px solid $gray-lighter;
       padding: 15px;
       min-height: 80px;
-      width: 130px;
+      width: 160px;
 
       span
       {
@@ -140,6 +140,8 @@ $ps-total-size: 140px;
 
     .ps-overdue
     {
+      padding-right: 0;
+
       .price
       {
         color: $brand-danger;
@@ -167,6 +169,8 @@ $ps-total-size: 140px;
 
     .ps-dayx
     {
+      padding-left: 0;
+
       .price
       {
         color: $gray-dark;

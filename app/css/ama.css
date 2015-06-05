@@ -11954,7 +11954,7 @@ strong.total {
     border-top: 1px solid #EEEEEE;
     padding: 15px;
     min-height: 80px;
-    width: 130px; }
+    width: 160px; }
     .payment-stats .ps-overdue-container .ps-overdue span,
     .payment-stats .ps-overdue-container .ps-dayx span,
     .payment-stats .ps-dayx-container .ps-overdue span,
@@ -11985,24 +11985,30 @@ strong.total {
 .payment-stats .ps-overdue-container,
 .todo-stats .ps-overdue-container {
   border-left: 1px solid #EEEEEE; }
-  .payment-stats .ps-overdue-container .ps-overdue .price,
-  .todo-stats .ps-overdue-container .ps-overdue .price {
-    color: #F4511E; }
-  .payment-stats .ps-overdue-container .ps-overdue.allgood .price,
-  .todo-stats .ps-overdue-container .ps-overdue.allgood .price {
-    color: #BDBDBD; }
-  .payment-stats .ps-overdue-container .ps-overdue.default .price,
-  .todo-stats .ps-overdue-container .ps-overdue.default .price {
-    color: #757575; }
+  .payment-stats .ps-overdue-container .ps-overdue,
+  .todo-stats .ps-overdue-container .ps-overdue {
+    padding-right: 0; }
+    .payment-stats .ps-overdue-container .ps-overdue .price,
+    .todo-stats .ps-overdue-container .ps-overdue .price {
+      color: #F4511E; }
+    .payment-stats .ps-overdue-container .ps-overdue.allgood .price,
+    .todo-stats .ps-overdue-container .ps-overdue.allgood .price {
+      color: #BDBDBD; }
+    .payment-stats .ps-overdue-container .ps-overdue.default .price,
+    .todo-stats .ps-overdue-container .ps-overdue.default .price {
+      color: #757575; }
 .payment-stats .ps-dayx-container,
 .todo-stats .ps-dayx-container {
   border-right: 1px solid #EEEEEE; }
-  .payment-stats .ps-dayx-container .ps-dayx .price,
-  .todo-stats .ps-dayx-container .ps-dayx .price {
-    color: #757575; }
-  .payment-stats .ps-dayx-container .ps-dayx.nothing .price,
-  .todo-stats .ps-dayx-container .ps-dayx.nothing .price {
-    color: #BDBDBD; }
+  .payment-stats .ps-dayx-container .ps-dayx,
+  .todo-stats .ps-dayx-container .ps-dayx {
+    padding-left: 0; }
+    .payment-stats .ps-dayx-container .ps-dayx .price,
+    .todo-stats .ps-dayx-container .ps-dayx .price {
+      color: #757575; }
+    .payment-stats .ps-dayx-container .ps-dayx.nothing .price,
+    .todo-stats .ps-dayx-container .ps-dayx.nothing .price {
+      color: #BDBDBD; }
 .payment-stats .ps-total-container-outer,
 .todo-stats .ps-total-container-outer {
   width: 30%;
