@@ -130,7 +130,6 @@ app.controller('ProjectDetailCtrl',
                 {
                     var duedate = date.replace(/\s/g, "T");
                     var result = Date.parse(duedate) < Date.now();
-                    console.log(date, duedate, Date.now(), result);
                     return result;
                 }
                 else
