@@ -1,4 +1,6 @@
 /**
+ * @class ama.directives.materialInput
+ *
  * The materialInput directive
  * Shows a form field and handles inputs for certain input types
  *

@@ -1,6 +1,12 @@
 /**
+ * @class ama.directives.clientBox
+ *
  * The clientBox directive
- * Shows client data
+ * Shows a client's data (address etc.)
+ *
+ * ## Usage
+ *     <div client-box="clientToShow"></div>
+ *
  *
  * @author Christian Baur
  */

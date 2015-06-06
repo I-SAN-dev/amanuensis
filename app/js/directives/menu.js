@@ -1,6 +1,8 @@
 /**
- * Controller for menus (amaMenu directive) and navigation items
- * builds a navigation list from the sites and modules constants
+ * @class ama.controllers.NavCtrl
+ *
+ * Controller for menus ({@link ama.directives.amaMenu amaMenu directive}) and navigation items
+ * builds a navigation list from the {@link ama.constants.sites sites} and {@link ama.constants.modules modules} constants
  * and handles clicks on menu items
  *
  * @author Christian Baur
@@ -43,9 +45,13 @@ app.controller('NavCtrl',[
                     value.active = value.name == stateName;
                 });
             };
-            // Handle clicks on menu items
-            // value.active will set an active class on the menu item
+
+            /**
+             * Handles clicks on menu items
+             * @param {Object} item The item that was clicked
+             */
             this.goTo = function(item){
+                // value.active will set an active class on the menu item
                 setActiveClass(item.name);
 
                 var menuItem = item.menus[name];
@@ -69,7 +75,10 @@ app.controller('NavCtrl',[
                 })
             });
 
-            // read additional classes for the menu list from the modules constant
+            /**
+             * additional classes for the menu list from the modules constant
+             * @type {string}
+             */
             this.additionalClasses = modules[name].additionalClasses || '';
 
             setActiveClass($state.current.name);
@@ -79,8 +88,14 @@ app.controller('NavCtrl',[
 );
 
 /**
+ * @class ama.directives.amaMenu
+ *
  * Directive for menus
  * Takes a menuname which will be used to identify the menu in the controller
+ *
+ * ## Usage
+ *
+ *     <div ama-menu menuname="referenceOfThisMenuInSitesConstant"></div>
  */
 app.directive('amaMenu', [function(){
     return {

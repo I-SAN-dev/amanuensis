@@ -1,8 +1,11 @@
 /**
- * The inPlaceEdit directive
+ * @class ama.directives.inPlaceEdit
+ *
+ * # The inPlaceEdit directive
  * Shows the value of a specified property or a placeholder if the property is not defined.
+ *
  * When clicked on that element, it changes to a input field of a specified type and typically some buttons aside of them.
- * The directive also handles attempts to save/cancel the edit or delete the property
+ * The directive also handles attempts to save/cancel the edit or delete the property.
  *
  * @author Christian Baur
  */
@@ -34,7 +37,10 @@ app.directive('inPlaceEdit',
                 controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
                     var self = this;
 
-                    // initially, the edit mode is turned off
+                    /**
+                     * @type {bool}
+                     * Indicates if the directive is in editMode. Initiallyset to false.
+                     */
                     this.editMode = false;
 
                     var backup = null;
@@ -155,7 +161,10 @@ app.directive('inPlaceEdit',
                         self.editMode = false;
                     };
 
-                    // define buttons to show aside of the input field
+                    /**
+                     * define buttons to show aside of the input field
+                     * @type {{wrapper: boolean, wrapperClass: string, iconOnly: boolean, save: {class: string, iconClass: string, save: Function}, cancel: {class: string, iconClass: string, cancel: Function}, delete: {isSet: string, class: string, iconClass: string, delete: Function}}}
+                     */
                     this.buttons = {
                         wrapper: true,
                         wrapperClass: 'bai-buttons',

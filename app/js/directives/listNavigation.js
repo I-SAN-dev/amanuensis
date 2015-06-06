@@ -1,6 +1,15 @@
 /**
+ * @class ama.directives.listNavigation
+ *
  * The listNavigation directive
  * Shows a list and handles keyboard inputs to navigate through that list
+ *
+ * ## Usage
+ *    <div list-navigation="callbackFunction"
+ *         list="listToNavigateThrough"
+ *         active="activeListItem (optional)"
+ *         filter-text="filterForTheList (optional)"></div>
+ *
  *
  * @author Christian Baur
  */

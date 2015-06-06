@@ -1,10 +1,14 @@
 /**
  * @class ama.directives.fileUpload
  *
- * The fileUpload directive & service.
- * Handles file uploads.
+ * The fileUpload directive.
+ * Handles file uploads. Also see {@link ama.services.fileUploadService}
  *
- * Attribution: http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
+ * ## Usage
+ *
+ *     <input file-upload></input>
+ *
+ * [Based on code from uncorkedstudios.com](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs)
  */
 app.directive('fileUpload', ['$parse', function ($parse) {
     return {

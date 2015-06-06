@@ -1,5 +1,6 @@
 /**
- * The amaModule directive.
+ * @class ama.controllers.ModuleCtrl
+ * Controller for the {@link ama.directives.amaModule amaModule directive}.
  * Shows a module with content specified in 'js/scriptsbytemplate/modules.jst'
  *
  * @author Christian Baur
@@ -36,6 +37,14 @@ app.controller('ModuleCtrl', [
 
     }
 ]);
+
+/**
+ * @class ama.directives.amaModule
+ * Shows a module with custom content
+ *
+ * ## Usage
+ *     <div ama-module="moduleName"></div>
+ */
 app.directive('amaModule', [function(){
     return {
         restrict: 'A',

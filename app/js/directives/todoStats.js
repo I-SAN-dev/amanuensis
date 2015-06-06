@@ -1,7 +1,12 @@
 /**
+ * @class ama.directives.todoStats
+ *
  * The todoStats directive
  * Shows a nice todo/done graph
  *
+ * ## Usage
+ *
+ *     <div todo-stats="theTodoStatsObject"></div>
  * @author Sebastian Antosch
  */
 app.directive('todoStats', [

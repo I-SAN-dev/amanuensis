@@ -1,6 +1,12 @@
 /**
+ * @class ama.directives.paymentStats
+ *
  * The paymentStats directive
  * Shows a nice payment stats timeline
+ *
+ * ## Usage
+ *
+ *     <div payment-stats="thePaymentStatsObject"></div>
  *
  * @author Sebastian Antosch
  */

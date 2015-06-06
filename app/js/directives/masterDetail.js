@@ -1,9 +1,18 @@
 /**
+ * @class ama.directives.masterDetail
+ *
  * The masterDetail directive
  * Shows a master detail view. A template for master and detail must be specified.
  * Furthermore a controller for detail can be supplied.
  * Integrates with the masterDetailService
  *
+ * ## Usage
+ *     <div master-detail
+ *          master-tpl="path/to/template/for/master.html"
+ *          detail-tpl="path/to/template/for/detail.html"
+ *          master-list="theMasterList"
+ *          masterLoaded="booleanValue"
+ *          detail="theCurrentDetail (optional)"></div>
  * @author Christian Baur
  */
 app.directive('masterDetail', [function(){
@@ -25,9 +34,28 @@ app.directive('masterDetail', [function(){
             '$q',
             'MasterDetailService',
             function ($scope, $state, $stateParams, $q, MasterDetailService) {
+                /**
+                 * The detail object
+                 * @type {Object}
+                 */
                 this.detail = $scope.detail;
+
+                /**
+                 * Path to the master view's template file
+                 * @type {string}
+                 */
                 this.masterTpl = $scope.masterTpl;
+
+                /**
+                 * Path to the detail view's template file
+                 * @type {string}
+                 */
                 this.detailTpl = $scope.detailTpl;
+
+                /**
+                 * String to filter the master list with
+                 * @type {*|string}
+                 */
                 this.filterText = $stateParams.filter || '';
 
                 var self = this;
@@ -68,8 +96,17 @@ app.directive('masterDetail', [function(){
 
                 MasterDetailService.setController($scope);
 
+                /**
+                 * @method notifyMaster
+                 * Calls the {@link ama.services.MasterDetailService#notifyMaster notifyMaster function in MasterDetailService}
+                 * @param {*} any Any param the function to be called should receive
+                 */
                 this.notifyMaster = MasterDetailService.notifyMaster;
 
+                /**
+                 * Config object for the drag and drop sort directive
+                 * @type {{itemMoved: Function, orderChanged: Function, containerPositioning: string}}
+                 */
                 this.sort = {
                     //accept: function (sourceItemHandleScope, destSortableScope) {return boolean}//override to determine drag is allowed or not. default is true.
                     itemMoved: function (event) {
