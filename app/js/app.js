@@ -1,7 +1,9 @@
 /**
+ * @class ama
  * Main application. Handles dependencies and routing.
  */
 var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.translate', 'ngAnimate', 'ngSanitize','pickadate','ui.sortable']);
+
 
 app.config( [
     '$compileProvider',
@@ -11,13 +13,17 @@ app.config( [
     }
 ]);
 
+/**
+ * @method run
+ *
+ */
 app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
 
 
-    /**
+    /*
      * Checks if the current user is logged in and sets the 'loggedin' variable
      * which will be used to get the login state at any other point
-     * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+     * @return {Object}
      */
     var getLoginState = function(){
         console.log('loggedIn',$rootScope.loggedIn);
@@ -73,6 +79,7 @@ app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
 
 });
 /**
+ * @class ama.constants.sites
  * The 'sites' constant.
  * Contains information about all app states,
  * each including the actual state object and any additional information needed
@@ -472,6 +479,7 @@ app.constant('sites', [
 ]);
 
 /**
+ * @method config
  * App Config
  * Configures i18n and app states
  */

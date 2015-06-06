@@ -1,3 +1,8 @@
+/**
+ * @class ama.controllers.AcceptanceCreationCtrl
+ *
+ * Controller for the acceptance creation view.
+ */
 app.controller('AcceptanceCreationCtrl', [
     'RefnumberService',
     'ItemContainerService',
@@ -7,8 +12,17 @@ app.controller('AcceptanceCreationCtrl', [
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
+
+        /**
+         * @type {String}
+         * The name of the current project, derived from stateParams
+         */
         this.projectName = project.name;
 
+        /**
+         * An initially empty object which will be filled by user input and send to the API as new acceptance
+         * @type {{refnumber: string, project: Object}}
+         */
         this.newAcceptance = {
             refnumber: '',
             project: projectId

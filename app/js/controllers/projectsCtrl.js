@@ -1,5 +1,8 @@
 /**
+ * @class ama.controllers.ProjectsCtrl
  * Controller for the projects overview page
+ * *DEPRECATED:* The projects overview page doesn't exist anymore.
+ * TODO: Delete this file.
  */
 app.controller('ProjectsCtrl', [
     'ApiAbstractionLayer',
@@ -60,6 +63,10 @@ app.controller('ProjectsCtrl', [
             $scope.$apply();
         }, 1000);
 
+        /**
+         * Deletes a project by given ID
+         * @param {int} id The ID of the project to be deleted
+         */
         this.deleteProject = function (id) {
             DeleteService('project',id).then(function (data) {
                 self.projects = data.list;

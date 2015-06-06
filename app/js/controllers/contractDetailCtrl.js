@@ -1,4 +1,5 @@
 /**
+ * @class ama.controllers.ContractDetailCtrl
  * Controller for the contractDetail page
  */
 app.controller('ContractDetailCtrl', [
@@ -12,8 +13,16 @@ app.controller('ContractDetailCtrl', [
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
+        /**
+         * Indicates if current project is fileContract (which cannot contain amanu items) or a amanu contract
+         * @type {boolean}
+         */
         this.isFileContract = type == 'fileContract';
         MasterDetailService.setMaster(this);
+        /**
+         * The contract.
+         * @type {Object}
+         */
         this.contract = LocalStorage.getData(type+'/'+id);
         ApiAbstractionLayer('GET',{name:type,params: {id:id}}).then(function (data) {
             LocalStorage.setData(type+'/'+id, data);
@@ -24,6 +33,13 @@ app.controller('ContractDetailCtrl', [
             }
         });
 
+        /**
+         * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
+         * or the generated PDF of the contract
+         * @param {Event} event The event (commonly 'click') that triggered the function call
+         * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+         * @param {String} path *optional* Path to the generated PDF
+         */
         this.viewPdf = function (event,preview,path) {
             PdfService(event,preview,'contract',id, path).then(function (data) {
                 if(data){

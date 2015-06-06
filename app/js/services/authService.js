@@ -26,7 +26,7 @@ app
              * Tries to login the user with the provided data
              * @param email - the user's mail address
              * @param password - the user's password
-             * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*}
+             * @returns {Object}
              */
             login: function(email, password) {
                 var deferred = $q.defer();

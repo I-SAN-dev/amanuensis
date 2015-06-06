@@ -1,3 +1,8 @@
+/**
+ * @class ama.controllers.OfferCreationCtrl
+ *
+ * Controller for the offer creation view.
+ */
 app.controller('OfferCreationCtrl', [
     'RefnumberService',
     'ItemContainerService',
@@ -7,7 +12,16 @@ app.controller('OfferCreationCtrl', [
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
+        /**
+        * Name of the current project (derived from stateParams)
+        * @type {string}
+        */
         this.projectName = project.name;
+
+        /**
+         * The offer to be created.
+         * @type {{refnumber: string, project: *}}
+         */
         this.newOffer = {
             refnumber: '',
             project: projectId
@@ -19,6 +33,10 @@ app.controller('OfferCreationCtrl', [
                 self.newOffer.refnumber = data.refnumber;
             }
         });
+
+        /**
+         * Creates a new offer in the current project.
+         */
         this.createOffer = function () {
             ItemContainerService.createItemContainer('offer', projectId, self.newOffer).then(function (data) {
                 // go to where we came from

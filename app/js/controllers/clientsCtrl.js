@@ -1,5 +1,6 @@
 /**
- * Controller for the client list view.
+ * @class ama.controllers.ClientsCtrl
+ * Controller for the client (master) list view.
  * Gets the client list and holds functions to add and delete clients in the database.
  */
 app.controller('ClientsCtrl',
@@ -12,6 +13,10 @@ app.controller('ClientsCtrl',
         'MasterDetailService',
         '$filter',
         function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, $filter) {
+            /**
+             * An array containing all clients.
+             * @type {Array}
+             */
             this.clientList = LocalStorage.getData('clients');
             MasterDetailService.setMaster(this);
 
@@ -61,6 +66,7 @@ app.controller('ClientsCtrl',
 
             /**
              * Delete the link between client and client category
+             * *DEPRECATED:* We manage this in {@link ama.controllers.ClientCategoriesDialog the ClientCategoriesDialog controller}.
              * TODO: test if this still works...
              * @param client - the client's id
              * @param category - the category

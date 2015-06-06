@@ -1,3 +1,7 @@
+/**
+ * @class ama.controllers.SettingsCtrl
+ * Controller for the app settings
+ */
 app.controller('SettingsCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -195,6 +199,7 @@ app.controller('SettingsCtrl', [
                 ErrorDialog(error).activate();
             });
         };
+
 
         this.response =  LocalStorage.getData('settings');
         this.settings = this.response ? this.response.settings : {};

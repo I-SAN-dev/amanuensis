@@ -1,3 +1,9 @@
+/**
+ * @class ama.controllers.ItemCreationCtrl
+ * Controller for the item creation view.
+ *
+ * Remember: the term 'item' refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
 app.controller('ItemCreationCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -13,7 +19,15 @@ app.controller('ItemCreationCtrl', [
         var self = this;
 
         var presets = LocalStorage.getData('itemPresets')|| [];
+        /**
+         * Array containing all available item presets
+         * @type {Array}
+         */
         this.presetList = [];
+        /**
+         * Array containing all items available from the current project.
+         * @type {Array}
+         */
         this.projectItems = [];
         var setItemList = function (input, output) {
             for(var i = 0; i < input.length; i++){
@@ -41,6 +55,10 @@ app.controller('ItemCreationCtrl', [
             LocalStorage.setData(forType+'/'+forId+'/availableItems', data);
         });
 
+        /**
+         * Options for the useRate selection list (fixed/hourly/dailyRate)
+         * @type {{name: *, value: number}[]}
+         */
         this.useRateOptions = [
             {
                 name: $filter('translate')('items.fixedRate'),
@@ -69,6 +87,9 @@ app.controller('ItemCreationCtrl', [
             $state.go(to,toParams);
         };
 
+        /**
+         * Creates a new item
+         */
         this.createItem = function () {
             if(self.newItem){
 
@@ -98,6 +119,9 @@ app.controller('ItemCreationCtrl', [
 
         };
 
+        /**
+         * Imports a selected item from the current project
+         */
         this.importItem = function () {
             if(self.itemFromProject){
                 self.itemFromProject[forType] = forId;

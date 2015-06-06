@@ -1,3 +1,7 @@
+/**
+ * @class ama.controllers.ClientCreationCtrl
+ * Controller for the client creation view.
+ */
 app.controller('ClientCreationCtrl',
     [
         'ApiAbstractionLayer',
@@ -31,8 +35,16 @@ app.controller('ClientCreationCtrl',
                 refnumber: refNumber
             };
 
+            /**
+             * The client to be created.
+             * @type {{companyname: string, contact_firstname: string, contact_lastname: string, street_no: string, additional: string, zip: string, city: string, country: string, comment: string, contact_gender: string, refnumber: string}}
+             */
             this.newClient = initialNewClient;
 
+            /**
+             * An array containing options for the gender selection list
+             * @type {{id: string, name: string}[]}
+             */
             this.genderOptions = [
                 {
                     id: '',
@@ -48,17 +60,25 @@ app.controller('ClientCreationCtrl',
                 }
             ];
 
-            // Get all client categories
+            /**
+             * An array containing all available client categories.
+             * @type {Array}
+             */
             this.allCategories = LocalStorage.getData('clientCategories');
             ApiAbstractionLayer('GET', 'client_categories').then(function(data){
                 self.allCategories = data;
                 LocalStorage.setData('clientCategories', data)
             });
+            /**
+             * An array containing all selected categories for the new client.
+             * @type {Array}
+             */
             this.newClientCategories = [];
+
             /**
              * Adds one or more categori(es) to a client
-             * @param {int} client - the client id
-             * @param {object} categories - an array containing all category ids that shall be added to the client
+             * @param {int} client The client id
+             * @param {object} categories An array containing all category ids that shall be added to the client
              */
             var addCategoryLinks = function(client, categories) {
                 if(categories.length > 0){
@@ -69,7 +89,7 @@ app.controller('ClientCreationCtrl',
             };
 
             /**
-             * Creates a new client
+             * Creates a new client and adds the selected categories
              */
             this.addClient = function () {
                 ApiAbstractionLayer('POST', {name: 'client', data: self.newClient}).then(function(data){

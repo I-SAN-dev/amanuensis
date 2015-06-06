@@ -1,4 +1,5 @@
 /**
+ * @class ama.directives.fileUpload
  *
  * The fileUpload directive & service.
  * Handles file uploads.
@@ -20,12 +21,21 @@ app.directive('fileUpload', ['$parse', function ($parse) {
         }
     };
 }])
+    /**
+     * @class ama.services.fileUploadService
+     *
+     * Provides a function to upload a file to the server.
+     *
+     */
     .service('fileUploadService', ['$http', '$q', function ($http, $q) {
+
+
         /**
-         * Uploads the specified file to the specified url.
          * @param file
          * @param uploadUrl
-         * @returns {d.promise|promise|.Deferred.promise|promise.promise|jQuery.promise|n.ready.promise|*} - a promise
+         * @returns {Promise}
+         *
+         * Uploads the specified file to the specified url.
          */
         this.uploadFile = function(file, uploadUrl){
             var fd = new FormData();

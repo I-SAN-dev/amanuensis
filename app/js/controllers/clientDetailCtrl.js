@@ -1,4 +1,5 @@
 /**
+ * @class ama.controllers.ClientDetailCtrl
  * Controller for the client detail view.
  */
 app.controller('ClientDetailCtrl',
@@ -14,11 +15,18 @@ app.controller('ClientDetailCtrl',
 
             var self = this;
 
+            /**
+             * @type {int}
+             * Indicates which panel should be shown. Initially set by the {@link ama.services.PanelService PanelService}
+             */
             this.showPage = PanelService.getPanel('clients');
 
             MasterDetailService.setDetail(this);
 
-
+            /**
+             * A list of available genders with their respective id ('f' for female, 'm' for male)
+             * @type {{name: string, id: string}[]}
+             */
             this.genders = [
                 {
                     name: 'clients.contactGender.male',
@@ -31,9 +39,10 @@ app.controller('ClientDetailCtrl',
             ];
 
             var calls = 0;
+
             /**
              * Gets a client from the API
-             * @param {int} id - the client id to query for
+             * @param {int} id The client id to query for
              */
             var getClient = function(id) {
                 self.client = LocalStorage.getData('client'+'/'+id);
@@ -43,6 +52,10 @@ app.controller('ClientDetailCtrl',
                 });
             };
 
+            /**
+             * a flag indicating if the client's projects should be shown or not. *Deprecated.*
+             * @type {boolean}
+             */
             this.showProjects = false;
             /**
              * gets the projects associated with the client specified by param id
@@ -60,6 +73,10 @@ app.controller('ClientDetailCtrl',
             };
 
             // call getClient when the detail view is requested
+            /**
+             * Reacts on a change of the client detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
+             * @param {Object} data The newly selected client
+             */
             this.detailChanged = function(data){
                 calls += 1;
                 console.log(calls);
@@ -75,9 +92,12 @@ app.controller('ClientDetailCtrl',
 
             // the next few lines contain code to create a new client - client_data connection
 
-            // set flags for all types of client data.
-            // the flag indicate if we currently want to add a new client data of its type
-            // TODO: do this dynamically
+
+            /**
+             * Object of flags indicate if we currently want to add a new client data of its type (phone/mail/fax)
+             * TODO: do this dynamically
+             * @type {{phone: boolean, mail: boolean, fax: boolean}}
+             */
             this.newConnectionFlag = {
                 phone: false,
                 mail: false,
@@ -86,16 +106,21 @@ app.controller('ClientDetailCtrl',
 
             /**
              * Toggles the flag for the newConnection creation mode
-             * @param {string} type - identifier of the type of client data
+             * @param {string} type Identifier of the type of client data
              */
             this.setNewConnectionFlag = function(type) {
                 self.newConnectionFlag[type] = !self.newConnectionFlag[type];
             };
 
-            // just a simple object containing any possible new client data
-            // with (initially) empty names and values.
-            // bound to input fields in the view
-            // TODO: create this dynamically
+            /**
+             * A simple object containing any possible new client data
+             * with (initially) empty names and values.
+             * Bound to input fields in the view.
+             * *Deprecated:* As fax works without this, we don't seem to need it.
+             * TODO: create this dynamically
+             * @type {{phone: {name: string, value: string}, mail: {name: string, value: string}}}
+             */
+            //
             this.newConnection = {
                 phone: {
                     name: '',
@@ -109,7 +134,7 @@ app.controller('ClientDetailCtrl',
 
             /**
              * Performs a database request to add a new client - client_data connection of a certain type
-             * @param {string} type - identifier of the type of client_data to be created
+             * @param {string} type Identifier of the type of client_data to be created
              */
             this.addConnection = function(type) {
                 var name = self.newConnection[type].name;
@@ -256,6 +281,10 @@ app.controller('ClientDetailCtrl',
                     allCategories = data;
                     var modal = btfModal({
                         templateUrl: 'templates/pages/clients/categoryDialog.html',
+                        /**
+                         * @class ama.controllers.ClientCategoriesDialog
+                         * Controller for the modal being opened via {@link ama.controllers.ClientDetailCtrl#openCategoryModal the openCategoryModal function in ClientDetailCtrl}
+                         */
                         controller: function(){
                             var cats = this;
                             if(allCategories.length > 0){
@@ -265,6 +294,10 @@ app.controller('ClientDetailCtrl',
                             }
 
                             this.filterText = '';
+                            /**
+                             * An object containing all available categories
+                             * @type {string|Object|*}
+                             */
                             this.allCategories = allCategories;
                             var resetNewCategory = function () {
                                 return {
@@ -272,6 +305,10 @@ app.controller('ClientDetailCtrl',
                                     description: ''
                                 };
                             };
+                            /**
+                             * @type {Object}
+                             * Contains a category to be sent to the API for creation
+                             */
                             this.newCategory = resetNewCategory();
                             /**
                              * Toggles the selection of a category

@@ -1,14 +1,20 @@
 /**
- * Controller for the login page
+ * @class ama.controllers.AuthCtrl
+ * Controller for the login view
  */
 angular.module('ama')
 .controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
 
+        /**
+         * @type {String}
+         * A message printed on the page in case of login failure
+         * *Deprecated:* We use modals for this now
+         */
         this.message = $state.current.data.message;
 
         var self = this;
         /**
-         * Gets the current user
+         * Gets the current user from the {@link ama.services.AuthService AuthService}
          */
         this.getUser = function () {
             AuthService.currentUser().then(function(result){
@@ -16,6 +22,10 @@ angular.module('ama')
             });
         };
 
+        /**
+         *
+         * @type {string}
+         */
         this.email = '';
         /*AuthService.currentUser(true).then(function(user){
             self.email = user.email;

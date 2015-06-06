@@ -13,7 +13,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     /**
      * Trys to parse a string as JSON, returns object if true, otherwise returns the String
      * @param {string} jsonString - the string that might be json
-     * @memberof js/services/localStorage
      */
     var tryParseJSON = function(jsonString){
         try {
@@ -35,7 +34,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     /**
      * Cleans up a key by removing unnecessary url parameters, preventing duplicate entries
      * @param {string} key - the key (mostly url) to be checked
-     * @memberof js/services/localStorage
      */
     var cleanKey = function(key)
     {
@@ -53,7 +51,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     /**
      * Cleans up the local Storage and removes all entrys starting with http (= all cached requests)
      * should be called when a local storage quote exceeded exception is thrown
-     * @memberof js/services/localStorage
      */
     var cleanUpCache = function()
     {
@@ -104,7 +101,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * Creates or updates an entry (key-value pair) in the local storage
          * @param: {string} key -  the storage entry's key
          * @param: {string|object} val - value to save in the local storage
-         * @memberof js/services/localStorage
          */
         setData: function(key, val, encrypted){
 
@@ -146,7 +142,6 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
          * Gets data from the local storage.
          * @param: {string} key - The key of the storage's entry to be retrieved
          * @return: {string|object} - the corresponding localStorage entry
-         * @memberof js/services/localStorage
          */
         getData: function(key, encrypted){
             var jsonString = $window.sessionStorage.getItem(cleanKey(key));

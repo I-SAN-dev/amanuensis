@@ -1,3 +1,7 @@
+/**
+ * @class ContractsCreationCtrl
+ * Controller for the contract creation view.
+ */
 app.controller('ContractCreationCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -11,7 +15,16 @@ app.controller('ContractCreationCtrl', [
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
+        /**
+         * Name of the current project (derived from stateParams)
+         * @type {string}
+         */
         this.projectName = project.name;
+
+        /**
+         * The new contract to be created
+         * @type {{refnumber: string, project: int}}
+         */
         this.newContract = {
             refnumber: '',
             project: project.id
@@ -23,6 +36,9 @@ app.controller('ContractCreationCtrl', [
             }
         });
 
+        /**
+         * Creates a new contract
+         */
         this.createContract = function () {
             if(self.fileContract){
                 ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {

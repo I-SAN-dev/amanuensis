@@ -1,3 +1,7 @@
+/**
+ * @class ama.controllers.ProjectDetailCtrl
+ * Controller for the project detail view.
+ */
 app.controller('ProjectDetailCtrl',
     [
         'ApiAbstractionLayer',
@@ -12,9 +16,15 @@ app.controller('ProjectDetailCtrl',
         function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, StateManager, $scope, $state, $stateParams, MasterDetailService) {
             var self = this;
             MasterDetailService.setDetail(this);
+            /**
+             * List of all contracts and fileContracts taken from the current project
+             * @type {Array}
+             */
             this.contracts = [];
 
-            // set a flag to indicate if the project can be deleted
+            /**
+             * A flag to indicate if the project can be deleted (doesn't contain any documents).
+             */
             this.emptyProject = false;
 
 
@@ -71,6 +81,13 @@ app.controller('ProjectDetailCtrl',
             };
 
             // call getProject when the detail view is requested
+            /**
+             * Sets the project detail.
+             * This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
+             * *DEPRECATED:* The project detail view isn't a masterDetail view anymore.
+             * TODO: Delete this code
+             * @param data - the newly selected project
+             */
             this.detailChanged=function(data){
                 self.project = data;
                 self.contracts = [];

@@ -1,3 +1,9 @@
+/**
+ * @class ama.controllers.ItemPresetCreationCtrl
+ * Controller for the item preset creation view.
+ *
+ * Remember: the term 'item' refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
 app.controller('ItemPresetCreationCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -6,6 +12,11 @@ app.controller('ItemPresetCreationCtrl', [
     '$stateParams',
     function (ApiAbstractionLayer, LocalStorage, $filter, $state, $stateParams) {
         var self = this;
+
+        /**
+         * List of options for the useRate selection field.
+         * @type {{name: *, value: number}[]}
+         */
         this.useRateOptions = [
             {
                 name: $filter('translate')('items.fixedRate'),
@@ -21,6 +32,9 @@ app.controller('ItemPresetCreationCtrl', [
             }
         ];
 
+        /**
+         * Creates an item preset
+         */
         this.addPreset = function () {
             var apiObject = {
                 name: 'item_preset',

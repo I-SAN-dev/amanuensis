@@ -1,3 +1,7 @@
+/**
+ * @class ama.controllers.DashboardCtrl
+ * Controller for the dashboard view
+ */
 app.controller('DashboardCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -7,7 +11,16 @@ app.controller('DashboardCtrl', [
         var self = this;
 
         /* projects */
+        /**
+         * The current projects (all projects which are not archived)
+         * @type {Object}
+         */
         this.currentProjects = LocalStorage.getData('currentProjects');
+
+        /**
+         * The overall statistics for the current projects.
+         * @type {Object}
+         */
         this.statistics = LocalStorage.getData('statistics');
         var apiObject = {
             name: 'project',
@@ -23,6 +36,10 @@ app.controller('DashboardCtrl', [
         });
 
         /* Stream */
+        /**
+         * The app's news stream.
+         * @type {Object}
+         */
         this.stream = LocalStorage.getData('stream');
         ApiAbstractionLayer('GET', 'stream').then(function (data) {
             self.stream = data;

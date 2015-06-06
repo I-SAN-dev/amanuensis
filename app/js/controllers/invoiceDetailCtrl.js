@@ -1,3 +1,7 @@
+/**
+ * @class ama.controllers.InvoiceDetailCtrl
+ * Controller for the invoice detail view
+ */
 app.controller('InvoiceDetailCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -23,6 +27,11 @@ app.controller('InvoiceDetailCtrl', [
         }, 1000);
 
         var id = $stateParams.id;
+
+        /**
+         * The invoice.
+         * @type Object
+         */
         this.invoice = LocalStorage.getData('invoice/'+id);
         var getInvoice = function () {
             ApiAbstractionLayer('GET', {name: 'invoice', params: {id:id}}).then(function (data) {
@@ -33,44 +42,26 @@ app.controller('InvoiceDetailCtrl', [
         getInvoice();
 
 
-        this.generatePDF = function (preview) {
-            PdfService(preview, 'invoice', id).then(function (data) {
-                if(preview){
-
-                } else {
-                    self.offer.path = data.path;
-                    LocalStorage.setData('invoice/'+id, self.invoice);
-                }
-            });
-        };
-
-        this.openPdfPreview = function (event) {
-            event.preventDefault();
-            window.open(
-                constants.BASEURL+'/api?action=pdfgen&for=invoice&forid='+self.invoice.id,
-                '',
-                'height=500,width=900'
-            );
-        };
-
-        this.openPdf = function (event) {
-            event.preventDefault();
-            window.open(
-                constants.BASEURL+'/api?action=protectedpdf&path='+self.invoice.path,
-                '',
-                'height=500,width=900'
-            );
-        };
-
+        /**
+         * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current invoice.
+         * @param {Event} event The event (click) that led to the function call
+         */
         this.openMailPreview = function (event) {
             event.preventDefault();
             MailService.showPreview('invoice',self.invoice.id);
         };
 
+        /**
+         * Uses the {@link ama.services.MailService MailService} to send a mail with the current invoice.
+         */
         this.send = function () {
             MailService.send('invoice',self.offer.id);
         };
 
+        /**
+         * Deletes an item by given id.
+         * @param {id} itemId The id of the item to be deleted
+         */
         this.deleteItem = function (itemId) {
             DeleteService('item', itemId).then(function (data) {
                 self.invoice.items = data;
@@ -78,11 +69,21 @@ app.controller('InvoiceDetailCtrl', [
             });
         };
 
+        /**
+         * Gets called when the price of an item inside the invoice changes.
+         * Reloads the invoice.
+         * @param {Object} item The item that was changed.
+         */
         this.priceChanged = function (item) {
             self.loaded = false;
             getInvoice();
         };
 
+        /**
+         * Generates a stateParams object from the current stateParams for a certain state
+         * @param {string} forState The state for which the stateParams should be generated
+         * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+         */
         this.getStateParams = function(forState){
             if(forState == 'itemCreation'){
                 return {

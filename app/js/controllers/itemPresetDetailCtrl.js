@@ -1,3 +1,9 @@
+/**
+ * @class ama.controllers.ItemPresetDetailCtrl
+ * Controller for the item preset detail view
+ *
+ * Remember: the term 'item' refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
 app.controller('ItemPresetDetailCtrl', [
     'ApiAbstractionLayer',
     'MasterDetailService',
@@ -7,7 +13,7 @@ app.controller('ItemPresetDetailCtrl', [
         var self = this;
 
         /**
-         * Sets the preset detail. This function gets called by the masterDetail directive when the detail changes
+         * Sets the preset detail. This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
          * @param preset - the new preset
          * @param keyboard - indicates if the detail was changed by keyboard input
          */

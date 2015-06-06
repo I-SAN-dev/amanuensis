@@ -1,5 +1,8 @@
 /**
+ * @class ama.controllers.InvoicesCtrl
+ * *DEPRECATED:* The corresponding view doesn't exist anymore
  * Controller for the invoices overview page
+ * // TODO: Remove this file
  */
 app.controller('InvoicesCtrl', [
     'ApiAbstractionLayer',

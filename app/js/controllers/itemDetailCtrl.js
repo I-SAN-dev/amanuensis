@@ -1,3 +1,9 @@
+/**
+ * @class ama.controllers.ItemDetailCtrl
+ * Controller for the item detail views.
+ *
+ * Remember: the term 'item' refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
 app.controller('ItemDetailCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
@@ -7,6 +13,10 @@ app.controller('ItemDetailCtrl', [
     function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
         MasterDetailService.setDetail(this);
 
+        /**
+         * Indicates what panel should be shown in the view
+         * @type int
+         */
         this.showPage = PanelService.getPanel('items');
 
         var self = this;
@@ -31,6 +41,13 @@ app.controller('ItemDetailCtrl', [
 
         };
 
+        /**
+         * /**
+         * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
+         * Re-initializes the detail view
+         * @param {Object} item The newly selected item
+         * @param {bool} keyboard Indicates if the selection was taken by keyboard input
+         */
         this.detailChanged = function (item, keyboard) {
             self.item = item;
 
@@ -58,9 +75,16 @@ app.controller('ItemDetailCtrl', [
         };
 
 
+        /**
+         * Deletes the current item by notifying the master controller via {@link ama.services.MasterDetailServices#notifyMaster the MasterDetailService}.
+         */
         this.deleteItem = function () {
             MasterDetailService.notifyMaster('deleteItem', self.item.id);
         };
+
+        /**
+         * Changes the useRate value (fixed/hourly/dailyRate) of the current item.
+         */
         this.changeUseRate = function () {
             var apiObject = {
                 name: 'item',
@@ -74,12 +98,19 @@ app.controller('ItemDetailCtrl', [
             });
         };
 
+        /**
+         * Set a start time in the time API
+         */
         this.startTime = function () {
             ApiAbstractionLayer('POST',{name:'time', data: {item: self.item.id}}).then(function (data) {
                 self.time.times.push(data);
             });
         };
 
+        /**
+         * Stops the timer with the given id
+         * @param {int} id The ID of the timer to be stopped
+         */
         this.stopTime = function (id) {
             ApiAbstractionLayer('POST', {name: 'time', data:{id:id,endnow:true}}).then(function (data) {
                 for(var i = 0; i<self.time.times.length; i++){
@@ -90,15 +121,20 @@ app.controller('ItemDetailCtrl', [
                 }
             });
         };
-        
+
+        /**
+         * Deletes a timer by given ID
+         * @param {int} id The ID of the timer to be deleted.
+         */
         this.deleteTime = function (id) {
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
                 self.time.times = data;
             });
         };
 
-
-
+        /**
+         * Moves the current item to another document.
+         */
         this.moveItem = function () {
             // TODO: this
         };
