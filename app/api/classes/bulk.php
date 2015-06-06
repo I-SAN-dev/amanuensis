@@ -104,8 +104,16 @@ class bulk {
                     catch(Exception $e)
                     {
                         /* log the error, but don't die... the rest of the loop may be successful */
-                        new amaException($e);
+                        $error = new amaException($e);
+                        $error->renderJSONerror();
+                        $error->setHeaders(true);
                     }
+                }
+                else
+                {
+                    $error = new amaException(NULL, 400, "Wrong format in order: '".$update."' is invalid");
+                    $error->renderJSONerror();
+                    $error->setHeaders(true);
                 }
             }
             json_response(array('success' => true));
