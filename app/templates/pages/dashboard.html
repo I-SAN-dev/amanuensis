@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row fullheight">
-                        <div class="col-fixedwith-35 fullheight">
+                        <div class="col-fixedwidth-35 fullheight">
                             <a class="fastbutton action" data-ng-click="dashboard.newProject()" data-ng-href="/clients/" title="{{'projects.new' | translate}}">
                                 <i class="md-add"></i>
                             </a>
@@ -33,7 +33,7 @@
                                 <i class="md-extension"></i>
                             </a>
                         </div>
-                        <div class="col-beneath-fixedwith-35 fullheight scroll-y">
+                        <div class="col-beneath-fixedwidth-35 fullheight scroll-y">
                             <div class="row">
                                 <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <a class="tile" data-ui-sref="app.projectDetail({id:project.id})">
@@ -75,10 +75,10 @@
                 </div>
                 <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
                     <div class="row">
-                        <div class="col-fixedwith-46">
+                        <div class="col-fixedwidth-46">
                            <span class="icon-bubble icon-{{entry.action}}"></span>
                         </div>
-                        <div class="col-beneath-fixedwith-46">
+                        <div class="col-beneath-fixedwidth-46">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <h3 data-ng-if="!entry.user.name">

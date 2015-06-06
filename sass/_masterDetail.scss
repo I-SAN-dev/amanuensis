@@ -250,7 +250,7 @@ $detail-toolbar-height: 64px;
   {
     position: absolute;
     right: 30px;
-    top: -5px;
+    top: 5px;
   }
   .list-group-item
   {
@@ -264,4 +264,116 @@ $detail-toolbar-height: 64px;
   position: absolute;
   left: 30px;
   top: -86px;
+}
+
+
+/* document state icons */
+.icon-docstate
+{
+  display: inline-block;
+  font: normal normal normal 24px/1 'Material Design Iconic Font';
+  speak: none;
+  text-rendering: auto;
+  height: 46px;
+  line-height: 46px;
+  width: 46px;
+  text-align: center;
+  border-radius: 23px;
+  background-color: $gray-light;
+  color: #fff;
+  opacity: 0.5;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.icon-docstate--1
+  {
+    background-color: $brand-danger;
+    &:after
+    {
+      content: "\f29a"; /* md-close */
+    }
+  }
+  &.icon-docstate-0
+  {
+    background-color: $gray-light;
+    &:after
+    {
+      content: "\f060"; /* md-settings */
+    }
+  }
+  &.icon-docstate-1
+  {
+    background-color: $brand-info;
+    &:after
+    {
+      content: "\f060"; /* md-settings */
+    }
+  }
+  &.icon-docstate-2
+  {
+    background-color: $brand-success;
+    &:after
+    {
+      content: "\f05e"; /* md-schedule */
+    }
+  }
+  &.icon-docstate-3
+  {
+    background-color: $brand-success;
+    &:after
+    {
+      content: "\f023"; /* md-done */
+    }
+  }
+  &.icon-docstate-4,
+  &.icon-docstate-5
+  {
+    background-color: $brand-danger;
+    &:after
+    {
+      content: "\f05e"; /* md-schedule */
+    }
+  }
+  &.icon-docstate-contract
+  {
+    background-color: $brand-success;
+    &:after
+    {
+      content: "\f021"; /* md-description */
+    }
+  }
+  &.icon-docstate-fileContract
+  {
+    background-color: $brand-info;
+    &:after
+    {
+      content: "\f168"; /* md-attach-file */
+    }
+  }
+  &.icon-docstate-todo
+  {
+    background-color: $brand-warning;
+    &:after
+    {
+      content: "\f060"; /* md-settings */
+    }
+  }
+  &.icon-docstate-tododone
+  {
+    background-color: $brand-success;
+    &:after
+    {
+      content: "\f023"; /* md-done */
+    }
+  }
+  &.icon-docstate-todooverdue
+  {
+    background-color: $brand-danger;
+    &:after
+    {
+      content: "\f060"; /* md-settings */
+    }
+  }
 }

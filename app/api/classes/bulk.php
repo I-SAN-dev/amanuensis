@@ -27,15 +27,20 @@ class bulk {
     {
         Authenticator::onlyFor(0,1);
 
-        if( !isset($_POST["ids"]) || $_POST["ids"]=='' || !isset($_POST["for"]) || $_POST["for"]=='' || !isset($_POST["forid"]) || $_POST["forid"]=='')
+
+        if(isset($_POST["ids"]) && $_POST["ids"]!='' && isset($_POST["for"]) && $_POST["for"]!='' && isset($_POST["forid"]) && $_POST["forid"]!='')
+        {
+            self::bulkUpdate($_POST["ids"], $_POST["for"], $_POST["forid"]);
+        }
+        else if (isset($_POST["setorder"]) && $_POST["setorder"] != '' && isset($_POST["order"]) && $_POST["order"] != '')
+        {
+            self::bulkOrder($_POST["setorder"], $_POST["order"]);
+        }
+        else
         {
             $error = new amaException(NULL, 400, "Not all needed parameters specified");
             $error->renderJSONerror();
             $error->setHeaders();
-        }
-        else
-        {
-            self::bulkUpdate($_POST["ids"], $_POST["for"], $_POST["forid"]);
         }
     }
 
@@ -67,6 +72,58 @@ class bulk {
         $q->execute($idarray);
 
         json_response(array('items_linked' => $q->rowCount()));
+    }
+
+    /**
+     * Sets the global_order or todo_order for multiple items
+     * @param String $setorder - 'global' or 'todo'
+     * @param $order - a string, containing item-ids and their new order, format: 'id:ordering,id:ordering,...'
+     */
+    static function bulkOrder($setorder, $order)
+    {
+        if(in_array($setorder, array('global','todo')))
+        {
+            $toUpdate = explode(',',$order);
+
+            $query = '
+                UPDATE items SET '.$setorder.'_order = ? WHERE id = ?;
+            ';
+
+            $dbal = DBAL::getInstance();
+            $q = $dbal->prepare($query);
+
+            foreach($toUpdate as $update)
+            {
+                $a = explode(':', $update);
+                if(count($a) == 2 && ctype_digit((String)$a[0]) && ctype_digit((String)$a[1]))
+                {
+                    try
+                    {
+                        $q->execute(array($a[1], $a[0]));
+                    }
+                    catch(Exception $e)
+                    {
+                        /* log the error, but don't die... the rest of the loop may be successful */
+                        $error = new amaException($e);
+                        $error->renderJSONerror();
+                        $error->setHeaders(true);
+                    }
+                }
+                else
+                {
+                    $error = new amaException(NULL, 400, "Wrong format in order: '".$update."' is invalid");
+                    $error->renderJSONerror();
+                    $error->setHeaders(true);
+                }
+            }
+            json_response(array('success' => true));
+        }
+        else
+        {
+            $error = new amaException(NULL, 400, "Invalid parameter setorder");
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
     }
 
 }

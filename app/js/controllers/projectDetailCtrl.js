@@ -136,6 +136,26 @@ app.controller('ProjectDetailCtrl',
             };
 
 
+            /**
+             * Checks if something is overdue (especially toDos, because they don't have a state)
+             * @param date - a due date
+             * @returns {boolean}
+             */
+            this.checkOverdue = function(date)
+            {
+                if(date)
+                {
+                    var duedate = date.replace(/\s/g, "T");
+                    var result = Date.parse(duedate) < Date.now();
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+
+
         }
     ]
 );
