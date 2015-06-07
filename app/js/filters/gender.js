@@ -1,4 +1,5 @@
 /**
+ * @class ama.filters.gender
  * # The gender filter
  * Converts a gender code ('f' for female, 'm' for male) to a language string.
  *

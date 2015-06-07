@@ -1,3 +1,11 @@
+/**
+ * @class ama.services.NextStepModal
+ * # NextStepModal
+ * Shows a modal asking the user what to do next (i.e. when an offer is accepted)
+ *
+ * @param {string} type The type of document of which the state just changed
+ * @param {Object} object The document
+ */
 app.factory('NextStepModal', [
     'ItemContainerService',
     'btfModal',

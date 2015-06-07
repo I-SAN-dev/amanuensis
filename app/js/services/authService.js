@@ -1,5 +1,6 @@
 /**
- * Authentication Service
+ * @class ama.services.AuthService
+ * # Authentication Service
  * Provides functions to log in, log out and get the login state and the current user
  */
 app
@@ -16,7 +17,8 @@ app
         return {
             /**
              * Gets the currently logged in user
-             * @returns {promise}
+             * @param {bool} noErrorModal *Optional.* If true, no message will be shown in case of an error.
+             * @returns {promise} A promise containing the current user or an error object.
              */
             currentUser: function(noErrorModal){
                 return ApiAbstractionLayer('GET','userdata', noErrorModal);

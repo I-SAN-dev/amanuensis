@@ -1,3 +1,12 @@
+/**
+ * @class ama.services.DeleteService
+ * # DeleteService
+ * Opens a modal that asks the user if he/she wants to delete something. Deletes that thing after the user confirms.
+ *
+ * @param {string} apiAction The name of the apiAction (i.e. 'invoice', if an invoice shall be deleted)
+ * @param {int|string|Object} The ID of the object to be deleted. If given as object, it can also contain additional parameters for the API.
+ * @returns {promise} A promise containing the API's answer after the deletion or nothing if the user cancelled the deletion.
+ */
 app.factory('DeleteService',
     [
         'ApiAbstractionLayer',

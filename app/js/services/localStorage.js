@@ -1,4 +1,6 @@
 /**
+ * @class ama.services.LocalStorage
+ * # LocalStorage
  * The local storage service allows us to persistently save/retrieve data to/from HTML5 local storage
  * @namespace js/services/localStorage
  * @author Christian Baur, Sebastian Antosch

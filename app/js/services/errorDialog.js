@@ -1,5 +1,9 @@
 /**
+ * @class ama.services.ErrorDialog
  * Service that creates a modal showing error information when needed.
+ *
+ * @param {Object} errorObj The error to be presented in the modal.
+ * @returns {btfModal} The modal with the error information. Has to be activated to be shown (modal.activate()).
  */
 app.factory('ErrorDialog', function (btfModal) {
     return function(errorObj){

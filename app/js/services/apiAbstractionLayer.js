@@ -1,9 +1,12 @@
 /**
- * API Abstraction Service
+ * @class ama.services.ApiAbstractionLayer
+ *
+ * # API Abstraction Service
  * Provides a simple function that will perform the right API call depending on its parameters
- * @param method {string} - 'GET'|'POST' (other methods might be supported later)
- * @param identifier {string|object} - an identifier for the api action
- * @return {promise}
+ * @param {string} method 'GET'|'POST'|'DELETE' (other methods are currently not supported by the API)
+ * @param {string|object} identifier An identifier for the API action. The object contains the name of the API action and additional params or data. If no additional data/params are required, the service also accepts the action as a string
+ * @param {bool} noErrorModal *Optional.* If true, no message will be shown in case of an error.
+ * @return {promise} A promise containing the desired data from the API or an error object.
  */
 app
     .factory('ApiAbstractionLayer', [

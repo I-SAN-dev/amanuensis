@@ -1,3 +1,13 @@
+/**
+ * @class ama.services.PdfService
+ * Shows a PDF representation of a document in a popup window.
+ * @param {Event} event The event that led to the call of the service
+ * @param {boolean} preview Indicates if a preview should be rendered or the actual PDf should be shown
+ * @param {string} forType The type of the document for which the PDF representation shall be shown
+ * @param {string|int} forId The ID of the document for which the PDF representation shall be shown
+ * @param {string} pdfPath *Optional.* The path to the PDF saved on the server.
+ * @returns {promise} A promise containing the answer from the API
+ */
 app.factory('PdfService', [
     'ApiAbstractionLayer',
     'constants',
