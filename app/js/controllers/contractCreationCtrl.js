@@ -1,5 +1,5 @@
 /**
- * @class ContractsCreationCtrl
+ * @class ama.controllers.ContractCreationCtrl
  * Controller for the contract creation view.
  */
 app.controller('ContractCreationCtrl', [

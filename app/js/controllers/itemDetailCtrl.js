@@ -15,7 +15,7 @@ app.controller('ItemDetailCtrl', [
 
         /**
          * Indicates what panel should be shown in the view
-         * @type int
+         * @type {integer}
          */
         this.showPage = PanelService.getPanel('items');
 
@@ -46,7 +46,7 @@ app.controller('ItemDetailCtrl', [
          * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
          * Re-initializes the detail view
          * @param {Object} item The newly selected item
-         * @param {bool} keyboard Indicates if the selection was taken by keyboard input
+         * @param {boolean} keyboard Indicates if the selection was taken by keyboard input
          */
         this.detailChanged = function (item, keyboard) {
             self.item = item;
@@ -76,7 +76,7 @@ app.controller('ItemDetailCtrl', [
 
 
         /**
-         * Deletes the current item by notifying the master controller via {@link ama.services.MasterDetailServices#notifyMaster the MasterDetailService}.
+         * Deletes the current item by notifying the master controller via {@link ama.services.MasterDetailService#notifyMaster the MasterDetailService}.
          */
         this.deleteItem = function () {
             MasterDetailService.notifyMaster('deleteItem', self.item.id);
@@ -109,7 +109,7 @@ app.controller('ItemDetailCtrl', [
 
         /**
          * Stops the timer with the given id
-         * @param {int} id The ID of the timer to be stopped
+         * @param {integer} id The ID of the timer to be stopped
          */
         this.stopTime = function (id) {
             ApiAbstractionLayer('POST', {name: 'time', data:{id:id,endnow:true}}).then(function (data) {
@@ -124,7 +124,7 @@ app.controller('ItemDetailCtrl', [
 
         /**
          * Deletes a timer by given ID
-         * @param {int} id The ID of the timer to be deleted.
+         * @param {integer} id The ID of the timer to be deleted.
          */
         this.deleteTime = function (id) {
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
