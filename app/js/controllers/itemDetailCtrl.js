@@ -19,6 +19,15 @@ app.controller('ItemDetailCtrl', [
          */
         this.showPage = PanelService.getPanel('items');
 
+        /**
+         * Sets the panel to show for the item detail view by using the {@link ama.services.PanelService PanelService}
+         * @param {integer} pageNumber The number of the panel to show.
+         */
+        this.setPage = function (pageNumber) {
+            PanelService.setPanel('items', pageNumber);
+            self.showPage = PanelService.getPanel('items');
+        };
+
         var self = this;
 
         var getIsConnected = function () {
