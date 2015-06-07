@@ -1,15 +1,22 @@
 /**
- * formats a number as price
+ * @class ama.filters.price
+ * # The price filter
+ * Formats a number as price.
  *
- * This file is part of the project codename "AMANUENSIS"
  *
  * @author Sebastian Antosch <s.antosch@i-san.de>
  * @copyright 2015 I-SAN.de Webdesign & Hosting GbR
- * @link http://i-san.de
  *
  * @license GPL
  *
- * Usage: {{'5.25'|price}} -> 5,25 €
+ * ## Usage
+ * HTML:
+ *
+ *     {{'5.25'|price}} -> 5,25 €
+ *
+ * JavaScript:
+ *
+ *     $filter('price')(5.25) -> '5,25 €'
  */
 app.filter('price', function () {
     return function (value) {

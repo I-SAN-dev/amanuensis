@@ -1,3 +1,19 @@
+/**
+ * @class ama.filters.amaStates
+ * # The amaStates filter
+ * Converts an amanu status code to a language string representing the status.
+ *
+ * ## Usage
+ * HTML:
+ *
+ *     {{statusCode|amaStates:type}}
+ *
+ * JavaScript:
+ *
+ *     $filter('amaStates')(statusCode, type)
+ *
+ * type can be one of: 'project', 'offer', 'acceptance', 'invoice', 'reminder', 'error', 'errorDescription'
+ */
 app.filter('amaStates', function () {
     var statusCodes = {
         project: {

@@ -1,10 +1,18 @@
 /**
- * Description:
- *     removes white space from text. useful for html values that cannot have spaces
- * Usage:
- *   {{some_text | nospace}}
+ * @class ama.filters.nospace
  *
- * Source: https://gist.github.com/builtbylane/7237798
+ * # The nospace filter
+ * Removes white space from text. useful for html values that cannot have spaces
+ * ## Usage
+ * HTML:
+ *
+ *     {{some_text | nospace}}
+ *
+ * JavaScript:
+ *
+ *     $filter('nospace')(some_text)
+ *
+ * Source: [gist.github.com](https://gist.github.com/builtbylane/7237798)
  */
 app.filter('nospace', function () {
     return function (value) {
