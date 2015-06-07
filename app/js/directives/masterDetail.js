@@ -108,15 +108,16 @@ app.directive('masterDetail', [function(){
                  * @type {{itemMoved: Function, orderChanged: Function, containerPositioning: string}}
                  */
                 this.sort = {
-                    //accept: function (sourceItemHandleScope, destSortableScope) {return boolean}//override to determine drag is allowed or not. default is true.
+                    accept: function () {
+                        return self.filterText == '';
+                    },
                     itemMoved: function (event) {
                         console.log('itemMoved');
                     },
                     orderChanged: function(event) {
-                        console.log('orderChanged');
+                        self.notifyMaster('orderChanged');
                     },
                     containerPositioning: 'relative'
-                    //containment: '#board'//optional param.
                 };
             }],
         controllerAs: 'MasterDetailCtrl'

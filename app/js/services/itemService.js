@@ -76,6 +76,25 @@ app.factory('ItemService',[
                     }
                 };
                 return ApiAbstractionLayer('POST',apiObject);
+            },
+            /**
+             * Changes the ordering of a given list of items on the server
+             * @param {Array} list The ordered list of items
+             * @param {boolean} isTodo *Optional.* Set this to true if the todo_order is to be changed
+             * @returns {promise} A promise containing the answer from the API
+             */
+            changeOrdering: function(list,isTodo){
+                var setOrder = 'global';
+                if(isTodo){
+                    setOrder = 'todo';
+                }
+                var bulkOrder = [];
+                for(var i=0; i<list.length; i++){
+                    list[i].todo_order = i;
+                    bulkOrder.push(list[i].id+':'+i);
+                }
+                bulkOrder = bulkOrder.join(',');
+                return ApiAbstractionLayer('POST', {name:'bulk', data: {order:bulkOrder,setorder:setOrder}});
             }
         }
     }

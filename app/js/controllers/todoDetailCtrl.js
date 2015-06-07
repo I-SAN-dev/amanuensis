@@ -8,8 +8,9 @@ app.controller('TodoDetailCtrl', [
     'LocalStorage',
     'MasterDetailService',
     'PanelService',
+    'ItemService',
     '$stateParams',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, $stateParams) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
         PanelService.setPanel('items',2);
@@ -56,6 +57,15 @@ app.controller('TodoDetailCtrl', [
          */
         this.todoItemChanged = function () {
             getTodo();
+        };
+
+        /**
+         * Gets called when the ordering of the items in the todolist was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the todo_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.todo.items, true);
         }
     }
 ]);
