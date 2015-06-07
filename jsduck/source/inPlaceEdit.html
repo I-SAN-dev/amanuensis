@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-directives-inPlaceEdit'>/**
+</span> * @class ama.directives.inPlaceEdit
+ *
+ * # The inPlaceEdit directive
+ * Shows the value of a specified property or a placeholder if the property is not defined.
+ *
+ * When clicked on that element, it changes to a input field of a specified type and typically some buttons aside of them.
+ * The directive also handles attempts to save/cancel the edit or delete the property.
+ *
+ * @author Christian Baur
+ */
+app.directive(&#39;inPlaceEdit&#39;,
+    [
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;DeleteService&#39;,
+        function (ApiAbstractionLayer, LocalStorage, DeleteService) {
+            return {
+                restrict: &#39;A&#39;,
+                scope: {
+                    key: &#39;=ipeKey&#39;,
+                    val: &#39;=ipeValue&#39;,
+                    type: &#39;=ipeType&#39;,
+                    options: &#39;=ipeSelectOptions&#39;,
+                    optionValue: &#39;@ipeSelectOptionValue&#39;,
+                    optionName: &#39;@ipeSelectOptionName&#39;,
+                    name: &#39;=ipeName&#39;,
+                    apiName: &#39;=&#39;,
+                    apiParams: &#39;=&#39;,
+                    apiId: &#39;=&#39;,
+                    deletable: &#39;=ipeDeletable&#39;,
+                    deletableItem: &#39;=&#39;,
+                    outputVal: &#39;=outputValue&#39;,
+                    callback: &#39;&amp;ipeCallback&#39;
+                },
+                templateUrl: &#39;templates/directives/inPlaceEdit.html&#39;,
+                controller: [&#39;$scope&#39;, &#39;MasterDetailService&#39;, function($scope, MasterDetailService){
+                    var self = this;
+
+<span id='ama-directives-inPlaceEdit-property-editMode'>                    /**
+</span>                     * @type {bool}
+                     * Indicates if the directive is in editMode. Initiallyset to false.
+                     */
+                    this.editMode = false;
+
+                    var backup = null;
+
+<span id='ama-directives-inPlaceEdit-method-enterEditMode'>                    /**
+</span>                     * Turns on the edit mode for the inPlaceEdit
+                     */
+                    this.enterEditMode = function (keep) {
+                        // in a master detail view, the MasterDetailService has to be notified
+                        MasterDetailService.setEditor(self);
+
+                        // set the needed properties
+                        self.deletable = $scope.deletable;
+                        self.deletableItem = $scope.deletableItem;
+                        self.type = $scope.type;
+                        self.val = $scope.val;
+                        if(!keep)
+                        {
+                            self.editMode = MasterDetailService.editMode(true);
+                        }
+                        else
+                        {
+                            self.editMode = true;
+                        }
+
+
+                        // create a backup
+                        backup = angular.copy($scope.val);
+                    };
+
+                    // inputs of type bool are always in editMode
+                    if($scope.type==&#39;bool&#39;){
+                        self.enterEditMode(true);
+                    }
+
+<span id='ama-directives-inPlaceEdit-method-post'>                    /**
+</span>                     * Posts the set properties to the API
+                     */
+                    var post = function() {
+                        // set up the object to be posted
+                        var apiObject = {
+                            name: $scope.apiName,
+                            params: $scope.apiParams || {},
+                            data: {id:$scope.apiId}
+                        };
+
+                        // the settings API is different to the others
+                        // therefore we have to modify our object a little bit
+                        if($scope.apiName == &#39;settings&#39;){
+                            apiObject.data.key = $scope.key;
+                            apiObject.data.value = self.val;
+                        } else {
+                            // for other APIs we can directly set the important value
+                            apiObject.data[$scope.key] = self.val;
+                        }
+
+
+                        // perform a POST request
+                        ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                            // on success we leave the editMode (it not type == &#39;bool&#39;)
+                            self.editMode = $scope.type == &#39;bool&#39;;
+
+                            // update $scope.val &amp; reset backup
+                            $scope.val = self.val;
+                            backup = null;
+
+                            // update the localStorage
+                            if($scope.apiId)
+                                LocalStorage.setData($scope.apiName+&#39;/&#39;+$scope.apiId, data);
+
+                            // changing price inputs sometimes affects parent objects
+                            if($scope.type == &#39;price&#39;){
+                                MasterDetailService.notifyMaster(&#39;priceChanged&#39;)
+                            }
+
+                            $scope.callback();
+
+                        });
+                    };
+
+<span id='ama-directives-inPlaceEdit-method-save'>                    /**
+</span>                     * Saves the value
+                     * @param newValue - in some cases the binding doesn&#39;t work directly, so the new value has to be set manually
+                     */
+                    this.save = function (newValue) {
+                        // if a newValue is given, use that one
+                        if(newValue !== undefined){
+                            self.val = newValue;
+                        }
+                        // Post to the API
+                        post();
+                    };
+
+<span id='ama-directives-inPlaceEdit-method-cancel'>                    /**
+</span>                     * Cancels the editing
+                     */
+                    this.cancel = function () {
+                        self.editMode = false;
+                        self.val = angular.copy(backup);
+                        backup = null;
+                    };
+
+<span id='ama-directives-inPlaceEdit-method-deleteItem'>                    /**
+</span>                     * Deletes the property or sets it to an empty string (if deletion is not allowed)
+                     */
+                    this.deleteItem = function () {
+                        if(self.deletable != false) {
+                            if(self.deletableItem){
+                                DeleteService($scope.apiName, $scope.apiId).then(function (data) {
+                                    self.deletableItem(data);
+                                });
+                            } else{
+                                self.val = &#39;&#39;;
+                                $scope.outputVal = &#39;&#39;;
+                                post();
+                            }
+                        }
+                        self.editMode = false;
+                    };
+
+<span id='ama-directives-inPlaceEdit-property-buttons'>                    /**
+</span>                     * define buttons to show aside of the input field
+                     * @type {{wrapper: boolean, wrapperClass: string, iconOnly: boolean, save: {class: string, iconClass: string, save: Function}, cancel: {class: string, iconClass: string, cancel: Function}, delete: {isSet: string, class: string, iconClass: string, delete: Function}}}
+                     */
+                    this.buttons = {
+                        wrapper: true,
+                        wrapperClass: &#39;bai-buttons&#39;,
+                        iconOnly: true,
+                        save: {
+                            class: &#39;btn btn-link btn-success btn-icon-round&#39;,
+                            iconClass: &#39;md md-check&#39;,
+                            save: self.save
+                        },
+                        cancel: {
+                            class: &#39;btn btn-link btn-warning btn-icon-round&#39;,
+                            iconClass: &#39;md md-close&#39;,
+                            cancel: self.cancel
+                        },
+                        delete: {
+                            isSet: $scope.deletable,
+                            class: &#39;btn btn-link btn-danger btn-icon-round&#39;,
+                            iconClass: &#39;md md-delete&#39;,
+                            delete: self.deleteItem
+                        }
+                    }
+                }],
+                controllerAs: &#39;ipe&#39;
+            };
+        }
+    ]
+);</pre>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ProjectCreationCtrl'>/**
+</span> * @class ama.controllers.ProjectCreationCtrl
+ * Controller for the project creation view.
+ * *DEPRECATED:* This view doesn&#39;t exist anymore.
+ */
+app.controller(&#39;ProjectCreationCtrl&#39;,[
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;LocalStorage&#39;,
+        function (ApiAbstractionLayer, LocalStorage) {
+            var self = this;
+<span id='ama-controllers-ProjectCreationCtrl-method-addProject'>            /**
+</span>             * Adds a new project to the given client
+             * @param {Object} client The client to which the project should be added
+             */
+            this.addProject = function (client) {
+                var apiObject = {
+                    name: &#39;project&#39;,
+                    data: {
+                        name: self.newProject.name,
+                        description: self.newProject.description,
+                        client: client
+                    }
+                };
+                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                    LocalStorage.setData(&#39;project/&#39;+data.id, data);
+                    self.newProject = null;
+                });
+            };
+        }
+    ]
+);</pre>
+</body>
+</html>

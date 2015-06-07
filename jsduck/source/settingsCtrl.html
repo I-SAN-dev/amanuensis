@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-SettingsCtrl'>/**
+</span> * @class ama.controllers.SettingsCtrl
+ * Controller for the app settings
+ */
+app.controller(&#39;SettingsCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;constants&#39;,
+    &#39;$scope&#39;,
+    &#39;ErrorDialog&#39;,
+    &#39;DeleteService&#39;,
+    &#39;sha256Filter&#39;,
+    &#39;btfModal&#39;,
+    &#39;$q&#39;,
+    function (ApiAbstractionLayer, LocalStorage, constants, $scope, ErrorDialog, DeleteService, sha256Filter, btfModal, $q) {
+        var self = this;
+
+
+        var modifyUser = function (type, userData) {
+            var defer = $q.defer();
+            console.log(self[type]);
+            if(self[type].password1 != self[type].password2)
+            {
+                defer.reject({code:&#39;1337&#39;,languagestring:&#39;user.passwordsdontmatch&#39;});
+            }
+            else
+            {
+                ApiAbstractionLayer(&#39;POST&#39;, {
+                    name: &#39;userdata&#39;,
+                    data: userData
+                },true).then(function(data){
+                    self.users = data;
+                    self.reset(type);
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+            }
+            return defer.promise;
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-objectKeys'>        /**
+</span>         * Will give me all keys of an object
+         * @param obj
+         * @returns {Array}
+         */
+        this.objectKeys = function(obj)
+        {
+            if(obj)
+            {
+                return Object.keys(obj);
+            }
+            return [];
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-isSetting'>        /**
+</span>         * test if the given object can be a setting
+         * @param val
+         * @returns {boolean}
+         */
+        this.isSetting = function(val)
+        {
+            return((val != &#39;%spacer%&#39;) &amp;&amp; !(typeof(val) === &#39;object&#39;));
+        };
+<span id='ama-controllers-SettingsCtrl-method-isSettingSet'>        /**
+</span>         * Test if the given object is a setting object
+         * @param val
+         * @returns {boolean}
+         */
+        this.isSettingSet = function(val)
+        {
+            return((val != &#39;%spacer%&#39;) &amp;&amp; (typeof(val) === &#39;object&#39;));
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-ffappinstalled'>        /**
+</span>         * Tries to install the amanu firefox open web app
+         * @param e - the click event
+         */
+        $scope.ffappinstalled = false;
+        this.installffapp = function(e)
+        {
+            e.preventDefault();
+
+            if(navigator.mozApps)
+            {
+                var app = navigator.mozApps.install(this.apps.firefoxapp);
+                app.onsuccess = function()
+                {
+                    if(app.result)
+                    {
+                        $scope.ffappinstalled = true;
+                        $scope.$apply();
+                    }
+                };
+            }
+            else
+            {
+                ErrorDialog({
+                    code:&#39;1337&#39;,
+                    languagestring:&#39;errors.browsertoold&#39;
+                }).activate();
+            }
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-checkffapp'>        /**
+</span>         * Checks if the ff extension is installed
+         */
+        this.checkffapp = function()
+        {
+            if(navigator.mozApps)
+            {
+                var app = navigator.mozApps.checkInstalled(this.apps.firefoxapp);
+                app.onsuccess = function()
+                {
+                    if(app.result)
+                    {
+                        $scope.ffappinstalled = true;
+                        $scope.$apply();
+                    }
+                };
+            }
+        };
+
+
+<span id='ama-controllers-SettingsCtrl-method-deleteUser'>        /**
+</span>         * Deletes a user with a given id
+         * @param e - the click event
+         * @param id - the id of the user
+         */
+        this.deleteUser = function(e, id)
+        {
+            e.preventDefault();
+            DeleteService(&#39;userdata&#39;,id).then(function(data){
+                self.users = data;
+            });
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-changeUserPass'>        /**
+</span>         * Changes the passwort of a user with a given id
+         * @param user - the user to be modified
+         */
+        this.changeUserPass = function(user)
+        {
+            var modal = btfModal({
+                templateUrl: &#39;templates/modules/changePasswordModal.html&#39;,
+                controller: function(){
+                    var changeModal = this;
+                    this.username = user.username;
+                    this.accept = function () {
+                        self.passwordChange = {
+                            password1: changeModal.password1,
+                            password2: changeModal.password2
+                        };
+                        modifyUser(&#39;passwordChange&#39;,{id: user.id, password: sha256Filter(self.passwordChange.password1)}).then(function () {
+                            modal.deactivate();
+                        }, function (error) {
+                            if(error.languagestring){
+                                changeModal.errorMessage = error.languagestring;
+                            } else {
+                                changeModal.errorMessage = error.message;
+                            }
+                        });
+                    };
+
+                    this.cancel = function () {
+                        modal.deactivate();
+                        self.reset(&#39;passwordChange&#39;);
+                    };
+                },
+                controllerAs: &#39;change&#39;
+            });
+            modal.activate();
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-reset'>        /**
+</span>         * Resets the user creation form
+         */
+        this.reset = function(type)
+        {
+            self[type] = {
+                username: &#39;&#39;,
+                email:&#39;&#39;,
+                password1:&#39;&#39;,
+                password2:&#39;&#39;
+            }
+        };
+
+<span id='ama-controllers-SettingsCtrl-method-addNewUser'>        /**
+</span>         * Adds a new user
+         */
+        this.addNewUser = function()
+        {
+            modifyUser(&#39;newUser&#39;,{
+                username: self.newUser.username,
+                email: self.newUser.email,
+                password: sha256Filter(self.newUser.password1),
+                accessgroup: 0
+            }).then(function () {}, function (error) {
+                ErrorDialog(error).activate();
+            });
+        };
+
+
+        this.response =  LocalStorage.getData(&#39;settings&#39;);
+        this.settings = this.response ? this.response.settings : {};
+        this.settingtypes = this.response ? this.response.types: {};
+        this.settingkeys = this.objectKeys(this.settings);
+
+        ApiAbstractionLayer(&#39;GET&#39;, &#39;settings&#39;).then(function (data) {
+            LocalStorage.setData(&#39;settings&#39;, data);
+            self.settings = data.settings;
+            self.settingtypes = data.types;
+            self.settingkeys = self.objectKeys(self.settings);
+        });
+
+        ApiAbstractionLayer(&#39;GET&#39;,&#39;apps&#39;).then(function(data){
+            self.apps = data;
+            self.checkffapp();
+        });
+
+        ApiAbstractionLayer(&#39;GET&#39;, {name: &#39;userdata&#39;, params: {list: 1}}).then(function(data){
+            self.users = data;
+        });
+
+        this.reset(&#39;newUser&#39;);
+        this.reset(&#39;passwordChange&#39;);
+    }
+]);</pre>
+</body>
+</html>

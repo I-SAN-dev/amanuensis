@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-ItemContainerService'>/**
+</span> * @class ama.services.ItemContainerService
+ * # ItemContainerService
+ * Holds functions to manage documents that have items associated (item containers).
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of an offer/contract/list of todos/acceptance/invoice
+ */
+app.factory(&#39;ItemContainerService&#39;,[
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;$filter&#39;,
+    &#39;$q&#39;,
+    function (ApiAbstractionLayer, LocalStorage,$filter, $q) {
+        var containerMap = {
+            offer: &#39;offers&#39;,
+            contract: &#39;contracts&#39;,
+            fileContract: &#39;fileContracts&#39;,
+            acceptance: &#39;acceptances&#39;,
+            invoice: &#39;invoices&#39;,
+            reminder: &#39;reminders&#39;
+        };
+        var updateLocalStorage = function (type, projectId, container) {
+            LocalStorage.setData(type+&#39;/&#39;+container.id, container);
+
+            var project = LocalStorage.getData(&#39;project/&#39;+projectId);
+            var list = project[containerMap[type]] || [];
+            list.push(container);
+            LocalStorage.setData(&#39;project/&#39;+projectId, project);
+
+        };
+        return {
+<span id='ama-services-ItemContainerService-method-createItemContainer'>            /**
+</span>             * Creates an item container of given type for a given project
+             * @param {string} type One of: &#39;offer&#39;, &#39;contract&#39;, &#39;accepatance&#39;, &#39;invoice&#39;, &#39;reminder&#39;
+             * @param {string|int} projectId The id of the current project
+             * @param {Object} newContainer The new item container to be posted to the API.
+             * @returns {promise} A promise containing the newly crated item container or an error object.
+             */
+            createItemContainer: function(type, projectId, newContainer) {
+                var defer = $q.defer();
+                var date = new Date;
+                newContainer.date = $filter(&#39;date&#39;)(date,&#39;yyyy-MM-dd HH:mm:ss&#39;);
+
+                var apiObject = {
+                    name: type,
+                    data: newContainer
+                };
+                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                    updateLocalStorage(type,projectId,data);
+                    defer.resolve(data);
+                });
+                return defer.promise;
+            },
+<span id='ama-services-ItemContainerService-method-updateLocalStorage'>            /**
+</span>             * Updates the {@link ama.services.LocalStorage local strage} entry of an given item container
+             * @param {string} type The type of the given item container (offer/contract/acceptance/invoice/reminder)
+             * @param {int|string} projectId The ID of the current project
+             * @param {object} container The container to update the entry for
+             */
+            updateLocalStorage: function (type, projectId, container) {
+                updateLocalStorage(type, projectId, container);
+            }
+        }
+    }
+
+]);</pre>
+</body>
+</html>

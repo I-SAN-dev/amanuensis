@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-LocalStorage'>/**
+</span> * @class ama.services.LocalStorage
+ * # LocalStorage
+ * The local storage service allows us to persistently save/retrieve data to/from HTML5 local storage
+ * @namespace js/services/localStorage
+ * @author Christian Baur, Sebastian Antosch
+ */
+app.factory(&#39;LocalStorage&#39;, [&#39;$window&#39;, &#39;$rootScope&#39;, function($window, $rootScope){
+    var encryptionKey;
+
+    angular.element($window).on(&#39;storage&#39;, function(event){
+        $rootScope.$apply();
+    });
+
+<span id='ama-services-LocalStorage-method-tryParseJSON'>    /**
+</span>     * Trys to parse a string as JSON, returns object if true, otherwise returns the String
+     * @param {string} jsonString - the string that might be json
+     */
+    var tryParseJSON = function(jsonString){
+        try {
+            var o = JSON.parse(jsonString);
+
+            // Handle non-exception-throwing cases:
+            // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+            // but... JSON.parse(null) returns &#39;null&#39;, and typeof null === &quot;object&quot;,
+            // so we must check for that, too.
+            if (o &amp;&amp; typeof o === &quot;object&quot; &amp;&amp; o !== null) {
+                return o;
+            }
+        }
+        catch (e) { }
+
+        return jsonString;
+    };
+
+<span id='ama-services-LocalStorage-method-cleanKey'>    /**
+</span>     * Cleans up a key by removing unnecessary url parameters, preventing duplicate entries
+     * @param {string} key - the key (mostly url) to be checked
+     */
+    var cleanKey = function(key)
+    {
+        var index = key.indexOf(&#39;&amp;$filter&#39;);
+        if (index == -1)
+        {
+            return key;
+        }
+        else
+        {
+            return key.substring(0, index);
+        }
+    };
+
+<span id='ama-services-LocalStorage-method-cleanUpCache'>    /**
+</span>     * Cleans up the local Storage and removes all entrys starting with http (= all cached requests)
+     * should be called when a local storage quote exceeded exception is thrown
+     */
+    var cleanUpCache = function()
+    {
+        var toClear = [];
+        for ( var i = 0, len = sessionStorage.length; i &lt; len; ++i ) {
+
+            var key = sessionStorage.key(i);
+            if (key.indexOf(&#39;http&#39;) == 0)
+            {
+                toClear.push(key);
+            }
+        }
+        /* this separation is needed due to index-changes when entrys are removed */
+        for(i in toClear)
+        {
+            sessionStorage.removeItem(toClear[i]);
+        }
+        toClear = [];
+        console.log(&#39;LocalStorage cleaned!&#39;);
+    };
+
+    var encrypt = function (actual) {
+        if(actual &amp;&amp; encryptionKey) {
+            var result = &quot;&quot;;
+            for (var i = 0; i &lt; actual.length; i++) {
+                result += String.fromCharCode(actual.charCodeAt(i) + encryptionKey.charCodeAt(i % encryptionKey.length));
+            }
+            return result;
+        }
+    };
+
+    var decrypt = function (encrypted) {
+        if(encrypted &amp;&amp; encryptionKey) {
+            var result = &quot;&quot;;
+            for (var i = 0; i &lt; encrypted.length; i++) {
+                result += String.fromCharCode(encrypted.charCodeAt(i) - encryptionKey.charCodeAt(i % encryptionKey.length));
+            }
+            return result;
+        }
+    };
+
+
+
+
+    /* Public service functions */
+    return {
+<span id='ama-services-LocalStorage-method-setData'>        /**
+</span>         * Creates or updates an entry (key-value pair) in the local storage
+         * @param: {string} key -  the storage entry&#39;s key
+         * @param: {string|object} val - value to save in the local storage
+         */
+        setData: function(key, val, encrypted){
+
+            /* If the value is an object, serialize it with Json */
+            var processedValue;
+            if(val !== null &amp;&amp; typeof val === &#39;object&#39;)
+            {
+                processedValue = JSON.stringify(val);
+            }
+            else
+            {
+                processedValue = val;
+            }
+
+            if(encrypted != false) {
+                processedValue = encrypt(processedValue);
+            }
+
+            /* Store the Data */
+            if($window.sessionStorage)
+            {
+                try
+                {
+                    $window.sessionStorage.setItem(cleanKey(key), processedValue);
+                }
+                catch(e)
+                {
+                    cleanUpCache();
+                    $window.sessionStorage.setItem(cleanKey(key), processedValue);
+                }
+            }
+            else
+            {
+                alert(&quot;Your device does not support localStorage. This is really not good, we can&#39;t do anything for you in this case.&quot;);
+            }
+        },
+
+<span id='ama-services-LocalStorage-method-getData'>        /**
+</span>         * Gets data from the local storage.
+         * @param: {string} key - The key of the storage&#39;s entry to be retrieved
+         * @return: {string|object} - the corresponding localStorage entry
+         */
+        getData: function(key, encrypted){
+            var jsonString = $window.sessionStorage.getItem(cleanKey(key));
+            if(encrypted != false){
+                jsonString = decrypt(jsonString);
+            }
+            return tryParseJSON(jsonString);
+        },
+
+<span id='ama-services-LocalStorage-method-removeItem'>        /**
+</span>         * Removes a specific item from the localStorage
+         * @param {string} key - The key of the storage&#39;s entry to be removed
+         */
+        removeItem: function (key) {
+            $window.sessionStorage.removeItem(key);
+        },
+
+<span id='ama-services-LocalStorage-method-removeCache'>        /**
+</span>         * Removes the entire data from the local storage
+         */
+        removeCache: function () {
+            $window.sessionStorage.clear();
+        },
+
+<span id='ama-services-LocalStorage-method-setKey'>        /**
+</span>         * Sets the key for encryption
+         * @param {string} key - a key coming from the API which will be used to encrypt the cache
+         */
+        setKey: function(key){
+            encryptionKey = key;
+        }
+    }
+}]);</pre>
+</body>
+</html>

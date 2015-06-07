@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-TodoDetailCtrl'>/**
+</span> * @class ama.controllers.TodoDetailCtrl
+ *
+ * Controller for the todoDetail view.
+ */
+app.controller(&#39;TodoDetailCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;MasterDetailService&#39;,
+    &#39;PanelService&#39;,
+    &#39;$stateParams&#39;,
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, $stateParams) {
+        var self = this;
+        MasterDetailService.setMaster(this);
+
+        var id = $stateParams.id;
+
+        var getTodo = function () {
+            self.todo = LocalStorage.getData(&#39;todo/&#39;+ id);
+            ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;todo&#39;,params: {id:id}}).then(function (data) {
+                self.todo = data;
+                LocalStorage.setData(&#39;todo/&#39;+id, data);
+            });
+        };
+        getTodo();
+
+<span id='ama-controllers-TodoDetailCtrl-method-nextStep'>        /**
+</span>         *
+         */
+        this.nextStep = function()
+        {
+            alert(&#39;TODO: create acceptance or invoice&#39;);
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-getStateParams'>        /**
+</span>         * Generates a stateParams object from the current stateParams for a certain state
+         * @param {string} forState The state for which the stateParams should be generated
+         * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+         */
+        this.getStateParams = function(forState){
+            if(forState == &#39;itemCreation&#39;){
+                return {
+                    referrer: &#39;app.todoDetail&#39;,
+                    referrerParams: {
+                        id: id
+                    },
+                    for: &#39;todo&#39;,
+                    forId: id
+                };
+            }
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-todoItemChanged'>        /**
+</span>         * Reloads the todoList
+         */
+        this.todoItemChanged = function () {
+            getTodo();
+        }
+    }
+]);</pre>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-OfferCreationCtrl'>/**
+</span> * @class ama.controllers.OfferCreationCtrl
+ *
+ * Controller for the offer creation view.
+ */
+app.controller(&#39;OfferCreationCtrl&#39;, [
+    &#39;RefnumberService&#39;,
+    &#39;ItemContainerService&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$state&#39;,
+    function (RefnumberService, ItemContainerService, $stateParams, $state) {
+        var self = this;
+        var project = $stateParams.project;
+        var projectId = project.id;
+<span id='ama-controllers-OfferCreationCtrl-property-projectName'>        /**
+</span>        * Name of the current project (derived from stateParams)
+        * @type {string}
+        */
+        this.projectName = project.name;
+
+<span id='ama-controllers-OfferCreationCtrl-property-newOffer'>        /**
+</span>         * The offer to be created.
+         * @type {{refnumber: string, project: *}}
+         */
+        this.newOffer = {
+            refnumber: &#39;&#39;,
+            project: projectId
+        };
+
+
+        RefnumberService(&#39;offers&#39;, projectId).then(function (data) {
+            if(self.newOffer.refnumber === &#39;&#39;){
+                self.newOffer.refnumber = data.refnumber;
+            }
+        });
+
+<span id='ama-controllers-OfferCreationCtrl-method-createOffer'>        /**
+</span>         * Creates a new offer in the current project.
+         */
+        this.createOffer = function () {
+            ItemContainerService.createItemContainer(&#39;offer&#39;, projectId, self.newOffer).then(function (data) {
+                // go to where we came from
+                var to = $stateParams.referrer;
+                var toParams = $stateParams.referrerParams;
+                $state.go(to,toParams);
+            });
+        };
+    }
+]);</pre>
+</body>
+</html>

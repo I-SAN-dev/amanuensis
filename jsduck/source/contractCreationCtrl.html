@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ContractCreationCtrl'>/**
+</span> * @class ama.controllers.ContractCreationCtrl
+ * Controller for the contract creation view.
+ */
+app.controller(&#39;ContractCreationCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;RefnumberService&#39;,
+    &#39;ItemContainerService&#39;,
+    &#39;fileUploadService&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$state&#39;,
+    &#39;constants&#39;,
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants) {
+        var self = this;
+        var project = $stateParams.project;
+        var projectId = project.id;
+<span id='ama-controllers-ContractCreationCtrl-property-projectName'>        /**
+</span>         * Name of the current project (derived from stateParams)
+         * @type {string}
+         */
+        this.projectName = project.name;
+
+<span id='ama-controllers-ContractCreationCtrl-property-newContract'>        /**
+</span>         * The new contract to be created
+         * @type {{refnumber: string, project: int}}
+         */
+        this.newContract = {
+            refnumber: &#39;&#39;,
+            project: project.id
+        };
+
+        RefnumberService(&#39;contracts&#39;, projectId).then(function (data) {
+            if(self.newContract.refnumber === &#39;&#39;){
+                self.newContract.refnumber = data.refnumber;
+            }
+        });
+
+<span id='ama-controllers-ContractCreationCtrl-method-createContract'>        /**
+</span>         * Creates a new contract
+         */
+        this.createContract = function () {
+            if(self.fileContract){
+                ItemContainerService.createItemContainer(&#39;fileContract&#39;,projectId, self.newContract).then(function (data) {
+                    var file = self.fileContract;
+                    console.log(file);
+                    var uploadUrl = constants.BASEURL+&#39;/api/?action=fileContract&amp;uploadfor=&#39;+data.id;
+                    fileUploadService.uploadFile(file,uploadUrl).then(function(path){
+                        ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;fileContract&#39;, data: {id: data.id, path: path}}).then(function (data) {
+                            ItemContainerService.updateLocalStorage(&#39;fileContract&#39;, projectId, data);
+                            // go to where we came from
+                            var to = $stateParams.referrer;
+                            var toParams = $stateParams.referrerParams;
+                            $state.go(to,toParams);
+                        });
+                    });
+
+                });
+
+            } else {
+                ItemContainerService.createItemContainer(&#39;contract&#39;, projectId, self.newContract).then(function (data) {
+                    // go to where we came from
+                    var to = $stateParams.referrer;
+                    var toParams = $stateParams.referrerParams;
+                    $state.go(to,toParams);
+                });
+            }
+        };
+    }
+]);</pre>
+</body>
+</html>

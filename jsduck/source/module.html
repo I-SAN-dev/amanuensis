@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ModuleCtrl'>/**
+</span> * @class ama.controllers.ModuleCtrl
+ * Controller for the {@link ama.directives.amaModule amaModule directive}.
+ * Shows a module with content specified in &#39;js/scriptsbytemplate/modules.jst&#39;
+ *
+ * @author Christian Baur
+ */
+app.controller(&#39;ModuleCtrl&#39;, [
+    &#39;$scope&#39;,
+    &#39;modules&#39;,
+    &#39;$state&#39;,
+    &#39;$rootScope&#39;,
+    function ($scope, modules, $state, $rootScope) {
+        $scope.template = &#39;templates/modules/&#39;+$scope.name+&#39;.html&#39;;
+
+        var self = this;
+
+<span id='ama-controllers-ModuleCtrl-method-getContent'>        /**
+</span>         * gets the module&#39;s content for the specified state
+         * @param state - name of the ui-router state
+         */
+        var getContent = function (state) {
+            var module = modules[$scope.name];
+            var specificModule = module[state];
+            self.content = module.content;
+            if(specificModule){
+                self.content = angular.extend({}, module.content, specificModule);
+            }
+        };
+
+        $rootScope.$on(&#39;$viewContentLoaded&#39;, function (event) {
+            console.log(&#39;view content loaded&#39;);
+            getContent($state.current.name);
+        });
+
+
+
+    }
+]);
+
+<span id='ama-directives-amaModule'>/**
+</span> * @class ama.directives.amaModule
+ * Shows a module with custom content
+ *
+ * ## Usage
+ *     &lt;div ama-module=&quot;moduleName&quot;&gt;&lt;/div&gt;
+ */
+app.directive(&#39;amaModule&#39;, [function(){
+    return {
+        restrict: &#39;A&#39;,
+        replace: true,
+        scope: {
+            name: &#39;=amaModule&#39;
+        },
+        templateUrl: &#39;templates/modules/amaModule.html&#39;,
+        controller: &#39;ModuleCtrl&#39;,
+        controllerAs: &#39;module&#39;
+    }
+}]);</pre>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-PdfService'>/**
+</span> * @class ama.services.PdfService
+ * Shows a PDF representation of a document in a popup window.
+ * @param {Event} event The event that led to the call of the service
+ * @param {boolean} preview Indicates if a preview should be rendered or the actual PDf should be shown
+ * @param {string} forType The type of the document for which the PDF representation shall be shown
+ * @param {string|int} forId The ID of the document for which the PDF representation shall be shown
+ * @param {string} pdfPath *Optional.* The path to the PDF saved on the server.
+ * @returns {promise} A promise containing the answer from the API
+ */
+app.factory(&#39;PdfService&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;constants&#39;,
+    &#39;$q&#39;,
+    function (ApiAbstractionLayer, constants, $q) {
+        var popup;
+        var openPopup = function (viewPath) {
+            popup = window.open(
+                viewPath,
+                &#39;&#39;,
+                &#39;height=500,width=900&#39;
+            );
+        };
+
+        return function (event, preview, forType, forId, pdfPath) {
+            event.preventDefault();
+
+
+            var defer = $q.defer();
+
+
+            if(preview) {
+                openPopup(constants.BASEURL+&#39;/api?action=pdfgen&amp;for=&#39;+forType+&#39;&amp;forid=&#39;+forId);
+                if(forType == &#39;contract&#39;){
+                    popup.print();
+                }
+                defer.resolve();
+
+            } else {
+                if(pdfPath){
+                    openPopup(constants.BASEURL+&#39;/api?action=protectedpdf&amp;path=&#39;+pdfPath);
+                    if(forType == &#39;contract&#39;){
+                        popup.print();
+                    }
+                    defer.resolve();
+                } else {
+                    var apiObject = {
+                        name: &#39;pdfgen&#39;,
+                        data: {
+                            for: forType,
+                            forid: forId
+                        }
+                    };
+
+
+                    ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                        defer.resolve(data);
+                    }, function (error) {
+                        defer.reject(error);
+                    });
+
+                }
+            }
+
+            return defer.promise;
+
+
+
+
+        };
+    }
+]);</pre>
+</body>
+</html>

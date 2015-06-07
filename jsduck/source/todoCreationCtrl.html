@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-TodoCreationCtrl'>/**
+</span> * @class ama.controllers.TodoCreationCtrl
+ * Controller for the todolist creation view
+ */
+app.controller(&#39;TodoCreationCtrl&#39;, [
+    &#39;ItemContainerService&#39;,
+    &#39;ErrorDialog&#39;,
+    &#39;$state&#39;,
+    &#39;$stateParams&#39;,
+    function (ItemContainerService,ErrorDialog,$state,$stateParams) {
+        var self = this;
+        if(!$stateParams.project){
+            ErrorDialog({code:&#39;1337&#39;,languagestring:&#39;errors.noProjectSpecified&#39;}).activate();
+            $state.go(&#39;app.dashboard&#39;)
+        }
+        var project = $stateParams.project;
+        var projectId = project.id;
+<span id='ama-controllers-TodoCreationCtrl-property-projectName'>        /**
+</span>         * Name of the current project (derived from stateParams)
+         * @type {string}
+         */
+        this.projectName = project.name;
+
+<span id='ama-controllers-TodoCreationCtrl-property-newTodo'>        /**
+</span>         * The todolist to be created
+         * @type {{project: *}}
+         */
+        this.newTodo = {
+            project: projectId
+        };
+
+<span id='ama-controllers-TodoCreationCtrl-method-createTodo'>        /**
+</span>         * Creates a new todoList in the current project
+         */
+        this.createTodo = function () {
+            ItemContainerService.createItemContainer(&#39;todo&#39;,projectId,self.newTodo).then(function (data) {
+                $state.go(&#39;app.todoDetail&#39;,{id:data.id});
+            });
+        }
+    }
+]);</pre>
+</body>
+</html>

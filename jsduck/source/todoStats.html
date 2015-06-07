@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-directives-todoStats'>/**
+</span> * @class ama.directives.todoStats
+ *
+ * The todoStats directive
+ * Shows a nice todo/done graph
+ *
+ * ## Usage
+ *
+ *     &lt;div todo-stats=&quot;theTodoStatsObject&quot;&gt;&lt;/div&gt;
+ * @author Sebastian Antosch
+ */
+app.directive(&#39;todoStats&#39;, [
+    function () {
+        // these input types are available
+
+        return {
+            restrict: &#39;A&#39;,
+            scope: {
+                stats:&#39;=todoStats&#39;
+            },
+            controller: function ($scope, amaDateFilter) {
+
+                $scope.angle=90;
+                $scope.bgorfg = &#39;#FFB300&#39;;
+
+                $scope.$watch(&#39;stats&#39;, function(){
+
+                    if($scope.stats)
+                    {
+                        $scope.open = $scope.stats.items_total - $scope.stats.items_done;
+                        $scope.done = $scope.stats.items_done;
+                        $scope.due = $scope.stats.due;
+
+
+                        /* calc percent */
+                        var percent = $scope.stats.items_total == 0 ? 0 : $scope.done / $scope.stats.items_total;
+                        /* calc degrees */
+                        var degrees = percent * 360;
+                        if(degrees &lt; 180)
+                        {
+                            $scope.bgorfg = &#39;#FFB300&#39;;
+                            $scope.angle = 90+degrees;
+                        }
+                        else
+                        {
+                            $scope.bgorfg = &#39;#009688&#39;;
+                            $scope.angle = -90+degrees;
+                        }
+
+                    }
+
+
+                });
+
+                $scope.checkOverdue = function()
+                {
+                    if($scope.stats)
+                    {
+                        var duedate = $scope.stats.due.replace(/\s/g, &quot;T&quot;);
+                        return Date.parse(duedate) &lt; Date.now();
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+
+
+
+
+
+
+            },
+            replace: true,
+            templateUrl: &#39;templates/directives/todoStats.html&#39;
+        }
+    }
+]);</pre>
+</body>
+</html>

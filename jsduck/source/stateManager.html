@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-StateManager'>/**
+</span> * @class ama.services.StateManager
+ * # StateManager
+ * Holds functions to manage document states.
+ */
+app.factory(&#39;StateManager&#39;,[
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;$q&#39;,
+    function (ApiAbstractionLayer, LocalStorage, $q) {
+        return {
+<span id='ama-services-StateManager-method-setState'>            /**
+</span>             * Sets a new state for a given document
+             * @param {string} type The type of document
+             * @param {int|string} id The ID of the document
+             * @param {int|string} state The status code of the desired new state
+             * @returns {promise} A promise containing the changed document or an error object
+             */
+            setState: function(type, id, state){
+                var defer = $q.defer();
+                ApiAbstractionLayer(&#39;POST&#39;,{name:type, data:{id: id, state:state}}).then(function (data) {
+                    LocalStorage.setData(type+&#39;/&#39;+id, data);
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+                return defer.promise;
+            }
+        }
+    }
+]);</pre>
+</body>
+</html>

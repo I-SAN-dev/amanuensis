@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-filters-gender'>/**
+</span> * @class ama.filters.gender
+ * # The gender filter
+ * Converts a gender code (&#39;f&#39; for female, &#39;m&#39; for male) to a language string.
+ *
+ * ## Usage
+ * HTML:
+ *
+ *     {{genderCode|gender}}
+ *
+ * JavaScript:
+ *
+ *     $filter(&#39;gender&#39;)(genderCode)
+ *
+ * genderCode can be one of: &#39;f&#39;, &#39;m&#39;
+ */
+app.filter(&#39;gender&#39;, function ($filter) {
+    var genders = {
+        m: &quot;clients.contactGender.male&quot;,
+        f: &quot;clients.contactGender.female&quot;
+    };
+    return function (input) {
+        return $filter(&#39;translate&#39;)(genders[input]);
+    }
+});</pre>
+</body>
+</html>

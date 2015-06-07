@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ClientCategoriesCtrl'>/**
+</span> * @class ama.controllers.ClientCategoriesCtrl
+ * Controller for the client categories list view.
+ * Gets the client categories list and holds functions to add and delete client categories in the database.
+ *
+ * *Deprecated:* All client category concerns are no handled within {@link ama.controllers.ClientDetailCtrl ClientDetailCtrl}
+ */
+app.controller(&#39;ClientCategoriesCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;DeleteService&#39;,
+    function (ApiAbstractionLayer, LocalStorage, DeleteService) {
+
+<span id='ama-controllers-ClientCategoriesCtrl-property-allCategories'>        /**
+</span>         * An array containing all client categories.
+         * @type {Object}
+         */
+        this.allCategories = LocalStorage.getData(&#39;clientCategories&#39;);
+        ApiAbstractionLayer(&#39;GET&#39;, &#39;client_categories&#39;).then(function (data) {
+            self.allCategories = data;
+            LocalStorage.setData(&#39;clientCategories&#39;, data)
+        });
+
+        var self = this;
+
+<span id='ama-controllers-ClientCategoriesCtrl-method-addCategory'>        /**
+</span>         * Creates a new client category
+         */
+        this.addCategory = function () {
+            ApiAbstractionLayer(&#39;POST&#39;, {name: &#39;client_categories&#39;, data: self.newCategory}).then(function (data) {
+                self.allCategories.push(data);
+                LocalStorage.setData(&#39;clientCategories&#39;, self.allCategories);
+                self.newCategory = null;
+            });
+        };
+
+<span id='ama-controllers-ClientCategoriesCtrl-method-deleteCategory'>        /**
+</span>         * Deletes a client category by given ID
+         * @param {int} id The id of the category to be deleted.
+         */
+        this.deleteCategory = function (id) {
+            DeleteService(&#39;client_categories&#39;, id).then(function (data) {
+                self.allCategories = data;
+                LocalStorage.setData(&#39;clientCategories&#39;, self.allCategories);
+            });
+        };
+    }]);</pre>
+</body>
+</html>

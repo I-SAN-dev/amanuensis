@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ItemPresetsCtrl'>/**
+</span> * @class ama.controllers.ItemPresetsCtrl
+ * Controller for the item presets (master) list.
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
+app.controller(&#39;ItemPresetsCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;DeleteService&#39;,
+    &#39;$filter&#39;,
+    &#39;$stateParams&#39;,
+    &#39;MasterDetailService&#39;,
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, $stateParams, MasterDetailService) {
+        MasterDetailService.setMaster(this);
+        var self = this;
+
+<span id='ama-controllers-ItemPresetsCtrl-property-currency'>        /**
+</span>         * The currency to be used. *DEPRECATED.*
+         * TODO: get this from config
+         * @type {string}
+         */
+        this.currency = &#39;€&#39;;
+
+<span id='ama-controllers-ItemPresetsCtrl-property-presets'>        /**
+</span>         * List of all item presets
+         * @type {Array}
+         */
+        this.presets = LocalStorage.getData(&#39;itemPresets&#39;);
+
+        // get the list of item presets and cache it
+        ApiAbstractionLayer(&#39;GET&#39;, &#39;item_preset&#39;).then(function (data) {
+            self.presets = data;
+            LocalStorage.setData(&#39;itemPresets&#39;, data);
+
+            // set the first list entry as detail of none is supplied
+            if(!$stateParams.id &amp;&amp; data.length &gt; 0){
+                MasterDetailService.notifyController(&#39;setDetail&#39;,data[0]);
+                $stateParams.id = data[0].id;
+            }
+        });
+
+<span id='ama-controllers-ItemPresetsCtrl-method-deletePreset'>        /**
+</span>         * Deletes a preset by given id.
+         * @param {int} id - the preset&#39;s id
+         */
+        this.deletePreset = function (id) {
+            DeleteService(&#39;item_preset&#39;, id).then(function (data) {
+                self.presets = data;
+                LocalStorage.setData(&#39;itemPresets&#39;, data);
+            })
+        };
+
+
+    }
+]);</pre>
+</body>
+</html>

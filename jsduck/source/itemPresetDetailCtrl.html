@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ItemPresetDetailCtrl'>/**
+</span> * @class ama.controllers.ItemPresetDetailCtrl
+ * Controller for the item preset detail view
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
+app.controller(&#39;ItemPresetDetailCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;MasterDetailService&#39;,
+    &#39;$stateParams&#39;,
+    function (ApiAbstractionLayer, MasterDetailService, $stateParams) {
+        MasterDetailService.setDetail(this);
+        var self = this;
+
+<span id='ama-controllers-ItemPresetDetailCtrl-method-detailChanged'>        /**
+</span>         * Sets the preset detail. This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
+         * @param preset - the new preset
+         * @param keyboard - indicates if the detail was changed by keyboard input
+         */
+        this.detailChanged = function (preset, keyboard) {
+            // the preset from the list is equivalent to what we would get from the API, so we don&#39;t need a request here
+            self.preset = preset;
+        };
+
+<span id='ama-controllers-ItemPresetDetailCtrl-method-deletePreset'>        /**
+</span>         * Deletes the current preset by calling the delete action in the master controller
+         */
+        this.deletePreset = function () {
+            MasterDetailService.notifyMaster(&#39;deletePreset&#39;, self.preset.id);
+        };
+
+        // if the itemPreset state is entered with a certain id, we want to set the preset detail for this id
+        if($stateParams.id){
+            // this time, a request is needed to get the item preset
+            ApiAbstractionLayer(&#39;GET&#39;,{name:&#39;item_preset&#39;,params:{id:$stateParams.id}}).then(function (data) {
+                MasterDetailService.notifyController(&#39;setDetail&#39;,data);
+            });
+        }
+
+    }
+]);</pre>
+</body>
+</html>

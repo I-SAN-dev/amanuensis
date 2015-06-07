@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-InvoiceDetailCtrl'>/**
+</span> * @class ama.controllers.InvoiceDetailCtrl
+ * Controller for the invoice detail view
+ */
+app.controller(&#39;InvoiceDetailCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;MasterDetailService&#39;,
+    &#39;MailService&#39;,
+    &#39;PdfService&#39;,
+    &#39;DeleteService&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$scope&#39;,
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, $stateParams, $scope) {
+
+        MasterDetailService.setMaster(this);
+        var self = this;
+
+        // (re)set a flag indicating if the Controller was fully loaded
+        // needed for setting transition classes
+        $scope.$on(&#39;$stateChangeStart&#39;, function (event, toState) {
+            self.loaded = false;
+        });
+        setTimeout(function () {
+            self.loaded = true;
+            $scope.$apply();
+        }, 1000);
+
+        var id = $stateParams.id;
+
+<span id='ama-controllers-InvoiceDetailCtrl-property-invoice'>        /**
+</span>         * The invoice.
+         * @type Object
+         */
+        this.invoice = LocalStorage.getData(&#39;invoice/&#39;+id);
+        var getInvoice = function () {
+            ApiAbstractionLayer(&#39;GET&#39;, {name: &#39;invoice&#39;, params: {id:id}}).then(function (data) {
+                self.invoice = data;
+                LocalStorage.setData(&#39;invoice/&#39;+id, data);
+            });
+        };
+        getInvoice();
+
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-openMailPreview'>        /**
+</span>         * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current invoice.
+         * @param {Event} event The event (click) that led to the function call
+         */
+        this.openMailPreview = function (event) {
+            event.preventDefault();
+            MailService.showPreview(&#39;invoice&#39;,self.invoice.id);
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-send'>        /**
+</span>         * Uses the {@link ama.services.MailService MailService} to send a mail with the current invoice.
+         */
+        this.send = function () {
+            MailService.send(&#39;invoice&#39;,self.offer.id);
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-deleteItem'>        /**
+</span>         * Deletes an item by given id.
+         * @param {id} itemId The id of the item to be deleted
+         */
+        this.deleteItem = function (itemId) {
+            DeleteService(&#39;item&#39;, itemId).then(function (data) {
+                self.invoice.items = data;
+                LocalStorage.setData(&#39;invoice/&#39;+id, self.invoice);
+            });
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-priceChanged'>        /**
+</span>         * Gets called when the price of an item inside the invoice changes.
+         * Reloads the invoice.
+         * @param {Object} item The item that was changed.
+         */
+        this.priceChanged = function (item) {
+            self.loaded = false;
+            getInvoice();
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-getStateParams'>        /**
+</span>         * Generates a stateParams object from the current stateParams for a certain state
+         * @param {string} forState The state for which the stateParams should be generated
+         * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+         */
+        this.getStateParams = function(forState){
+            if(forState == &#39;itemCreation&#39;){
+                return {
+                    referrer: &#39;app.invoiceDetail&#39;,
+                    referrerParams: {
+                        id: id
+                    },
+                    for: &#39;invoice&#39;,
+                    forId: id
+                };
+            }
+        };
+    }
+]);</pre>
+</body>
+</html>

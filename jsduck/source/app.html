@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama'>/**
+</span> * @class ama
+ * Main application. Handles dependencies and routing.
+ */
+var app = angular.module(&#39;ama&#39;, [&#39;ui.router&#39;, &#39;btford.modal&#39;,&#39;pascalprecht.translate&#39;, &#39;ngAnimate&#39;, &#39;ngSanitize&#39;,&#39;pickadate&#39;,&#39;ui.sortable&#39;]);
+
+
+app.config( [
+    &#39;$compileProvider&#39;,
+    function( $compileProvider )
+    {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|chrome|chrome-extension):/);
+    }
+]);
+
+<span id='ama-method-run'>/**
+</span> * @method run
+ *
+ */
+app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
+
+
+    /*
+     * Checks if the current user is logged in and sets the &#39;loggedin&#39; variable
+     * which will be used to get the login state at any other point
+     * @return {Object}
+     */
+    var getLoginState = function(){
+        console.log(&#39;loggedIn&#39;,$rootScope.loggedIn);
+        var defer = $q.defer();
+        AuthService.currentUser().then(function (data) {
+            LocalStorage.setKey(data.fe_key);
+            $rootScope.loggedIn = true;
+            $rootScope.currentUserName = data.username;
+            defer.resolve();
+
+        });
+        return defer.promise;
+    };
+
+    // redirects to login state if authentication is required for the next state and the user is not logged in
+    var loginLogic = function (event, toState, toParams) {
+        var requireLogin = toState.data.requireLogin;
+        if (requireLogin &amp;&amp; !$rootScope.loggedIn) {
+            event.preventDefault();
+            $state.go(&#39;login&#39;, {referrer:toState.name, referrerParams:toParams});
+        }
+    };
+
+
+
+<span id='ama-property-'>    /**
+</span>     * Processes the login logic at every stateChange
+     */
+    $rootScope.$on(&#39;$stateChangeStart&#39;, function (event, toState, toParams) {
+        console.log(toState);
+        // if loggedIn is not set yet, wait for getLoginState
+        if($rootScope.loggedIn === undefined)
+        {
+            getLoginState().then(function () {
+                loginLogic(event, toState, toParams);
+            });
+        } else {
+            loginLogic(event, toState, toParams);
+        }
+
+    });
+
+
+    // trigger a refresh whenever user clicks history buttons
+    window.onpopstate = function (e) {
+        $state.reload();
+
+    };
+
+    angular.element(document).on(&quot;click&quot;, function(e) {
+        $rootScope.$broadcast(&quot;documentClicked&quot;, angular.element(e.target));
+    });
+
+});
+<span id='ama-constants-sites'>/**
+</span> * @class ama.constants.sites
+ * The &#39;sites&#39; constant.
+ * Contains information about all app states,
+ * each including the actual state object and any additional information needed
+ */
+app.constant(&#39;sites&#39;, [
+    {
+        name: &#39;index&#39;,
+        stateObject: {
+            url: &#39;/index&#39;,
+            views: {
+                &#39;mainContent&#39;: {
+                    templateUrl: &#39;templates/pages/start.html&#39;
+                }
+            },
+            data: {
+                requireLogin: false
+            }
+        }
+    },
+    {
+        name:&#39;login&#39;,
+        stateObject: {
+            url: &#39;/login&#39;,
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                &#39;mainContent&#39;: {
+                    templateUrl: &#39;templates/pages/login.html&#39;
+                }
+            },
+            data: {
+                id: &#39;login&#39;,
+                name: &#39;Login&#39;
+            }
+        },
+        menus: {
+            topRightNav: {
+                name: &#39;Logout&#39;,
+                title: &#39;Logout&#39;,
+                icon: &#39;md md-lg md-exit-to-app&#39;,
+                iconOnly: true,
+                service: &#39;AuthService&#39;,
+                click: &#39;logout&#39;
+            }
+        }
+    },
+    {
+        name: &#39;app&#39;,
+        stateObject: {
+            abstract: true,
+            url: &#39;&#39;,
+            data: {
+                // all child states will require login
+                requireLogin: true
+            },
+            views: {
+                &#39;mainContent&#39;: {
+                    template: &#39;&lt;div data-ui-view=&quot;appContent&quot; class=&quot;fullheight next-fullheight&quot;&gt;&lt;/div&gt;&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.dashboard&#39;,
+        stateObject: {
+            url: &#39;/dashboard&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/dashboard.html&#39;
+                }
+            }
+        },
+        menus: {
+            mainNav: {
+                name: &#39;dashboard.menuName&#39;,
+                title: &#39;dashboard.menuTitle&#39;,
+                icon: &#39;md md-home&#39;
+            }
+        }
+    },
+    {
+        name: &#39;app.clients&#39;,
+        stateObject: {
+            url: &#39;/clients&#39;,
+            abstract: true,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/clients.html&#39;
+                }
+            },
+            params: {
+                hasDetails: true
+            }
+        }
+    },
+    {
+        name: &#39;app.clients.detail&#39;,
+        stateObject: {
+            url: &#39;/:id&#39;
+        },
+        menus: {
+            mainNav: {
+                name: &#39;clients.menuName&#39;,
+                title: &#39;clients.menuTitle&#39;,
+                icon: &#39;md md-people&#39;
+            }
+        }
+    },
+    {
+        name: &#39;app.clientCategories&#39;,
+        stateObject: {
+            url:&#39;/client-categories&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/clientCategories.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.clientCreation&#39;,
+        stateObject: {
+            url:&#39;/new-client&#39;,
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/clientCreation.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.offers&#39;,
+        stateObject: {
+            url: &#39;/offers&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/offers.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.offerDetail&#39;,
+        stateObject: {
+            url: &#39;/offers/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/offerDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.offerCreation&#39;,
+        stateObject: {
+            url: &#39;/new-offer&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/offerCreation.html&#39;
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: &#39;app.contractCreation&#39;,
+        stateObject: {
+            url: &#39;/new-contract&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/contractCreation.html&#39;
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: &#39;app.acceptanceCreation&#39;,
+        stateObject: {
+            url: &#39;/new-acceptance&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/acceptanceCreation.html&#39;
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: &#39;app.invoiceCreation&#39;,
+        stateObject: {
+            url: &#39;/new-invoice&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/invoiceCreation.html&#39;
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: &#39;app.projectCreation&#39;,
+        stateObject: {
+            url: &#39;/new-project&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/projectCreation.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.projectDetail&#39;,
+        stateObject: {
+            url: &#39;/project/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/projectDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name: &#39;app.projectArchive&#39;,
+        stateObject: {
+            url: &#39;/project-archive&#39;,
+            abstract: true,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/projects.html&#39;
+                }
+            },
+            params: {
+                hasDetails: true
+            }
+        }
+    },
+    {
+        name: &#39;app.projectArchive.detail&#39;,
+        stateObject:{
+            url: &#39;/:id&#39;
+        }
+    },
+    {
+        name: &#39;app.contractDetail&#39;,
+        stateObject: {
+            url: &#39;/contracts/:type/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/contractDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.todoDetail&#39;,
+        stateObject: {
+            url: &#39;/todos/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/todoDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.todoCreation&#39;,
+        stateObject: {
+            url: &#39;/new-todo&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/todoCreation.html&#39;
+                }
+            },
+            params: {
+                project: null,
+                referrer: null,
+                referrerParams: null
+            }
+        }
+    },
+    {
+        name: &#39;app.acceptanceDetail&#39;,
+        stateObject: {
+            url: &#39;/acceptances/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/acceptanceDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.invoiceDetail&#39;,
+        stateObject: {
+            url: &#39;/invoices/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/invoiceDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.itemPresets&#39;,
+        stateObject: {
+            abstract: true,
+            url: &#39;/item-presets&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/itemPresets.html&#39;
+                }
+            },
+            params: {
+                hasDetails: true
+            }
+        }
+    },
+    {
+        name: &#39;app.itemPresets.detail&#39;,
+        stateObject: {
+            url: &#39;/:id&#39;
+        }
+    },
+    {
+        name:&#39;app.itemPresetCreation&#39;,
+        stateObject: {
+            url: &#39;/new-item-preset&#39;,
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/itemPresetCreation.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.itemCreation&#39;,
+        stateObject: {
+            url: &#39;/new-item/:for/:forId&#39;,
+            params: {
+                referrer: null,
+                referrerParams: null
+            },
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/itemCreation.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.settings&#39;,
+        stateObject: {
+            url: &#39;/settings&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/settings.html&#39;
+                }
+            }
+        },
+        menus: {
+            topRightNav: {
+                name: &#39;Settings&#39;,
+                title: &#39;Settings&#39;,
+                icon: &#39;md md-lg md-settings&#39;,
+                iconOnly: true
+            }
+        }
+    }
+
+]);
+
+<span id='ama-constants-sites-method-config'>/**
+</span> * @method config
+ * App Config
+ * Configures i18n and app states
+ */
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants, $locationProvider,pickadateI18nProvider) {
+    /*
+     * Configure the i18n service
+     */
+    $translateProvider.useStaticFilesLoader({
+        prefix: &#39;lang/&#39; + constants.LANGUAGE_PREFIX,
+        suffix: constants.LANGUAGE_SUFFIX
+    });
+    /*
+     * Set default language
+     */
+    $translateProvider.preferredLanguage(constants.LANGUAGE);
+
+
+
+
+    // create all app states based on the &#39;sites&#39; constant
+    var states = sites;
+    for(var i= 0; i&lt;states.length; i++){
+        $stateProvider.state(states[i].name, states[i].stateObject);
+    }
+
+
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise(&#39;/dashboard&#39;);
+
+    pickadateI18nProvider.translations = {
+            prev: &#39;&lt;i class=&quot;md md-chevron-left&quot;&gt;&lt;/i&gt;&#39;,
+            next: &#39;&lt;i class=&quot;md md-chevron-right&quot;&gt;&lt;/i&gt;&#39;
+    }
+});</pre>
+</body>
+</html>

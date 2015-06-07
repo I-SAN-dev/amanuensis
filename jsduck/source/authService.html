@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-AuthService'>/**
+</span> * @class ama.services.AuthService
+ * # Authentication Service
+ * Provides functions to log in, log out and get the login state and the current user
+ */
+app
+.factory(&#39;AuthService&#39;, [
+        &#39;$q&#39;,
+        &#39;$http&#39;,
+        &#39;sha256Filter&#39;,
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;$rootScope&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;ErrorDialog&#39;,
+        function($q, $http, sha256Filter, ApiAbstractionLayer, $rootScope, LocalStorage, ErrorDialog){
+
+        return {
+<span id='ama-services-AuthService-method-currentUser'>            /**
+</span>             * Gets the currently logged in user
+             * @param {bool} noErrorModal *Optional.* If true, no message will be shown in case of an error.
+             * @returns {promise} A promise containing the current user or an error object.
+             */
+            currentUser: function(noErrorModal){
+                return ApiAbstractionLayer(&#39;GET&#39;,&#39;userdata&#39;, noErrorModal);
+            },
+
+<span id='ama-services-AuthService-method-login'>            /**
+</span>             * Tries to login the user with the provided data
+             * @param email - the user&#39;s mail address
+             * @param password - the user&#39;s password
+             * @returns {Object}
+             */
+            login: function(email, password) {
+                var deferred = $q.defer();
+                if(!$rootScope.loggedIn) {
+                    ApiAbstractionLayer(&#39;GET&#39;, {name: &#39;login&#39;, params: {action: &#39;login&#39;, email: email}})
+                        .then(function (result) {
+                            if (password &amp;&amp; result.salt &amp;&amp; result.token) {
+                                var token = result.token;
+                                var salt = result.salt;
+
+                                var hashedPass = sha256Filter(password);
+                                var passSalt = sha256Filter(hashedPass + salt);
+                                var passToSend = sha256Filter(passSalt + token);
+                            } else {
+                                deferred.reject();
+                            }
+                            ApiAbstractionLayer(&#39;POST&#39;, {
+                                name: &#39;login&#39;,
+                                data: {action: &#39;login&#39;, email: email, password: passToSend}
+                            })
+                                .then(function (data) {
+                                    $rootScope.loggedIn = true;
+                                    LocalStorage.setKey(data.fe_key);
+                                    deferred.resolve(data);
+                                }, function (error) {
+                                    deferred.reject(error);
+                                });
+
+                        }, function (error) {
+                            deferred.reject(error);
+                        });
+                } else {
+                    var error = {code:&#39;Fehler&#39;, message: &#39;Already logged in&#39;};
+                    deferred.reject(error);
+                    ErrorDialog(error).activate();
+                }
+
+
+                return deferred.promise;
+
+            },
+
+<span id='ama-services-AuthService-method-logout'>            /**
+</span>             * Tries to log out the current user
+             * @returns {promise}
+             */
+            logout: function(){
+                var defer = $q.defer();
+                ApiAbstractionLayer(&#39;GET&#39;, &#39;logout&#39;).then(function (result) {
+                    $rootScope.loggedIn = false;
+                    LocalStorage.removeCache();
+                    defer.resolve(result);
+                }, function (error) {
+                    defer.reject(error);
+                });
+                return defer.promise;
+            },
+
+<span id='ama-services-AuthService-method-isLoggedIn'>            /**
+</span>             * Gets the login state of the current user
+             * @returns {promise} - promise containing the login state as boolean: true if logged in, false if not
+             */
+            isLoggedIn: function(){
+                return ApiAbstractionLayer(&#39;GET&#39;,&#39;login&#39;);
+            }
+        }
+    }]);</pre>
+</body>
+</html>

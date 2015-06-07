@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-RootCtrl'>/**
+</span> * @class ama.controllers.RootCtrl
+ * Just a first controller for the app. Doesn&#39;t do anything apart from logging &quot;Hello world&quot;
+ *
+ * *DEPRECATED:* Not used
+ * TODO: Delete this file
+ */
+app.controller(&#39;RootCtrl&#39;, [&#39;AuthService&#39;,&#39;$state&#39;, function (AuthService, $state) {
+    console.log(&#39;Hello world&#39;);
+    /*AuthService.currentUser(true).then(function(data){
+        $state.go(&#39;app.dashboard&#39;);
+    }, function () {
+        $state.go(&#39;login&#39;);
+    });*/
+}]);</pre>
+</body>
+</html>

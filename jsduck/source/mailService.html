@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-MailService'>/**
+</span> * @class ama.services.MailService
+ * # MailService
+ * Holds functions to show and send e-mails.
+ */
+app.factory(&#39;MailService&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;constants&#39;,
+    function (ApiAbstractionLayer, constants) {
+        var createApiObject = function (type, id, mailtext) {
+            var apiObject = {
+                name: &#39;mail&#39;,
+                data: {
+                    type: type,
+                    id: id,
+                    additional: mailtext
+                }
+            };
+            console.log(mailtext);
+            if(mailtext){
+                apiObject.data.additional = mailtext;
+            }
+            return apiObject;
+        };
+        return {
+<span id='ama-services-MailService-method-showPreview'>            /**
+</span>             * Shows an email preview in a popup window
+             * @param {string} type The type of document for which the mail preview shall be shown.
+             * @param {int|string} id The ID of the document for which the mail preview shall be shown.
+             * @param {string} mailtext An additional text for the email.
+             */
+            showPreview: function(type, id, mailtext){
+                var preview = window.open(&#39;&#39;,&#39;&#39;,&#39;height=500,width=900&#39;);
+                var apiObject = createApiObject(type, id, mailtext);
+                ApiAbstractionLayer(&#39;POST&#39;,apiObject).then(function (data) {
+                    preview.location.href = constants.BASEURL+&#39;/api?action=mail&amp;path=&#39;+data.previewpath;
+                });
+            },
+<span id='ama-services-MailService-method-send'>            /**
+</span>             * Sends an email with information about a given doicument
+             * @param {string} type The type of document for which the mail preview shall be shown.
+             * @param {int|string} id The ID of the document for which the mail preview shall be shown.
+             * @param {string} mailtext An additional text for the email.
+             * @returns {promise} The answer from the API
+             */
+            send: function(type, id, mailtext) {
+                var apiObject = createApiObject(type, id, mailtext);
+                apiObject.data.send = true;
+                return ApiAbstractionLayer(&#39;POST&#39;, apiObject);
+            }
+        }
+    }
+]);</pre>
+</body>
+</html>

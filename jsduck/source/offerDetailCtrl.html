@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-OfferDetailCtrl'>/**
+</span> * @class ama.controllers.OfferDetailCtrl
+ *
+ * Controller for the offer detail view.
+ */
+app.controller(&#39;OfferDetailCtrl&#39;, [
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;MasterDetailService&#39;,
+        &#39;DeleteService&#39;,
+        &#39;PdfService&#39;,
+        &#39;MailService&#39;,
+        &#39;StateManager&#39;,
+        &#39;NextStepModal&#39;,
+        &#39;$stateParams&#39;,
+        &#39;$scope&#39;,
+        &#39;constants&#39;,
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, $stateParams, $scope, constants) {
+            var id = $stateParams.id;
+            MasterDetailService.setMaster(this);
+            var self = this;
+
+<span id='ama-controllers-OfferDetailCtrl-method-viewPdf'>            /**
+</span>             * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
+             * or the generated PDF of the offer.
+             * @param {Event} event The event (commonly &#39;click&#39;) that triggered the function call
+             * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+             * @param {String} path *optional* Path to the generated PDF
+             */
+            this.viewPdf = function (event, preview, path) {
+                PdfService(event,preview,&#39;offer&#39;,id, path).then(function (data) {
+                    if(data){
+                        self.offer.path = data.path;
+                        self.offer.state = 1;
+                        LocalStorage.setData(&#39;offer/&#39;+id, self.offer);
+                    }
+                });
+            };
+            $scope.mailtext = &#39;&#39;;
+            // (re)set a flag indicating if the Controller was fully loaded
+            // needed for setting transition classes
+            $scope.$on(&#39;$stateChangeStart&#39;, function (event, toState) {
+                self.loaded = false;
+            });
+            setTimeout(function () {
+                self.loaded = true;
+                $scope.$apply();
+            }, 1000);
+
+
+
+
+<span id='ama-controllers-OfferDetailCtrl-property-dateFormat'>            /**
+</span>             * The app&#39;s date format. *DEPRECATED.*
+             * TODO: load dateFormat from Config
+             * @type {string}
+             */
+            this.dateFormat = &#39;dd.MM.yyyy&#39;;
+
+<span id='ama-controllers-OfferDetailCtrl-property-offer'>            /**
+</span>             * The current offer.
+             * @type {Object}
+             */
+            this.offer = LocalStorage.getData(&#39;offer/&#39;+id);
+
+
+
+            var getOffer = function () {
+                ApiAbstractionLayer(&#39;GET&#39;,{name: &#39;offer&#39;, params: {id: id}}).then(function (data) {
+                    self.offer = data;
+                    LocalStorage.setData(&#39;offer/&#39;+id, data);
+                    self.loaded = true;
+                });
+            };
+
+            getOffer();
+
+<span id='ama-controllers-OfferDetailCtrl-method-setFirstItemAsDetail'>            /**
+</span>             * Sets the first item of a provided list as active item in the MasterDetail view
+             */
+            this.setFirstItemAsDetail = function () {
+                console.log(&#39;first&#39;, self.offer);
+                if(self.offer) {
+                    var list = self.offer.items;
+                    if (list.length &gt; 0){
+                        console.log(list);
+                        MasterDetailService.setDetailView(list[0]);
+                    }
+                }
+            };
+
+
+<span id='ama-controllers-OfferDetailCtrl-method-openMailPreview'>            /**
+</span>             * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current offer.
+             * @param {Event} event The event (click) that led to the function call
+             */
+            this.openMailPreview = function (event) {
+                event.preventDefault();
+                $scope.mailtext = $scope.getValueFromWysiwyg(&#39;mailtext&#39;);
+                MailService.showPreview(&#39;offer&#39;,self.offer.id, $scope.mailtext);
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-send'>            /**
+</span>             * Uses the {@link ama.services.MailService MailService} to send a mail with the current offer.
+             */
+            this.send = function () {
+                $scope.mailtext = $scope.getValueFromWysiwyg(&#39;mailtext&#39;);
+                MailService.send(&#39;offer&#39;,self.offer.id, $scope.mailtext);
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-deleteItem'>            /**
+</span>             * Deletes an item by given id.
+             * @param {id} itemId The id of the item to be deleted
+             */
+            this.deleteItem = function (itemId) {
+                DeleteService(&#39;item&#39;, itemId).then(function (data) {
+                    self.offer.items = data;
+                    LocalStorage.setData(&#39;offer/&#39;+id, self.offer);
+                });
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-priceChanged'>            /**
+</span>             * Gets called when the price of an item inside the offer changes.
+             * Reloads the offer.
+             * @param {Object} item The item that was changed.
+             */
+            this.priceChanged = function (item) {
+                self.loaded = false;
+                getOffer();
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-getStateParams'>            /**
+</span>             * Generates a stateParams object from the current stateParams for a certain state
+             * @param {string} forState The state for which the stateParams should be generated
+             * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+             */
+            this.getStateParams = function(forState){
+                if(forState == &#39;itemCreation&#39;){
+                    return {
+                        referrer: &#39;app.offerDetail&#39;,
+                        referrerParams: {
+                            id: id
+                        },
+                        for: &#39;offer&#39;,
+                        forId: id
+                    };
+                }
+            };
+
+            var changeState=function(toState){
+                StateManager.setState(&#39;offer&#39;, id,toState).then(function (data) {
+                    self.offer = data;
+                });
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-decline'>            /**
+</span>             * Changes the state of the offer to -1 (client declined)
+             */
+            this.decline = function(){
+                changeState(-1);
+            };
+
+<span id='ama-controllers-OfferDetailCtrl-method-accept'>            /**
+</span>             * Changes the offer&#39;s state to 3 (client accepted)
+             * Opens a {@link ama.services.NextStepModal NextStepModal}.
+             */
+            this.accept = function () {
+                changeState(3);
+                NextStepModal(&#39;offer&#39;,self.offer);
+                // TODO: ask for what&#39;s next
+            };
+        }
+    ]
+);</pre>
+</body>
+</html>

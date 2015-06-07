@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ItemCreationCtrl'>/**
+</span> * @class ama.controllers.ItemCreationCtrl
+ * Controller for the item creation view.
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
+app.controller(&#39;ItemCreationCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;ItemService&#39;,
+    &#39;$state&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$filter&#39;,
+    function (ApiAbstractionLayer,LocalStorage, ItemService, $state, $stateParams, $filter) {
+
+
+        var forType = $stateParams.for;
+        var forId = $stateParams.forId;
+        var self = this;
+
+        var presets = LocalStorage.getData(&#39;itemPresets&#39;)|| [];
+<span id='ama-controllers-ItemCreationCtrl-property-presetList'>        /**
+</span>         * Array containing all available item presets
+         * @type {Array}
+         */
+        this.presetList = [];
+<span id='ama-controllers-ItemCreationCtrl-property-projectItems'>        /**
+</span>         * Array containing all items available from the current project.
+         * @type {Array}
+         */
+        this.projectItems = [];
+        var setItemList = function (input, output) {
+            for(var i = 0; i &lt; input.length; i++){
+                self[output].push({
+                    name: input[i].name,
+                    value: input[i]
+                });
+            }
+        };
+        setItemList(presets, &#39;presetList&#39;);
+
+
+        ApiAbstractionLayer(&#39;GET&#39;, &#39;item_preset&#39;).then(function (data) {
+            presets = data;
+            setItemList(presets, &#39;presetList&#39;);
+            LocalStorage.setData(&#39;itemPresets&#39;, data);
+        });
+
+
+        var availableItems = LocalStorage.getData(forType+&#39;/&#39;+forId+&#39;/availableItems&#39;) || [];
+        setItemList(availableItems,&#39;projectItems&#39;);
+        ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;item_connection&#39;, params:{for: forType, forid: forId}}).then(function (data) {
+            availableItems = data;
+            setItemList(availableItems,&#39;projectItems&#39;);
+            LocalStorage.setData(forType+&#39;/&#39;+forId+&#39;/availableItems&#39;, data);
+        });
+
+<span id='ama-controllers-ItemCreationCtrl-property-useRateOptions'>        /**
+</span>         * Options for the useRate selection list (fixed/hourly/dailyRate)
+         * @type {{name: *, value: number}[]}
+         */
+        this.useRateOptions = [
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.fixedRate&#39;),
+                value: 0
+            },
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.hourlyRate&#39;),
+                value: 1
+            },
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.dailyRate&#39;),
+                value: 2
+            }
+        ];
+
+        var updateCachedList = function () {
+            var itemList = LocalStorage.getData(forType+&#39;/&#39;+forId);
+            itemList.items.push(data);
+            LocalStorage.setData(forType+&#39;/&#39;+forId, itemList);
+        };
+
+        var goBack = function () {
+            // go to where we came from
+            var to = $stateParams.referrer || &#39;app.&#39;+forType+&#39;Detail&#39;;
+            var toParams = $stateParams.referrerParams || {id:forId};
+            $state.go(to,toParams);
+        };
+
+<span id='ama-controllers-ItemCreationCtrl-method-createItem'>        /**
+</span>         * Creates a new item
+         */
+        this.createItem = function () {
+            if(self.newItem){
+
+                self.newItem.id = null;
+                self.newItem[forType] = forId;
+                var apiObject = {
+                    name: &#39;item&#39;,
+                    data: self.newItem,
+                    params: {
+                        for: forType,
+                        forid: forId
+                    }
+                };
+
+                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                    LocalStorage.setData(&#39;item/&#39;+data.id, data);
+
+
+                    updateCachedList();
+
+                    self.newItem = null;
+
+                    goBack();
+                });
+
+            }
+
+        };
+
+<span id='ama-controllers-ItemCreationCtrl-method-importItem'>        /**
+</span>         * Imports a selected item from the current project
+         */
+        this.importItem = function () {
+            if(self.itemFromProject){
+                self.itemFromProject[forType] = forId;
+                var apiObject = {
+                    name: &#39;item&#39;,
+                    data: self.itemFromProject
+                };
+                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                    LocalStorage.setData(&#39;item/&#39;+data.id, data);
+                    self.itemFromProject = null;
+
+                    updateCachedList();
+
+                    goBack();
+                });
+            }
+        };
+    }
+]);</pre>
+</body>
+</html>

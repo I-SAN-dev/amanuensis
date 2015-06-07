@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ContractDetailCtrl'>/**
+</span> * @class ama.controllers.ContractDetailCtrl
+ * Controller for the contractDetail page
+ */
+app.controller(&#39;ContractDetailCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;MasterDetailService&#39;,
+    &#39;PdfService&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$sce&#39;,
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce){
+        var self = this;
+        var id = $stateParams.id;
+        var type = this.type = $stateParams.type;
+<span id='ama-controllers-ContractDetailCtrl-property-isFileContract'>        /**
+</span>         * Indicates if current project is fileContract (which cannot contain amanu items) or a amanu contract
+         * @type {boolean}
+         */
+        this.isFileContract = type == &#39;fileContract&#39;;
+        MasterDetailService.setMaster(this);
+<span id='ama-controllers-ContractDetailCtrl-property-contract'>        /**
+</span>         * The contract.
+         * @type {Object}
+         */
+        this.contract = LocalStorage.getData(type+&#39;/&#39;+id);
+        ApiAbstractionLayer(&#39;GET&#39;,{name:type,params: {id:id}}).then(function (data) {
+            LocalStorage.setData(type+&#39;/&#39;+id, data);
+            self.contract = data;
+            if(self.isFileContract){
+                self.fileName = data.path.replace(/\\/g,&#39;/&#39;).replace( /.*\//, &#39;&#39; ); /* Use filename instead of refnumber */
+                self.iframeSrc = $sce.trustAsResourceUrl(&#39;api/?action=protectedpdf&amp;path=&#39;+data.path);
+            }
+        });
+
+<span id='ama-controllers-ContractDetailCtrl-method-viewPdf'>        /**
+</span>         * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
+         * or the generated PDF of the contract
+         * @param {Event} event The event (commonly &#39;click&#39;) that triggered the function call
+         * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+         * @param {String} path *optional* Path to the generated PDF
+         */
+        this.viewPdf = function (event,preview,path) {
+            PdfService(event,preview,&#39;contract&#39;,id, path).then(function (data) {
+                if(data){
+                    self.acceptance.path = data.path;
+                    self.acceptance.state = 1;
+                    LocalStorage.setData(&#39;contract/&#39;+id,self.acceptance);
+                }
+            });
+        };
+
+
+
+    }]);</pre>
+</body>
+</html>

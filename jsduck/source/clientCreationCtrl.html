@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ClientCreationCtrl'>/**
+</span> * @class ama.controllers.ClientCreationCtrl
+ * Controller for the client creation view.
+ */
+app.controller(&#39;ClientCreationCtrl&#39;,
+    [
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;$state&#39;,
+        &#39;$stateParams&#39;,
+        function (ApiAbstractionLayer, LocalStorage, $state, $stateParams) {
+
+            var self = this;
+
+
+
+            var refNumber = &#39;&#39;;
+            ApiAbstractionLayer(&#39;GET&#39;,{name:&#39;refnumber&#39;, params: {for:&#39;customers&#39;}}).then(function (data) {
+                if(self.newClient.refnumber === &#39;&#39;){
+                    self.newClient.refnumber = data.refnumber;
+                }
+            });
+
+            var initialNewClient = {
+                companyname: null,
+                contact_firstname: null,
+                contact_lastname: null,
+                street_no: null,
+                additional: null,
+                zip: null,
+                city: null,
+                country: null,
+                comment: null,
+                contact_gender: null,
+                refnumber: refNumber
+            };
+
+<span id='ama-controllers-ClientCreationCtrl-property-newClient'>            /**
+</span>             * The client to be created.
+             * @type {{companyname: string, contact_firstname: string, contact_lastname: string, street_no: string, additional: string, zip: string, city: string, country: string, comment: string, contact_gender: string, refnumber: string}}
+             */
+            this.newClient = initialNewClient;
+
+<span id='ama-controllers-ClientCreationCtrl-property-genderOptions'>            /**
+</span>             * An array containing options for the gender selection list
+             * @type {{id: string, name: string}[]}
+             */
+            this.genderOptions = [
+                {
+                    id: &#39;&#39;,
+                    name: &#39;&#39;
+                },
+                {
+                    id: &#39;m&#39;,
+                    name: &#39;clients.contactGender.male&#39;
+                },
+                {
+                    id: &#39;w&#39;,
+                    name: &#39;clients.contactGender.female&#39;
+                }
+            ];
+
+<span id='ama-controllers-ClientCreationCtrl-property-allCategories'>            /**
+</span>             * An array containing all available client categories.
+             * @type {Array}
+             */
+            this.allCategories = LocalStorage.getData(&#39;clientCategories&#39;);
+            ApiAbstractionLayer(&#39;GET&#39;, &#39;client_categories&#39;).then(function(data){
+                self.allCategories = data;
+                LocalStorage.setData(&#39;clientCategories&#39;, data)
+            });
+<span id='ama-controllers-ClientCreationCtrl-property-newClientCategories'>            /**
+</span>             * An array containing all selected categories for the new client.
+             * @type {Array}
+             */
+            this.newClientCategories = [];
+
+<span id='ama-controllers-ClientCreationCtrl-method-addCategoryLinks'>            /**
+</span>             * Adds one or more categori(es) to a client
+             * @param {int} client The client id
+             * @param {object} categories An array containing all category ids that shall be added to the client
+             */
+            var addCategoryLinks = function(client, categories) {
+                if(categories.length &gt; 0){
+                    for (var i = 0; i&lt;categories.length; i++) {
+                        ApiAbstractionLayer(&#39;POST&#39;, {name: &#39;client_categories&#39;, data: {id: categories[i], clientid: client}});
+                    }
+                }
+            };
+
+<span id='ama-controllers-ClientCreationCtrl-method-addClient'>            /**
+</span>             * Creates a new client and adds the selected categories
+             */
+            this.addClient = function () {
+                ApiAbstractionLayer(&#39;POST&#39;, {name: &#39;client&#39;, data: self.newClient}).then(function(data){
+                    // cache the new client and update the cached clientlist
+                    LocalStorage.setData(&#39;client/&#39;+data.id, data);
+                    var list = LocalStorage.getData(&#39;clients&#39;) || [];
+                    list.push(data);
+                    LocalStorage.setData(&#39;clients&#39;, list);
+
+                    addCategoryLinks(data.id, self.newClientCategories);
+                    self.newClient = initialNewClient;
+
+                    // go to where we came from or to the client list (and new client detail) if no referrer is specified
+                    var to = $stateParams.referrer || &#39;app.clients&#39;;
+                    var toParams;
+                    if(to==&#39;app.clients&#39;)
+                        toParams = {id:data.id};
+                    else
+                        toParams = $stateParams.referrerParams;
+                    $state.go(to,toParams);
+                });
+            };
+        }]);</pre>
+</body>
+</html>

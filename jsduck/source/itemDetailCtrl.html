@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ItemDetailCtrl'>/**
+</span> * @class ama.controllers.ItemDetailCtrl
+ * Controller for the item detail views.
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
+app.controller(&#39;ItemDetailCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;MasterDetailService&#39;,
+    &#39;DeleteService&#39;,
+    &#39;PanelService&#39;,
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
+        MasterDetailService.setDetail(this);
+
+<span id='ama-controllers-ItemDetailCtrl-property-showPage'>        /**
+</span>         * Indicates what panel should be shown in the view
+         * @type {integer}
+         */
+        this.showPage = PanelService.getPanel(&#39;items&#39;);
+
+        var self = this;
+
+        var getIsConnected = function () {
+            var count = 0;
+            if(self.connections)
+            {
+                if(self.connections.offer &amp;&amp; self.connections.offer.id)
+                    count++;
+                if(self.connections.contract &amp;&amp; self.connections.contract.id)
+                    count++;
+                if(self.connections.todo &amp;&amp; self.connections.todo.id)
+                    count++;
+                if(self.connections.acceptance &amp;&amp; self.connections.acceptance.id)
+                    count++;
+                if(self.connections.invoice &amp;&amp; self.connections.invoice.id)
+                    count++;
+            }
+            console.log(count);
+            return count&gt;1;
+
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-detailChanged'>        /**
+</span>         * /**
+         * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
+         * Re-initializes the detail view
+         * @param {Object} item The newly selected item
+         * @param {boolean} keyboard Indicates if the selection was taken by keyboard input
+         */
+        this.detailChanged = function (item, keyboard) {
+            self.item = item;
+
+            self.time = LocalStorage.getData(&#39;item/&#39;+self.item.id+&#39;/time&#39;) || [];
+            ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;time&#39;,params:{forid: self.item.id}}).then(function (data) {
+                self.time = data;
+                LocalStorage.setData(&#39;item/&#39;+self.item.id+&#39;/time&#39;, data);
+            });
+
+            self.connections = LocalStorage.getData(&#39;item/&#39;+self.item.id+&#39;/connections&#39;)
+            ||
+            {
+                offer:{},
+                contract: {},
+                todo: {},
+                acceptance: {},
+                invoice: {}
+            };
+            self.isConnected = getIsConnected();
+            ApiAbstractionLayer(&#39;GET&#39;,{name:&#39;item_connection&#39;, params:{id:self.item.id}}).then(function (data) {
+                self.connections = data;
+                self.isConnected = getIsConnected();
+                LocalStorage.setData(&#39;item/&#39;+self.item.id+&#39;/connections&#39;,data);
+            });
+        };
+
+
+<span id='ama-controllers-ItemDetailCtrl-method-deleteItem'>        /**
+</span>         * Deletes the current item by notifying the master controller via {@link ama.services.MasterDetailService#notifyMaster the MasterDetailService}.
+         */
+        this.deleteItem = function () {
+            MasterDetailService.notifyMaster(&#39;deleteItem&#39;, self.item.id);
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-changeUseRate'>        /**
+</span>         * Changes the useRate value (fixed/hourly/dailyRate) of the current item.
+         */
+        this.changeUseRate = function () {
+            var apiObject = {
+                name: &#39;item&#39;,
+                data: {
+                    id: self.item.id,
+                    userate: self.item.userate
+                }
+            };
+            ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                MasterDetailService.notifyMaster(&#39;priceChanged&#39;, data);
+            });
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-startTime'>        /**
+</span>         * Set a start time in the time API
+         */
+        this.startTime = function () {
+            ApiAbstractionLayer(&#39;POST&#39;,{name:&#39;time&#39;, data: {item: self.item.id}}).then(function (data) {
+                self.time.times.push(data);
+            });
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-stopTime'>        /**
+</span>         * Stops the timer with the given id
+         * @param {integer} id The ID of the timer to be stopped
+         */
+        this.stopTime = function (id) {
+            ApiAbstractionLayer(&#39;POST&#39;, {name: &#39;time&#39;, data:{id:id,endnow:true}}).then(function (data) {
+                for(var i = 0; i&lt;self.time.times.length; i++){
+                    if(self.time.times[i].id == data.id){
+                        self.time.times[i] = data;
+                        break;
+                    }
+                }
+            });
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-deleteTime'>        /**
+</span>         * Deletes a timer by given ID
+         * @param {integer} id The ID of the timer to be deleted.
+         */
+        this.deleteTime = function (id) {
+            DeleteService(&#39;time&#39;, {id:id,forid:self.item.id}).then(function (data) {
+                self.time.times = data;
+            });
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-moveItem'>        /**
+</span>         * Moves the current item to another document.
+         */
+        this.moveItem = function () {
+            // TODO: this
+        };
+
+
+    }
+]);</pre>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-PanelService'>/**
+</span> * @class ama.services.PanelService
+ * # PanelService
+ * Holds functions to set and get the current panel to show in some views
+ */
+app.factory(&#39;PanelService&#39;, [
+    function () {
+        var panelMax = {
+            clients: 3,
+            items: 3,
+            offers: 2
+        };
+
+        var panels = {};
+
+        return {
+<span id='ama-services-PanelService-method-getPanel'>            /**
+</span>             * Gets the currently shown panel of a specified view
+             * @param {string} site Name of the view
+             * @returns {int} The number of the currently shown panel
+             */
+            getPanel: function (site) {
+                if(panels[site])
+                    return panels[site];
+                else return 1;
+            },
+<span id='ama-services-PanelService-method-setPanel'>            /**
+</span>             * Sets the panel to show in a specified view
+             * @param site Name of the view
+             * @param panel The number of the panel which should be shown
+             */
+            setPanel: function(site, panel){
+                if(panelMax[site]&lt;=panel &amp;&amp; panel &gt; 0)
+                    panels[site] = panel;
+            }
+        };
+    }
+]);</pre>
+</body>
+</html>

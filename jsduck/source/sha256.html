@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-filters-sha256'>/**
+</span> * @class ama.filters.sha256
+ * # The sha256 filter
+ *
+ * Filter using the jsSHA library to hash the input with sha-256
+ * ## Usage
+ *
+ * HTML:
+ *
+ *     {{someString|sha256}}
+ *
+ * JavaScript:
+ *
+ *     $filter(&#39;sha256&#39;)(someString)
+ *
+ * @param {string} input - the string to be hashed
+ */
+angular.module(&#39;ama&#39;)
+    .filter(&#39;sha256&#39;, function(){
+        return function (input) {
+            var shaObj = new jsSHA(input, &quot;TEXT&quot;);
+            return shaObj.getHash(&quot;SHA-256&quot;, &quot;HEX&quot;)
+        };
+    });</pre>
+</body>
+</html>

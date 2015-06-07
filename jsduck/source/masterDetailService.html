@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-MasterDetailService'>/**
+</span> * @class ama.services.MasterDetailService
+ *
+ * # MasterDetail Communication Service
+ * Allows sharing functions between master and detail controllers.
+ *
+ */
+app.factory(&#39;MasterDetailService&#39;, [
+    &#39;$state&#39;,
+    function ($state) {
+        var master, detail, editor, controller;
+        var processParams = function (args) {
+            var params = [];
+            for (var i = 1; i&lt;args.length; i++){
+                params.push(args[i]);
+            }
+            return params;
+        };
+        var self = this;
+        var editMode = false;
+<span id='ama-services-MasterDetailService-method-notifyEditor'>        /**
+</span>         * Calls a function inside the registered editor controller
+         * @returns {*} The return value of the function being called
+         */
+        this.notifyEditor = function () {
+            var fnName = arguments[0];
+            if(typeof editor[fnName] === &#39;function&#39;) {
+                return editor[fnName].apply(null, processParams(arguments));
+            }
+        };
+<span id='ama-services-MasterDetailService-method-notifyDetail'>        /**
+</span>         * Calls a function inside the registered detail controller
+         * @returns {*} The return value of the function being called
+         */
+        this.notifyDetail = function () {
+            var fnName = arguments[0];
+            if(typeof detail[fnName] === &#39;function&#39;) {
+                return detail[fnName].apply(null,processParams(arguments));
+            }
+        };
+        return {
+<span id='ama-services-MasterDetailService-method-setMaster'>            /**
+</span>             * Registers the master controller
+             * @param {Object} ctrl The controller to be registered as master.
+             */
+            setMaster: function(ctrl) {
+                master = ctrl;
+            },
+<span id='ama-services-MasterDetailService-method-setDetail'>            /**
+</span>             * Registers the detail controller
+             * @param {Object} ctrl The controller to be registered as detail.
+             */
+            setDetail: function(ctrl) {
+                detail = ctrl;
+            },
+<span id='ama-services-MasterDetailService-method-setEditor'>            /**
+</span>             * Registers the editor controller
+             * @param {Object} ctrl The controller to be registered as editor.
+             */
+            setEditor: function(ctrl) {
+                editor = ctrl;
+            },
+<span id='ama-services-MasterDetailService-method-setController'>            /**
+</span>             * Registers the {@link ama.directives.masterDetail masterDetail directive}&#39;s controller
+             * @param {Object} ctrl The controller of the directive.
+             */
+            setController: function (ctrl) {
+                controller = ctrl;
+            },
+<span id='ama-services-MasterDetailService-method-editMode'>            /**
+</span>             * Sets a flag in the service indicating if the detail is currently in edit mode.
+             * @param {boolean} flag
+             * @returns {boolean} The current value of the edit mode flag
+             */
+            editMode: function(flag){
+                if(flag !== undefined)
+                    editMode = flag;
+                return editMode;
+            },
+<span id='ama-services-MasterDetailService-method-notifyMaster'>            /**
+</span>             * Calls a function inside the registered master controller
+             * @returns {*} The return value of the function being called
+             */
+            notifyMaster: function() {
+                var fnName = arguments[0];
+                if(typeof master[fnName] === &#39;function&#39;) {
+                    return master[fnName].apply(null, processParams(arguments));
+                }
+            },
+<span id='ama-services-MasterDetailService-property-notifyDetail'>            /**
+</span>             * The notifyDetail function, wrapped in a property
+             */
+            notifyDetail: self.notifyDetail,
+<span id='ama-services-MasterDetailService-property-notifyEditor'>            /**
+</span>             * The notifyEditor function, wrapped in a property
+             */
+            notifyEditor: self.notifyEditor,
+<span id='ama-services-MasterDetailService-method-notifyController'>            /**
+</span>             * Calls a function inside the registered masterDetail directive controller
+             * @returns {*} The return value of the function being called
+             */
+            notifyController: function () {
+                var fnName = arguments[0];
+                if(typeof controller[fnName] === &#39;function&#39;) {
+                    return controller[fnName].apply(null, processParams(arguments));
+                }
+            },
+<span id='ama-services-MasterDetailService-method-setDetailView'>            /**
+</span>             * Changes the detail
+             * @param {Object} detail The newly selected detail
+             * @param {boolean} keyboard *Optional.* Indicates if the detail was changed by keyboard input
+             * @returns {Object} The new detail.
+             */
+            setDetailView: function(detail, keyboard){
+                if(editMode) {
+                    console.log(&#39;cancel edit&#39;);
+                    self.notifyEditor(&#39;cancel&#39;);
+                    editMode = false;
+                }
+
+                if($state.params.hasDetails)
+                    $state.go($state.current.name, {id: detail.id});
+                self.notifyDetail(&#39;detailChanged&#39;, detail, keyboard);
+                return detail;
+            }
+        }
+    }
+]);</pre>
+</body>
+</html>

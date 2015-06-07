@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-NavCtrl'>/**
+</span> * @class ama.controllers.NavCtrl
+ *
+ * Controller for menus ({@link ama.directives.amaMenu amaMenu directive}) and navigation items
+ * builds a navigation list from the {@link ama.constants.sites sites} and {@link ama.constants.modules modules} constants
+ * and handles clicks on menu items
+ *
+ * @author Christian Baur
+ */
+app.controller(&#39;NavCtrl&#39;,[
+        &#39;AuthService&#39;,
+        &#39;$state&#39;,
+        &#39;sites&#39;,
+        &#39;$scope&#39;,
+        &#39;modules&#39;,
+        &#39;$rootScope&#39;,
+        function (AuthService, $state, sites, $scope, modules, $rootScope) {
+            var self = this;
+            var name=$scope.name;
+
+            var menuItems =  [];
+
+            var services = {
+                &#39;AuthService&#39;: AuthService
+            };
+
+            // get the menu items from the sites constant
+            for(var i = 0; i&lt;sites.length; i++) {
+                if(sites[i].menus &amp;&amp; sites[i].menus[name]){
+                    menuItems.push(sites[i]);
+                }
+            }
+
+            // only show the menu when user is logged in
+            $rootScope.$watch(&#39;loggedIn&#39;, function (newValue, oldValue) {
+                if(newValue === true){
+                    self.navItems = menuItems;
+                } else {
+                    self.navItems = [];
+                }
+            });
+
+            var setActiveClass = function (stateName) {
+                angular.forEach(menuItems, function(value, key){
+                    value.active = value.name == stateName;
+                });
+            };
+
+<span id='ama-controllers-NavCtrl-method-goTo'>            /**
+</span>             * Handles clicks on menu items
+             * @param {Object} item The item that was clicked
+             */
+            this.goTo = function(item){
+                // value.active will set an active class on the menu item
+                setActiveClass(item.name);
+
+                var menuItem = item.menus[name];
+                if(menuItem.click){
+                    services[menuItem.service][menuItem.click]();
+                }
+
+
+                // change state
+                $state.go(item.name).then(function(data){
+                    console.log(data);
+                }, function (data) {
+                    console.log(data);
+                    //$state.go(item.name);
+                });
+            };
+
+            $rootScope.$on(&#39;$stateChangeSuccess&#39;, function (event, toState) {
+                angular.forEach(menuItems, function (value, key) {
+                    value.active = value.name == toState.name;
+                })
+            });
+
+<span id='ama-controllers-NavCtrl-property-additionalClasses'>            /**
+</span>             * additional classes for the menu list from the modules constant
+             * @type {string}
+             */
+            this.additionalClasses = modules[name].additionalClasses || &#39;&#39;;
+
+            setActiveClass($state.current.name);
+
+        }
+    ]
+);
+
+<span id='ama-directives-amaMenu'>/**
+</span> * @class ama.directives.amaMenu
+ *
+ * Directive for menus
+ * Takes a menuname which will be used to identify the menu in the controller
+ *
+ * ## Usage
+ *
+ *     &lt;div ama-menu menuname=&quot;referenceOfThisMenuInSitesConstant&quot;&gt;&lt;/div&gt;
+ */
+app.directive(&#39;amaMenu&#39;, [function(){
+    return {
+        restrict: &#39;A&#39;,
+        scope: {
+            name: &#39;=menuname&#39;
+        },
+        templateUrl: &#39;templates/modules/navItems.html&#39;,
+        controller: &#39;NavCtrl&#39;,
+        controllerAs: &#39;nav&#39;
+    }
+}]);</pre>
+</body>
+</html>

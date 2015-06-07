@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-filters-amaStates'>/**
+</span> * @class ama.filters.amaStates
+ * # The amaStates filter
+ * Converts an amanu status code to a language string representing the status.
+ *
+ * ## Usage
+ * HTML:
+ *
+ *     {{statusCode|amaStates:type}}
+ *
+ * JavaScript:
+ *
+ *     $filter(&#39;amaStates&#39;)(statusCode, type)
+ *
+ * type can be one of: &#39;project&#39;, &#39;offer&#39;, &#39;acceptance&#39;, &#39;invoice&#39;, &#39;reminder&#39;, &#39;error&#39;, &#39;errorDescription&#39;
+ */
+app.filter(&#39;amaStates&#39;, function () {
+    var statusCodes = {
+        project: {
+            &#39;0&#39;: &#39;projects.states.created&#39;,
+            &#39;1&#39;: &#39;projects.states.waiting&#39;,
+            &#39;2&#39;: &#39;projects.states.todo&#39;,
+            &#39;3&#39;: &#39;projects.states.overdueWaiting&#39;,
+            &#39;4&#39;: &#39;projects.states.overdueTodo&#39;,
+            &#39;5&#39;: &#39;&#39;,
+            &#39;6&#39;: &#39;&#39;,
+            &#39;7&#39;: &#39;projects.states.finished&#39;,
+            &#39;8&#39;: &#39;projects.states.archived&#39;
+        },
+        offer: {
+            &#39;0&#39;: &#39;offers.states.created&#39;,
+            &#39;1&#39;: &#39;offers.states.pdfGenerated&#39;,
+            &#39;2&#39;: &#39;offers.states.pdfSent&#39;,
+            &#39;3&#39;: &#39;offers.states.clientAccepted&#39;,
+            &#39;-1&#39;: &#39;offers.states.clientDeclined&#39;
+        },
+        acceptance: {
+            &#39;0&#39;: &#39;acceptances.states.created&#39;,
+            &#39;1&#39;: &#39;acceptances.states.pdfGenerated&#39;,
+            &#39;2&#39;: &#39;acceptances.states.pdfSent&#39;,
+            &#39;3&#39;: &#39;acceptances.states.clientAccepted&#39;,
+            &#39;-1&#39;: &#39;acceptances.states.clientDeclined&#39;
+        },
+        invoice: {
+            &#39;0&#39;: &#39;invoices.states.created&#39;,
+            &#39;1&#39;: &#39;invoices.states.pdfGenerated&#39;,
+            &#39;2&#39;: &#39;invoices.states.pdfSent&#39;,
+            &#39;3&#39;: &#39;invoices.states.paid&#39;,
+            &#39;4&#39;: &#39;invoices.states.overdueNoReminder&#39;,
+            &#39;5&#39;: &#39;invoices.states.overdueReminderCreated&#39;
+        },
+        reminder: {
+            &#39;0&#39;:&#39;reminders.states.created&#39;,
+            &#39;1&#39;:&#39;reminders.states.pdfGenerated&#39;,
+            &#39;2&#39;:&#39;reminders.states.pdfSent&#39;
+        },
+        error: {
+            &quot;400&quot;: &quot;errors.codes.400.message&quot;,
+            &quot;401&quot;: &quot;errors.codes.401.message&quot;,
+            &quot;403&quot;: &quot;errors.codes.403.message&quot;,
+            &quot;404&quot;: &quot;errors.codes.404.message&quot;,
+            &quot;405&quot;: &quot;errors.codes.405.message&quot;,
+            &quot;500&quot;: &quot;errors.codes.500.message&quot;
+        },
+        errorDescription: {
+            &quot;400&quot;: &quot;errors.codes.400.description&quot;,
+            &quot;401&quot;: &quot;errors.codes.401.description&quot;,
+            &quot;403&quot;: &quot;errors.codes.403.description&quot;,
+            &quot;404&quot;: &quot;errors.codes.404.description&quot;,
+            &quot;405&quot;: &quot;errors.codes.405.description&quot;,
+            &quot;500&quot;: &quot;errors.codes.500.description&quot;
+        }
+    };
+
+    return function(input, type){
+        return statusCodes[type][input];
+    }
+});</pre>
+</body>
+</html>

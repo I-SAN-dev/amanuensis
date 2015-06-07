@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-ApiAbstractionLayer'>/**
+</span> * @class ama.services.ApiAbstractionLayer
+ *
+ * # API Abstraction Service
+ * Provides a simple function that will perform the right API call depending on its parameters
+ * @param {string} method &#39;GET&#39;|&#39;POST&#39;|&#39;DELETE&#39; (other methods are currently not supported by the API)
+ * @param {string|object} identifier An identifier for the API action. The object contains the name of the API action and additional params or data. If no additional data/params are required, the service also accepts the action as a string
+ * @param {bool} noErrorModal *Optional.* If true, no message will be shown in case of an error.
+ * @return {promise} A promise containing the desired data from the API or an error object.
+ */
+app
+    .factory(&#39;ApiAbstractionLayer&#39;, [
+        &#39;$http&#39;,
+        &#39;constants&#39;,
+        &#39;$q&#39;,
+        &#39;$state&#39;,
+        &#39;ErrorDialog&#39;,
+        &#39;$stateParams&#39;,
+        &#39;$rootScope&#39;,
+        function ($http, constants, $q, $state, ErrorDialog, $stateParams, $rootScope) {
+            //var specialParams = {};
+            var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/&#39;api/&#39;;
+
+
+            return function (method, identifier, noErrorModal) {
+                // the API action is either equal to the identifier or identifier.name
+                var action = identifier;
+                if (typeof(identifier) == &quot;object&quot;) {
+                    action = identifier.name;
+                }
+
+                // build the request config object for the $http service
+                var config = {
+                    url: apiUrl,
+                    method: method,
+                    params: identifier.params || {},
+                    data: identifier.data || {}
+                };
+                config.params.action = action;
+                config.data.action = action;
+                //$.extend(config, specialParams[id]);
+
+
+                var defer = $q.defer();
+                $rootScope.loaded = false;
+                // perform the HTTP request
+                $http(config)
+                    .success(function (data) {
+                        $rootScope.loaded = true;
+                        defer.resolve(data);
+                    })
+                    .error(function (data, status, headers, config) {
+                        if (!noErrorModal) {
+                            // Open modal with error information
+                            ErrorDialog(data.error).activate();
+                        }
+                        // handle 401 (Authentication required) errors in place
+                        if (status == 401) {
+                            $rootScope.loggedIn = false;
+                            $state.go(&#39;login&#39;, {referrer: $state.current.name, referrerParams: $stateParams});
+                        }
+                        $rootScope.loaded = true;
+                        defer.reject(data);
+                    });
+                return defer.promise;
+
+            };
+        }]);</pre>
+</body>
+</html>

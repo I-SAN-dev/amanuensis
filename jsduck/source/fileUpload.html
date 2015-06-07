@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-directives-fileUpload'>/**
+</span> * @class ama.directives.fileUpload
+ *
+ * The fileUpload directive.
+ * Handles file uploads. Also see {@link ama.services.fileUploadService}
+ *
+ * ## Usage
+ *
+ *     &lt;input file-upload&gt;&lt;/input&gt;
+ *
+ * [Based on code from uncorkedstudios.com](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs)
+ */
+app.directive(&#39;fileUpload&#39;, [&#39;$parse&#39;, function ($parse) {
+    return {
+        restrict: &#39;A&#39;,
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileUpload);
+            var modelSetter = model.assign;
+
+            element.bind(&#39;change&#39;, function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}])
+<span id='ama-services-fileUploadService'>    /**
+</span>     * @class ama.services.fileUploadService
+     *
+     * Provides a function to upload a file to the server.
+     *
+     */
+    .service(&#39;fileUploadService&#39;, [&#39;$http&#39;, &#39;$q&#39;, function ($http, $q) {
+
+
+<span id='ama-services-fileUploadService-method-uploadFile'>        /**
+</span>         * @param file
+         * @param uploadUrl
+         * @returns {Promise}
+         *
+         * Uploads the specified file to the specified url.
+         */
+        this.uploadFile = function(file, uploadUrl){
+            var fd = new FormData();
+            fd.append(&#39;file&#39;, file);
+            var defer = $q.defer();
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {&#39;Content-Type&#39;: undefined}
+            })
+                .success(function(data){
+                    defer.resolve(data.path);
+                })
+                .error(function(error){
+                    defer.reject(error)
+                });
+            return defer.promise;
+        }
+    }]);</pre>
+</body>
+</html>

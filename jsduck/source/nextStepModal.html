@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-NextStepModal'>/**
+</span> * @class ama.services.NextStepModal
+ * # NextStepModal
+ * Shows a modal asking the user what to do next (i.e. when an offer is accepted)
+ *
+ * @param {string} type The type of document of which the state just changed
+ * @param {Object} object The document
+ */
+app.factory(&#39;NextStepModal&#39;, [
+    &#39;ItemContainerService&#39;,
+    &#39;btfModal&#39;,
+    &#39;$state&#39;,
+    function (ItemContainerService, btfModal, $state) {
+        var offer = {
+            name: &#39;offer.name&#39;,
+            api: &#39;offer&#39;,
+            stateName: &#39;app.offerDetail&#39;
+        };
+        var contract = {
+            name: &#39;contract.name&#39;,
+            api: &#39;contract&#39;,
+            stateName: &#39;app.contractDetail&#39;
+        };
+        var todo = {
+            name: &#39;todo.name&#39;,
+            api: &#39;todo&#39;,
+            stateName: &#39;app.todoDetail&#39;
+        };
+        var acceptance = {
+            name: &#39;acceptance.name&#39;,
+            api: &#39;acceptance&#39;,
+            stateName: &#39;app.acceptanceDetail&#39;
+        };
+        var invoice = {
+            name: &#39;invoice.name&#39;,
+            api: &#39;invoice&#39;,
+            stateName: &#39;app.invoiceDetail&#39;
+        };
+        var reminder = {
+            name: &#39;reminder.name&#39;,
+            api: &#39;reminder&#39;,
+            stateName: &#39;app.reminderDetail&#39;
+        };
+
+        var others = function (type) {
+            switch (type){
+                case &#39;offer&#39;:
+                    return [contract,todo,acceptance,invoice];
+                case &#39;contract&#39;:
+                    return [todo,acceptance,invoice];
+                case &#39;todo&#39;:
+                    return [acceptance,invoice];
+                case &#39;invoice&#39;:
+                    return [reminder];
+                default :
+                    return [];
+            }
+        };
+        return function (type, object) {
+            var modal = btfModal(
+                {
+                    templateUrl: &#39;templates/modules/nextStepModal.html&#39;,
+                    controller: [&#39;RefnumberService&#39;,&#39;ItemService&#39;, &#39;$scope&#39;, &#39;$filter&#39;, function(RefnumberService, ItemService, $scope, $filter){
+                        var self = this;
+                        this.copyItems = true;
+                        this.before = object;
+                        this.options = others(type);
+                        this.selected = this.options[0];
+                        var getPrefix = function (name) {
+                            return &#39;[&#39;+ $filter(&#39;translate&#39;)(name) +&#39;] &#39;;
+                        };
+                        var prefix = getPrefix(this.selected.name);
+                        this.name = prefix + object.name;
+                        if(this.selected.api != &#39;todo&#39;){
+                            RefnumberService(this.selected.api+&#39;s&#39;,object.project.id).then(function (data) {
+                                $scope.refnumber = data.refnumber;
+                            });
+                        }
+
+                        this.select = function (selected, keyboard) {
+                            self.selected = selected;
+                            var newPrefix = getPrefix(selected.name);
+                            if(self.name.substr(0,prefix.length)==prefix)
+                                self.name = newPrefix + self.name.substr(prefix.length);
+                            prefix = newPrefix;
+                            if(selected.api != &#39;todo&#39;) {
+                                RefnumberService(selected.api + &#39;s&#39;, object.project.id).then(function (data) {
+                                    $scope.refnumber = data.refnumber;
+                                });
+                            }
+                            if(keyboard) {
+                                $scope.$apply();
+                            }
+                        };
+                        this.transform = function() {
+                            var newItemContainer = angular.copy(object);
+                            delete newItemContainer.id;
+                            delete newItemContainer.state;
+                            delete newItemContainer.path;
+                            newItemContainer.name = self.name;
+                            newItemContainer.refnumber = $scope.refnumber;
+                            newItemContainer.project = object.project.id;
+
+                            var itemsToCopy = [];
+                            for(var i = 0; i&lt;object.items.length; i++){
+                                itemsToCopy.push(object.items[i].id);
+                            }
+
+
+                            ItemContainerService.createItemContainer(this.selected.api, object.project.id, newItemContainer).then(function (data) {
+                                if(self.copyItems)
+                                    ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id);
+                                modal.deactivate();
+                                $state.go(self.selected.stateName,{id:data.id});
+                            });
+                        };
+                        this.close = function () {
+                            modal.deactivate();
+                        };
+                    }],
+                    controllerAs: &#39;next&#39;
+                }
+            );
+            modal.activate();
+        };
+    }
+]);</pre>
+</body>
+</html>

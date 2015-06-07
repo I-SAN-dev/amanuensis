@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-directives-paymentStats'>/**
+</span> * @class ama.directives.paymentStats
+ *
+ * The paymentStats directive
+ * Shows a nice payment stats timeline
+ *
+ * ## Usage
+ *
+ *     &lt;div payment-stats=&quot;thePaymentStatsObject&quot;&gt;&lt;/div&gt;
+ *
+ * @author Sebastian Antosch
+ */
+app.directive(&#39;paymentStats&#39;, [
+    function () {
+        // these input types are available
+
+        return {
+            restrict: &#39;A&#39;,
+            scope: {
+                stats:&#39;=paymentStats&#39;
+            },
+            controller: function ($scope, amaDateFilter) {
+
+                $scope.$watch(&#39;stats&#39;, function(){
+
+                    if($scope.stats)
+                    {
+                        /* normalize if total info or single project info */
+                        $scope.payEvents = $scope.stats.to_pay !== undefined ? $scope.stats.to_pay : $scope.stats.toPay;
+                        if($scope.stats.overdue instanceof Array)
+                        {
+                            $scope.overdue = $scope.stats.overdue_total;
+                            $scope.overdue_items = $scope.stats.overdue;
+                        }
+                        else
+                        {
+                            $scope.overdue = $scope.stats.overdue;
+                            $scope.overdue_items = [];
+                        }
+                        $scope.dayx = $scope.stats.day_x_total !== undefined ? $scope.stats.day_x_total : $scope.stats.toPayDayX;
+                        $scope.dayx_items = $scope.stats.day_x || [];
+
+                        if ($scope.stats.totalProjectWorth !== undefined)
+                        {
+                            $scope.total = $scope.stats.totalProjectWorth;
+                        }
+                        else if($scope.stats.total !== undefined)
+                        {
+                            $scope.total = $scope.stats.total;
+                            $scope.beforetax = $scope.stats.beforetax;
+                            $scope.tax = $scope.stats.tax;
+                            $scope.taxlabel = $scope.stats.taxlabel;
+                            $scope.singleThing = true;
+                        }
+                        else
+                        {
+                            $scope.total = $scope.stats.overdue_total + $scope.stats.to_pay_total + $scope.stats.day_x_total;
+                        }
+
+
+                        /* calc time interval */
+                        if($scope.payEvents &amp;&amp; $scope.payEvents.length &gt; 0)
+                        {
+                            $scope.leftendtime = Date.now() / 1000;
+                            var rightendtime = Date.now() / 1000;
+                            var enddate = amaDateFilter(new Date().toDateString(),&#39;dd.MM.yyyy&#39;);
+
+                            for(var i = 0; i &lt; $scope.payEvents.length; i++)
+                            {
+                                var time = new Date($scope.payEvents[i].date).getTime() / 1000;
+                                if(time &gt; rightendtime)
+                                {
+                                    rightendtime = time;
+                                    enddate = amaDateFilter($scope.payEvents[i].date, &#39;dd.MM.yyyy&#39;);
+                                }
+                            }
+                            $scope.rightendtime = rightendtime;
+                            $scope.enddate = enddate;
+                            $scope.timeintervall = $scope.rightendtime - $scope.leftendtime;
+                        }
+                    }
+
+                });
+
+
+
+                $scope.calcLeft = function(date)
+                {
+                    var timestamp = new Date(date).getTime() / 1000;
+                    var timefromleft = timestamp - $scope.leftendtime;
+
+                    return parseInt(timefromleft / $scope.timeintervall * 100);
+                }
+
+
+
+            },
+            replace: true,
+            templateUrl: &#39;templates/directives/paymentStats.html&#39;
+        }
+    }
+]);</pre>
+</body>
+</html>

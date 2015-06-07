@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-directives-listNavigation'>/**
+</span> * @class ama.directives.listNavigation
+ *
+ * The listNavigation directive
+ * Shows a list and handles keyboard inputs to navigate through that list
+ *
+ * ## Usage
+ *    &lt;div list-navigation=&quot;callbackFunction&quot;
+ *         list=&quot;listToNavigateThrough&quot;
+ *         active=&quot;activeListItem (optional)&quot;
+ *         filter-text=&quot;filterForTheList (optional)&quot;&gt;&lt;/div&gt;
+ *
+ *
+ * @author Christian Baur
+ */
+app.directive(&#39;listNavigation&#39;,[
+    &#39;$document&#39;,
+    &#39;$filter&#39;,
+    function ($document, $filter) {
+        return {
+            restrict: &#39;A&#39;,
+            scope: {
+                list: &#39;=&#39;,
+                active: &#39;=&#39;,
+                callback: &#39;=listNavigation&#39;,
+                filterText:&#39;=filterText&#39;
+            },
+            link:function(scope, elem) {
+
+                scope.$on(&#39;$stateChangeStart&#39;, function (event, toState, toParams, fromState, fromParams) {
+                    if(!toParams.hasDetails){
+                        $document.unbind(&#39;keyup&#39;);
+                        $document.unbind(&#39;keydown&#39;);
+                    }
+                    console.log(event, toState, toParams, fromState, fromParams);
+                });
+
+                var scrollArea = angular.element(elem);
+
+                var callback = scope.callback;
+
+<span id='ama-directives-listNavigation-method-getNeighbor'>                /**
+</span>                 * Looks for the next or previous item in the master list
+                 * @param offset - specifies how many items to go back or forward in the list
+                 * @returns {*} - the requested neighbor object
+                 */
+                var getNeighbor = function (offset, active, list) {
+                    var oldPos;
+                    if (active) {
+                        oldPos = list.indexOf(active);
+                        if (oldPos == -1) {
+                            //console.log(list);
+                            for (var i = 0; i &lt; list.length; i++) {
+                                if (list[i].id &gt; active.id) {
+                                    list.splice(i, 0, active);
+                                    oldPos = i;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        oldPos = -offset;
+                    }
+
+                    return oldPos + offset;
+                };
+
+                // select the only element left in the list when the list is filtered down to one element
+                $document.unbind(&#39;keyup&#39;);
+                $document.on(&#39;keyup&#39;, function (event) {
+                    var list = $filter(&#39;filter&#39;)(scope.list, scope.filterText);
+                    if (list.length == 1) {
+                        callback(list[0]);
+                    }
+                });
+
+                // navigate to the next or previous item when up or down key is pressed
+                $document.unbind(&#39;keydown&#39;);
+                $document.on(&#39;keydown&#39;, function (event) {
+                    var list = $filter(&#39;filter&#39;)(scope.list, scope.filterText);
+
+                    var domList = elem[0].children;
+
+
+                    var active = scope.active || null;
+                    var key = event.keyCode;
+
+                    var animation = {
+                        duration: 500,
+                        queue: false
+                    };
+                    var documentOffset = 40;
+                    var newActiveOffset;
+
+
+                    var viewportHeight = scrollArea.height();
+                    var scrollTop = scrollArea.scrollTop();
+
+                    var position;
+                    if (key == 38) { // arrow up
+                        event.stopPropagation();
+                        event.preventDefault();
+                        position = getNeighbor(-1, active, list);
+                        var prevDetail = list[position];
+
+                        if (prevDetail) {
+                            callback(prevDetail, true);
+                            if(domList[position]) {
+                                newActiveOffset = $(domList[position]).position();
+                                newActiveOffset = newActiveOffset.top - domList[position].offsetHeight;
+                                if (newActiveOffset &lt; 0) {
+                                    // scroll to the element
+                                    var newScrollTop = scrollTop + newActiveOffset ;
+                                    scrollArea.animate({scrollTop: newScrollTop}, animation);
+                                }
+
+                            }
+                        }
+                    }
+                    if (key == 40) { // arrow down
+                        event.stopPropagation();
+                        event.preventDefault();
+
+                        position = getNeighbor(1, active, list);
+                        var nextDetail = list[position];
+                        if (nextDetail) {
+                            callback(nextDetail, true);
+                            if(domList[position]) {
+                                var newActiveItem = $(domList[position]);
+
+                                newActiveOffset = newActiveItem.position();
+                                newActiveOffset = newActiveItem.height() + newActiveOffset.top;
+                                if (newActiveOffset &gt; viewportHeight) {
+                                    // scroll to the element
+                                    scrollArea.animate({scrollTop: scrollTop + (newActiveOffset - viewportHeight)}, animation);
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+    }
+}]);</pre>
+</body>
+</html>

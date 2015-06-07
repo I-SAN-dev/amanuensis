@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-OffersCtrl'>/**
+</span> * @class ama.controllers.OffersCtrl
+ * Controller for the offers overview page
+ * *DEPRECATED:* The corresponding view doesn&#39;t exist anymore.
+ * TODO: Delete this file.
+ */
+app.controller(&#39;OffersCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;MasterDetailService&#39;,
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService){
+        var self = this;
+<span id='ama-controllers-OffersCtrl-property-offers'>        /**
+</span>         * List off all existing offers
+         * @type {Array}
+         */
+        this.offers = LocalStorage.getData(&#39;offers&#39;);
+        ApiAbstractionLayer(&#39;GET&#39;,&#39;offer&#39;).then(function (data) {
+            LocalStorage.setData(&#39;offer&#39;, data);
+            self.offers = data;
+        });
+}]);</pre>
+</body>
+</html>

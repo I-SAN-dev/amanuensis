@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-DashboardCtrl'>/**
+</span> * @class ama.controllers.DashboardCtrl
+ * Controller for the dashboard view
+ */
+app.controller(&#39;DashboardCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;PanelService&#39;,
+    &#39;$state&#39;,
+    function (ApiAbstractionLayer, LocalStorage, PanelService, $state) {
+        var self = this;
+
+        /* projects */
+<span id='ama-controllers-DashboardCtrl-property-currentProjects'>        /**
+</span>         * The current projects (all projects which are not archived)
+         * @type {Object}
+         */
+        this.currentProjects = LocalStorage.getData(&#39;currentProjects&#39;);
+
+<span id='ama-controllers-DashboardCtrl-property-statistics'>        /**
+</span>         * The overall statistics for the current projects.
+         * @type {Object}
+         */
+        this.statistics = LocalStorage.getData(&#39;statistics&#39;);
+        var apiObject = {
+            name: &#39;project&#39;,
+            params: {
+                current: 1
+            }
+        };
+        ApiAbstractionLayer(&#39;GET&#39;, apiObject).then(function (data) {
+            self.currentProjects = data.list;
+            self.statistics = data.info;
+            LocalStorage.setData(&#39;currentProjects&#39;, data.list);
+            LocalStorage.setData(&#39;statistics&#39;, data.info);
+        });
+
+        /* Stream */
+<span id='ama-controllers-DashboardCtrl-property-stream'>        /**
+</span>         * The app&#39;s news stream.
+         * @type {Object}
+         */
+        this.stream = LocalStorage.getData(&#39;stream&#39;);
+        ApiAbstractionLayer(&#39;GET&#39;, &#39;stream&#39;).then(function (data) {
+            self.stream = data;
+            LocalStorage.setData(&#39;stream&#39;, data);
+        });
+
+
+<span id='ama-controllers-DashboardCtrl-method-newProject'>        /**
+</span>         * Switches to new project view in client view
+         */
+        this.newProject = function () {
+            PanelService.setPanel(&#39;clients&#39;, 3);
+            $state.go(&#39;app.clients&#39;);
+        };
+
+<span id='ama-controllers-DashboardCtrl-method-goto'>        /**
+</span>         * Goes to a page
+         * @param type - the type of the page, e.g. invoice
+         * @param id - the id of the thing
+         */
+        this.goto = function(type, id)
+        {
+            var stateOfType = {
+                client:&#39;app.clients.detail&#39;,
+                project:&#39;app.projectDetail&#39;,
+                offer:&#39;app.offerDetail&#39;,
+                contract:&#39;app.contractDetail&#39;,
+                todo:&#39;app.todoDetail&#39;,
+                acceptance:&#39;app.acceptanceDetail&#39;,
+                invoice:&#39;app.invoiceDetail&#39;,
+                reminder:&#39;app.reminderDetail&#39;
+            };
+            $state.go(stateOfType[type], {id: id});
+        };
+
+<span id='ama-controllers-DashboardCtrl-method-clientLinkable'>        /**
+</span>         * Checks if a client in a stream entry is linkable
+         * @param entry - the entry
+         * @returns {boolean}
+         */
+        this.clientLinkable = function(entry)
+        {
+            return !((entry.action == &#39;delete&#39;) &amp;&amp; (entry.type == &#39;client&#39;));
+        };
+
+<span id='ama-controllers-DashboardCtrl-method-linkable'>        /**
+</span>         * Checks if a stream entry is linkable
+         * @param entry - the entry
+         * @returns {boolean}
+         */
+        this.linkable = function(entry)
+        {
+            return (entry.action != &#39;delete&#39;);
+        };
+
+    }
+]);</pre>
+</body>
+</html>

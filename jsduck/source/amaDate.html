@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-filters-amaDate'>/**
+</span> * @class ama.filters.amaDate
+ *
+ * # The amaDate filter
+ * Converts a given datetime string to a desired format.
+ * Internally uses the standard AngularJS date filter but also supports the MySQL date format.
+ * ## Usage
+ * HTML:
+ *
+ *     {{dateString|amaDate:&#39;dd.MM.yyyy HH:mm&#39;}}
+ *
+ * JavaScript:
+ *
+ *     $filter(&#39;amaDate&#39;)(dateString, &#39;dd.MM.yyyy HH:mm&#39;)
+ *
+ * &#39;dd.MM.yyyy&#39; from the example above can be replaced by any desired datetime format
+ *
+ *
+ */
+app.filter(&#39;amaDate&#39;, [&#39;$filter&#39;, function ($filter) {
+    return function (input, dateTimeFormat) {
+        if(input){
+            input = input.replace(/\s/g, &quot;T&quot;);
+            return $filter(&#39;date&#39;)(input, dateTimeFormat);
+        }
+    };
+}]);</pre>
+</body>
+</html>

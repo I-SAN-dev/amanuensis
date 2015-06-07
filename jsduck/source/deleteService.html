@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-DeleteService'>/**
+</span> * @class ama.services.DeleteService
+ * # DeleteService
+ * Opens a modal that asks the user if he/she wants to delete something. Deletes that thing after the user confirms.
+ *
+ * @param {string} apiAction The name of the apiAction (i.e. &#39;invoice&#39;, if an invoice shall be deleted)
+ * @param {int|string|Object} The ID of the object to be deleted. If given as object, it can also contain additional parameters for the API.
+ * @returns {promise} A promise containing the API&#39;s answer after the deletion or nothing if the user cancelled the deletion.
+ */
+app.factory(&#39;DeleteService&#39;,
+    [
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;btfModal&#39;,
+        &#39;$q&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;ErrorDialog&#39;,
+        function(ApiAbstractionLayer, btfModal, $q, LocalStorage, ErrorDialog){
+    return function (apiAction, id) {
+        var data = {id:id};
+        if(typeof(id) === &quot;object&quot;) {
+            data = id;
+        }
+        var defer = $q.defer();
+        var modal = btfModal({
+            templateUrl: &#39;templates/modules/deleteDialog.html&#39;,
+            controller: function(){
+
+                this.accept = function () {
+                    ApiAbstractionLayer(&#39;DELETE&#39;, {name: apiAction, data: data}, true).then(function (data) {
+                        modal.deactivate();
+                        LocalStorage.removeItem(apiAction+&#39;/&#39;+id);
+                        defer.resolve(data);
+                    }, function (data) {
+                        modal.deactivate();
+                        ErrorDialog(data.error).activate();
+                        defer.reject(data);
+                    });
+                };
+
+                this.cancel = function () {
+                    modal.deactivate();
+                    defer.reject();
+                };
+            },
+            controllerAs: &#39;delete&#39;
+        });
+        modal.activate();
+        return defer.promise;
+    };
+}]);</pre>
+</body>
+</html>

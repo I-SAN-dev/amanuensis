@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ClientsCtrl'>/**
+</span> * @class ama.controllers.ClientsCtrl
+ * Controller for the client (master) list view.
+ * Gets the client list and holds functions to add and delete clients in the database.
+ */
+app.controller(&#39;ClientsCtrl&#39;,
+    [
+        &#39;ApiAbstractionLayer&#39;,
+        &#39;LocalStorage&#39;,
+        &#39;$scope&#39;,
+        &#39;$stateParams&#39;,
+        &#39;DeleteService&#39;,
+        &#39;MasterDetailService&#39;,
+        &#39;$filter&#39;,
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, $filter) {
+<span id='ama-controllers-ClientsCtrl-property-clientList'>            /**
+</span>             * An array containing all clients.
+             * @type {Array}
+             */
+            this.clientList = LocalStorage.getData(&#39;clients&#39;);
+            MasterDetailService.setMaster(this);
+
+
+            var self = this;
+
+<span id='ama-controllers-ClientsCtrl-method-setClientList'>            /**
+</span>             * Process the list of clients coming from the api after GET or DELETE request
+             * @param data - the apiData object
+             */
+            var setClientList = function (data) {
+                for(var i= 0; i&lt;data.length; i++){
+                    // process contact name if companyname is not set
+                    if(!data[i].companyname){
+                        data[i].companyname =
+                            (data[i].contact_firstname || &#39;&#39;)
+                            +&#39; &#39;
+                            +(data[i].contact_lastname || &#39;&#39;);
+                    }
+                }
+                self.clientList = $filter(&#39;orderBy&#39;)(data,&#39;companyname&#39;);
+                LocalStorage.setData(&#39;clients&#39;, self.clientList);
+            };
+
+            // get the client list
+            if(!$stateParams.noReload) {
+                ApiAbstractionLayer(&#39;GET&#39;, &#39;client&#39;).then(function (data) {
+                    setClientList(data);
+                    if (!$stateParams.id &amp;&amp; self.clientList.length &gt; 0) {
+                        MasterDetailService.notifyController(&#39;setDetail&#39;, self.clientList[0]);
+                        $stateParams.id = self.clientList[0].id;
+                    }
+                });
+            }
+
+            // (re)set a flag indicating if the Controller was fully loaded
+            // needed for setting transition classes
+            $scope.$on(&#39;$stateChangeStart&#39;, function (event, toState) {
+                console.log(toState);
+                self.loaded = false;
+            });
+            setTimeout(function () {
+                self.loaded = true;
+                $scope.$apply();
+            }, 1000);
+
+
+<span id='ama-controllers-ClientsCtrl-method-deleteCategoryLink'>            /**
+</span>             * Delete the link between client and client category
+             * *DEPRECATED:* We manage this in {@link ama.controllers.ClientCategoriesDialog the ClientCategoriesDialog controller}.
+             * TODO: test if this still works...
+             * @param client - the client&#39;s id
+             * @param category - the category
+             */
+            this.deleteCategoryLink = function (client, category) {
+                ApiAbstractionLayer(&#39;DELETE&#39;, {name:&#39;client_categories&#39;, data: {id:self.allCategories[category].id, clientid: client}});
+            };
+
+<span id='ama-controllers-ClientsCtrl-method-deleteClient'>            /**
+</span>             * Deletes a client by given ID
+             *
+             * @param id {string} - Database ID of the client to be deleted
+             */
+            this.deleteClient = function(id){
+                DeleteService(&#39;client&#39;,id).then(function (data) {
+                    setClientList(data);
+                });
+            };
+
+
+        }
+    ]
+);</pre>
+</body>
+</html>

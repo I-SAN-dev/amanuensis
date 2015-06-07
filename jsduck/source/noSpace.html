@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-filters-nospace'>/**
+</span> * @class ama.filters.nospace
+ *
+ * # The nospace filter
+ * Removes white space from text. useful for html values that cannot have spaces
+ * ## Usage
+ * HTML:
+ *
+ *     {{some_text | nospace}}
+ *
+ * JavaScript:
+ *
+ *     $filter(&#39;nospace&#39;)(some_text)
+ *
+ * Source: [gist.github.com](https://gist.github.com/builtbylane/7237798)
+ */
+app.filter(&#39;nospace&#39;, function () {
+    return function (value) {
+        return (!value) ? &#39;&#39; : value.replace(/ /g, &#39;&#39;);
+    };
+});</pre>
+</body>
+</html>

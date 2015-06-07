@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-InvoiceCreationCtrl'>/**
+</span> * @class ama.controllers.InvoiceCreationCtrl
+ * Controller for the invoice creation view.
+ */
+app.controller(&#39;InvoiceCreationCtrl&#39;, [
+    &#39;RefnumberService&#39;,
+    &#39;ItemContainerService&#39;,
+    &#39;$stateParams&#39;,
+    &#39;$state&#39;,
+    function (RefnumberService, ItemContainerService, $stateParams, $state) {
+        var self = this;
+        var project = $stateParams.project;
+        var projectId = project.id;
+<span id='ama-controllers-InvoiceCreationCtrl-property-projectName'>        /**
+</span>         * The name of the current project (derived from stateParams)
+         * @type string
+         */
+        this.projectName = project.name;
+
+<span id='ama-controllers-InvoiceCreationCtrl-property-newInvoice'>        /**
+</span>         * The invoice to be created
+         * @type {{refnumber: string, project: int}}
+         */
+        this.newInvoice = {
+            refnumber: &#39;&#39;,
+            project: projectId
+        };
+
+        RefnumberService(&#39;invoices&#39;, projectId).then(function (data) {
+            if(self.newInvoice.refnumber === &#39;&#39;){
+                self.newInvoice.refnumber = data.refnumber;
+            }
+        });
+
+<span id='ama-controllers-InvoiceCreationCtrl-method-createInvoice'>        /**
+</span>         * Creates a new invoice in the current project
+         */
+        this.createInvoice = function () {
+            ItemContainerService.createItemContainer(&#39;invoice&#39;, projectId, self.newInvoice).then(function (data) {
+                // go to where we came from
+                var to = $stateParams.referrer;
+                var toParams = $stateParams.referrerParams;
+                $state.go(to,toParams);
+            });
+        };
+    }
+]);</pre>
+</body>
+</html>

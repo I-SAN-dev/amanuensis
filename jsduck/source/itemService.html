@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-services-ItemService'>/**
+</span> * @class ama.services.ItemService
+ * # ItemService
+ * A service that holds functions to manage items.
+ * Remember: the term &#39;item&#39; refers to a single piece of an offer/contract/list of todos/acceptance/invoice
+ */
+app.factory(&#39;ItemService&#39;,[
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    function (ApiAbstractionLayer, LocalStorage) {
+        return {
+<span id='ama-services-ItemService-method-getItems'>            /**
+</span>             * Gets all items of given document
+             * @param {string} forType The type of the document (offer/contract/acceptance/invoice)
+             * @param {string|int} forId The ID of the document
+             * @returns {Array} The list of items of the document
+             */
+            getItems: function(forType, forId) {
+                var apiObject = {
+                    name: &#39;item&#39;,
+                    params: {
+                        for: forType,
+                        forid: forId
+                    }
+                };
+                var lsKey = &#39;items&#39;;
+                if(forType)
+                    lsKey = lsKey+&#39;/&#39;+forType;
+                if(forId)
+                    lsKey = lsKey+&#39;/&#39;+forId;
+                var items = LocalStorage.getData(lsKey);
+
+                ApiAbstractionLayer(&#39;GET&#39;, apiObject).then(function (data) {
+                    LocalStorage.setData(lsKey, data);
+                    return data;
+                }, function () {
+                    return items;
+                });
+            },
+<span id='ama-services-ItemService-method-getItem'>            /**
+</span>             * Gets an item specified by id
+             * @param {string|int} id - The id of the item
+             * @returns {Object} the item
+             */
+            getItem: function (id) {
+                var apiObject = {
+                    name: &#39;item&#39;,
+                    data: {
+                        id: id
+                    }
+                };
+                var lsKey = &#39;item/&#39; + id;
+                var item = LocalStorage.getData(lsKey);
+                ApiAbstractionLayer(&#39;GET&#39;, apiObject).then(function (data) {
+                    LocalStorage.setData(lsKey, data);
+                    return data;
+                }, function () {
+                    return item;
+                });
+            },
+<span id='ama-services-ItemService-method-bindItemsToContainer'>            /**
+</span>             * Binds a bulk of items to a given item container (document)
+             * @param {Array} itemIds List of item IDs to be bound
+             * @param {string} forType The type of the container (offer/contract/acceptance/invoice/reminder)
+             * @param {int|string} forId The Id of the container
+             * @returns {promise} A promise containing the answer from the API
+             */
+            bindItemsToContainer: function (itemIds, forType, forId) {
+                var items = itemIds.join(&#39;,&#39;);
+                var apiObject = {
+                    name: &#39;bulk&#39;,
+                    data: {
+                        ids: items,
+                        for: forType,
+                        forid: forId
+                    }
+                };
+                return ApiAbstractionLayer(&#39;POST&#39;,apiObject);
+            }
+        }
+    }
+]);</pre>
+</body>
+</html>

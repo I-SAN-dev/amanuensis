@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='ama-controllers-ItemPresetCreationCtrl'>/**
+</span> * @class ama.controllers.ItemPresetCreationCtrl
+ * Controller for the item preset creation view.
+ *
+ * Remember: the term &#39;item&#39; refers to a single piece of a offer/contract/list of todos/acceptance/invoice
+ */
+app.controller(&#39;ItemPresetCreationCtrl&#39;, [
+    &#39;ApiAbstractionLayer&#39;,
+    &#39;LocalStorage&#39;,
+    &#39;$filter&#39;,
+    &#39;$state&#39;,
+    &#39;$stateParams&#39;,
+    function (ApiAbstractionLayer, LocalStorage, $filter, $state, $stateParams) {
+        var self = this;
+
+<span id='ama-controllers-ItemPresetCreationCtrl-property-useRateOptions'>        /**
+</span>         * List of options for the useRate selection field.
+         * @type {{name: *, value: number}[]}
+         */
+        this.useRateOptions = [
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.fixedRate&#39;),
+                value: 0
+            },
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.hourlyRate&#39;),
+                value: 1
+            },
+            {
+                name: $filter(&#39;translate&#39;)(&#39;items.dailyRate&#39;),
+                value: 2
+            }
+        ];
+
+<span id='ama-controllers-ItemPresetCreationCtrl-method-addPreset'>        /**
+</span>         * Creates an item preset
+         */
+        this.addPreset = function () {
+            var apiObject = {
+                name: &#39;item_preset&#39;,
+                data: self.newPreset
+            };
+            ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                LocalStorage.setData(&#39;itemPreset/&#39;+data.id, data);
+
+                var presetList = LocalStorage.getData(&#39;itemPresets&#39;) || [];
+                presetList.push(data);
+
+
+                LocalStorage.setData(&#39;itemPresets&#39;, presetList);
+
+                self.newPreset = null;
+
+                // go to where we came from or to the itemPresets list (and new preset detail) if no referrer is specified
+                var to = $stateParams.referrer || &#39;app.itemPresets&#39;;
+                var toParams;
+                if(to==&#39;app.itemPresets&#39;)
+                    toParams = {id:data.id};
+                else
+                    toParams = $stateParams.referrerParams;
+                $state.go(to,toParams);
+            })
+        };
+    }
+]);</pre>
+</body>
+</html>
