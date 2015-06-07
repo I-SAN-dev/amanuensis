@@ -20,6 +20,7 @@ app.factory('PanelService', [
              * @returns {int} The number of the currently shown panel
              */
             getPanel: function (site) {
+                console.log(panels);
                 if(panels[site])
                     return panels[site];
                 else return 1;
@@ -30,7 +31,7 @@ app.factory('PanelService', [
              * @param panel The number of the panel which should be shown
              */
             setPanel: function(site, panel){
-                if(panelMax[site]<=panel && panel > 0)
+                if(panelMax[site] >= panel && panel > 0)
                     panels[site] = panel;
             }
         };

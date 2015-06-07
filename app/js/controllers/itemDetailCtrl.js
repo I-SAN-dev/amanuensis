@@ -36,7 +36,6 @@ app.controller('ItemDetailCtrl', [
                 if(self.connections.invoice && self.connections.invoice.id)
                     count++;
             }
-            console.log(count);
             return count>1;
 
         };

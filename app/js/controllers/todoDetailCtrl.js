@@ -12,6 +12,7 @@ app.controller('TodoDetailCtrl', [
     function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
+        PanelService.setPanel('items',2);
 
         var id = $stateParams.id;
 
