@@ -66,6 +66,9 @@
     margin: 0;
     background-color: $brand-primary;
     color: #fff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .tile-text
   {
