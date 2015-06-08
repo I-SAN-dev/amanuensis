@@ -278,6 +278,7 @@ $panel-heading-height: 64px;
     height: $panel-heading-height;
     padding: 0;
     margin: 0;
+    width: 100%; /* this is awkward... but we need this */
     background-color: #fff;
     border-bottom: 1px solid $gray-lighter;
     text-overflow: ellipsis;
