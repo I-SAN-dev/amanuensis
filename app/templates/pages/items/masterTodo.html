@@ -26,17 +26,16 @@
              data-active="MasterDetailCtrl.detail"
              data-filter-text="MasterDetailCtrl.filterText">
             <div data-as-sortable="MasterDetailCtrl.sort"
-             data-ng-model="masterList">
-            <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
-               data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
-               data-ng-click="setDetail(item)"
-               data-as-sortable-item>
-
-                <div class="row">
-
-                    <div class="col-xs-8">
-                        <h2><i data-ng-show="MasterDetailCtrl.filterText == ''" class="md md-unfold-more" data-as-sortable-item-handle></i> {{item.name}}</h2>
-                    </div>
+                 data-ng-model="masterList">
+                <a class="list-group-item" data-ng-repeat="item in masterList | filter:MasterDetailCtrl.filterText"
+                   data-ng-class="{active:MasterDetailCtrl.detail.id == item.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
+                   data-ng-click="setDetail(item)"
+                   data-as-sortable-item>
+                    <div data-ng-show="MasterDetailCtrl.filterText == ''" data-as-sortable-item-handle><i class="md md-unfold-more"></i></div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h2>{{item.name}}</h2>
+                        </div>
                         <div class="check">
                             <span class="checkbox"
                                   data-in-place-edit
@@ -51,11 +50,11 @@
                                     >
                             </span>
                         </div>
-                </div>
+                    </div>
 
 
-            </a>
-                </div>
+                </a>
+            </div>
         </div>
     </div>
     <a class="btn btn-fab btn-success add-item" data-ui-sref="app.itemCreation(MasterDetailCtrl.getStateParams('itemCreation'))">

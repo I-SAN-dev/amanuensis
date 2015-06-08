@@ -1,12 +1,39 @@
 .list-group {
+
   .btn-on-list {
     position: absolute;
     right: 15px;
     top: calc(50% - 15px);
     z-index: 1000;
   }
-}
 
+}
+.list-group-item.as-sortable-item {
+  padding-left: 20px;
+
+  .as-sortable-item-handle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    line-height: 100%;
+    width: 15px;
+    z-index: 999;
+    border-right: 1px dotted $gray-lighter;
+    color: $gray-light;
+
+    > i {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &.active {
+    .as-sortable-item-handle {
+      border-right: 1px solid $gray-light;
+    }
+  }
+}
 .listinfo-row {
   border-bottom: 1px solid $gray-lighter;
   padding-top: 20px;

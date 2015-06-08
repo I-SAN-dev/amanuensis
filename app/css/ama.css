@@ -12217,6 +12217,25 @@ strong.total {
   top: calc(50% - 15px);
   z-index: 1000; }
 
+.list-group-item.as-sortable-item {
+  padding-left: 20px; }
+  .list-group-item.as-sortable-item .as-sortable-item-handle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    line-height: 100%;
+    width: 15px;
+    z-index: 999;
+    border-right: 1px dotted #EEEEEE;
+    color: #BDBDBD; }
+    .list-group-item.as-sortable-item .as-sortable-item-handle > i {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%); }
+  .list-group-item.as-sortable-item.active .as-sortable-item-handle {
+    border-right: 1px solid #BDBDBD; }
+
 .listinfo-row {
   border-bottom: 1px solid #EEEEEE;
   padding-top: 20px;
