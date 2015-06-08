@@ -168,6 +168,15 @@
   "acceptance": {
     "name": "Abnahme"
   },
+  "acceptances": {
+    "states": {
+      "created":"Abnahmeformular erstellt",
+      "pdfGenerated":"PDF erstellt",
+      "pdfSent":"PDF verschickt",
+      "clientAccepted":"Vom Kunden abgenommen",
+      "clientDeclined":"Vom Kunden abgelehnt"
+    }
+  },
   "invoice":{
     "name": "Rechnung",
     "description": "Beschreibungstext",
