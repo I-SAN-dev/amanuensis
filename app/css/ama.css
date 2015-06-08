@@ -11753,7 +11753,10 @@ a.list-group-item {
     padding: 87px 15px 15px 15px;
     margin: 0;
     background-color: #404877;
-    color: #fff; }
+    color: #fff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
   .tile .tile-text {
     padding: 15px 15px 0 15px;
     height: 55px;

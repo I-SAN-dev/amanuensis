@@ -150,7 +150,8 @@
   "contract":
   {
     "name": "Vertrag",
-    "type":"Typ"
+    "type":"Typ",
+    "description":"Beschreibung"
   },
   "todo": {
     "todo":"ToDo",
