@@ -34,6 +34,9 @@
                             </a>
                         </div>
                         <div class="col-beneath-fixedwidth-35 fullheight scroll-y">
+                            <div data-ng-if="dashboard.currentProjects.length == 0">
+                                <h3 data-ng-bind-html="'dashboard.noprojects'|translate"></h3>
+                            </div>
                             <div class="row">
                                 <div data-ng-repeat="project in dashboard.currentProjects" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                     <a class="tile" data-ui-sref="app.projectDetail({id:project.id})">
@@ -71,7 +74,7 @@
 
             <div class="panel panel-default under-fixedheight-360 shadow-0 scroll-y">
                 <div class="stream-entry list-group-item" data-ng-if="dashboard.stream.length == 0">
-                    <h3>{{'stream.nothing'}}</h3>
+                    <h3>{{'stream.nothing'|translate}}</h3>
                 </div>
                 <div class="stream-entry list-group-item" data-ng-repeat="entry in dashboard.stream">
                     <div class="row">

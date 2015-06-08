@@ -1,6 +1,7 @@
 {
   "hello": "Hallo",
   "dashboard":{
+    "noprojects":"Im Moment sind keine Projekte offen.<br/><br/>Sobald du ein neues Projekt angelegt hast, wird dieses hier angezeigt.",
     "menuName": "Dashboard",
     "menuTitle": "Übersicht über Kunden und Projekte"
   },
@@ -43,6 +44,7 @@
 
   "clients": {
     "addClient":"Neuen Kunden anlegen",
+    "noclient":"Es sind noch keine Kunden hinterlegt.<br/>Lege jetzt einen an!",
     "menuName": "Kunden",
     "menuTitle": "Liste aller Kunden",
     "client": "Kunde",
@@ -256,7 +258,8 @@
     "newTime": "Zeit erfassen",
     "alsoIn": "Dieser Posten befindet sich auch in:",
     "alsoInNone": "Dieser Posten ist keinen weiteren Dokumenten zugeordnet.",
-    "deleteItem": "Diesen Posten löschen."
+    "deleteItem": "Diesen Posten löschen.",
+    "nopresets":"Es sind noch keine Bausteine angelegt.<br/>Hinterlege jetzt einen Baustein, um ihn in deinen Angeboten, Rechnungen, etc. zu verwenden."
   },
   "offers": {
     "state": "Angebotsstatus",
