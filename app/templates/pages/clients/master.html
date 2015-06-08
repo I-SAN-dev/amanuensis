@@ -25,6 +25,10 @@
              data-list="masterList"
              data-active="MasterDetailCtrl.detail"
              data-filter-text="MasterDetailCtrl.filterText">
+            <div data-ng-if="masterList.length == 0">
+                <a class="list-group-item" data-ui-sref="app.clientCreation" data-ng-bind-html="'clients.noclient'|translate"></a>
+            </div>
+
             <div class="position-relative" data-ng-repeat="client in masterList | filter:MasterDetailCtrl.filterText">
                 <a class="list-group-item"
                    data-ng-class="{active:MasterDetailCtrl.detail.id == client.id, 'ng-trans ng-trans-scale-up':masterLoaded}"

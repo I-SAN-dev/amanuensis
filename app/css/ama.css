@@ -11482,6 +11482,9 @@ textarea {
       margin-top: -60px;
       margin-left: -60px; }
 
+a.list-group-item {
+  margin-bottom: 0 !important; }
+
 .masterlist h3 {
   text-align: right;
   line-height: 1.0;

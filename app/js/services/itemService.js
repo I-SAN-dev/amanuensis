@@ -84,15 +84,43 @@ app.factory('ItemService',[
              * @returns {promise} A promise containing the answer from the API
              */
             changeOrdering: function(list,isTodo){
+                var bulkOrder = [];
                 var setOrder = 'global';
                 if(isTodo){
                     setOrder = 'todo';
+
+                    for(var i=0; i<list.length; i++){
+                        list[i].todo_order = i;
+                        bulkOrder.push(list[i].id+':'+i);
+                    }
                 }
-                var bulkOrder = [];
-                for(var i=0; i<list.length; i++){
-                    list[i].todo_order = i;
-                    bulkOrder.push(list[i].id+':'+i);
+                else
+                {
+                    /* preserve existing order numbers*/
+                    var orderNumbers = [];
+                    for(var j = 0; j<list.length; j++)
+                    {
+                        orderNumbers.push(list[j].global_order);
+                    }
+                    /* make order numbers unique and sort them*/
+                    orderNumbers = orderNumbers.sort().filter(function(item, pos, ary){
+                        return !pos || item != ary[pos-1];
+                    });
+                    /* refill the orderNumbers, necessary if there where duplicates*/
+                    var difference = list.length - orderNumbers.length;
+                    for(var k = 0; k < difference; k++)
+                    {
+                        orderNumbers.push(orderNumbers[orderNumbers.length-1] + 1)
+                    }
+
+                    /* assign the new order numbers */
+                    for(var i=0; i<list.length; i++){
+                        list[i].global_order = orderNumbers[i];
+                        bulkOrder.push(list[i].id+':'+orderNumbers[i]);
+                    }
+
                 }
+
                 bulkOrder = bulkOrder.join(',');
                 return ApiAbstractionLayer('POST', {name:'bulk', data: {order:bulkOrder,setorder:setOrder}});
             }

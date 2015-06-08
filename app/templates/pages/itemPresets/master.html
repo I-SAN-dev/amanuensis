@@ -25,6 +25,9 @@
              data-list="masterList"
              data-active="MasterDetailCtrl.detail"
              data-filter-text="MasterDetailCtrl.filterText">
+            <div data-ng-if="masterList.length == 0">
+                <a class="list-group-item" data-ui-sref="app.itemPresetCreation" data-ng-bind-html="'items.nopresets'|translate"></a>
+            </div>
             <a class="list-group-item" data-ng-repeat="preset in masterList | filter:MasterDetailCtrl.filterText"
                data-ng-class="{active:MasterDetailCtrl.detail.id == preset.id, 'ng-trans ng-trans-scale-up':masterLoaded}"
                data-ng-click="setDetail(preset)">
