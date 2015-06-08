@@ -51,7 +51,8 @@ class refnumber {
             /* get the possible next id for use in the refnumber */
             $q = $dbal->prepare("SELECT max(id)+1 AS auto_increment FROM ".$for);
             $q->execute();
-            $nextid = $q->fetch()["auto_increment"] ? $q->fetch()["auto_increment"] : 1;
+            $nextid = $q->fetch()["auto_increment"];
+            $nextid = $nextid ? $nextid : 1;
 
             $nextid=(string)$nextid;
             $nextid = str_pad($nextid, $idminlength, '0', STR_PAD_LEFT);
