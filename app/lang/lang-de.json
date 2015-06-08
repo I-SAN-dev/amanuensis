@@ -93,7 +93,10 @@
     "data":"Kundendaten",
     "pricing":"Preise",
     "defaultHourlyrate":"Standard-Stundensatz",
-    "defaultDailyrate":"Standard-Tagessatz"
+    "defaultDailyrate":"Standard-Tagessatz",
+    "manageCategories":"Kategorien zuweisen",
+    "newCategory":"Neue Kategorie anlegen",
+    "addCategory":"Kategorie erstellen"
   },
   "category":
   {

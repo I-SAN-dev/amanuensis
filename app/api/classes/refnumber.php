@@ -49,10 +49,10 @@ class refnumber {
             $idminlength = $options['idminlength'];
 
             /* get the possible next id for use in the refnumber */
-            $q = $dbal->prepare("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = :table ");
-            $q->bindParam(':table', $for);
+            $q = $dbal->prepare("SELECT max(id)+1 AS auto_increment FROM ".$for);
             $q->execute();
-            $nextid = $q->fetch()["auto_increment"];
+            $nextid = $q->fetch()["auto_increment"] ? $q->fetch()["auto_increment"] : 1;
+
             $nextid=(string)$nextid;
             $nextid = str_pad($nextid, $idminlength, '0', STR_PAD_LEFT);
 
