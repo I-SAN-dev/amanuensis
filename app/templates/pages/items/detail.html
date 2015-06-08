@@ -42,90 +42,165 @@
             </div>
 
             <div class="slideanim-item fullheight scroll-y">
+                <div class="detail-block">
+                    <div class="row detail-block">
+                        <div class="col-sm-2 col-md-1"><div class="sidelabel"><i class="md md-attach-money"></i></div></div>
+                        <div class="col-sm-10 col-md-11">
+                            <div class="listinfo-row">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <span data-in-place-edit
+                                              data-ipe-key="'hourlyrates'"
+                                              data-ipe-value="item.item.hourlyrates"
+                                              data-api-name="'item'"
+                                              data-api-id="item.item.id"
+                                              data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
+                                                                                                                                        data-ipe-type="'price'"
+                                                                                                                                        data-ipe-value="item.item.hourlyrate"
+                                                                                                                                        data-ipe-key="'hourlyrate'"
+                                                                                                                                        data-api-name="'item'"
+                                                                                                                                        data-api-id="item.item.id"
+                                                                                                                                        data-ipe-name="'items.hourlyRate'|translate"
+                                                                                                                                        data-output-value="item.item.hourlyrate|price"></span>
+                                        <br />
+                                        <span class="less-important">{{'items.hourlyRate'|translate}}</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                           data-ng-if="item.item.userate == 1"
+                                           title="{{'items.currentUseRate' | translate}}">
+                                            <i class="md md-star"></i>
+                                        </a>
+                                        <a class="listinfo-action listinfo-action-icon"
+                                           data-ng-if="item.item.userate != 1"
+                                           data-ng-click="item.changeUseRate(1)"
+                                           title="{{'items.changeUseRate' | translate}}"
+                                           data-ng-mouseenter="hoverHourly = true"
+                                           data-ng-mouseleave="hoverHourly = false"
+                                           data-ng-class="{'listinfo-action-info':hoverHourly}">
+                                            <i class="md" data-ng-class="{'md-star info':hoverHourly,'md-star-outline':!hoverHourly}"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listinfo-row">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <span data-in-place-edit
+                                              data-ipe-key="'dailyrates'"
+                                              data-ipe-value="item.item.dailyrates"
+                                              data-api-name="'item'"
+                                              data-api-id="item.item.id"
+                                              data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
+                                                                                                                                      data-ipe-type="'price'"
+                                                                                                                                      data-ipe-value="item.item.dailyrate"
+                                                                                                                                      data-ipe-key="'dailyrate'"
+                                                                                                                                      data-api-name="'item'"
+                                                                                                                                      data-api-id="item.item.id"
+                                                                                                                                      data-ipe-name="'items.dailyRate'|translate"
+                                                                                                                                      data-output-value="item.item.dailyrate|price"></span>
+                                        <br />
+                                        <span class="less-important">{{'items.dailyRate'|translate}}</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                           data-ng-if="item.item.userate == 2"
+                                           title="{{'items.currentUseRate' | translate}}">
+                                            <i class="md md-star"></i>
+                                        </a>
+                                        <a class="listinfo-action listinfo-action-icon"
+                                           data-ng-if="item.item.userate != 2"
+                                           data-ng-click="item.changeUseRate(2)"
+                                           title="{{'items.changeUseRate' | translate}}"
+                                           data-ng-mouseenter="hoverDaily = true"
+                                           data-ng-mouseleave="hoverDaily = false"
+                                           data-ng-class="{'listinfo-action-info':hoverDaily}">
+                                            <i class="md" data-ng-class="{'md-star info':hoverDaily,'md-star-outline':!hoverDaily}"></i>
+                                        </a>
+                                    </div>
+                                </div>
 
-                <h3>{{'items.expectedRate'|translate}}</h3>
-                <div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" value="1" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.hourlyRate'|translate}}:</label><span data-in-place-edit
-                                                                    data-ipe-key="'hourlyrates'"
-                                                                    data-ipe-value="item.item.hourlyrates"
-                                                                    data-api-name="'item'"
-                                                                    data-ipe-type="'text'"
-                                                                    data-api-id="item.item.id"
-                                                                    data-ipe-name="'items.hourlyRates'|translate"></span> {{'items.hours'|translate}} à <span data-in-place-edit
-                                                                                                                                                              data-ipe-value="item.item.hourlyrate"
-                                                                                                                                                              data-ipe-key="'hourlyrate'"
-                                                                                                                                                              data-api-name="'item'"
-                                                                                                                                                              data-ipe-type="'price'"
-                                                                                                                                                              data-api-id="item.item.id"
-                                                                                                                                                              data-ipe-name="'items.hourlyRate'|translate"></span>
 
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" value="2" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.dailyRate'|translate}}:</label> <span data-in-place-edit
-                                                                   data-ipe-key="'dailyrates'"
-                                                                   data-ipe-type="'text'"
-                                                                   data-ipe-value="item.item.dailyrates"
-                                                                   data-api-name="'item'"
-                                                                   data-api-id="item.item.id"
-                                                                   data-ipe-name="'items.dailyRates'|translate"></span> {{'items.days'|translate}} à <span data-in-place-edit
-                                                                                                                                                           data-ipe-value="item.item.dailyrate"
-                                                                                                                                                           data-ipe-key="'dailyrate'"
-                                                                                                                                                           data-api-name="'item'"
-                                                                                                                                                           data-ipe-type="'price'"
-                                                                                                                                                           data-api-id="item.item.id"
-                                                                                                                                                           data-ipe-name="'items.dailyRate'|translate"></span>
-
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" value="0" data-ng-model="item.item.userate" data-ng-change="item.changeUseRate()">
-                            {{'items.fixedRate'|translate}}:</label> <span data-in-place-edit
-                                                                   data-ipe-value="item.item.fixedrate"
-                                                                   data-ipe-key="'fixedrate'"
-                                                                   data-api-name="'item'"
-                                                                   data-ipe-type="'price'"
-                                                                   data-api-id="item.item.id"
-                                                                   data-ipe-name="'items.fixedRate'|translate"></span>
-                    </div>
-
-                    <div class="detail-block">
-                        <div class="row striped" data-ng-repeat="time in item.time.times">
-                            <div class="col-sm-4">
-                                {{time.username}}
                             </div>
-                            <div class="col-sm-3">
-                                {{time.start|amaDate:'dd.MM.yyyy HH:mm'}}
-                            </div>
-                            <div class="col-sm-3">
-                                {{time.end|amaDate:'dd.MM.yyyy HH:mm'}}
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-link btn-icon-round btn-warning" data-ng-if="!time.end" data-ng-click="item.stopTime(time.id)"><i class="md md-stop"></i></button>
-                                <button class="btn btn-link btn-icon-round btn-danger" data-ng-click="item.deleteTime(time.id)"><i class="md md-delete"></i></button>
-                            </div>
-                        </div>
-                        <div class="row striped">
-                            <div class="col-sm-4">
-                                {{'items.newTime'|translate}}
-                            </div>
-                            <div class="col-sm-2 col-sm-offset-6">
-                                <button class="btn btn-link btn-icon-round btn-success" data-ng-click="item.startTime()"><i class="md md-play-arrow"></i></button>
-                            </div>
-                        </div>
-                        <div class="row striped">
-                            <div class="col-sm-12 text-right">
-                                {{'items.totalTime'|translate}}: {{item.time.totaltime}}
+                            <div class="listinfo-row">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <span data-in-place-edit
+                                              data-ipe-type="'price'"
+                                              data-ipe-value="item.item.fixedrate"
+                                              data-ipe-key="'fixedrate'"
+                                              data-api-name="'item'"
+                                              data-api-id="item.item.id"
+                                              data-ipe-name="'items.fixedRate'|translate"
+                                              data-output-value="item.item.fixedrate|price"></span>
+                                        <br />
+                                        <span class="less-important">{{'items.fixedRate'|translate}}</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                           data-ng-if="item.item.userate == 0"
+                                           title="{{'items.currentUseRate' | translate}}">
+                                            <i class="md md-star"></i>
+                                        </a>
+                                        <a class="listinfo-action listinfo-action-icon"
+                                           data-ng-if="item.item.userate != 0"
+                                           data-ng-click="item.changeUseRate(0)"
+                                           title="{{'items.changeUseRate' | translate}}"
+                                           data-ng-mouseenter="hoverFixed = true"
+                                           data-ng-mouseleave="hoverFixed = false"
+                                           data-ng-class="{'listinfo-action-info':hoverFixed}">
+                                            <i class="md" data-ng-class="{'md-star info':hoverFixed,'md-star-outline':!hoverFixed}"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-
+                <div class="detail-block">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-1"><div class="sidelabel"><i class="md md-access-alarm"></i></div></div>
+                        <div class="col-sm-10 col-md-11">
+                            <div data-ng-repeat="time in item.time.times" class="listinfo-row">
+                                <div data-ng-if="time.end">
+                                    <div class="row">
+                                        <div class="col-xs-8">
+                                            {{time.username}} {{'items.workedOn'|translate}}<br />
+                                            <span class="less-important">{{time.start|amaDate:'dd.MM.yyyy HH:mm'}} - {{time.end|amaDate:'dd.MM.yyyy HH:mm'}}</span>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a class="listinfo-action listinfo-action-danger listinfo-action-icon" data-ng-click="item.deleteTime(time.id)"><i class="md md-delete"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-ng-if="!time.end">
+                                    <div class="row">
+                                        <div class="col-xs-8">{{time.username}} {{'items.workingOn'|translate}}<br />
+                                            <span class="less-important">{{'items.workingOnSince'|translate}} {{time.start|amaDate:'dd.MM.yyyy HH:mm'}}</span>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a class="listinfo-action listinfo-action-warning listinfo-action-icon" data-ng-if="!time.end" data-ng-click="item.stopTime(time.id)"><i class="md md-stop"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listinfo-row">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{'items.newTime'|translate}}
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="listinfo-action listinfo-action-success listinfo-action-icon" data-ng-click="item.startTime()"><i class="md md-play-arrow"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listinfo-row">
+                                {{'items.totalTime'|translate}}: {{item.time.totaltime||0}} {{'items.hours'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="slideanim-item fullheight scroll-y">

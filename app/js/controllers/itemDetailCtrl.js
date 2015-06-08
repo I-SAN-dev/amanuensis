@@ -92,18 +92,21 @@ app.controller('ItemDetailCtrl', [
 
         /**
          * Changes the useRate value (fixed/hourly/dailyRate) of the current item.
+         * @param {integer} value The value the userate property of the item should be set to
          */
-        this.changeUseRate = function () {
+        this.changeUseRate = function (value) {
             var apiObject = {
                 name: 'item',
                 data: {
                     id: self.item.id,
-                    userate: self.item.userate
+                    userate: value
                 }
             };
+            self.item.userate = value;
             ApiAbstractionLayer('POST', apiObject).then(function (data) {
                 MasterDetailService.notifyMaster('priceChanged', data);
             });
+
         };
 
         /**

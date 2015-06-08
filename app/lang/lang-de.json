@@ -262,7 +262,12 @@
     "alsoIn": "Dieser Posten befindet sich auch in:",
     "alsoInNone": "Dieser Posten ist keinen weiteren Dokumenten zugeordnet.",
     "deleteItem": "Diesen Posten löschen.",
-    "nopresets":"Es sind noch keine Bausteine angelegt.<br/>Hinterlege jetzt einen Baustein, um ihn in deinen Angeboten, Rechnungen, etc. zu verwenden."
+    "nopresets":"Es sind noch keine Bausteine angelegt.<br/>Hinterlege jetzt einen Baustein, um ihn in deinen Angeboten, Rechnungen, etc. zu verwenden.",
+    "changeUseRate": "Diesen Preis für den Posten verwenden.",
+    "currentUseRate": "Dieser Preis wird als Preis für den Posten verwendet",
+    "workedOn": "hat an diesem Posten gearbeitet",
+    "workingOn": "arbeitet gerade an diesem Posten",
+    "workingOnSince": "seit"
   },
   "offers": {
     "state": "Angebotsstatus",
