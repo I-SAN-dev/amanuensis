@@ -36,7 +36,7 @@ app.factory('MailService', [
                 var preview = window.open('','','height=500,width=900');
                 var apiObject = createApiObject(type, id, mailtext);
                 ApiAbstractionLayer('POST',apiObject).then(function (data) {
-                    preview.location.href = constants.BASEURL+'/api?action=mail&path='+data.previewpath;
+                    preview.location.href = constants.URL+'/api?action=mail&path='+data.previewpath;
                 });
             },
             /**

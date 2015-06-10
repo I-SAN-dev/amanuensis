@@ -18,17 +18,6 @@ require_once 'classes/config/config.php';
 require_once 'classes/errorhandling/amaException.php';
 
 
-function getBaseurl()
-{
-    $conf = Config::getInstance();
-    if(isset($conf->get['baseurl']) && $conf->get['baseurl'] != '')
-    {
-        return $conf->get['baseurl'].'/';
-    }
-    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'? 'https://' : 'http://';
-    return $protocol.$_SERVER['HTTP_HOST'].'/';
-}
-
 /* Output buffering */
 ob_start();
 ?>
@@ -45,7 +34,7 @@ ob_start();
     <?php
         $conf = Config::getInstance();
     ?>
-    <base href="<?php echo(getBaseurl()); ?>" />
+    <base href="<?php echo($conf->getUrl(false)); ?>" />
     <title>
         <?php echo $conf->get['company']; ?> - AMANU
     </title>

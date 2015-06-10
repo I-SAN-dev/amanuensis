@@ -82,7 +82,7 @@ class AmaMailDoc {
             'subject' => $this->subject,
             'recipient' => $this->recipient,
             'attachments' => $this->attachments,
-            'mailpreviewpath' => $conf->get['baseurl'].'/api/?action=mail&path='.$path
+            'mailpreviewpath' => $conf->getUrl().'api/?action=mail&path='.$path
         ));
 
         $previewpath = 'tmp/'.$userid.'-preview.html';
@@ -210,7 +210,7 @@ class AmaMailDoc {
 
     /**
      * Gathers the Attachment path and ensures it existence
-     * @return string
+     * @return array
      */
     private function getAttachments()
     {
