@@ -1,0 +1,151 @@
+<div class="row detail fullheight" data-ng-controller="ReminderDetailCtrl as reminder">
+
+
+
+    <div class="col-lg-8 col-md-8 col-sm-7 fullheight">
+
+        <div class="row detail-top-bar">
+            <div class="col-sm-12 fullheight">
+                <div class="panel panel-default fullheight shadow-0 bg-primary">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1>
+                                    <span data-in-place-edit
+                                          data-api-id="reminder.reminder.id"
+                                          data-api-name="'reminder'"
+                                          data-ipe-key="'name'"
+                                          data-ipe-value="reminder.reminder.name"
+                                          data-ipe-name="'global.name'|translate"
+                                          data-ipe-deletable="false"
+                                            ></span>
+                                </h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <span data-in-place-edit
+                                      data-ipe-key="'refnumber'"
+                                      data-ipe-value="reminder.reminder.refnumber"
+                                      data-ipe-deletable="false"
+                                      data-api-id="reminder.reminder.id"
+                                      data-api-name="'reminder'"
+                                      data-ipe-name="'reminders.refnumber'|translate"></span>
+                            </div>
+                        </div>
+                        {{reminder.reminder.state|amaStates:'reminder'|translate}}, {{reminder.belongsTo}}
+                        <div class="detail-inline">
+                            <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: reminder.reminder.project.id})">{{reminder.reminder.project.name}}</a>
+                        </div>
+                        <div class="detail-inline detail-inline-date">
+                            <i class="md md-schedule"></i>
+                            <div class="date-container">
+                                <span data-in-place-edit
+                                      data-api-id="reminder.reminder.id"
+                                      data-api-name="'reminder'"
+                                      data-ipe-key="'date'"
+                                      data-ipe-value="reminder.reminder.date"
+                                      data-ipe-name="'global.date'|translate"
+                                      data-ipe-deletable="false"
+                                      data-ipe-type="'date'"
+                                      data-output-value="reminder.reminder.date|amaDate:'dd.MM.yyyy'"
+                                        ></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="under-detail-top-bar next-fullheight">
+            <div data-master-detail
+                 data-master-list="reminder.reminder.items"
+                 data-master-tpl="'templates/pages/items/master.html'"
+                 data-detail-tpl="'templates/pages/items/detail.html'"
+                 data-detail="reminder.reminder.items[0]"
+                 data-master-loaded="reminder.loaded"></div>
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4 col-md-4 col-sm-5 fullheight">
+
+        <div class="panel panel-default fixedheight-320 shadow-1">
+            <div class="panel-body">
+
+                <div class="margin-bottom-lg" data-payment-stats="reminder.reminder.costs"></div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="btn btn-block btn-info" data-ng-if="reminder.reminder.state <= 1" data-ng-click="reminder.viewPdf($event, true)">{{'pdf.preview'|translate}}</a>
+                        <button class="btn btn-block btn-success" data-ng-if="reminder.reminder.state <= 1" data-ng-click="reminder.viewPdf($event, false)">{{'pdf.generate'|translate}}</button>
+                        <a class="btn btn-block btn-info" data-ng-if="reminder.reminder.state > 1" data-ng-click="reminder.viewPdf($event, false, reminder.reminder.path)" data-ng-href="api/?action=protectedpdf&path={{reminder.reminder.path}}">{{'pdf.view'|translate}}</a>
+                        <button disabled class="btn btn-block btn-success disabled" data-ng-if="reminder.reminder.state > 1">{{'pdf.generated'|translate}}</button>
+                    </div>
+                    <div class="col-sm-4" data-ng-if="reminder.reminder.state >= 1">
+                        <a class="btn btn-block btn-info" data-ng-click="reminder.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=reminder&forid={{reminder.reminder.id}}">{{'mail.preview'|translate}}</a>
+                        <button data-ng-if="reminder.reminder.state == 1" class="btn btn-block btn-success" data-ng-click="reminder.send()">{{'reminder.send'|translate}}</button>
+                        <button disabled data-ng-if="reminder.reminder.state > 1" class="btn btn-block btn-success disabled">{{'reminder.sent' | translate}}</button>
+                    </div>
+                    <div class="col-sm-4" data-ng-if="reminder.reminder.state >= 2">
+                        <button class="btn btn-block btn-danger" data-ng-click="reminder.decline()">{{'reminder.decline' |translate}}</button>
+                        <button class="btn btn-block btn-success" data-ng-click="reminder.accept()">{{'reminder.accept'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default under-fixedheight-320">
+            <div class="panel-heading">
+                <div class="btn-group btn-group-sm pull-right" data-ng-init="reminder.showPage = 1">
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==1}" data-ng-click="reminder.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.client' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==2}" data-ng-click="reminder.showPage = 2"><i class="md md-lg md-comment"></i> {{'reminder.description' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==3}" data-ng-click="reminder.showPage = 3"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
+                </div>
+            </div>
+            <div class="panel-body nopadding nooverflow">
+                <div class="slideanim3 fullheight" data-ng-class="{panel2: reminder.showPage==2, panel3: reminder.showPage==3}">
+
+                    <div class="slideanim-item fullheight scroll-y">
+
+                        <div data-client-box="reminder.reminder.project.client"></div>
+
+                    </div>
+
+                    <div class="slideanim-item fullheight scroll-y">
+
+                        <div class="ipe-wysiwyg-fullheight">
+                            <p data-in-place-edit
+                               data-api-id="reminder.reminder.id"
+                               data-api-name="'reminder'"
+                               data-ipe-key="'description'"
+                               data-ipe-value="reminder.reminder.description"
+                               data-ipe-name="'global.description'|translate"
+                               data-ipe-type="'wysiwyg'"></p>
+                        </div>
+
+                    </div>
+
+                    <div class="slideanim-item nopadding fullheight">
+
+                        <div class="wysiwyg-fullheight">
+                            <div data-material-input
+                                 data-ng-model="mailtext"
+                                 data-input-id="mailtext"
+                                 data-input-label="'mail.mailtext'|translate"
+                                 data-input-type="wysiwyg"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
