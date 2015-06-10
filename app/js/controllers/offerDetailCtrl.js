@@ -108,6 +108,7 @@ app.controller('OfferDetailCtrl', [
 
             /**
              * Uses the {@link ama.services.MailService MailService} to send a mail with the current offer.
+             * Changes the state of the offer to 2 (PDF sent) on success.
              */
             this.send = function () {
                 $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
@@ -171,7 +172,6 @@ app.controller('OfferDetailCtrl', [
             this.accept = function () {
                 changeState(3);
                 NextStepModal('offer',self.offer);
-                // TODO: ask for what's next
             };
         }
     ]

@@ -56,7 +56,7 @@ app.directive('todoStats', [
                 {
                     if($scope.stats)
                     {
-                        if($scope.stats.due === undefined)
+                        if($scope.stats.due === undefined || $scope.stats.due == null)
                         {
                             return false;
                         }
