@@ -145,13 +145,19 @@
     "send":"Angebot senden",
     "sent":"Angebot gesendet",
     "decline":"Kunde lehnt ab",
-    "accept":"Kunde nimmt an"
+    "accept":"Kunde nimmt an",
+    "notifications": {
+      "emailSent": "Angebot wurde verschickt"
+    }
   },
   "contract":
   {
     "name": "Vertrag",
     "type":"Typ",
-    "description":"Beschreibung"
+    "description":"Beschreibung",
+    "notifications": {
+      "emailSent": "Vertrag wurde verschickt"
+    }
   },
   "todo": {
     "todo":"ToDo",
@@ -166,7 +172,10 @@
     "done":"erledigt"
   },
   "acceptance": {
-    "name": "Abnahme"
+    "name": "Abnahme",
+    "notifications": {
+      "emailSent": "Abnahmeformular wurde verschickt"
+    }
   },
   "acceptances": {
     "states": {
@@ -184,10 +193,16 @@
     "createReminder": "Mahnung erstellen",
     "wasPaid": "Rechnung wurde bezahlt",
     "due":"Fällig",
-    "reminders":"Zahlungserinnerungen"
+    "reminders":"Zahlungserinnerungen",
+    "notifications": {
+      "emailSent": "Rechnung wurde verschickt"
+    }
   },
   "reminder": {
-    "name": "Zahlungserinnerung"
+    "name": "Zahlungserinnerung",
+    "notifications": {
+      "emailSent": "Zahlungserinnerung wurde verschickt"
+    }
   },
 
   "itemPresets":

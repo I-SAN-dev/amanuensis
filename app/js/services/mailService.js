@@ -5,8 +5,11 @@
  */
 app.factory('MailService', [
     'ApiAbstractionLayer',
+    'NotificationService',
     'constants',
-    function (ApiAbstractionLayer, constants) {
+    '$filter',
+    '$q',
+    function (ApiAbstractionLayer, NotificationService, constants, $filter, $q) {
         var createApiObject = function (type, id, mailtext) {
             var apiObject = {
                 name: 'mail',
@@ -37,16 +40,23 @@ app.factory('MailService', [
                 });
             },
             /**
-             * Sends an email with information about a given doicument
+             * Sends an email with information about a given document. Notifies the user when the email was sent.
              * @param {string} type The type of document for which the mail preview shall be shown.
              * @param {int|string} id The ID of the document for which the mail preview shall be shown.
              * @param {string} mailtext An additional text for the email.
              * @returns {promise} The answer from the API
              */
             send: function(type, id, mailtext) {
+                var defer = $q.defer();
                 var apiObject = createApiObject(type, id, mailtext);
                 apiObject.data.send = true;
-                return ApiAbstractionLayer('POST', apiObject);
+                ApiAbstractionLayer('POST', apiObject).then(function(data){
+                    NotificationService($filter('translate')(type+'.notifications.emailSent'),5000);
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+                return defer.promise;
             }
         }
     }

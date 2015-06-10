@@ -10892,6 +10892,31 @@ h1, h2 {
 
   .col-md-115 {
     width: 95.8182%; } }
+.snackbar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 9999;
+  transition: 0.5s margin-bottom ease-in-out; }
+  .snackbar.navbar-hide {
+    transition: 0.5s margin-bottom ease-in-out;
+    margin-bottom: -39px; }
+  .snackbar.snackbar-show {
+    transition: 0.5s margin-bottom ease-in-out;
+    margin-bottom: 0; }
+  .snackbar > div {
+    position: relative;
+    display: inline-block;
+    left: -50%;
+    height: 39px;
+    background-color: #212121;
+    color: #fff;
+    padding: 10px 20px;
+    min-width: 200px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+
 .fastbutton {
   display: block;
   max-height: 20%;
