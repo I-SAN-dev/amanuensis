@@ -12,10 +12,11 @@ app.controller('OfferDetailCtrl', [
         'MailService',
         'StateManager',
         'NextStepModal',
+        'ItemService',
         '$stateParams',
         '$scope',
         'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, $stateParams, $scope, constants) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, ItemService, $stateParams, $scope, constants) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -173,6 +174,15 @@ app.controller('OfferDetailCtrl', [
                 changeState(3);
                 NextStepModal('offer',self.offer);
             };
+
+            /**
+             * Gets called when the ordering of the items in the offer was changed.
+             * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+             * This changes the global_order property of the items.
+             */
+            this.orderChanged = function () {
+                ItemService.changeOrdering(self.offer.items);
+            }
         }
     ]
 );

@@ -11,9 +11,10 @@ app.controller('ReminderDetailCtrl', [
     'PdfService',
     'StateManager',
     'DeleteService',
+    'ItemService',
     '$stateParams',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, StateManager, DeleteService, $stateParams, $scope) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, StateManager, DeleteService, ItemService, $stateParams, $scope) {
         MasterDetailService.setMaster(this);
         var id = $stateParams.id;
         var self = this;
@@ -77,5 +78,14 @@ app.controller('ReminderDetailCtrl', [
                 LocalStorage.setData('reminder/'+id, self.reminder);
             });
         };
+
+        /**
+         * Gets called when the ordering of the items in the reminder was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.reminder.items);
+        }
     }
 ]);

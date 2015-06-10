@@ -8,6 +8,11 @@ app.factory('ItemService',[
     'ApiAbstractionLayer',
     'LocalStorage',
     function (ApiAbstractionLayer, LocalStorage) {
+
+        var sortNumber = function (a,b) {
+            return a-b;
+        };
+
         return {
             /**
              * Gets all items of given document
@@ -97,34 +102,28 @@ app.factory('ItemService',[
                 }
                 else
                 {
-                    console.log('start');
                     /* preserve existing order numbers*/
                     var orderNumbers = [];
                     for(var j = 0; j<list.length; j++)
                     {
-                        orderNumbers.push(list[j].global_order);
+                        orderNumbers.push(parseInt(list[j].global_order));
                     }
-                    console.log(orderNumbers);
                     /* make order numbers unique and sort them*/
-                    orderNumbers = orderNumbers.sort().filter(function(item, pos, ary){
+                    orderNumbers = orderNumbers.sort(sortNumber).filter(function(item, pos, ary){
                         return !pos || item != ary[pos-1];
                     });
-                    console.log(orderNumbers);
                     /* refill the orderNumbers, necessary if there where duplicates*/
                     var difference = list.length - orderNumbers.length;
                     for(var k = 0; k < difference; k++)
                     {
                         orderNumbers.push(orderNumbers[orderNumbers.length-1] + 1)
                     }
-                    console.log(orderNumbers);
 
                     /* assign the new order numbers */
-                    for(var l=0; i<list.length; i++){
+                    for(var l=0; l<list.length; l++){
                         list[l].global_order = orderNumbers[l];
                         bulkOrder.push(list[l].id+':'+orderNumbers[l]);
                     }
-                    console.log(bulkOrder);
-
                 }
 
                 bulkOrder = bulkOrder.join(',');
