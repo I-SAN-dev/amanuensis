@@ -23,6 +23,31 @@
   -webkit-backface-visibility: hidden;
 }
 
+.slideanim4
+{
+  width: 400%;
+  transition: 0.3s margin-left;
+
+  .slideanim-item
+  {
+    width: 25%;
+    float: left;
+    padding: 20px;
+  }
+
+  &.panel2
+  {
+    margin-left: -100%;
+  }
+  &.panel3
+  {
+    margin-left: -200%;
+  }
+  &.panel4
+  {
+    margin-left: -300%;
+  }
+}
 
 .slideanim3
 {

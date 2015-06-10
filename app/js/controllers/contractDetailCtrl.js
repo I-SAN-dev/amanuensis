@@ -7,10 +7,11 @@ app.controller('ContractDetailCtrl', [
     'LocalStorage',
     'MasterDetailService',
     'PdfService',
+    'ItemService',
     '$stateParams',
     '$sce',
     "constants",
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce, constants){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, $stateParams, $sce, constants){
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
@@ -50,6 +51,15 @@ app.controller('ContractDetailCtrl', [
                 }
             });
         };
+
+        /**
+         * Gets called when the ordering of the items in the contract was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.contract.items);
+        }
 
 
 

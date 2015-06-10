@@ -7,9 +7,10 @@ app.controller('AcceptanceDetailCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'MasterDetailService',
+    'ItemService',
     'PdfService',
     '$stateParams',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, $stateParams){
         var self = this;
         var id = $stateParams.id;
         MasterDetailService.setMaster(this);
@@ -40,6 +41,14 @@ app.controller('AcceptanceDetailCtrl', [
             });
         };
 
+        /**
+         * Gets called when the ordering of the items in the acceptance was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.acceptance.items);
+        }
 
 
     }]);

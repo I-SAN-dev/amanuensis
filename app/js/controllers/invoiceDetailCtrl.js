@@ -9,9 +9,10 @@ app.controller('InvoiceDetailCtrl', [
     'MailService',
     'PdfService',
     'DeleteService',
+    'ItemService',
     '$stateParams',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, $stateParams, $scope) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, $stateParams, $scope) {
 
         MasterDetailService.setMaster(this);
         var self = this;
@@ -96,5 +97,14 @@ app.controller('InvoiceDetailCtrl', [
                 };
             }
         };
+
+        /**
+         * Gets called when the ordering of the items in the invoice was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.invoice.items);
+        }
     }
 ]);

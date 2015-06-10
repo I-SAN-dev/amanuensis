@@ -194,6 +194,7 @@
     "wasPaid": "Rechnung wurde bezahlt",
     "due":"Fällig",
     "reminders":"Zahlungserinnerungen",
+    "addReminder": "Zahlungserinnerung hinzufügen",
     "notifications": {
       "emailSent": "Rechnung wurde verschickt"
     }
@@ -313,6 +314,13 @@
       "paid": "Rechnung ist bezahlt",
       "overdueNoReminder": "Rechnung ist überfällig. Es wurde noch keine Mahnung erstellt.",
       "overdueReminderCreated": "Mahnung erstellt."
+    }
+  },
+  "reminders": {
+    "states": {
+      "created": "Zahlungserinnerung erstellt",
+      "pdfGenerated": "Zahlungserinnerung bereit zum Versand",
+      "pdfSent": "Zahlungserinnerung verschickt"
     }
   },
 
