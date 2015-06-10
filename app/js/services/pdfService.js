@@ -30,7 +30,7 @@ app.factory('PdfService', [
 
 
             if(preview) {
-                openPopup(constants.BASEURL+'/api?action=pdfgen&for='+forType+'&forid='+forId);
+                openPopup(constants.URL +'/api?action=pdfgen&for='+forType+'&forid='+forId);
                 if(forType == 'contract'){
                     popup.print();
                 }
@@ -38,7 +38,7 @@ app.factory('PdfService', [
 
             } else {
                 if(pdfPath){
-                    openPopup(constants.BASEURL+'/api?action=protectedpdf&path='+pdfPath);
+                    openPopup(constants.URL +'/api?action=protectedpdf&path='+pdfPath);
                     if(forType == 'contract'){
                         popup.print();
                     }

@@ -10,6 +10,7 @@ angular.module('ama')
     .constant('constants', {
         BASEURL:'[@baseurl@]',
         SECUREURL: '[@secureurl@]',
+        URL:('[@secureurl@]' || '[@baseurl@]'),
         COMPANY:'[@company@]',
         DEBUG: '[@debug@]',
         LANGUAGE: '[@lang@]',

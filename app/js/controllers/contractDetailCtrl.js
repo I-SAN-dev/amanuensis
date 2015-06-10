@@ -9,7 +9,8 @@ app.controller('ContractDetailCtrl', [
     'PdfService',
     '$stateParams',
     '$sce',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce){
+    "constants",
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce, constants){
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
@@ -29,7 +30,7 @@ app.controller('ContractDetailCtrl', [
             self.contract = data;
             if(self.isFileContract){
                 self.fileName = data.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use filename instead of refnumber */
-                self.iframeSrc = $sce.trustAsResourceUrl('api/?action=protectedpdf&path='+data.path);
+                self.iframeSrc = $sce.trustAsResourceUrl(constants.URL+'/api/?action=protectedpdf&path='+data.path);
             }
         });
 

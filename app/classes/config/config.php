@@ -108,4 +108,26 @@ final class Config {
             $error->setHeaders();
         }
     }
+
+    /**
+     * Gets either the secure url if set
+     * otherwise the base url or the request url.
+     * This is needed for popups and previews (->Stuff that requires login but is not loaded via API)
+     * @param boolean $includeSecure - default true - if the secure url shall be used if set
+     * @return String - the url
+     */
+    public function getUrl($includeSecure = true)
+    {
+
+        if($includeSecure && isset($this->get['secureurl']) && $this->get['secureurl'] != '')
+        {
+            return $this->get['secureurl'].'/';
+        }
+        if(isset($this->get['baseurl']) && $this->get['baseurl'] != '')
+        {
+            return $this->get['baseurl'].'/';
+        }
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'? 'https://' : 'http://';
+        return $protocol.$_SERVER['HTTP_HOST'].'/';
+    }
 }
