@@ -19,7 +19,10 @@ app.factory('NextStepModal', [
         var contract = {
             name: 'contract.name',
             api: 'contract',
-            stateName: 'app.contractDetail'
+            stateName: 'app.contractDetail',
+            additionalParams: {
+                type: 'contract'
+            }
         };
         var todo = {
             name: 'todo.name',
@@ -111,7 +114,10 @@ app.factory('NextStepModal', [
                                 if(self.copyItems)
                                     ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id);
                                 modal.deactivate();
-                                $state.go(self.selected.stateName,{id:data.id});
+                                var stateParams = {id:data.id};
+                                if(self.selected.additionalParams)
+                                    stateParams = angular.extend(stateParams,self.selected.additionalParams);
+                                $state.go(self.selected.stateName,stateParams);
                             });
                         };
                         this.close = function () {
