@@ -75,6 +75,12 @@ app.controller('OfferDetailCtrl', [
 
             getOffer();
 
+            var changeState=function(toState){
+                StateManager.setState('offer', id,toState).then(function (data) {
+                    self.offer = data;
+                });
+            };
+
             /**
              * Sets the first item of a provided list as active item in the MasterDetail view
              */
@@ -105,7 +111,9 @@ app.controller('OfferDetailCtrl', [
              */
             this.send = function () {
                 $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
-                MailService.send('offer',self.offer.id, $scope.mailtext);
+                MailService.send('offer',self.offer.id, $scope.mailtext).then(function (data) {
+                    changeState(2);
+                });
             };
 
             /**
@@ -147,11 +155,7 @@ app.controller('OfferDetailCtrl', [
                 }
             };
 
-            var changeState=function(toState){
-                StateManager.setState('offer', id,toState).then(function (data) {
-                    self.offer = data;
-                });
-            };
+
 
             /**
              * Changes the state of the offer to -1 (client declined)

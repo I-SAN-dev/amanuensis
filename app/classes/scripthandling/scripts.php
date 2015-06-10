@@ -61,6 +61,7 @@ class Scripts
         // Services
         "js/services/authService.js",
         "js/services/apiAbstractionLayer.js",
+        "js/services/notificationService.js",
         "js/services/errorDialog.js",
         "js/services/deleteService.js",
         "js/services/localStorage.js",
