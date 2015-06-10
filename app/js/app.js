@@ -7,9 +7,12 @@ var app = angular.module('ama', ['ui.router', 'btford.modal','pascalprecht.trans
 
 app.config( [
     '$compileProvider',
-    function( $compileProvider )
+    '$httpProvider',
+    function( $compileProvider, $httpProvider )
     {
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|chrome|chrome-extension):/);
+
+        $httpProvider.defaults.withCredentials = true;
     }
 ]);
 

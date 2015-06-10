@@ -14,6 +14,7 @@
 chdir('..');
 set_include_path(getcwd());
 
+
 require_once 'classes/config/config.php';
 require_once 'classes/errorhandling/amaException.php';
 
@@ -21,11 +22,13 @@ require_once 'classes/errorhandling/amaException.php';
 $conf = Config::getInstance();
 if(isset($conf->get['secureurl']) && $conf->get['secureurl'] != '')
 {
-    //header("Access-Control-Allow-Origin: ".$conf->get['baseurl']);
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: ".$conf->get['baseurl']);
     /* Firefox needs this! */
     header("Vary: Origin");
 }
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 86400");
+header("Access-Control-Allow-Headers: X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
 
 
 /* Enable output buffer */
@@ -62,9 +65,6 @@ if ($method == 'OPTIONS')
     header($_SERVER["SERVER_PROTOCOL"]." 200 Ok", true, 200);
     header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
     header("Allow: GET, POST, DELETE, OPTIONS");
-    header("Access-Control-Allow-Credentials: false");
-    header("Access-Control-Max-Age: 86400");
-    header("Access-Control-Allow-Headers: X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
     header("Content-Type: application/json");
     ob_end_flush();
     die();
