@@ -12326,6 +12326,20 @@ strong.total {
 .ng-trans {
   -webkit-backface-visibility: hidden; }
 
+.slideanim4 {
+  width: 400%;
+  transition: 0.3s margin-left; }
+  .slideanim4 .slideanim-item {
+    width: 25%;
+    float: left;
+    padding: 20px; }
+  .slideanim4.panel2 {
+    margin-left: -100%; }
+  .slideanim4.panel3 {
+    margin-left: -200%; }
+  .slideanim4.panel4 {
+    margin-left: -300%; }
+
 .slideanim3 {
   width: 300%;
   transition: 0.3s margin-left; }

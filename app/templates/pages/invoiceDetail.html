@@ -1,4 +1,5 @@
-<div class="row detail fullheight" data-ng-controller="InvoiceDetailCtrl as invoice">
+<div class="row detail fullheight" data-ng-controller="InvoiceDetailCtrl as invoice"
+     xmlns="http://www.w3.org/1999/html">
 
 
 
@@ -29,9 +30,10 @@
                                       data-api-id="invoice.invoice.id"
                                       data-api-name="'invoice'"
                                       data-ipe-name="'invoices.refnumber'|translate"></span>
+                                <button data-ng-if="invoice.invoice.state >= 2" class="btn btn-link btn-success" data-ng-click="invoice.addReminder()" ><i class="md md-add"></i>{{'invoice.addReminder' | translate}}</button>
                             </div>
                         </div>
-                        {{invoice.invoice.state|amaStates:'invoice'|translate}}
+                        {{invoice.invoice.state|amaStates:'invoice'|translate}}<span data-ng-if="invoice.invoice.reminders.length>0">, <a data-ui-sref="app.reminderDetail({id:invoice.invoice.reminders[invoice.invoice.reminders.length-1].id})">{{invoice.invoice.reminders[invoice.invoice.reminders.length-1].state|amaStates:'reminder'|translate}}</a></span>
                         <div class="detail-inline">
                             <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: invoice.invoice.project.id})">{{invoice.invoice.project.name}}</a>
                         </div>

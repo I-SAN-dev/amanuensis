@@ -406,6 +406,17 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.reminderDetail',
+        stateObject: {
+            url: '/reminder/:id',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/reminderDetail.html'
+                }
+            }
+        }
+    },
+    {
         name:'app.itemPresets',
         stateObject: {
             abstract: true,
