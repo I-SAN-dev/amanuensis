@@ -44,6 +44,9 @@ class ScriptLoader
     {
         $result = "\n";
 
+        $conf = Config::getInstance();
+        $pathprefix = (isset($conf->get['secureurl']) && $conf->get['secureurl'] != '') ? $conf->get['secureurl'].'/' : '';
+
         /* Generate css file link tags */
         $cssfiles = Scripts::$css;
         foreach ($cssfiles as $path)
@@ -57,7 +60,7 @@ class ScriptLoader
 
         foreach ($jsfiles as $path)
         {
-            $result = $result.'<script src="'.$path.'" type="text/javascript"></script>'."\n";
+            $result = $result.'<script src="'.$pathprefix.$path.'" type="text/javascript"></script>'."\n";
         }
         return $result;
     }
@@ -70,11 +73,14 @@ class ScriptLoader
     {
         $result = "\n";
 
+        $conf = Config::getInstance();
+        $pathprefix = (isset($conf->get['secureurl']) && $conf->get['secureurl'] != '') ? $conf->get['secureurl'].'/' : '';
+
         /* CSS */
         $result = $result.'<link rel="stylesheet" type="text/css" href="'.self::cacheCompressCss().'">'."\n";
 
         /* JS */
-        $result = $result.'<script src="'.self::cacheCompressJs().'" type="text/javascript"></script>'."\n";
+        $result = $result.'<script src="'.$pathprefix.self::cacheCompressJs().'" type="text/javascript"></script>'."\n";
 
         return $result;
     }

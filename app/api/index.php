@@ -17,6 +17,16 @@ set_include_path(getcwd());
 require_once 'classes/config/config.php';
 require_once 'classes/errorhandling/amaException.php';
 
+/* Enable CORS if a secureurl is set  */
+$conf = Config::getInstance();
+if(isset($conf->get['secureurl']) && $conf->get['secureurl'] != '')
+{
+    header("Access-Control-Allow-Origin: ".$conf->get['baseurl']);
+    /* Firefox needs this! */
+    header("Vary: Origin");
+}
+
+
 /* Enable output buffer */
 ob_start();
 

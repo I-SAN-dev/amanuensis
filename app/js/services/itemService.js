@@ -84,6 +84,7 @@ app.factory('ItemService',[
              * @returns {promise} A promise containing the answer from the API
              */
             changeOrdering: function(list,isTodo){
+                console.log('hier');
                 var bulkOrder = [];
                 var setOrder = 'global';
                 if(isTodo){
@@ -96,28 +97,33 @@ app.factory('ItemService',[
                 }
                 else
                 {
+                    console.log('start');
                     /* preserve existing order numbers*/
                     var orderNumbers = [];
                     for(var j = 0; j<list.length; j++)
                     {
                         orderNumbers.push(list[j].global_order);
                     }
+                    console.log(orderNumbers);
                     /* make order numbers unique and sort them*/
                     orderNumbers = orderNumbers.sort().filter(function(item, pos, ary){
                         return !pos || item != ary[pos-1];
                     });
+                    console.log(orderNumbers);
                     /* refill the orderNumbers, necessary if there where duplicates*/
                     var difference = list.length - orderNumbers.length;
                     for(var k = 0; k < difference; k++)
                     {
                         orderNumbers.push(orderNumbers[orderNumbers.length-1] + 1)
                     }
+                    console.log(orderNumbers);
 
                     /* assign the new order numbers */
-                    for(var i=0; i<list.length; i++){
-                        list[i].global_order = orderNumbers[i];
-                        bulkOrder.push(list[i].id+':'+orderNumbers[i]);
+                    for(var l=0; i<list.length; i++){
+                        list[l].global_order = orderNumbers[l];
+                        bulkOrder.push(list[l].id+':'+orderNumbers[l]);
                     }
+                    console.log(bulkOrder);
 
                 }
 
