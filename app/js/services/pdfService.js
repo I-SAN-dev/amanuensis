@@ -13,13 +13,20 @@ app.factory('PdfService', [
     'constants',
     '$q',
     function (ApiAbstractionLayer, constants, $q) {
-        var popup;
-        var openPopup = function (viewPath) {
-            popup = window.open(
+        var openPopup = function (viewPath, print) {
+            var popup = window.open(
                 viewPath,
                 '',
                 'height=500,width=900'
             );
+            if(print)
+            {
+                /* this will fail, if we access the popup via secure url due to browser security restrictions */
+                /* but hey, you can press the print button in your PDF viewer! */
+                popup.onload = function(){
+                    popup.print();
+                };
+            }
         };
 
         return function (event, preview, forType, forId, pdfPath) {
@@ -30,18 +37,12 @@ app.factory('PdfService', [
 
 
             if(preview) {
-                openPopup(constants.URL +'/api?action=pdfgen&for='+forType+'&forid='+forId);
-                if(forType == 'contract'){
-                    popup.print();
-                }
+                openPopup(constants.URL +'/api?action=pdfgen&for='+forType+'&forid='+forId, (forType == 'contract'));
                 defer.resolve();
 
             } else {
                 if(pdfPath){
-                    openPopup(constants.URL +'/api?action=protectedpdf&path='+pdfPath);
-                    if(forType == 'contract'){
-                        popup.print();
-                    }
+                    openPopup(constants.URL +'/api?action=protectedpdf&path='+pdfPath, (forType == 'contract'));
                     defer.resolve();
                 } else {
                     var apiObject = {
