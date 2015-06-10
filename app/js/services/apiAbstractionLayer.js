@@ -19,7 +19,11 @@ app
         '$rootScope',
         function ($http, constants, $q, $state, ErrorDialog, $stateParams, $rootScope) {
             //var specialParams = {};
-            var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/'api/';
+            var apiUrl = 'api/';
+            if(constants.SECUREURL)
+            {
+                apiUrl = constants.SECUREURL+'/api/';
+            }
 
 
             return function (method, identifier, noErrorModal) {
