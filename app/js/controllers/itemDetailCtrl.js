@@ -10,7 +10,8 @@ app.controller('ItemDetailCtrl', [
     'MasterDetailService',
     'DeleteService',
     'PanelService',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
+    'ItemContainerService',
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService) {
         MasterDetailService.setDetail(this);
 
         /**
@@ -155,10 +156,10 @@ app.controller('ItemDetailCtrl', [
         };
 
         /**
-         * Moves the current item to another document.
+         * Moves the current item to another document by notifying the master ({@link ama.directives.MasterDetail see MasterDetail directive}).
          */
         this.moveItem = function () {
-            // TODO: this
+            MasterDetailService.notifyMaster('moveItem', self.item);
         };
 
 

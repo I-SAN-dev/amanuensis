@@ -66,6 +66,14 @@ app.controller('TodoDetailCtrl', [
          */
         this.orderChanged = function () {
             ItemService.changeOrdering(self.todo.items, true);
-        }
+        };
+
+        /**
+         * Moves the specified item to another todolist by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, 'todo', self.todo.id, self.todo.project.todos);
+        };
     }
 ]);

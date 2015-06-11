@@ -60,6 +60,8 @@ app.factory('ItemContainerService',[
             updateLocalStorage: function (type, projectId, container) {
                 updateLocalStorage(type, projectId, container);
             }
+
+
         }
     }
 
