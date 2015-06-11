@@ -38,7 +38,8 @@ class settings {
 
         /* define some groups */
         $d = array();
-        $d['settings.company'] = array('company', 'company_addition','address', '|', 'pricing', 'invoice_due_days');
+        $d['settings.company'] = array('company', 'company_addition','address');
+        $d['settings.payment'] = array('pricing', 'invoice_due_days', '|', 'account');
         $d['settings.design'] = array('design', '|', 'templates');
         $d['settings.mail'] = array('mailcontent','|','mail');
         $d['settings.refnumbers'] = array('refnumber_offers', '|', 'refnumber_contracts', '|', 'refnumber_acceptances', '|', 'refnumber_invoices', '|', 'refnumber_reminders', '|', 'refnumber_customers' );
