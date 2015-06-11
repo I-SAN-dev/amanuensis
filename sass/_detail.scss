@@ -82,18 +82,3 @@ strong.total
     }
   }
 }
-
-.pickadate
-{
-  position: absolute;
-  z-index: 99;
-  @include card(5);
-  background-color: #ffffff;
-  width: 180px;
-
-  .pickadate-head,
-  .pickadate-centered-heading
-  {
-    color: $brand-primary;
-  }
-}

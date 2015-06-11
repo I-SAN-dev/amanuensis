@@ -13,4 +13,6 @@
     <button id="delete-{{id}}" class="{{buttons.delete.class}}" data-ng-if="buttons.delete.isSet != false" data-ng-click="buttons.delete.delete()"><i class="{{buttons.delete.iconClass}}"></i></button>
     <button id="cancel-{{id}}" class="{{buttons.cancel.class}}" data-ng-click="buttons.cancel.cancel()"><i class="{{buttons.cancel.iconClass}}"></i></button>
 </div>
-<div data-pickadate data-ng-model="model" data-ng-show="selectDate" data-ng-click="processDate()"></div>
+<div class="datepicker-container">
+    <div data-pickadate data-ng-model="model" data-ng-show="selectDate" data-ng-click="processDate()"></div>
+</div>

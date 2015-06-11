@@ -20,6 +20,7 @@ app.directive('materialInput', [
             selectMultiple: true,
             price: true,
             date: true,
+            datetime: true,
             bool: true
         };
         return {
@@ -207,6 +208,26 @@ app.directive('materialInput', [
                             initialDate = angular.copy($scope.model);
                         }
                     }
+                }
+
+                // datetime fields
+                if($scope.inputType == 'datetime'){
+                    var initialDatetime = angular.copy($scope.model);
+                    var dateTime = $scope.model.split(' ');
+                    var time = dateTime[1].split(':');
+                    $scope.datetimeModel = [
+                        dateTime[0], // the date component
+                        time[0], // the hours
+                        time[1] // the minutes
+                    ];
+
+                    $scope.processDatetime = function(){
+                        $scope.model = $scope.datetimeModel[0]+' '+$scope.datetimeModel[1]+':'+$scope.datetimeModel[2]+':00';
+                        initialDatetime = $scope.model;
+                        if($scope.buttons){
+                            $scope.buttons.save.save($scope.model);
+                        }
+                    };
                 }
 
                 // bool fields
