@@ -196,7 +196,7 @@
                                 </div>
                             </div>
                             <div class="listinfo-row">
-                                {{'items.totalTime'|translate}}: {{item.time.totaltime||0}} {{'items.hours'|translate}}
+                                {{'items.totalTime'|translate}}: {{item.time.totaltime||0}} {{'items.hours'|translate}} <a data-ng-if="item.time.totaltime" data-ng-click="item.setTotaltimeAsTime()" class="btn btn-link btn-icon-round btn-success" title="{{'items.totaltimeAsHourlyRates'|translate}}"><i class="md md-check"></i></a>
                             </div>
                         </div>
                     </div>

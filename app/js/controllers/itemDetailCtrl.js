@@ -144,6 +144,17 @@ app.controller('ItemDetailCtrl', [
         };
 
         /**
+         * Sets the current totaltime from the time recording as the time for price calculation with hourly rates
+         */
+        this.setTotaltimeAsTime = function () {
+            self.item.hourlyrates = self.time.totaltime;
+            ApiAbstractionLayer('POST', {name:'item', data: self.item}).then(function(data){
+                self.item = data;
+                MasterDetailService.notifyMaster('priceChanged', data);
+            });
+        };
+
+        /**
          * Moves the current item to another document.
          */
         this.moveItem = function () {
