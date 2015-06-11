@@ -108,6 +108,7 @@ class PdfDoc {
                 array('id', $info['invoice']), 1);
 
             /* calc invoice duedate */
+            $invoice['items'] = new AmaItemList('invoice', $invoice['id']);
             $invoice['duedate'] = $this->calcDueDate($invoice['date']);
 
             $info['invoice'] = $invoice;
