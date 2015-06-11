@@ -20,7 +20,7 @@ app.config( [
  * @method run
  *
  */
-app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
+app.run(function ($rootScope, $state, AuthService, LocalStorage, $q, constants) {
 
 
     /*
@@ -49,6 +49,8 @@ app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
             $state.go('login', {referrer:toState.name, referrerParams:toParams});
         }
     };
+
+    $rootScope.linkurl = constants.URL;
 
 
 

@@ -78,13 +78,13 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <a class="btn btn-block btn-info" data-ng-if="acceptance.acceptance.state <= 1" data-ng-click="acceptance.viewPdf($event,true)" data-ng-href="api/?action=pdfgen&for=acceptance&forid={{acceptance.acceptance.id}}">{{'pdf.preview'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="acceptance.acceptance.state <= 1" data-ng-click="acceptance.viewPdf($event,true)" data-ng-href="{{$root.linkurl}}/api/?action=pdfgen&for=acceptance&forid={{acceptance.acceptance.id}}">{{'pdf.preview'|translate}}</a>
                         <button class="btn btn-block btn-success" data-ng-if="acceptance.acceptance.state <= 1" data-ng-click="acceptance.viewPdf($event,false)">{{'pdf.generate'|translate}}</button>
-                        <a class="btn btn-block btn-info" data-ng-if="acceptance.acceptance.state > 1" data-ng-click="acceptance.viewPdf($event,false,acceptance.acceptance.path)" data-ng-href="api/?action=protectedpdf&path={{acceptance.acceptance.path}}">{{'pdf.view'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="acceptance.acceptance.state > 1" data-ng-click="acceptance.viewPdf($event,false,acceptance.acceptance.path)" data-ng-href="{{$root.linkurl}}/api/?action=protectedpdf&path={{acceptance.acceptance.path}}">{{'pdf.view'|translate}}</a>
                         <button disabled class="btn btn-block btn-success disabled" data-ng-if="acceptance.acceptance.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="acceptance.acceptance.state >= 1">
-                        <a class="btn btn-block btn-info" data-ng-click="acceptance.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=acceptance&forid={{acceptance.acceptance.id}}">{{'mail.preview'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-click="acceptance.openMailPreview($event)" data-ng-href="{{$root.linkurl}}/api/?action=pdfgen&for=acceptance&forid={{acceptance.acceptance.id}}">{{'mail.preview'|translate}}</a>
                         <button data-ng-if="acceptance.acceptance.state == 1" class="btn btn-block btn-success" data-ng-click="acceptance.send()">{{'acceptance.send'|translate}}</button>
                         <button disabled data-ng-if="acceptance.acceptance.state > 1" class="btn btn-block btn-success disabled">{{'acceptance.sent' | translate}}</button>
                     </div>

@@ -156,7 +156,11 @@
   {
     "name": "Vertrag",
     "type":"Typ",
-    "description":"Vertragstext",
+    "description":
+    {
+      "true":"Beschreibung",
+      "false":"Vertragstext"
+    },
     "notifications": {
       "emailSent": "Vertrag wurde verschickt"
     },
@@ -231,6 +235,7 @@
     "generated":"PDF wurde verschickt",
     "view":"PDF anzeigen",
     "print": "Drucken",
+    "download":"Herunterladen",
     "generationSucceeded": "PDF erfolgreich erstellt."
   },
   "mail":
