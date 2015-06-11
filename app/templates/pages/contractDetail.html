@@ -87,8 +87,9 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-block btn-info" data-ng-if="!contract.isFileContract" data-ng-click="contract.viewPdf($event,true)"><i class="md md-print"></i> {{'pdf.print'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="!contract.isFileContract" data-ng-click="contract.viewPdf($event,true)" data-ng-href="api/?action=pdfgen&for=contract&forid={{contract.contract.id}}">{{'pdf.preview'|translate}}</a>
                         <a class="btn btn-block btn-info" data-ng-if="contract.isFileContract" data-ng-click="contract.viewPdf($event,false,contract.contract.path)"><i class="md md-print"></i> {{'pdf.print'|translate}}</a>
+                        <button class="btn btn-block btn-success" data-ng-if="!contract.isFileContract" data-ng-click="contract.viewPdf($event, false)">{{'pdf.generate'|translate}}</button>
                     </div>
                     <div class="col-sm-6">
 

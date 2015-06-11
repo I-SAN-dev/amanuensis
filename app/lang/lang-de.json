@@ -223,7 +223,8 @@
     "generate":"PDF generieren",
     "generated":"PDF wurde verschickt",
     "view":"PDF anzeigen",
-    "print": "Drucken"
+    "print": "Drucken",
+    "generationSucceeded": "PDF erfolgreich erstellt."
   },
   "mail":
   {

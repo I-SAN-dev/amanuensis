@@ -51,7 +51,7 @@ app.factory('MailService', [
                 var apiObject = createApiObject(type, id, mailtext);
                 apiObject.data.send = true;
                 ApiAbstractionLayer('POST', apiObject).then(function(data){
-                    NotificationService($filter('translate')(type+'.notifications.emailSent'),5000);
+                    NotificationService(type+'.notifications.emailSent',5000);
                     defer.resolve(data);
                 }, function (error) {
                     defer.reject(error);

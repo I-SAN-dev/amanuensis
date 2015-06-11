@@ -40,14 +40,13 @@ app.controller('ContractDetailCtrl', [
          * or the generated PDF of the contract
          * @param {Event} event The event (commonly 'click') that triggered the function call
          * @param {bool} preview Indicates if a preview or the generated PDF should be shown
-         * @param {String} path *optional* Path to the generated PDF
+         * @param {String} [path] *optional* Path to the generated PDF
          */
         this.viewPdf = function (event,preview,path) {
-            PdfService(event,preview,'contract',id, path).then(function (data) {
+            PdfService(event,preview, type,id, path).then(function (data) {
                 if(data){
-                    self.acceptance.path = data.path;
-                    self.acceptance.state = 1;
-                    LocalStorage.setData('contract/'+id,self.acceptance);
+                    self.contract.path = data.path;
+                    LocalStorage.setData('contract/'+id,self.contract);
                 }
             });
         };

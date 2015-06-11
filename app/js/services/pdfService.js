@@ -10,9 +10,10 @@
  */
 app.factory('PdfService', [
     'ApiAbstractionLayer',
+    'NotificationService',
     'constants',
     '$q',
-    function (ApiAbstractionLayer, constants, $q) {
+    function (ApiAbstractionLayer, NotificationService, constants, $q) {
         var openPopup = function (viewPath, print) {
             var popup = window.open(
                 viewPath,
@@ -37,12 +38,12 @@ app.factory('PdfService', [
 
 
             if(preview) {
-                openPopup(constants.URL +'/api?action=pdfgen&for='+forType+'&forid='+forId, (forType == 'contract'));
+                openPopup(constants.URL +'/api?action=pdfgen&for='+forType+'&forid='+forId, (forType == 'fileContract'));
                 defer.resolve();
 
             } else {
                 if(pdfPath){
-                    openPopup(constants.URL +'/api?action=protectedpdf&path='+pdfPath, (forType == 'contract'));
+                    openPopup(constants.URL +'/api?action=protectedpdf&path='+pdfPath, (forType == 'fileContract'));
                     defer.resolve();
                 } else {
                     var apiObject = {
@@ -55,6 +56,7 @@ app.factory('PdfService', [
 
 
                     ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                        NotificationService('pdf.generationSucceeded', 5000);
                         defer.resolve(data);
                     }, function (error) {
                         defer.reject(error);

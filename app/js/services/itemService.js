@@ -85,11 +85,10 @@ app.factory('ItemService',[
             /**
              * Changes the ordering of a given list of items on the server
              * @param {Array} list The ordered list of items
-             * @param {boolean} isTodo *Optional.* Set this to true if the todo_order is to be changed
+             * @param {boolean} [isTodo] *Optional.* Set this to true if the todo_order is to be changed
              * @returns {promise} A promise containing the answer from the API
              */
             changeOrdering: function(list,isTodo){
-                console.log('hier');
                 var bulkOrder = [];
                 var setOrder = 'global';
                 if(isTodo){
