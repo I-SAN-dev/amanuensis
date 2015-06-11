@@ -1,10 +1,75 @@
-<h2>{{client.companyname}}</h2>
-<p>{{client.contact_firstname}} {{client.contact_lastname}}</p>
-<address>
-    <strong>{{client.companyname}}</strong><br data-ng-if="client.street_no">
-    {{client.street_no}}<br data-ng-if="client.additional">
-    {{client.additional}}<br data-ng-if="client.zip || client.city">
-    {{client.zip}} {{client.city}}<br data-ng-if="client.country">
-    {{client.country}}
-</address>
+<div class="clientbox">
+    <div class="row spaceafter">
+        <div class="col-xs-offset-1 col-xs-11">
+            <h2><a data-ui-sref="app.clients.detail({id: client.id})">{{client.companyname}}</a></h2>
+        </div>
+    </div>
+    <div class="row spaceafter" data-ng-if="client.contact_lastname || client.contact_firstname">
+        <div class="col-xs-1">
+            <i class="md md-person md-lg"></i>
+        </div>
+        <div class="col-xs-11">
+            {{client.contact_gender | gender}}<br/>
+            {{client.contact_firstname}} {{client.contact_lastname}}
+        </div>
+    </div>
+    <div class="row spaceafter">
+        <div class="col-xs-1">
+            <i class="md md-place md-lg"></i>
+        </div>
+        <div class="col-xs-11">
+            <address>
+                <strong>{{client.companyname}}</strong><br data-ng-if="client.street_no">
+                {{client.street_no}}<br data-ng-if="client.additional">
+                {{client.additional}}<br data-ng-if="client.zip || client.city">
+                {{client.zip}} {{client.city}}<br data-ng-if="client.country">
+                {{client.country}}
+            </address>
+        </div>
+    </div>
+    <div class="row" data-ng-if="client.data.mail.length > 0">
+        <div class="col-xs-1">
+            <i class="md md-mail md-lg"></i>
+        </div>
+        <div class="col-xs-11">
+            <div class="listinfo-row" data-ng-repeat="mail in client.data.mail | filter:{isdefault: 1}">
+                <div class="row">
+                    <div class="col-sm-9 col-md-10">
+                                        {{mail.value}}<br/>
+                                        <span class="less-important">{{mail.name}}</span>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <a class="listinfo-action listinfo-action-icon listinfo-action-success"  title="{{'clients.sendMail' | translate}}" href="mailto:{{mail.value}}">
+                            <i class="md md-mail"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" data-ng-if="client.data.phone.length > 0">
+        <div class="col-xs-1">
+            <i class="md md-phone md-lg"></i>
+        </div>
+        <div class="col-xs-11">
+            <div class="listinfo-row" data-ng-repeat="phone in client.data.phone">
+                <div class="row">
+                    <div class="col-sm-9 col-md-10">
+                        {{phone.value}}<br/>
+                        <span class="less-important">{{phone.name}}</span>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <a class="listinfo-action listinfo-action-icon listinfo-action-success"  title="{{'clients.call' | translate}}" href="tel:{{phone.value}}">
+                            <i class="md md-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 

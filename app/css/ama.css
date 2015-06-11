@@ -12287,6 +12287,18 @@ strong.total {
     .listinfo-row .listinfo-action.listinfo-action-danger {
       color: #F4511E; }
 
+.clientbox i.md {
+  color: #404877; }
+.clientbox .listinfo-action-success i.md {
+  color: #009688; }
+.clientbox .row.spaceafter {
+  margin-bottom: 15px; }
+.clientbox .listinfo-row {
+  padding: 0 0 15px 0;
+  margin-bottom: 15px; }
+.clientbox address {
+  margin-bottom: 0; }
+
 /**
   * This extends ng-trans
   */
