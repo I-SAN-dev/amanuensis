@@ -50,6 +50,14 @@ app.controller('ItemDetailCtrl', [
 
         };
 
+        this.getTime = function () {
+            self.time = LocalStorage.getData('item/'+self.item.id+'/time') || [];
+            ApiAbstractionLayer('GET', {name:'time',params:{forid: self.item.id}}).then(function (data) {
+                self.time = data;
+                LocalStorage.setData('item/'+self.item.id+'/time', data);
+            });
+        };
+
         /**
          * /**
          * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
@@ -60,11 +68,7 @@ app.controller('ItemDetailCtrl', [
         this.detailChanged = function (item, keyboard) {
             self.item = item;
 
-            self.time = LocalStorage.getData('item/'+self.item.id+'/time') || [];
-            ApiAbstractionLayer('GET', {name:'time',params:{forid: self.item.id}}).then(function (data) {
-                self.time = data;
-                LocalStorage.setData('item/'+self.item.id+'/time', data);
-            });
+            self.getTime();
 
             self.connections = LocalStorage.getData('item/'+self.item.id+'/connections')
             ||

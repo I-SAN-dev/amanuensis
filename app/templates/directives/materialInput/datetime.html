@@ -12,7 +12,7 @@
 <div class="datepicker-container" data-ng-show="selectDate">
     <div class="slideanim2" data-ng-class="{panel2: showPage==2}">
         <div class="slideanim-item">
-            <div data-pickadate data-ng-model="datetimeModel[0]" data-ng-click="showPage=2"></div>
+            <div data-pickadate data-min-date="minDate" data-max-date="maxDate" data-ng-model="datetimeModel[0]" data-ng-click="applyDate($event)"></div>
         </div>
         <div class="slideanim-item">
             <button class="btn btn-link" data-ng-click="showPage=1"><i class="md md-arrow-back"></i> {{datetimeModel[0]|amaDate:'dd.MM.yyyy'}}</button>
@@ -23,10 +23,11 @@
                             id="{{id}}-1"
                             data-ng-model="datetimeModel[1]"
                             data-ng-required="{{required || false}}"
+                            data-ng-change="applyTime()"
                             size="2"
                             maxlength="2"
-                            max="23"
-                            min="0"
+                            max="{{maxHour}}"
+                            min="{{minHour}}"
                             step="1"
                             class="form-control">
                     <span class="bar"></span>
@@ -38,16 +39,17 @@
                             id="{{id}}-2"
                             data-ng-model="datetimeModel[2]"
                             data-ng-required="{{required || false}}"
+                            data-ng-change="applyTime()"
                             size="2"
                             maxlength="2"
-                            max="59"
-                            min="0"
+                            max="{{maxMinute}}"
+                            min="{{minMinute}}"
                             step="1"
                             class="form-control">
                     <span class="bar"></span>
                     <label for="{{id}}-2">{{label}}</label>
                 </div>
-                <div class="form-group">
+                <div class="btn-group">
                     <button id="save-{{id}}" class="{{buttons.save.class}}" type="submit"><i class="{{buttons.save.iconClass}}"></i></button>
                     <button id="delete-{{id}}" class="{{buttons.delete.class}}" data-ng-if="buttons.delete.isSet != false" data-ng-click="buttons.delete.delete()"><i class="{{buttons.delete.iconClass}}"></i></button>
                     <button id="cancel-{{id}}" class="{{buttons.cancel.class}}" data-ng-click="buttons.cancel.cancel()"><i class="{{buttons.cancel.iconClass}}"></i></button>

@@ -175,14 +175,18 @@
                                                                                data-api-id="time.id"
                                                                                data-ipe-name="'time.start'|translate"
                                                                                data-ipe-deletable="false"
+                                                                               data-ipe-max-datetime="{{time.end}}"
+                                                                               data-ipe-callback="item.getTime()"
                                                                                data-output-value="time.start|amaDate:'dd.MM.yyyy HH:mm'"></span> - <span data-in-place-edit
-                                                                                                                                                         data-ipe-key="'start'"
+                                                                                                                                                         data-ipe-key="'end'"
                                                                                                                                                          data-ipe-value="time.end"
                                                                                                                                                          data-ipe-type="'datetime'"
+                                                                                                                                                         data-ipe-min-datetime="{{time.start}}"
                                                                                                                                                          data-api-name="'time'"
                                                                                                                                                          data-api-id="time.id"
                                                                                                                                                          data-ipe-name="'time.end'|translate"
                                                                                                                                                          data-ipe-deletable="false"
+                                                                                                                                                         data-ipe-callback="item.getTime()"
                                                                                                                                                          data-output-value="time.end|amaDate:'dd.MM.yyyy HH:mm'"></span></span>
                                         </div>
                                         <div class="col-xs-4">

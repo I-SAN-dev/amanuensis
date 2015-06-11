@@ -36,7 +36,9 @@ app.directive('materialInput', [
                 optionName: '@inputSelectOptionName',
                 buttons: '=inputButtons',
                 searchable: '@inputSelectSearchable',
-                inputBlur:'=ngBlur'
+                inputBlur:'=ngBlur',
+                minDatetime: '=inputMinDatetime',
+                maxDatetime: '=inputMaxDatetime'
             },
             controller: function ($scope) {
                 $scope.currencySymbol = '€';
@@ -212,18 +214,66 @@ app.directive('materialInput', [
 
                 // datetime fields
                 if($scope.inputType == 'datetime'){
-                    var initialDatetime = angular.copy($scope.model);
-                    var dateTime = $scope.model.split(' ');
-                    var time = dateTime[1].split(':');
-                    $scope.datetimeModel = [
-                        dateTime[0], // the date component
-                        time[0], // the hours
-                        time[1] // the minutes
-                    ];
+                    var splitDatetime = function(datetime){
+                        var dateTime = datetime.split(' ');
+                        var time = dateTime[1].split(':');
+                        return [
+                            dateTime[0], // the date component
+                            parseInt(time[0]), // the hours
+                            parseInt(time[1]) // the minutes
+                        ];
+                    };
+
+
+                    if($scope.minDatetime){
+                        var minimum = splitDatetime($scope.minDatetime);
+                        $scope.minDate = minimum[0];
+                        $scope.minHour = minimum[1];
+                        $scope.minMinute = minimum[2]+1;
+                    } else {
+                        $scope.minHour = 0;
+                        $scope.minMinute = 0;
+                    }
+
+                    if($scope.maxDatetime){
+                        var max = splitDatetime($scope.maxDatetime);
+                        $scope.maxDate = max[0];
+                        $scope.maxHour = max[1];
+                        $scope.maxMinute = max[2]-1;
+                    } else{
+                        $scope.maxHour = 23;
+                        $scope.maxMinute = 59;
+                    }
+
+                    $scope.datetimeModel = splitDatetime($scope.model);
+                    var initial = angular.copy($scope.datetimeModel[0]);
+
+                    $scope.applyDate = function(event){
+                        if($(event.target).hasClass('pickadate-enabled')) {
+                            $scope.showPage = 2;
+                            initial = angular.copy($scope.datetimeModel[0]);
+                        }
+                    };
+
+                    $scope.applyTime = function(){
+                        if($scope.maxDatetime){
+                            if($scope.datetimeModel[1] != $scope.maxHour){
+                                $scope.maxMinute = 59;
+                            } else {
+                                $scope.maxMinute = max[2]-1;
+                            }
+                        }
+                        if($scope.minDatetime){
+                            if($scope.datetimeModel[1] != $scope.minHour){
+                                $scope.minMinute = 0;
+                            } else {
+                                $scope.minMinute = minimum[2]+1;
+                            }
+                        }
+                    };
 
                     $scope.processDatetime = function(){
                         $scope.model = $scope.datetimeModel[0]+' '+$scope.datetimeModel[1]+':'+$scope.datetimeModel[2]+':00';
-                        initialDatetime = $scope.model;
                         if($scope.buttons){
                             $scope.buttons.save.save($scope.model);
                         }
