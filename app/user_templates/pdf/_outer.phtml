@@ -75,6 +75,7 @@
             </p>
         </div>
 
+        <?php if($type != 'contract') { ?>
         <div class="content">
             <p>
                 <? valFromKey($project['client']['contact_gender'],
@@ -120,6 +121,10 @@
                 </tr>
             </table>
         </div>
-
+        <?php }
+            else
+            {
+              echo($content)  ;
+            } ?>
     </body>
 </html>

@@ -156,7 +156,7 @@
   {
     "name": "Vertrag",
     "type":"Typ",
-    "description":"Beschreibung",
+    "description":"Vertragstext",
     "notifications": {
       "emailSent": "Vertrag wurde verschickt"
     },
