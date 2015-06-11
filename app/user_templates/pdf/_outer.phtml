@@ -67,7 +67,7 @@
                                     'offer' => 'Angebotsreferenz',
                                     'contract' => 'Vertragsreferenz',
                                     'acceptance' => 'Abnahmereferenz',
-                                    'invoice' => 'Rechnugnsnummer',
+                                    'invoice' => 'Rechnungsnummer',
                                     'reminder' => 'Zahlungserinnerung'
                                  ),
                                  '%v: ') ?>
@@ -93,22 +93,32 @@
             <p class="less">
                 <span class="big"><?= $conf['company'] ?></span><br/>
                 <? echoIf($conf['company_addition'], '<span class="small">%v</span><br/>') ?>
-                <br/>
-                <? echoIf($conf['address']['street'], '%v<br/>') ?>
-                <? echoIf($conf['address']['zip'], '%v ') ?>
-                <? echoIf($conf['address']['city'], '%v<br/>') ?>
-                <? echoIf($conf['address']['country'], '%v<br/>') ?>
-                <br/>
-                <? echoIf($conf['address']['web'], '<a href="%v" target="_blank">%v</a><br/>') ?>
-                <? echoIf($conf['address']['telephone'], 'Tel.: %v<br/>') ?>
-                <? echoIf($conf['address']['fax'], 'Fax: %v<br/>') ?>
-                <? echoIf($conf['mail']['replyto'], 'Mail: <a href="mailto:%v">%v</a><br/>') ?>
-                <br />
-                <? echoIf($conf['pricing']['umsatzsteuerid'], 'USt-ID: %v<br/>') ?>
-                <? echoIf($conf['pricing']['steuernummer'], 'Steuernummer: %v<br/>') ?>
-
             </p>
+            <table class="less">
+                <tr>
+                    <td width="33%" class="top" rowspan="2">
+                        <? echoIf($conf['address']['street'], '%v<br/>') ?>
+                        <? echoIf($conf['address']['zip'], '%v ') ?>
+                        <? echoIf($conf['address']['city'], '%v<br/>') ?>
+                        <? echoIf($conf['address']['country'], '%v<br/>') ?>
 
+                    </td>
+                    <td class="top" width="34%">
+                        <? echoIf($conf['address']['telephone'], 'Tel.: %v<br/>') ?>
+                        <? echoIf($conf['address']['fax'], 'Fax: %v<br/>') ?>
+                    </td>
+                    <td class="top">
+                        <? echoIf($conf['address']['web'], 'Web: <a href="%v" target="_blank">%v</a><br/>') ?>
+                        <? echoIf($conf['mail']['replyto'], 'Mail: <a href="mailto:%v">%v</a><br/>') ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="top" colspan="2">
+                        <? echoIf($conf['pricing']['umsatzsteuerid'], 'USt-ID: %v<br/>') ?>
+                        <? echoIf($conf['pricing']['steuernummer'], 'Steuernummer: %v<br/>') ?>
+                    </td>
+                </tr>
+            </table>
         </div>
 
     </body>

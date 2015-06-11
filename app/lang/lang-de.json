@@ -427,6 +427,7 @@
   "settings": {
     "settings":"Einstellungen",
     "company":"Firma",
+    "payment":"Preise & Konto",
     "design":"Design",
     "mail":"E-Mails",
     "refnumbers":"Referenznummern",
@@ -435,6 +436,7 @@
     "sub": {
       "address":"Anschrift",
       "pricing":"Preisgestaltung",
+      "account":"Bankdaten (zur Anzeige in Rechnungen)",
       "design":"Design",
       "templates":"Templates",
       "mail":"E-Mail Versand",
@@ -549,9 +551,21 @@
       "hourlyrate": "Stundensatz",
       "calc_tax": "Steuer ausweisen",
       "tax": "Steuersatz (%)",
-      "tax_label": "Steuerbezeichnung"
+      "tax_label": "Steuerbezeichnung",
+      "hint_kleinunternehmerregelung": "Hinweis auf Kleinuternehmerregelung in Rechnungen",
+      "hint_agb":"Hinweis auf AGB in Angeboten & Verträgen",
+      "link_agb":"Link zu den AGB",
+      "umsatzsteuerid": "Umsatzsteuer-ID-Nr. (wenn vorhanden)",
+      "steuernummer": "Steuernummer (wenn keine USt-IdNr.)"
     },
     "invoice_due_days":"Zahlungsziel für Rechnungen in Tagen",
+    "account":
+    {
+      "owner":"Kontoinhaber",
+      "bank":"Bank",
+      "IBAN":"IBAN",
+      "BIC":"BIC"
+    },
 
     "refnumber_offers":
     {

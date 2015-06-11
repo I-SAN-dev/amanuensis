@@ -27,6 +27,13 @@ class PdfDoc {
      */
     public function __construct($type, $id)
     {
+        if(!in_array($type, array('offer','contract','todo','acceptance','invoice','reminder')))
+        {
+            $error = new amaException(NULL, 400, '"'.$type.'" is no possible value for "for"');
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+
         $this->type = $type;
         $this->id = $id;
 
@@ -38,7 +45,10 @@ class PdfDoc {
         $this->date = $this->info['date'];
 
         /* Gather associated items */
-        $this->info['items'] = $this->getItems();
+        if($this->type != 'reminder')
+        {
+            $this->info['items'] = $this->getItems();
+        }
 
         $this->pdf = new PDF($this->generateFilename());
         $this->pdf->setHTML($this->generateHTML());
@@ -90,14 +100,27 @@ class PdfDoc {
         }
 
         /* Add project and client data */
-        if($this->type != 'reminder')
+        if($this->type == 'reminder')
         {
-            $project = new AmaProject($info['project']);
+            $invoice = $dbal->simpleSelect(
+                'invoices',
+                array('id','name','description','refnumber','date','project'),
+                array('id', $info['invoice']), 1);
+
+            /* calc invoice duedate */
+            $invoice['items'] = new AmaItemList('invoice', $invoice['id']);
+            $invoice['duedate'] = $this->calcDueDate($invoice['date']);
+
+            $info['invoice'] = $invoice;
+            $project = new AmaProject($invoice['project']);
         }
         else
         {
-            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $info['invoice']), 1);
-            $project = new AmaProject($invoice['project']);
+            $project = new AmaProject($info['project']);
+            if($this->type == 'invoice')
+            {
+                $info['duedate'] = $this->calcDueDate($info['date']);
+            }
         }
         $info['project'] = $project->getProjectData();
 
@@ -194,6 +217,19 @@ class PdfDoc {
         $html = $outertemplate->getHTML();
 
         return $outertemplate->getHTML();
+    }
+
+    /**
+     * Calcs a due date for a date
+     * @param $date - the invoice date
+     * @return bool|string
+     */
+    private function calcDueDate($date)
+    {
+        $conf = Config::getInstance();
+        $days = $conf->get['invoice_due_days'];
+        $seconds = $days*24*60*60;
+        return date('Y-m-d',(strtotime($date) + $seconds));
     }
 
 }

@@ -1,0 +1,136 @@
+<p>
+    Sie erhalten heute wie gewünscht Ihr Angebot mit der Referenznummer <?= $refnumber ?> zum Thema "<?= $name ?>".
+</p>
+<? echoIf($description, '%v') ?>
+<p>Wir hoffen, unsere Aufstellung entspricht Ihren Vorstellungen.
+    Für Rückfragen stehen wir Ihnen natürlich gerne unter
+    <? echoIf($conf['mail']['replyto'], '<a href="mailto:%v">%v</a>') ?> zur Verfügung.
+</p>
+<p>
+    Mit freundlichen Grüßen,
+</p>
+<p class="colored">
+    <?= $conf['company'] ?>
+</p>
+
+<? pageBreak() ?>
+
+<p class="heading"><?=$name ?></p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th width="70%" class="left">
+
+            Posten
+
+        </th>
+        <th width="20%" class="right">
+
+            Kosten
+
+        </th>
+        <th width="10%" class="center">
+
+            Auftrag
+
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($items['list'] as $item) { ?>
+        <tr>
+            <td width="70%" class="left">
+
+                <span class="big"><?= $item['name'] ?></span>
+                <? echoIf($item['description'], '<br/>%v') ?>
+
+            </td>
+            <td width="20%" class="right">
+
+                <?= twoDec($item['total']) ?>
+
+            </td>
+            <td width="10%" class="center">
+
+
+            </td>
+        </tr>
+    <?php } ?>
+    <tr class="total">
+        <td width="70%" class="right">
+            Gesamt
+        </td>
+        <td width="20%" class="right">
+
+            <?= twoDec($items['costs']['total']) ?>
+
+        </td>
+        <td width="10%" class="center">
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<p class="less">
+    Alle Angaben in Euro.
+    <?php if($conf['pricing']['hint_agb']) { ?>
+        Es gelten die Allgemeinen Geschäftsbedingungen (AGB) von <?= $conf['company'] ?> <? echoIf($conf['company_addition']) ?>.
+        Eine Kopie dieser AGB wurde Ihnen mit diesem Angebot übermittelt
+        <?php echoIf($conf['pricing']['link_agb'], 'oder kann unter %v heruntergeladen werden'); ?>.
+    <?php } ?>
+</p>
+<p class="less">
+    Durch Ankreuzen der gewünschten Leistung und Ihre Unterschrift bestätigen Sie die Vergabe des Auftrags der beschriebenen Leistungen an
+    <?= $conf['company'] ?> <? echoIf($conf['company_addition']) ?>. Dieses Angebot stellt keinen bindenden Antrag im Sinne des §145 BGB dar,
+    lediglich eine Aufforderung hierzu an Sie. Für das Zustandekommen eines Vertrages bedarf es der Auftragsbestätigung in Textform durch
+    <?= $conf['company'] ?> <? echoIf($conf['company_addition']) ?>
+</p>
+<br/>
+<p>
+    Hiermit beauftrage ich die angekreuzten Leistungen.
+    <?php if($conf['pricing']['hint_agb']) { ?><br/>Die AGB habe ich gelesen und akzeptiert.<?php } ?>
+</p>
+<table class="signature">
+    <tr>
+        <td width="33%">
+
+        </td>
+        <td>
+
+        </td>
+        <td width="33%">
+            <?php
+            echoIf($project['client']['contact_firstname'],'%v ');
+            echoIf($project['client']['contact_lastname']);
+            echoIf($project['client']['companyname'],'<br/>%v<br/>');
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td width="33%" class="signeline">
+
+        </td>
+        <td>
+
+        </td>
+        <td width="33%"  class="signeline">
+
+        </td>
+    </tr>
+    <tr>
+        <td width="33%">
+            Datum, Ort
+        </td>
+        <td>
+
+        </td>
+        <td width="33%">
+            Unterschrift
+        </td>
+    </tr>
+</table>
+
+

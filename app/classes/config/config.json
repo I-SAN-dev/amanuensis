@@ -7,8 +7,8 @@
     "password":"bachelor2015"
   },
 
-  "baseurl":"http://cb.ama.i-san.de",
-  "secureurl":"",
+  "baseurl":"http://sa.ama.i-san.de",
+  "secureurl":"https://secure83.tophost.ch/~isande/amanuensis/dev_sa",
   "appsecret":"asdfkkj83n8429fkf9ek0kj",
   "sessiontimeout":"60",
 
@@ -23,6 +23,13 @@
     "web":"http://i-san.de",
     "telephone":"+49 1578 8562613",
     "fax":"1234 567890"
+  },
+  "account":
+  {
+    "owner":"Christian Baur",
+    "bank":"Augusta Bank eG",
+    "IBAN":"DE36 7209 0000 0007 6020 90",
+    "BIC":"GENODEF1AUB"
   },
   "design":
   {

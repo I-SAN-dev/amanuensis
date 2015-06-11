@@ -16,61 +16,70 @@
 <? pageBreak() ?>
 
 <p class="heading"><?=$name ?></p>
-
 <table class="table">
     <thead>
-        <tr>
-            <th width="70%" class="left">
-
-                    Posten
-
-            </th>
-            <th width="20%" class="right">
-
-                    Kosten
-
-            </th>
-            <th width="10%" class="center">
-
-                    Auftrag
-
-            </th>
-        </tr>
+    <tr>
+        <th class="left">
+            Posten
+        </th>
+        <th width="5%" class="center">
+            Menge
+        </th>
+        <th width="15%" class="center">
+            Einzelpreis
+        </th>
+        <th width="15%" class="center">
+            Gesamtpreis
+        </th>
+        <th width="10%">
+            Auftrag
+        </th>
+    </tr>
     </thead>
     <tbody>
     <?php foreach($items['list'] as $item) { ?>
         <tr>
-            <td width="70%" class="left">
-
-                    <span class="big"><?= $item['name'] ?></span>
-                    <? echoIf($item['description'], '<br/>%v') ?>
-
+            <td class="left">
+                <?= $item['name'] ?>
+                <? echoIf($item['description'], '<br/>%v') ?>
             </td>
-            <td width="20%" class="right">
-
-                    <?= twoDec($item['total']) ?>
-
+            <td width="5%" class="right">
+                <?php
+                if ($item['userate'] == 1){
+                    echo(twoDec($item['hourlyrates']));
+                }
+                else if ($item['userate'] == 2) {
+                    echo(twoDec($item['dailyrates']));
+                }
+                else {
+                    echo('1');
+                }
+                ?>
             </td>
-            <td width="10%" class="center">
-
-
+            <td width="15%" class="right">
+                <?php
+                echo(twoDec($item['usedrate']));
+                ?>
+            </td>
+            <td width="15%" class="right">
+                <?= twoDec($item['total']) ?>
+            </td>
+            <td width="10%">
+                &nbsp;
             </td>
         </tr>
     <?php } ?>
-        <tr class="total">
-            <td width="70%" class="right">
-                Gesamt
-            </td>
-            <td width="20%" class="right">
-
-                <?= twoDec($items['costs']['total']) ?>
-
-            </td>
-            <td width="10%" class="center">
-
-
-            </td>
-        </tr>
+    <tr class="total">
+        <td class="right" colspan="3">
+            Gesamt
+        </td>
+        <td width="15%" class="right">
+            <?= twoDec($items['costs']['total']) ?>
+        </td>
+        <td width="10%">
+            &nbsp;
+        </td>
+    </tr>
     </tbody>
 </table>
 <br/>

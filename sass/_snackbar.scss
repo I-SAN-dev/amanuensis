@@ -1,0 +1,29 @@
+.snackbar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 9999;
+  transition:0.5s transform ease-in-out;
+  transform: translate(0,0);
+
+  &.snackbar-hide
+  {
+    transform: translate(0, 50px);
+  }
+
+
+  >div
+  {
+    position: relative;
+    display: inline-block;
+    left: -50%;
+    height: 39px;
+    background-color: $brand-primary;
+    color: #fff;
+    padding: 10px 20px;
+    min-width: 200px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
