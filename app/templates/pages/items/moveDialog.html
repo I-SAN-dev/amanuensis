@@ -1,0 +1,22 @@
+<div class="modal show ng-trans ng-trans-fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-ng-click="move.close()"><i class="md md-close"></i></button>
+                <h4 class="modal-title">{{move.type+'.moveToOther'|translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="fixedheight-250 scroll-y">
+                    <div class="list-group">
+                        <div  class="list-group-item" data-ng-repeat="container in move.available"
+                              data-ng-click="move.selected = container.id" data-ng-class="{active:move.selected==container.id}">{{container.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-ng-click="move.accept()">{{'global.ok'|translate}}</button>
+                <button class="btn btn-info" type="button" data-ng-click="move.close()">{{'global.cancel'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

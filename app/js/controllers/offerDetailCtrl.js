@@ -76,8 +76,8 @@ app.controller('OfferDetailCtrl', [
 
             getOffer();
 
-            var changeState=function(toState){
-                StateManager.setState('offer', id,toState).then(function (data) {
+            var changeState = function(toState){
+                StateManager.setState('offer', id, toState).then(function (data) {
                     self.offer = data;
                 });
             };
@@ -182,7 +182,15 @@ app.controller('OfferDetailCtrl', [
              */
             this.orderChanged = function () {
                 ItemService.changeOrdering(self.offer.items);
-            }
+            };
+
+            /**
+             * Moves the specified item to another offer by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+             * @param {Object} item The item to be moved.
+             */
+            this.moveItem = function (item) {
+                ItemService.moveItem(item, 'offer', self.offer.id, self.offer.project.offers);
+            };
         }
     ]
 );

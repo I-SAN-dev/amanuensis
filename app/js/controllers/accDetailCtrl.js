@@ -48,7 +48,15 @@ app.controller('AcceptanceDetailCtrl', [
          */
         this.orderChanged = function () {
             ItemService.changeOrdering(self.acceptance.items);
-        }
+        };
+
+        /**
+         * Moves the specified item to another acceptance by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, 'acceptance', self.acceptance.id, self.acceptance.project.acceptances);
+        };
 
 
     }]);

@@ -105,6 +105,14 @@ app.controller('InvoiceDetailCtrl', [
          */
         this.orderChanged = function () {
             ItemService.changeOrdering(self.invoice.items);
-        }
+        };
+
+        /**
+         * Moves the specified item to another invoice by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, 'invoice', self.invoice.id, self.invoice.project.invoices);
+        };
     }
 ]);

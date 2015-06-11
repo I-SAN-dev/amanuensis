@@ -7,7 +7,9 @@
 app.factory('ItemService',[
     'ApiAbstractionLayer',
     'LocalStorage',
-    function (ApiAbstractionLayer, LocalStorage) {
+    'btfModal',
+    '$state',
+    function (ApiAbstractionLayer, LocalStorage, btfModal, $state) {
 
         var sortNumber = function (a,b) {
             return a-b;
@@ -127,6 +129,47 @@ app.factory('ItemService',[
 
                 bulkOrder = bulkOrder.join(',');
                 return ApiAbstractionLayer('POST', {name:'bulk', data: {order:bulkOrder,setorder:setOrder}});
+            },
+            moveItem: function(item, containerType, containerId, availableContainers){
+                for(var i = 0; i<availableContainers.length; i++){
+                    if(availableContainers[i].id == containerId){
+                        availableContainers.splice(i,1);
+                        break;
+                    }
+                }
+                var modal = btfModal({
+                    templateUrl: 'templates/pages/items/moveDialog.html',
+                    controller: function(){
+                        var ctrl = this;
+                        this.available = availableContainers;
+                        this.type = containerType;
+
+                        this.accept = function () {
+                            if(ctrl.selected){
+                                var apiObject = {
+                                    name: 'item',
+                                    data: {
+                                        id: item.id
+                                    }
+                                };
+                                apiObject.data[containerType] = ctrl.selected;
+                                ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                                    LocalStorage.setData('item/'+item.id, data);
+                                    $state.go('app.'+containerType+'Detail',{id:ctrl.selected});
+                                });
+                            }
+                            modal.deactivate();
+                        };
+
+
+                        this.close = function () {
+                            console.log('close');
+                            modal.deactivate();
+                        };
+                    },
+                    controllerAs: 'move'
+                });
+                modal.activate();
             }
         }
     }

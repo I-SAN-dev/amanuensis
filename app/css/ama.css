@@ -11353,6 +11353,19 @@ textarea {
       transform: scale(1);
       transition: all 300ms cubic-bezier(1, 0, 0, 2.75); }
 
+.datepicker-container {
+  overflow: hidden;
+  position: absolute;
+  z-index: 99;
+  box-shadow: 0 7.5px 10px rgba(0, 0, 0, 0.165), 0 7.5px 38px rgba(0, 0, 0, 0.225);
+  background-color: #ffffff;
+  width: 180px; }
+  .datepicker-container .pickadate-head,
+  .datepicker-container .pickadate-centered-heading {
+    color: #404877; }
+  .datepicker-container input {
+    padding-right: 0 !important; }
+
 /*.nav#mainNav
 {
   @include card(1);
@@ -11992,16 +12005,6 @@ strong.total {
       vertical-align: top !important; }
     .detail-inline.detail-inline-date .date-container {
       width: 180px; }
-
-.pickadate {
-  position: absolute;
-  z-index: 99;
-  box-shadow: 0 7.5px 10px rgba(0, 0, 0, 0.165), 0 7.5px 38px rgba(0, 0, 0, 0.225);
-  background-color: #ffffff;
-  width: 180px; }
-  .pickadate .pickadate-head,
-  .pickadate .pickadate-centered-heading {
-    color: #404877; }
 
 .settings .nav-tabs li:first-child a {
   border-left: none !important; }

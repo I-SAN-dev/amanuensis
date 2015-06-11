@@ -148,7 +148,9 @@
     "accept":"Kunde nimmt an",
     "notifications": {
       "emailSent": "Angebot wurde verschickt"
-    }
+    },
+    "moveToOther": "Posten in ein anderes Angebot verschieben"
+
   },
   "contract":
   {
@@ -157,7 +159,9 @@
     "description":"Beschreibung",
     "notifications": {
       "emailSent": "Vertrag wurde verschickt"
-    }
+    },
+    "moveToOther": "Posten in einen anderen Vertrag verschieben"
+
   },
   "todo": {
     "todo":"ToDo",
@@ -169,13 +173,15 @@
     "alldone":"Alles erledigt",
     "ready":"Abschließen",
     "open":"zu erledigen",
-    "done":"erledigt"
+    "done":"erledigt",
+    "moveToOther": "Aufgabe in eine andere ToDo-Liste verschieben"
   },
   "acceptance": {
     "name": "Abnahme",
     "notifications": {
       "emailSent": "Abnahmeformular wurde verschickt"
-    }
+    },
+    "moveToOther": "Posten in eine andere Abnahme verschieben"
   },
   "acceptances": {
     "states": {
@@ -197,7 +203,8 @@
     "addReminder": "Zahlungserinnerung hinzufügen",
     "notifications": {
       "emailSent": "Rechnung wurde verschickt"
-    }
+    },
+    "moveToOther": "Posten in eine andere Rechnung verschieben"
   },
   "reminder": {
     "name": "Zahlungserinnerung",
@@ -294,7 +301,9 @@
     "currentUseRate": "Dieser Preis wird als Preis für den Posten verwendet",
     "workedOn": "hat an diesem Posten gearbeitet",
     "workingOn": "arbeitet gerade an diesem Posten",
-    "workingOnSince": "seit"
+    "workingOnSince": "seit",
+    "totaltimeAsHourlyRates": "Für Postenkalkulation übernehmen",
+    "moveItem": "Posten verschieben..."
   },
   "offers": {
     "state": "Angebotsstatus",
@@ -593,5 +602,11 @@
   "nextStep": {
     "transformThis": "{{name}} überführen in:",
     "copyItems": "Verfügbare Posten übernehmen"
+  },
+
+  "input": {
+    "datetime": {
+      "chooseTime": "Uhrzeit auswählen:"
+    }
   }
 }

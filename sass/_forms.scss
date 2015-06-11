@@ -494,3 +494,24 @@ $checkbox-size: 40px;
     }
   }
 }
+
+// Date inputs
+.datepicker-container
+{
+  overflow: hidden;
+  position: absolute;
+  z-index: 99;
+  @include card(5);
+  background-color: #ffffff;
+  width: 180px;
+
+  .pickadate-head,
+  .pickadate-centered-heading
+  {
+    color: $brand-primary;
+  }
+
+  input {
+    padding-right: 0 !important;
+  }
+}

@@ -10,7 +10,8 @@ app.controller('ItemDetailCtrl', [
     'MasterDetailService',
     'DeleteService',
     'PanelService',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
+    'ItemContainerService',
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService) {
         MasterDetailService.setDetail(this);
 
         /**
@@ -144,10 +145,21 @@ app.controller('ItemDetailCtrl', [
         };
 
         /**
-         * Moves the current item to another document.
+         * Sets the current totaltime from the time recording as the time for price calculation with hourly rates
+         */
+        this.setTotaltimeAsTime = function () {
+            self.item.hourlyrates = self.time.totaltime;
+            ApiAbstractionLayer('POST', {name:'item', data: self.item}).then(function(data){
+                self.item = data;
+                MasterDetailService.notifyMaster('priceChanged', data);
+            });
+        };
+
+        /**
+         * Moves the current item to another document by notifying the master ({@link ama.directives.MasterDetail see MasterDetail directive}).
          */
         this.moveItem = function () {
-            // TODO: this
+            MasterDetailService.notifyMaster('moveItem', self.item);
         };
 
 
