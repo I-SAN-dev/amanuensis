@@ -100,11 +100,7 @@ class PdfDoc {
         }
 
         /* Add project and client data */
-        if($this->type != 'reminder')
-        {
-            $project = new AmaProject($info['project']);
-        }
-        else
+        if($this->type == 'reminder')
         {
             $invoice = $dbal->simpleSelect(
                 'invoices',
@@ -112,13 +108,18 @@ class PdfDoc {
                 array('id', $info['invoice']), 1);
 
             /* calc invoice duedate */
-            $conf = Config::getInstance();
-            $days = $conf->get['invoice_due_days'];
-            $seconds = $days*24*60*60;
-            $invoice['duedate'] = date('Y-m-d',(strtotime($invoice['date']) + $seconds));
+            $invoice['duedate'] = $this->calcDueDate($invoice['date']);
 
             $info['invoice'] = $invoice;
             $project = new AmaProject($invoice['project']);
+        }
+        else
+        {
+            $project = new AmaProject($info['project']);
+            if($this->type == 'invoice')
+            {
+                $info['duedate'] = $this->calcDueDate($info['date']);
+            }
         }
         $info['project'] = $project->getProjectData();
 
@@ -215,6 +216,19 @@ class PdfDoc {
         $html = $outertemplate->getHTML();
 
         return $outertemplate->getHTML();
+    }
+
+    /**
+     * Calcs a due date for a date
+     * @param $date - the invoice date
+     * @return bool|string
+     */
+    private function calcDueDate($date)
+    {
+        $conf = Config::getInstance();
+        $days = $conf->get['invoice_due_days'];
+        $seconds = $days*24*60*60;
+        return date('Y-m-d',(strtotime($date) + $seconds));
     }
 
 }

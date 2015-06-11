@@ -202,7 +202,7 @@ class AmaItem {
 
             /* set total value */
             $entry['total'] = $entry['hourlyrates'] * $hourlyrate;
-
+            $entry['usedrate'] = $hourlyrate;
         }
         /*
          * use daily rate
@@ -230,6 +230,7 @@ class AmaItem {
 
             /* set total value */
             $entry['total'] = $entry['dailyrates'] * $dailyrate;
+            $entry['usedrate'] = $dailyrate;
 
         }
         /*
@@ -242,6 +243,7 @@ class AmaItem {
                 $entry['fixedrate'] = 0;
             }
             $entry['total'] = $entry['fixedrate'];
+            $entry['usedrate'] = $entry['fixedrate'];
         }
 
         /* round the item price */

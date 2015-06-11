@@ -61,6 +61,10 @@ p
 {
     text-align: center;
 }
+.top
+{
+    vertical-align: top;
+}
 .heading
 {
     font-size: 22px;
@@ -119,6 +123,10 @@ table.table th
 tr.total td
 {
     background-color: #EEEEEE;
+}
+tr.total td .less
+{
+    color: #000000;
 }
 
 /* signature table */

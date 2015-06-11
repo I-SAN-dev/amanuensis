@@ -1,0 +1,122 @@
+<? echoIf($description, '%v') ?>
+<p>Wir bedanken uns für die Zusammenarbeit und stellen Ihnen vereinbarungsgemäß folgende Leistungen in Rechnung:</p>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th width="15%" class="left">
+            Datum
+        </th>
+        <th class="left">
+            Posten
+        </th>
+        <th width="5%" class="center">
+            Menge
+        </th>
+        <th width="15%" class="center">
+            Einzelpreis
+        </th>
+        <th width="15%" class="center">
+            Gesamtpreis
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($items['list'] as $item) { ?>
+        <tr>
+            <td width="15%" class="left">
+                <? echo formatDate($date) ?>
+            </td>
+            <td class="left">
+                <?= $item['name'] ?>
+            </td>
+            <td width="5%" class="right">
+                <?php
+                    if ($item['userate'] == 1){
+                        echo(twoDec($item['hourlyrates']));
+                    }
+                    else if ($item['userate'] == 2) {
+                        echo(twoDec($item['dailyrates']));
+                    }
+                    else {
+                        echo('1');
+                    }
+                ?>
+            </td>
+            <td width="15%" class="right">
+                <?php
+                    echo(twoDec($item['usedrate']));
+                ?>
+            </td>
+            <td width="15%" class="right">
+                <?= twoDec($item['total']) ?>
+            </td>
+        </tr>
+    <?php } ?>
+    <tr class="total">
+        <td class="right" colspan="4">
+            <?php if($conf['pricing']['calc_tax']) { ?>
+                <span class="less">Netto</span><br/>
+                <span class="less"><?= $items['costs']['taxlabel'] ?></span><br/>
+            <?php } ?>
+            Rechnungsbetrag
+        </td>
+        <td width="15%" class="right">
+            <?php if($conf['pricing']['calc_tax']) { ?>
+                <span class="less"><?= twoDec($items['costs']['beforetax']); ?></span><br/>
+                <span class="less"><?= twoDec($items['costs']['tax']); ?></span><br/>
+            <?php } ?>
+            <?= twoDec($items['costs']['total']) ?>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<p>Alle Preisangaben in Euro.</p>
+<p>Bitte überweisen Sie den Rechnungsbetrag unter Angabe der Rechnungsnummer
+    bis spätestens <?= formatDate($duedate); ?> auf folgendes Konto:</p>
+
+<table>
+    <tr>
+        <td width="20%">Kontoinhaber:</td>
+        <td><?= $conf['account']['owner'] ?></td>
+    </tr>
+    <tr>
+        <td width="20%">Bank:</td>
+        <td><?= $conf['account']['bank'] ?></td>
+    </tr>
+    <tr>
+        <td width="20%">IBAN:</td>
+        <td><?= $conf['account']['IBAN'] ?></td>
+    </tr>
+    <tr>
+        <td width="20%">BIC:</td>
+        <td><?= $conf['account']['BIC'] ?></td>
+    </tr>
+</table>
+<br/>
+
+<?php if ($conf['hint_kleinunternehmerregelung']) { ?>
+<table>
+    <tr>
+        <td width="20%" class="top">Hinweis:</td>
+        <td>Die Ausweisung der Umsatzsteuer entfällt gem. § 19 UStG (Kleinunternehmerregelung) für unser Unternehmen.</td>
+    </tr>
+</table>
+<br/>
+<?php } ?>
+
+<p>
+    Für Rückfragen stehen wir Ihnen natürlich gerne unter
+    <? echoIf($conf['mail']['replyto'], '<a href="mailto:%v">%v</a>') ?> zur Verfügung.
+</p>
+<p>
+    Mit freundlichen Grüßen,
+</p>
+<p class="colored">
+    <?= $conf['company'] ?>
+</p>
+
+
