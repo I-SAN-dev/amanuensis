@@ -12299,6 +12299,24 @@ strong.total {
 .clientbox address {
   margin-bottom: 0; }
 
+.filebox {
+  height: 225px;
+  margin-bottom: 30px; }
+  .filebox .fa {
+    font-size: 150px;
+    color: #EEEEEE;
+    display: block;
+    vertical-align: middle;
+    text-align: right;
+    height: 100%; }
+    .filebox .fa:before {
+      vertical-align: middle; }
+  .filebox .filedetails {
+    margin-top: 70px; }
+
+span.wider {
+  letter-spacing: 0.5px; }
+
 /**
   * This extends ng-trans
   */

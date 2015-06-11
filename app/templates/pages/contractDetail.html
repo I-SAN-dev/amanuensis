@@ -83,6 +83,22 @@
 
                 <div data-ng-if="!contract.isFileContract" class="margin-bottom-lg" data-payment-stats="contract.contract.costs"></div>
 
+                <div data-ng-if="contract.isFileContract" class="filebox">
+                    <div class="row fullheight">
+                        <div class="col-xs-4 fullheight">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </div>
+                        <div class="col-xs-8 fullheight">
+                            <div class="filedetails">
+                                <h2>
+                                    {{contract.fileName}}
+                                </h2>
+                                <span class="wider">PDF-Dokument - </span>{{contract.contract.filesize}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" data-ng-if="contract.isFileContract">
                     <div class="col-sm-6">
                         <a class="btn btn-block btn-info" data-ng-click="contract.viewPdf($event,false,contract.contract.path)"><i class="md md-print"></i> {{'pdf.print'|translate}}</a>

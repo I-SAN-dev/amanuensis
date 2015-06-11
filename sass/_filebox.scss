@@ -1,0 +1,30 @@
+.filebox
+{
+  .fa
+  {
+    font-size: 150px;
+    color: $gray-lighter;
+    display: block;
+    vertical-align: middle;
+    text-align: right;
+    height: 100%;
+
+    &:before
+    {
+      vertical-align: middle;
+    }
+  }
+
+  .filedetails
+  {
+    margin-top: 70px;
+  }
+
+  height: 225px;
+  margin-bottom: 30px;
+}
+
+span.wider
+{
+  letter-spacing: 0.5px;
+}
