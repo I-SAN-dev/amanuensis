@@ -73,6 +73,18 @@ p
 {
     color: #999999;
 }
+.red
+{
+    color: #ff0000;
+}
+.with-next
+{
+    page-break-after: avoid;
+}
+.with-before
+{
+    page-break-before: avoid;
+}
 /* links */
 a,
 a:link,

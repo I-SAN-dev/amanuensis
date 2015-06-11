@@ -1,0 +1,168 @@
+<p class="heading"><?=$name ?></p>
+
+<p>Zwischen</p>
+<p>
+    <?
+    echoIf($conf['company'], '%v<br/>');
+    echoIf($conf['company_addition'], '%v<br/>');
+    echoIf($conf['address']['street'], '%v<br/>');
+    echoIf($conf['address']['zip'], '%v ');
+    echoIf($conf['address']['city'], '%v<br/>');
+    echoIf($conf['address']['country'], '%v<br/>');
+    ?>
+</p>
+<p>nachfolgend "Anbieter" genannt<br/>und</p>
+<p>
+    <?
+    echoIf($project['client']['companyname'],'%v<br/>');
+    valFromKey($project['client']['contact_gender'], array('m'=>' vertreten durch Herrn', 'f' => 'vertreten durch Frau'), '%v ');
+    echoIf($project['client']['contact_firstname'],'%v ');
+    echoIf($project['client']['contact_lastname'],'%v<br/>');
+    echoIf($project['client']['street_no'],'%v<br/>');
+    echoIf($project['client']['street_additional'],'%v<br/>');
+    echoIf($project['client']['zip'],'%v ');
+    echoIf($project['client']['city'],'%v<br/>');
+    echoIf($project['client']['country'],'%v');
+    ?>
+</p>
+<p>nachfolgend "Kunde" genannt<br/>
+wird folgender Vertrag geschlossen.</p>
+
+
+<?php
+    if(exists($description))
+    {
+        echo($description);
+    }
+    else
+    {
+        ?>
+            <p class="big red">
+                Füge hier deine Vertragsklauseln ein!<br/>
+                Du hast einen Standardvertrag, den du immer wieder verwendest?<br/>
+                Wenn du das Vertragstemplate anpasst, kannst du diesen mit wenigen Klicks generieren!
+            </p>
+        <?php
+    }
+?>
+<?php pageBreak() ?>
+<p>Vertragsgegenstand:</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th class="left">
+            Posten
+        </th>
+        <th width="5%" class="center">
+            Menge
+        </th>
+        <th width="15%" class="center">
+            Einzelpreis
+        </th>
+        <th width="15%" class="center">
+            Gesamtpreis
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($items['list'] as $item) { ?>
+        <tr>
+            <td class="left">
+                <span class="big"><?= $item['name'] ?></span>
+                <? echoIf($item['description'], '<br/>%v') ?>
+            </td>
+            <td width="5%" class="right">
+                <?php
+                if ($item['userate'] == 1){
+                    echo(twoDec($item['hourlyrates']));
+                }
+                else if ($item['userate'] == 2) {
+                    echo(twoDec($item['dailyrates']));
+                }
+                else {
+                    echo('1');
+                }
+                ?>
+            </td>
+            <td width="15%" class="right">
+                <?php
+                echo(twoDec($item['usedrate']));
+                ?>
+            </td>
+            <td width="15%" class="right">
+                <?= twoDec($item['total']) ?>
+            </td>
+        </tr>
+    <?php } ?>
+    <tr class="total">
+        <td class="right" colspan="3">
+            Gesamtpreis
+        </td>
+        <td width="15%" class="right">
+            <?= twoDec($items['costs']['total']) ?>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<p>
+    Alle Angaben in Euro.
+    <?php if($conf['pricing']['hint_agb']) { ?>
+        Es gelten die Allgemeinen Geschäftsbedingungen (AGB) von <?= $conf['company'] ?> <? echoIf($conf['company_addition']) ?>.
+        Eine Kopie dieser AGB wurde Ihnen mit diesem Vertrag übermittelt
+        <?php echoIf($conf['pricing']['link_agb'], 'oder kann unter %v heruntergeladen werden'); ?>.
+    <?php } ?>
+</p>
+
+<br/>
+<table class="signature">
+    <tr>
+        <td width="33%" class="signeline">
+
+        </td>
+        <td>
+
+        </td>
+        <td width="33%"  class="signeline">
+
+        </td>
+    </tr>
+    <tr>
+        <td width="33%">
+            Datum, Ort
+        </td>
+        <td>
+
+        </td>
+        <td width="33%">
+            Unterschrift Anbieter
+        </td>
+    </tr>
+</table>
+<br/>
+<table class="signature">
+    <tr>
+        <td width="33%" class="signeline">
+
+        </td>
+        <td>
+
+        </td>
+        <td width="33%"  class="signeline">
+
+        </td>
+    </tr>
+    <tr>
+        <td width="33%">
+            Datum, Ort
+        </td>
+        <td>
+
+        </td>
+        <td width="33%">
+            Unterschrift Kunde
+        </td>
+    </tr>
+</table>
+
+
