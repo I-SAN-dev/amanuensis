@@ -27,6 +27,13 @@ class PdfDoc {
      */
     public function __construct($type, $id)
     {
+        if(!in_array($type, array('offer','contract','todo','acceptance','invoice','reminder')))
+        {
+            $error = new amaException(NULL, 400, '"'.$type.'" is no possible value for "for"');
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+
         $this->type = $type;
         $this->id = $id;
 
@@ -38,7 +45,10 @@ class PdfDoc {
         $this->date = $this->info['date'];
 
         /* Gather associated items */
-        $this->info['items'] = $this->getItems();
+        if($this->type != 'reminder')
+        {
+            $this->info['items'] = $this->getItems();
+        }
 
         $this->pdf = new PDF($this->generateFilename());
         $this->pdf->setHTML($this->generateHTML());
@@ -96,7 +106,18 @@ class PdfDoc {
         }
         else
         {
-            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $info['invoice']), 1);
+            $invoice = $dbal->simpleSelect(
+                'invoices',
+                array('id','name','description','refnumber','date','project'),
+                array('id', $info['invoice']), 1);
+
+            /* calc invoice duedate */
+            $conf = Config::getInstance();
+            $days = $conf->get['invoice_due_days'];
+            $seconds = $days*24*60*60;
+            $invoice['duedate'] = date('Y-m-d',(strtotime($invoice['date']) + $seconds));
+
+            $info['invoice'] = $invoice;
             $project = new AmaProject($invoice['project']);
         }
         $info['project'] = $project->getProjectData();
