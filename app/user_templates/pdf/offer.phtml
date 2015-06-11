@@ -40,7 +40,7 @@
     <?php foreach($items['list'] as $item) { ?>
         <tr>
             <td class="left">
-                <?= $item['name'] ?>
+                <span class="big"><?= $item['name'] ?></span>
                 <? echoIf($item['description'], '<br/>%v') ?>
             </td>
             <td width="5%" class="right">
