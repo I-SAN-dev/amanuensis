@@ -65,10 +65,16 @@ app.directive('listNavigation',[
                     return oldPos + offset;
                 };
 
+                var getFilteredList = function () {
+                    if(scope.filterText){
+                        return $filter('filter')(scope.list, scope.filterText);
+                    } else return scope.list;
+                };
+
                 // select the only element left in the list when the list is filtered down to one element
                 $document.unbind('keyup');
                 $document.on('keyup', function (event) {
-                    var list = $filter('filter')(scope.list, scope.filterText);
+                    var list = getFilteredList();
                     if (list.length == 1) {
                         callback(list[0]);
                     }
@@ -77,7 +83,7 @@ app.directive('listNavigation',[
                 // navigate to the next or previous item when up or down key is pressed
                 $document.unbind('keydown');
                 $document.on('keydown', function (event) {
-                    var list = $filter('filter')(scope.list, scope.filterText);
+                    var list = getFilteredList();
 
                     var domList = elem[0].children;
 
