@@ -8,8 +8,13 @@ app.controller('AcceptanceCreationCtrl', [
     'ItemContainerService',
     '$stateParams',
     '$state',
-    function (RefnumberService, ItemContainerService, $stateParams, $state) {
+    'ErrorDialog',
+    function (RefnumberService, ItemContainerService, $stateParams, $state, ErrorDialog) {
         var self = this;
+        if(!$stateParams.project){
+            ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
+            $state.go('app.dashboard')
+        }
         var project = $stateParams.project;
         var projectId = project.id;
 

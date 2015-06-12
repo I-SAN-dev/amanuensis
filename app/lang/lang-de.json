@@ -175,7 +175,7 @@
     "todo":"ToDo",
     "name": "ToDo-Liste",
     "createTodo": "ToDo-Liste erstellen",
-    "createForProject":"ToDo-Liste für das Projekt {{projectName}} erstellen",
+    "createForProject":"Neue ToDo-Liste im Projekt",
     "dueDate": "Fälligkeitsdatum",
     "someopen":"Noch nicht erfüllt",
     "alldone":"Alles erledigt",

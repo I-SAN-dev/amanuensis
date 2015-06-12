@@ -12,8 +12,13 @@ app.controller('ContractCreationCtrl', [
     '$state',
     'constants',
     'translateFilter',
-    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter) {
+    'ErrorDialog',
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter, ErrorDialog) {
         var self = this;
+        if(!$stateParams.project){
+            ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
+            $state.go('app.dashboard')
+        }
         var project = $stateParams.project;
         var projectId = project.id;
         /**
