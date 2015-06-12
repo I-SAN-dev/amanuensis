@@ -12,9 +12,10 @@ app.controller('TodoCreationCtrl', [
         if(!$stateParams.project){
             ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
             $state.go('app.dashboard')
+        } else{
+            var project = $stateParams.project;
+            var projectId = project.id;
         }
-        var project = $stateParams.project;
-        var projectId = project.id;
         /**
          * Name of the current project (derived from stateParams)
          * @type {string}

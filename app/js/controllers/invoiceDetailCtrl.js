@@ -42,6 +42,22 @@ app.controller('InvoiceDetailCtrl', [
         };
         getInvoice();
 
+        /**
+         * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
+         * or the generated PDF of the invoice.
+         * @param {Event} event The event (commonly 'click') that triggered the function call
+         * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+         * @param {String} [path] *optional* Path to the generated PDF
+         */
+        this.viewPdf = function (event, preview, path) {
+            PdfService(event,preview,'invoice',id, path).then(function (data) {
+                if(data){
+                    self.invoice.path = data.path;
+                    self.invoice.state = 1;
+                    LocalStorage.setData('invoice/'+id, self.invoice);
+                }
+            });
+        };
 
         /**
          * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current invoice.
@@ -56,7 +72,10 @@ app.controller('InvoiceDetailCtrl', [
          * Uses the {@link ama.services.MailService MailService} to send a mail with the current invoice.
          */
         this.send = function () {
-            MailService.send('invoice',self.offer.id);
+            MailService.send('invoice',self.invoice.id).then(function (data) {
+                self.invoice.state = 2;
+                LocalStorage.setData('invoice/'+id, self.invoice);
+            });
         };
 
         /**
