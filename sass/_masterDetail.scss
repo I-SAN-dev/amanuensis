@@ -325,6 +325,14 @@ $detail-toolbar-height: 64px;
       content: "\f05e"; /* md-schedule */
     }
   }
+  &.icon-docstate-reminder.icon-docstate-2
+  {
+    background-color: $brand-success;
+    &:after
+    {
+      content: "\f119"; /* md-send */
+    }
+  }
   &.icon-docstate-3
   {
     background-color: $brand-success;
