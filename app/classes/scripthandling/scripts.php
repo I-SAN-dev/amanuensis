@@ -115,6 +115,7 @@ class Scripts
         "js/controllers/todoDetailCtrl.js",
         "js/controllers/todoCreationCtrl.js",
         "js/controllers/reminderDetailCtrl.js",
+        "js/controllers/reminderCreationCtrl.js",
     );
 
     /**

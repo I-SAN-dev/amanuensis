@@ -402,6 +402,17 @@ app.constant('sites', [
         }
     },
     {
+        name:'app.reminderCreation',
+        stateObject: {
+            url: '/new-reminder/:project/:invoice',
+            views: {
+                'appContent': {
+                    templateUrl: 'templates/pages/reminderCreation.html'
+                }
+            }
+        }
+    },
+    {
         name:'app.itemPresets',
         stateObject: {
             abstract: true,

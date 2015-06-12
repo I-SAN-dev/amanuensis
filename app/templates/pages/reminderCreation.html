@@ -1,0 +1,45 @@
+<div class="row fullheight" data-ng-controller="ReminderCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
+        <div class="panel panel-default max-fullheight scroll-y">
+            <form data-ng-submit="create.createReminder()" class="fullheight">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>{{'reminders.newReminderFor' | translate}} {{create.invoice.name}}</h3>
+                        </div>
+                        <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-6 padding-top">
+                            <div data-material-input
+                                 data-ng-model="create.newReminder.refnumber"
+                                 data-input-id="refnumber"
+                                 data-input-required="true"
+                                 data-input-label="{{'reminders.refNumber'|translate}}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-7">
+                            <div data-material-input
+                                 data-ng-model="create.newReminder.name"
+                                 data-input-id="name"
+                                 data-input-label="{{'global.name'|translate}}"></div>
+                        </div>
+                        <div class="col-md-5 col-sm-6">
+                            <div data-material-input
+                                 data-ng-model="create.newReminder.date"
+                                 data-input-type="date" data-input-label="{{'reminders.dueDate'|translate}}"></div>
+                        </div>
+                    </div>
+
+                    <div data-material-input
+                         data-ng-model="create.newReminder.description"
+                         data-input-id="description"
+                         data-input-type="wysiwyg"
+                         data-input-label="{{'global.description'|translate}}"></div>
+
+                    <button class="btn btn-success pull-right margin-top" type="submit">{{'reminders.createReminder'|translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
