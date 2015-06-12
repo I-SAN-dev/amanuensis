@@ -82,7 +82,8 @@ class AmaMailDoc {
             'subject' => $this->subject,
             'recipient' => $this->recipient,
             'attachments' => $this->attachments,
-            'mailpreviewpath' => $conf->getUrl().'api/?action=mail&path='.$path
+            'mailpreviewpath' => $conf->getUrl().'api/?action=mail&path='.$path,
+            'linkurl' => $conf->getUrl()
         ));
 
         $previewpath = 'tmp/'.$userid.'-preview.html';
