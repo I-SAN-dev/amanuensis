@@ -203,6 +203,8 @@
   "invoice":{
     "name": "Rechnung",
     "description": "Beschreibungstext",
+    "newInvoiceFor":"Neue Rechnung im Projekt",
+    "createInvoice":"Rechnung erstellen",
     "send": "Rechnung senden",
     "createReminder": "Mahnung erstellen",
     "wasPaid": "Rechnung wurde bezahlt",
