@@ -14,6 +14,8 @@ app.controller('ItemDetailCtrl', [
     function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService) {
         MasterDetailService.setDetail(this);
 
+
+
         /**
          * Indicates what panel should be shown in the view
          * @type {integer}
@@ -63,12 +65,14 @@ app.controller('ItemDetailCtrl', [
          * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
          * Re-initializes the detail view
          * @param {Object} item The newly selected item
-         * @param {boolean} keyboard Indicates if the selection was taken by keyboard input
+         * @param {boolean} [keyboard] Indicates if the selection was taken by keyboard input
          */
         this.detailChanged = function (item, keyboard) {
+            console.log('detail changed');
             self.item = item;
 
             self.getTime();
+
 
             self.connections = LocalStorage.getData('item/'+self.item.id+'/connections')
             ||
@@ -166,6 +170,7 @@ app.controller('ItemDetailCtrl', [
             MasterDetailService.notifyMaster('moveItem', self.item);
         };
 
+        MasterDetailService.notifyController('setFirstAsDetail');
 
     }
 ]);

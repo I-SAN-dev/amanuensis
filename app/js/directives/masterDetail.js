@@ -75,7 +75,7 @@ app.directive('masterDetail', [function(){
                 /**
                  * Sets a new detail item and notifies other controllers that the detail has changed
                  * @param detail - the new detail object
-                 * @param keyboard - indicates if the detail was changed by keyboard input
+                 * @param [keyboard] - indicates if the detail was changed by keyboard input
                  */
                 $scope.setDetail = function(detail, keyboard){
                     self.detail = MasterDetailService.setDetailView(detail,keyboard);
@@ -119,6 +119,19 @@ app.directive('masterDetail', [function(){
                     },
                     containerPositioning: 'relative'
                 };
+
+                $scope.setFirstAsDetail=function(){
+                    console.log('first');
+                    $scope.$watch('masterList', function () {
+                        if($scope.masterList) {
+                            if ($scope.masterList.length > 0) {
+                                $scope.setDetail($scope.masterList[0]);
+                            }
+                        }
+                    });
+                };
+
+
             }],
         controllerAs: 'MasterDetailCtrl'
     }

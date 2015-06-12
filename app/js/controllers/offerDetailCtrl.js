@@ -15,8 +15,8 @@ app.controller('OfferDetailCtrl', [
         'ItemService',
         '$stateParams',
         '$scope',
-        'constants',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, ItemService, $stateParams, $scope, constants) {
+        '$q',
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, ItemService, $stateParams, $scope, $q) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -67,11 +67,14 @@ app.controller('OfferDetailCtrl', [
 
 
             var getOffer = function () {
+                var defer = $q.defer();
                 ApiAbstractionLayer('GET',{name: 'offer', params: {id: id}}).then(function (data) {
                     self.offer = data;
                     LocalStorage.setData('offer/'+id, data);
                     self.loaded = true;
+                    defer.resolve(data);
                 });
+                return defer.promise;
             };
 
             getOffer();
@@ -86,12 +89,11 @@ app.controller('OfferDetailCtrl', [
              * Sets the first item of a provided list as active item in the MasterDetail view
              */
             this.setFirstItemAsDetail = function () {
-                console.log('first', self.offer);
                 if(self.offer) {
                     var list = self.offer.items;
                     if (list.length > 0){
                         console.log(list);
-                        MasterDetailService.setDetailView(list[0]);
+                        MasterDetailService.notifyController('setDetail',list[0]);
                     }
                 }
             };

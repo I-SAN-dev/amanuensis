@@ -52,6 +52,7 @@ app.factory('MasterDetailService', [
              */
             setDetail: function(ctrl) {
                 detail = ctrl;
+                console.log(detail);
             },
             /**
              * Registers the editor controller
@@ -66,6 +67,8 @@ app.factory('MasterDetailService', [
              */
             setController: function (ctrl) {
                 controller = ctrl;
+
+                console.log(controller);
             },
             /**
              * Sets a flag in the service indicating if the detail is currently in edit mode.
@@ -107,11 +110,11 @@ app.factory('MasterDetailService', [
             },
             /**
              * Changes the detail
-             * @param {Object} detail The newly selected detail
+             * @param {Object} detailItem The newly selected detail
              * @param {boolean} [keyboard] *Optional.* Indicates if the detail was changed by keyboard input
              * @returns {Object} The new detail.
              */
-            setDetailView: function(detail, keyboard){
+            setDetailView: function(detailItem, keyboard){
                 if(editMode) {
                     console.log('cancel edit');
                     self.notifyEditor('cancel');
@@ -119,9 +122,10 @@ app.factory('MasterDetailService', [
                 }
 
                 if($state.params.hasDetails)
-                    $state.go($state.current.name, {id: detail.id});
-                self.notifyDetail('detailChanged', detail, keyboard);
-                return detail;
+                    $state.go($state.current.name, {id: detailItem.id});
+                console.log('set detail view', detailItem, detail);
+                self.notifyDetail('detailChanged', detailItem, keyboard);
+                return detailItem;
             }
         }
     }

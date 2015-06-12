@@ -132,7 +132,6 @@ app.directive('listNavigation',[
 
                         if (nextDetail) {
                             callback(nextDetail, true);
-                            console.log(domList);
                             if(domList[position]) {
                                 var newActiveItem = $(domList[position]);
 
