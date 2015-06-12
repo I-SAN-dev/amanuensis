@@ -81,11 +81,11 @@
                     <div class="col-sm-4">
                         <a class="btn btn-block btn-info" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.viewPdf($event, true)">{{'pdf.preview'|translate}}</a>
                         <button class="btn btn-block btn-success" data-ng-if="offer.offer.state <= 1" data-ng-click="offer.viewPdf($event, false)">{{'pdf.generate'|translate}}</button>
-                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.viewPdf($event, false, offer.offer.path)" data-ng-href="api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="offer.offer.state > 1" data-ng-click="offer.viewPdf($event, false, offer.offer.path)" data-ng-href="{{$root.linkurl}}/api/?action=protectedpdf&path={{offer.offer.path}}">{{'pdf.view'|translate}}</a>
                         <button disabled class="btn btn-block btn-success disabled" data-ng-if="offer.offer.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="offer.offer.state >= 1">
-                        <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-click="offer.openMailPreview($event)" data-ng-href="{{$root.linkurl}}/api/?action=pdfgen&for=offer&forid={{offer.offer.id}}">{{'mail.preview'|translate}}</a>
                         <button data-ng-if="offer.offer.state == 1" class="btn btn-block btn-success" data-ng-click="offer.send()">{{'offer.send'|translate}}</button>
                         <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
                     </div>

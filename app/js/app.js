@@ -20,7 +20,7 @@ app.config( [
  * @method run
  *
  */
-app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
+app.run(function ($rootScope, $state, AuthService, LocalStorage, $q, constants) {
 
 
     // trigger a refresh whenever user clicks history buttons

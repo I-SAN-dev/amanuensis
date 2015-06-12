@@ -1,25 +1,35 @@
-<div class="row scroll-y" data-ng-controller="OfferCreationCtrl as create">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <h2>!!Create offer for project {{create.projectName}}</h2>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form data-ng-submit="create.createOffer()">
-                    <div data-material-input
-                         data-ng-model="create.newOffer.name"
-                         data-input-id="name"
-                         data-input-label="{{'global.name'|translate}}"></div>
-                    <div data-material-input
-                         data-ng-model="create.newOffer.description"
-                         data-input-id="description"
-                         data-input-type="wysiwyg"
-                         data-input-label="{{'global.description'|translate}}"></div>
-                    <div data-material-input
-                         data-ng-model="create.newOffer.refnumber"
-                         data-input-id="refnumber"
-                         data-input-label="{{'offers.refNumber'|translate}}"></div>
-                    <button class="btn btn-success" type="submit">{{'offers.createOffer'|translate}}</button>
-                </form>
-            </div>
+<div class="row fullheight" data-ng-controller="OfferCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
+        <div class="panel panel-default max-fullheight scroll-y">
+            <form data-ng-submit="create.createOffer()" class="fullheight">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>{{'offers.newOfferFor' | translate}} {{create.projectName}}</h3>
+                        </div>
+                        <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-6 padding-top">
+                            <div data-material-input
+                                 data-ng-model="create.newOffer.refnumber"
+                                 data-input-id="refnumber"
+                                 data-input-required="true"
+                                 data-input-label="{{'offers.refNumber'|translate}}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                        <div data-material-input
+                             data-ng-model="create.newOffer.name"
+                             data-input-id="name"
+                             data-input-label="{{'global.name'|translate}}"></div>
+                        <div data-material-input
+                             data-ng-model="create.newOffer.description"
+                             data-input-id="description"
+                             data-input-type="wysiwyg"
+                             data-input-label="{{'global.description'|translate}}"></div>
+
+                        <button class="btn btn-success pull-right margin-top" type="submit">{{'offers.createOffer'|translate}}</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

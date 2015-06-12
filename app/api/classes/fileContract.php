@@ -131,6 +131,11 @@ class fileContract {
         $project = new AmaProject($result['project']);
         $result['project'] = $project->getProjectData();
 
+        if(isset($result['path']) && $result['path'] != '' && file_exists($result['path']))
+        {
+            $result['filesize'] = self::human_filesize(@filesize($result['path']));
+        }
+
         json_response($result);
     }
 
@@ -336,6 +341,21 @@ class fileContract {
             $error->renderJSONerror();
             $error->setHeaders();
         }
+    }
+
+    /**
+     * Converts bytes to human readable filesize
+     * @author Jeffrey Sambells
+     * @url http://jeffreysambells.com/2012/10/25/human-readable-filesize-php
+     * @param $bytes - the filesize in bytes
+     * @param int $decimals - how many decimals should be shown
+     * @return string - a human readable file size
+     */
+    private static function human_filesize($bytes, $decimals = 2)
+    {
+        $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f ", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 
 }

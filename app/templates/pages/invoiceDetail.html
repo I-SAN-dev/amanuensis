@@ -83,11 +83,11 @@
                     <div class="col-sm-4">
                         <a class="btn btn-block btn-info" data-ng-if="invoice.invoice.state <= 1" data-ng-click="invoice.viewPdf($event, true)">{{'pdf.preview'|translate}}</a>
                         <button class="btn btn-block btn-success" data-ng-if="invoice.invoice.state <= 1" data-ng-click="invoice.viewPdf($event, false)">{{'pdf.generate'|translate}}</button>
-                        <a class="btn btn-block btn-info" data-ng-if="invoice.invoice.state > 1" data-ng-click="invoice.viewPdf($event, false, invoice.invoice.path)" data-ng-href="api/?action=protectedpdf&path={{invoice.invoice.path}}">{{'pdf.view'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-if="invoice.invoice.state > 1" data-ng-click="invoice.viewPdf($event, false, invoice.invoice.path)" data-ng-href="{{$root.linkurl}}/api/?action=protectedpdf&path={{invoice.invoice.path}}">{{'pdf.view'|translate}}</a>
                         <button disabled class="btn btn-block btn-success disabled" data-ng-if="invoice.invoice.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="invoice.invoice.state >= 1">
-                        <a class="btn btn-block btn-info" data-ng-click="invoice.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=invoice&forid={{invoice.invoice.id}}">{{'mail.preview'|translate}}</a>
+                        <a class="btn btn-block btn-info" data-ng-click="invoice.openMailPreview($event)" data-ng-href="{{$root.linkurl}}/api/?action=pdfgen&for=invoice&forid={{invoice.invoice.id}}">{{'mail.preview'|translate}}</a>
                         <button data-ng-if="invoice.invoice.state == 1" class="btn btn-block btn-success" data-ng-click="invoice.send()">{{'invoice.send'|translate}}</button>
                         <button disabled data-ng-if="invoice.invoice.state > 1" class="btn btn-block btn-success disabled">{{'invoice.sent' | translate}}</button>
                     </div>

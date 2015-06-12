@@ -332,7 +332,10 @@ $panel-heading-height: 64px;
       &.active {
         border-bottom: 2px solid $brand-primary !important;
       }
-
+    }
+    .padding-top
+    {
+      padding-top: 15px;
     }
   }
   .panel-heading+.panel-body
@@ -350,6 +353,10 @@ $panel-heading-height: 64px;
 {
   overflow:hidden;
 }
+.nomargin
+{
+  margin: 0;
+}
 .margin-bottom
 {
   margin-bottom: 15px;
@@ -357,6 +364,14 @@ $panel-heading-height: 64px;
 .margin-bottom-lg
 {
   margin-bottom: 30px;
+}
+.margin-top
+{
+  margin-top: 15px;
+}
+.margin-top-lg
+{
+  margin-top: 30px;
 }
 .bg-primary
 {

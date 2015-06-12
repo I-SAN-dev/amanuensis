@@ -10818,6 +10818,8 @@ h1, h2 {
       text-decoration: none; }
     .panel-default .panel-heading button.btn.active {
       border-bottom: 2px solid #404877 !important; }
+  .panel-default .panel-heading .padding-top {
+    padding-top: 15px; }
 .panel-default .panel-heading + .panel-body {
   height: calc(100% - 64px); }
 .panel-default.buttons-left {
@@ -10826,11 +10828,20 @@ h1, h2 {
 .nooverflow {
   overflow: hidden; }
 
+.nomargin {
+  margin: 0; }
+
 .margin-bottom {
   margin-bottom: 15px; }
 
 .margin-bottom-lg {
   margin-bottom: 30px; }
+
+.margin-top {
+  margin-top: 15px; }
+
+.margin-top-lg {
+  margin-top: 30px; }
 
 .bg-primary {
   background-color: #404877;
@@ -11366,6 +11377,17 @@ textarea {
   .datepicker-container input {
     padding-right: 0 !important; }
 
+.note-editor {
+  border: 1px solid #EEEEEE; }
+  .note-editor .note-toolbar {
+    border-bottom: 1px solid #EEEEEE; }
+    .note-editor .note-toolbar button {
+      color: #404877; }
+  .note-editor .note-resizebar {
+    border-top: 1px solid #EEEEEE !important; }
+    .note-editor .note-resizebar .note-iconbar {
+      border-top: 1px solid #BDBDBD !important; }
+
 /*.nav#mainNav
 {
   @include card(1);
@@ -11561,7 +11583,7 @@ a.list-group-item {
 
 .note-editor .btn-toolbar .btn-group button.btn {
   height: 34px !important;
-  line-height: 30px !important; }
+  line-height: 24px !important; }
 
 .clientSwitch {
   display: block;
@@ -12298,6 +12320,24 @@ strong.total {
   margin-bottom: 15px; }
 .clientbox address {
   margin-bottom: 0; }
+
+.filebox {
+  height: 225px;
+  margin-bottom: 30px; }
+  .filebox .fa {
+    font-size: 150px;
+    color: #EEEEEE;
+    display: block;
+    vertical-align: middle;
+    text-align: right;
+    height: 100%; }
+    .filebox .fa:before {
+      vertical-align: middle; }
+  .filebox .filedetails {
+    margin-top: 70px; }
+
+span.wider {
+  letter-spacing: 0.5px; }
 
 /**
   * This extends ng-trans

@@ -515,3 +515,29 @@ $checkbox-size: 40px;
     padding-right: 0 !important;
   }
 }
+
+
+// Summernote
+.note-editor
+{
+  border: 1px solid $gray-lighter;
+
+  .note-toolbar
+  {
+    border-bottom: 1px solid $gray-lighter;
+
+    button
+    {
+      color: $brand-primary;
+    }
+  }
+  .note-resizebar
+  {
+    border-top: 1px solid $gray-lighter !important;
+
+    .note-iconbar
+    {
+      border-top: 1px solid $gray-light !important;
+    }
+  }
+}
