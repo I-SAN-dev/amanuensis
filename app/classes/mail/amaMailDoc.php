@@ -144,7 +144,7 @@ class AmaMailDoc {
         }
         else
         {
-            $invoice = $dbal->simpleSelect('invoices', array('project, name, description, refnumber, date, path'), array('id', $info['invoice']), 1);
+            $invoice = $dbal->simpleSelect('invoices', array('id, project, name, description, refnumber, date, path'), array('id', $info['invoice']), 1);
             $info['invoice'] = $invoice;
             $project = new AmaProject($invoice['project']);
         }
