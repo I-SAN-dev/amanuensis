@@ -1,6 +1,6 @@
 <p>
     wir konnten für die Rechnung <?= $invoice['refnumber']; ?> vom <?= formatDate($invoice['date']) ?> über
-    <?= twodec($invoice['costs']['total']) ?> €, fällig am <?= formatDate($invoice['duedate']) ?>,
+    <?= twodec($invoice['items']->costs['total']) ?> €, fällig am <?= formatDate($invoice['duedate']) ?>,
     noch keinen Zahlungseingang feststellen.
 </p>
 

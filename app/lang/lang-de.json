@@ -155,6 +155,10 @@
   "contract":
   {
     "name": "Vertrag",
+    "newContractFor":"Neuer Vertrag im Projekt",
+    "dropFileHere":"Wenn du einen bestehenden Vertrag (PDF) hochladen möchtest,<br/>ziehe diesen hierher oder klicke hier.",
+    "createContract":"Vertrag erstellen",
+    "onlyPdf":"Nur PDF Dateien erlaubt.",
     "type":"Typ",
     "description":
     {
@@ -171,7 +175,7 @@
     "todo":"ToDo",
     "name": "ToDo-Liste",
     "createTodo": "ToDo-Liste erstellen",
-    "createForProject":"ToDo-Liste für das Projekt {{projectName}} erstellen",
+    "createForProject":"Neue ToDo-Liste im Projekt",
     "dueDate": "Fälligkeitsdatum",
     "someopen":"Noch nicht erfüllt",
     "alldone":"Alles erledigt",
@@ -199,6 +203,8 @@
   "invoice":{
     "name": "Rechnung",
     "description": "Beschreibungstext",
+    "newInvoiceFor":"Neue Rechnung im Projekt",
+    "createInvoice":"Rechnung erstellen",
     "send": "Rechnung senden",
     "createReminder": "Mahnung erstellen",
     "wasPaid": "Rechnung wurde bezahlt",
@@ -211,7 +217,10 @@
     "moveToOther": "Posten in eine andere Rechnung verschieben"
   },
   "reminder": {
+    "send": "Erinnerung senden",
+    "sent": "Erinnerung gesendet",
     "name": "Zahlungserinnerung",
+    "description":"Beschreibung",
     "notifications": {
       "emailSent": "Zahlungserinnerung wurde verschickt"
     }

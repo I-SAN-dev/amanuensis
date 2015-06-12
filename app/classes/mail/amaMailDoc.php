@@ -82,7 +82,8 @@ class AmaMailDoc {
             'subject' => $this->subject,
             'recipient' => $this->recipient,
             'attachments' => $this->attachments,
-            'mailpreviewpath' => $conf->getUrl().'api/?action=mail&path='.$path
+            'mailpreviewpath' => $conf->getUrl().'api/?action=mail&path='.$path,
+            'linkurl' => $conf->getUrl()
         ));
 
         $previewpath = 'tmp/'.$userid.'-preview.html';
@@ -144,7 +145,7 @@ class AmaMailDoc {
         }
         else
         {
-            $invoice = $dbal->simpleSelect('invoices', array('project, name, description, refnumber, date, path'), array('id', $info['invoice']), 1);
+            $invoice = $dbal->simpleSelect('invoices', array('id, project, name, description, refnumber, date, path'), array('id', $info['invoice']), 1);
             $info['invoice'] = $invoice;
             $project = new AmaProject($invoice['project']);
         }

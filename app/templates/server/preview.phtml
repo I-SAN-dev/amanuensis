@@ -73,7 +73,7 @@
             <span class="il-left">Betreff: </span><span class="il-right"><?= $subject ?></a></span><br/>
             <span class="il-left">Anhang: </span><span class="il-right">
                 <?php foreach($attachments as $attachment) { ?>
-                <a href="/api/?action=protectedpdf&path=<?= $attachment ?>" target="_blank"><?= basename($attachment) ?></a>&nbsp;
+                <a href="<?= $linkurl ?>/api/?action=protectedpdf&path=<?= $attachment ?>" target="_blank"><?= basename($attachment) ?></a>&nbsp;
                 <?php } ?>
             </span><br/>
         </div>

@@ -69,9 +69,7 @@ class PdfDoc {
     public function saveToDisk()
     {
         $path = $this->generatePath();
-
         $this->pdf->saveToDisk($path);
-
         $this->updateState($path);
         return $path;
     }

@@ -515,6 +515,10 @@ $checkbox-size: 40px;
     padding-right: 0 !important;
   }
 }
+.datepicker-fixed .datepicker-container
+{
+  position: fixed;
+}
 
 
 // Summernote
@@ -522,6 +526,10 @@ $checkbox-size: 40px;
 {
   border: 1px solid $gray-lighter;
 
+  .note-dropzone
+  {
+    opacity: 0 !important;
+  }
   .note-toolbar
   {
     border-bottom: 1px solid $gray-lighter;
@@ -540,4 +548,80 @@ $checkbox-size: 40px;
       border-top: 1px solid $gray-light !important;
     }
   }
+}
+
+/* Drag n drop fileupload */
+.fileinput
+{
+  width: 100%;
+  height: 100px;
+  background-color: $gray-lighter;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: $gray-base;
+  transition: 0.3s background-color, 0.3s color;
+  border-radius: 2px;
+
+  &:hover
+  {
+    background-color: rgba($brand-info, 0.6) !important;
+    color: #fff;
+  }
+  &.active
+  {
+    background-color: rgba($brand-info, 0.5);
+    color: #fff;
+  }
+  &.invalid
+  {
+    background-color: rgba($brand-danger, 0.6) !important;
+    color: #fff;
+  }
+
+  .hidden-fileinput
+  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+  }
+
+  .fileinput-inner
+  {
+    text-align: center;
+    height: 100%;
+
+    &:before
+    {
+      content: ' ';
+      width: 1px;
+      height: 100%;
+      display: inline-block;
+      opacity: 0;
+      vertical-align: middle;
+    }
+    span
+    {
+      vertical-align: middle;
+      display: inline-block;
+      font-size: $font-size-h3;
+    }
+    i
+    {
+      font-size: 60px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.btn.linebefore
+{
+  margin-top: -32px;
 }
