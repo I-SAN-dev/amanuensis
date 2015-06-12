@@ -17,7 +17,7 @@ angular.module('ama')
          * Gets the current user from the {@link ama.services.AuthService AuthService}
          */
         this.getUser = function () {
-            AuthService.currentUser().then(function(result){
+            AuthService.currentUser().then(function (result) {
                 return result;
             });
         };
@@ -28,8 +28,8 @@ angular.module('ama')
          */
         this.email = '';
         /*AuthService.currentUser(true).then(function(user){
-            self.email = user.email;
-        });*/
+         self.email = user.email;
+         });*/
 
 
         /**
@@ -41,16 +41,18 @@ angular.module('ama')
             AuthService.login(email, password).then(function (result) {
                 var to = $stateParams.referrer || 'app.dashboard';
                 var toParams = $stateParams.referrerParams;
-                $state.go(to,toParams);
+                console.log(to, toParams);
+                $state.go(to, toParams);
             });
         };
         /**
          * Logs the user out
          */
         this.logout = function () {
-            AuthService.logout().then(function(result){
+            AuthService.logout().then(function (result) {
                 console.log(result);
             });
         };
 
-    }]);
+    }
+        ]);

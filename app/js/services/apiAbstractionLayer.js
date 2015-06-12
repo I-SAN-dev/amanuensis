@@ -62,7 +62,8 @@ app
                         if (status == 401) {
                             $rootScope.loggedIn = false;
                             if($state.current.name != 'login'){
-                                $state.go('login', {referrer: $state.current.name, referrerParams: $stateParams});
+                                console.log($state.current, $stateParams);
+                                $state.go('login', {referrer: $state.current.name, referrerParams: angular.copy($stateParams)});
                             }
                         }
                         $rootScope.loaded = true;
