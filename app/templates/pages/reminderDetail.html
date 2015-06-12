@@ -81,20 +81,16 @@
                 <div class="margin-bottom-lg" data-payment-stats="reminder.reminder.invoice.costs"></div>
 
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <a class="btn btn-block btn-info" data-ng-if="reminder.reminder.state <= 1" data-ng-click="reminder.viewPdf($event, true)">{{'pdf.preview'|translate}}</a>
                         <button class="btn btn-block btn-success" data-ng-if="reminder.reminder.state <= 1" data-ng-click="reminder.viewPdf($event, false)">{{'pdf.generate'|translate}}</button>
                         <a class="btn btn-block btn-info" data-ng-if="reminder.reminder.state > 1" data-ng-click="reminder.viewPdf($event, false, reminder.reminder.path)" data-ng-href="api/?action=protectedpdf&path={{reminder.reminder.path}}">{{'pdf.view'|translate}}</a>
                         <button disabled class="btn btn-block btn-success disabled" data-ng-if="reminder.reminder.state > 1">{{'pdf.generated'|translate}}</button>
                     </div>
-                    <div class="col-sm-4" data-ng-if="reminder.reminder.state >= 1">
+                    <div class="col-sm-6" data-ng-if="reminder.reminder.state >= 1">
                         <a class="btn btn-block btn-info" data-ng-click="reminder.openMailPreview($event)" data-ng-href="api/?action=pdfgen&for=reminder&forid={{reminder.reminder.id}}">{{'mail.preview'|translate}}</a>
                         <button data-ng-if="reminder.reminder.state == 1" class="btn btn-block btn-success" data-ng-click="reminder.send()">{{'reminder.send'|translate}}</button>
                         <button disabled data-ng-if="reminder.reminder.state > 1" class="btn btn-block btn-success disabled">{{'reminder.sent' | translate}}</button>
-                    </div>
-                    <div class="col-sm-4" data-ng-if="reminder.reminder.state >= 2">
-                        <button class="btn btn-block btn-danger" data-ng-click="reminder.decline()">{{'reminder.decline' |translate}}</button>
-                        <button class="btn btn-block btn-success" data-ng-click="reminder.accept()">{{'reminder.accept'|translate}}</button>
                     </div>
                 </div>
             </div>
