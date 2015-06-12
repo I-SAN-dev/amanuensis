@@ -31,7 +31,10 @@
                                       data-ipe-name="'reminders.refnumber'|translate"></span>
                             </div>
                         </div>
-                        {{reminder.reminder.state|amaStates:'reminder'|translate}}, {{reminder.belongsTo}}
+                        {{reminder.reminder.state|amaStates:'reminder'|translate}}
+                        <div class="detail-inline">
+                            <i class="md md-attach-money"></i><a data-ui-sref="app.invoiceDetail({id: reminder.reminder.invoice.id})">{{reminder.reminder.invoice.name}}</a>
+                        </div>
                         <div class="detail-inline">
                             <i class="md md-folder"></i> <a data-ui-sref="app.projectDetail({id: reminder.reminder.project.id})">{{reminder.reminder.project.name}}</a>
                         </div>
@@ -75,7 +78,7 @@
         <div class="panel panel-default fixedheight-320 shadow-1">
             <div class="panel-body">
 
-                <div class="margin-bottom-lg" data-payment-stats="reminder.reminder.costs"></div>
+                <div class="margin-bottom-lg" data-payment-stats="reminder.reminder.invoice.costs"></div>
 
                 <div class="row">
                     <div class="col-sm-4">
@@ -111,7 +114,7 @@
 
                     <div class="slideanim-item fullheight scroll-y">
 
-                        <div data-client-box="reminder.reminder.project.client"></div>
+                        <div data-client-box="reminder.reminder.client"></div>
 
                     </div>
 

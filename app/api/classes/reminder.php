@@ -149,6 +149,7 @@ class reminder {
 
         /* Add project data */
         $project = new AmaProject($invoice['project']);
+        $result['project'] = array("name"=>$project->name, "id"=>$project->id);
         $result['client'] = $project->getClient();
         $result['invoice'] = $invoice;
 

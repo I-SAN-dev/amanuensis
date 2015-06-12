@@ -102,9 +102,24 @@ final class AmaStream {
             $client = $project->getClient();
             $data['client_id'] = $client['id'];
         }
+        /* reminder */
+        else if($type == 'reminder')
+        {
+            $thing = $dbal->simpleSelect(
+                $type.'s',
+                array('name', 'invoice'),
+                array('id', $id),
+                1
+            );
 
+            $data['associated_title'] = $thing['name'];
+            $invoice = $dbal->simpleSelect('invoices', array('project'), array('id', $thing['invoice']), 1);
+            $project = new AmaProject($invoice['project']);
+            $client = $project->getClient();
+            $data['client_id'] = $client['id'];
+        }
         /* things */
-        else if(in_array($type, array('offer','contract','todo','acceptance','invoice','reminder')))
+        else if(in_array($type, array('offer','contract','todo','acceptance','invoice')))
         {
             $thing = $dbal->simpleSelect(
                 $type.'s',

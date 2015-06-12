@@ -218,6 +218,7 @@
   },
   "reminder": {
     "name": "Zahlungserinnerung",
+    "description":"Beschreibung",
     "notifications": {
       "emailSent": "Zahlungserinnerung wurde verschickt"
     }
