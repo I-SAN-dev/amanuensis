@@ -99,13 +99,15 @@ app.constant('sites', [
                 }
             },
             resolve: {
+                /*
+                 * Checks if the current user is logged in and sets the 'loggedin' variable
+                 * which will be used to get the login state at any other point
+                 * @return {Object}
+                 */
                 auth: function(AuthService, $rootScope, $q){
+                    console.log('authentification');
                     var deferred = $q.defer();
-                    /*
-                     * Checks if the current user is logged in and sets the 'loggedin' variable
-                     * which will be used to get the login state at any other point
-                     * @return {Object}
-                     */
+
                     if(AuthService.loggedIn === undefined) {
                         AuthService.currentUser(true).then(function (data) {
                             $rootScope.loggedIn = true;
@@ -119,10 +121,8 @@ app.constant('sites', [
                 }
             },
             controller: ['auth', '$state',function(auth,$state) {
-
-
+                console.log(auth);
                 if (!auth) {
-                    event.preventDefault();
                     $state.go('login', {referrer: $state.current.name, referrerParams: $state.current.params});
                 }
 
@@ -502,11 +502,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
     }
 
 
+
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/dashboard');
 
     pickadateI18nProvider.translations = {
-            prev: '<i class="md md-chevron-left"></i>',
-            next: '<i class="md md-chevron-right"></i>'
-    }
+        prev: '<i class="md md-chevron-left"></i>',
+        next: '<i class="md md-chevron-right"></i>'
+    };
+
+
 });
