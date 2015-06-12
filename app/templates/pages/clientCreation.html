@@ -1,12 +1,13 @@
-<div  class="row scroll-y" data-ng-controller="ClientCreationCtrl as create">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <h2>{{'clients.newClient' | translate}}</h2>
-
-        <div class="panel panel-default">
-            <form>
+<div class="row fullheight scroll-y" data-ng-controller="ClientCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
+        <div class="panel panel-default fullheight nomargin">
+            <form class="fullheight">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="col-sm-6">
+                            <h3>{{'clients.newClient' | translate}}</h3>
+                        </div>
+                        <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-6 padding-top">
                             <div data-material-input
                                  data-input-label="{{'clients.refNumber'|translate}}"
                                  data-input-type="text"
@@ -17,7 +18,7 @@
                     </div>
 
                 </div>
-                <div class="panel-body">
+                <div class="panel-body scroll-y">
                     <div class="row">
                         <div class="col-md-6">
                             <h3>{{ 'clients.companyName'|translate }}</h3>

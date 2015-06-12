@@ -10818,6 +10818,8 @@ h1, h2 {
       text-decoration: none; }
     .panel-default .panel-heading button.btn.active {
       border-bottom: 2px solid #404877 !important; }
+  .panel-default .panel-heading .padding-top {
+    padding-top: 15px; }
 .panel-default .panel-heading + .panel-body {
   height: calc(100% - 64px); }
 .panel-default.buttons-left {
@@ -10825,6 +10827,9 @@ h1, h2 {
 
 .nooverflow {
   overflow: hidden; }
+
+.nomargin {
+  margin: 0; }
 
 .margin-bottom {
   margin-bottom: 15px; }
