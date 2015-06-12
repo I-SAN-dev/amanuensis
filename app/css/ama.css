@@ -10837,6 +10837,12 @@ h1, h2 {
 .margin-bottom-lg {
   margin-bottom: 30px; }
 
+.margin-top {
+  margin-top: 15px; }
+
+.margin-top-lg {
+  margin-top: 30px; }
+
 .bg-primary {
   background-color: #404877;
   color: #fff; }

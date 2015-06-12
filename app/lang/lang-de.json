@@ -312,6 +312,8 @@
   },
   "offers": {
     "state": "Angebotsstatus",
+    "createOffer": "Angebot erstellen",
+    "newOfferFor": "Neues Angebot im Projekt",
     "states":{
       "created": "Angebot erstellt",
       "pdfGenerated": "PDF generiert",
