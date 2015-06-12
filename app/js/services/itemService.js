@@ -73,16 +73,18 @@ app.factory('ItemService',[
              * @returns {promise} A promise containing the answer from the API
              */
             bindItemsToContainer: function (itemIds, forType, forId) {
-                var items = itemIds.join(',');
-                var apiObject = {
-                    name: 'bulk',
-                    data: {
-                        ids: items,
-                        for: forType,
-                        forid: forId
-                    }
-                };
-                return ApiAbstractionLayer('POST',apiObject);
+                if(itemIds.length>0) {
+                    var items = itemIds.join(',');
+                    var apiObject = {
+                        name: 'bulk',
+                        data: {
+                            ids: items,
+                            for: forType,
+                            forid: forId
+                        }
+                    };
+                    return ApiAbstractionLayer('POST', apiObject);
+                }
             },
             /**
              * Changes the ordering of a given list of items on the server

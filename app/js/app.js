@@ -23,55 +23,6 @@ app.config( [
 app.run(function ($rootScope, $state, AuthService, LocalStorage, $q, constants) {
 
 
-    /*
-     * Checks if the current user is logged in and sets the 'loggedin' variable
-     * which will be used to get the login state at any other point
-     * @return {Object}
-     */
-    var getLoginState = function(){
-        console.log('loggedIn',$rootScope.loggedIn);
-        var defer = $q.defer();
-        AuthService.currentUser().then(function (data) {
-            LocalStorage.setKey(data.fe_key);
-            $rootScope.loggedIn = true;
-            $rootScope.currentUserName = data.username;
-            defer.resolve();
-
-        });
-        return defer.promise;
-    };
-
-    // redirects to login state if authentication is required for the next state and the user is not logged in
-    var loginLogic = function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-        if (requireLogin && !$rootScope.loggedIn) {
-            event.preventDefault();
-            $state.go('login', {referrer:toState.name, referrerParams:toParams});
-        }
-    };
-
-    $rootScope.linkurl = constants.URL;
-
-
-
-    /**
-     * Processes the login logic at every stateChange
-     */
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        console.log(toState);
-        // if loggedIn is not set yet, wait for getLoginState
-        if($rootScope.loggedIn === undefined)
-        {
-            getLoginState().then(function () {
-                loginLogic(event, toState, toParams);
-            });
-        } else {
-            loginLogic(event, toState, toParams);
-        }
-
-    });
-
-
     // trigger a refresh whenever user clicks history buttons
     window.onpopstate = function (e) {
         $state.reload();
@@ -146,7 +97,36 @@ app.constant('sites', [
                 'mainContent': {
                     template: '<div data-ui-view="appContent" class="fullheight next-fullheight"></div>'
                 }
-            }
+            },
+            resolve: {
+                /*
+                 * Checks if the current user is logged in and sets the 'loggedin' variable
+                 * which will be used to get the login state at any other point
+                 * @return {Object}
+                 */
+                auth: function(AuthService, $rootScope, $q){
+                    console.log('authentification');
+                    var deferred = $q.defer();
+
+                    if(AuthService.loggedIn === undefined) {
+                        AuthService.currentUser(true).then(function (data) {
+                            $rootScope.loggedIn = true;
+                            $rootScope.currentUserName = data.username;
+                            deferred.resolve($rootScope.loggedIn);
+                        });
+                    } else {
+                        deferred.resolve($rootScope.loggedIn);
+                    }
+                    return deferred.promise;
+                }
+            },
+            controller: ['auth', '$state',function(auth,$state) {
+                console.log(auth);
+                if (!auth) {
+                    $state.go('login', {referrer: $state.current.name, referrerParams: $state.current.params});
+                }
+
+            }]
         }
     },
     {
@@ -522,11 +502,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
     }
 
 
+
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/dashboard');
 
     pickadateI18nProvider.translations = {
-            prev: '<i class="md md-chevron-left"></i>',
-            next: '<i class="md md-chevron-right"></i>'
-    }
+        prev: '<i class="md md-chevron-left"></i>',
+        next: '<i class="md md-chevron-right"></i>'
+    };
+
+
 });

@@ -98,6 +98,7 @@ app.factory('NextStepModal', [
                         this.transform = function() {
                             var newItemContainer = angular.copy(object);
                             delete newItemContainer.id;
+                            delete newItemContainer.description;
                             delete newItemContainer.state;
                             delete newItemContainer.path;
                             newItemContainer.name = self.name;

@@ -61,7 +61,9 @@ app
                         // handle 401 (Authentication required) errors in place
                         if (status == 401) {
                             $rootScope.loggedIn = false;
-                            $state.go('login', {referrer: $state.current.name, referrerParams: $stateParams});
+                            if($state.current.name != 'login'){
+                                $state.go('login', {referrer: $state.current.name, referrerParams: $stateParams});
+                            }
                         }
                         $rootScope.loaded = true;
                         defer.reject(data);
