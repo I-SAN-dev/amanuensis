@@ -10742,6 +10742,9 @@ button:disabled {
 h1, h2 {
   margin-top: 0; }
 
+.panel-body-fullscreen-wysiwyg {
+  padding: 20px; }
+
 .wysiwyg-fullheight {
   height: 100%; }
   .wysiwyg-fullheight .note-editor {
@@ -11774,6 +11777,11 @@ a.list-group-item {
     .icon-docstate.icon-docstate-2:after {
       content: "\f05e";
       /* md-schedule */ }
+  .icon-docstate.icon-docstate-reminder.icon-docstate-2 {
+    background-color: #009688; }
+    .icon-docstate.icon-docstate-reminder.icon-docstate-2:after {
+      content: "\f119";
+      /* md-send */ }
   .icon-docstate.icon-docstate-3 {
     background-color: #009688; }
     .icon-docstate.icon-docstate-3:after {

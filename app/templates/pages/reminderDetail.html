@@ -61,13 +61,25 @@
             </div>
         </div>
 
-        <div class="under-detail-top-bar next-fullheight">
-            <div data-master-detail
-                 data-master-list="reminder.reminder.items"
-                 data-master-tpl="'templates/pages/items/master.html'"
-                 data-detail-tpl="'templates/pages/items/detail.html'"
-                 data-detail="reminder.reminder.items[0]"
-                 data-master-loaded="reminder.loaded"></div>
+        <div class="under-detail-top-bar">
+            <div class="panel panel-default fullheight">
+                <div class="panel-heading">
+                    <h3>
+                        <i class="md md-lg md-comment"></i> {{'reminder.description' | translate}}
+                    </h3>
+                </div>
+                <div class="panel-body scroll-y panel-body-fullscreen-wysiwyg">
+                    <div class="ipe-wysiwyg-fullheight">
+                        <p data-in-place-edit
+                           data-api-id="reminder.reminder.id"
+                           data-api-name="'reminder'"
+                           data-ipe-key="'description'"
+                           data-ipe-value="reminder.reminder.description"
+                           data-ipe-name="'global.description'|translate"
+                           data-ipe-type="'wysiwyg'"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -101,8 +113,7 @@
             <div class="panel-heading">
                 <div class="btn-group btn-group-sm pull-right" data-ng-init="reminder.showPage = 1">
                     <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==1}" data-ng-click="reminder.showPage = 1"><i class="md md-lg md-person"></i> {{'clients.client' | translate}}</button>
-                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==2}" data-ng-click="reminder.showPage = 2"><i class="md md-lg md-comment"></i> {{'reminder.description' | translate}}</button>
-                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==3}" data-ng-click="reminder.showPage = 3"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
+                    <button class="btn btn-link ng-binding" data-ng-class="{active: reminder.showPage==2}" data-ng-click="reminder.showPage = 2"><i class="md md-lg md-mail"></i> {{'mail.mailtext' | translate}}</button>
                 </div>
             </div>
             <div class="panel-body nopadding nooverflow">
@@ -111,20 +122,6 @@
                     <div class="slideanim-item fullheight scroll-y">
 
                         <div data-client-box="reminder.reminder.client"></div>
-
-                    </div>
-
-                    <div class="slideanim-item fullheight scroll-y">
-
-                        <div class="ipe-wysiwyg-fullheight">
-                            <p data-in-place-edit
-                               data-api-id="reminder.reminder.id"
-                               data-api-name="'reminder'"
-                               data-ipe-key="'description'"
-                               data-ipe-value="reminder.reminder.description"
-                               data-ipe-name="'global.description'|translate"
-                               data-ipe-type="'wysiwyg'"></p>
-                        </div>
 
                     </div>
 
