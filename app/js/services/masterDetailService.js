@@ -108,7 +108,7 @@ app.factory('MasterDetailService', [
             /**
              * Changes the detail
              * @param {Object} detail The newly selected detail
-             * @param {boolean} keyboard *Optional.* Indicates if the detail was changed by keyboard input
+             * @param {boolean} [keyboard] *Optional.* Indicates if the detail was changed by keyboard input
              * @returns {Object} The new detail.
              */
             setDetailView: function(detail, keyboard){

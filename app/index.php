@@ -65,7 +65,7 @@ ob_start();
         echo ScriptLoader::echoScripts($conf->get['debug']);
     ?>
 </head>
-<body data-ng-init="getLoginState()">
+<body>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid" data-ama-module="'topBar'"></div>
