@@ -23,10 +23,11 @@ app.factory('ItemContainerService',[
             LocalStorage.setData(type+'/'+container.id, container);
 
             var project = LocalStorage.getData('project/'+projectId);
-            var list = project[containerMap[type]] || [];
-            list.push(container);
-            LocalStorage.setData('project/'+projectId, project);
-
+            if(project) {
+                var list = project[containerMap[type]] || [];
+                list.push(container);
+                LocalStorage.setData('project/' + projectId, project);
+            }
         };
         return {
             /**
