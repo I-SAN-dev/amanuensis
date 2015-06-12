@@ -85,7 +85,7 @@ app.directive('listNavigation',[
                 $document.on('keydown', function (event) {
                     var list = getFilteredList();
 
-                    var domList = elem[0].children;
+                    var domList = $(elem[0]).find('[data-ng-repeat]');
 
 
                     var active = scope.active || null;
@@ -129,8 +129,10 @@ app.directive('listNavigation',[
 
                         position = getNeighbor(1, active, list);
                         var nextDetail = list[position];
+
                         if (nextDetail) {
                             callback(nextDetail, true);
+                            console.log(domList);
                             if(domList[position]) {
                                 var newActiveItem = $(domList[position]);
 
