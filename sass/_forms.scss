@@ -515,6 +515,10 @@ $checkbox-size: 40px;
     padding-right: 0 !important;
   }
 }
+.datepicker-fixed .datepicker-container
+{
+  position: fixed;
+}
 
 
 // Summernote

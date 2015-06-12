@@ -11377,6 +11377,9 @@ textarea {
   .datepicker-container input {
     padding-right: 0 !important; }
 
+.datepicker-fixed .datepicker-container {
+  position: fixed; }
+
 .note-editor {
   border: 1px solid #EEEEEE; }
   .note-editor .note-dropzone {

@@ -1,8 +1,8 @@
-<div class="row scroll-y fullheight" data-ng-controller="TodoCreationCtrl as create">
+<div class="row fullheight" data-ng-controller="TodoCreationCtrl as create">
     <div class="fullheight col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <div class="fullheight panel panel-default">
+        <div class="max-fullheight scroll-y panel panel-default">
             <div class="panel-heading">
-                <h2>{{'todo.createForProject'|translate:create}}</h2>
+                <h3>{{'todo.createForProject'|translate:create}}</h3>
             </div>
             <div class="panel-body">
                 <form data-ng-submit="create.createTodo()">
@@ -12,14 +12,16 @@
                                  data-ng-model="create.newTodo.name"
                                  data-input-id="newTodoName"
                                  data-input-label="{{'global.name'|translate}}"></div>
+                        </div>
+                        <div class="col-sm-6 datepicker-fixed">
                             <div data-material-input data-input-type="date"
                                  data-ng-model="create.newTodo.due"
                                  data-input-id="newTodoDueDate"
                                  data-input-label="{{'todo.dueDate'|translate}}"
                                  data-output-value="create.newTodo.due|amaDate:'MM.dd.yyyy'"></div>
-                            <button class="btn btn-success pull-right" type="submit">{{'todo.createTodo'|translate}}</button>
                         </div>
                     </div>
+                    <button class="btn btn-success pull-right margin-top" type="submit">{{'todo.createTodo'|translate}}</button>
 
                 </form>
             </div>
