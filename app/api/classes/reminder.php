@@ -17,6 +17,8 @@ require_once('classes/database/dbal.php');
 require_once('classes/errorhandling/amaException.php');
 require_once('classes/authentication/authenticator.php');
 require_once('classes/project/amaStream.php');
+require_once('classes/project/amaClient.php');
+require_once('classes/config/config.php');
 
 class reminder {
 
@@ -79,7 +81,6 @@ class reminder {
      */
     private static function getReminderList()
     {
-        //TODO add client name
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'reminders',
@@ -102,7 +103,7 @@ class reminder {
      */
     private static function getReminder($id)
     {
-        //TODO add client name
+        $conf = Config::getInstance();
         $dbal = DBAL::getInstance();
         $result = $dbal->simpleSelect(
             'reminders',
@@ -119,6 +120,38 @@ class reminder {
             array('id', $id),
             1
         );
+
+        $invoice = $dbal->simpleSelect(
+            'invoices',
+            array(
+                'id',
+                'name',
+                'description',
+                'refnumber',
+                'state',
+                'project',
+                'date',
+                'path'
+            ),
+            array('id', $result['invoice']),
+            1
+        );
+
+        /* Add items */
+        $itemlist = new AmaItemList('invoice', $id);
+        $invoice["items"] = $itemlist->entries;
+        $invoice["costs"] = $itemlist->costs;
+
+        /* Add due date */
+        $date = new DateTime($result['date']);
+        $date->add(date_interval_create_from_date_string($conf->get['invoice_due_days'].' days'));
+        $invoice['due'] = $date->format("Y-m-d");
+
+        /* Add project data */
+        $project = new AmaProject($invoice['project']);
+        $result['client'] = $project->getClient();
+        $result['invoice'] = $invoice;
+
         json_response($result);
     }
 
