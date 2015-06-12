@@ -11379,6 +11379,8 @@ textarea {
 
 .note-editor {
   border: 1px solid #EEEEEE; }
+  .note-editor .note-dropzone {
+    opacity: 0 !important; }
   .note-editor .note-toolbar {
     border-bottom: 1px solid #EEEEEE; }
     .note-editor .note-toolbar button {
@@ -11387,6 +11389,58 @@ textarea {
     border-top: 1px solid #EEEEEE !important; }
     .note-editor .note-resizebar .note-iconbar {
       border-top: 1px solid #BDBDBD !important; }
+
+/* Drag n drop fileupload */
+.fileinput {
+  width: 100%;
+  height: 100px;
+  background-color: #EEEEEE;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: #9E9E9E;
+  transition: 0.3s background-color, 0.3s color;
+  border-radius: 2px; }
+  .fileinput:hover {
+    background-color: rgba(0, 172, 193, 0.6) !important;
+    color: #fff; }
+  .fileinput.active {
+    background-color: rgba(0, 172, 193, 0.5);
+    color: #fff; }
+  .fileinput.invalid {
+    background-color: rgba(244, 81, 30, 0.6) !important;
+    color: #fff; }
+  .fileinput .hidden-fileinput {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer; }
+  .fileinput .fileinput-inner {
+    text-align: center;
+    height: 100%; }
+    .fileinput .fileinput-inner:before {
+      content: ' ';
+      width: 1px;
+      height: 100%;
+      display: inline-block;
+      opacity: 0;
+      vertical-align: middle; }
+    .fileinput .fileinput-inner span {
+      vertical-align: middle;
+      display: inline-block;
+      font-size: 16px; }
+    .fileinput .fileinput-inner i {
+      font-size: 60px;
+      vertical-align: middle; }
+
+.btn.linebefore {
+  margin-top: -32px; }
 
 /*.nav#mainNav
 {

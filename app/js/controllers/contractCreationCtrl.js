@@ -11,7 +11,8 @@ app.controller('ContractCreationCtrl', [
     '$stateParams',
     '$state',
     'constants',
-    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants) {
+    'translateFilter',
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter) {
         var self = this;
         var project = $stateParams.project;
         var projectId = project.id;
@@ -37,25 +38,57 @@ app.controller('ContractCreationCtrl', [
         });
 
         /**
+         * Checks if a string ends with a given string
+         * @param str
+         * @param suffix
+         * @returns {boolean}
+         */
+        var endsWith = function(str, suffix)
+        {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        };
+
+        /**
+         * Watches filename changes
+         */
+        var fileinput = $('.hidden-fileinput');
+        fileinput.change(function(){
+            var filename = fileinput.val();
+            if(endsWith(filename,'.pdf') || endsWith(filename, '.PDF'))
+            {
+                self.filename = filename;
+                self.validfile = true;
+            }
+            else
+            {
+                self.filename = translateFilter('contract.onlyPdf');
+                self.validfile = false;
+            }
+        });
+
+        /**
          * Creates a new contract
          */
         this.createContract = function () {
             if(self.fileContract){
-                ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {
-                    var file = self.fileContract;
-                    console.log(file);
-                    var uploadUrl = constants.BASEURL+'/api/?action=fileContract&uploadfor='+data.id;
-                    fileUploadService.uploadFile(file,uploadUrl).then(function(path){
-                        ApiAbstractionLayer('POST', {name:'fileContract', data: {id: data.id, path: path}}).then(function (data) {
-                            ItemContainerService.updateLocalStorage('fileContract', projectId, data);
-                            // go to where we came from
-                            var to = $stateParams.referrer;
-                            var toParams = $stateParams.referrerParams;
-                            $state.go(to,toParams);
+
+                if(self.validFile)
+                {
+                    ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {
+                        var file = self.fileContract;
+                        console.log(file);
+                        var uploadUrl = constants.URL+'/api/?action=fileContract&uploadfor='+data.id;
+                        fileUploadService.uploadFile(file,uploadUrl).then(function(path){
+                            ApiAbstractionLayer('POST', {name:'fileContract', data: {id: data.id, path: path}}).then(function (data) {
+                                ItemContainerService.updateLocalStorage('fileContract', projectId, data);
+                                // go to where we came from
+                                var to = $stateParams.referrer;
+                                var toParams = $stateParams.referrerParams;
+                                $state.go(to,toParams);
+                            });
                         });
                     });
-
-                });
+                }
 
             } else {
                 ItemContainerService.createItemContainer('contract', projectId, self.newContract).then(function (data) {

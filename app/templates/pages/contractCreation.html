@@ -1,33 +1,57 @@
-<div class="row scroll-y" data-ng-controller="ContractCreationCtrl as create">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <h2>!!Create contract for project {{create.projectName}}</h2>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form data-ng-submit="create.createContract()">
-                    <div data-material-input
-                         data-ng-model="create.newContract.name"
-                         data-input-id="name"
-                         data-input-label="{{'global.name'|translate}}"></div>
-                    <div data-material-input
-                         data-ng-model="create.newContract.description"
-                         data-input-id="description"
-                         data-input-type="wysiwyg"
-                         data-input-label="{{'global.description'|translate}}"></div>
+<div class="row fullheight" data-ng-controller="ContractCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
+        <div class="panel panel-default max-fullheight scroll-y">
+            <form data-ng-submit="create.createContract()">
+                <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-6">
+                            <h3>{{'contract.newContractFor' | translate}} {{create.projectName}}</h3>
+                        </div>
+                        <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-6 padding-top">
                             <div data-material-input
                                  data-ng-model="create.newContract.refnumber"
                                  data-input-id="refnumber"
+                                 data-input-required="true"
                                  data-input-label="{{'contracts.refNumber'|translate}}"></div>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="file" data-file-upload="create.fileContract">
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                        <div data-material-input
+                             data-ng-model="create.newContract.name"
+                             data-input-id="name"
+                             data-input-label="{{'global.name'|translate}}"></div>
+                        <div data-material-input
+                             data-ng-model="create.newContract.description"
+                             data-input-id="description"
+                             data-input-type="wysiwyg"
+                             data-input-label="{{'global.description'|translate}}"></div>
+
+                        <div class="row margin-top">
+                            <div class="col-sm-6">
+                                <div class="fileinput" data-ng-class="{active: create.filename, invalid: create.validfile === false}">
+                                    <div class="fileinput-inner">
+                                        <i class="md-attach-file"></i>
+                                        <span data-ng-if="!create.filename" data-ng-bind-html="'contract.dropFileHere'|translate">
+
+                                        </span>
+                                        <span data-ng-if="create.filename">
+                                            {{create.filename}}
+                                        </span>
+                                    </div>
+                                    <input type="file" class="hidden-fileinput" data-file-upload="create.fileContract">
+                                </div>
+
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-6">
+                            <button class="btn btn-success pull-right linebefore" type="submit">{{'contract.createContract'|translate}}</button>
                         </div>
                     </div>
-
-                    <button class="btn btn-success" type="submit">{{'contracts.createContracts'|translate}}</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

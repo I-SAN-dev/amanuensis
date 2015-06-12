@@ -155,6 +155,10 @@
   "contract":
   {
     "name": "Vertrag",
+    "newContractFor":"Neuer Vertrag im Projekt",
+    "dropFileHere":"Wenn du einen bestehenden Vertrag (PDF) hochladen möchtest,<br/>ziehe diesen hierher oder klicke hier.",
+    "createContract":"Vertrag erstellen",
+    "onlyPdf":"Nur PDF Dateien erlaubt.",
     "type":"Typ",
     "description":
     {
