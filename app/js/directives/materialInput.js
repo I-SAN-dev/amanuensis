@@ -138,10 +138,13 @@ app.directive('materialInput', [
                     // build an array (length=2) as model for our price inputs
                     // array[0] will be the 'euros' value of the price
                     // array[1] will be the 'cents' value of the price
-                    if($scope.model)
-                        $scope.priceModel = $scope.model.split('.');
-                    else
-                        $scope.priceModel = new Array(2);
+                    $scope.priceModel = new Array(2);
+                    var watcher = function (newValue){
+                        if(newValue)
+                            $scope.priceModel = newValue.split('.');
+                    };
+                    var unbindWatcher = $scope.$watch('model', watcher);
+
                     /**
                      * Parses the actual price (as String) from the priceModel array
                      */
@@ -151,10 +154,14 @@ app.directive('materialInput', [
                             value[1] = '00';
                         }
                         if(!value[0]){
-                            value[0] = null;
-                            return;
+                            value[0] = '0';
                         }
                         $scope.model = value[0]+'.'+value[1];
+                    };
+
+                    $scope.savePrice = function(){
+                        $scope.processPrice();
+                        $scope.buttons.save.save();
                     }
                 }
 

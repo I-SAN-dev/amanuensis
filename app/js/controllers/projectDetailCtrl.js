@@ -36,7 +36,9 @@ app.controller('ProjectDetailCtrl',
             var getProject = function(id) {
                 self.project = LocalStorage.getData('project'+'/'+id);
                 self.contracts = LocalStorage.getData('project/'+id+'/contracts');
-                self.emptyProject = isProjectEmpty();
+                if(self.project){
+                    self.emptyProject = isProjectEmpty();
+                }
                 ApiAbstractionLayer('GET', {name:'project', params: {id:id}}).then(function (data) {
                     LocalStorage.setData('project'+'/'+id, data);
                     self.project = data;
