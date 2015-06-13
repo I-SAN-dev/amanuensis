@@ -31,7 +31,7 @@
                                       data-api-name="'invoice'"
                                       data-ipe-name="'invoices.refnumber'|translate"></span>
                                 <br/>
-                                <a data-ng-if="invoice.invoice.state >= 2" class="link-danger" data-ui-sref="app.reminderCreation({invoice:invoice.invoice.id, project:invoice.invoice.project.id})" ><i class="md md-add"></i>{{'invoice.addReminder' | translate}}</a>
+                                <a data-ng-if="invoice.invoice.state >= 2" class="link-danger" data-ui-sref="app.reminderCreation({invoice:invoice.invoice})" ><i class="md md-add"></i>{{'invoice.addReminder' | translate}}</a>
                             </div>
                         </div>
                         {{invoice.invoice.state|amaStates:'invoice'|translate}}<span data-ng-if="invoice.invoice.reminders.length>0">, <a data-ui-sref="app.reminderDetail({id:invoice.invoice.reminders[invoice.invoice.reminders.length-1].id})">{{invoice.invoice.reminders[invoice.invoice.reminders.length-1].state|amaStates:'reminder'|translate}}</a></span>
@@ -93,7 +93,7 @@
                         <button disabled data-ng-if="invoice.invoice.state > 1" class="btn btn-block btn-success disabled">{{'invoice.sent' | translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="invoice.invoice.state >= 2">
-                        <button class="btn btn-block btn-danger" data-ui-sref="app.reminderCreation({invoice:invoice.invoice.id, project:invoice.invoice.project.id})">{{'invoice.decline' |translate}}</button>
+                        <button class="btn btn-block btn-danger" data-ui-sref="app.reminderCreation({invoice:invoice.invoice})">{{'invoice.decline' |translate}}</button>
                         <button class="btn btn-block btn-success" data-ng-click="invoice.accept()">{{'invoice.accept'|translate}}</button>
                     </div>
                 </div>
