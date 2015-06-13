@@ -75,9 +75,9 @@ app.controller('ItemCreationCtrl', [
             }
         ];
 
-        var updateCachedList = function () {
+        var updateCachedList = function (newItem) {
             var itemList = LocalStorage.getData(forType+'/'+forId);
-            itemList.items.push(data);
+            itemList.items.push(newItem);
             LocalStorage.setData(forType+'/'+forId, itemList);
         };
 
@@ -109,7 +109,7 @@ app.controller('ItemCreationCtrl', [
                     LocalStorage.setData('item/'+data.id, data);
 
 
-                    updateCachedList();
+                    updateCachedList(data);
 
                     self.newItem = null;
 
@@ -134,7 +134,7 @@ app.controller('ItemCreationCtrl', [
                     LocalStorage.setData('item/'+data.id, data);
                     self.itemFromProject = null;
 
-                    updateCachedList();
+                    updateCachedList(data);
 
                     goBack();
                 });
