@@ -12,9 +12,11 @@ app.controller('AcceptanceDetailCtrl', [
     'MailService',
     'StateManager',
     'NextStepModal',
+    'DeleteService',
     '$scope',
+    '$state',
     '$stateParams',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, NextStepModal, $scope, $stateParams){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, NextStepModal, DeleteService, $scope, $state, $stateParams){
         var self = this;
         var id = $stateParams.id;
         MasterDetailService.setMaster(this);
@@ -142,6 +144,12 @@ app.controller('AcceptanceDetailCtrl', [
                     forId: id
                 };
             }
+        };
+
+        this.deleteAcceptance = function () {
+            DeleteService('acceptance', id).then(function () {
+                $state.go('app.projectDetail', {id: self.acceptance.project.id});
+            });
         };
 
 
