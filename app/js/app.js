@@ -104,7 +104,7 @@ app.constant('sites', [
                  * which will be used to get the login state at any other point
                  * @return {Object}
                  */
-                auth: function(AuthService, $rootScope, $q){
+                auth: function(AuthService, LocalStorage, $rootScope, $q){
                     console.log('authentification');
                     var deferred = $q.defer();
 
@@ -112,6 +112,7 @@ app.constant('sites', [
                         AuthService.currentUser(true).then(function (data) {
                             $rootScope.loggedIn = true;
                             $rootScope.currentUserName = data.username;
+                            LocalStorage.setKey(data.fe_key);
                             deferred.resolve($rootScope.loggedIn);
                         });
                     } else {
