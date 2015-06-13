@@ -53,6 +53,8 @@ app.factory('NextStepModal', [
                     return [todo,acceptance,invoice];
                 case 'todo':
                     return [acceptance,invoice];
+                case 'acceptance':
+                    return [invoice];
                 case 'invoice':
                     return [reminder];
                 default :
@@ -73,6 +75,7 @@ app.factory('NextStepModal', [
                             return '['+ $filter('translate')(name) +'] ';
                         };
                         var prefix = getPrefix(this.selected.name);
+                        console.log(object);
                         this.name = prefix + object.name;
                         if(this.selected.api != 'todo'){
                             RefnumberService(this.selected.api+'s',object.project.id).then(function (data) {

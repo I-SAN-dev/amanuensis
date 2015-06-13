@@ -9,8 +9,14 @@ app.controller('AcceptanceDetailCtrl', [
     'MasterDetailService',
     'ItemService',
     'PdfService',
+    'MailService',
+    'StateManager',
+    'NextStepModal',
+    'DeleteService',
+    '$scope',
+    '$state',
     '$stateParams',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, $stateParams){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, NextStepModal, DeleteService, $scope, $state, $stateParams){
         var self = this;
         var id = $stateParams.id;
         MasterDetailService.setMaster(this);
@@ -19,6 +25,10 @@ app.controller('AcceptanceDetailCtrl', [
          * @type {Object}
          */
         this.acceptance = LocalStorage.getData('acceptance/'+id);
+
+        /*
+        Load the acceptance from the API
+         */
         var getAcceptance = function()
         {
             ApiAbstractionLayer('GET',{name:'acceptance',params: {id:id}}).then(function (data) {
@@ -28,6 +38,14 @@ app.controller('AcceptanceDetailCtrl', [
         };
         getAcceptance();
 
+        /*
+        Change the acceptance's state
+         */
+        var changeState = function(toState){
+            StateManager.setState('acceptance', id, toState).then(function (data) {
+                self.acceptance = data;
+            });
+        };
 
         /**
          * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
@@ -44,6 +62,43 @@ app.controller('AcceptanceDetailCtrl', [
                     LocalStorage.setData('acceptance/'+id,self.acceptance);
                 }
             });
+        };
+
+        /**
+         * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current offer.
+         * @param {Event} event The event (click) that led to the function call
+         */
+        this.openMailPreview = function (event) {
+            event.preventDefault();
+            $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+            MailService.showPreview('acceptance',self.acceptance.id, $scope.mailtext);
+        };
+
+        /**
+         * Uses the {@link ama.services.MailService MailService} to send a mail with the current offer.
+         * Changes the state of the offer to 2 (PDF sent) on success.
+         */
+        this.send = function () {
+            $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+            MailService.send('acceptance',self.acceptance.id, $scope.mailtext).then(function (data) {
+                changeState(2);
+            });
+        };
+
+        /**
+         * Changes the state of the acceptance to -1 (client declined)
+         */
+        this.decline = function(){
+            changeState(-1);
+        };
+
+        /**
+         * Changes the acceptance's state to 3 (client accepted)
+         * Opens a {@link ama.services.NextStepModal NextStepModal}.
+         */
+        this.accept = function () {
+            changeState(3);
+            NextStepModal('acceptance',self.acceptance);
         };
 
         /**
@@ -89,6 +144,15 @@ app.controller('AcceptanceDetailCtrl', [
                     forId: id
                 };
             }
+        };
+
+        /**
+         * Deletes the current acceptance via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteAcceptance = function () {
+            DeleteService('acceptance', id).then(function () {
+                $state.go('app.projectDetail', {id: self.acceptance.project.id});
+            });
         };
 
 

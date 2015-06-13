@@ -8,10 +8,12 @@ app.controller('ContractDetailCtrl', [
     'MasterDetailService',
     'PdfService',
     'ItemService',
+    'DeleteService',
+    '$state',
     '$stateParams',
     '$sce',
     "constants",
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, $stateParams, $sce, constants){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, DeleteService, $state, $stateParams, $sce, constants){
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
@@ -26,7 +28,7 @@ app.controller('ContractDetailCtrl', [
          * @type {Object}
          */
         this.contract = LocalStorage.getData(type+'/'+id);
-        getContract = function()
+        var getContract = function()
         {
             ApiAbstractionLayer('GET',{name:type,params: {id:id}}).then(function (data) {
                 LocalStorage.setData(type+'/'+id, data);
@@ -101,4 +103,14 @@ app.controller('ContractDetailCtrl', [
             }
         };
 
-    }]);
+        /**
+         * Deletes the current contract via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteContract = function () {
+            DeleteService(type, id).then(function () {
+                $state.go('app.projectDetail', {id: self.contract.project.id});
+            });
+        };
+
+    }
+]);

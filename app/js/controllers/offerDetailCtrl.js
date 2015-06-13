@@ -13,10 +13,11 @@ app.controller('OfferDetailCtrl', [
         'StateManager',
         'NextStepModal',
         'ItemService',
+        '$state',
         '$stateParams',
         '$scope',
         '$q',
-        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, ItemService, $stateParams, $scope, $q) {
+        function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PdfService, MailService, StateManager, NextStepModal, ItemService, $state, $stateParams, $scope, $q) {
             var id = $stateParams.id;
             MasterDetailService.setMaster(this);
             var self = this;
@@ -202,7 +203,16 @@ app.controller('OfferDetailCtrl', [
             {
                 ItemService.removeItemFromDocument(item, 'offer');
                 getOffer();
-            }
+            };
+
+            /**
+             * Deletes the current offer via {@link ama.services.DeleteService DeleteService}
+             */
+            this.deleteOffer = function () {
+                DeleteService('offer', id).then(function () {
+                    $state.go('app.projectDetail', {id: self.offer.project.id});
+                });
+            };
         }
     ]
 );

@@ -8,9 +8,10 @@
 app.factory('ItemContainerService',[
     'ApiAbstractionLayer',
     'LocalStorage',
+    'DeleteService',
     '$filter',
     '$q',
-    function (ApiAbstractionLayer, LocalStorage,$filter, $q) {
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, $q) {
         var containerMap = {
             offer: 'offers',
             contract: 'contracts',
@@ -52,7 +53,7 @@ app.factory('ItemContainerService',[
                 return defer.promise;
             },
             /**
-             * Updates the {@link ama.services.LocalStorage local strage} entry of an given item container
+             * Updates the {@link ama.services.LocalStorage local storage} entry of an given item container
              * @param {string} type The type of the given item container (offer/contract/acceptance/invoice/reminder)
              * @param {int|string} projectId The ID of the current project
              * @param {object} container The container to update the entry for
@@ -60,8 +61,6 @@ app.factory('ItemContainerService',[
             updateLocalStorage: function (type, projectId, container) {
                 updateLocalStorage(type, projectId, container);
             }
-
-
         }
     }
 
