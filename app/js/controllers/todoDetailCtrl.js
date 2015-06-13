@@ -9,8 +9,10 @@ app.controller('TodoDetailCtrl', [
     'MasterDetailService',
     'PanelService',
     'ItemService',
+    'DeleteService',
+    '$state',
     '$stateParams',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, $stateParams) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, DeleteService, $state, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
         PanelService.setPanel('items',2);
@@ -84,6 +86,15 @@ app.controller('TodoDetailCtrl', [
         {
             ItemService.removeItemFromDocument(item, 'todo');
             getTodo();
+        };
+
+        /**
+         * Deletes the current todolist via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteTodo = function () {
+            DeleteService('todo', id).then(function () {
+                $state.go('app.projectDetail', {id: self.todo.project.id});
+            });
         };
     }
 ]);

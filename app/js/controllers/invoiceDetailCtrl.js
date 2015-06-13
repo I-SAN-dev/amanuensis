@@ -11,9 +11,10 @@ app.controller('InvoiceDetailCtrl', [
     'DeleteService',
     'ItemService',
     'StateManager',
+    '$state',
     '$stateParams',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, StateManager, $stateParams, $scope) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, StateManager, $state, $stateParams, $scope) {
 
         MasterDetailService.setMaster(this);
         var self = this;
@@ -154,6 +155,15 @@ app.controller('InvoiceDetailCtrl', [
         {
             ItemService.removeItemFromDocument(item, 'invoice');
             getInvoice();
+        };
+
+        /**
+         * Deletes the current invoice via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteInvoice = function () {
+            DeleteService('invoice', id).then(function () {
+                $state.go('app.projectDetail', {id: self.invoice.project.id});
+            });
         };
     }
 ]);

@@ -146,6 +146,9 @@ app.controller('AcceptanceDetailCtrl', [
             }
         };
 
+        /**
+         * Deletes the current acceptance via {@link ama.services.DeleteService DeleteService}
+         */
         this.deleteAcceptance = function () {
             DeleteService('acceptance', id).then(function () {
                 $state.go('app.projectDetail', {id: self.acceptance.project.id});
