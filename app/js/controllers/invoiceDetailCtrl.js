@@ -136,8 +136,12 @@ app.controller('InvoiceDetailCtrl', [
         };
 
 
-        this.accept = function () {
-            StateManager.setState('invoice',id,3).then(function(data){
+        /**
+         * Changes the state of the invoice.
+         * @param {integer|String} state The state to be set.
+         */
+        this.changeState = function (state) {
+            StateManager.setState('invoice',id,state).then(function(data){
                 self.invoice = data;
             });
         };

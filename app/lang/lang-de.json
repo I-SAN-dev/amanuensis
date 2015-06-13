@@ -211,6 +211,7 @@
     "send": "Rechnung senden",
     "sent": "Rechnung verschickt",
     "accept": "Ist bezahlt!",
+    "notPaid": "Doch nicht bezahlt",
     "decline": "Zahlungserinnerung",
     "createReminder": "Mahnung erstellen",
     "wasPaid": "Rechnung wurde bezahlt",
