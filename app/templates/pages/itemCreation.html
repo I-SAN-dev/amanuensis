@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-sm-6">
 
-                                    <div class="row detail-block">
+                                    <div class="row">
                                         <div class="col-sm-2 col-md-1">
                                             <div class="sidelabel"><i class="md md-attach-money"></i></div>
                                         </div>
@@ -209,31 +209,55 @@
 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
+                            <div data-ng-if="create.itemFromProject">
+                                <div class="row">
+                                    <div class="col-sm-6">
 
+                                        <div data-ng-if="create.itemFromProject">
+                                            <h2>{{create.itemFromProject.name}}</h2>
+                                            <div data-ng-bind-html="create.itemFromProject.description"></div>
+                                        </div>
 
-                                    <div data-ng-if="create.itemFromProject">
-                                        <h2>{{create.itemFromProject.name}}</h2>
-                                        <div>{{create.itemFromProject.description}}</div>
+                                    </div>
+                                    <div class="col-sm-6">
                                         <h3>{{'items.pricing'|translate}}</h3>
 
-                                        <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.hourlyrate|price}} ({{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}})</p>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-1">
+                                                <div class="sidelabel"><i class="md md-attach-money"></i></div>
+                                            </div>
+                                            <div class="col-sm-10 col-md-11">
 
-                                        <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.dailyrate|price}} ({{create.itemFromProject.dailyrates}} {{'items.days'|translate}})</p>
+                                                <div class="listinfo-row" data-ng-if="create.itemFromProject.userate == 1">
+                                                    {{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}} à {{create.itemFromProject.hourlyrate|price}}
+                                                            <br />
+                                                            <span class="less-important">{{'items.hourlyRate'|translate}}</span>
+                                                </div>
+                                                <div class="listinfo-row" data-ng-if="create.itemFromProject.userate == 2">
+                                                    {{create.itemFromProject.dailyrates}} {{'items.days'|translate}} à {{create.itemFromProject.dailyrate|price}}
+                                                    <br />
+                                                    <span class="less-important">{{'items.dailyRate'|translate}}</span>
+                                                </div>
+                                                <div class="listinfo-row" data-ng-if="create.itemFromProject.userate != 1 && create.itemFromProject.userate != 2">
+                                                    {{create.itemFromProject.fixedrate|price}}
+                                                    <br />
+                                                    <span class="less-important">{{'items.fixedRate'|translate}}</span>
+                                                </div>
+                                                <div class="listinfo-row">
+                                                    {{create.itemFromProject.total|price}}
+                                                    <br />
+                                                    <span class="less-important">{{'items.totalPrice'|translate}}</span>
+                                                </div>
 
-                                        <p>{{'items.fixedRate'|translate}}: {{create.itemFromProject.fixedrate|price}}</p>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-                                    <p>{{create.itemFromProject}}</p>
-
-                                    <button class="btn btn-success" data-ng-if="create.itemFromProject" type="submit">{{'items.importItem'|translate}}</button>
-                                    <button class="btn btn-success disabled" disabled data-ng-if="!create.itemFromProject">{{'items.importItem'|translate}}</button>
-
                                 </div>
-                                <div class="col-sm-6">
-
-                                </div>
+                                <button class="btn btn-success pull-right margin-top margin-bottom"  type="submit">{{'items.importItem'|translate}}</button>
                             </div>
+
                         </form>
                     </div>
 
