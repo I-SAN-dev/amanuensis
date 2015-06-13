@@ -68,6 +68,22 @@ app.controller('ContractDetailCtrl', [
             ItemService.moveItem(item, 'contract', self.contract.id, self.contract.project.contracts);
         };
 
-
+        /**
+         * Generates a stateParams object from the current stateParams for a certain state
+         * @param {string} forState The state for which the stateParams should be generated
+         * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+         */
+        this.getStateParams = function(forState){
+            if(forState == 'itemCreation'){
+                return {
+                    referrer: 'app.contractDetail',
+                    referrerParams: {
+                        id: id
+                    },
+                    for: 'contract',
+                    forId: id
+                };
+            }
+        };
 
     }]);
