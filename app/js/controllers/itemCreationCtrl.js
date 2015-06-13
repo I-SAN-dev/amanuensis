@@ -19,6 +19,7 @@ app.controller('ItemCreationCtrl', [
         var self = this;
 
         var presets = LocalStorage.getData('itemPresets')|| [];
+
         /**
          * Array containing all available item presets
          * @type {Array}

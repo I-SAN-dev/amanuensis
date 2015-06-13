@@ -301,6 +301,9 @@
   },
 
   "items": {
+    "add":"Anlegen",
+    "import":"Importieren",
+    "new":"Neuer Posten",
     "expectedRate": "Veranschlagter Preis",
     "fixedRate": "Fixpreis",
     "hourlyRates":"Anzahl Stunden",
@@ -328,8 +331,14 @@
     "totaltimeAsHourlyRates": "Für Postenkalkulation übernehmen",
     "moveItem": "verschieben...",
     "removeItem": "aus Dokument entfernen",
-    "thisitem":"Diesen Posten"
+    "thisitem":"Diesen Posten",
+    "fromPreset":"Baustein importieren",
+    "fromProject":"Posten aus Projekt importieren",
+    "name":"Name",
+    "addItem":"Posten erstellen",
+    "importItem":"Posten importieren"
   },
+
   "offers": {
     "state": "Angebotsstatus",
     "createOffer": "Angebot erstellen",
