@@ -127,7 +127,8 @@
       "new":"Neues Projekt erstellen",
       "delete":"Projekt löschen",
       "archive": "Projektarchiv",
-      "archiveProject": "Projekt archivieren"
+      "archiveProject": "Projekt archivieren",
+      "unarchiveProject": "Projekt reaktivieren"
     },
     "states": {
       "created": "Projekt erstellt",

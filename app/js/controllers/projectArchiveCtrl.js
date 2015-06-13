@@ -7,9 +7,10 @@ app.controller('ProjectArchiveCtrl', [
     'LocalStorage',
     'MasterDetailService',
     'DeleteService',
+    'StateManager',
     '$scope',
     '$state',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, $scope, $state){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, StateManager, $scope, $state){
         var self = this;
         MasterDetailService.setMaster(this);
         var apiObject = {
@@ -72,4 +73,14 @@ app.controller('ProjectArchiveCtrl', [
             });
 
         };
+
+        /**
+         * Uses {@link ama.services.StateManager the stateManager} to resend the given archived project back to the list of current projects
+         * @param id The id of the project to be unarchived
+         */
+        this.unarchiveProject = function (id) {
+            StateManager.setState('project',id,0).then(function (data) {
+                $state.go('app.projectDetail',{id:data.id});
+            });
+        }
 }]);
