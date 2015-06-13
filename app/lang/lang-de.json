@@ -12,6 +12,8 @@
     "description":"Beschreibung",
     "date":"Datum",
     "ok": "OK",
+    "yes": "Ja",
+    "no": "Nein",
     "cancel": "Abbrechen",
     "delete": "Löschen",
     "sure": "Sicher?",
@@ -649,6 +651,27 @@
   "input": {
     "datetime": {
       "chooseTime": "Uhrzeit auswählen:"
+    }
+  },
+  "delete": {
+    "warning": "Bist du dir sicher?",
+    "message": "Achtung! Diese Aktion kann nicht rückgängig gemacht werden. Bist du sicher, dass du {{name}} löschen möchtest?",
+    "messages": {
+      "userdata": "diesen Benutzer",
+      "client": "diesen Kunden",
+      "client_categories":"diese Kundenkategorie",
+      "client_data": "diese Kontaktdaten",
+      "project":"dieses Projekt",
+      "offer": "dieses Angebot",
+      "contract": "diesen Vertrag",
+      "fileContract": "diesen Vertrag",
+      "todo": "diese ToDo-Liste",
+      "acceptance": "dieses Abnahmeformular",
+      "invoice": "diese Rechnung",
+      "reminder": "diese Zahlungserinnerung",
+      "item_preset": "diesen Baustein",
+      "item": "diesen Posten",
+      "time": "diese Zeiterfassung"
     }
   }
 }
