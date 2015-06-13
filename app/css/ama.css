@@ -10846,6 +10846,9 @@ h1, h2 {
 .margin-top-lg {
   margin-top: 30px; }
 
+.link-danger {
+  color: #F4511E !important; }
+
 .bg-primary {
   background-color: #404877;
   color: #fff; }
