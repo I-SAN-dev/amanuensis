@@ -1,0 +1,214 @@
+<div class="detail-view fullheight" data-ng-controller="ProjectDetailCtrl as project">
+    <div class="btn-toolbar">
+
+        <div class="row">
+            <div class="col-sm-5 col-md-6">
+                <span class="h3">{{project.project.name}} <i class="state-icon state-icon-inherit state-icon-{{project.project.state}}"></i></span>
+            </div>
+            <div class="col-sm-7 col-md-6">
+                <div class="btn-group btn-group-sm pull-right" data-ng-init="project.showPage = 1">
+                    <button class="btn btn-link" data-ng-click="project.showPage = 1" data-ng-class="{active: project.showPage==1}"><i class="md md-lg md-folder"></i> {{'projects.data' | translate}}</button>
+                    <button class="btn btn-link" data-ng-click="project.showPage = 2" data-ng-class="{active: project.showPage==2}"><i class="md md-lg md-attach-file"></i> {{'projects.documents' | translate}}</button>
+                </div>
+                <!--<div class="pull-right">
+
+                    <button data-ng-if="project.emptyProject" class="btn btn-danger btn-link btn-icon-round" data-ng-click="project.deleteProject()" title="{{'projects.actions.delete'|translate}}"><i class="md md-delete"></i></button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="detail-inner">
+        <div class="seamless fullheight">
+            <div class="slideanim2 fullheight" data-ng-class="{panel2: project.showPage==2}">
+                <div class="slideanim-item fullheight scroll-y">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row spaceafter">
+                                <div class="col-sm-2 col-md-1">
+                                    <i class="md md-lg md-attach-money"></i>
+                                </div>
+                                <div class="col-sm-10 col-md-11">
+                                    <div class="detail-value">
+                                        {{project.project.stats.paid|price}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-ng-if="project.project.description" class="row spaceafter">
+                                <div class="col-sm-2 col-md-1">
+                                    <i class="md md-lg md-comment"></i>
+                                </div>
+                                <div class="col-sm-10 col-md-11">
+                                    <div class="detail-value">
+                                        {{project.project.description}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div data-client-box="project.project.client"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slideanim-item fullheight scroll-y">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-1">
+                                    <h3 class="sidelabel">
+                                        <i class="md md-assignment"></i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-11 col-md-11">
+                                    <div class="detail-block">
+                                        <h3>{{'projects.offers'|translate}}</h3>
+                                        <div class="listinfo-row listinfo-link" data-ng-repeat="offer in project.project.offers" data-ui-sref="app.offerDetail({id:{{offer.id}}})">
+                                            <div class="row">
+                                                <div class="col-fixedwidth-46">
+                                                    <i class="icon-docstate icon-docstate-{{offer.state}}"></i>
+                                                </div>
+                                                <div class="col-beneath-fixedwidth-46">
+                                                    {{offer.name}}<br />
+                                                    <span class="secondary">{{offer.refnumber}}</span><span class="less-important"> – {{offer.state|amaStates:'offer'|translate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-1">
+                                    <h3 class="sidelabel">
+                                        <i class="md md-description"></i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-11 col-md-11">
+                                    <div class="detail-block">
+                                        <h3>{{'projects.contracts'|translate}}</h3>
+                                        <div class="listinfo-row listinfo-link"
+                                             data-ng-repeat="contract in project.contracts" data-ui-sref="app.contractDetail({id:contract.id,type:contract.type})">
+                                            <div class="row">
+                                                <div class="col-fixedwidth-46">
+                                                    <i class="icon-docstate icon-docstate-{{contract.type}}"></i>
+                                                </div>
+                                                <div class="col-beneath-fixedwidth-46">
+                                                    {{contract.name}}<br />
+                                                    <span class="secondary">{{contract.refnumber}}</span>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-1">
+                                    <h3 class="sidelabel">
+                                        <i class="md md-list"></i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-11 col-md-11">
+                                    <div class="detail-block">
+                                        <h3>{{'projects.todos'|translate}}</h3>
+                                        <div class="listinfo-row listinfo-link"
+                                             data-ng-repeat="todo in project.project.todos" data-ui-sref="app.todoDetail({id:{{todo.id}}})">
+                                            <div class="row">
+                                                <div class="col-fixedwidth-46">
+                                                    <i data-ng-if="todo.items_done == todo.items_total" class="icon-docstate icon-docstate-tododone"></i>
+                                                    <i data-ng-if="todo.items_done < todo.items_total && !project.checkOverdue(todo.due)" class="icon-docstate icon-docstate-todo"></i>
+                                                    <i data-ng-if="todo.items_done < todo.items_total && project.checkOverdue(todo.due)" class="icon-docstate icon-docstate-todooverdue"></i>
+                                                </div>
+                                                <div class="col-beneath-fixedwidth-46">
+                                                    {{todo.name}}<br />
+                                                    <span class="secondary">{{todo.due|amaDate:'dd.MM.yyyy'}}</span><span class="less-important"> – {{todo.items_done}}/{{todo.items_total}}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-1">
+                                    <h3 class="sidelabel">
+                                        <i class="md md-assignment-turned-in"></i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-11 col-md-11">
+                                    <div class="detail-block">
+                                        <h3>{{'projects.acceptances'|translate}}</h3>
+                                        <div class="listinfo-row listinfo-link" data-ng-repeat="acceptance in project.project.acceptances" data-ui-sref="app.acceptanceDetail({id:{{acceptance.id}}})">
+                                            <div class="row">
+                                                <div class="col-fixedwidth-46">
+                                                    <i class="icon-docstate icon-docstate-{{acceptance.state}}"></i>
+                                                </div>
+                                                <div class="col-beneath-fixedwidth-46">
+                                                    {{acceptance.name}}<br />
+                                                    <span class="secondary">{{acceptance.refnumber}}</span><span class="less-important"> – {{acceptance.state|amaStates:'acceptance'|translate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-1 col-md-05">
+                                    <h3 class="sidelabel">
+                                        <i class="md md-attach-money"></i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-11 col-md-115">
+                                    <div class="detail-block">
+                                        <h3>{{'projects.invoices'|translate}}</h3>
+                                        <div class="listinfo-row listinfo-link-inside"
+                                             data-ng-repeat="invoice in project.project.invoices">
+                                            <div class="listinfo-link" data-ui-sref="app.invoiceDetail({id:{{invoice.id}}})">
+                                                <div class="row">
+                                                    <div class="col-fixedwidth-46">
+                                                        <i class="icon-docstate icon-docstate-{{invoice.state}}"></i>
+                                                    </div>
+                                                    <div class="col-beneath-fixedwidth-46">
+                                                        {{invoice.name}}<br />
+                                                        <span class="secondary">{{invoice.refnumber}}</span><span class="less-important"> – {{invoice.state|amaStates:'invoice'|translate}}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="listinfo-row listinfo-link"
+                                                 data-ng-repeat="reminder in invoice.reminders" data-ui-sref="app.reminderDetail({id:{{reminder.id}}})">
+                                                <div class="row">
+                                                    <div class="col-fixedwidth-46">
+                                                        <i class="icon-docstate icon-docstate-{{reminder.state}} icon-docstate-reminder"></i>
+                                                    </div>
+                                                    <div class="col-beneath-fixedwidth-46">
+                                                        {{reminder.name}}<br />
+                                                        <span class="secondary">{{reminder.refnumber}}</span><span class="less-important"> – {{reminder.state|amaStates:'reminder'|translate}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

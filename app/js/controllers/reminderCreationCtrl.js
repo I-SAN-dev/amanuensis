@@ -2,30 +2,40 @@ app.controller('ReminderCreationCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'RefnumberService',
+    'ErrorDialog',
     '$stateParams',
     '$state',
     '$filter',
-    function (ApiAbstractionLayer, LocalStorage, RefnumberService, $stateParams, $state, $filter) {
-        var invoiceId = $stateParams.invoice;
-        var projectId = $stateParams.project;
+    function (ApiAbstractionLayer, LocalStorage, RefnumberService, ErrorDialog, $stateParams, $state, $filter) {
         var self = this;
-        RefnumberService('reminders', projectId).then(function (data) {
-            self.newReminder = {
-                invoice: invoiceId,
-                refnumber: data.refnumber
-            };
-        });
+        if(!$stateParams.invoice){
+            ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
+            $state.go('app.dashboard');
+        } else {
+            var invoice = $stateParams.invoice;
+            var invoiceId = invoice.id;
+            var projectId = invoice.project.id;
+            self.invoiceName = invoice.name;
+            RefnumberService('reminders', projectId).then(function (data) {
+                self.newReminder = {
+                    invoice: invoiceId,
+                    refnumber: data.refnumber
+                };
+            });
+        }
+
+
 
         this.createReminder = function ()
         {
             var date = new Date;
             self.newReminder.date = $filter('date')(date,'yyyy-MM-dd HH:mm:ss');
             ApiAbstractionLayer('POST', {name: 'reminder', data:self.newReminder}).then(function (data) {
-                var invoice = LocalStorage.getData('invoice/'+invoiceId)||{reminders:[data]};
-                LocalStorage.setData('invoice/'+invoiceId, self.invoice);
+                invoice.reminders.push(data);
+                LocalStorage.setData('invoice/'+invoiceId, invoice);
                 LocalStorage.setData('invoice/'+invoiceId+'reminder/'+data.id, data);
                 $state.go('app.reminderDetail',{id: data.id});
-            })
+            });
         };
     }
 ]);

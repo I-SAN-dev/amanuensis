@@ -316,7 +316,7 @@ app.constant('sites', [
             abstract: true,
             views: {
                 'appContent': {
-                    templateUrl: 'templates/pages/projects.html'
+                    templateUrl: 'templates/pages/projectArchive.html'
                 }
             },
             params: {
@@ -404,11 +404,14 @@ app.constant('sites', [
     {
         name:'app.reminderCreation',
         stateObject: {
-            url: '/new-reminder/:project/:invoice',
+            url: '/new-reminder',
             views: {
                 'appContent': {
                     templateUrl: 'templates/pages/reminderCreation.html'
                 }
+            },
+            params: {
+                invoice: null
             }
         }
     },

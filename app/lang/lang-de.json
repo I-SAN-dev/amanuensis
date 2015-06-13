@@ -120,12 +120,15 @@
     "newAcceptance": "Neues Abnahmeformular anlegen",
     "newInvoice": "Neue Rechnung erstellen",
     "newTodo": "Neue ToDo Liste erstellen",
+    "data": "Projektdaten",
+    "documents": "Dokumente",
     "actions":
     {
       "new":"Neues Projekt erstellen",
       "delete":"Projekt löschen",
       "archive": "Projektarchiv",
-      "archiveProject": "Projekt archivieren"
+      "archiveProject": "Projekt archivieren",
+      "unarchiveProject": "Projekt reaktivieren"
     },
     "states": {
       "created": "Projekt erstellt",

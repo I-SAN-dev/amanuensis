@@ -93,7 +93,7 @@ class Scripts
         "js/controllers/clientDetailCtrl.js",
         "js/controllers/clientCategoriesCtrl.js",
         "js/controllers/clientCreationCtrl.js",
-        "js/controllers/projectsCtrl.js",
+        "js/controllers/projectArchiveCtrl.js",
         "js/controllers/projectDetailCtrl.js",
         "js/controllers/projectCreationCtrl.js",
         "js/controllers/accDetailCtrl.js",

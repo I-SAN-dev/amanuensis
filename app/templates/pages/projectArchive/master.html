@@ -22,12 +22,15 @@
 
     <div class="list-under-filter">
         <div data-list-navigation="setDetail" data-filter-text="MasterDetailCtrl.filterText" data-active="MasterDetailCtrl.detail" data-list="masterList" class="list-group max-fullheight scroll-y masterlist">
-            <a class="list-group-item" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText"
-               data-ng-class="{active:MasterDetailCtrl.detail.id == project.id,'ng-trans ng-trans-scale-up':masterLoaded}"
-               data-ng-click="setDetail(project)">
-                <h3>{{project.companyname}}</h3>
-                <h2>{{project.name}}</h2>
-            </a>
+            <div class="position-relative" data-ng-repeat="project in masterList | filter:MasterDetailCtrl.filterText">
+                <a class="list-group-item"
+                   data-ng-class="{active:MasterDetailCtrl.detail.id == project.id,'ng-trans ng-trans-scale-up':masterLoaded}"
+                   data-ng-click="setDetail(project)">
+                    <h3>{{project.companyname}}</h3>
+                    <h2>{{project.name}}</h2>
+                </a>
+                <button class="btn btn-warning btn-link btn-icon-round btn-on-list" title="{{'projects.actions.unarchiveProject' | translate}}" data-ng-click="MasterDetailCtrl.notifyMaster('unarchiveProject',project.id);"><i class="md md-undo"></i></button>
+            </div>
         </div>
     </div>
 </div>
