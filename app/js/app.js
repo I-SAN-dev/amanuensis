@@ -316,7 +316,7 @@ app.constant('sites', [
             abstract: true,
             views: {
                 'appContent': {
-                    templateUrl: 'templates/pages/projects.html'
+                    templateUrl: 'templates/pages/projectArchive.html'
                 }
             },
             params: {
