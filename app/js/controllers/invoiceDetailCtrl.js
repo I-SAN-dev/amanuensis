@@ -145,5 +145,15 @@ app.controller('InvoiceDetailCtrl', [
                 self.invoice = data;
             });
         };
+
+        /**
+         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, 'invoice');
+            getInvoice();
+        };
     }
 ]);

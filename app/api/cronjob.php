@@ -377,7 +377,23 @@ Gehe jetzt zu <a href="'.$conf->get['baseurl'].'">amanu</a>
     $mail->send();
 }
 
+/*
+ * clean up the database
+ */
 
+/* stream */
+$stream->cleanUpOld();
+
+/* unused items */
+$x = $dbal->prepare('
+       DELETE FROM items
+       WHERE offer IS NULL
+       AND contract IS NULL
+       AND todo IS NULL
+       AND acceptance IS NULL
+       AND invoice IS NULL
+');
+$x->execute();
 
 /* echo execution time */
 echo('Processed in '.(microtime(true) - $start).' seconds!');

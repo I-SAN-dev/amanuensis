@@ -43,11 +43,11 @@ final class AmaStream {
     }
 
     /**
-     * Constructor will trigger the cleanup
+     * Constructor will do nothing
      */
     private function __construct()
     {
-        $this->cleanUpOld();
+
     }
 
     /**
@@ -202,7 +202,7 @@ final class AmaStream {
     /**
      * Deletes old stream entries, older than 90 days
      */
-    private function cleanUpOld()
+    public function cleanUpOld()
     {
         $dbal = DBAL::getInstance();
         $q = $dbal->prepare('

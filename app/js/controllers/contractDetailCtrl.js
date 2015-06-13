@@ -26,14 +26,19 @@ app.controller('ContractDetailCtrl', [
          * @type {Object}
          */
         this.contract = LocalStorage.getData(type+'/'+id);
-        ApiAbstractionLayer('GET',{name:type,params: {id:id}}).then(function (data) {
-            LocalStorage.setData(type+'/'+id, data);
-            self.contract = data;
-            if(self.isFileContract){
-                self.fileName = data.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use filename instead of refnumber */
-                self.iframeSrc = $sce.trustAsResourceUrl(constants.URL+'/api/?action=protectedpdf&path='+data.path);
-            }
-        });
+        getContract = function()
+        {
+            ApiAbstractionLayer('GET',{name:type,params: {id:id}}).then(function (data) {
+                LocalStorage.setData(type+'/'+id, data);
+                self.contract = data;
+                if(self.isFileContract){
+                    self.fileName = data.path.replace(/\\/g,'/').replace( /.*\//, '' ); /* Use filename instead of refnumber */
+                    self.iframeSrc = $sce.trustAsResourceUrl(constants.URL+'/api/?action=protectedpdf&path='+data.path);
+                }
+            });
+        };
+        getContract();
+
 
         /**
          * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
@@ -66,6 +71,16 @@ app.controller('ContractDetailCtrl', [
          */
         this.moveItem = function (item) {
             ItemService.moveItem(item, 'contract', self.contract.id, self.contract.project.contracts);
+        };
+
+        /**
+         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, 'contract');
+            getContract();
         };
 
         /**
