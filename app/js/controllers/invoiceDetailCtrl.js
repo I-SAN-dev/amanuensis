@@ -10,9 +10,10 @@ app.controller('InvoiceDetailCtrl', [
     'PdfService',
     'DeleteService',
     'ItemService',
+    'StateManager',
     '$stateParams',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, $stateParams, $scope) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, StateManager, $stateParams, $scope) {
 
         MasterDetailService.setMaster(this);
         var self = this;
@@ -132,6 +133,17 @@ app.controller('InvoiceDetailCtrl', [
          */
         this.moveItem = function (item) {
             ItemService.moveItem(item, 'invoice', self.invoice.id, self.invoice.project.invoices);
+        };
+
+
+        /**
+         * Changes the state of the invoice.
+         * @param {integer|String} state The state to be set.
+         */
+        this.changeState = function (state) {
+            StateManager.setState('invoice',id,state).then(function(data){
+                self.invoice = data;
+            });
         };
 
         /**
