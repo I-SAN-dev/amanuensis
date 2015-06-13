@@ -10,21 +10,17 @@ app.controller('ProjectArchiveCtrl', [
     'StateManager',
     '$scope',
     '$state',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, StateManager, $scope, $state){
+    '$stateParams',
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, StateManager, $scope, $state, $stateParams){
         var self = this;
         MasterDetailService.setMaster(this);
         var apiObject = {
             name: 'project',
-            params: {}
+            params: {
+                archive: 1
+            }
         };
-        var lsIdentifier = 'projects';
-        if($state.current.name == 'app.projects.detail'){
-            apiObject.params.current = 1;
-        }
-        if($state.current.name == 'app.projectArchive.detail'){
-            apiObject.params.archive = 1;
-            lsIdentifier = 'projectArchive';
-        }
+        var lsIdentifier = 'projectArchive';
 
 
         /**
@@ -50,6 +46,10 @@ app.controller('ProjectArchiveCtrl', [
         setProjectList(LocalStorage.getData(lsIdentifier)|| []);
         ApiAbstractionLayer('GET',apiObject).then(function (data) {
             setProjectList(data.list);
+            if (!$stateParams.id && self.projects.length > 0) {
+                MasterDetailService.notifyController('setDetail', self.projects[0]);
+                $stateParams.id = self.projects[0].id;
+            }
         });
 
         // (re)set a flag indicating if the Controller was fully loaded
