@@ -225,32 +225,75 @@
 
             <div class="slideanim-item fullheight scroll-y">
 
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3>{{'items.alsoIn'|translate}}</h3>
-                        <ul data-ng-if="item.isConnected">
-                            <li data-ng-if="item.connections.offer.id">
-                                <a data-ui-sref="app.offerDetail({id:item.connections.offer.id})">{{item.connections.offer.name}}</a>
-                            </li>
-                            <li data-ng-if="item.connections.contract.id">
-                                <a data-ui-sref="app.contractDetail({id:item.connections.contract.id})">{{item.connections.contract.name}}</a>
-                            </li>
-                            <li data-ng-if="item.connections.todo.id">
-                                <a data-ui-sref="app.todoDetail({id:item.connections.todo.id})">{{item.connections.todo.name}}</a>
-                            </li>
-                            <li data-ng-if="item.connections.acceptance.id">
-                                <a data-ui-sref="app.contractDetail({id:item.connections.acceptance.id})">{{item.connections.acceptance.name}}</a>
-                            </li>
-                            <li data-ng-if="item.connections.invoice.id">
-                                <a data-ui-sref="app.invoiceDetail({id:item.connections.invoice.id})">{{item.connections.invoice.name}}</a>
-                            </li>
-                        </ul>
-                        <p data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
+                <h2>{{'items.alsoIn'|translate}}</h2>
+                <div data-ng-if="item.isConnected">
+                    <div data-ng-if="item.connections.offer.id" class="listinfo-row listinfo-link" data-ui-sref="app.offerDetail({id:item.connections.offer.id})">
+                        <div class="row">
+                            <div class="col-fixedwidth-46">
+                                <i class="icon-docstate icon-docstate-{{item.connections.offer.state}}"></i>
+                            </div>
+                            <div class="col-beneath-fixedwidth-46">
+                                {{item.connections.offer.name}}<br/>
+                                <span class="less-important">{{'offer.name'|translate}} - {{item.connections.offer.refnumber}}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <button class="btn btn-block btn-success" data-ng-click="item.moveItem()"><i class="md md-lg md-forward"></i> {{'items.moveItem'|translate}}</button>
+                    <div data-ng-if="item.connections.contract.id" class="listinfo-row listinfo-link" data-ui-sref="app.contractDetail({id:item.connections.contract.id})">
+                        <div class="row">
+                            <div class="col-fixedwidth-46">
+                                <i class="icon-docstate icon-docstate-contract"></i>
+                            </div>
+                            <div class="col-beneath-fixedwidth-46">
+                                {{item.connections.contract.name}}<br/>
+                                <span class="less-important">{{'contract.name'|translate}} - {{item.connections.contract.refnumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-ng-if="item.connections.todo.id" class="listinfo-row listinfo-link" data-ui-sref="app.todoDetail({id:item.connections.todo.id})">
+                        <div class="row">
+                            <div class="col-fixedwidth-46">
+                                <i class="icon-docstate icon-docstate-{{item.connections.todo.state}} icon-todostate"></i>
+                            </div>
+                            <div class="col-beneath-fixedwidth-46">
+                                {{item.connections.todo.name}}<br/>
+                                <span class="less-important">{{'todo.name'|translate}}<span data-ng-if="item.conenctions.todo.due"> - {{item.connections.todo.due|amaDate:'dd.MM.yyyy'}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-ng-if="item.connections.acceptance.id" class="listinfo-row listinfo-link" data-ui-sref="app.contractDetail({id:item.connections.acceptance.id})">
+                        <div class="row">
+                            <div class="col-fixedwidth-46">
+                                <i class="icon-docstate icon-docstate-{{item.connections.acceptance.state}}"></i>
+                            </div>
+                            <div class="col-beneath-fixedwidth-46">
+                                {{item.connections.acceptance.name}}<br/>
+                                <span class="less-important">{{'acceptance.name'|translate}} - {{item.connections.acceptance.refnumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-ng-if="item.connections.invoice.id" class="listinfo-row listinfo-link" data-ui-sref="app.invoiceDetail({id:item.connections.invoice.id})">
+                        <div class="row">
+                            <div class="col-fixedwidth-46">
+                                <i class="icon-docstate icon-docstate-{{item.connections.invoice.state}}"></i>
+                            </div>
+                            <div class="col-beneath-fixedwidth-46">
+                                {{item.connections.invoice.name}}<br/>
+                                <span class="less-important">{{'invoice.name'|translate}} - {{item.connections.invoice.refnumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
+
+                <div class="row margin-top margin-bottom">
+                    <div class="col-sm-4">
                         <button class="btn btn-block btn-danger" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i> {{'items.deleteItem'|translate}}</button>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-block btn-success" data-ng-click="item.moveItem()"><i class="md md-lg md-forward"></i> {{'items.moveItem'|translate}}</button>
                     </div>
                 </div>
 

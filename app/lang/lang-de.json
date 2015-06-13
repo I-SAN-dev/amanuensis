@@ -224,6 +224,9 @@
   },
   "reminder": {
     "send": "Erinnerung senden",
+    "createReminder":"Zahlungserinnerung erstellen",
+    "refNumber":"Referenznummer",
+    "newReminderFor":"Neue Zahlungserinnerung für die Rechnung",
     "sent": "Erinnerung gesendet",
     "name": "Zahlungserinnerung",
     "description":"Beschreibung",

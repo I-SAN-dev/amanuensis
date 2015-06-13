@@ -366,7 +366,8 @@ $detail-toolbar-height: 64px;
       content: "\f168"; /* md-attach-file */
     }
   }
-  &.icon-docstate-todo
+  &.icon-docstate-todo,
+  &.icon-todostate.icon-docstate-0
   {
     background-color: $brand-warning;
     &:after
@@ -374,7 +375,8 @@ $detail-toolbar-height: 64px;
       content: "\f060"; /* md-settings */
     }
   }
-  &.icon-docstate-tododone
+  &.icon-docstate-tododone,
+  &.icon-todostate.icon-docstate-1
   {
     background-color: $brand-success;
     &:after
@@ -382,7 +384,8 @@ $detail-toolbar-height: 64px;
       content: "\f023"; /* md-done */
     }
   }
-  &.icon-docstate-todooverdue
+  &.icon-docstate-todooverdue,
+  &.icon-todostate.icon-docstate-2
   {
     background-color: $brand-danger;
     &:after
