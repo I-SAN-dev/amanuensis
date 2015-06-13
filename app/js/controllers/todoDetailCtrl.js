@@ -75,5 +75,15 @@ app.controller('TodoDetailCtrl', [
         this.moveItem = function (item) {
             ItemService.moveItem(item, 'todo', self.todo.id, self.todo.project.todos);
         };
+
+        /**
+         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, 'todo');
+            getTodo();
+        };
     }
 ]);

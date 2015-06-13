@@ -19,10 +19,15 @@ app.controller('AcceptanceDetailCtrl', [
          * @type {Object}
          */
         this.acceptance = LocalStorage.getData('acceptance/'+id);
-        ApiAbstractionLayer('GET',{name:'acceptance',params: {id:id}}).then(function (data) {
-            LocalStorage.setData('acceptance/'+id, data);
-            self.acceptance = data;
-        });
+        var getAcceptance = function()
+        {
+            ApiAbstractionLayer('GET',{name:'acceptance',params: {id:id}}).then(function (data) {
+                LocalStorage.setData('acceptance/'+id, data);
+                self.acceptance = data;
+            });
+        };
+        getAcceptance();
+
 
         /**
          * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
@@ -56,6 +61,16 @@ app.controller('AcceptanceDetailCtrl', [
          */
         this.moveItem = function (item) {
             ItemService.moveItem(item, 'acceptance', self.acceptance.id, self.acceptance.project.acceptances);
+        };
+
+        /**
+         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, 'acceptance');
+            getAcceptance();
         };
 
         /**
