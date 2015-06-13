@@ -51,6 +51,9 @@ app.directive('materialInput', [
                      * @param type - the type of the button that was clicked (can be one of 'save', 'cancel' or 'delete')
                      */
                     $scope.processWysiwyg = function (type) {
+                        var editor = $scope.editors;
+                        if($(editor[0]).summernote('isEmpty'))
+                            $scope.model = '';
                         if (type == 'save')
                             $scope.buttons[type][type]($scope.model);
                         else
