@@ -152,7 +152,7 @@ class item_connection {
 
         $query = '
             SELECT DISTINCT
-              items.id, items.name, items.fixedrate, items.hourlyrates, items.hourlyrate, items.dailyrates, items.dailyrate, items.userate, items.todo_done, items.global_order,
+              items.id, items.name, items.description, items.fixedrate, items.hourlyrates, items.hourlyrate, items.dailyrates, items.dailyrate, items.userate, items.todo_done, items.global_order,
               items.offer, items.contract, items.todo, items.acceptance, items.invoice
             FROM items
                   LEFT JOIN offers ON (items.offer = offers.id)
