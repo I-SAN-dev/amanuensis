@@ -11634,8 +11634,9 @@ a.list-group-item {
     .detail-view .btn-toolbar .btn-group button.btn.active,
     .btn-toolbar.inpanel-tabbar .btn-group button.btn.active {
       border-bottom: 2px solid #404877 !important; }
-  .detail-view .btn-toolbar h3,
-  .btn-toolbar.inpanel-tabbar h3 {
+  .detail-view .btn-toolbar h3, .detail-view .btn-toolbar .h3,
+  .btn-toolbar.inpanel-tabbar h3,
+  .btn-toolbar.inpanel-tabbar .h3 {
     color: #404877;
     padding: 20px 20px 0 20px;
     line-height: 23px;
@@ -11967,6 +11968,8 @@ a.list-group-item {
     content: "\f024";
     /* md-done-all */
     color: #009688; }
+  .state-icon.state-icon-inherit {
+    font-size: inherit; }
 
 .table-box {
   margin-bottom: 20px; }
@@ -12378,13 +12381,14 @@ strong.total {
   color: #404877; }
 .clientbox .listinfo-action-success i.md {
   color: #009688; }
-.clientbox .row.spaceafter {
-  margin-bottom: 15px; }
 .clientbox .listinfo-row {
   padding: 0 0 15px 0;
   margin-bottom: 15px; }
 .clientbox address {
   margin-bottom: 0; }
+
+.row.spaceafter {
+  margin-bottom: 15px; }
 
 .filebox {
   height: 225px;

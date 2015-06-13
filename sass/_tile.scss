@@ -215,4 +215,8 @@
     content: "\f024"; /* md-done-all */
     color: $brand-success;
   }
+
+  &.state-icon-inherit {
+    font-size: inherit;
+  }
 }

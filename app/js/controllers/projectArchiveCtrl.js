@@ -1,10 +1,8 @@
 /**
- * @class ama.controllers.ProjectsCtrl
- * Controller for the projects overview page
- * *DEPRECATED:* The projects overview page doesn't exist anymore.
- * TODO: Delete this file.
+ * @class ama.controllers.ProjectArchiveCtrl
+ * Controller for the project archive page
  */
-app.controller('ProjectsCtrl', [
+app.controller('ProjectArchiveCtrl', [
     'ApiAbstractionLayer',
     'LocalStorage',
     'MasterDetailService',
