@@ -132,6 +132,7 @@ app.factory('ItemService',[
                 bulkOrder = bulkOrder.join(',');
                 return ApiAbstractionLayer('POST', {name:'bulk', data: {order:bulkOrder,setorder:setOrder}});
             },
+
             moveItem: function(item, containerType, containerId, availableContainers){
                 for(var i = 0; i<availableContainers.length; i++){
                     if(availableContainers[i].id == containerId){
@@ -172,6 +173,20 @@ app.factory('ItemService',[
                     controllerAs: 'move'
                 });
                 modal.activate();
+            },
+
+            /**
+             * Removes an item connection to a given document type
+             * @param item
+             * @param type
+             */
+            removeItemFromDocument: function(item, type)
+            {
+                data = {
+                    id: item.id
+                };
+                data[type] = '';
+                return ApiAbstractionLayer('POST', {name:'item', data: data});
             }
         }
     }
