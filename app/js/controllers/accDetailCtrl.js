@@ -9,8 +9,11 @@ app.controller('AcceptanceDetailCtrl', [
     'MasterDetailService',
     'ItemService',
     'PdfService',
+    'MailService',
+    'StateManager',
+    '$scope',
     '$stateParams',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, $stateParams){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, $scope, $stateParams){
         var self = this;
         var id = $stateParams.id;
         MasterDetailService.setMaster(this);
@@ -19,6 +22,10 @@ app.controller('AcceptanceDetailCtrl', [
          * @type {Object}
          */
         this.acceptance = LocalStorage.getData('acceptance/'+id);
+
+        /*
+        Load the acceptance from the API
+         */
         var getAcceptance = function()
         {
             ApiAbstractionLayer('GET',{name:'acceptance',params: {id:id}}).then(function (data) {
@@ -28,6 +35,14 @@ app.controller('AcceptanceDetailCtrl', [
         };
         getAcceptance();
 
+        /*
+        Change the acceptance's state
+         */
+        var changeState = function(toState){
+            StateManager.setState('acceptance', id, toState).then(function (data) {
+                self.acceptance = data;
+            });
+        };
 
         /**
          * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
@@ -43,6 +58,27 @@ app.controller('AcceptanceDetailCtrl', [
                     self.acceptance.state = 1;
                     LocalStorage.setData('acceptance/'+id,self.acceptance);
                 }
+            });
+        };
+
+        /**
+         * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current offer.
+         * @param {Event} event The event (click) that led to the function call
+         */
+        this.openMailPreview = function (event) {
+            event.preventDefault();
+            $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+            MailService.showPreview('acceptance',self.acceptance.id, $scope.mailtext);
+        };
+
+        /**
+         * Uses the {@link ama.services.MailService MailService} to send a mail with the current offer.
+         * Changes the state of the offer to 2 (PDF sent) on success.
+         */
+        this.send = function () {
+            $scope.mailtext = $scope.getValueFromWysiwyg('mailtext');
+            MailService.send('acceptance',self.acceptance.id, $scope.mailtext).then(function (data) {
+                changeState(2);
             });
         };
 
