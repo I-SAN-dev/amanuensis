@@ -92,7 +92,7 @@ class item_connection {
         {
             $result['todo'] = $dbal->simpleSelect(
                 'todos',
-                array('id','name'),
+                array('id','name', 'state', 'due'),
                 array('id', $item['todo']),
                 1
             );

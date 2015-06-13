@@ -11805,19 +11805,19 @@ a.list-group-item {
     .icon-docstate.icon-docstate-fileContract:after {
       content: "\f168";
       /* md-attach-file */ }
-  .icon-docstate.icon-docstate-todo {
+  .icon-docstate.icon-docstate-todo, .icon-docstate.icon-todostate.icon-docstate-0 {
     background-color: #FFB300; }
-    .icon-docstate.icon-docstate-todo:after {
+    .icon-docstate.icon-docstate-todo:after, .icon-docstate.icon-todostate.icon-docstate-0:after {
       content: "\f060";
       /* md-settings */ }
-  .icon-docstate.icon-docstate-tododone {
+  .icon-docstate.icon-docstate-tododone, .icon-docstate.icon-todostate.icon-docstate-1 {
     background-color: #009688; }
-    .icon-docstate.icon-docstate-tododone:after {
+    .icon-docstate.icon-docstate-tododone:after, .icon-docstate.icon-todostate.icon-docstate-1:after {
       content: "\f023";
       /* md-done */ }
-  .icon-docstate.icon-docstate-todooverdue {
+  .icon-docstate.icon-docstate-todooverdue, .icon-docstate.icon-todostate.icon-docstate-2 {
     background-color: #F4511E; }
-    .icon-docstate.icon-docstate-todooverdue:after {
+    .icon-docstate.icon-docstate-todooverdue:after, .icon-docstate.icon-todostate.icon-docstate-2:after {
       content: "\f060";
       /* md-settings */ }
 
