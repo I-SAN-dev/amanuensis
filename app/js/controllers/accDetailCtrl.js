@@ -11,9 +11,10 @@ app.controller('AcceptanceDetailCtrl', [
     'PdfService',
     'MailService',
     'StateManager',
+    'NextStepModal',
     '$scope',
     '$stateParams',
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, $scope, $stateParams){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, ItemService, PdfService, MailService, StateManager, NextStepModal, $scope, $stateParams){
         var self = this;
         var id = $stateParams.id;
         MasterDetailService.setMaster(this);
@@ -80,6 +81,22 @@ app.controller('AcceptanceDetailCtrl', [
             MailService.send('acceptance',self.acceptance.id, $scope.mailtext).then(function (data) {
                 changeState(2);
             });
+        };
+
+        /**
+         * Changes the state of the acceptance to -1 (client declined)
+         */
+        this.decline = function(){
+            changeState(-1);
+        };
+
+        /**
+         * Changes the acceptance's state to 3 (client accepted)
+         * Opens a {@link ama.services.NextStepModal NextStepModal}.
+         */
+        this.accept = function () {
+            changeState(3);
+            NextStepModal('acceptance',self.acceptance);
         };
 
         /**

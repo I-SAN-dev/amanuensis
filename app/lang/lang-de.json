@@ -194,7 +194,10 @@
     },
     "moveToOther": "Posten in eine andere Abnahme verschieben",
     "send": "Abnahme senden",
-    "description": "Beschreibungstext"
+    "description": "Beschreibungstext",
+    "sent": "Abnahme verschickt",
+    "accept": "Kunde nimmt an",
+    "decline": "Kunde lehnt ab"
   },
   "acceptances": {
     "states": {
