@@ -1,91 +1,245 @@
-<div class="row scroll-y" data-ng-controller="ItemCreationCtrl as create">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
+<div class="row fullheight" data-ng-controller="ItemCreationCtrl as create">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
 
+        <div class="panel panel-default fullheight">
+            <div class="panel-heading">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <form data-ng-submit="create.createItem()">
-                            <div data-material-input
-                                 data-input-label="{{'items.fromPreset'|translate}}"
-                                 data-input-id="preset"
-                                 data-ng-model="create.newItem"
-                                 data-input-type="select"
-                                 data-input-select-options="create.presetList"
-                                 data-input-select-option-name="name"
-                                 data-input-select-option-value="value"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.name'|translate}}"
-                                 data-input-id="name"
-                                 data-ng-model="create.newItem.name"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.description'|translate}}"
-                                 data-input-id="description"
-                                 data-input-type="wysiwyg"
-                                 data-ng-model="create.newItem.description"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.hourlyRates'|translate}}"
-                                 data-input-id="hourlyrates"
-                                 data-ng-model="create.newItem.hourlyrates"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.hourlyRate'|translate}}"
-                                 data-input-id="hourlyrate"
-                                 data-ng-model="create.newItem.hourlyrate"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.dailyRates'|translate}}"
-                                 data-input-id="dailyrates"
-                                 data-ng-model="create.newItem.dailyrates"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.dailyRate'|translate}}"
-                                 data-input-id="dailyrate"
-                                 data-input-type="price"
-                                 data-ng-model="create.newItem.dailyrate"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.fixedRate'|translate}}"
-                                 data-input-id="fixedrate"
-                                 data-ng-model="create.newItem.fixedrate"></div>
-                            <div data-material-input
-                                 data-input-label="{{'items.useRate'|translate}}"
-                                 data-input-id="userate"
-                                 data-ng-model="create.newItem.userate"
-                                 data-input-type="select"
-                                 data-input-select-options="create.useRateOptions"
-                                 data-input-select-option-name="name"
-                                 data-input-select-option-value="value"></div>
-                            <button data-ng-if="create.newItem" class="btn btn-success" type="submit">{{'items.addItem'|translate}}</button>
-                            <button data-ng-if="!create.newItem" class="btn btn-success disabled" disabled>{{'items.addItem'|translate}}</button>
-                        </form>
+                    <div class="col-xs-6">
+                        <h3>{{'items.new'|translate}}</h3>
                     </div>
-                    <div class="col-sm-6">
-                        <form data-ng-submit="create.importItem()">
-                            <div data-material-input
-                                 data-input-label="{{'items.fromProject'|translate}}"
-                                 data-input-id="projectItems"
-                                 data-ng-model="create.itemFromProject"
-                                 data-input-type="select"
-                                 data-input-select-options="create.projectItems"
-                                 data-input-select-option-name="name"
-                                 data-input-select-option-value="value"></div>
-                            <div data-ng-if="create.itemFromProject">
-                                <h2>{{create.itemFromProject.name}}</h2>
-                                <div>{{create.itemFromProject.description}}</div>
-                                <h3>{{'items.pricing'|translate}}</h3>
+                    <div class="col-xs-6">
+                        <div class="btn-group btn-group-sm pull-right" data-ng-init="create.showPage = 1">
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: create.showPage==1}" data-ng-click="create.showPage = 1"><i class="md md-lg md-add"></i> {{'items.add' | translate}}</button>
+                            <button class="btn btn-link ng-binding" data-ng-class="{active: create.showPage==2}" data-ng-click="create.showPage = 2"><i class="md md-lg md-redo"></i> {{'items.import' | translate}}</button>
 
-                                <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.hourlyrate|price}} ({{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}})</p>
-
-                                <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.dailyrate|price}} ({{create.itemFromProject.dailyrates}} {{'items.days'|translate}})</p>
-
-                                <p>{{'items.fixedRate'|translate}}: {{create.itemFromProject.fixedrate|price}}</p>
-                            </div>
-                            <p>{{create.itemFromProject}}</p>
-
-                            <button class="btn btn-success" data-ng-if="create.itemFromProject" type="submit">{{'items.importItem'|translate}}</button>
-                            <button class="btn btn-success disabled" disabled data-ng-if="!create.itemFromProject">{{'items.importItem'|translate}}</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="panel-body nopadding nooverflow">
+                <div class="slideanim2 fullheight scroll-y" data-ng-class="{panel2: create.showPage==2, panel3: create.showPage==3}">
 
+                    <div class="slideanim-item fullheight scroll-y">
+                        <form data-ng-submit="create.createItem()">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="tile tile-autoheight">
+                                        <div class="tile-inner">
+                                            <div class="row">
+                                                <div class="col-xs-2 text-center">
+                                                    <i class="md md-extension md-2x md-primary"></i>
+                                                </div>
+                                                <div class="col-xs-10">
+                                                    <div data-material-input
+                                                         data-input-label="{{'items.fromPreset'|translate}}"
+                                                         data-input-id="preset"
+                                                         data-ng-model="create.newItem"
+                                                         data-input-type="select"
+                                                         data-input-select-options="create.presetList"
+                                                         data-input-select-option-name="name"
+                                                         data-input-select-option-value="value"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <div data-material-input
+                                         data-input-label="{{'items.name'|translate}}"
+                                         data-input-id="name"
+                                         data-ng-model="create.newItem.name"></div>
+                                    <div data-material-input
+                                         data-input-label="{{'items.description'|translate}}"
+                                         data-input-id="description"
+                                         data-input-type="wysiwyg"
+                                         data-ng-model="create.newItem.description"></div>
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="row detail-block">
+                                        <div class="col-sm-2 col-md-1">
+                                            <div class="sidelabel"><i class="md md-attach-money"></i></div>
+                                        </div>
+                                        <div class="col-sm-10 col-md-11">
+
+                                            <div class="listinfo-row">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <span data-material-input
+                                                             data-input-label="{{'items.hourlyRates'|translate}}"
+                                                             data-input-id="hourlyrates"
+                                                             data-input-type="price"
+                                                             data-ng-model="create.newItem.hourlyrates"></span> {{'items.hours'|translate}} à <span data-material-input
+                                                                                                                                                   data-input-label="€"
+                                                                                                                                                   data-input-id="hourlyrate"
+                                                                                                                                                   data-input-type="price"
+                                                                                                                                                   data-ng-model="create.newItem.hourlyrate"></span>
+                                                        <br />
+                                                        <span class="less-important">{{'items.hourlyRate'|translate}}</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                                           data-ng-if="create.newItem.userate == 1"
+                                                           title="{{'items.currentUseRate' | translate}}">
+                                                            <i class="md md-star"></i>
+                                                        </a>
+                                                        <a class="listinfo-action listinfo-action-icon"
+                                                           data-ng-if="create.newItem.userate != 1"
+                                                           data-ng-click="create.newItem.userate = 1"
+                                                           title="{{'items.changeUseRate' | translate}}"
+                                                           data-ng-mouseenter="hoverHourly = true"
+                                                           data-ng-mouseleave="hoverHourly = false"
+                                                           data-ng-class="{'listinfo-action-info':hoverHourly}">
+                                                            <i class="md" data-ng-class="{'md-star info':hoverHourly,'md-star-outline':!hoverHourly}"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="listinfo-row">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <span data-material-input
+                                                              data-input-label="{{'items.dailyRates'|translate}}"
+                                                              data-input-id="dailyrates"
+                                                              data-input-type="price"
+                                                              data-ng-model="create.newItem.dailyrates"></span> {{'items.days'|translate}} à <span data-material-input
+                                                                                                                                                     data-input-label="€"
+                                                                                                                                                     data-input-id="dailyrate"
+                                                                                                                                                     data-input-type="price"
+                                                                                                                                                     data-ng-model="create.newItem.dailyyrate"></span>
+                                                        <br />
+                                                        <span class="less-important">{{'items.dailyRate'|translate}}</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                                           data-ng-if="create.newItem.userate == 2"
+                                                           title="{{'items.currentUseRate' | translate}}">
+                                                            <i class="md md-star"></i>
+                                                        </a>
+                                                        <a class="listinfo-action listinfo-action-icon"
+                                                           data-ng-if="create.newItem.userate != 2"
+                                                           data-ng-click="create.newItem.userate = 2"
+                                                           title="{{'items.changeUseRate' | translate}}"
+                                                           data-ng-mouseenter="hoverDaily = true"
+                                                           data-ng-mouseleave="hoverDaily = false"
+                                                           data-ng-class="{'listinfo-action-info':hoverDaily}">
+                                                            <i class="md" data-ng-class="{'md-star info':hoverDaily,'md-star-outline':!hoverDaily}"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="listinfo-row">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <span data-material-input
+                                                             data-input-label="€"
+                                                             data-input-id="fixedrate"
+                                                             data-input-type="price"
+                                                             data-ng-model="create.newItem.fixedrate"></span>
+                                                        <br />
+                                                        <span class="less-important">{{'items.fixedRate'|translate}}</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <a class="listinfo-action listinfo-action-icon listinfo-action-info"
+                                                           data-ng-if="create.newItem.userate == 0"
+                                                           title="{{'items.currentUseRate' | translate}}">
+                                                            <i class="md md-star"></i>
+                                                        </a>
+                                                        <a class="listinfo-action listinfo-action-icon"
+                                                           data-ng-if="create.newItem.userate != 0"
+                                                           data-ng-click="create.newItem.userate = 0"
+                                                           title="{{'items.changeUseRate' | translate}}"
+                                                           data-ng-mouseenter="hoverFixed = true"
+                                                           data-ng-mouseleave="hoverFixed = false"
+                                                           data-ng-class="{'listinfo-action-info':hoverFixed}">
+                                                            <i class="md" data-ng-class="{'md-star info':hoverFixed,'md-star-outline':!hoverFixed}"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button data-ng-if="create.newItem" class="btn btn-success pull-right margin-top margin-bottom" type="submit">{{'items.addItem'|translate}}</button>
+                            <button data-ng-if="!create.newItem" class="btn btn-success disabled pull-right margin-top margin-bottom" disabled>{{'items.addItem'|translate}}</button>
+                        </form>
+                    </div>
+
+                    <div class="slideanim-item fullheight scroll-y">
+
+                        <form data-ng-submit="create.importItem()">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <div class="tile tile-autoheight">
+                                        <div class="tile-inner">
+                                            <div class="row">
+                                                <div class="col-xs-2 text-center">
+                                                    <i class="md md-folder md-2x md-primary"></i>
+                                                </div>
+                                                <div class="col-xs-10">
+                                                    <div data-material-input
+                                                         data-input-label="{{'items.fromProject'|translate}}"
+                                                         data-input-id="projectItems"
+                                                         data-ng-model="create.itemFromProject"
+                                                         data-input-type="select"
+                                                         data-input-select-options="create.projectItems"
+                                                         data-input-select-option-name="name"
+                                                         data-input-select-option-value="value"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+
+
+                                    <div data-ng-if="create.itemFromProject">
+                                        <h2>{{create.itemFromProject.name}}</h2>
+                                        <div>{{create.itemFromProject.description}}</div>
+                                        <h3>{{'items.pricing'|translate}}</h3>
+
+                                        <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.hourlyrate|price}} ({{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}})</p>
+
+                                        <p>{{'items.hourlyRate'|translate}}: {{create.itemFromProject.dailyrate|price}} ({{create.itemFromProject.dailyrates}} {{'items.days'|translate}})</p>
+
+                                        <p>{{'items.fixedRate'|translate}}: {{create.itemFromProject.fixedrate|price}}</p>
+                                    </div>
+                                    <p>{{create.itemFromProject}}</p>
+
+                                    <button class="btn btn-success" data-ng-if="create.itemFromProject" type="submit">{{'items.importItem'|translate}}</button>
+                                    <button class="btn btn-success disabled" disabled data-ng-if="!create.itemFromProject">{{'items.importItem'|translate}}</button>
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
+
     </div>
 </div>
