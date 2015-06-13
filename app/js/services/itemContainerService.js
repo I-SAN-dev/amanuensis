@@ -16,8 +16,7 @@ app.factory('ItemContainerService',[
             contract: 'contracts',
             fileContract: 'fileContracts',
             acceptance: 'acceptances',
-            invoice: 'invoices',
-            reminder: 'reminders'
+            invoice: 'invoices'
         };
         var updateLocalStorage = function (type, projectId, container) {
             LocalStorage.setData(type+'/'+container.id, container);

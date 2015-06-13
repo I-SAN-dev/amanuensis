@@ -4,7 +4,8 @@ app.controller('ReminderCreationCtrl', [
     'RefnumberService',
     '$stateParams',
     '$state',
-    function (ApiAbstractionLayer, LocalStorage, RefnumberService, $stateParams, $state) {
+    '$filter',
+    function (ApiAbstractionLayer, LocalStorage, RefnumberService, $stateParams, $state, $filter) {
         var invoiceId = $stateParams.invoice;
         var projectId = $stateParams.project;
         var self = this;
@@ -15,7 +16,10 @@ app.controller('ReminderCreationCtrl', [
             };
         });
 
-        this.createReminder = function () {
+        this.createReminder = function ()
+        {
+            var date = new Date;
+            self.newReminder.date = $filter('date')(date,'yyyy-MM-dd HH:mm:ss');
             ApiAbstractionLayer('POST', {name: 'reminder', data:self.newReminder}).then(function (data) {
                 var invoice = LocalStorage.getData('invoice/'+invoiceId)||{reminders:[data]};
                 LocalStorage.setData('invoice/'+invoiceId, self.invoice);
