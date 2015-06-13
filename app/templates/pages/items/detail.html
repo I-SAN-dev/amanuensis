@@ -225,8 +225,20 @@
 
             <div class="slideanim-item fullheight scroll-y">
 
-                <h2>{{'items.alsoIn'|translate}}</h2>
-                <div data-ng-if="item.isConnected">
+                <h2>{{'items.thisitem'|translate}}</h2>
+                <div class="row margin-bottom-lg">
+                    <div class="col-sm-4">
+                        <button class="btn btn-block btn-danger" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i> {{'items.deleteItem'|translate}}</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-block btn-warning" data-ng-click="item.removeItemFromDocument()"><i class="md md-lg md-remove-circle-outline"></i> {{'items.removeItem'|translate}}</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-block btn-success" data-ng-click="item.moveItem()">{{'items.moveItem'|translate}} <i class="md md-lg md-forward"></i></button>
+                    </div>
+                </div>
+                <h3>{{'items.alsoIn'|translate}}</h3>
+                <div data-ng-if="item.isConnected" class="margin-bottom">
                     <div data-ng-if="item.connections.offer.id" class="listinfo-row listinfo-link" data-ui-sref="app.offerDetail({id:item.connections.offer.id})">
                         <div class="row">
                             <div class="col-fixedwidth-46">
@@ -283,19 +295,8 @@
                         </div>
                     </div>
                 </div>
-                <p data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
+                <p class="margin-bottom" data-ng-if="!item.isConnected">{{'items.alsoInNone'|translate}}</p>
 
-                <div class="row margin-top margin-bottom">
-                    <div class="col-sm-4">
-                        <button class="btn btn-block btn-danger" data-ng-click="item.deleteItem()"><i class="md md-lg md-delete"></i> {{'items.deleteItem'|translate}}</button>
-                    </div>
-                    <div class="col-sm-4">
-
-                    </div>
-                    <div class="col-sm-4">
-                        <button class="btn btn-block btn-success" data-ng-click="item.moveItem()"><i class="md md-lg md-forward"></i> {{'items.moveItem'|translate}}</button>
-                    </div>
-                </div>
 
             </div>
 

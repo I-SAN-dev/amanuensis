@@ -193,6 +193,16 @@ app.controller('OfferDetailCtrl', [
             this.moveItem = function (item) {
                 ItemService.moveItem(item, 'offer', self.offer.id, self.offer.project.offers);
             };
+
+            /**
+             * Removes a given item from the document
+             * @param {Object} item The item to be removed
+             */
+            this.removeItemFromDocument = function(item)
+            {
+                ItemService.removeItemFromDocument(item, 'offer');
+                getOffer();
+            }
         }
     ]
 );

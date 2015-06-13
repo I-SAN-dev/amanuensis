@@ -170,6 +170,14 @@ app.controller('ItemDetailCtrl', [
             MasterDetailService.notifyMaster('moveItem', self.item);
         };
 
+        /**
+         * Removes an item from the current document
+         */
+        this.removeItemFromDocument = function()
+        {
+            MasterDetailService.notifyMaster('removeItemFromDocument', self.item);
+        };
+
         MasterDetailService.notifyController('setFirstAsDetail');
 
     }
