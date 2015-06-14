@@ -10807,7 +10807,8 @@ h1, h2 {
     line-height: 64px;
     margin-right: 20px; }
   .panel-default .panel-heading .btn-group {
-    padding-right: 0;
+    padding-right: 0; }
+  .panel-default .panel-heading .row .btn-group {
     margin-right: -20px; }
   .panel-default .panel-heading button.btn {
     height: 64px;
