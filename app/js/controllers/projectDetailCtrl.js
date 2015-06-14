@@ -13,8 +13,10 @@ app.controller('ProjectDetailCtrl',
         '$state',
         '$stateParams',
         'MasterDetailService',
-        function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, StateManager, $scope, $state, $stateParams, MasterDetailService) {
+        '$q',
+        function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, StateManager, $scope, $state, $stateParams, MasterDetailService, $q) {
             var self = this;
+            var initial = true;
             MasterDetailService.setDetail(this);
             /**
              * List of all contracts and fileContracts taken from the current project
@@ -34,6 +36,7 @@ app.controller('ProjectDetailCtrl',
              * @param {int} id - the client id to query for
              */
             var getProject = function(id) {
+                var defer = $q.defer();
                 self.project = LocalStorage.getData('project'+'/'+id);
                 self.contracts = LocalStorage.getData('project/'+id+'/contracts');
                 if(self.project){
@@ -58,7 +61,9 @@ app.controller('ProjectDetailCtrl',
                     }
                     self.contracts = contracts;
                     LocalStorage.setData('project/'+id+'/contracts', self.contracts);
-                });
+                    defer.resolve(data);
+                }, function(error){defer.reject(error);});
+                return defer.promise;
             };
 
             /**
@@ -84,11 +89,27 @@ app.controller('ProjectDetailCtrl',
 
             // if the project state is entered with a certain id, we want to set the project detail for this id
             if($stateParams.id){
-                if($scope.$parent.setDetail)
-                    $scope.$parent.setDetail({id:$stateParams.id});
-                else
-                    getProject($stateParams.id);
+                getProject($stateParams.id).then(function (data) {
+                    if($scope.$parent.setDetail)
+                        $scope.$parent.setDetail(data);
+                });
             }
+
+            // call getProject when the detail view is requested
+            /**
+             * Sets the project detail.
+             * This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
+             * Only applies for projectArchive view
+             * @param data - the newly selected project
+             */
+            this.detailChanged=function(data){
+                self.project = data;
+                self.contracts = [];
+                if(!initial)
+                    getProject(data.id);
+                else
+                    initial = false;
+            };
 
             /**
              * Deletes the current project

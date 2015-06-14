@@ -123,8 +123,8 @@ app.factory('MasterDetailService', [
 
                 if($state.params.hasDetails)
                     $state.go($state.current.name, {id: detailItem.id});
-                console.log('set detail view', detailItem, detail);
                 self.notifyDetail('detailChanged', detailItem, keyboard);
+                console.log('setView');
                 return detailItem;
             }
         }
