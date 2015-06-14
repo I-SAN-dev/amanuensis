@@ -11459,6 +11459,12 @@ textarea {
 .form-inline {
   display: inline-block;
   vertical-align: 2px; }
+  .form-inline .decimalcomma {
+    vertical-align: -2px;
+    margin-left: -2px;
+    margin-right: -2px; }
+  .form-inline .text-right input {
+    text-align: right; }
 
 /*.nav#mainNav
 {
