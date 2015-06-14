@@ -10807,7 +10807,8 @@ h1, h2 {
     line-height: 64px;
     margin-right: 20px; }
   .panel-default .panel-heading .btn-group {
-    padding-right: 0;
+    padding-right: 0; }
+  .panel-default .panel-heading .row .btn-group {
     margin-right: -20px; }
   .panel-default .panel-heading button.btn {
     height: 64px;
@@ -11462,6 +11463,12 @@ textarea {
 .form-inline {
   display: inline-block;
   vertical-align: 2px; }
+  .form-inline .decimalcomma {
+    vertical-align: -2px;
+    margin-left: -2px;
+    margin-right: -2px; }
+  .form-inline .text-right input {
+    text-align: right; }
 
 /*.nav#mainNav
 {
@@ -11751,6 +11758,14 @@ a.list-group-item {
   top: 5px; }
 .master-todo .list-group-item {
   min-height: 71px; }
+
+.newentry {
+  padding: 10px 0 10px 10px; }
+  .newentry .varcheck-if-false {
+    position: relative;
+    left: -30px; }
+  .newentry button {
+    float: left; }
 
 .add-item {
   position: absolute;

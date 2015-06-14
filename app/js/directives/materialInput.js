@@ -52,12 +52,20 @@ app.directive('materialInput', [
                      */
                     $scope.processWysiwyg = function (type) {
                         var editor = $scope.editors;
-                        if($(editor[0]).summernote('isEmpty'))
+                        /* this will only work with the new summernote version which is not released yet */
+                        if($(editor[0]).summernote('isEmpty')) {
                             $scope.model = '';
-                        if (type == 'save')
+                        }
+                        /* therefore here comes a workaround */
+                        if($scope.model != '' && $('<div>'+$scope.model+'</div>').text().trim() == '') {
+                            $scope.model = '';
+                        }
+                        if (type == 'save') {
                             $scope.buttons[type][type]($scope.model);
-                        else
+                        }
+                        else {
                             $scope.buttons[type][type]();
+                        }
                     };
 
 

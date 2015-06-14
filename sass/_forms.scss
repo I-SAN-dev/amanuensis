@@ -630,4 +630,19 @@ $checkbox-size: 40px;
 {
   display: inline-block;
   vertical-align: 2px;
+
+  .decimalcomma
+  {
+    vertical-align: -2px;
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+
+  .text-right
+  {
+    input
+    {
+      text-align: right;
+    }
+  }
 }
