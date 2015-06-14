@@ -11104,7 +11104,7 @@ h1, h2 {
   /* active state */ }
   .form-group input.form-control,
   .form-group .multiselect > .select {
-    height: 30.33333px; }
+    min-height: 30.33333px; }
   .form-group input.form-control,
   .form-group select.form-control,
   .form-group textarea.form-control,
@@ -11484,6 +11484,15 @@ textarea {
     vertical-align: -2px; }
     .ipe-price .form-inline .decimalcomma {
       vertical-align: 1px; }
+
+h1 .ipe input.form-control {
+  padding-bottom: 0 !important;
+  border-bottom-width: 0 !important; }
+h1 .ipe .bar {
+  position: relative;
+  bottom: -5px;
+  border-top: 1px solid #EEEEEE;
+  margin-bottom: -1px; }
 
 /*.nav#mainNav
 {

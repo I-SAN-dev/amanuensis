@@ -86,7 +86,7 @@
   input.form-control,
   .multiselect>.select
   {
-    height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    min-height: 2.5*$font-size-base - ($font-size-base/3); // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   }
 
   input.form-control,
@@ -660,6 +660,25 @@ $checkbox-size: 40px;
     .decimalcomma
     {
       vertical-align: 1px;
+    }
+  }
+}
+
+h1
+{
+  .ipe
+  {
+    input.form-control
+    {
+      padding-bottom: 0 !important;
+      border-bottom-width: 0 !important;
+    }
+    .bar
+    {
+      position: relative;
+      bottom: -5px;
+      border-top: 1px solid $gray-lighter;
+      margin-bottom: -1px;
     }
   }
 }
