@@ -11755,6 +11755,14 @@ a.list-group-item {
 .master-todo .list-group-item {
   min-height: 71px; }
 
+.newentry {
+  padding: 10px 0 10px 10px; }
+  .newentry .varcheck-if-false {
+    position: relative;
+    left: -30px; }
+  .newentry button {
+    float: left; }
+
 .add-item {
   position: absolute;
   left: 30px;

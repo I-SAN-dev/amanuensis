@@ -264,6 +264,22 @@ $detail-toolbar-height: 64px;
   }
 }
 
+.newentry
+{
+  padding: 10px 0 10px 10px;
+
+  .varcheck-if-false
+  {
+    position: relative;
+    left: -30px;
+  }
+
+  button
+  {
+    float: left;
+  }
+}
+
 
 .add-item
 {
