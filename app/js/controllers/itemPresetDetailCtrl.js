@@ -29,6 +29,25 @@ app.controller('ItemPresetDetailCtrl', [
             MasterDetailService.notifyMaster('deletePreset', self.preset.id);
         };
 
+        /**
+         * Changes the useRate value (fixed/hourly/dailyRate) of the current itemPreset.
+         * @param {integer} value The value the userate property of the itemPreset should be set to
+         */
+        this.setUserate = function (value) {
+            var apiObject = {
+                name: 'item_preset',
+                data: {
+                    id: self.preset.id,
+                    userate: value
+                }
+            };
+            self.preset.userate = value;
+            ApiAbstractionLayer('POST', apiObject).then(function (data) {
+                MasterDetailService.notifyMaster('priceChanged', data);
+            });
+
+        };
+
         // if the itemPreset state is entered with a certain id, we want to set the preset detail for this id
         if($stateParams.id){
             // this time, a request is needed to get the item preset
