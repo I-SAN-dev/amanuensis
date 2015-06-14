@@ -86,6 +86,7 @@ app.directive('masterDetail', [function(){
                 /**
                  * Set a new template for the detail view
                  * TODO: check if this still works...
+                 * @deprecated not used
                  * @param templateUrl
                  */
                 $scope.setDetailTpl = function(templateUrl) {

@@ -171,7 +171,7 @@ app.directive('materialInput', [
                 /**
                  * Chooses the action to be taken on blur.
                  * If one of the buttons is clicked, the button action replaces the default blur action.
-                 * TODO: this code should not be not used anymore. check if we can remove it entirely
+                 * @deprecated TODO: this code should not be not used anymore. check if we can remove it entirely
                  * @param event
                  * @param fieldId
                  */

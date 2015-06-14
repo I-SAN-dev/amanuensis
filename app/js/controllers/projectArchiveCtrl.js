@@ -63,18 +63,6 @@ app.controller('ProjectArchiveCtrl', [
         }, 1000);
 
         /**
-         * Deletes a project by given ID
-         * @param {int} id The ID of the project to be deleted
-         */
-        this.deleteProject = function (id) {
-            DeleteService('project',id).then(function (data) {
-                self.projects = data.list;
-                //TODO actually this is wrong. This does not consider that we differentiate between archived and current projects
-            });
-
-        };
-
-        /**
          * Uses {@link ama.services.StateManager the stateManager} to resend the given archived project back to the list of current projects
          * @param id The id of the project to be unarchived
          */

@@ -82,20 +82,6 @@ app.controller('ProjectDetailCtrl',
                 }
             };
 
-            // call getProject when the detail view is requested
-            /**
-             * Sets the project detail.
-             * This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
-             * *DEPRECATED:* The project detail view isn't a masterDetail view anymore.
-             * TODO: Delete this code
-             * @param data - the newly selected project
-             */
-            this.detailChanged=function(data){
-                self.project = data;
-                self.contracts = [];
-                getProject(data.id);
-            };
-
             // if the project state is entered with a certain id, we want to set the project detail for this id
             if($stateParams.id){
                 if($scope.$parent.setDetail)

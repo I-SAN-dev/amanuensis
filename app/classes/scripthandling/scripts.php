@@ -98,7 +98,6 @@ class Scripts
         "js/controllers/projectCreationCtrl.js",
         "js/controllers/accDetailCtrl.js",
         "js/controllers/invoicesCtrl.js",
-        "js/controllers/offersCtrl.js",
         "js/controllers/offerDetailCtrl.js",
         "js/controllers/offerCreationCtrl.js",
         "js/controllers/contractDetailCtrl.js",

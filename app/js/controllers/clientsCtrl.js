@@ -67,7 +67,6 @@ app.controller('ClientsCtrl',
             /**
              * Delete the link between client and client category
              * *DEPRECATED:* We manage this in {@link ama.controllers.ClientCategoriesDialog the ClientCategoriesDialog controller}.
-             * TODO: test if this still works...
              * @param client - the client's id
              * @param category - the category
              */
