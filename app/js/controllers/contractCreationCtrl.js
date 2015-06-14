@@ -76,8 +76,7 @@ app.controller('ContractCreationCtrl', [
          */
         this.createContract = function () {
             if(self.fileContract){
-
-                if(self.validFile)
+                if(self.validfile)
                 {
                     ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {
                         var file = self.fileContract;
