@@ -1,15 +1,16 @@
 var searchData=
 [
-  ['acceptance',['acceptance',['../classacceptance.html',1,'']]],
-  ['amaclient',['AmaClient',['../class_ama_client.html',1,'']]],
-  ['amaexception',['amaException',['../classama_exception.html',1,'']]],
-  ['amaitem',['AmaItem',['../class_ama_item.html',1,'']]],
-  ['amaitemlist',['AmaItemList',['../class_ama_item_list.html',1,'']]],
-  ['amamail',['AmaMail',['../class_ama_mail.html',1,'']]],
-  ['amamaildoc',['AmaMailDoc',['../class_ama_mail_doc.html',1,'']]],
-  ['amaproject',['AmaProject',['../class_ama_project.html',1,'']]],
-  ['amasession',['AmaSession',['../class_ama_session.html',1,'']]],
-  ['amatemplate',['amaTemplate',['../classama_template.html',1,'']]],
-  ['apps',['apps',['../classapps.html',1,'']]],
-  ['authenticator',['Authenticator',['../class_authenticator.html',1,'']]]
+  ['acceptance',['acceptance',['../a00001.html',1,'']]],
+  ['amaclient',['AmaClient',['../a00002.html',1,'']]],
+  ['amaexception',['amaException',['../a00003.html',1,'']]],
+  ['amaitem',['AmaItem',['../a00004.html',1,'']]],
+  ['amaitemlist',['AmaItemList',['../a00005.html',1,'']]],
+  ['amamail',['AmaMail',['../a00006.html',1,'']]],
+  ['amamaildoc',['AmaMailDoc',['../a00007.html',1,'']]],
+  ['amaproject',['AmaProject',['../a00008.html',1,'']]],
+  ['amasession',['AmaSession',['../a00009.html',1,'']]],
+  ['amastream',['AmaStream',['../a00010.html',1,'']]],
+  ['amatemplate',['amaTemplate',['../a00011.html',1,'']]],
+  ['apps',['apps',['../a00012.html',1,'']]],
+  ['authenticator',['Authenticator',['../a00013.html',1,'']]]
 ];

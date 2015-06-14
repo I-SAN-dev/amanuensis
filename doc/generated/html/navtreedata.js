@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Amanuensis", "index.html", [
+  [ "Amanu", "index.html", [
     [ "Data Structures", null, [
       [ "Data Structures", "annotated.html", "annotated" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -23,8 +23,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_crx_build_8php.html",
-"classmail.html#aa220a1fab892798bcacc8e8a47449448"
+"a00001.html",
+"a00038.html#a5ba61361bf0695a285bbaefefc427191"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
