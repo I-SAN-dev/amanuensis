@@ -57,7 +57,7 @@ app.directive('materialInput', [
                             $scope.model = '';
                         }
                         /* therefore here comes a workaround */
-                        if($('<div>'+$scope.model+'</div>').text().trim() == '') {
+                        if($scope.model != '' && $('<div>'+$scope.model+'</div>').text().trim() == '') {
                             $scope.model = '';
                         }
                         if (type == 'save') {
