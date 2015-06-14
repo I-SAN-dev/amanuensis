@@ -439,6 +439,12 @@ $panel-heading-height: 64px;
   color: $brand-primary !important;
 }
 
+
+.fontsize-base {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
 /* Shadow classes */
 .shadow-0
 {

@@ -170,12 +170,19 @@ app.controller('OfferDetailCtrl', [
             };
 
             /**
+             * Opens a {@link ama.services.NextStepModal NextStepModal}.
+             */
+            this.nextStep = function () {
+                NextStepModal('offer', self.offer);
+            };
+
+            /**
              * Changes the offer's state to 3 (client accepted)
              * Opens a {@link ama.services.NextStepModal NextStepModal}.
              */
             this.accept = function () {
                 changeState(3);
-                NextStepModal('offer',self.offer);
+                self.nextStep();
             };
 
             /**

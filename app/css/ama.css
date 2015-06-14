@@ -10881,6 +10881,10 @@ h1, h2 {
 .md-primary {
   color: #404877 !important; }
 
+.fontsize-base {
+  font-size: 14px;
+  line-height: 1.42857; }
+
 /* Shadow classes */
 .shadow-0 {
   box-shadow: 0px 0px 0px 0px transparent;
