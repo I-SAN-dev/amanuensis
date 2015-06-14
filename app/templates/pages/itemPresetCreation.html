@@ -3,6 +3,7 @@
         <div data-material-input
              data-input-label="{{'items.name'|translate}}"
              data-input-id="name"
+             data-input-required="true"
              data-ng-model="create.newPreset.name"></div>
         <div data-material-input
              data-input-label="{{'items.description'|translate}}"
@@ -12,14 +13,17 @@
         <div data-material-input
              data-input-label="{{'items.hourlyRates'|translate}}"
              data-input-id="hourlyrates"
+             data-input-type="price"
              data-ng-model="create.newPreset.hourlyrates"></div>
         <div data-material-input
              data-input-label="{{'items.hourlyRate'|translate}}"
              data-input-id="hourlyrate"
+             data-input-type="price"
              data-ng-model="create.newPreset.hourlyrate"></div>
         <div data-material-input
              data-input-label="{{'items.dailyRates'|translate}}"
              data-input-id="dailyrates"
+             data-input-type="price"
              data-ng-model="create.newPreset.dailyrates"></div>
         <div data-material-input
              data-input-label="{{'items.dailyRate'|translate}}"
@@ -29,6 +33,7 @@
         <div data-material-input
              data-input-label="{{'items.fixedRate'|translate}}"
              data-input-id="fixedrate"
+             data-input-type="price"
              data-ng-model="create.newPreset.fixedrate"></div>
         <div data-material-input
              data-input-label="{{'items.useRate'|translate}}"

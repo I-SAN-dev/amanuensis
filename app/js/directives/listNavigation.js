@@ -32,7 +32,6 @@ app.directive('listNavigation',[
                         $document.unbind('keyup');
                         $document.unbind('keydown');
                     }
-                    console.log(event, toState, toParams, fromState, fromParams);
                 });
 
                 var scrollArea = angular.element(elem);
@@ -46,17 +45,20 @@ app.directive('listNavigation',[
                  */
                 var getNeighbor = function (offset, active, list) {
                     var oldPos;
+
                     if (active) {
                         oldPos = list.indexOf(active);
+                        console.log(active, oldPos)
                         if (oldPos == -1) {
-                            //console.log(list);
                             for (var i = 0; i < list.length; i++) {
-                                if (list[i].id > active.id) {
-                                    list.splice(i, 0, active);
+                                if (list[i].id == active.id) {
+                                    active = list[i];
+                                    list.splice(i, 1, active);
                                     oldPos = i;
                                     break;
                                 }
                             }
+                            console.log(list);
                         }
                     } else {
                         oldPos = -offset;
@@ -84,6 +86,7 @@ app.directive('listNavigation',[
                 $document.unbind('keydown');
                 $document.on('keydown', function (event) {
                     var list = getFilteredList();
+
 
                     var domList = $(elem[0]).find('[data-ng-repeat]');
 
