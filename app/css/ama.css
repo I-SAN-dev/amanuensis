@@ -11478,6 +11478,13 @@ textarea {
   .form-inline .text-right input {
     text-align: right; }
 
+.ipe-price {
+  display: inline-block; }
+  .ipe-price .form-inline {
+    vertical-align: -2px; }
+    .ipe-price .form-inline .decimalcomma {
+      vertical-align: 1px; }
+
 /*.nav#mainNav
 {
   @include card(1);

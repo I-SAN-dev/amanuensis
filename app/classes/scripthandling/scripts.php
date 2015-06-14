@@ -56,6 +56,7 @@ class Scripts
         "js/filters/amaStates.js",
         "js/filters/noSpace.js",
         "js/filters/price.js",
+        "js/filters/twoDecimals.js",
         "js/filters/gender.js",
         "js/filters/amaDate.js",
         // Services
