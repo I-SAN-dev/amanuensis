@@ -52,9 +52,9 @@ app.controller('ItemPresetCreationCtrl', [
                 self.newPreset = null;
 
                 // go to where we came from or to the itemPresets list (and new preset detail) if no referrer is specified
-                var to = $stateParams.referrer || 'app.itemPresets';
+                var to = $stateParams.referrer || 'app.itemPresets.detail';
                 var toParams;
-                if(to=='app.itemPresets')
+                if(to=='app.itemPresets.detail')
                     toParams = {id:data.id};
                 else
                     toParams = $stateParams.referrerParams;
