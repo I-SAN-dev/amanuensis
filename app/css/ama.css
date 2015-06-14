@@ -10809,7 +10809,8 @@ h1, h2 {
   .panel-default .panel-heading .btn-group, .panel-default .panel-heading .slideanim-buttons {
     padding-right: 0;
     font-size: 0; }
-  .panel-default .panel-heading .row .btn-group {
+  .panel-default .panel-heading .row .btn-group,
+  .panel-default .panel-heading .row .slideanim-buttons {
     margin-right: -20px; }
   .panel-default .panel-heading button.btn {
     height: 64px;
