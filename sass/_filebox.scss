@@ -18,6 +18,12 @@
   .filedetails
   {
     margin-top: 70px;
+
+    h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   height: 225px;

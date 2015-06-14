@@ -12487,6 +12487,10 @@ strong.total {
       vertical-align: middle; }
   .filebox .filedetails {
     margin-top: 70px; }
+    .filebox .filedetails h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
 
 span.wider {
   letter-spacing: 0.5px; }
