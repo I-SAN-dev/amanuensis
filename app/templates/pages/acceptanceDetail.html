@@ -90,8 +90,10 @@
                         <button disabled data-ng-if="acceptance.acceptance.state > 1" class="btn btn-block btn-success disabled">{{'acceptance.sent' | translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="acceptance.acceptance.state >= 2">
-                        <button class="btn btn-block btn-danger" data-ng-click="acceptance.decline()">{{'acceptance.decline' |translate}}</button>
-                        <button class="btn btn-block btn-success" data-ng-click="acceptance.accept()">{{'acceptance.accept'|translate}}</button>
+                        <button data-ng-if="acceptance.acceptance.state == 2" class="btn btn-block btn-danger" data-ng-click="acceptance.decline()">{{'acceptance.decline' |translate}}</button>
+                        <button data-ng-if="acceptance.acceptance.state == 2" class="btn btn-block btn-success" data-ng-click="acceptance.accept()">{{'acceptance.accept'|translate}}</button>
+                        <button data-ng-if="acceptance.acceptance.state == 3" class="btn btn-block btn-danger" data-ng-click="acceptance.decline()">{{'acceptance.notAccepted' |translate}}</button>
+                        <button data-ng-if="acceptance.acceptance.state == 3" class="btn btn-block btn-success" data-ng-click="acceptance.nextStep()">{{'acceptance.nextStep'|translate}}</button>
                     </div>
                 </div>
             </div>

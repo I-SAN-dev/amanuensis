@@ -93,8 +93,10 @@
                         <button disabled data-ng-if="offer.offer.state > 1" class="btn btn-block btn-success disabled">{{'offer.sent' | translate}}</button>
                     </div>
                     <div class="col-sm-4" data-ng-if="offer.offer.state >= 2">
-                        <button class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
-                        <button class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
+                        <button data-ng-if="offer.offer.state == 2" class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.decline' |translate}}</button>
+                        <button data-ng-if="offer.offer.state == 2" class="btn btn-block btn-success" data-ng-click="offer.accept()">{{'offer.accept'|translate}}</button>
+                        <button data-ng-if="offer.offer.state == 3" class="btn btn-block btn-danger" data-ng-click="offer.decline()">{{'offer.notAccepted' |translate}}</button>
+                        <button data-ng-if="offer.offer.state == 3" class="btn btn-block btn-success" data-ng-click="offer.nextStep()">{{'offer.nextStep'|translate}}</button>
                     </div>
                 </div>
             </div>

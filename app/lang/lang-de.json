@@ -156,8 +156,9 @@
     "notifications": {
       "emailSent": "Angebot wurde verschickt"
     },
-    "moveToOther": "Posten in ein anderes Angebot verschieben"
-
+    "moveToOther": "Posten in ein anderes Angebot verschieben",
+    "notAccepted": "Doch nicht angenommen",
+    "nextStep": "Überführen in..."
   },
   "contract":
   {
@@ -177,7 +178,6 @@
       "emailSent": "Vertrag wurde verschickt"
     },
     "moveToOther": "Posten in einen anderen Vertrag verschieben"
-
   },
   "todo": {
     "todo":"ToDo",
@@ -204,7 +204,9 @@
     "description": "Beschreibungstext",
     "sent": "Abnahme verschickt",
     "accept": "Kunde nimmt an",
-    "decline": "Kunde lehnt ab"
+    "decline": "Kunde lehnt ab",
+    "notAccepted": "Doch nicht abgenommen",
+    "nextStep": "Überführen in..."
   },
   "acceptances": {
     "states": {
