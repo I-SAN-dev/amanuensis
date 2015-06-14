@@ -31,7 +31,7 @@ app.directive('fileUpload', ['$parse', function ($parse) {
      * Provides a function to upload a file to the server.
      *
      */
-    .service('fileUploadService', ['$http', '$q', function ($http, $q) {
+    .service('fileUploadService', ['NotificationService', 'ErrorDialog', '$http', '$q', '$rootScope', function (NotificationService, ErrorDialog, $http, $q, $rootScope) {
 
 
         /**
@@ -42,6 +42,7 @@ app.directive('fileUpload', ['$parse', function ($parse) {
          * Uploads the specified file to the specified url.
          */
         this.uploadFile = function(file, uploadUrl){
+            $rootScope.loaded = false;
             var fd = new FormData();
             fd.append('file', file);
             var defer = $q.defer();
@@ -51,10 +52,14 @@ app.directive('fileUpload', ['$parse', function ($parse) {
             })
                 .success(function(data){
                     defer.resolve(data.path);
+                    $rootScope.loaded= true;
+                    NotificationService('global.notifications.uploadSucceeded',5000);
                 })
                 .error(function(error){
-                    defer.reject(error)
+                    defer.reject(error);
+                    $rootScope.loaded = true;
+                    ErrorDialog(error.error).activate();
                 });
             return defer.promise;
-        }
+        };
     }]);

@@ -42,7 +42,11 @@
     "overdue":"Überfällig",
     "dayx":"Tag X",
     "total":"Gesamt",
-    "estimatedIncome": "Geschätzte voraussichtliche Einnahmen"
+    "estimatedIncome": "Geschätzte voraussichtliche Einnahmen",
+    "notifications":{
+      "uploadSucceeded": "Datei-Upload erfolgreich.",
+      "uploadFailed": "Datei-Upload fehlgeschlagen"
+    }
   },
 
   "clients": {
