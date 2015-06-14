@@ -17,7 +17,7 @@
                                   data-ipe-value="todo.todo.name"
                                   data-ipe-name="'global.name'|translate"
                                   data-ipe-deletable="false"
-                                    ></span><span class="fontsize-base"><a data-ng-click="todo.nextStep()">{{'global.transformTo'|translate}}<i class="md md-call-made"></i></a></span>
+                                    ></span>
                         </h1>
                         <span data-ng-if="todo.todo.items_done < todo.todo.items_total">{{'todo.someopen' | translate}}</span>
                         <span data-ng-if="todo.todo.items_done == todo.todo.items_total">{{'todo.alldone' | translate}}</span>
@@ -41,6 +41,7 @@
                         </div>
 
                         <div class="delete-document">
+                            <button class="btn btn-warning btn-icon-round btn-link" title="{{'global.transformTo'|translate}}" data-ng-click="todo.nextStep()"><i class="md md-content-copy"></i></button>
                             <button class="btn btn-danger btn-icon-round btn-link" title="{{'todo.deleteTodo'|translate}}" data-ng-click="todo.deleteTodo()"><i class="md md-delete"></i></button>
                         </div>
 

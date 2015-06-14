@@ -17,7 +17,7 @@
                                           data-ipe-value="contract.contract.name"
                                           data-ipe-name="'global.name'|translate"
                                           data-ipe-deletable="false"
-                                            ></span> <span data-ng-if="!contract.isFileContract" class="fontsize-base"><a data-ng-click="contract.nextStep()">{{'global.transformTo'|translate}}<i class="md md-call-made"></i></a></span>
+                                            ></span>
                                 </h1>
                             </div>
                             <div class="col-sm-4 text-right">
@@ -51,6 +51,7 @@
                             </div>
                         </div>
                         <div class="delete-document">
+                            <button data-ng-if="!contract.isFileContract" class="btn btn-warning btn-icon-round btn-link" title="{{'global.transformTo'|translate}}" data-ng-click="contract.nextStep()"><i class="md md-content-copy"></i></button>
                             <button class="btn btn-danger btn-icon-round btn-link" title="{{'contract.deleteContract'|translate}}" data-ng-click="contract.deleteContract()"><i class="md md-delete"></i></button>
                         </div>
                     </div>

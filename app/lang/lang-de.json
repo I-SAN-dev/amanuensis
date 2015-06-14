@@ -20,7 +20,7 @@
     "greeting": "Hallo",
     "youhavexprojects": "du hast {{length}} offene Projekte!",
     "youhaveoneproject": "du hast ein offenes Projekt!",
-    "transformTo": "Überführen in...",
+    "transformTo": "In ein anderes Dokument überführen",
     "month":
     {
       "1":"Januar",
@@ -152,6 +152,7 @@
     "sent":"Angebot gesendet",
     "decline":"Kunde lehnt ab",
     "accept":"Kunde nimmt an",
+    "deleteOffer": "Angebot löschen",
     "notifications": {
       "emailSent": "Angebot wurde verschickt"
     },
@@ -166,6 +167,7 @@
     "createContract":"Vertrag erstellen",
     "onlyPdf":"Nur PDF Dateien erlaubt.",
     "type":"Typ",
+    "deleteContract": "Vertrag löschen",
     "description":
     {
       "true":"Beschreibung",
@@ -188,7 +190,8 @@
     "ready":"Abschließen",
     "open":"zu erledigen",
     "done":"erledigt",
-    "moveToOther": "Aufgabe in eine andere ToDo-Liste verschieben"
+    "moveToOther": "Aufgabe in eine andere ToDo-Liste verschieben",
+    "deleteTodo": "ToDo-Liste löschen"
   },
   "acceptance": {
     "name": "Abnahme",
@@ -197,6 +200,7 @@
     },
     "moveToOther": "Posten in eine andere Abnahme verschieben",
     "send": "Abnahme senden",
+    "deleteAcceptance": "Abnahme löschen",
     "description": "Beschreibungstext",
     "sent": "Abnahme verschickt",
     "accept": "Kunde nimmt an",
@@ -217,6 +221,7 @@
     "newInvoiceFor":"Neue Rechnung im Projekt",
     "createInvoice":"Rechnung erstellen",
     "send": "Rechnung senden",
+    "deleteInvoice": "Rechnung löschen",
     "sent": "Rechnung verschickt",
     "accept": "Ist bezahlt!",
     "notPaid": "Doch nicht bezahlt",
@@ -233,6 +238,7 @@
   },
   "reminder": {
     "send": "Erinnerung senden",
+    "deleteReminder": "Zahlungserinnerung löschen",
     "createReminder":"Zahlungserinnerung erstellen",
     "refNumber":"Referenznummer",
     "newReminderFor":"Neue Zahlungserinnerung für die Rechnung",

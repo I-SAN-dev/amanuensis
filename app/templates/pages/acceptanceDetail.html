@@ -17,7 +17,7 @@
                                           data-ipe-value="acceptance.acceptance.name"
                                           data-ipe-name="'global.name'|translate"
                                           data-ipe-deletable="false"
-                                            ></span> <span class="fontsize-base"><a data-ng-click="acceptance.nextStep()">{{'global.transformTo'|translate}}<i class="md md-call-made"></i></a></span>
+                                            ></span>
                                 </h1>
                             </div>
                             <div class="col-sm-4 text-right">
@@ -50,6 +50,7 @@
                             </div>
                         </div>
                         <div class="delete-document">
+                            <button class="btn btn-warning btn-icon-round btn-link" title="{{'global.transformTo'|translate}}" data-ng-click="acceptance.nextStep()"><i class="md md-content-copy"></i></button>
                             <button class="btn btn-danger btn-icon-round btn-link" title="{{'acceptance.deleteAcceptance'|translate}}" data-ng-click="acceptance.deleteAcceptance()"><i class="md md-delete"></i></button>
                         </div>
                     </div>
