@@ -319,7 +319,8 @@ $panel-heading-height: 64px;
       padding-right: 0;
       font-size: 0;
     }
-    .row .btn-group
+    .row .btn-group,
+    .row .slideanim-buttons
     {
       margin-right: -20px;
     }
@@ -416,6 +417,13 @@ $panel-heading-height: 64px;
       color: $gray-lighter;
     }
   }
+}
+
+.btn-block
+{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .btn.btn-fab

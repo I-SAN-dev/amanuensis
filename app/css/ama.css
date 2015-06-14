@@ -10809,7 +10809,8 @@ h1, h2 {
   .panel-default .panel-heading .btn-group, .panel-default .panel-heading .slideanim-buttons {
     padding-right: 0;
     font-size: 0; }
-  .panel-default .panel-heading .row .btn-group {
+  .panel-default .panel-heading .row .btn-group,
+  .panel-default .panel-heading .row .slideanim-buttons {
     margin-right: -20px; }
   .panel-default .panel-heading button.btn {
     height: 64px;
@@ -10864,6 +10865,11 @@ h1, h2 {
     .bg-primary a:hover, .bg-primary a:active, .bg-primary a:focus {
       text-decoration: underline;
       color: #EEEEEE; }
+
+.btn-block {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
 
 .btn.btn-fab {
   display: block;
@@ -11401,7 +11407,8 @@ textarea {
   .note-editor .note-dropzone {
     opacity: 0 !important; }
   .note-editor .note-toolbar {
-    border-bottom: 1px solid #EEEEEE; }
+    border-bottom: 1px solid #EEEEEE;
+    height: auto !important; }
     .note-editor .note-toolbar button {
       color: #404877; }
   .note-editor .note-resizebar {

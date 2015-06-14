@@ -533,6 +533,7 @@ $checkbox-size: 40px;
   .note-toolbar
   {
     border-bottom: 1px solid $gray-lighter;
+    height: auto !important;
 
     button
     {
