@@ -10866,6 +10866,11 @@ h1, h2 {
       text-decoration: underline;
       color: #EEEEEE; }
 
+.btn-block {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
 .btn.btn-fab {
   display: block;
   padding: 0;
@@ -11402,7 +11407,8 @@ textarea {
   .note-editor .note-dropzone {
     opacity: 0 !important; }
   .note-editor .note-toolbar {
-    border-bottom: 1px solid #EEEEEE; }
+    border-bottom: 1px solid #EEEEEE;
+    height: auto !important; }
     .note-editor .note-toolbar button {
       color: #404877; }
   .note-editor .note-resizebar {

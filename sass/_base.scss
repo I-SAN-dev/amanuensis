@@ -419,6 +419,13 @@ $panel-heading-height: 64px;
   }
 }
 
+.btn-block
+{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .btn.btn-fab
 {
   display: block;
