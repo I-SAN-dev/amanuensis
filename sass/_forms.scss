@@ -647,3 +647,19 @@ $checkbox-size: 40px;
     }
   }
 }
+
+.ipe-price
+{
+  display: inline-block;
+
+
+  .form-inline
+  {
+    vertical-align: -2px;
+
+    .decimalcomma
+    {
+      vertical-align: 1px;
+    }
+  }
+}

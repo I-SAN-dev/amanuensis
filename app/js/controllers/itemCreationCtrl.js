@@ -31,6 +31,7 @@ app.controller('ItemCreationCtrl', [
          */
         this.projectItems = [];
         var setItemList = function (input, output) {
+            self[output] = [];
             for(var i = 0; i < input.length; i++){
                 self[output].push({
                     name: input[i].name,

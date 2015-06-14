@@ -28,17 +28,24 @@ app.controller('ItemPresetsCtrl', [
          */
         this.presets = LocalStorage.getData('itemPresets');
 
-        // get the list of item presets and cache it
-        ApiAbstractionLayer('GET', 'item_preset').then(function (data) {
-            self.presets = data;
-            LocalStorage.setData('itemPresets', data);
+        /**
+         * get the list of item presets and cache it
+         */
+        var getPresets = function()
+        {
+            ApiAbstractionLayer('GET', 'item_preset').then(function (data) {
+                self.presets = data;
+                LocalStorage.setData('itemPresets', data);
 
-            // set the first list entry as detail of none is supplied
-            if(!$stateParams.id && data.length > 0){
-                MasterDetailService.notifyController('setDetail',data[0]);
-                $stateParams.id = data[0].id;
-            }
-        });
+                // set the first list entry as detail of none is supplied
+                if(!$stateParams.id && data.length > 0){
+                    MasterDetailService.notifyController('setDetail',data[0]);
+                    $stateParams.id = data[0].id;
+                }
+            });
+        };
+        getPresets();
+
 
         /**
          * Deletes a preset by given id.
@@ -50,6 +57,14 @@ app.controller('ItemPresetsCtrl', [
                 LocalStorage.setData('itemPresets', data);
             })
         };
+
+        /**
+         * is called when the price has changed
+         */
+        this.priceChanged = function()
+        {
+            getPresets();
+        }
 
 
     }

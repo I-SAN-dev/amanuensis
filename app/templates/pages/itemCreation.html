@@ -229,12 +229,12 @@
                                             <div class="col-sm-10 col-md-11">
 
                                                 <div class="listinfo-row" data-ng-if="create.itemFromProject.userate == 1">
-                                                    {{create.itemFromProject.hourlyrates}} {{'items.hours'|translate}} à {{create.itemFromProject.hourlyrate|price}}
+                                                    {{create.itemFromProject.hourlyrates|twoDecimals}} {{'items.hours'|translate}} à {{create.itemFromProject.hourlyrate|price}}
                                                             <br />
                                                             <span class="less-important">{{'items.hourlyRate'|translate}}</span>
                                                 </div>
                                                 <div class="listinfo-row" data-ng-if="create.itemFromProject.userate == 2">
-                                                    {{create.itemFromProject.dailyrates}} {{'items.days'|translate}} à {{create.itemFromProject.dailyrate|price}}
+                                                    {{create.itemFromProject.dailyrates|twoDecimals}} {{'items.days'|translate}} à {{create.itemFromProject.dailyrate|price}}
                                                     <br />
                                                     <span class="less-important">{{'items.dailyRate'|translate}}</span>
                                                 </div>
