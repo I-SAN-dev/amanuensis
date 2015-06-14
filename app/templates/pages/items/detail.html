@@ -2,7 +2,7 @@
     <div class="btn-toolbar">
 
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-6 col-md-4 col-lg-5">
 
                 <h3 data-in-place-edit
                     data-ipe-key="'name'"
@@ -12,13 +12,10 @@
                     data-ipe-name="'items.name'|translate"></h3>
 
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-6 col-md-8 col-lg-7">
 
-                <div class="btn-group btn-group-sm pull-right">
-                    <button class="btn btn-link" data-ng-click="item.setPage(1)" data-ng-class="{active: item.showPage==1}"><i class="md md-lg md-comment"></i> {{'global.description' | translate}}</button>
-                    <button class="btn btn-link" data-ng-click="item.setPage(2)" data-ng-class="{active: item.showPage==2}"><i class="md md-lg md-payment"></i> {{'items.pricing' | translate}}</button>
-                    <button class="btn btn-link" data-ng-click="item.setPage(3)" data-ng-class="{active: item.showPage==3}"><i class="md md-lg md-link"></i> {{'items.connections'|translate}}</button>
-                </div>
+                <div class="slideanim-buttons slideanim3-buttons btn-group-sm pull-right">
+                    <button class="btn btn-link" data-ng-click="item.setPage(1)" data-ng-class="{active: item.showPage==1}"><i class="md md-lg md-comment"></i><span class="hidden-xs hidden-sm"> {{'global.description' | translate}}</span></button><button class="btn btn-link" data-ng-click="item.setPage(2)" data-ng-class="{active: item.showPage==2}"><i class="md md-lg md-payment"></i><span class="hidden-xs hidden-sm"> {{'items.pricing' | translate}}</span></button><button class="btn btn-link" data-ng-click="item.setPage(3)" data-ng-class="{active: item.showPage==3}"><i class="md md-lg md-link"></i><span class="hidden-xs hidden-sm"> {{'items.connections'|translate}}</span></button>               </div>
             </div>
         </div>
     </div>

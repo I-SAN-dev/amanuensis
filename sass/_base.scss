@@ -314,9 +314,10 @@ $panel-heading-height: 64px;
       line-height: $panel-heading-height;
       margin-right: 20px;
     }
-    .btn-group
+    .btn-group, .slideanim-buttons
     {
       padding-right: 0;
+      font-size: 0;
     }
     .row .btn-group
     {

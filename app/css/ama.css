@@ -10806,8 +10806,9 @@ h1, h2 {
   .panel-default .panel-heading i.state-icon {
     line-height: 64px;
     margin-right: 20px; }
-  .panel-default .panel-heading .btn-group {
-    padding-right: 0; }
+  .panel-default .panel-heading .btn-group, .panel-default .panel-heading .slideanim-buttons {
+    padding-right: 0;
+    font-size: 0; }
   .panel-default .panel-heading .row .btn-group {
     margin-right: -20px; }
   .panel-default .panel-heading button.btn {
@@ -11638,24 +11639,41 @@ a.list-group-item {
   .detail-view .btn-toolbar.inpanel-tabbar,
   .btn-toolbar.inpanel-tabbar.inpanel-tabbar {
     border-top: 1px solid #EEEEEE; }
-  .detail-view .btn-toolbar .btn-group button.btn,
-  .btn-toolbar.inpanel-tabbar .btn-group button.btn {
-    height: 64px;
-    line-height: 60px;
-    font-size: 12px;
-    padding: 0 10px;
-    border-top: 2px solid transparent !important;
-    border-bottom: 2px solid transparent !important;
-    transition: 0.3s border-bottom, 0.3s background-color;
-    border-radius: 0 !important; }
-    .detail-view .btn-toolbar .btn-group button.btn:hover, .detail-view .btn-toolbar .btn-group button.btn:active, .detail-view .btn-toolbar .btn-group button.btn:focus,
-    .btn-toolbar.inpanel-tabbar .btn-group button.btn:hover,
-    .btn-toolbar.inpanel-tabbar .btn-group button.btn:active,
-    .btn-toolbar.inpanel-tabbar .btn-group button.btn:focus {
-      text-decoration: none; }
-    .detail-view .btn-toolbar .btn-group button.btn.active,
-    .btn-toolbar.inpanel-tabbar .btn-group button.btn.active {
-      border-bottom: 2px solid #404877 !important; }
+  .detail-view .btn-toolbar .slideanim-buttons,
+  .btn-toolbar.inpanel-tabbar .slideanim-buttons {
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 0; }
+    .detail-view .btn-toolbar .slideanim-buttons.slideanim3-buttons .btn,
+    .btn-toolbar.inpanel-tabbar .slideanim-buttons.slideanim3-buttons .btn {
+      max-width: 33.33333%; }
+    .detail-view .btn-toolbar .slideanim-buttons.slideanim2-buttons .btn,
+    .btn-toolbar.inpanel-tabbar .slideanim-buttons.slideanim2-buttons .btn {
+      max-width: 50%; }
+    .detail-view .btn-toolbar .slideanim-buttons.slideanim4-buttons .btn,
+    .btn-toolbar.inpanel-tabbar .slideanim-buttons.slideanim4-buttons .btn {
+      max-width: 25%; }
+    .detail-view .btn-toolbar .slideanim-buttons button.btn,
+    .btn-toolbar.inpanel-tabbar .slideanim-buttons button.btn {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 64px;
+      line-height: 60px;
+      font-size: 12px;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important; }
+      .detail-view .btn-toolbar .slideanim-buttons button.btn:hover, .detail-view .btn-toolbar .slideanim-buttons button.btn:active, .detail-view .btn-toolbar .slideanim-buttons button.btn:focus,
+      .btn-toolbar.inpanel-tabbar .slideanim-buttons button.btn:hover,
+      .btn-toolbar.inpanel-tabbar .slideanim-buttons button.btn:active,
+      .btn-toolbar.inpanel-tabbar .slideanim-buttons button.btn:focus {
+        text-decoration: none; }
+      .detail-view .btn-toolbar .slideanim-buttons button.btn.active,
+      .btn-toolbar.inpanel-tabbar .slideanim-buttons button.btn.active {
+        border-bottom: 2px solid #404877 !important; }
   .detail-view .btn-toolbar h3, .detail-view .btn-toolbar .h3,
   .btn-toolbar.inpanel-tabbar h3,
   .btn-toolbar.inpanel-tabbar .h3 {

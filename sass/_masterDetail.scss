@@ -61,27 +61,50 @@ $detail-toolbar-height: 64px;
     border-top: 1px solid $gray-lighter;
   }
 
-  .btn-group button.btn {
-    height: $detail-toolbar-height;
-    line-height: $detail-toolbar-height - 4px;
-    font-size: $font-size-small;
-    padding: 0 10px;
-    border-top: 2px solid transparent !important;
-    border-bottom: 2px solid transparent !important;
-    transition: 0.3s border-bottom, 0.3s background-color;
-    border-radius: 0 !important;
 
-    &:hover,
-    &:active,
-    &:focus {
-      text-decoration: none;
+  .slideanim-buttons {
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 0;
+    &.slideanim3-buttons {
+      .btn {
+        max-width: 33.33333%;
+      }
     }
+    &.slideanim2-buttons {
+      .btn {
+        max-width: 50%;
+      }
+    }
+    &.slideanim4-buttons {
+      .btn {
+        max-width: 25%;
+      }
+    }
+    button.btn {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: $detail-toolbar-height;
+      line-height: $detail-toolbar-height - 4px;
+      font-size: $font-size-small;
+      padding: 0 10px;
+      border-top: 2px solid transparent !important;
+      border-bottom: 2px solid transparent !important;
+      transition: 0.3s border-bottom, 0.3s background-color;
+      border-radius: 0 !important;
 
-    &.active {
-      border-bottom: 2px solid $brand-primary !important;
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+      }
+
+      &.active {
+        border-bottom: 2px solid $brand-primary !important;
+      }
     }
   }
-
   h3, .h3
   {
     color: $brand-primary;

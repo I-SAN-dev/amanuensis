@@ -6,7 +6,7 @@
                 <span class="h3">{{project.project.name}} <i class="state-icon state-icon-inherit state-icon-{{project.project.state}}"></i></span>
             </div>
             <div class="col-sm-7 col-md-6">
-                <div class="btn-group btn-group-sm pull-right" data-ng-init="project.showPage = 1">
+                <div class="slideanim-buttons slideanim2-buttons btn-group-sm pull-right" data-ng-init="project.showPage = 1">
                     <button class="btn btn-link" data-ng-click="project.showPage = 1" data-ng-class="{active: project.showPage==1}"><i class="md md-lg md-folder"></i> {{'projects.data' | translate}}</button>
                     <button class="btn btn-link" data-ng-click="project.showPage = 2" data-ng-class="{active: project.showPage==2}"><i class="md md-lg md-attach-file"></i> {{'projects.documents' | translate}}</button>
                 </div>
