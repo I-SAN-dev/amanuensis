@@ -181,11 +181,6 @@ class AmaItem {
          */
         if($entry['userate'] == 1)
         {
-            /* check hourlyrates */
-            if(!isset($entry['hourlyrates']) || $entry['hourlyrates'] == '')
-            {
-                $entry['hourlyrates'] = 0;
-            }
             /* get hourlyrate - from item, client or config */
             if(isset($entry['hourlyrate']) && $entry['hourlyrate'] != '' && $entry['hourlyrate'] != 0)
             {
@@ -201,7 +196,8 @@ class AmaItem {
             }
 
             /* set total value */
-            $entry['total'] = $entry['hourlyrates'] * $hourlyrate;
+            $hourlyrates = (isset($entry['hourlyrates'])&& $entry['hourlyrates'] != '') ? $entry['hourlyrates'] : 0;
+            $entry['total'] = $hourlyrates * $hourlyrate;
             $entry['usedrate'] = $hourlyrate;
         }
         /*
@@ -209,11 +205,6 @@ class AmaItem {
          */
         else if($entry['userate'] == 2)
         {
-            /* check hourlyrates */
-            if(!isset($entry['dailyrates']) || $entry['dailyrates'] == '')
-            {
-                $entry['dailyrates'] = 0;
-            }
             /* get hourlyrate - from item, client or config */
             if(isset($entry['dailyrate']) && $entry['dailyrate'] != '' && $entry['dailyrate'] != 0)
             {
@@ -229,7 +220,8 @@ class AmaItem {
             }
 
             /* set total value */
-            $entry['total'] = $entry['dailyrates'] * $dailyrate;
+            $dailyrates = (isset($entry['dailyrates'])&& $entry['dailyrates'] != '') ? $entry['dailyrates'] : 0;
+            $entry['total'] = $dailyrates * $dailyrate;
             $entry['usedrate'] = $dailyrate;
 
         }
