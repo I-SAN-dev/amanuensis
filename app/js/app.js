@@ -491,6 +491,7 @@ app.constant('sites', [
 
 /**
  * @method config
+ * @memberOf ama
  * App Config
  * Configures i18n and app states
  */

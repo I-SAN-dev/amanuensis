@@ -3,6 +3,12 @@
   height: 100px;
   margin-bottom: 20px;
 
+  h1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   .delete-document {
     position: absolute;
     bottom: 10px;

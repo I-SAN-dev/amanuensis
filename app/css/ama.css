@@ -12118,6 +12118,10 @@ a.list-group-item {
 .detail-top-bar {
   height: 100px;
   margin-bottom: 20px; }
+  .detail-top-bar h1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
   .detail-top-bar .delete-document {
     position: absolute;
     bottom: 10px;

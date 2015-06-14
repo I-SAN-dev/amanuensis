@@ -34,8 +34,10 @@ app.factory('MasterDetailService', [
          */
         this.notifyDetail = function () {
             var fnName = arguments[0];
-            if(typeof detail[fnName] === 'function') {
-                return detail[fnName].apply(null,processParams(arguments));
+            if(detail) {
+                if (typeof detail[fnName] === 'function') {
+                    return detail[fnName].apply(null, processParams(arguments));
+                }
             }
         };
         return {

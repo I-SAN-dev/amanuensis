@@ -74,10 +74,16 @@ app.directive('listNavigation',[
                 };
 
                 // select the only element left in the list when the list is filtered down to one element
-                $document.unbind('keyup');
+                /*$document.unbind('keyup');
                 $document.on('keyup', function (event) {
                     var list = getFilteredList();
                     if (list.length == 1) {
+                        callback(list[0]);
+                    }
+                });*/
+                scope.$watch('filterText', function () {
+                    var list = getFilteredList();
+                    if (list.length == 1 && callback) {
                         callback(list[0]);
                     }
                 });
@@ -85,27 +91,30 @@ app.directive('listNavigation',[
                 // navigate to the next or previous item when up or down key is pressed
                 $document.unbind('keydown');
                 $document.on('keydown', function (event) {
-                    var list = getFilteredList();
-
-
-                    var domList = $(elem[0]).find('[data-ng-repeat]');
-
-
-                    var active = scope.active || null;
                     var key = event.keyCode;
-
-                    var animation = {
-                        duration: 500,
-                        queue: false
-                    };
-                    var documentOffset = 40;
-                    var newActiveOffset;
+                    if(key==38 || key==40) {
+                        var list = getFilteredList();
 
 
-                    var viewportHeight = scrollArea.height();
-                    var scrollTop = scrollArea.scrollTop();
+                        var domList = $(elem[0]).find('[data-ng-repeat]');
 
-                    var position;
+
+                        var active = scope.active || null;
+
+
+                        var animation = {
+                            duration: 500,
+                            queue: false
+                        };
+                        var documentOffset = 40;
+                        var newActiveOffset;
+
+
+                        var viewportHeight = scrollArea.height();
+                        var scrollTop = scrollArea.scrollTop();
+
+                        var position;
+                    }
                     if (key == 38) { // arrow up
                         event.stopPropagation();
                         event.preventDefault();

@@ -349,7 +349,13 @@ app.directive('materialInput', [
                                 console.log(scope.model);
                             }
                         });
-                        scope.editors.code(scope.model);
+                        var unbind = scope.$watch('model', function (newValue) {
+                            if(newValue){
+                                scope.editors.code(newValue);
+                                unbind();
+                            }
+                        });
+
                     }
 
 
