@@ -36,6 +36,11 @@ class settings {
         $array["appsecret"] = '*****';
         $array["mail"]["password"] = '*****';
 
+        /* remove stuff that should not be editable in the frontend */
+        unset($array['db']);
+        unset($array['lang']);
+        unset($array['path']);
+
         /* define some groups */
         $d = array();
         $d['settings.company'] = array('company', 'company_addition','address');
@@ -43,7 +48,7 @@ class settings {
         $d['settings.design'] = array('design', '|', 'templates');
         $d['settings.mail'] = array('mailcontent','|','mail');
         $d['settings.refnumbers'] = array('refnumber_offers', '|', 'refnumber_contracts', '|', 'refnumber_acceptances', '|', 'refnumber_invoices', '|', 'refnumber_reminders', '|', 'refnumber_customers' );
-        $d['settings.server'] = array('baseurl','secureurl','appsecret','sessiontimeout','|', 'debug', 'errorlogging', 'errorlogpath', '|', 'lang', '|', 'path', '|', 'db');
+        $d['settings.server'] = array('baseurl','secureurl','appsecret','sessiontimeout','|', 'debug', 'errorlogging', 'errorlogpath');
 
         /* create the groups groups*/
         $out = array();
