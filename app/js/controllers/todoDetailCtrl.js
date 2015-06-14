@@ -10,9 +10,10 @@ app.controller('TodoDetailCtrl', [
     'PanelService',
     'ItemService',
     'DeleteService',
+    'NextStepModal',
     '$state',
     '$stateParams',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, DeleteService, $state, $stateParams) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, DeleteService, NextStepModal, $state, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
         PanelService.setPanel('items',2);
@@ -29,11 +30,11 @@ app.controller('TodoDetailCtrl', [
         getTodo();
 
         /**
-         *
+         * Opens a {@link ama.services.NextStepModal NextStepModal}.
          */
         this.nextStep = function()
         {
-            alert('TODO: create acceptance or invoice');
+            NextStepModal('todo', self.todo);
         };
 
         /**
@@ -96,5 +97,7 @@ app.controller('TodoDetailCtrl', [
                 $state.go('app.projectDetail', {id: self.todo.project.id});
             });
         };
+
+
     }
 ]);

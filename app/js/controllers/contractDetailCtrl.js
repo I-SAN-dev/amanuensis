@@ -9,11 +9,12 @@ app.controller('ContractDetailCtrl', [
     'PdfService',
     'ItemService',
     'DeleteService',
+    'NextStepModal',
     '$state',
     '$stateParams',
     '$sce',
     "constants",
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, DeleteService, $state, $stateParams, $sce, constants){
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, DeleteService, NextStepModal, $state, $stateParams, $sce, constants){
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
@@ -112,5 +113,11 @@ app.controller('ContractDetailCtrl', [
             });
         };
 
+        /**
+         * Opens a {@link ama.services.NextStepModal NextStepModal}.
+         */
+        this.nextStep = function(){
+            NextStepModal('contract', self.contract);
+        };
     }
 ]);

@@ -93,12 +93,19 @@ app.controller('AcceptanceDetailCtrl', [
         };
 
         /**
+         * Opens a {@link ama.services.NextStepModal NextStepModal}.
+         */
+        this.nextStep = function()
+        {
+            NextStepModal('acceptance', self.acceptance);
+        };
+        /**
          * Changes the acceptance's state to 3 (client accepted)
          * Opens a {@link ama.services.NextStepModal NextStepModal}.
          */
         this.accept = function () {
             changeState(3);
-            NextStepModal('acceptance',self.acceptance);
+            self.nextStep();
         };
 
         /**

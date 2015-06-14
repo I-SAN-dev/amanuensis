@@ -17,7 +17,7 @@
                                           data-ipe-value="contract.contract.name"
                                           data-ipe-name="'global.name'|translate"
                                           data-ipe-deletable="false"
-                                            ></span>
+                                            ></span> <span data-ng-if="!contract.isFileContract" class="fontsize-base"><a data-ng-click="contract.nextStep()">{{'global.transformTo'|translate}}<i class="md md-call-made"></i></a></span>
                                 </h1>
                             </div>
                             <div class="col-sm-4 text-right">
