@@ -23,20 +23,23 @@ app.directive('clientBox', [
                 var mailvalue;
                 var mailname;
 
-                if($scope.client && $scope.client.data && $scope.client.data.mail)
-                {
-                    for(var i = 0; i<$scope.client.data.mail.length; i++ )
+                $scope.$watch('client', function(){
+                    if($scope.client && $scope.client.data && $scope.client.data.mail)
                     {
-                        if(i==0 || $scope.client.data.mail[i].isdefault == 1)
+                        for(var i = 0; i<$scope.client.data.mail.length; i++ )
                         {
-                            mailvalue = $scope.client.data.mail[i].value;
-                            mailname = $scope.client.data.mail[i].name;
+                            if(i==0 || $scope.client.data.mail[i].isdefault == 1)
+                            {
+                                mailvalue = $scope.client.data.mail[i].value;
+                                mailname = $scope.client.data.mail[i].name;
+                            }
                         }
+                        $scope.mail = {};
+                        $scope.mail.value = mailvalue;
+                        $scope.mail.name = mailname;
                     }
-                    $scope.mail = {};
-                    $scope.mail.value = mailvalue;
-                    $scope.mail.name = mailname;
-                }
+                });
+
             }
         }
     }
