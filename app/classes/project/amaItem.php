@@ -220,7 +220,7 @@ class AmaItem {
             }
 
             /* set total value */
-            $dailyrates = (isset($entry['dailyyrates'])&& $entry['dailyyrates'] != '') ? $entry['dailyyrates'] : 0;
+            $dailyrates = (isset($entry['dailyrates'])&& $entry['dailyrates'] != '') ? $entry['dailyrates'] : 0;
             $entry['total'] = $dailyrates * $dailyrate;
             $entry['usedrate'] = $dailyrate;
 
