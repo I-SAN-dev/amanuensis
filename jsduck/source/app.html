@@ -24,64 +24,20 @@ var app = angular.module(&#39;ama&#39;, [&#39;ui.router&#39;, &#39;btford.modal&
 
 app.config( [
     &#39;$compileProvider&#39;,
-    function( $compileProvider )
+    &#39;$httpProvider&#39;,
+    function( $compileProvider, $httpProvider )
     {
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|chrome|chrome-extension):/);
+
+        $httpProvider.defaults.withCredentials = true;
     }
 ]);
 
 <span id='ama-method-run'>/**
 </span> * @method run
- *
+ * This method is executed when the app is started. Handles global events.
  */
-app.run(function ($rootScope, $state, AuthService, LocalStorage, $q) {
-
-
-    /*
-     * Checks if the current user is logged in and sets the &#39;loggedin&#39; variable
-     * which will be used to get the login state at any other point
-     * @return {Object}
-     */
-    var getLoginState = function(){
-        console.log(&#39;loggedIn&#39;,$rootScope.loggedIn);
-        var defer = $q.defer();
-        AuthService.currentUser().then(function (data) {
-            LocalStorage.setKey(data.fe_key);
-            $rootScope.loggedIn = true;
-            $rootScope.currentUserName = data.username;
-            defer.resolve();
-
-        });
-        return defer.promise;
-    };
-
-    // redirects to login state if authentication is required for the next state and the user is not logged in
-    var loginLogic = function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-        if (requireLogin &amp;&amp; !$rootScope.loggedIn) {
-            event.preventDefault();
-            $state.go(&#39;login&#39;, {referrer:toState.name, referrerParams:toParams});
-        }
-    };
-
-
-
-<span id='ama-property-'>    /**
-</span>     * Processes the login logic at every stateChange
-     */
-    $rootScope.$on(&#39;$stateChangeStart&#39;, function (event, toState, toParams) {
-        console.log(toState);
-        // if loggedIn is not set yet, wait for getLoginState
-        if($rootScope.loggedIn === undefined)
-        {
-            getLoginState().then(function () {
-                loginLogic(event, toState, toParams);
-            });
-        } else {
-            loginLogic(event, toState, toParams);
-        }
-
-    });
+app.run(function ($rootScope, $state) {
 
 
     // trigger a refresh whenever user clicks history buttons
@@ -158,7 +114,37 @@ app.constant(&#39;sites&#39;, [
                 &#39;mainContent&#39;: {
                     template: &#39;&lt;div data-ui-view=&quot;appContent&quot; class=&quot;fullheight next-fullheight&quot;&gt;&lt;/div&gt;&#39;
                 }
-            }
+            },
+            resolve: {
+                /*
+                 * Checks if the current user is logged in and sets the &#39;loggedin&#39; variable
+                 * which will be used to get the login state at any other point
+                 * @return {Object}
+                 */
+                auth: function(AuthService, LocalStorage, $rootScope, $q){
+                    console.log(&#39;authentification&#39;);
+                    var deferred = $q.defer();
+
+                    if(AuthService.loggedIn === undefined) {
+                        AuthService.currentUser(true).then(function (data) {
+                            $rootScope.loggedIn = true;
+                            $rootScope.currentUserName = data.username;
+                            LocalStorage.setKey(data.fe_key);
+                            deferred.resolve($rootScope.loggedIn);
+                        });
+                    } else {
+                        deferred.resolve($rootScope.loggedIn);
+                    }
+                    return deferred.promise;
+                }
+            },
+            controller: [&#39;auth&#39;, &#39;$state&#39;,function(auth,$state) {
+                console.log(auth);
+                if (!auth) {
+                    $state.go(&#39;login&#39;, {referrer: $state.current.name, referrerParams: $state.current.params});
+                }
+
+            }]
         }
     },
     {
@@ -348,7 +334,7 @@ app.constant(&#39;sites&#39;, [
             abstract: true,
             views: {
                 &#39;appContent&#39;: {
-                    templateUrl: &#39;templates/pages/projects.html&#39;
+                    templateUrl: &#39;templates/pages/projectArchive.html&#39;
                 }
             },
             params: {
@@ -419,6 +405,31 @@ app.constant(&#39;sites&#39;, [
                 &#39;appContent&#39;: {
                     templateUrl: &#39;templates/pages/invoiceDetail.html&#39;
                 }
+            }
+        }
+    },
+    {
+        name:&#39;app.reminderDetail&#39;,
+        stateObject: {
+            url: &#39;/reminder/:id&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/reminderDetail.html&#39;
+                }
+            }
+        }
+    },
+    {
+        name:&#39;app.reminderCreation&#39;,
+        stateObject: {
+            url: &#39;/new-reminder&#39;,
+            views: {
+                &#39;appContent&#39;: {
+                    templateUrl: &#39;templates/pages/reminderCreation.html&#39;
+                }
+            },
+            params: {
+                invoice: null
             }
         }
     },
@@ -495,8 +506,9 @@ app.constant(&#39;sites&#39;, [
 
 ]);
 
-<span id='ama-constants-sites-method-config'>/**
+<span id='ama-method-config'>/**
 </span> * @method config
+ * @member ama
  * App Config
  * Configures i18n and app states
  */
@@ -523,13 +535,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $
     }
 
 
+
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise(&#39;/dashboard&#39;);
 
     pickadateI18nProvider.translations = {
-            prev: &#39;&lt;i class=&quot;md md-chevron-left&quot;&gt;&lt;/i&gt;&#39;,
-            next: &#39;&lt;i class=&quot;md md-chevron-right&quot;&gt;&lt;/i&gt;&#39;
-    }
+        prev: &#39;&lt;i class=&quot;md md-chevron-left&quot;&gt;&lt;/i&gt;&#39;,
+        next: &#39;&lt;i class=&quot;md md-chevron-right&quot;&gt;&lt;/i&gt;&#39;
+    };
+
+
 });</pre>
 </body>
 </html>

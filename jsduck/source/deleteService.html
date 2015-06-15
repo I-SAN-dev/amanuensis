@@ -40,7 +40,10 @@ app.factory(&#39;DeleteService&#39;,
         var defer = $q.defer();
         var modal = btfModal({
             templateUrl: &#39;templates/modules/deleteDialog.html&#39;,
-            controller: function(){
+            controller: [&#39;$filter&#39;,&#39;$scope&#39;, function($filter, $scope){
+
+                $scope.msgObject = {name:$filter(&#39;translate&#39;)(&#39;delete.messages.&#39;+ apiAction)};
+
 
                 this.accept = function () {
                     ApiAbstractionLayer(&#39;DELETE&#39;, {name: apiAction, data: data}, true).then(function (data) {
@@ -58,7 +61,7 @@ app.factory(&#39;DeleteService&#39;,
                     modal.deactivate();
                     defer.reject();
                 };
-            },
+            }],
             controllerAs: &#39;delete&#39;
         });
         modal.activate();

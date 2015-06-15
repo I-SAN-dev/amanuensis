@@ -29,9 +29,10 @@ app.controller(&#39;TodoCreationCtrl&#39;, [
         if(!$stateParams.project){
             ErrorDialog({code:&#39;1337&#39;,languagestring:&#39;errors.noProjectSpecified&#39;}).activate();
             $state.go(&#39;app.dashboard&#39;)
+        } else{
+            var project = $stateParams.project;
+            var projectId = project.id;
         }
-        var project = $stateParams.project;
-        var projectId = project.id;
 <span id='ama-controllers-TodoCreationCtrl-property-projectName'>        /**
 </span>         * Name of the current project (derived from stateParams)
          * @type {string}

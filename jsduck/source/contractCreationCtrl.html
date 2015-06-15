@@ -28,8 +28,14 @@ app.controller(&#39;ContractCreationCtrl&#39;, [
     &#39;$stateParams&#39;,
     &#39;$state&#39;,
     &#39;constants&#39;,
-    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants) {
+    &#39;translateFilter&#39;,
+    &#39;ErrorDialog&#39;,
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter, ErrorDialog) {
         var self = this;
+        if(!$stateParams.project){
+            ErrorDialog({code:&#39;1337&#39;,languagestring:&#39;errors.noProjectSpecified&#39;}).activate();
+            $state.go(&#39;app.dashboard&#39;)
+        }
         var project = $stateParams.project;
         var projectId = project.id;
 <span id='ama-controllers-ContractCreationCtrl-property-projectName'>        /**
@@ -53,26 +59,57 @@ app.controller(&#39;ContractCreationCtrl&#39;, [
             }
         });
 
+<span id='ama-controllers-ContractCreationCtrl-method-endsWith'>        /**
+</span>         * Checks if a string ends with a given string
+         * @param str
+         * @param suffix
+         * @returns {boolean}
+         */
+        var endsWith = function(str, suffix)
+        {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        };
+
+<span id='ama-controllers-ContractCreationCtrl-property-fileinput'>        /**
+</span>         * Watches filename changes
+         */
+        var fileinput = $(&#39;.hidden-fileinput&#39;);
+        fileinput.change(function(){
+            var filename = fileinput.val();
+            if(endsWith(filename,&#39;.pdf&#39;) || endsWith(filename, &#39;.PDF&#39;))
+            {
+                self.filename = filename;
+                self.validfile = true;
+            }
+            else
+            {
+                self.filename = translateFilter(&#39;contract.onlyPdf&#39;);
+                self.validfile = false;
+            }
+        });
+
 <span id='ama-controllers-ContractCreationCtrl-method-createContract'>        /**
 </span>         * Creates a new contract
          */
         this.createContract = function () {
             if(self.fileContract){
-                ItemContainerService.createItemContainer(&#39;fileContract&#39;,projectId, self.newContract).then(function (data) {
-                    var file = self.fileContract;
-                    console.log(file);
-                    var uploadUrl = constants.BASEURL+&#39;/api/?action=fileContract&amp;uploadfor=&#39;+data.id;
-                    fileUploadService.uploadFile(file,uploadUrl).then(function(path){
-                        ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;fileContract&#39;, data: {id: data.id, path: path}}).then(function (data) {
-                            ItemContainerService.updateLocalStorage(&#39;fileContract&#39;, projectId, data);
-                            // go to where we came from
-                            var to = $stateParams.referrer;
-                            var toParams = $stateParams.referrerParams;
-                            $state.go(to,toParams);
+                if(self.validfile)
+                {
+                    ItemContainerService.createItemContainer(&#39;fileContract&#39;,projectId, self.newContract).then(function (data) {
+                        var file = self.fileContract;
+                        console.log(file);
+                        var uploadUrl = constants.URL+&#39;/api/?action=fileContract&amp;uploadfor=&#39;+data.id;
+                        fileUploadService.uploadFile(file,uploadUrl).then(function(path){
+                            ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;fileContract&#39;, data: {id: data.id, path: path}}).then(function (data) {
+                                ItemContainerService.updateLocalStorage(&#39;fileContract&#39;, projectId, data);
+                                // go to where we came from
+                                var to = $stateParams.referrer;
+                                var toParams = $stateParams.referrerParams;
+                                $state.go(to,toParams);
+                            });
                         });
                     });
-
-                });
+                }
 
             } else {
                 ItemContainerService.createItemContainer(&#39;contract&#39;, projectId, self.newContract).then(function (data) {

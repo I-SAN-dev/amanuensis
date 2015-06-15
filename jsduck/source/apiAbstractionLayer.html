@@ -36,7 +36,11 @@ app
         &#39;$rootScope&#39;,
         function ($http, constants, $q, $state, ErrorDialog, $stateParams, $rootScope) {
             //var specialParams = {};
-            var apiUrl = /*(constants.SECUREURL || constants.BASEURL)+*/&#39;api/&#39;;
+            var apiUrl = &#39;api/&#39;;
+            if(constants.SECUREURL)
+            {
+                apiUrl = constants.SECUREURL+&#39;/api/&#39;;
+            }
 
 
             return function (method, identifier, noErrorModal) {
@@ -74,7 +78,10 @@ app
                         // handle 401 (Authentication required) errors in place
                         if (status == 401) {
                             $rootScope.loggedIn = false;
-                            $state.go(&#39;login&#39;, {referrer: $state.current.name, referrerParams: $stateParams});
+                            if($state.current.name != &#39;login&#39;){
+                                console.log($state.current, $stateParams);
+                                $state.go(&#39;login&#39;, {referrer: $state.current.name, referrerParams: angular.copy($stateParams)});
+                            }
                         }
                         $rootScope.loaded = true;
                         defer.reject(data);

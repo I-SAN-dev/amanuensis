@@ -37,6 +37,7 @@ app.directive(&#39;materialInput&#39;, [
             selectMultiple: true,
             price: true,
             date: true,
+            datetime: true,
             bool: true
         };
         return {
@@ -52,7 +53,9 @@ app.directive(&#39;materialInput&#39;, [
                 optionName: &#39;@inputSelectOptionName&#39;,
                 buttons: &#39;=inputButtons&#39;,
                 searchable: &#39;@inputSelectSearchable&#39;,
-                inputBlur:&#39;=ngBlur&#39;
+                inputBlur:&#39;=ngBlur&#39;,
+                minDatetime: &#39;=inputMinDatetime&#39;,
+                maxDatetime: &#39;=inputMaxDatetime&#39;
             },
             controller: function ($scope) {
                 $scope.currencySymbol = &#39;€&#39;;
@@ -65,10 +68,21 @@ app.directive(&#39;materialInput&#39;, [
                      * @param type - the type of the button that was clicked (can be one of &#39;save&#39;, &#39;cancel&#39; or &#39;delete&#39;)
                      */
                     $scope.processWysiwyg = function (type) {
-                        if (type == &#39;save&#39;)
+                        var editor = $scope.editors;
+                        /* this will only work with the new summernote version which is not released yet */
+                        if($(editor[0]).summernote(&#39;isEmpty&#39;)) {
+                            $scope.model = &#39;&#39;;
+                        }
+                        /* therefore here comes a workaround */
+                        if($scope.model != &#39;&#39; &amp;&amp; $(&#39;&lt;div&gt;&#39;+$scope.model+&#39;&lt;/div&gt;&#39;).text().trim() == &#39;&#39;) {
+                            $scope.model = &#39;&#39;;
+                        }
+                        if (type == &#39;save&#39;) {
                             $scope.buttons[type][type]($scope.model);
-                        else
+                        }
+                        else {
                             $scope.buttons[type][type]();
+                        }
                     };
 
 
@@ -152,10 +166,13 @@ app.directive(&#39;materialInput&#39;, [
                     // build an array (length=2) as model for our price inputs
                     // array[0] will be the &#39;euros&#39; value of the price
                     // array[1] will be the &#39;cents&#39; value of the price
-                    if($scope.model)
-                        $scope.priceModel = $scope.model.split(&#39;.&#39;);
-                    else
-                        $scope.priceModel = new Array(2);
+                    $scope.priceModel = new Array(2);
+                    var watcher = function (newValue){
+                        if(newValue)
+                            $scope.priceModel = newValue.split(&#39;.&#39;);
+                    };
+                    var unbindWatcher = $scope.$watch(&#39;model&#39;, watcher);
+
 <span id='ama-directives-materialInput-method-processPrice'>                    /**
 </span>                     * Parses the actual price (as String) from the priceModel array
                      */
@@ -165,17 +182,21 @@ app.directive(&#39;materialInput&#39;, [
                             value[1] = &#39;00&#39;;
                         }
                         if(!value[0]){
-                            value[0] = null;
-                            return;
+                            value[0] = &#39;0&#39;;
                         }
                         $scope.model = value[0]+&#39;.&#39;+value[1];
+                    };
+
+                    $scope.savePrice = function(){
+                        $scope.processPrice();
+                        $scope.buttons.save.save();
                     }
                 }
 
 <span id='ama-directives-materialInput-method-blurField'>                /**
 </span>                 * Chooses the action to be taken on blur.
                  * If one of the buttons is clicked, the button action replaces the default blur action.
-                 * TODO: this code should not be not used anymore. check if we can remove it entirely
+                 * @deprecated TODO: this code should not be not used anymore. check if we can remove it entirely
                  * @param event
                  * @param fieldId
                  */
@@ -224,6 +245,74 @@ app.directive(&#39;materialInput&#39;, [
                             initialDate = angular.copy($scope.model);
                         }
                     }
+                }
+
+                // datetime fields
+                if($scope.inputType == &#39;datetime&#39;){
+                    var splitDatetime = function(datetime){
+                        var dateTime = datetime.split(&#39; &#39;);
+                        var time = dateTime[1].split(&#39;:&#39;);
+                        return [
+                            dateTime[0], // the date component
+                            parseInt(time[0]), // the hours
+                            parseInt(time[1]) // the minutes
+                        ];
+                    };
+
+
+                    if($scope.minDatetime){
+                        var minimum = splitDatetime($scope.minDatetime);
+                        $scope.minDate = minimum[0];
+                        $scope.minHour = minimum[1];
+                        $scope.minMinute = minimum[2]+1;
+                    } else {
+                        $scope.minHour = 0;
+                        $scope.minMinute = 0;
+                    }
+
+                    if($scope.maxDatetime){
+                        var max = splitDatetime($scope.maxDatetime);
+                        $scope.maxDate = max[0];
+                        $scope.maxHour = max[1];
+                        $scope.maxMinute = max[2]-1;
+                    } else{
+                        $scope.maxHour = 23;
+                        $scope.maxMinute = 59;
+                    }
+
+                    $scope.datetimeModel = splitDatetime($scope.model);
+                    var initial = angular.copy($scope.datetimeModel[0]);
+
+                    $scope.applyDate = function(event){
+                        if($(event.target).hasClass(&#39;pickadate-enabled&#39;)) {
+                            $scope.showPage = 2;
+                            initial = angular.copy($scope.datetimeModel[0]);
+                        }
+                    };
+
+                    $scope.applyTime = function(){
+                        if($scope.maxDatetime){
+                            if($scope.datetimeModel[1] != $scope.maxHour){
+                                $scope.maxMinute = 59;
+                            } else {
+                                $scope.maxMinute = max[2]-1;
+                            }
+                        }
+                        if($scope.minDatetime){
+                            if($scope.datetimeModel[1] != $scope.minHour){
+                                $scope.minMinute = 0;
+                            } else {
+                                $scope.minMinute = minimum[2]+1;
+                            }
+                        }
+                    };
+
+                    $scope.processDatetime = function(){
+                        $scope.model = $scope.datetimeModel[0]+&#39; &#39;+$scope.datetimeModel[1]+&#39;:&#39;+$scope.datetimeModel[2]+&#39;:00&#39;;
+                        if($scope.buttons){
+                            $scope.buttons.save.save($scope.model);
+                        }
+                    };
                 }
 
                 // bool fields
@@ -277,7 +366,13 @@ app.directive(&#39;materialInput&#39;, [
                                 console.log(scope.model);
                             }
                         });
-                        scope.editors.code(scope.model);
+                        var unbind = scope.$watch(&#39;model&#39;, function (newValue) {
+                            if(newValue){
+                                scope.editors.code(newValue);
+                                unbind();
+                            }
+                        });
+
                     }
 
 

@@ -18,9 +18,9 @@ app.config( [
 
 /**
  * @method run
- *
+ * This method is executed when the app is started. Handles global events.
  */
-app.run(function ($rootScope, $state, AuthService, LocalStorage, $q, constants) {
+app.run(function ($rootScope, $state) {
 
 
     // trigger a refresh whenever user clicks history buttons
@@ -491,8 +491,8 @@ app.constant('sites', [
 
 /**
  * @method config
- * @memberOf ama
- * App Config
+ * @member ama
+ * ## App Config
  * Configures i18n and app states
  */
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, sites, $translateProvider, constants, $locationProvider,pickadateI18nProvider) {

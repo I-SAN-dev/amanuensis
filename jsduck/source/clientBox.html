@@ -34,7 +34,30 @@ app.directive(&#39;clientBox&#39;, [
             scope: {
                 client: &#39;=clientBox&#39;
             },
-            templateUrl: &#39;templates/directives/clientBox.html&#39;
+            templateUrl: &#39;templates/directives/clientBox.html&#39;,
+            controller: function($scope){
+
+                var mailvalue;
+                var mailname;
+
+                $scope.$watch(&#39;client&#39;, function(){
+                    if($scope.client &amp;&amp; $scope.client.data &amp;&amp; $scope.client.data.mail)
+                    {
+                        for(var i = 0; i&lt;$scope.client.data.mail.length; i++ )
+                        {
+                            if(i==0 || $scope.client.data.mail[i].isdefault == 1)
+                            {
+                                mailvalue = $scope.client.data.mail[i].value;
+                                mailname = $scope.client.data.mail[i].name;
+                            }
+                        }
+                        $scope.mail = {};
+                        $scope.mail.value = mailvalue;
+                        $scope.mail.name = mailname;
+                    }
+                });
+
+            }
         }
     }
 ]);</pre>

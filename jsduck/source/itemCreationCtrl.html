@@ -36,6 +36,7 @@ app.controller(&#39;ItemCreationCtrl&#39;, [
         var self = this;
 
         var presets = LocalStorage.getData(&#39;itemPresets&#39;)|| [];
+
 <span id='ama-controllers-ItemCreationCtrl-property-presetList'>        /**
 </span>         * Array containing all available item presets
          * @type {Array}
@@ -47,6 +48,7 @@ app.controller(&#39;ItemCreationCtrl&#39;, [
          */
         this.projectItems = [];
         var setItemList = function (input, output) {
+            self[output] = [];
             for(var i = 0; i &lt; input.length; i++){
                 self[output].push({
                     name: input[i].name,
@@ -91,9 +93,9 @@ app.controller(&#39;ItemCreationCtrl&#39;, [
             }
         ];
 
-        var updateCachedList = function () {
+        var updateCachedList = function (newItem) {
             var itemList = LocalStorage.getData(forType+&#39;/&#39;+forId);
-            itemList.items.push(data);
+            itemList.items.push(newItem);
             LocalStorage.setData(forType+&#39;/&#39;+forId, itemList);
         };
 
@@ -125,7 +127,7 @@ app.controller(&#39;ItemCreationCtrl&#39;, [
                     LocalStorage.setData(&#39;item/&#39;+data.id, data);
 
 
-                    updateCachedList();
+                    updateCachedList(data);
 
                     self.newItem = null;
 
@@ -150,7 +152,7 @@ app.controller(&#39;ItemCreationCtrl&#39;, [
                     LocalStorage.setData(&#39;item/&#39;+data.id, data);
                     self.itemFromProject = null;
 
-                    updateCachedList();
+                    updateCachedList(data);
 
                     goBack();
                 });

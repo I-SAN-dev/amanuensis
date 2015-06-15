@@ -120,9 +120,9 @@ app.controller(&#39;ClientCreationCtrl&#39;,
                     self.newClient = initialNewClient;
 
                     // go to where we came from or to the client list (and new client detail) if no referrer is specified
-                    var to = $stateParams.referrer || &#39;app.clients&#39;;
+                    var to = $stateParams.referrer || &#39;app.clients.detail&#39;;
                     var toParams;
-                    if(to==&#39;app.clients&#39;)
+                    if(to==&#39;app.clients.detail&#39;)
                         toParams = {id:data.id};
                     else
                         toParams = $stateParams.referrerParams;

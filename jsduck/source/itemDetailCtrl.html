@@ -27,14 +27,26 @@ app.controller(&#39;ItemDetailCtrl&#39;, [
     &#39;MasterDetailService&#39;,
     &#39;DeleteService&#39;,
     &#39;PanelService&#39;,
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService) {
+    &#39;ItemContainerService&#39;,
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService) {
         MasterDetailService.setDetail(this);
+
+
 
 <span id='ama-controllers-ItemDetailCtrl-property-showPage'>        /**
 </span>         * Indicates what panel should be shown in the view
          * @type {integer}
          */
         this.showPage = PanelService.getPanel(&#39;items&#39;);
+
+<span id='ama-controllers-ItemDetailCtrl-method-setPage'>        /**
+</span>         * Sets the panel to show for the item detail view by using the {@link ama.services.PanelService PanelService}
+         * @param {integer} pageNumber The number of the panel to show.
+         */
+        this.setPage = function (pageNumber) {
+            PanelService.setPanel(&#39;items&#39;, pageNumber);
+            self.showPage = PanelService.getPanel(&#39;items&#39;);
+        };
 
         var self = this;
 
@@ -53,9 +65,16 @@ app.controller(&#39;ItemDetailCtrl&#39;, [
                 if(self.connections.invoice &amp;&amp; self.connections.invoice.id)
                     count++;
             }
-            console.log(count);
             return count&gt;1;
 
+        };
+
+        this.getTime = function () {
+            self.time = LocalStorage.getData(&#39;item/&#39;+self.item.id+&#39;/time&#39;) || [];
+            ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;time&#39;,params:{forid: self.item.id}}).then(function (data) {
+                self.time = data;
+                LocalStorage.setData(&#39;item/&#39;+self.item.id+&#39;/time&#39;, data);
+            });
         };
 
 <span id='ama-controllers-ItemDetailCtrl-method-detailChanged'>        /**
@@ -63,16 +82,14 @@ app.controller(&#39;ItemDetailCtrl&#39;, [
          * Reacts on a change of the item detail. Triggered by the {@link ama.directives.masterDetail masterDetail directive}.
          * Re-initializes the detail view
          * @param {Object} item The newly selected item
-         * @param {boolean} keyboard Indicates if the selection was taken by keyboard input
+         * @param {boolean} [keyboard] Indicates if the selection was taken by keyboard input
          */
         this.detailChanged = function (item, keyboard) {
+            console.log(&#39;detail changed&#39;);
             self.item = item;
 
-            self.time = LocalStorage.getData(&#39;item/&#39;+self.item.id+&#39;/time&#39;) || [];
-            ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;time&#39;,params:{forid: self.item.id}}).then(function (data) {
-                self.time = data;
-                LocalStorage.setData(&#39;item/&#39;+self.item.id+&#39;/time&#39;, data);
-            });
+            self.getTime();
+
 
             self.connections = LocalStorage.getData(&#39;item/&#39;+self.item.id+&#39;/connections&#39;)
             ||
@@ -101,18 +118,21 @@ app.controller(&#39;ItemDetailCtrl&#39;, [
 
 <span id='ama-controllers-ItemDetailCtrl-method-changeUseRate'>        /**
 </span>         * Changes the useRate value (fixed/hourly/dailyRate) of the current item.
+         * @param {integer} value The value the userate property of the item should be set to
          */
-        this.changeUseRate = function () {
+        this.changeUseRate = function (value) {
             var apiObject = {
                 name: &#39;item&#39;,
                 data: {
                     id: self.item.id,
-                    userate: self.item.userate
+                    userate: value
                 }
             };
+            self.item.userate = value;
             ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
                 MasterDetailService.notifyMaster(&#39;priceChanged&#39;, data);
             });
+
         };
 
 <span id='ama-controllers-ItemDetailCtrl-method-startTime'>        /**
@@ -149,13 +169,33 @@ app.controller(&#39;ItemDetailCtrl&#39;, [
             });
         };
 
-<span id='ama-controllers-ItemDetailCtrl-method-moveItem'>        /**
-</span>         * Moves the current item to another document.
+<span id='ama-controllers-ItemDetailCtrl-method-setTotaltimeAsTime'>        /**
+</span>         * Sets the current totaltime from the time recording as the time for price calculation with hourly rates
          */
-        this.moveItem = function () {
-            // TODO: this
+        this.setTotaltimeAsTime = function () {
+            self.item.hourlyrates = self.time.totaltime;
+            ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;item&#39;, data: self.item}).then(function(data){
+                self.item = data;
+                MasterDetailService.notifyMaster(&#39;priceChanged&#39;, data);
+            });
         };
 
+<span id='ama-controllers-ItemDetailCtrl-method-moveItem'>        /**
+</span>         * Moves the current item to another document by notifying the master ({@link ama.directives.MasterDetail see MasterDetail directive}).
+         */
+        this.moveItem = function () {
+            MasterDetailService.notifyMaster(&#39;moveItem&#39;, self.item);
+        };
+
+<span id='ama-controllers-ItemDetailCtrl-method-removeItemFromDocument'>        /**
+</span>         * Removes an item from the current document
+         */
+        this.removeItemFromDocument = function()
+        {
+            MasterDetailService.notifyMaster(&#39;removeItemFromDocument&#39;, self.item);
+        };
+
+        MasterDetailService.notifyController(&#39;setFirstAsDetail&#39;);
 
     }
 ]);</pre>

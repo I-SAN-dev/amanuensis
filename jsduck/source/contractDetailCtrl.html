@@ -24,9 +24,14 @@ app.controller(&#39;ContractDetailCtrl&#39;, [
     &#39;LocalStorage&#39;,
     &#39;MasterDetailService&#39;,
     &#39;PdfService&#39;,
+    &#39;ItemService&#39;,
+    &#39;DeleteService&#39;,
+    &#39;NextStepModal&#39;,
+    &#39;$state&#39;,
     &#39;$stateParams&#39;,
     &#39;$sce&#39;,
-    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, $stateParams, $sce){
+    &quot;constants&quot;,
+    function(ApiAbstractionLayer, LocalStorage, MasterDetailService, PdfService, ItemService, DeleteService, NextStepModal, $state, $stateParams, $sce, constants){
         var self = this;
         var id = $stateParams.id;
         var type = this.type = $stateParams.type;
@@ -41,34 +46,97 @@ app.controller(&#39;ContractDetailCtrl&#39;, [
          * @type {Object}
          */
         this.contract = LocalStorage.getData(type+&#39;/&#39;+id);
-        ApiAbstractionLayer(&#39;GET&#39;,{name:type,params: {id:id}}).then(function (data) {
-            LocalStorage.setData(type+&#39;/&#39;+id, data);
-            self.contract = data;
-            if(self.isFileContract){
-                self.fileName = data.path.replace(/\\/g,&#39;/&#39;).replace( /.*\//, &#39;&#39; ); /* Use filename instead of refnumber */
-                self.iframeSrc = $sce.trustAsResourceUrl(&#39;api/?action=protectedpdf&amp;path=&#39;+data.path);
-            }
-        });
+        var getContract = function()
+        {
+            ApiAbstractionLayer(&#39;GET&#39;,{name:type,params: {id:id}}).then(function (data) {
+                LocalStorage.setData(type+&#39;/&#39;+id, data);
+                self.contract = data;
+                if(self.isFileContract){
+                    self.fileName = data.path.replace(/\\/g,&#39;/&#39;).replace( /.*\//, &#39;&#39; ); /* Use filename instead of refnumber */
+                    self.iframeSrc = $sce.trustAsResourceUrl(constants.URL+&#39;/api/?action=protectedpdf&amp;path=&#39;+data.path);
+                }
+            });
+        };
+        getContract();
+
 
 <span id='ama-controllers-ContractDetailCtrl-method-viewPdf'>        /**
 </span>         * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
          * or the generated PDF of the contract
          * @param {Event} event The event (commonly &#39;click&#39;) that triggered the function call
          * @param {bool} preview Indicates if a preview or the generated PDF should be shown
-         * @param {String} path *optional* Path to the generated PDF
+         * @param {String} [path] *optional* Path to the generated PDF
          */
         this.viewPdf = function (event,preview,path) {
-            PdfService(event,preview,&#39;contract&#39;,id, path).then(function (data) {
+            PdfService(event,preview, type,id, path).then(function (data) {
                 if(data){
-                    self.acceptance.path = data.path;
-                    self.acceptance.state = 1;
-                    LocalStorage.setData(&#39;contract/&#39;+id,self.acceptance);
+                    self.contract.path = data.path;
+                    LocalStorage.setData(&#39;contract/&#39;+id,self.contract);
                 }
             });
         };
 
+<span id='ama-controllers-ContractDetailCtrl-method-orderChanged'>        /**
+</span>         * Gets called when the ordering of the items in the contract was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.contract.items);
+        };
 
+<span id='ama-controllers-ContractDetailCtrl-method-moveItem'>        /**
+</span>         * Moves the specified item to another contract by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, &#39;contract&#39;, self.contract.id, self.contract.project.contracts);
+        };
 
-    }]);</pre>
+<span id='ama-controllers-ContractDetailCtrl-method-removeItemFromDocument'>        /**
+</span>         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, &#39;contract&#39;);
+            getContract();
+        };
+
+<span id='ama-controllers-ContractDetailCtrl-method-getStateParams'>        /**
+</span>         * Generates a stateParams object from the current stateParams for a certain state
+         * @param {string} forState The state for which the stateParams should be generated
+         * @returns {{referrer: string, referrerParams: {id: ($stateParams.id|*)}, for: string, forId: ($stateParams.id|*)}} The stateParams for the state to be transitioned to, generated from the current stateParams.
+         */
+        this.getStateParams = function(forState){
+            if(forState == &#39;itemCreation&#39;){
+                return {
+                    referrer: &#39;app.contractDetail&#39;,
+                    referrerParams: {
+                        id: id
+                    },
+                    for: &#39;contract&#39;,
+                    forId: id
+                };
+            }
+        };
+
+<span id='ama-controllers-ContractDetailCtrl-method-deleteContract'>        /**
+</span>         * Deletes the current contract via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteContract = function () {
+            DeleteService(type, id).then(function () {
+                $state.go(&#39;app.projectDetail&#39;, {id: self.contract.project.id});
+            });
+        };
+
+<span id='ama-controllers-ContractDetailCtrl-method-nextStep'>        /**
+</span>         * Opens a {@link ama.services.NextStepModal NextStepModal}.
+         */
+        this.nextStep = function(){
+            NextStepModal(&#39;contract&#39;, self.contract);
+        };
+    }
+]);</pre>
 </body>
 </html>

@@ -73,6 +73,11 @@ app.directive(&#39;todoStats&#39;, [
                 {
                     if($scope.stats)
                     {
+                        if($scope.stats.due === undefined || $scope.stats.due == null)
+                        {
+                            return false;
+                        }
+
                         var duedate = $scope.stats.due.replace(/\s/g, &quot;T&quot;);
                         return Date.parse(duedate) &lt; Date.now();
                     }

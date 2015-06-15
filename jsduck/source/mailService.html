@@ -22,8 +22,11 @@
  */
 app.factory(&#39;MailService&#39;, [
     &#39;ApiAbstractionLayer&#39;,
+    &#39;NotificationService&#39;,
     &#39;constants&#39;,
-    function (ApiAbstractionLayer, constants) {
+    &#39;$filter&#39;,
+    &#39;$q&#39;,
+    function (ApiAbstractionLayer, NotificationService, constants, $filter, $q) {
         var createApiObject = function (type, id, mailtext) {
             var apiObject = {
                 name: &#39;mail&#39;,
@@ -50,20 +53,27 @@ app.factory(&#39;MailService&#39;, [
                 var preview = window.open(&#39;&#39;,&#39;&#39;,&#39;height=500,width=900&#39;);
                 var apiObject = createApiObject(type, id, mailtext);
                 ApiAbstractionLayer(&#39;POST&#39;,apiObject).then(function (data) {
-                    preview.location.href = constants.BASEURL+&#39;/api?action=mail&amp;path=&#39;+data.previewpath;
+                    preview.location.href = constants.URL+&#39;/api?action=mail&amp;path=&#39;+data.previewpath;
                 });
             },
 <span id='ama-services-MailService-method-send'>            /**
-</span>             * Sends an email with information about a given doicument
+</span>             * Sends an email with information about a given document. Notifies the user when the email was sent.
              * @param {string} type The type of document for which the mail preview shall be shown.
              * @param {int|string} id The ID of the document for which the mail preview shall be shown.
              * @param {string} mailtext An additional text for the email.
              * @returns {promise} The answer from the API
              */
             send: function(type, id, mailtext) {
+                var defer = $q.defer();
                 var apiObject = createApiObject(type, id, mailtext);
                 apiObject.data.send = true;
-                return ApiAbstractionLayer(&#39;POST&#39;, apiObject);
+                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function(data){
+                    NotificationService(type+&#39;.notifications.emailSent&#39;,5000);
+                    defer.resolve(data);
+                }, function (error) {
+                    defer.reject(error);
+                });
+                return defer.promise;
             }
         }
     }

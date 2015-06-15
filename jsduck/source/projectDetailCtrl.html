@@ -30,8 +30,10 @@ app.controller(&#39;ProjectDetailCtrl&#39;,
         &#39;$state&#39;,
         &#39;$stateParams&#39;,
         &#39;MasterDetailService&#39;,
-        function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, StateManager, $scope, $state, $stateParams, MasterDetailService) {
+        &#39;$q&#39;,
+        function (ApiAbstractionLayer, LocalStorage, DeleteService, PanelService, StateManager, $scope, $state, $stateParams, MasterDetailService, $q) {
             var self = this;
+            var initial = true;
             MasterDetailService.setDetail(this);
 <span id='ama-controllers-ProjectDetailCtrl-property-contracts'>            /**
 </span>             * List of all contracts and fileContracts taken from the current project
@@ -51,9 +53,12 @@ app.controller(&#39;ProjectDetailCtrl&#39;,
              * @param {int} id - the client id to query for
              */
             var getProject = function(id) {
+                var defer = $q.defer();
                 self.project = LocalStorage.getData(&#39;project&#39;+&#39;/&#39;+id);
                 self.contracts = LocalStorage.getData(&#39;project/&#39;+id+&#39;/contracts&#39;);
-                self.emptyProject = isProjectEmpty();
+                if(self.project){
+                    self.emptyProject = isProjectEmpty();
+                }
                 ApiAbstractionLayer(&#39;GET&#39;, {name:&#39;project&#39;, params: {id:id}}).then(function (data) {
                     LocalStorage.setData(&#39;project&#39;+&#39;/&#39;+id, data);
                     self.project = data;
@@ -73,7 +78,9 @@ app.controller(&#39;ProjectDetailCtrl&#39;,
                     }
                     self.contracts = contracts;
                     LocalStorage.setData(&#39;project/&#39;+id+&#39;/contracts&#39;, self.contracts);
-                });
+                    defer.resolve(data);
+                }, function(error){defer.reject(error);});
+                return defer.promise;
             };
 
 <span id='ama-controllers-ProjectDetailCtrl-method-isProjectEmpty'>            /**
@@ -97,27 +104,29 @@ app.controller(&#39;ProjectDetailCtrl&#39;,
                 }
             };
 
+            // if the project state is entered with a certain id, we want to set the project detail for this id
+            if($stateParams.id){
+                getProject($stateParams.id).then(function (data) {
+                    if($scope.$parent.setDetail)
+                        $scope.$parent.setDetail(data);
+                });
+            }
+
             // call getProject when the detail view is requested
 <span id='ama-controllers-ProjectDetailCtrl-method-detailChanged'>            /**
 </span>             * Sets the project detail.
              * This function gets called by the {@link ama.directives.masterDetail masterDetail directive} when the detail changes
-             * *DEPRECATED:* The project detail view isn&#39;t a masterDetail view anymore.
-             * TODO: Delete this code
+             * Only applies for projectArchive view
              * @param data - the newly selected project
              */
             this.detailChanged=function(data){
                 self.project = data;
                 self.contracts = [];
-                getProject(data.id);
-            };
-
-            // if the project state is entered with a certain id, we want to set the project detail for this id
-            if($stateParams.id){
-                if($scope.$parent.setDetail)
-                    $scope.$parent.setDetail({id:$stateParams.id});
+                if(!initial)
+                    getProject(data.id);
                 else
-                    getProject($stateParams.id);
-            }
+                    initial = false;
+            };
 
 <span id='ama-controllers-ProjectDetailCtrl-method-deleteProject'>            /**
 </span>             * Deletes the current project

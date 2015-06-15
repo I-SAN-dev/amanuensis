@@ -25,25 +25,26 @@
 app.factory(&#39;ItemContainerService&#39;,[
     &#39;ApiAbstractionLayer&#39;,
     &#39;LocalStorage&#39;,
+    &#39;DeleteService&#39;,
     &#39;$filter&#39;,
     &#39;$q&#39;,
-    function (ApiAbstractionLayer, LocalStorage,$filter, $q) {
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, $q) {
         var containerMap = {
             offer: &#39;offers&#39;,
             contract: &#39;contracts&#39;,
             fileContract: &#39;fileContracts&#39;,
             acceptance: &#39;acceptances&#39;,
-            invoice: &#39;invoices&#39;,
-            reminder: &#39;reminders&#39;
+            invoice: &#39;invoices&#39;
         };
         var updateLocalStorage = function (type, projectId, container) {
             LocalStorage.setData(type+&#39;/&#39;+container.id, container);
 
             var project = LocalStorage.getData(&#39;project/&#39;+projectId);
-            var list = project[containerMap[type]] || [];
-            list.push(container);
-            LocalStorage.setData(&#39;project/&#39;+projectId, project);
-
+            if(project) {
+                var list = project[containerMap[type]] || [];
+                list.push(container);
+                LocalStorage.setData(&#39;project/&#39; + projectId, project);
+            }
         };
         return {
 <span id='ama-services-ItemContainerService-method-createItemContainer'>            /**
@@ -69,7 +70,7 @@ app.factory(&#39;ItemContainerService&#39;,[
                 return defer.promise;
             },
 <span id='ama-services-ItemContainerService-method-updateLocalStorage'>            /**
-</span>             * Updates the {@link ama.services.LocalStorage local strage} entry of an given item container
+</span>             * Updates the {@link ama.services.LocalStorage local storage} entry of an given item container
              * @param {string} type The type of the given item container (offer/contract/acceptance/invoice/reminder)
              * @param {int|string} projectId The ID of the current project
              * @param {object} container The container to update the entry for

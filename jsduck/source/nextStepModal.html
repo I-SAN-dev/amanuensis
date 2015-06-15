@@ -36,7 +36,10 @@ app.factory(&#39;NextStepModal&#39;, [
         var contract = {
             name: &#39;contract.name&#39;,
             api: &#39;contract&#39;,
-            stateName: &#39;app.contractDetail&#39;
+            stateName: &#39;app.contractDetail&#39;,
+            additionalParams: {
+                type: &#39;contract&#39;
+            }
         };
         var todo = {
             name: &#39;todo.name&#39;,
@@ -67,6 +70,8 @@ app.factory(&#39;NextStepModal&#39;, [
                     return [todo,acceptance,invoice];
                 case &#39;todo&#39;:
                     return [acceptance,invoice];
+                case &#39;acceptance&#39;:
+                    return [invoice];
                 case &#39;invoice&#39;:
                     return [reminder];
                 default :
@@ -87,6 +92,7 @@ app.factory(&#39;NextStepModal&#39;, [
                             return &#39;[&#39;+ $filter(&#39;translate&#39;)(name) +&#39;] &#39;;
                         };
                         var prefix = getPrefix(this.selected.name);
+                        console.log(object);
                         this.name = prefix + object.name;
                         if(this.selected.api != &#39;todo&#39;){
                             RefnumberService(this.selected.api+&#39;s&#39;,object.project.id).then(function (data) {
@@ -112,6 +118,7 @@ app.factory(&#39;NextStepModal&#39;, [
                         this.transform = function() {
                             var newItemContainer = angular.copy(object);
                             delete newItemContainer.id;
+                            delete newItemContainer.description;
                             delete newItemContainer.state;
                             delete newItemContainer.path;
                             newItemContainer.name = self.name;
@@ -128,7 +135,10 @@ app.factory(&#39;NextStepModal&#39;, [
                                 if(self.copyItems)
                                     ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id);
                                 modal.deactivate();
-                                $state.go(self.selected.stateName,{id:data.id});
+                                var stateParams = {id:data.id};
+                                if(self.selected.additionalParams)
+                                    stateParams = angular.extend(stateParams,self.selected.additionalParams);
+                                $state.go(self.selected.stateName,stateParams);
                             });
                         };
                         this.close = function () {

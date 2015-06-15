@@ -51,8 +51,10 @@ app.factory(&#39;MasterDetailService&#39;, [
          */
         this.notifyDetail = function () {
             var fnName = arguments[0];
-            if(typeof detail[fnName] === &#39;function&#39;) {
-                return detail[fnName].apply(null,processParams(arguments));
+            if(detail) {
+                if (typeof detail[fnName] === &#39;function&#39;) {
+                    return detail[fnName].apply(null, processParams(arguments));
+                }
             }
         };
         return {
@@ -69,6 +71,7 @@ app.factory(&#39;MasterDetailService&#39;, [
              */
             setDetail: function(ctrl) {
                 detail = ctrl;
+                console.log(detail);
             },
 <span id='ama-services-MasterDetailService-method-setEditor'>            /**
 </span>             * Registers the editor controller
@@ -83,6 +86,8 @@ app.factory(&#39;MasterDetailService&#39;, [
              */
             setController: function (ctrl) {
                 controller = ctrl;
+
+                console.log(controller);
             },
 <span id='ama-services-MasterDetailService-method-editMode'>            /**
 </span>             * Sets a flag in the service indicating if the detail is currently in edit mode.
@@ -124,11 +129,11 @@ app.factory(&#39;MasterDetailService&#39;, [
             },
 <span id='ama-services-MasterDetailService-method-setDetailView'>            /**
 </span>             * Changes the detail
-             * @param {Object} detail The newly selected detail
-             * @param {boolean} keyboard *Optional.* Indicates if the detail was changed by keyboard input
+             * @param {Object} detailItem The newly selected detail
+             * @param {boolean} [keyboard] *Optional.* Indicates if the detail was changed by keyboard input
              * @returns {Object} The new detail.
              */
-            setDetailView: function(detail, keyboard){
+            setDetailView: function(detailItem, keyboard){
                 if(editMode) {
                     console.log(&#39;cancel edit&#39;);
                     self.notifyEditor(&#39;cancel&#39;);
@@ -136,9 +141,10 @@ app.factory(&#39;MasterDetailService&#39;, [
                 }
 
                 if($state.params.hasDetails)
-                    $state.go($state.current.name, {id: detail.id});
-                self.notifyDetail(&#39;detailChanged&#39;, detail, keyboard);
-                return detail;
+                    $state.go($state.current.name, {id: detailItem.id});
+                self.notifyDetail(&#39;detailChanged&#39;, detailItem, keyboard);
+                console.log(&#39;setView&#39;);
+                return detailItem;
             }
         }
     }

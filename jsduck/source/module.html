@@ -23,11 +23,12 @@
  * @author Christian Baur
  */
 app.controller(&#39;ModuleCtrl&#39;, [
+    &#39;AuthService&#39;,
     &#39;$scope&#39;,
     &#39;modules&#39;,
     &#39;$state&#39;,
     &#39;$rootScope&#39;,
-    function ($scope, modules, $state, $rootScope) {
+    function (AuthService, $scope, modules, $state, $rootScope) {
         $scope.template = &#39;templates/modules/&#39;+$scope.name+&#39;.html&#39;;
 
         var self = this;

@@ -26,9 +26,12 @@ app.controller(&#39;InvoiceDetailCtrl&#39;, [
     &#39;MailService&#39;,
     &#39;PdfService&#39;,
     &#39;DeleteService&#39;,
+    &#39;ItemService&#39;,
+    &#39;StateManager&#39;,
+    &#39;$state&#39;,
     &#39;$stateParams&#39;,
     &#39;$scope&#39;,
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, $stateParams, $scope) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, MailService, PdfService, DeleteService, ItemService, StateManager, $state, $stateParams, $scope) {
 
         MasterDetailService.setMaster(this);
         var self = this;
@@ -58,6 +61,22 @@ app.controller(&#39;InvoiceDetailCtrl&#39;, [
         };
         getInvoice();
 
+<span id='ama-controllers-InvoiceDetailCtrl-method-viewPdf'>        /**
+</span>         * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
+         * or the generated PDF of the invoice.
+         * @param {Event} event The event (commonly &#39;click&#39;) that triggered the function call
+         * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+         * @param {String} [path] *optional* Path to the generated PDF
+         */
+        this.viewPdf = function (event, preview, path) {
+            PdfService(event,preview,&#39;invoice&#39;,id, path).then(function (data) {
+                if(data){
+                    self.invoice.path = data.path;
+                    self.invoice.state = 1;
+                    LocalStorage.setData(&#39;invoice/&#39;+id, self.invoice);
+                }
+            });
+        };
 
 <span id='ama-controllers-InvoiceDetailCtrl-method-openMailPreview'>        /**
 </span>         * Uses the {@link ama.services.MailService MailService} to show a mail preview for the current invoice.
@@ -72,7 +91,10 @@ app.controller(&#39;InvoiceDetailCtrl&#39;, [
 </span>         * Uses the {@link ama.services.MailService MailService} to send a mail with the current invoice.
          */
         this.send = function () {
-            MailService.send(&#39;invoice&#39;,self.offer.id);
+            MailService.send(&#39;invoice&#39;,self.invoice.id).then(function (data) {
+                self.invoice.state = 2;
+                LocalStorage.setData(&#39;invoice/&#39;+id, self.invoice);
+            });
         };
 
 <span id='ama-controllers-InvoiceDetailCtrl-method-deleteItem'>        /**
@@ -112,6 +134,53 @@ app.controller(&#39;InvoiceDetailCtrl&#39;, [
                     forId: id
                 };
             }
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-orderChanged'>        /**
+</span>         * Gets called when the ordering of the items in the invoice was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the global_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.invoice.items);
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-moveItem'>        /**
+</span>         * Moves the specified item to another invoice by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, &#39;invoice&#39;, self.invoice.id, self.invoice.project.invoices);
+        };
+
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-changeState'>        /**
+</span>         * Changes the state of the invoice.
+         * @param {integer|String} state The state to be set.
+         */
+        this.changeState = function (state) {
+            StateManager.setState(&#39;invoice&#39;,id,state).then(function(data){
+                self.invoice = data;
+            });
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-removeItemFromDocument'>        /**
+</span>         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, &#39;invoice&#39;);
+            getInvoice();
+        };
+
+<span id='ama-controllers-InvoiceDetailCtrl-method-deleteInvoice'>        /**
+</span>         * Deletes the current invoice via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteInvoice = function () {
+            DeleteService(&#39;invoice&#39;, id).then(function () {
+                $state.go(&#39;app.projectDetail&#39;, {id: self.invoice.project.id});
+            });
         };
     }
 ]);</pre>

@@ -24,7 +24,14 @@
 app.factory(&#39;ItemService&#39;,[
     &#39;ApiAbstractionLayer&#39;,
     &#39;LocalStorage&#39;,
-    function (ApiAbstractionLayer, LocalStorage) {
+    &#39;btfModal&#39;,
+    &#39;$state&#39;,
+    function (ApiAbstractionLayer, LocalStorage, btfModal, $state) {
+
+        var sortNumber = function (a,b) {
+            return a-b;
+        };
+
         return {
 <span id='ama-services-ItemService-method-getItems'>            /**
 </span>             * Gets all items of given document
@@ -83,16 +90,120 @@ app.factory(&#39;ItemService&#39;,[
              * @returns {promise} A promise containing the answer from the API
              */
             bindItemsToContainer: function (itemIds, forType, forId) {
-                var items = itemIds.join(&#39;,&#39;);
-                var apiObject = {
-                    name: &#39;bulk&#39;,
-                    data: {
-                        ids: items,
-                        for: forType,
-                        forid: forId
+                if(itemIds.length&gt;0) {
+                    var items = itemIds.join(&#39;,&#39;);
+                    var apiObject = {
+                        name: &#39;bulk&#39;,
+                        data: {
+                            ids: items,
+                            for: forType,
+                            forid: forId
+                        }
+                    };
+                    return ApiAbstractionLayer(&#39;POST&#39;, apiObject);
+                }
+            },
+<span id='ama-services-ItemService-method-changeOrdering'>            /**
+</span>             * Changes the ordering of a given list of items on the server
+             * @param {Array} list The ordered list of items
+             * @param {boolean} [isTodo] *Optional.* Set this to true if the todo_order is to be changed
+             * @returns {promise} A promise containing the answer from the API
+             */
+            changeOrdering: function(list,isTodo){
+                var bulkOrder = [];
+                var setOrder = &#39;global&#39;;
+                if(isTodo){
+                    setOrder = &#39;todo&#39;;
+
+                    for(var i=0; i&lt;list.length; i++){
+                        list[i].todo_order = i;
+                        bulkOrder.push(list[i].id+&#39;:&#39;+i);
                     }
+                }
+                else
+                {
+                    /* preserve existing order numbers*/
+                    var orderNumbers = [];
+                    for(var j = 0; j&lt;list.length; j++)
+                    {
+                        orderNumbers.push(parseInt(list[j].global_order));
+                    }
+                    /* make order numbers unique and sort them*/
+                    orderNumbers = orderNumbers.sort(sortNumber).filter(function(item, pos, ary){
+                        return !pos || item != ary[pos-1];
+                    });
+                    /* refill the orderNumbers, necessary if there where duplicates*/
+                    var difference = list.length - orderNumbers.length;
+                    for(var k = 0; k &lt; difference; k++)
+                    {
+                        orderNumbers.push(orderNumbers[orderNumbers.length-1] + 1)
+                    }
+
+                    /* assign the new order numbers */
+                    for(var l=0; l&lt;list.length; l++){
+                        list[l].global_order = orderNumbers[l];
+                        bulkOrder.push(list[l].id+&#39;:&#39;+orderNumbers[l]);
+                    }
+                }
+
+                bulkOrder = bulkOrder.join(&#39;,&#39;);
+                return ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;bulk&#39;, data: {order:bulkOrder,setorder:setOrder}});
+            },
+
+            moveItem: function(item, containerType, containerId, availableContainers){
+                for(var i = 0; i&lt;availableContainers.length; i++){
+                    if(availableContainers[i].id == containerId){
+                        availableContainers.splice(i,1);
+                        break;
+                    }
+                }
+                var modal = btfModal({
+                    templateUrl: &#39;templates/pages/items/moveDialog.html&#39;,
+                    controller: function(){
+                        var ctrl = this;
+                        this.available = availableContainers;
+                        this.type = containerType;
+
+                        this.accept = function () {
+                            if(ctrl.selected){
+                                var apiObject = {
+                                    name: &#39;item&#39;,
+                                    data: {
+                                        id: item.id
+                                    }
+                                };
+                                apiObject.data[containerType] = ctrl.selected;
+                                ApiAbstractionLayer(&#39;POST&#39;, apiObject).then(function (data) {
+                                    LocalStorage.setData(&#39;item/&#39;+item.id, data);
+                                    $state.go(&#39;app.&#39;+containerType+&#39;Detail&#39;,{id:ctrl.selected});
+                                });
+                            }
+                            modal.deactivate();
+                        };
+
+
+                        this.close = function () {
+                            console.log(&#39;close&#39;);
+                            modal.deactivate();
+                        };
+                    },
+                    controllerAs: &#39;move&#39;
+                });
+                modal.activate();
+            },
+
+<span id='ama-services-ItemService-method-removeItemFromDocument'>            /**
+</span>             * Removes an item connection to a given document type
+             * @param item
+             * @param type
+             */
+            removeItemFromDocument: function(item, type)
+            {
+                data = {
+                    id: item.id
                 };
-                return ApiAbstractionLayer(&#39;POST&#39;,apiObject);
+                data[type] = &#39;&#39;;
+                return ApiAbstractionLayer(&#39;POST&#39;, {name:&#39;item&#39;, data: data});
             }
         }
     }

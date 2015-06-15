@@ -45,17 +45,24 @@ app.controller(&#39;ItemPresetsCtrl&#39;, [
          */
         this.presets = LocalStorage.getData(&#39;itemPresets&#39;);
 
-        // get the list of item presets and cache it
-        ApiAbstractionLayer(&#39;GET&#39;, &#39;item_preset&#39;).then(function (data) {
-            self.presets = data;
-            LocalStorage.setData(&#39;itemPresets&#39;, data);
+<span id='ama-controllers-ItemPresetsCtrl-method-getPresets'>        /**
+</span>         * get the list of item presets and cache it
+         */
+        var getPresets = function()
+        {
+            ApiAbstractionLayer(&#39;GET&#39;, &#39;item_preset&#39;).then(function (data) {
+                self.presets = data;
+                LocalStorage.setData(&#39;itemPresets&#39;, data);
 
-            // set the first list entry as detail of none is supplied
-            if(!$stateParams.id &amp;&amp; data.length &gt; 0){
-                MasterDetailService.notifyController(&#39;setDetail&#39;,data[0]);
-                $stateParams.id = data[0].id;
-            }
-        });
+                // set the first list entry as detail of none is supplied
+                if(!$stateParams.id &amp;&amp; data.length &gt; 0){
+                    MasterDetailService.notifyController(&#39;setDetail&#39;,data[0]);
+                    $stateParams.id = data[0].id;
+                }
+            });
+        };
+        getPresets();
+
 
 <span id='ama-controllers-ItemPresetsCtrl-method-deletePreset'>        /**
 </span>         * Deletes a preset by given id.
@@ -67,6 +74,14 @@ app.controller(&#39;ItemPresetsCtrl&#39;, [
                 LocalStorage.setData(&#39;itemPresets&#39;, data);
             })
         };
+
+<span id='ama-controllers-ItemPresetsCtrl-method-priceChanged'>        /**
+</span>         * is called when the price has changed
+         */
+        this.priceChanged = function()
+        {
+            getPresets();
+        }
 
 
     }

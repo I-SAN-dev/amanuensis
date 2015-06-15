@@ -24,8 +24,13 @@ app.controller(&#39;InvoiceCreationCtrl&#39;, [
     &#39;ItemContainerService&#39;,
     &#39;$stateParams&#39;,
     &#39;$state&#39;,
-    function (RefnumberService, ItemContainerService, $stateParams, $state) {
+    &#39;ErrorDialog&#39;,
+    function (RefnumberService, ItemContainerService, $stateParams, $state, ErrorDialog) {
         var self = this;
+        if(!$stateParams.project){
+            ErrorDialog({code:&#39;1337&#39;,languagestring:&#39;errors.noProjectSpecified&#39;}).activate();
+            $state.go(&#39;app.dashboard&#39;)
+        }
         var project = $stateParams.project;
         var projectId = project.id;
 <span id='ama-controllers-InvoiceCreationCtrl-property-projectName'>        /**

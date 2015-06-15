@@ -48,7 +48,7 @@ app.directive(&#39;fileUpload&#39;, [&#39;$parse&#39;, function ($parse) {
      * Provides a function to upload a file to the server.
      *
      */
-    .service(&#39;fileUploadService&#39;, [&#39;$http&#39;, &#39;$q&#39;, function ($http, $q) {
+    .service(&#39;fileUploadService&#39;, [&#39;NotificationService&#39;, &#39;ErrorDialog&#39;, &#39;$http&#39;, &#39;$q&#39;, &#39;$rootScope&#39;, function (NotificationService, ErrorDialog, $http, $q, $rootScope) {
 
 
 <span id='ama-services-fileUploadService-method-uploadFile'>        /**
@@ -59,6 +59,7 @@ app.directive(&#39;fileUpload&#39;, [&#39;$parse&#39;, function ($parse) {
          * Uploads the specified file to the specified url.
          */
         this.uploadFile = function(file, uploadUrl){
+            $rootScope.loaded = false;
             var fd = new FormData();
             fd.append(&#39;file&#39;, file);
             var defer = $q.defer();
@@ -68,12 +69,16 @@ app.directive(&#39;fileUpload&#39;, [&#39;$parse&#39;, function ($parse) {
             })
                 .success(function(data){
                     defer.resolve(data.path);
+                    $rootScope.loaded= true;
+                    NotificationService(&#39;global.notifications.uploadSucceeded&#39;,5000);
                 })
                 .error(function(error){
-                    defer.reject(error)
+                    defer.reject(error);
+                    $rootScope.loaded = true;
+                    ErrorDialog(error.error).activate();
                 });
             return defer.promise;
-        }
+        };
     }]);</pre>
 </body>
 </html>

@@ -92,10 +92,10 @@ app.directive(&#39;masterDetail&#39;, [function(){
 <span id='ama-directives-masterDetail-method-setDetail'>                /**
 </span>                 * Sets a new detail item and notifies other controllers that the detail has changed
                  * @param detail - the new detail object
-                 * @param keyboard - indicates if the detail was changed by keyboard input
+                 * @param [keyboard] - indicates if the detail was changed by keyboard input
                  */
                 $scope.setDetail = function(detail, keyboard){
-                    self.detail = MasterDetailService.setDetailView(detail,keyboard);
+                    self.detail = MasterDetailService.setDetailView(detail, keyboard);
                 };
 
 
@@ -103,6 +103,7 @@ app.directive(&#39;masterDetail&#39;, [function(){
 <span id='ama-directives-masterDetail-method-setDetailTpl'>                /**
 </span>                 * Set a new template for the detail view
                  * TODO: check if this still works...
+                 * @deprecated not used
                  * @param templateUrl
                  */
                 $scope.setDetailTpl = function(templateUrl) {
@@ -125,16 +126,30 @@ app.directive(&#39;masterDetail&#39;, [function(){
                  * @type {{itemMoved: Function, orderChanged: Function, containerPositioning: string}}
                  */
                 this.sort = {
-                    //accept: function (sourceItemHandleScope, destSortableScope) {return boolean}//override to determine drag is allowed or not. default is true.
+                    accept: function () {
+                        return self.filterText == &#39;&#39;;
+                    },
                     itemMoved: function (event) {
                         console.log(&#39;itemMoved&#39;);
                     },
                     orderChanged: function(event) {
-                        console.log(&#39;orderChanged&#39;);
+                        self.notifyMaster(&#39;orderChanged&#39;);
                     },
                     containerPositioning: &#39;relative&#39;
-                    //containment: &#39;#board&#39;//optional param.
                 };
+
+                $scope.setFirstAsDetail=function(){
+                    console.log(&#39;first&#39;);
+                    $scope.$watch(&#39;masterList&#39;, function () {
+                        if($scope.masterList) {
+                            if ($scope.masterList.length &gt; 0) {
+                                $scope.setDetail($scope.masterList[0]);
+                            }
+                        }
+                    });
+                };
+
+
             }],
         controllerAs: &#39;MasterDetailCtrl&#39;
     }

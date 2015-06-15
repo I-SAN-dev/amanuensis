@@ -23,26 +23,49 @@
  * @returns {btfModal} The modal with the error information. Has to be activated to be shown (modal.activate()).
  */
 app.factory(&#39;ErrorDialog&#39;, function (btfModal) {
+
+
+    var self = this;
+    self.errorActive = false;
+
     return function(errorObj){
-        var modal = btfModal({
-            templateUrl: &#39;templates/modules/errorDialog.html&#39;,
-            controller: function(){
-                this.code = errorObj.code;
-                this.message = errorObj.message;
-                this.languagestring = errorObj.languagestring;
-                this.file = errorObj.file;
-                this.line = errorObj.line;
+
+        /* only show an error modal, if no other error modal is present */
+        if(!self.errorActive)
+        {
+            self.errorActive = true;
+            var modal = btfModal({
+                templateUrl: &#39;templates/modules/errorDialog.html&#39;,
+                controller: function(){
+                    this.code = errorObj.code;
+                    this.message = errorObj.message;
+                    this.languagestring = errorObj.languagestring;
+                    this.file = errorObj.file;
+                    this.line = errorObj.line;
+
+                    this.close = function () {
+                        console.log(&#39;close&#39;);
+                        self.errorActive = false;
+                        modal.deactivate();
+                    };
+                },
+                controllerAs: &#39;error&#39;
+            });
+            return modal;
+        }
+        /* otherwise only log the error to the console */
+        else
+        {
+            /* return an object behaving similiar to the modal, so we can use it in same context */
+            /* quak quak ducktyping */
+            return {
+                activate: function(){
+                    console.error(errorObj.code + &#39; - &#39; + errorObj.message + &#39; (&#39; + errorObj.file + &#39;:&#39; + errorObj.line + &#39;)&#39;);
+                }
+            }
+        }
 
 
-
-                this.close = function () {
-                    console.log(&#39;close&#39;);
-                    modal.deactivate();
-                };
-            },
-            controllerAs: &#39;error&#39;
-        });
-        return modal;
     };
 });</pre>
 </body>

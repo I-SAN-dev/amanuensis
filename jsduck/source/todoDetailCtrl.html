@@ -25,10 +25,15 @@ app.controller(&#39;TodoDetailCtrl&#39;, [
     &#39;LocalStorage&#39;,
     &#39;MasterDetailService&#39;,
     &#39;PanelService&#39;,
+    &#39;ItemService&#39;,
+    &#39;DeleteService&#39;,
+    &#39;NextStepModal&#39;,
+    &#39;$state&#39;,
     &#39;$stateParams&#39;,
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, $stateParams) {
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, PanelService, ItemService, DeleteService, NextStepModal, $state, $stateParams) {
         var self = this;
         MasterDetailService.setMaster(this);
+        PanelService.setPanel(&#39;items&#39;,2);
 
         var id = $stateParams.id;
 
@@ -42,11 +47,11 @@ app.controller(&#39;TodoDetailCtrl&#39;, [
         getTodo();
 
 <span id='ama-controllers-TodoDetailCtrl-method-nextStep'>        /**
-</span>         *
+</span>         * Opens a {@link ama.services.NextStepModal NextStepModal}.
          */
         this.nextStep = function()
         {
-            alert(&#39;TODO: create acceptance or invoice&#39;);
+            NextStepModal(&#39;todo&#39;, self.todo);
         };
 
 <span id='ama-controllers-TodoDetailCtrl-method-getStateParams'>        /**
@@ -72,7 +77,45 @@ app.controller(&#39;TodoDetailCtrl&#39;, [
          */
         this.todoItemChanged = function () {
             getTodo();
-        }
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-orderChanged'>        /**
+</span>         * Gets called when the ordering of the items in the todolist was changed.
+         * Uses {@link ama.services.ItemService#changeOrdering the changeOrdering() function in the ItemService} to apply the new ordering on the server
+         * This changes the todo_order property of the items.
+         */
+        this.orderChanged = function () {
+            ItemService.changeOrdering(self.todo.items, true);
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-moveItem'>        /**
+</span>         * Moves the specified item to another todolist by calling {@link ama.services.ItemService#moveItem the moveItem() function in ItemService}
+         * @param {Object} item The item to be moved.
+         */
+        this.moveItem = function (item) {
+            ItemService.moveItem(item, &#39;todo&#39;, self.todo.id, self.todo.project.todos);
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-removeItemFromDocument'>        /**
+</span>         * Removes a given item from the document
+         * @param {Object} item The item to be removed
+         */
+        this.removeItemFromDocument = function(item)
+        {
+            ItemService.removeItemFromDocument(item, &#39;todo&#39;);
+            getTodo();
+        };
+
+<span id='ama-controllers-TodoDetailCtrl-method-deleteTodo'>        /**
+</span>         * Deletes the current todolist via {@link ama.services.DeleteService DeleteService}
+         */
+        this.deleteTodo = function () {
+            DeleteService(&#39;todo&#39;, id).then(function () {
+                $state.go(&#39;app.projectDetail&#39;, {id: self.todo.project.id});
+            });
+        };
+
+
     }
 ]);</pre>
 </body>
