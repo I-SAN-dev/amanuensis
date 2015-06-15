@@ -1,0 +1,77 @@
+\hypertarget{a00082}{}\section{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/index.php File Reference}
+\label{a00082}\index{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/index.\+php@{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/index.\+php}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00082_a2a4d0fc0c8817862d5c0c4769c909fa3}{catch\+All} (\$e)
+\item 
+\hyperlink{a00082_a289e5852ae9a348e1a0ef87aa3ce1c8c}{json\+\_\+response} (\$array)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00082_ae4901046cc3e1deebf77ccc785384a78}{\$conf} = \hyperlink{a00018_ac93fbec81f07e5d15f80db907e63dc10}{Config\+::get\+Instance}()
+\item 
+\hyperlink{a00082_a12661b2fc0f57f97e30a1620889ce9c6}{\$method} = \$\+\_\+\+S\+E\+R\+V\+E\+R\mbox{[}\textquotesingle{}R\+E\+Q\+U\+E\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D\textquotesingle{}\mbox{]}
+\item 
+if(\$method== \textquotesingle{}O\+P\+T\+I\+O\+N\+S\textquotesingle{}) if(\$method!= \textquotesingle{}G\+E\+T\textquotesingle{}\&\&\$method!= \textquotesingle{}P\+O\+S\+T\textquotesingle{}\&\&\$method!= \textquotesingle{}D\+E\+L\+E\+T\+E\textquotesingle{}) if(\$method== \textquotesingle{}P\+O\+S\+T\textquotesingle{}) if(\$method== \textquotesingle{}D\+E\+L\+E\+T\+E\textquotesingle{}) if(\$method=== \textquotesingle{}G\+E\+T\textquotesingle{}\&\&isset(\$\+\_\+\+G\+E\+T\mbox{[}\textquotesingle{}action\textquotesingle{}\mbox{]})) else if(\$method=== \textquotesingle{}P\+O\+S\+T\textquotesingle{}\&\&isset(\$\+\_\+\+P\+O\+S\+T\mbox{[}\textquotesingle{}action\textquotesingle{}\mbox{]})) else if(\$method=== \textquotesingle{}D\+E\+L\+E\+T\+E\textquotesingle{}\&\&isset(\$\+\_\+\+D\+E\+L\+E\+T\+E\mbox{[}\textquotesingle{}action\textquotesingle{}\mbox{]})) else if(\$method=== \textquotesingle{}P\+O\+S\+T\textquotesingle{}\&\&isset(\$\+\_\+\+G\+E\+T\mbox{[}\char`\"{}uploadfor\char`\"{}\mbox{]})) \hyperlink{a00082_a1d3defe87c04d4fc1443739d3831ebfe}{else}
+\item 
+if(!preg\+\_\+match(\char`\"{}/$^\wedge$ \hyperlink{a00082_a1c1b7d1432c2e06063bf8f9ad29ba19d}{\$includefile} \mbox{[}\+\_\+a-\/z\+A-\/Z\mbox{]}\mbox{[}\+\_\+a-\/z\+A-\/Z0-\/9\mbox{]}$\ast$\$/\char`\"{}, \$action)) = \textquotesingle{}api/classes/\textquotesingle{}.\$action.\textquotesingle{}.php\textquotesingle{}
+\item 
+if(!file\+\_\+exists(\$includefile)) \hyperlink{a00082_a36df20dc9373bab32c6e4ff30b9093c3}{\$thisisamanu} = true
+\item 
+\hyperlink{a00082_a0a2d1b1b87dbb189b9243f333ad904f3}{\$callarray} = array(\$action, strtolower(\$method))
+\item 
+\hyperlink{a00082_a61eded163d962fc248b3cf209000979b}{\$arguments} = array()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{a00082_a2a4d0fc0c8817862d5c0c4769c909fa3}{}\index{index.\+php@{index.\+php}!catch\+All@{catch\+All}}
+\index{catch\+All@{catch\+All}!index.\+php@{index.\+php}}
+\subsubsection[{catch\+All}]{\setlength{\rightskip}{0pt plus 5cm}catch\+All (
+\begin{DoxyParamCaption}
+\item[{}]{\$e}
+\end{DoxyParamCaption}
+)}\label{a00082_a2a4d0fc0c8817862d5c0c4769c909fa3}
+This function catches all uncaught Exceptions! 
+\begin{DoxyParams}[1]{Parameters}
+Exception & {\em \$e} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00082_a289e5852ae9a348e1a0ef87aa3ce1c8c}{}\index{index.\+php@{index.\+php}!json\+\_\+response@{json\+\_\+response}}
+\index{json\+\_\+response@{json\+\_\+response}!index.\+php@{index.\+php}}
+\subsubsection[{json\+\_\+response}]{\setlength{\rightskip}{0pt plus 5cm}json\+\_\+response (
+\begin{DoxyParamCaption}
+\item[{}]{\$array}
+\end{DoxyParamCaption}
+)}\label{a00082_a289e5852ae9a348e1a0ef87aa3ce1c8c}
+Echoes a given array as J\+S\+O\+N 
+
+\subsection{Variable Documentation}
+\hypertarget{a00082_ae4901046cc3e1deebf77ccc785384a78}{}\index{index.\+php@{index.\+php}!\$conf@{\$conf}}
+\index{\$conf@{\$conf}!index.\+php@{index.\+php}}
+\subsubsection[{\$conf}]{\setlength{\rightskip}{0pt plus 5cm}\$conf = {\bf Config\+::get\+Instance}()}\label{a00082_ae4901046cc3e1deebf77ccc785384a78}
+\hypertarget{a00082_a12661b2fc0f57f97e30a1620889ce9c6}{}\index{index.\+php@{index.\+php}!\$method@{\$method}}
+\index{\$method@{\$method}!index.\+php@{index.\+php}}
+\subsubsection[{\$method}]{\setlength{\rightskip}{0pt plus 5cm}\$method = \$\+\_\+\+S\+E\+R\+V\+E\+R\mbox{[}\textquotesingle{}R\+E\+Q\+U\+E\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D\textquotesingle{}\mbox{]}}\label{a00082_a12661b2fc0f57f97e30a1620889ce9c6}
+\hypertarget{a00082_a1d3defe87c04d4fc1443739d3831ebfe}{}\index{index.\+php@{index.\+php}!else@{else}}
+\index{else@{else}!index.\+php@{index.\+php}}
+\subsubsection[{else}]{\setlength{\rightskip}{0pt plus 5cm}if (\$method== \textquotesingle{}D\+E\+L\+E\+T\+E\textquotesingle{}) if (is\+\_\+callable(\$callarray)) else}\label{a00082_a1d3defe87c04d4fc1443739d3831ebfe}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    $error = \textcolor{keyword}{new} \hyperlink{a00003}{amaException}(NULL, 400, \textcolor{stringliteral}{"Action not defined"})
+\end{DoxyCode}
+\hypertarget{a00082_a1c1b7d1432c2e06063bf8f9ad29ba19d}{}\index{index.\+php@{index.\+php}!\$includefile@{\$includefile}}
+\index{\$includefile@{\$includefile}!index.\+php@{index.\+php}}
+\subsubsection[{\$includefile}]{\setlength{\rightskip}{0pt plus 5cm}if (!preg\+\_\+match(\char`\"{}/$^\wedge$ \$includefile\mbox{[}\+\_\+a-\/z\+A-\/Z\mbox{]}\mbox{[}\+\_\+a-\/z\+A-\/Z0-\/9\mbox{]}$\ast$\$/\char`\"{}, \$action)) = \textquotesingle{}api/classes/\textquotesingle{}.\$action.\textquotesingle{}.php\textquotesingle{}}\label{a00082_a1c1b7d1432c2e06063bf8f9ad29ba19d}
+\hypertarget{a00082_a36df20dc9373bab32c6e4ff30b9093c3}{}\index{index.\+php@{index.\+php}!\$thisisamanu@{\$thisisamanu}}
+\index{\$thisisamanu@{\$thisisamanu}!index.\+php@{index.\+php}}
+\subsubsection[{\$thisisamanu}]{\setlength{\rightskip}{0pt plus 5cm}if (!file\+\_\+exists(\$includefile)) \$thisisamanu = true}\label{a00082_a36df20dc9373bab32c6e4ff30b9093c3}
+\hypertarget{a00082_a0a2d1b1b87dbb189b9243f333ad904f3}{}\index{index.\+php@{index.\+php}!\$callarray@{\$callarray}}
+\index{\$callarray@{\$callarray}!index.\+php@{index.\+php}}
+\subsubsection[{\$callarray}]{\setlength{\rightskip}{0pt plus 5cm}\$callarray = array(\$action, strtolower(\$method))}\label{a00082_a0a2d1b1b87dbb189b9243f333ad904f3}
+\hypertarget{a00082_a61eded163d962fc248b3cf209000979b}{}\index{index.\+php@{index.\+php}!\$arguments@{\$arguments}}
+\index{\$arguments@{\$arguments}!index.\+php@{index.\+php}}
+\subsubsection[{\$arguments}]{\setlength{\rightskip}{0pt plus 5cm}\$arguments = array()}\label{a00082_a61eded163d962fc248b3cf209000979b}

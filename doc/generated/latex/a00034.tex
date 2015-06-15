@@ -1,0 +1,168 @@
+\hypertarget{a00034}{}\section{Pdf\+Doc Class Reference}
+\label{a00034}\index{Pdf\+Doc@{Pdf\+Doc}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00034_ab838a22786c540b6b0dd5eb7b4f16451}{\+\_\+\+\_\+construct} (\$type, \$id)
+\item 
+\hyperlink{a00034_ac577e3777381a2b1616704cbefcec054}{stream\+Preview} ()
+\item 
+\hyperlink{a00034_a980f4ff9366e30bbc593223f606a6ec1}{save\+To\+Disk} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00034_a164026f74736817927e1cacd282a2e28}{get\+Info} ()
+\item 
+\hyperlink{a00034_ab20ac3660e2d867b235b004bd3950ec3}{get\+Items} ()
+\item 
+\hyperlink{a00034_a8e1c644fb3127a75be9e7b36e4ef6e79}{update\+State} (\$path)
+\item 
+\hyperlink{a00034_adb5455ba3678cc7d0333ba3e6c1f5e9b}{generate\+Path} ()
+\item 
+\hyperlink{a00034_a8bad07be942d56e97c7a6cf4bd17e02b}{generate\+Filename} ()
+\item 
+\hyperlink{a00034_a423e6fdd1402abf321e7e93a5d2d2f7b}{generate\+H\+T\+M\+L} ()
+\item 
+\hyperlink{a00034_a3dae5b4b218ecd93ab366f3176d166c5}{calc\+Due\+Date} (\$date)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a \hyperlink{a00033}{P\+D\+F} Document, for example an offer or an invoice.
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{a00034_ab838a22786c540b6b0dd5eb7b4f16451}{}\index{Pdf\+Doc@{Pdf\+Doc}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$type, }
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{a00034_ab838a22786c540b6b0dd5eb7b4f16451}
+Constructs a new \hyperlink{a00033}{P\+D\+F} Doc 
+\begin{DoxyParams}{Parameters}
+{\em \$type} & -\/ the document type (e.\+g. offer, invoice...) \\
+\hline
+{\em \$id} & -\/ the id of the document \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{a00034_ac577e3777381a2b1616704cbefcec054}{}\index{Pdf\+Doc@{Pdf\+Doc}!stream\+Preview@{stream\+Preview}}
+\index{stream\+Preview@{stream\+Preview}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{stream\+Preview}]{\setlength{\rightskip}{0pt plus 5cm}stream\+Preview (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00034_ac577e3777381a2b1616704cbefcec054}
+Will stream a preview for this document \hypertarget{a00034_a980f4ff9366e30bbc593223f606a6ec1}{}\index{Pdf\+Doc@{Pdf\+Doc}!save\+To\+Disk@{save\+To\+Disk}}
+\index{save\+To\+Disk@{save\+To\+Disk}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{save\+To\+Disk}]{\setlength{\rightskip}{0pt plus 5cm}save\+To\+Disk (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00034_a980f4ff9366e30bbc593223f606a6ec1}
+Will render the doc and save it to disk at the proper location \begin{DoxyReturn}{Returns}
+String -\/ the path the \hyperlink{a00033}{P\+D\+F} was saved 
+\end{DoxyReturn}
+\hypertarget{a00034_a164026f74736817927e1cacd282a2e28}{}\index{Pdf\+Doc@{Pdf\+Doc}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{get\+Info}]{\setlength{\rightskip}{0pt plus 5cm}get\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_a164026f74736817927e1cacd282a2e28}
+Gathers the document info \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & -\/ if the thing is not found \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00034_ab20ac3660e2d867b235b004bd3950ec3}{}\index{Pdf\+Doc@{Pdf\+Doc}!get\+Items@{get\+Items}}
+\index{get\+Items@{get\+Items}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{get\+Items}]{\setlength{\rightskip}{0pt plus 5cm}get\+Items (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_ab20ac3660e2d867b235b004bd3950ec3}
+Gathers the associated items \hypertarget{a00034_a8e1c644fb3127a75be9e7b36e4ef6e79}{}\index{Pdf\+Doc@{Pdf\+Doc}!update\+State@{update\+State}}
+\index{update\+State@{update\+State}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{update\+State}]{\setlength{\rightskip}{0pt plus 5cm}update\+State (
+\begin{DoxyParamCaption}
+\item[{}]{\$path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_a8e1c644fb3127a75be9e7b36e4ef6e79}
+Will update the database state and path of the document 
+\begin{DoxyParams}{Parameters}
+{\em \$path} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00034_adb5455ba3678cc7d0333ba3e6c1f5e9b}{}\index{Pdf\+Doc@{Pdf\+Doc}!generate\+Path@{generate\+Path}}
+\index{generate\+Path@{generate\+Path}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{generate\+Path}]{\setlength{\rightskip}{0pt plus 5cm}generate\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_adb5455ba3678cc7d0333ba3e6c1f5e9b}
+generates desired path and filename for the document, and ensures it is existent \begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00034_a8bad07be942d56e97c7a6cf4bd17e02b}{}\index{Pdf\+Doc@{Pdf\+Doc}!generate\+Filename@{generate\+Filename}}
+\index{generate\+Filename@{generate\+Filename}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{generate\+Filename}]{\setlength{\rightskip}{0pt plus 5cm}generate\+Filename (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_a8bad07be942d56e97c7a6cf4bd17e02b}
+generates an appropriate filename \begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+\hypertarget{a00034_a423e6fdd1402abf321e7e93a5d2d2f7b}{}\index{Pdf\+Doc@{Pdf\+Doc}!generate\+H\+T\+M\+L@{generate\+H\+T\+M\+L}}
+\index{generate\+H\+T\+M\+L@{generate\+H\+T\+M\+L}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{generate\+H\+T\+M\+L}]{\setlength{\rightskip}{0pt plus 5cm}generate\+H\+T\+M\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_a423e6fdd1402abf321e7e93a5d2d2f7b}
+Generates the H\+T\+M\+L for the doc \begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\hypertarget{a00034_a3dae5b4b218ecd93ab366f3176d166c5}{}\index{Pdf\+Doc@{Pdf\+Doc}!calc\+Due\+Date@{calc\+Due\+Date}}
+\index{calc\+Due\+Date@{calc\+Due\+Date}!Pdf\+Doc@{Pdf\+Doc}}
+\subsubsection[{calc\+Due\+Date}]{\setlength{\rightskip}{0pt plus 5cm}calc\+Due\+Date (
+\begin{DoxyParamCaption}
+\item[{}]{\$date}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00034_a3dae5b4b218ecd93ab366f3176d166c5}
+Calcs a due date for a date 
+\begin{DoxyParams}{Parameters}
+{\em \$date} & -\/ the invoice date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool$\vert$string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/pdf/\hyperlink{a00096}{pdf\+Doc.\+php}\end{DoxyCompactItemize}

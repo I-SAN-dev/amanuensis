@@ -1,0 +1,162 @@
+\hypertarget{a00080}{}\section{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/cronjob.php File Reference}
+\label{a00080}\index{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/cronjob.\+php@{D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/api/cronjob.\+php}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00080_a2a4d0fc0c8817862d5c0c4769c909fa3}{catch\+All} (\$e)
+\item 
+\hyperlink{a00080_a3d91ce7e1e6e49cd135de307a8d8cec6}{push\+Event} (\$type, \$id, \$name, \$state)
+\item 
+\hyperlink{a00080_ad700f42d51c056202611f48d3d36c425}{is\+Past} (\$date, \$offset=false)
+\item 
+\hyperlink{a00080_a2af807e3480f82307c7714ae16b72af3}{get\+State} (\$type, \$id)
+\item 
+\hyperlink{a00080_aaf4c137ed921caea237bd1be2b596629}{get\+Link} (\$event)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00080_a50a00e7de77365e00b117e73aa82fb9b}{\$start} = microtime(true)
+\item 
+\hyperlink{a00080_a1bcec9bbd34255927faaf155bf3a940a}{\$events} = array()
+\item 
+\hyperlink{a00080_a19a2d11c597ce9e2b727d9e1657b118c}{\$dbal} = \hyperlink{a00022_ac93fbec81f07e5d15f80db907e63dc10}{D\+B\+A\+L\+::get\+Instance}()
+\item 
+\hyperlink{a00080_abb0f8f809252372e25f48d52b63ef29d}{\$q}
+\item 
+\hyperlink{a00080_a1675978feddab0f9a720c372412eba80}{\$project\+Archived} = \hyperlink{a00090_af95db4629e61f0761ec2d794434d109d}{P\+R\+O\+J\+E\+C\+T\+\_\+\+A\+R\+C\+H\+I\+V\+E\+D}
+\item 
+\hyperlink{a00080_a060f31ca5c54d6a34d9f54d90f69b82e}{\$projectids} = \$q-\/$>$fetch\+All(P\+D\+O\+::\+F\+E\+T\+C\+H\+\_\+\+A\+S\+S\+O\+C)
+\item 
+foreach(\$projectids as \$projectid) \hyperlink{a00080_a45c2378f9f1837fc72aea6a2a65148f0}{\$stream} = \hyperlink{a00010_ac93fbec81f07e5d15f80db907e63dc10}{Ama\+Stream\+::get\+Instance}()
+\item 
+\hyperlink{a00080_af3a16c5f0dd7a74cf9acf6a49fff73a7}{\$x}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{a00080_a2a4d0fc0c8817862d5c0c4769c909fa3}{}\index{cronjob.\+php@{cronjob.\+php}!catch\+All@{catch\+All}}
+\index{catch\+All@{catch\+All}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{catch\+All}]{\setlength{\rightskip}{0pt plus 5cm}catch\+All (
+\begin{DoxyParamCaption}
+\item[{}]{\$e}
+\end{DoxyParamCaption}
+)}\label{a00080_a2a4d0fc0c8817862d5c0c4769c909fa3}
+This function catches all uncaught Exceptions! 
+\begin{DoxyParams}[1]{Parameters}
+Exception & {\em \$e} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00080_a3d91ce7e1e6e49cd135de307a8d8cec6}{}\index{cronjob.\+php@{cronjob.\+php}!push\+Event@{push\+Event}}
+\index{push\+Event@{push\+Event}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{push\+Event}]{\setlength{\rightskip}{0pt plus 5cm}push\+Event (
+\begin{DoxyParamCaption}
+\item[{}]{\$type, }
+\item[{}]{\$id, }
+\item[{}]{\$name, }
+\item[{}]{\$state}
+\end{DoxyParamCaption}
+)}\label{a00080_a3d91ce7e1e6e49cd135de307a8d8cec6}
+Adds an event to the event array 
+\begin{DoxyParams}{Parameters}
+{\em \$type} & -\/ the type of the thing \\
+\hline
+{\em \$id} & -\/ the id of the thing \\
+\hline
+{\em \$name} & -\/ the display name \\
+\hline
+{\em \$state} & -\/ the state of the thing \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00080_ad700f42d51c056202611f48d3d36c425}{}\index{cronjob.\+php@{cronjob.\+php}!is\+Past@{is\+Past}}
+\index{is\+Past@{is\+Past}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{is\+Past}]{\setlength{\rightskip}{0pt plus 5cm}is\+Past (
+\begin{DoxyParamCaption}
+\item[{}]{\$date, }
+\item[{}]{\$offset = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{a00080_ad700f42d51c056202611f48d3d36c425}
+
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$date} & -\/ a date in format yyy-\/\+M\+M-\/dd \\
+\hline
+boolean & {\em \$offset} & -\/ if the invoice-\/due-\/days offset should be calculated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 
+\end{DoxyReturn}
+\hypertarget{a00080_a2af807e3480f82307c7714ae16b72af3}{}\index{cronjob.\+php@{cronjob.\+php}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{get\+State}]{\setlength{\rightskip}{0pt plus 5cm}get\+State (
+\begin{DoxyParamCaption}
+\item[{}]{\$type, }
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{a00080_a2af807e3480f82307c7714ae16b72af3}
+Returns a name of a state 
+\begin{DoxyParams}{Parameters}
+{\em \$type} & \\
+\hline
+{\em \$id} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00080_aaf4c137ed921caea237bd1be2b596629}{}\index{cronjob.\+php@{cronjob.\+php}!get\+Link@{get\+Link}}
+\index{get\+Link@{get\+Link}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{get\+Link}]{\setlength{\rightskip}{0pt plus 5cm}get\+Link (
+\begin{DoxyParamCaption}
+\item[{}]{\$event}
+\end{DoxyParamCaption}
+)}\label{a00080_aaf4c137ed921caea237bd1be2b596629}
+Returns a linked name and declaration 
+\begin{DoxyParams}{Parameters}
+{\em \$event} & -\/ the event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string \$html 
+\end{DoxyReturn}
+Change project state if necessary
+
+\subsection{Variable Documentation}
+\hypertarget{a00080_a50a00e7de77365e00b117e73aa82fb9b}{}\index{cronjob.\+php@{cronjob.\+php}!\$start@{\$start}}
+\index{\$start@{\$start}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$start}]{\setlength{\rightskip}{0pt plus 5cm}\$start = microtime(true)}\label{a00080_a50a00e7de77365e00b117e73aa82fb9b}
+\hypertarget{a00080_a1bcec9bbd34255927faaf155bf3a940a}{}\index{cronjob.\+php@{cronjob.\+php}!\$events@{\$events}}
+\index{\$events@{\$events}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$events}]{\setlength{\rightskip}{0pt plus 5cm}\$events = array()}\label{a00080_a1bcec9bbd34255927faaf155bf3a940a}
+\hypertarget{a00080_a19a2d11c597ce9e2b727d9e1657b118c}{}\index{cronjob.\+php@{cronjob.\+php}!\$dbal@{\$dbal}}
+\index{\$dbal@{\$dbal}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$dbal}]{\setlength{\rightskip}{0pt plus 5cm}\$dbal = {\bf D\+B\+A\+L\+::get\+Instance}()}\label{a00080_a19a2d11c597ce9e2b727d9e1657b118c}
+\hypertarget{a00080_abb0f8f809252372e25f48d52b63ef29d}{}\index{cronjob.\+php@{cronjob.\+php}!\$q@{\$q}}
+\index{\$q@{\$q}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$q}]{\setlength{\rightskip}{0pt plus 5cm}\$q}\label{a00080_abb0f8f809252372e25f48d52b63ef29d}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \hyperlink{a00080_a19a2d11c597ce9e2b727d9e1657b118c}{$dbal}->prepare(\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{    SELECT id FROM projects WHERE state < :archived}
+\textcolor{stringliteral}{'})
+\end{DoxyCode}
+\hypertarget{a00080_a1675978feddab0f9a720c372412eba80}{}\index{cronjob.\+php@{cronjob.\+php}!\$project\+Archived@{\$project\+Archived}}
+\index{\$project\+Archived@{\$project\+Archived}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$project\+Archived}]{\setlength{\rightskip}{0pt plus 5cm}\$project\+Archived = {\bf P\+R\+O\+J\+E\+C\+T\+\_\+\+A\+R\+C\+H\+I\+V\+E\+D}}\label{a00080_a1675978feddab0f9a720c372412eba80}
+\hypertarget{a00080_a060f31ca5c54d6a34d9f54d90f69b82e}{}\index{cronjob.\+php@{cronjob.\+php}!\$projectids@{\$projectids}}
+\index{\$projectids@{\$projectids}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$projectids}]{\setlength{\rightskip}{0pt plus 5cm}\$projectids = \$q-\/$>$fetch\+All(P\+D\+O\+::\+F\+E\+T\+C\+H\+\_\+\+A\+S\+S\+O\+C)}\label{a00080_a060f31ca5c54d6a34d9f54d90f69b82e}
+\hypertarget{a00080_a45c2378f9f1837fc72aea6a2a65148f0}{}\index{cronjob.\+php@{cronjob.\+php}!\$stream@{\$stream}}
+\index{\$stream@{\$stream}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$stream}]{\setlength{\rightskip}{0pt plus 5cm}foreach (\$projectids as \$projectid) \${\bf stream} = {\bf Ama\+Stream\+::get\+Instance}()}\label{a00080_a45c2378f9f1837fc72aea6a2a65148f0}
+\hypertarget{a00080_af3a16c5f0dd7a74cf9acf6a49fff73a7}{}\index{cronjob.\+php@{cronjob.\+php}!\$x@{\$x}}
+\index{\$x@{\$x}!cronjob.\+php@{cronjob.\+php}}
+\subsubsection[{\$x}]{\setlength{\rightskip}{0pt plus 5cm}\$x}\label{a00080_af3a16c5f0dd7a74cf9acf6a49fff73a7}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \hyperlink{a00080_a19a2d11c597ce9e2b727d9e1657b118c}{$dbal}->prepare(\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{       DELETE FROM items}
+\textcolor{stringliteral}{       WHERE offer IS NULL}
+\textcolor{stringliteral}{       AND contract IS NULL}
+\textcolor{stringliteral}{       AND todo IS NULL}
+\textcolor{stringliteral}{       AND acceptance IS NULL}
+\textcolor{stringliteral}{       AND invoice IS NULL}
+\textcolor{stringliteral}{'})
+\end{DoxyCode}

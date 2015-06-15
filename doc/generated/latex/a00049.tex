@@ -1,0 +1,172 @@
+\hypertarget{a00049}{}\section{User Class Reference}
+\label{a00049}\index{User@{User}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00049_aca1bf51a5efba9e3b88c66d12b081a2b}{\+\_\+\+\_\+construct} (\$email, \$username, \$password, \$accessgroup, \$savetodb=true)
+\item 
+\hyperlink{a00049_a5ef76eef42d2624386442eeb636d338c}{set\+Email} (\$email)
+\item 
+\hyperlink{a00049_ac359b701a2ccaff746dd480f03314244}{set\+Username} (\$username)
+\item 
+\hyperlink{a00049_a930ab29fc6ab2cd66840a92a7056bf53}{set\+Accessgroup} (\$accessgroup)
+\item 
+\hyperlink{a00049_a3e35c8d3dbb2c513c618a664389e0926}{set\+Password} (\$password)
+\item 
+\hyperlink{a00049_ac94366e9b326c8dc53449ddf1e7e1ecd}{set\+Last\+Failed\+Login\+Attempt} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{a00049_a736a049fef923075462ba5a2b9d66b3e}{get} (\$email)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00049_a9cf3a655861ad4b52feb5e69692066f3}{send\+Notification} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{a00049_ac1e9c733679a192eae351365ac8eac2c}{userdata\+By\+Mail} (\$email)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class representing an \hyperlink{a00049}{User}
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{a00049_aca1bf51a5efba9e3b88c66d12b081a2b}{}\index{User@{User}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!User@{User}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$email, }
+\item[{}]{\$username, }
+\item[{}]{\$password, }
+\item[{}]{\$accessgroup, }
+\item[{}]{\$savetodb = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{a00049_aca1bf51a5efba9e3b88c66d12b081a2b}
+Creates a new \hyperlink{a00049}{User} and saves it to the Datastore 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$email} & \\
+\hline
+string & {\em \$username} & \\
+\hline
+string & {\em \$password} & -\/ completely hashed if already existent user or only once hashed with sha256 without salt! \\
+\hline
+int & {\em \$accessgroup} & \\
+\hline
+boolean & {\em \$savetodb} & -\/ set to false if user already exists \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{a00049_a736a049fef923075462ba5a2b9d66b3e}{}\index{User@{User}!get@{get}}
+\index{get@{get}!User@{User}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}static get (
+\begin{DoxyParamCaption}
+\item[{}]{\$email}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{a00049_a736a049fef923075462ba5a2b9d66b3e}
+Returns the \hyperlink{a00049}{User} with the given email address or N\+U\+L\+L if none found 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$email} & -\/ the email address of the wanted user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+User$\vert$\+N\+U\+L\+L 
+\end{DoxyReturn}
+\hypertarget{a00049_a5ef76eef42d2624386442eeb636d338c}{}\index{User@{User}!set\+Email@{set\+Email}}
+\index{set\+Email@{set\+Email}!User@{User}}
+\subsubsection[{set\+Email}]{\setlength{\rightskip}{0pt plus 5cm}set\+Email (
+\begin{DoxyParamCaption}
+\item[{}]{\$email}
+\end{DoxyParamCaption}
+)}\label{a00049_a5ef76eef42d2624386442eeb636d338c}
+Sets the email address 
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$email} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00049_ac359b701a2ccaff746dd480f03314244}{}\index{User@{User}!set\+Username@{set\+Username}}
+\index{set\+Username@{set\+Username}!User@{User}}
+\subsubsection[{set\+Username}]{\setlength{\rightskip}{0pt plus 5cm}set\+Username (
+\begin{DoxyParamCaption}
+\item[{}]{\$username}
+\end{DoxyParamCaption}
+)}\label{a00049_ac359b701a2ccaff746dd480f03314244}
+Sets the email address 
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$username} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00049_a930ab29fc6ab2cd66840a92a7056bf53}{}\index{User@{User}!set\+Accessgroup@{set\+Accessgroup}}
+\index{set\+Accessgroup@{set\+Accessgroup}!User@{User}}
+\subsubsection[{set\+Accessgroup}]{\setlength{\rightskip}{0pt plus 5cm}set\+Accessgroup (
+\begin{DoxyParamCaption}
+\item[{}]{\$accessgroup}
+\end{DoxyParamCaption}
+)}\label{a00049_a930ab29fc6ab2cd66840a92a7056bf53}
+Sets the access group 
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$accessgroup} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00049_a3e35c8d3dbb2c513c618a664389e0926}{}\index{User@{User}!set\+Password@{set\+Password}}
+\index{set\+Password@{set\+Password}!User@{User}}
+\subsubsection[{set\+Password}]{\setlength{\rightskip}{0pt plus 5cm}set\+Password (
+\begin{DoxyParamCaption}
+\item[{}]{\$password}
+\end{DoxyParamCaption}
+)}\label{a00049_a3e35c8d3dbb2c513c618a664389e0926}
+Sets the password 
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$password} & -\/ the one time hashed password \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00049_ac94366e9b326c8dc53449ddf1e7e1ecd}{}\index{User@{User}!set\+Last\+Failed\+Login\+Attempt@{set\+Last\+Failed\+Login\+Attempt}}
+\index{set\+Last\+Failed\+Login\+Attempt@{set\+Last\+Failed\+Login\+Attempt}!User@{User}}
+\subsubsection[{set\+Last\+Failed\+Login\+Attempt}]{\setlength{\rightskip}{0pt plus 5cm}set\+Last\+Failed\+Login\+Attempt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00049_ac94366e9b326c8dc53449ddf1e7e1ecd}
+Sets the last failed login attempt to now \hypertarget{a00049_a9cf3a655861ad4b52feb5e69692066f3}{}\index{User@{User}!send\+Notification@{send\+Notification}}
+\index{send\+Notification@{send\+Notification}!User@{User}}
+\subsubsection[{send\+Notification}]{\setlength{\rightskip}{0pt plus 5cm}send\+Notification (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00049_a9cf3a655861ad4b52feb5e69692066f3}
+Notifies a new user by email \hypertarget{a00049_ac1e9c733679a192eae351365ac8eac2c}{}\index{User@{User}!userdata\+By\+Mail@{userdata\+By\+Mail}}
+\index{userdata\+By\+Mail@{userdata\+By\+Mail}!User@{User}}
+\subsubsection[{userdata\+By\+Mail}]{\setlength{\rightskip}{0pt plus 5cm}static userdata\+By\+Mail (
+\begin{DoxyParamCaption}
+\item[{}]{\$email}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{a00049_ac1e9c733679a192eae351365ac8eac2c}
+Gets an P\+D\+O\+Statement result with user data to a given Mail 
+\begin{DoxyParams}{Parameters}
+{\em \$email} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed -\/ the first result for the user 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/authentication/\hyperlink{a00085}{user.\+php}\end{DoxyCompactItemize}

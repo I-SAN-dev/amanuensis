@@ -1,0 +1,143 @@
+\hypertarget{a00007}{}\section{Ama\+Mail\+Doc Class Reference}
+\label{a00007}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00007_ab3a7841df012540f33bfd8c277801e2d}{\+\_\+\+\_\+construct} (\$type, \$id, \$additional=N\+U\+L\+L)
+\item 
+\hyperlink{a00007_ab858356a1ff88c3d4efe48f1bf3a9028}{get\+Preview} ()
+\item 
+\hyperlink{a00007_a12bcef5130168b80d3d52dc82213f19a}{send} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00007_a164026f74736817927e1cacd282a2e28}{get\+Info} ()
+\item 
+\hyperlink{a00007_a14ad3e290231897f1be73086b9912fbc}{get\+Recipient} ()
+\item 
+\hyperlink{a00007_aa91862c4e237ee5b53083f41633babb6}{get\+Attachments} ()
+\item 
+\hyperlink{a00007_a58e43f09a06ce4e29b192c4e17ce7915}{get\+Content} ()
+\item 
+\hyperlink{a00007_a7ec8f5b794ded8f3c0df9afd96c8233c}{get\+Subject} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class generates an ama\+Mail with specific content and attachement based on a thing that should be sent
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{a00007_ab3a7841df012540f33bfd8c277801e2d}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$type, }
+\item[{}]{\$id, }
+\item[{}]{\$additional = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}\label{a00007_ab3a7841df012540f33bfd8c277801e2d}
+Constructs a new \hyperlink{a00007}{Ama\+Mail\+Doc} 
+\begin{DoxyParams}{Parameters}
+{\em \$type} & -\/ the type of the thing that should be send, e.\+g. offer \\
+\hline
+{\em \$id} & -\/ the id of the thing \\
+\hline
+{\em \$additional} & -\/ some additional text that can be added to the mail \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{a00007_ab858356a1ff88c3d4efe48f1bf3a9028}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Preview@{get\+Preview}}
+\index{get\+Preview@{get\+Preview}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Preview}]{\setlength{\rightskip}{0pt plus 5cm}get\+Preview (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00007_ab858356a1ff88c3d4efe48f1bf3a9028}
+Returns a preview path \begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\hypertarget{a00007_a12bcef5130168b80d3d52dc82213f19a}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!send@{send}}
+\index{send@{send}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{send}]{\setlength{\rightskip}{0pt plus 5cm}send (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00007_a12bcef5130168b80d3d52dc82213f19a}
+Sends the constructed mail \hypertarget{a00007_a164026f74736817927e1cacd282a2e28}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Info}]{\setlength{\rightskip}{0pt plus 5cm}get\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00007_a164026f74736817927e1cacd282a2e28}
+Gathers the info \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & -\/ if the thing is not found \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00007_a14ad3e290231897f1be73086b9912fbc}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Recipient@{get\+Recipient}}
+\index{get\+Recipient@{get\+Recipient}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Recipient}]{\setlength{\rightskip}{0pt plus 5cm}get\+Recipient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00007_a14ad3e290231897f1be73086b9912fbc}
+Gathers Recipient info \begin{DoxyReturn}{Returns}
+array with \textquotesingle{}mail\textquotesingle{} and \textquotesingle{}name\textquotesingle{} 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00007_aa91862c4e237ee5b53083f41633babb6}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Attachments@{get\+Attachments}}
+\index{get\+Attachments@{get\+Attachments}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Attachments}]{\setlength{\rightskip}{0pt plus 5cm}get\+Attachments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00007_aa91862c4e237ee5b53083f41633babb6}
+Gathers the Attachment path and ensures it existence \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+\hypertarget{a00007_a58e43f09a06ce4e29b192c4e17ce7915}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Content@{get\+Content}}
+\index{get\+Content@{get\+Content}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Content}]{\setlength{\rightskip}{0pt plus 5cm}get\+Content (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00007_a58e43f09a06ce4e29b192c4e17ce7915}
+Gathers the mail content \begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\hypertarget{a00007_a7ec8f5b794ded8f3c0df9afd96c8233c}{}\index{Ama\+Mail\+Doc@{Ama\+Mail\+Doc}!get\+Subject@{get\+Subject}}
+\index{get\+Subject@{get\+Subject}!Ama\+Mail\+Doc@{Ama\+Mail\+Doc}}
+\subsubsection[{get\+Subject}]{\setlength{\rightskip}{0pt plus 5cm}get\+Subject (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00007_a7ec8f5b794ded8f3c0df9afd96c8233c}
+Generates the Mails subject \begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/mail/\hyperlink{a00093}{ama\+Mail\+Doc.\+php}\end{DoxyCompactItemize}

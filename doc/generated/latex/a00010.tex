@@ -1,0 +1,123 @@
+\hypertarget{a00010}{}\section{Ama\+Stream Class Reference}
+\label{a00010}\index{Ama\+Stream@{Ama\+Stream}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00010_ad3461a300ecef3d09f94da67e6f89ac4}{add\+Item} (\$action, \$type, \$id, \$nouser=false)
+\item 
+\hyperlink{a00010_a3e5834ff3daeecd091712270886a16fb}{get\+Stream} ()
+\item 
+\hyperlink{a00010_ae86d23486e5db85ffa8cca4925b224da}{clean\+Up\+Old} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{a00010_ac93fbec81f07e5d15f80db907e63dc10}{get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{a00010_ad9d7ce33ebb142b70e58b68052ca0ea8}{\$instance}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00010_ad0cb87b388bc74d63dc884accdca8713}{\+\_\+\+\_\+clone} ()
+\item 
+\hyperlink{a00010_a095c5d389db211932136b53f25f39685}{\+\_\+\+\_\+construct} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handles stream item creation and stream delivering Implements Singleton Pattern
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{a00010_a095c5d389db211932136b53f25f39685}{}\index{Ama\+Stream@{Ama\+Stream}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00010_a095c5d389db211932136b53f25f39685}
+Constructor will do nothing 
+
+\subsection{Member Function Documentation}
+\hypertarget{a00010_ac93fbec81f07e5d15f80db907e63dc10}{}\index{Ama\+Stream@{Ama\+Stream}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{get\+Instance}]{\setlength{\rightskip}{0pt plus 5cm}static get\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{a00010_ac93fbec81f07e5d15f80db907e63dc10}
+Will return the instance of the stream \begin{DoxyReturn}{Returns}
+\hyperlink{a00010}{Ama\+Stream} -\/ a stream object 
+\end{DoxyReturn}
+\hypertarget{a00010_ad0cb87b388bc74d63dc884accdca8713}{}\index{Ama\+Stream@{Ama\+Stream}!\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}}
+\index{\+\_\+\+\_\+clone@{\+\_\+\+\_\+clone}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{\+\_\+\+\_\+clone}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00010_ad0cb87b388bc74d63dc884accdca8713}
+Manage proper cloning \begin{DoxyReturn}{Returns}
+\hyperlink{a00010}{Ama\+Stream} -\/ an \hyperlink{a00010}{Ama\+Stream} instance 
+\end{DoxyReturn}
+\hypertarget{a00010_ad3461a300ecef3d09f94da67e6f89ac4}{}\index{Ama\+Stream@{Ama\+Stream}!add\+Item@{add\+Item}}
+\index{add\+Item@{add\+Item}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{add\+Item}]{\setlength{\rightskip}{0pt plus 5cm}add\+Item (
+\begin{DoxyParamCaption}
+\item[{}]{\$action, }
+\item[{}]{\$type, }
+\item[{}]{\$id, }
+\item[{}]{\$nouser = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{a00010_ad3461a300ecef3d09f94da67e6f89ac4}
+
+\begin{DoxyParams}{Parameters}
+{\em \$action} & -\/ the action that was done, e.\+g create, send, archive, delete \\
+\hline
+{\em \$type} & -\/ what was done, e.\+g. project, client, invoice \\
+\hline
+{\em \$id} & -\/ id of the thing \\
+\hline
+{\em \$nouser} & -\/ if it is an event that shall not be connected with a user -\/ defaults to false \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00010_a3e5834ff3daeecd091712270886a16fb}{}\index{Ama\+Stream@{Ama\+Stream}!get\+Stream@{get\+Stream}}
+\index{get\+Stream@{get\+Stream}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{get\+Stream}]{\setlength{\rightskip}{0pt plus 5cm}get\+Stream (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00010_a3e5834ff3daeecd091712270886a16fb}
+Returns the stream data and triggers the cleanup \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+\hypertarget{a00010_ae86d23486e5db85ffa8cca4925b224da}{}\index{Ama\+Stream@{Ama\+Stream}!clean\+Up\+Old@{clean\+Up\+Old}}
+\index{clean\+Up\+Old@{clean\+Up\+Old}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{clean\+Up\+Old}]{\setlength{\rightskip}{0pt plus 5cm}clean\+Up\+Old (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00010_ae86d23486e5db85ffa8cca4925b224da}
+Deletes old stream entries, older than 90 days 
+
+\subsection{Field Documentation}
+\hypertarget{a00010_ad9d7ce33ebb142b70e58b68052ca0ea8}{}\index{Ama\+Stream@{Ama\+Stream}!\$instance@{\$instance}}
+\index{\$instance@{\$instance}!Ama\+Stream@{Ama\+Stream}}
+\subsubsection[{\$instance}]{\setlength{\rightskip}{0pt plus 5cm}\$instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{a00010_ad9d7ce33ebb142b70e58b68052ca0ea8}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/project/\hyperlink{a00101}{ama\+Stream.\+php}\end{DoxyCompactItemize}
