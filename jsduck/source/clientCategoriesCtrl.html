@@ -20,7 +20,7 @@
  * Controller for the client categories list view.
  * Gets the client categories list and holds functions to add and delete client categories in the database.
  *
- * *Deprecated:* All client category concerns are no handled within {@link ama.controllers.ClientDetailCtrl ClientDetailCtrl}
+ * *Deprecated:* All client category concerns are now handled within {@link ama.controllers.ClientDetailCtrl ClientDetailCtrl}
  */
 app.controller(&#39;ClientCategoriesCtrl&#39;, [
     &#39;ApiAbstractionLayer&#39;,
@@ -53,7 +53,7 @@ app.controller(&#39;ClientCategoriesCtrl&#39;, [
 
 <span id='ama-controllers-ClientCategoriesCtrl-method-deleteCategory'>        /**
 </span>         * Deletes a client category by given ID
-         * @param {int} id The id of the category to be deleted.
+         * @param {integer} id The id of the category to be deleted.
          */
         this.deleteCategory = function (id) {
             DeleteService(&#39;client_categories&#39;, id).then(function (data) {

@@ -33,7 +33,7 @@ app.controller(&#39;ClientDetailCtrl&#39;,
             var self = this;
 
 <span id='ama-controllers-ClientDetailCtrl-property-showPage'>            /**
-</span>             * @type {int}
+</span>             * @type {integer}
              * Indicates which panel should be shown. Initially set by the {@link ama.services.PanelService PanelService}
              */
             this.showPage = PanelService.getPanel(&#39;clients&#39;);
@@ -59,7 +59,7 @@ app.controller(&#39;ClientDetailCtrl&#39;,
 
 <span id='ama-controllers-ClientDetailCtrl-method-getClient'>            /**
 </span>             * Gets a client from the API
-             * @param {int} id The client id to query for
+             * @param {integer} id The client id to query for
              */
             var getClient = function(id) {
                 self.client = LocalStorage.getData(&#39;client&#39;+&#39;/&#39;+id);
@@ -129,12 +129,13 @@ app.controller(&#39;ClientDetailCtrl&#39;,
                 self.newConnectionFlag[type] = !self.newConnectionFlag[type];
             };
 
-<span id='ama-controllers-ClientDetailCtrl-property-'>            /**
+<span id='ama-controllers-ClientDetailCtrl-property-newConnection'>            /**
 </span>             * A simple object containing any possible new client data
              * with (initially) empty names and values.
              * Bound to input fields in the view.
-             * *Deprecated:* As fax works without this, we don&#39;t seem to need it.
+             * @deprecated As fax works without this, we don&#39;t seem to need it.
              * TODO: create this dynamically
+             * @property newConnection
              * @type {{phone: {name: string, value: string}, mail: {name: string, value: string}}}
              */
             //

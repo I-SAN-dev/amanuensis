@@ -51,7 +51,7 @@ app.controller('AcceptanceDetailCtrl', [
          * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
          * or the generated PDF of the acceptance
          * @param {Event} event The event (commonly 'click') that triggered the function call
-         * @param {bool} preview Indicates if a preview or the generated PDF should be shown
+         * @param {boolean} preview Indicates if a preview or the generated PDF should be shown
          * @param {String} path *optional* Path to the generated PDF
          */
         this.viewPdf = function (event,preview,path) {

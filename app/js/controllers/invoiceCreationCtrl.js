@@ -24,7 +24,7 @@ app.controller('InvoiceCreationCtrl', [
 
         /**
          * The invoice to be created
-         * @type {{refnumber: string, project: int}}
+         * @type {{refnumber: string, project: integer}}
          */
         this.newInvoice = {
             refnumber: '',

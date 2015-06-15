@@ -2,7 +2,6 @@
  * @class ama.services.LocalStorage
  * # LocalStorage
  * The local storage service allows us to persistently save/retrieve data to/from HTML5 local storage
- * @namespace js/services/localStorage
  * @author Christian Baur, Sebastian Antosch
  */
 app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootScope){
@@ -101,8 +100,9 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
     return {
         /**
          * Creates or updates an entry (key-value pair) in the local storage
-         * @param: {string} key -  the storage entry's key
-         * @param: {string|object} val - value to save in the local storage
+         * @param {string} key The storage entry's key
+         * @param {string|object} val Value to save in the local storage
+         * @param {boolean} [encrypted] Indicates if the value to save should be encrypted. Defaults to true.
          */
         setData: function(key, val, encrypted){
 
@@ -142,7 +142,8 @@ app.factory('LocalStorage', ['$window', '$rootScope', function($window, $rootSco
 
         /**
          * Gets data from the local storage.
-         * @param: {string} key - The key of the storage's entry to be retrieved
+         * @param {string} key The key of the storage's entry to be retrieved
+         * @param {boolean} [encrypted] Indicates if the value to be retrieved is stored encrypted. Defaults to true.
          * @return: {string|object} - the corresponding localStorage entry
          */
         getData: function(key, encrypted){

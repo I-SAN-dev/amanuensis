@@ -132,7 +132,13 @@ app.factory('ItemService',[
                 bulkOrder = bulkOrder.join(',');
                 return ApiAbstractionLayer('POST', {name:'bulk', data: {order:bulkOrder,setorder:setOrder}});
             },
-
+            /**
+             * Attempts to move an item from one document to another. Opens a modal to ask the user to which container the item should be moved.
+             * @param {Object} item The item to be moved
+             * @param {String} containerType The type of the document the item is currently in.
+             * @param {String|integer}containerId The id of the item's current container.
+             * @param {Array} availableContainers A list of item containers (documents) to which the item can be moved
+             */
             moveItem: function(item, containerType, containerId, availableContainers){
                 for(var i = 0; i<availableContainers.length; i++){
                     if(availableContainers[i].id == containerId){
@@ -177,8 +183,8 @@ app.factory('ItemService',[
 
             /**
              * Removes an item connection to a given document type
-             * @param item
-             * @param type
+             * @param {Object} item The item on which the connection is to be removed
+             * @param {String} type The document type which is to be removed from the item
              */
             removeItemFromDocument: function(item, type)
             {

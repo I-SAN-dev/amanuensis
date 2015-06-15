@@ -77,8 +77,8 @@ app.controller('ClientCreationCtrl',
 
             /**
              * Adds one or more categori(es) to a client
-             * @param {int} client The client id
-             * @param {object} categories An array containing all category ids that shall be added to the client
+             * @param {integer} client The client id
+             * @param {Object} categories An array containing all category ids that shall be added to the client
              */
             var addCategoryLinks = function(client, categories) {
                 if(categories.length > 0){
