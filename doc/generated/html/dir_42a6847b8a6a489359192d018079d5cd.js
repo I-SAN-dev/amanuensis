@@ -1,12 +1,12 @@
 var dir_42a6847b8a6a489359192d018079d5cd =
 [
-    [ "amaSession.php", "ama_session_8php.html", [
-      [ "AmaSession", "class_ama_session.html", "class_ama_session" ]
+    [ "amaSession.php", "a00083.html", [
+      [ "AmaSession", "a00009.html", "a00009" ]
     ] ],
-    [ "authenticator.php", "authenticator_8php.html", [
-      [ "Authenticator", "class_authenticator.html", "class_authenticator" ]
+    [ "authenticator.php", "a00084.html", [
+      [ "Authenticator", "a00013.html", "a00013" ]
     ] ],
-    [ "user.php", "user_8php.html", [
-      [ "User", "class_user.html", "class_user" ]
+    [ "user.php", "a00085.html", [
+      [ "User", "a00049.html", "a00049" ]
     ] ]
 ];
