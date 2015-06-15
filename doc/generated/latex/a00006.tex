@@ -1,0 +1,151 @@
+\hypertarget{a00006}{}\section{Ama\+Mail Class Reference}
+\label{a00006}\index{Ama\+Mail@{Ama\+Mail}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00006_ad08be69919daaa811af55b17ebbb8af9}{\+\_\+\+\_\+construct} (\$receivername, \$receivermail, \$subject)
+\item 
+\hyperlink{a00006_aea60bc046c572df8f2a87a2d388116a1}{set\+Content} (\$html)
+\item 
+\hyperlink{a00006_afde2b37e8fbc3f69d966f2e3aee1306f}{add\+Attachment} (\$path, \$name= \textquotesingle{}\textquotesingle{})
+\item 
+\hyperlink{a00006_ab858356a1ff88c3d4efe48f1bf3a9028}{get\+Preview} ()
+\item 
+\hyperlink{a00006_a12bcef5130168b80d3d52dc82213f19a}{send} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00006_a0a043c52d9e70e64ac1d0d801df3f30a}{html2text} (\$html)
+\item 
+\hyperlink{a00006_a62c74adc4d0bd5fdf881b127102f1b32}{charset\+\_\+decode\+\_\+utf\+\_\+8} (\$string)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Wrapper for P\+H\+P\+Mailer and sending Emails from the App
+
+This file is part of the project codename \char`\"{}\+A\+M\+A\+N\+U\+E\+N\+S\+I\+S\char`\"{}
+
+\begin{DoxyAuthor}{Author}
+Sebastian Antosch \href{mailto:s.antosch@i-san.de}{\tt s.\+antosch@i-\/san.\+de} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+2015 I-\/\+S\+A\+N.\+de Webdesign \& Hosting Gb\+R \hyperlink{}{G\+P\+L }
+\end{DoxyCopyright}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{a00006_ad08be69919daaa811af55b17ebbb8af9}{}\index{Ama\+Mail@{Ama\+Mail}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$receivername, }
+\item[{}]{\$receivermail, }
+\item[{}]{\$subject}
+\end{DoxyParamCaption}
+)}\label{a00006_ad08be69919daaa811af55b17ebbb8af9}
+create a new mail to a recipient 
+\begin{DoxyParams}[1]{Parameters}
+String & {\em \$receivername} & -\/ the name of the receiver \\
+\hline
+String & {\em \$receivermail} & -\/ the mail adress of the receiver \\
+\hline
+String & {\em \$subject} & -\/ the subject of the email \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{a00006_aea60bc046c572df8f2a87a2d388116a1}{}\index{Ama\+Mail@{Ama\+Mail}!set\+Content@{set\+Content}}
+\index{set\+Content@{set\+Content}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{set\+Content}]{\setlength{\rightskip}{0pt plus 5cm}set\+Content (
+\begin{DoxyParamCaption}
+\item[{}]{\$html}
+\end{DoxyParamCaption}
+)}\label{a00006_aea60bc046c572df8f2a87a2d388116a1}
+Sets the content of the mail 
+\begin{DoxyParams}{Parameters}
+{\em \$html} & -\/ the html body of the mail -\/ only the part inside the outer \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00006_afde2b37e8fbc3f69d966f2e3aee1306f}{}\index{Ama\+Mail@{Ama\+Mail}!add\+Attachment@{add\+Attachment}}
+\index{add\+Attachment@{add\+Attachment}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{add\+Attachment}]{\setlength{\rightskip}{0pt plus 5cm}add\+Attachment (
+\begin{DoxyParamCaption}
+\item[{}]{\$path, }
+\item[{}]{\$name = {\ttfamily \textquotesingle{}\textquotesingle{}}}
+\end{DoxyParamCaption}
+)}\label{a00006_afde2b37e8fbc3f69d966f2e3aee1306f}
+Adds an attachment to the mail 
+\begin{DoxyParams}[1]{Parameters}
+ & {\em \$path} & -\/ the path to the attchement \\
+\hline
+null & {\em \$name} & -\/ an optional new name for the attachment \\
+\hline
+\end{DoxyParams}
+\hypertarget{a00006_ab858356a1ff88c3d4efe48f1bf3a9028}{}\index{Ama\+Mail@{Ama\+Mail}!get\+Preview@{get\+Preview}}
+\index{get\+Preview@{get\+Preview}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{get\+Preview}]{\setlength{\rightskip}{0pt plus 5cm}get\+Preview (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00006_ab858356a1ff88c3d4efe48f1bf3a9028}
+Returns the complete generated Mail Markup \begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00006_a12bcef5130168b80d3d52dc82213f19a}{}\index{Ama\+Mail@{Ama\+Mail}!send@{send}}
+\index{send@{send}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{send}]{\setlength{\rightskip}{0pt plus 5cm}send (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00006_a12bcef5130168b80d3d52dc82213f19a}
+Finally sends the mail 
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{a00006_a0a043c52d9e70e64ac1d0d801df3f30a}{}\index{Ama\+Mail@{Ama\+Mail}!html2text@{html2text}}
+\index{html2text@{html2text}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{html2text}]{\setlength{\rightskip}{0pt plus 5cm}html2text (
+\begin{DoxyParamCaption}
+\item[{}]{\$html}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00006_a0a043c52d9e70e64ac1d0d801df3f30a}
+Converts html to Text and encodes it in I\+S\+O-\/8859-\/1 Looks like reeeeaaally fucked up shit, but this works actually quite well! 
+\begin{DoxyParams}{Parameters}
+{\em \$html} & -\/ the html that should be textified \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+\hypertarget{a00006_a62c74adc4d0bd5fdf881b127102f1b32}{}\index{Ama\+Mail@{Ama\+Mail}!charset\+\_\+decode\+\_\+utf\+\_\+8@{charset\+\_\+decode\+\_\+utf\+\_\+8}}
+\index{charset\+\_\+decode\+\_\+utf\+\_\+8@{charset\+\_\+decode\+\_\+utf\+\_\+8}!Ama\+Mail@{Ama\+Mail}}
+\subsubsection[{charset\+\_\+decode\+\_\+utf\+\_\+8}]{\setlength{\rightskip}{0pt plus 5cm}charset\+\_\+decode\+\_\+utf\+\_\+8 (
+\begin{DoxyParamCaption}
+\item[{}]{\$string}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00006_a62c74adc4d0bd5fdf881b127102f1b32}
+Decodes unicode/utf8 to ansi/\+I\+S\+O-\/8859-\/1 and replaces unsupported chars with entities \begin{DoxyAuthor}{Author}
+\href{mailto:okx.oliver.koenig@gmail.com}{\tt okx.\+oliver.\+koenig@gmail.\+com} -\/ \href{http://php.net/manual/de/function.utf8-decode.php#116671}{\tt http\+://php.\+net/manual/de/function.\+utf8-\/decode.\+php\#116671} 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em \$string} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Arbeit/\+Php\+Storm\+Projects/amanuensis/app/classes/mail/\hyperlink{a00092}{ama\+Mail.\+php}\end{DoxyCompactItemize}
