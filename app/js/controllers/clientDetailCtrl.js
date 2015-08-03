@@ -206,31 +206,41 @@ app.controller('ClientDetailCtrl',
              */
             this.makeMailDefault = function(id)
             {
-                var mailAdresses = self.client.data.mail;
-                var i = 0, j = 0, k= 0;
-                var iStopped = false, jStopped = false;
-                while(i<mailAdresses.length) {
-                    if(mailAdresses[i].id!=id && !jStopped)
-                        j++;
-                    else
-                        jStopped = true;
-                    if(mailAdresses[i].isdefault == "0" && ! iStopped)
-                        k++;
-                    else
-                        iStopped = true;
-                    if(iStopped && jStopped){
-                        break;
-                    } else {
-                        i++;
+                var mailAddresses = self.client.data.mail;
+                var currentDefault = null, currentSet = false, newDefault = null, newSet = false, i= 0;
+
+                console.log(newDefault, currentDefault, i, mailAddresses.length);
+                while(i<mailAddresses.length) {
+                    if(!currentSet && mailAddresses[i].isdefault == "1"){
+                        currentDefault = i;
+                        currentSet = true;
                     }
+                    if(!newSet && id == mailAddresses[i].id){
+                        newDefault = i;
+                        newSet = true;
+                    }
+                    if(currentSet && newSet)
+                        break;
+                    else
+                        i++;
                 }
-                ApiAbstractionLayer('POST', {name:'client_data', data:{id:mailAdresses[k].id, isdefault:"0"}}).then(function () {
-                    self.client.data.mail[k].isdefault = "0";
+
+                var setNewDefault = function () {
                     ApiAbstractionLayer('POST', {name:'client_data', data:{id:id, isdefault:"1"}}).then(function () {
-                        self.client.data.mail[j].isdefault = "1";
+                        self.client.data.mail[newDefault].isdefault = "1";
                         LocalStorage.setData('client/'+self.client.id, self.client);
                     });
-                });
+                };
+
+                if(currentSet){
+                    ApiAbstractionLayer('POST', {name:'client_data', data:{id:mailAddresses[currentDefault].id, isdefault:"0"}}).then(function () {
+                        self.client.data.mail[currentDefault].isdefault = "0";
+                        setNewDefault();
+                    });
+                } else {
+                    setNewDefault();
+                }
+
             };
 
 
