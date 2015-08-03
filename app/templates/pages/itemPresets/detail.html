@@ -1,24 +1,13 @@
 <div class="detail-view fullheight" data-ng-controller="ItemPresetDetailCtrl as preset">
     <div class="btn-toolbar">
 
-        <div class="row">
-            <div class="col-sm-8">
-
-                <h3 data-in-place-edit
+        <h3 data-in-place-edit
                     data-ipe-key="'name'"
                     data-ipe-value="preset.preset.name"
                     data-api-name="'item_preset'"
                     data-api-id="preset.preset.name"
                     data-ipe-name="'items.name'|translate"></h3>
 
-            </div>
-            <div class="col-sm-4">
-
-                <div class="btn-group btn-group-sm pull-right">
-                    <button class="btn btn-link" data-ng-click="preset.deletePreset()"><i class="md md-lg md-delete"></i> {{'global.delete'|translate}}</button>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="detail-inner scroll-y">
         <div class="detail-inner-padding">

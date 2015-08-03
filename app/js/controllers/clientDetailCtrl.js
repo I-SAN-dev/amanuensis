@@ -209,7 +209,6 @@ app.controller('ClientDetailCtrl',
                 var mailAddresses = self.client.data.mail;
                 var currentDefault = null, currentSet = false, newDefault = null, newSet = false, i= 0;
 
-                console.log(newDefault, currentDefault, i, mailAddresses.length);
                 while(i<mailAddresses.length) {
                     if(!currentSet && mailAddresses[i].isdefault == "1"){
                         currentDefault = i;
