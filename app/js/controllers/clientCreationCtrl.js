@@ -69,6 +69,7 @@ app.controller('ClientCreationCtrl',
                 self.allCategories = data;
                 LocalStorage.setData('clientCategories', data)
             });
+
             /**
              * An array containing all selected categories for the new client.
              * @type {Array}
