@@ -227,7 +227,7 @@ class time {
      * deletes a Time
      * @param $_DELETE
      */
-    private static function deleteTime($_DELETE, $forid = NULL)
+    private static function deleteTime($_DELETE)
     {
         $dbal = DBAL::getInstance();
         try
@@ -244,9 +244,9 @@ class time {
 
         if($count)
         {
-            if(isset($forid))
+            if(isset($_DELETE['forid']))
             {
-                self::getTimeFor($forid);
+                self::getTimeFor($_DELETE['forid']);
             }
             else
             {
