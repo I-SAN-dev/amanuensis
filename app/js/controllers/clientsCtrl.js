@@ -12,7 +12,8 @@ app.controller('ClientsCtrl',
         'DeleteService',
         'MasterDetailService',
         '$filter',
-        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, $filter) {
+        '$state',
+        function (ApiAbstractionLayer, LocalStorage, $scope, $stateParams, DeleteService, MasterDetailService, $filter, $state) {
             /**
              * An array containing all clients.
              * @type {Array}
@@ -75,14 +76,12 @@ app.controller('ClientsCtrl',
             };
 
             /**
-             * Deletes a client by given ID
+             * Updates the client list by given data
              *
-             * @param id {string} - Database ID of the client to be deleted
+             * @param data {object} the new client list
              */
-            this.deleteClient = function(id){
-                DeleteService('client',id).then(function (data) {
-                    setClientList(data);
-                });
+            this.updateList = function(data){
+                setClientList(data);
             };
 
 

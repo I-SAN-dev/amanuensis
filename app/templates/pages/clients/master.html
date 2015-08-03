@@ -37,7 +37,7 @@
                     <h2>{{client.companyname}}</h2>
                     <p>{{client.city}}</p>
                 </a>
-                <button class="btn btn-danger btn-link btn-icon-round btn-on-list" title="{{'clients.deleteClient' | translate}}" data-ng-click="MasterDetailCtrl.notifyMaster('deleteClient',client.id);"><i class="md md-delete"></i></button>
+                <button class="btn btn-danger btn-link btn-icon-round btn-on-list" title="{{'clients.deleteClient' | translate}}" data-ng-click="MasterDetailCtrl.removeItem('client',client.id);"><i class="md md-delete"></i></button>
             </div>
         </div>
     </div>
