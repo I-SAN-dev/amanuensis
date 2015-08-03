@@ -148,7 +148,8 @@ app.controller('ItemDetailCtrl', [
          */
         this.deleteTime = function (id) {
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
-                self.time.times = data;
+                self.time.times = data.times;
+                self.time.totaltime = data.totaltime;
             });
         };
 
