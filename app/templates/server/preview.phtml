@@ -69,8 +69,8 @@
     </head>
     <body>
         <div class="mailheader">
-            <span class="il-left">Empf&auml;nger: </span><span class="il-right"><a href="mailto:<?= $recipient['mail'] ?>"><?= $recipient['name'] ?> &lt;<?= $recipient['mail'] ?>&gt;</a></span><br/>
-            <span class="il-left">Betreff: </span><span class="il-right"><?= $subject ?></a></span><br/>
+            <span class="il-left">Empf&auml;nger: </span><span class="il-right"><a href="mailto:<?= htmlentities($recipient['mail']) ?>"><?= htmlentities($recipient['name']) ?> &lt;<?= htmlentities($recipient['mail']) ?>&gt;</a></span><br/>
+            <span class="il-left">Betreff: </span><span class="il-right"><?= $subject ?></span><br/>
             <span class="il-left">Anhang: </span><span class="il-right">
                 <?php foreach($attachments as $attachment) { ?>
                 <a href="<?= $linkurl ?>/api/?action=protectedpdf&path=<?= $attachment ?>" target="_blank"><?= basename($attachment) ?></a>&nbsp;
