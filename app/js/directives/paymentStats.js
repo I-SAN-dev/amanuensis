@@ -63,7 +63,7 @@ app.directive('paymentStats', [
                         {
                             $scope.leftendtime = Date.now() / 1000;
                             var rightendtime = Date.now() / 1000;
-                            var enddate = amaDateFilter(new Date().toDateString(),'dd.MM.yyyy');
+                            var enddate = '';
 
                             for(var i = 0; i < $scope.payEvents.length; i++)
                             {
