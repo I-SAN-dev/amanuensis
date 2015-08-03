@@ -112,4 +112,8 @@ app.controller('ClientCreationCtrl',
                     $state.go(to,toParams);
                 });
             };
+
+            this.showInfo = function () {
+                console.log(self.newClient);
+            }
         }]);

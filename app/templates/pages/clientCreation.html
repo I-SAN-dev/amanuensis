@@ -1,7 +1,7 @@
 <div class="row fullheight scroll-y" data-ng-controller="ClientCreationCtrl as create">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 fullheight">
         <div class="panel panel-default max-fullheight scroll-y nomargin">
-            <form>
+            <form name="newClientForm" data-ng-submit="create.addClient()">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-6">
@@ -26,7 +26,8 @@
                                  data-input-label="{{'clients.name'|translate}}"
                                  data-input-type="text"
                                  data-input-id="companyname"
-                                 data-ng-model="create.newClient.companyname"></div>
+                                 data-ng-model="create.newClient.companyname"
+                                 data-input-required="!create.newClient.contact_lastname"></div> <span data-ng-show="newClientForm.$valid">Name: {{create.newClient.contact_lastname}}</span>
                             <div data-material-input
                                  data-input-label="{{'clients.streetNo'|translate}}"
                                  data-input-type="text"
@@ -82,7 +83,8 @@
                                  data-input-label="{{'clients.lastName'|translate}}"
                                  data-input-type="text"
                                  data-input-id="contact_lastname"
-                                 data-ng-model="create.newClient.contact_lastname"></div>
+                                 data-ng-model="create.newClient.contact_lastname"
+                                 data-input-required="!create.newClient.companyname"></div>
 
                             <h3>{{ 'clients.categories'|translate }}</h3>
                             <div data-material-input
@@ -101,10 +103,12 @@
                         <label for="comment">{{'clients.comment'|translate}}</label>
                         <textarea class="form-control" id="comment" placeholder="{{'clients.comment'|translate}}" data-ng-model="create.newClient.comment"></textarea>
                     </div>
-                    <button type="submit" data-ng-click="create.addClient()" class="btn btn-success pull-right">{{'clients.addClient'|translate}}</button>
+                    <button type="submit" class="btn btn-success pull-right">{{'clients.addClient'|translate}}</button>
 
 
                 </div>
+
+
             </form>
         </div>
     </div>

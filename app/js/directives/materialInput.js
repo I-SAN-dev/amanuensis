@@ -29,7 +29,7 @@ app.directive('materialInput', [
                 model:'=ngModel',
                 id: '@inputId',
                 label: '@inputLabel',
-                required: '@inputRequired',
+                required: '=inputRequired',
                 inputType: '@',
                 options: '=inputSelectOptions',
                 optionValue: '@inputSelectOptionValue',
