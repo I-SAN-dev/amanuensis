@@ -172,7 +172,7 @@ foreach($projectids as $projectid)
     /* offer */
     foreach($projectdata['offers'] as $offer)
     {
-        if($state == PROJECT_CREATED && $offer['state'] = PDF_SENT)
+        if($state == PROJECT_CREATED && $offer['state'] == PDF_SENT)
         {
             $state = PROJECT_WAITING;
         }
@@ -180,7 +180,7 @@ foreach($projectids as $projectid)
     /* acceptance */
     foreach($projectdata['acceptances'] as $acceptance)
     {
-        if($state == PROJECT_CREATED && $acceptance['state'] = PDF_SENT)
+        if($state == PROJECT_CREATED && $acceptance['state'] == PDF_SENT)
         {
             $state = PROJECT_WAITING;
         }
@@ -188,7 +188,7 @@ foreach($projectids as $projectid)
     /* invoices */
     foreach($projectdata['invoices'] as $invoice)
     {
-        if($state == PROJECT_CREATED && $invoice['state'] = PDF_SENT)
+        if($state == PROJECT_CREATED && $invoice['state'] == PDF_SENT)
         {
             $state = PROJECT_WAITING;
         }
