@@ -47,6 +47,9 @@ class AmanuSetup {
             ),
             'defined' => array(
                 'PDO::ATTR_DRIVER_NAME' => 'PDO'
+            ),
+            'ini' => array(
+                'allow_url_fopen' => true
             )
     );
 
@@ -66,12 +69,12 @@ class AmanuSetup {
 
         foreach (self::$reqs['classes'] as $class => $module) {
             if (!class_exists($class)) {
-                $missingDependencies[] = array($module);
+                $missingDependencies[] = $module;
             }
         }
         foreach (self::$reqs['functions'] as $function => $module) {
             if (!function_exists($function)) {
-                $missingDependencies[] = array($module);
+                $missingDependencies[] = $module;
             }
         }
         foreach (self::$reqs['defined'] as $defined => $module) {
@@ -79,15 +82,28 @@ class AmanuSetup {
                 $missingDependencies[] = $module;
             }
         }
+        foreach (self::$reqs['ini'] as $setting => $value) {
+            if (ini_get($setting) != $value) {
+                if($value === true)
+                {
+                    $value="On";
+                }
+                else if($value===false)
+                {
+                    $value="Off";
+                }
+                $missingDependencies[] = 'PHP ini: "'.$setting.'" must be "'.$value.'"';
+            }
+        }
 
         if(!empty($missingDependencies)) {
-            $error .= 'The following PHP modules are required to use amanu:<br/>';
+            $error .= 'Die folgenden PHP-Module oder Einstellungen werden benötigt:<br/><ul>';
         }
         foreach($missingDependencies as $missingDependency) {
-            $error .= '<li>'.$missingDependency[0].'</li>';
+            $error .= '<li>'.$missingDependency.'</li>';
         }
         if(!empty($missingDependencies)) {
-            $error .= '</ul><p>Please contact your server administrator to install the missing modules.</p>';
+            $error .= '</ul><p>Kontaktiere einen Serveradministrator, der die fehlenden Module installieren und die nötigen Einstellungen treffen kann.</p>';
         }
 
         // do we have write permission?
@@ -181,7 +197,7 @@ class AmanuSetup {
         echo('<!DOCTYPE html>
 		<html>
 			<head>
-				<title>ownCloud Setup</title>
+				<title>amanu Setup</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="icon" type="image/png" href="http://amanu-app.de/favicon.ico" />
 				<link rel="stylesheet" href="http://deploy.amanu-app.de/assets/style.css" type="text/css"/>
@@ -225,7 +241,7 @@ class AmanuSetup {
                     <input type="hidden" name="step" value="'.$nextpage.'" />
 		');
 
-        if($nextpage<>'') echo('<input type="submit" id="submit" class="button" value="Next" />');
+        if($nextpage<>'') echo('<input type="submit" id="submit" class="button" value="Weiter" />');
 
         echo('
 		        </form>
@@ -240,7 +256,9 @@ class AmanuSetup {
      * Shows the welcome screen of the setup wizard
      */
     static public function showWelcome() {
-        $txt='Welcome to the ownCloud Setup Wizard.<br />This wizard will check the ownCloud dependencies, download the newest version of ownCloud and install it in a few simple steps.';
+        $txt='Willkommen zur Installation der Projektmanagementsoftware amanu.<br/><br/>
+                Dieses Installationsprogramm überprüft, ob dieser Server die Systemanforderungen erfüllt,
+                lädt anschließend die Software amanu auf diesen Server herunter und begleitet dich durch die Installation.';
         AmanuSetup::showContent('Setup Wizard',$txt,1);
     }
 
@@ -251,11 +269,11 @@ class AmanuSetup {
     static public function showCheckDependencies() {
         $error=AmanuSetup::checkDependencies();
         if($error=='') {
-            $txt='All ownCloud dependencies found';
-            AmanuSetup::showContent('Dependency check',$txt,2);
+            $txt='Der Server scheint die Systemanforderungen zu erfüllen';
+            AmanuSetup::showContent('Systemanforderungen',$txt,2);
         }else{
-            $txt='Dependencies not found.<br />'.$error;
-            AmanuSetup::showContent('Dependency check',$txt);
+            $txt='Der Server erfüllt einige Systemanforderungen nicht:<br/><br />'.$error;
+            AmanuSetup::showContent('Systemanforderungen',$txt);
         }
     }
 
