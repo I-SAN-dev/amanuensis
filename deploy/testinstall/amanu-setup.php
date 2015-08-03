@@ -183,19 +183,15 @@ class AmanuSetup {
 			<head>
 				<title>ownCloud Setup</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				<link rel="icon" type="image/png" href="https://owncloud.org/setupwizard/favicon.png" />
-				<link rel="stylesheet" href="https://owncloud.org/setupwizard/styles.css" type="text/css" media="screen" />
-				<style type="text/css">
-				body {
-					text-align:center;
-					font-size:13px;
-					color:#666;
-					font-weight:bold;
-				}
-				</style>
+				<link rel="icon" type="image/png" href="http://amanu-app.de/favicon.ico" />
+				<link rel="stylesheet" href="http://deploy.amanu-app.de/assets/style.css" type="text/css"/>
+				<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
+				<script type="text/javascript" src="http://deploy.amanu-app.de/assets/script.js"></script>
 			</head>
-
-			<body id="body-login">
+			<body>
+			    <div class="header">
+                    <img src="http://deploy.amanu-app.de/assets/logo.png" alt="amanu" />
+			    </div>
 		');
     }
 
@@ -205,7 +201,9 @@ class AmanuSetup {
      */
     static public function showFooter() {
         echo('
-		<footer><p class="info"><a href="https://owncloud.org/">ownCloud</a> &ndash; web services under your control</p></footer>
+		<div class="footer">
+		    <a href="http://amanu-app.de" target="_blank">amanu - Projektmanagement für Selbstständige und Freelancer</a> - <a href="http://wiki.amanu-app.de" target="_blank">Wiki</a>
+        </div>
 		</body>
 		</html>
 		');
@@ -220,29 +218,19 @@ class AmanuSetup {
      */
     static public function showContent($title, $content, $nextpage=''){
         echo('
-		<div id="login">
-			<header><div id="header">
-				<img src="https://owncloud.org/setupwizard/logo.png" alt="ownCloud" />
-			</div></header><br />
-			<p style="text-align:center; font-size:28px; color:#444; font-weight:bold;">'.$title.'</p><br />
-			<p style="text-align:center; font-size:13px; color:#666; font-weight:bold; ">'.$content.'</p>
-			<form method="get">
-				<input type="hidden" name="step" value="'.$nextpage.'" />
+            <div class="box">
+                <h2>'.$title.'</h2>
+                <div class="content">'.$content.'</div>
+                <form method="get">
+                    <input type="hidden" name="step" value="'.$nextpage.'" />
 		');
 
-        if($nextpage === 2) {
-            echo ('<p style="padding-left:0.5em; padding-right:0.5em">Enter a single "." to install in the current directory, or enter a subdirectory to install to:</p>
-				<input type="text" style="margin-left:0; margin-right:0" name="directory" value="owncloud" required="required" />');
-        }
-        if($nextpage === 3) {
-            echo ('<input type="hidden" value="'.$_GET['directory'].'" name="directory" />');
-        }
-
-        if($nextpage<>'') echo('<input type="submit" id="submit" class="login" style="margin-right:100px;" value="Next" />');
+        if($nextpage<>'') echo('<input type="submit" id="submit" class="button" value="Next" />');
 
         echo('
-		</form>
-		</div>
+		        </form>
+		    </div>
+
 
 		');
     }
