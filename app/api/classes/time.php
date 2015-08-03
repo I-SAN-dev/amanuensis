@@ -196,7 +196,7 @@ class time {
             ),
             $_POST
         );
-        self::getTime($id);
+        self::getTimeFor($_POST['item']);
     }
 
     /**
@@ -220,7 +220,10 @@ class time {
                 'end'
             ),
             $_POST);
-        self::getTime($affectedid);
+
+        $item = $dbal->simpleSelect('time',array('item'), array('id',$_POST['id']), 1);
+
+        self::getTimeFor($item['item']);
     }
 
     /**
