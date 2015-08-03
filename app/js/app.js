@@ -20,7 +20,7 @@ app.config( [
  * @method run
  * This method is executed when the app is started. Handles global events.
  */
-app.run(function ($rootScope, $state) {
+app.run(function ($rootScope, $state, constants) {
 
 
     // trigger a refresh whenever user clicks history buttons
@@ -32,6 +32,8 @@ app.run(function ($rootScope, $state) {
     angular.element(document).on("click", function(e) {
         $rootScope.$broadcast("documentClicked", angular.element(e.target));
     });
+
+    $rootScope.linkurl = constants.URL;
 
 });
 /**
