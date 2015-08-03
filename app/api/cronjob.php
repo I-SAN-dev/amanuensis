@@ -250,9 +250,12 @@ foreach($projectids as $projectid)
     /* Check if an invoice is overdue */
     foreach($projectdata['invoices'] as $invoice)
     {
-        if($invoice['state'] == PDF_SENT && isPast($invoice['date'], true))
+        if($invoice['state'] >= PDF_SENT && isPast($invoice['date'], true))
         {
             $state = PROJECT_WAITING_OVERDUE;
+        }
+        if($invoice['state'] == PDF_SENT && isPast($invoice['date'], true))
+        {
             //set invoice to overdue
             $dbal->dynamicUpdate('invoices', array('id', $invoice['id']), array('state'), array('state'=> INVOICE_OVERDUE));
             pushEvent('invoice', $invoice['id'], $invoice['name'], INVOICE_OVERDUE);
