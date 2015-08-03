@@ -114,14 +114,20 @@ app.factory('NextStepModal', [
                             }
 
 
-                            ItemContainerService.createItemContainer(this.selected.api, object.project.id, newItemContainer).then(function (data) {
-                                if(self.copyItems)
-                                    ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id);
+                            var goToNewContainer = function (id) {
                                 modal.deactivate();
-                                var stateParams = {id:data.id};
+                                var stateParams = {id:id};
                                 if(self.selected.additionalParams)
                                     stateParams = angular.extend(stateParams,self.selected.additionalParams);
                                 $state.go(self.selected.stateName,stateParams);
+                            };
+                            ItemContainerService.createItemContainer(this.selected.api, object.project.id, newItemContainer).then(function (data) {
+                                if(self.copyItems)
+                                    ItemService.bindItemsToContainer(itemsToCopy, self.selected.api, data.id).then(function(){
+                                        goToNewContainer(data.id);
+                                    });
+                                else
+                                    goToNewContainer(data.id);
                             });
                         };
                         this.close = function () {
