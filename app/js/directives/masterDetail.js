@@ -33,7 +33,8 @@ app.directive('masterDetail', [function(){
             '$stateParams',
             '$q',
             'MasterDetailService',
-            function ($scope, $state, $stateParams, $q, MasterDetailService) {
+            'DeleteService',
+            function ($scope, $state, $stateParams, $q, MasterDetailService, DeleteService) {
                 /**
                  * The detail object
                  * @type {Object}
@@ -129,6 +130,13 @@ app.directive('masterDetail', [function(){
                                 $scope.setDetail($scope.masterList[0]);
                             }
                         }
+                    });
+                };
+
+                this.removeItem = function (type, id) {
+                    DeleteService(type, id).then(function (data) {
+                        $scope.setFirstAsDetail();
+                        self.notifyMaster('updateList', data);
                     });
                 };
 
