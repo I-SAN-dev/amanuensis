@@ -119,11 +119,20 @@ app.controller('ItemDetailCtrl', [
         };
 
         /**
+         * Updates the time property of the item by a given object
+         * @param {object} data Contains a times array and the totaltime (as provided by the time API)
+         */
+        var updateTime = function (data) {
+            self.time.times = data.times;
+            self.time.totaltime = data.totaltime;
+        };
+
+        /**
          * Set a start time in the time API
          */
         this.startTime = function () {
             ApiAbstractionLayer('POST',{name:'time', data: {item: self.item.id}}).then(function (data) {
-                self.time.times.push(data);
+                updateTime(data);
             });
         };
 
@@ -133,12 +142,7 @@ app.controller('ItemDetailCtrl', [
          */
         this.stopTime = function (id) {
             ApiAbstractionLayer('POST', {name: 'time', data:{id:id,endnow:true}}).then(function (data) {
-                for(var i = 0; i<self.time.times.length; i++){
-                    if(self.time.times[i].id == data.id){
-                        self.time.times[i] = data;
-                        break;
-                    }
-                }
+                updateTime(data);
             });
         };
 
@@ -148,8 +152,7 @@ app.controller('ItemDetailCtrl', [
          */
         this.deleteTime = function (id) {
             DeleteService('time', {id:id,forid:self.item.id}).then(function (data) {
-                self.time.times = data.times;
-                self.time.totaltime = data.totaltime;
+                updateTime(data);
             });
         };
 
