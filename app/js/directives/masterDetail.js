@@ -123,12 +123,14 @@ app.directive('masterDetail', [function(){
                 };
 
                 $scope.setFirstAsDetail=function(){
-                    $scope.$watch('masterList', function () {
+                    var unwatch = $scope.$watch('masterList', function () {
                         if($scope.masterList) {
                             if ($scope.masterList.length > 0) {
                                 $scope.setDetail($scope.masterList[0]);
                             }
                         }
+                        // make sure this is only executed once
+                        unwatch();
                     });
                 };
 

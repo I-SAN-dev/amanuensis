@@ -11,7 +11,8 @@ app.controller('ItemDetailCtrl', [
     'DeleteService',
     'PanelService',
     'ItemContainerService',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService) {
+    '$scope',
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService, $scope) {
         MasterDetailService.setDetail(this);
 
 
@@ -181,7 +182,11 @@ app.controller('ItemDetailCtrl', [
             MasterDetailService.notifyMaster('removeItemFromDocument', self.item);
         };
 
-        MasterDetailService.notifyController('setFirstAsDetail');
+
+        if(MasterDetailService.reloaded == 0) {
+            MasterDetailService.notifyController('setFirstAsDetail');
+        }
+        console.log(MasterDetailService.reloaded);
 
     }
 ]);

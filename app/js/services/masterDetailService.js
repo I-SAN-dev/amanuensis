@@ -8,7 +8,7 @@
 app.factory('MasterDetailService', [
     '$state',
     function ($state) {
-        var master, detail, editor, controller;
+        var master, detail, editor, controller, reloaded=0;
         var processParams = function (args) {
             var params = [];
             for (var i = 1; i<args.length; i++){
@@ -40,6 +40,8 @@ app.factory('MasterDetailService', [
                 }
             }
         };
+
+
         return {
             /**
              * Registers the master controller
@@ -123,6 +125,11 @@ app.factory('MasterDetailService', [
                     $state.go($state.current.name, {id: detailItem.id});
                 self.notifyDetail('detailChanged', detailItem, keyboard);
                 return detailItem;
+            },
+
+            reloaded: reloaded,
+            incrementReloaded: function () {
+                reloaded++;
             }
         }
     }
