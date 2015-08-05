@@ -26,6 +26,7 @@
 // init
 ob_start();
 @set_time_limit(0);
+set_include_path(getcwd());
 ini_set('display_errors', 1);
 
 /**
@@ -196,11 +197,76 @@ class AmanuSetup {
     {
         $error = false;
 
+        $host = $_POST['host'];
+        $port = $_POST['port'];
+        $database = $_POST['database'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        /* Basic check of values */
+        if(!$host || !$port || !$database || !$username || !$password)
+        {
+            $error = true;
+        }
+        else
+        {
+            /* Check Database Access and install amanu db */
+            try
+            {
+                $db = new PDO('mysql:dbname='.$database.';host='.$host.';port='.$port,
+                    $username,
+                    $password,
+                    array(
+                        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8, sql_mode="STRICT_ALL_TABLES"'
+                    ));
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
+                $sql = file_get_contents('amanu_db_setup.sql');
+                $qr = $db->exec($sql);
+
+                if($qr == 1)
+                {
+                    $error = true;
+                }
+            }
+            catch (Exception $e)
+            {
+               $error = true;
+            }
+        }
+
+        /* Update config file */
+        if(!$error)
+        {
+            if(file_Exists('classes/config/config.php'))
+            {
+                require_once('classes/config/config.php');
+                $conf = Config::getInstance();
+                $conf->get['db']['host'] = $host;
+                $conf->get['db']['database'] = $database;
+                $conf->get['db']['port'] = $port;
+                $conf->get['db']['user'] = $username;
+                $conf->get['db']['password'] = $password;
+
+                $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'? 'https://' : 'http://';
+                $baseurl = $protocol.$_SERVER['HTTP_HOST'];
+
+                $conf->get['baseurl'] = $baseurl;
+                $conf->get['appsecret'] = sha1(time());
+
+                $conf->save();
+            }
+            else
+            {
+                $error = true;
+            }
+        }
+
+        /* Redirect */
         if($error)
         {
-            // redirect to step3
+            // redirect to step3 with error message to try again
             header("Location: amanu-setup.php?step=3&error");
         }
         else
