@@ -223,9 +223,9 @@ class AmanuSetup {
 
 
                 $sql = file_get_contents('amanu_db_setup.sql');
-                $qr = $db->exec($sql);
+                $q = $db->prepare($sql);
 
-                if($qr == 1)
+                if(!$q->execute())
                 {
                     $error = true;
                 }
@@ -273,6 +273,42 @@ class AmanuSetup {
         {
             // redirect to step4
             header("Location: amanu-setup.php?step=4");
+        }
+    }
+
+    /**
+     * creates a new amanu user
+     */
+    static public function createUser()
+    {
+        $error = false;
+
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password2 = $_POST['password2'];
+
+        /* Basic check of values */
+        if(!$username || !$email || !$password || !$password2 || ($password != $password2))
+        {
+            $error = true;
+        }
+        else
+        {
+            require_once('classes/authentication/user.php');
+            $hashedpass = hash('sha256', $password);
+            $user = new User($email, $username, $hashedpass, 0);
+        }
+        /* Redirect */
+        if($error)
+        {
+            // redirect to step3 with error message to try again
+            header("Location: amanu-setup.php?step=5&error");
+        }
+        else
+        {
+            // redirect to step4
+            header("Location: amanu-setup.php?step=6");
         }
     }
 
@@ -432,6 +468,55 @@ class AmanuSetup {
     }
 
 
+    /**
+     * Displays a user creation form
+     */
+    static public function showUserForm()
+    {
+        if(file_exists('./classes/config/config.json')) {
+
+            $txt='';
+            $form='
+            <form method="post">
+                <label for="username">Benutzername</label>
+                <input id="username" name="username" type="text" required />
+                <label for="email">E-Mail Adresse</label>
+                <input id="email" name="email" type="email" required />
+                <label for="password">Passwort</label>
+                <input id="password" name="password" type="password" required />
+                <label for="password2">Passwort wiederholen</label>
+                <input id="password2" name="password2" type="password" required />
+                <p>Nach Abschluss der Installation können im Bereich "Einstellungen" weitere Benutzer angelegt werden.</p>
+                <input type="submit" value="Weiter" class="button">
+            </form>
+
+            ';
+            $error = '<p class="error">Die beiden Passwörter stimmen nicht überein!</p>';
+
+            if(isset($_GET['error']))
+            {
+                $txt = $error.$form;
+            }
+            else
+            {
+                $txt=$form;
+            }
+            AmanuSetup::showContent('Nutzer anlegen',$txt);
+
+        }else{
+            $txt='Offensichtlich ist doch etwas fatal schief gelaufen, da benötigte Dateien nicht gefunden werden können.';
+            AmanuSetup::showContent('Fehler',$txt);
+        }
+    }
+
+    /**
+     * Shows a db installed message
+     */
+    static public function showFinished() {
+        $txt='amanu sollte jetzt erfolgreich auf diesem Server installiert sein.
+         <br/><br/>Mit einem Klick auf "Weiter" löscht sich diese Installationsdatei nun aus Sicherheitsgründen selbst und öffnet im Anschluss amanu.';
+        AmanuSetup::showContent('Fertig',$txt, 7);
+    }
 
     /**
      * Shows the redirect screen
@@ -460,7 +545,10 @@ elseif ($step==2) AmanuSetup::showInstall();
 elseif ($step==3 && isset($_POST['host'])) AmanuSetup::installDb();
 elseif ($step==3) AmanuSetup::showDbForm();
 elseif ($step==4) AmanuSetup::showDbInstalled();
-elseif ($step==5) AmanuSetup::showRedirect();
+elseif ($step==5 && isset($_POST['username'])) AmanuSetup::createUser();
+elseif ($step==5) AmanuSetup::showUserForm();
+elseif ($step==6) AmanuSetup::showFinished();
+elseif ($step==7) AmanuSetup::showRedirect();
 else  echo('Internal error. Please try again.');
 
 // show the footer
