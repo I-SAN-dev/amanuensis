@@ -110,7 +110,7 @@ class AmanuSetup {
 
         // do we have write permission?
         if(!is_writable('.')) {
-            $error.='Can\'t write to the current directory. Please fix this by giving the webserver user write access to the directory.<br/>';
+            $error.='Keine Schreibberechtigung für dieses Verzeichnis! Gib dem Webserver-Nuter Schreibrechte für das Installationsverzeichnis.<br/>';
         }
 
         // check if we are at root uri
