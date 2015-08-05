@@ -203,19 +203,24 @@ class User {
     {
         $conf = Config::getInstance();
         $executingUser = Authenticator::getUser();
-        $mail = new AmaMail($this->username, $this->email,'Dein Account bei amanu');
-        $mail->setContent('
-        <p>
-        Hallo '.$this->username.',<br/>
-        <br/>
-        Der Benutzer '.$executingUser->username.' hat für dich einen Account beim Projektverwaltungstool amanu von '.$conf->get["company"].' angelegt.<br/>
-        <br/>
-        Frage Ihn jetzt nach deinem Passwort!<br/>
-        <br/>
-        Mit deiner Mailadresse '.$this->email.' kannst du dich dann hier einloggen:
-        <a href="'.$conf->get["baseurl"].'">'.$conf->get["baseurl"].'</a><br/>
-        ');
-        $mail->send();
+
+        if($executingUser)
+        {
+            $mail = new AmaMail($this->username, $this->email,'Dein Account bei amanu');
+            $mail->setContent('
+                <p>
+                Hallo '.$this->username.',<br/>
+                <br/>
+                Der Benutzer '.$executingUser->username.' hat für dich einen Account beim Projektverwaltungstool amanu von '.$conf->get["company"].' angelegt.<br/>
+                <br/>
+                Frage Ihn jetzt nach deinem Passwort!<br/>
+                <br/>
+                Mit deiner Mailadresse '.$this->email.' kannst du dich dann hier einloggen:
+                <a href="'.$conf->get["baseurl"].'">'.$conf->get["baseurl"].'</a><br/>
+                ');
+            $mail->send();
+        }
+
     }
 
     /**
