@@ -83,8 +83,10 @@ app.directive('listNavigation',[
                 });*/
                 scope.$watch('filterText', function () {
                     var list = getFilteredList();
-                    if (list.length == 1 && callback) {
-                        callback(list[0]);
+                    if(list){
+                        if (list.length == 1 && callback) {
+                            callback(list[0]);
+                        }
                     }
                 });
 

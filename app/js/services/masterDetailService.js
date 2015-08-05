@@ -8,7 +8,7 @@
 app.factory('MasterDetailService', [
     '$state',
     function ($state) {
-        var master, detail, editor, controller;
+        var master, detail, editor, controller, reloaded=0;
         var processParams = function (args) {
             var params = [];
             for (var i = 1; i<args.length; i++){
@@ -40,6 +40,8 @@ app.factory('MasterDetailService', [
                 }
             }
         };
+
+
         return {
             /**
              * Registers the master controller
@@ -54,7 +56,6 @@ app.factory('MasterDetailService', [
              */
             setDetail: function(ctrl) {
                 detail = ctrl;
-                console.log(detail);
             },
             /**
              * Registers the editor controller
@@ -69,8 +70,6 @@ app.factory('MasterDetailService', [
              */
             setController: function (ctrl) {
                 controller = ctrl;
-
-                console.log(controller);
             },
             /**
              * Sets a flag in the service indicating if the detail is currently in edit mode.
@@ -118,7 +117,6 @@ app.factory('MasterDetailService', [
              */
             setDetailView: function(detailItem, keyboard){
                 if(editMode) {
-                    console.log('cancel edit');
                     self.notifyEditor('cancel');
                     editMode = false;
                 }
@@ -126,8 +124,12 @@ app.factory('MasterDetailService', [
                 if($state.params.hasDetails)
                     $state.go($state.current.name, {id: detailItem.id});
                 self.notifyDetail('detailChanged', detailItem, keyboard);
-                console.log('setView');
                 return detailItem;
+            },
+
+            reloaded: reloaded,
+            incrementReloaded: function () {
+                reloaded++;
             }
         }
     }

@@ -138,8 +138,11 @@ app.controller('OfferDetailCtrl', [
              * @param {Object} item The item that was changed.
              */
             this.priceChanged = function (item) {
+                MasterDetailService.incrementReloaded();
                 self.loaded = false;
-                getOffer();
+                getOffer().then(function () {
+                    MasterDetailService.notifyController("setDetail", item);
+                });
             };
 
             /**

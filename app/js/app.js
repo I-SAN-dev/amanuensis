@@ -107,7 +107,6 @@ app.constant('sites', [
                  * @return {Object}
                  */
                 auth: function(AuthService, LocalStorage, $rootScope, $q){
-                    console.log('authentification');
                     var deferred = $q.defer();
 
                     if(AuthService.loggedIn === undefined) {

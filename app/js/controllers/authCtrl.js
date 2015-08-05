@@ -41,7 +41,6 @@ angular.module('ama')
             AuthService.login(email, password).then(function (result) {
                 var to = $stateParams.referrer || 'app.dashboard';
                 var toParams = $stateParams.referrerParams;
-                console.log(to, toParams);
                 $state.go(to, toParams);
             });
         };
@@ -55,4 +54,4 @@ angular.module('ama')
         };
 
     }
-        ]);
+    ]);
