@@ -13,7 +13,8 @@ app.controller('ContractCreationCtrl', [
     'constants',
     'translateFilter',
     'ErrorDialog',
-    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter, ErrorDialog) {
+    'GoBackService',
+    function (ApiAbstractionLayer,LocalStorage,RefnumberService, ItemContainerService, fileUploadService, $stateParams, $state, constants, translateFilter, ErrorDialog, GoBackService) {
         var self = this;
         if(!$stateParams.project){
             ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
@@ -97,11 +98,11 @@ app.controller('ContractCreationCtrl', [
             } else {
                 ItemContainerService.createItemContainer('contract', projectId, self.newContract).then(function (data) {
                     // go to where we came from
-                    var to = $stateParams.referrer;
-                    var toParams = $stateParams.referrerParams;
-                    $state.go(to,toParams);
+                    GoBackService();
                 });
             }
         };
+
+        this.cancel = GoBackService;
     }
 ]);

@@ -131,7 +131,10 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success pull-right margin-top margin-bottom" type="submit">{{'items.addPreset'|translate}}</button>
+                    <div class="pull-right margin-top margin-bottom">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button class="btn btn-success" type="submit">{{'items.addPreset'|translate}}</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -8,7 +8,8 @@ app.controller('ClientCreationCtrl',
         'LocalStorage',
         '$state',
         '$stateParams',
-        function (ApiAbstractionLayer, LocalStorage, $state, $stateParams) {
+        'GoBackService',
+        function (ApiAbstractionLayer, LocalStorage, $state, $stateParams, GoBackService) {
 
             var self = this;
 
@@ -113,4 +114,6 @@ app.controller('ClientCreationCtrl',
                     $state.go(to,toParams);
                 });
             };
+
+            this.cancel = GoBackService;
         }]);

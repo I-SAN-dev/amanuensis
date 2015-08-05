@@ -7,6 +7,7 @@ app.controller('TodoCreationCtrl', [
     'ErrorDialog',
     '$state',
     '$stateParams',
+    'GoBackService',
     function (ItemContainerService,ErrorDialog,$state,$stateParams) {
         var self = this;
         if(!$stateParams.project){
@@ -37,6 +38,8 @@ app.controller('TodoCreationCtrl', [
             ItemContainerService.createItemContainer('todo',projectId,self.newTodo).then(function (data) {
                 $state.go('app.todoDetail',{id:data.id});
             });
-        }
+        };
+
+        this.cancel = GoBackService;
     }
 ]);

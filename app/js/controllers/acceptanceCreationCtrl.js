@@ -9,7 +9,8 @@ app.controller('AcceptanceCreationCtrl', [
     '$stateParams',
     '$state',
     'ErrorDialog',
-    function (RefnumberService, ItemContainerService, $stateParams, $state, ErrorDialog) {
+    'GoBackService',
+    function (RefnumberService, ItemContainerService, $stateParams, $state, ErrorDialog, GoBackService) {
         var self = this;
         if(!$stateParams.project){
             ErrorDialog({code:'1337',languagestring:'errors.noProjectSpecified'}).activate();
@@ -46,10 +47,10 @@ app.controller('AcceptanceCreationCtrl', [
         this.createAcceptance = function () {
             ItemContainerService.createItemContainer('acceptance', projectId, self.newAcceptance).then(function (data) {
                 // go to where we came from
-                var to = $stateParams.referrer;
-                var toParams = $stateParams.referrerParams;
-                $state.go(to,toParams);
+                GoBackService();
             });
         };
+
+        this.cancel = GoBackService;
     }
 ]);
