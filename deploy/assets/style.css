@@ -98,7 +98,8 @@ p.error
 }
 
 input[type=text],
-input[type=password]
+input[type=password],
+input[type=email]
 {
     display: block;
     width: 100%;
@@ -109,7 +110,8 @@ input[type=password]
     transition: 0.3s border-color;
 }
 input[type=text]:focus,
-input[type=password]:focus
+input[type=password]:focus,
+input[type=email]:focus
 {
     border-color: #404877;
 }
