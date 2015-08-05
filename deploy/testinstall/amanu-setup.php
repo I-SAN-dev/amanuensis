@@ -47,6 +47,10 @@ class AmanuSetup {
             ),
             'defined' => array(
                 'PDO::ATTR_DRIVER_NAME' => 'PDO'
+            ),
+            'ini' => array(
+                'allow_url_fopen' => true,
+                'short_open_tag' => true
             )
     );
 
@@ -66,12 +70,12 @@ class AmanuSetup {
 
         foreach (self::$reqs['classes'] as $class => $module) {
             if (!class_exists($class)) {
-                $missingDependencies[] = array($module);
+                $missingDependencies[] = $module;
             }
         }
         foreach (self::$reqs['functions'] as $function => $module) {
             if (!function_exists($function)) {
-                $missingDependencies[] = array($module);
+                $missingDependencies[] = $module;
             }
         }
         foreach (self::$reqs['defined'] as $defined => $module) {
@@ -79,15 +83,28 @@ class AmanuSetup {
                 $missingDependencies[] = $module;
             }
         }
+        foreach (self::$reqs['ini'] as $setting => $value) {
+            if (ini_get($setting) != $value) {
+                if($value === true)
+                {
+                    $value="On";
+                }
+                else if($value===false)
+                {
+                    $value="Off";
+                }
+                $missingDependencies[] = 'PHP ini: "'.$setting.'" must be "'.$value.'"';
+            }
+        }
 
         if(!empty($missingDependencies)) {
-            $error .= 'The following PHP modules are required to use amanu:<br/>';
+            $error .= 'Die folgenden PHP-Module oder Einstellungen werden benötigt:<br/><ul>';
         }
         foreach($missingDependencies as $missingDependency) {
-            $error .= '<li>'.$missingDependency[0].'</li>';
+            $error .= '<li>'.$missingDependency.'</li>';
         }
         if(!empty($missingDependencies)) {
-            $error .= '</ul><p>Please contact your server administrator to install the missing modules.</p>';
+            $error .= '</ul><p>Kontaktiere einen Serveradministrator, der die fehlenden Module installieren und die nötigen Einstellungen treffen kann.</p>';
         }
 
         // do we have write permission?
@@ -114,11 +131,10 @@ class AmanuSetup {
      */
     static public function install() {
         $error = '';
-        $directory = $_GET['directory'];
 
         // Test if folder already exists
-        if(file_exists('./'.$directory.'/status.php')) {
-            return 'The selected folder seems to already contain a ownCloud installation. - You cannot use this script to update existing installations.';
+        if(file_exists('./classes/config/config.json')) {
+            return 'Es scheint, amanu ist bereits in diesem Verzeichnis installiert!';
         }
 
         // downloading latest release
@@ -126,7 +142,7 @@ class AmanuSetup {
             $error .= AmanuSetup::getFile('http://deploy.amanu-app.de/download/amanu-current.zip','amanu-current.zip');
         }
 
-        // unpacking into owncloud folder
+        // unpacking
         $zip = new ZipArchive;
         $res = $zip->open('amanu-current.zip');
         if ($res==true) {
@@ -167,10 +183,31 @@ class AmanuSetup {
         fclose($fp);
 
         if($data==false){
-            $error.='download of amanu source file failed.<br />'.$curlError;
+            $error.='Download fehlgeschlagen.<br />Lade <a href="http://deploy.amanu-app.de/download/amanu-current.zip">diese Datei</a> herunter und platziere sie auf deinem Server neben diesem Installationsscript.'.$curlError;
         }
         return($error.$curlError);
 
+    }
+
+    /**
+     * installs the amanu db and updates the config file
+     */
+    static public function installDb()
+    {
+        $error = false;
+
+
+
+        if($error)
+        {
+            // redirect to step3
+            header("Location: amanu-setup.php?step=3&error");
+        }
+        else
+        {
+            // redirect to step4
+            header("Location: amanu-setup.php?step=4");
+        }
     }
 
 
@@ -181,7 +218,7 @@ class AmanuSetup {
         echo('<!DOCTYPE html>
 		<html>
 			<head>
-				<title>ownCloud Setup</title>
+				<title>amanu Setup</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link rel="icon" type="image/png" href="http://amanu-app.de/favicon.ico" />
 				<link rel="stylesheet" href="http://deploy.amanu-app.de/assets/style.css" type="text/css"/>
@@ -225,7 +262,7 @@ class AmanuSetup {
                     <input type="hidden" name="step" value="'.$nextpage.'" />
 		');
 
-        if($nextpage<>'') echo('<input type="submit" id="submit" class="button" value="Next" />');
+        if($nextpage<>'') echo('<input type="submit" id="submit" class="button" value="Weiter" />');
 
         echo('
 		        </form>
@@ -240,7 +277,9 @@ class AmanuSetup {
      * Shows the welcome screen of the setup wizard
      */
     static public function showWelcome() {
-        $txt='Welcome to the ownCloud Setup Wizard.<br />This wizard will check the ownCloud dependencies, download the newest version of ownCloud and install it in a few simple steps.';
+        $txt='Willkommen zur Installation der Projektmanagementsoftware amanu.<br/><br/>
+                Dieses Installationsprogramm überprüft, ob dieser Server die Systemanforderungen erfüllt,
+                lädt anschließend die Software amanu auf diesen Server herunter und begleitet dich durch die Installation.';
         AmanuSetup::showContent('Setup Wizard',$txt,1);
     }
 
@@ -251,11 +290,14 @@ class AmanuSetup {
     static public function showCheckDependencies() {
         $error=AmanuSetup::checkDependencies();
         if($error=='') {
-            $txt='All ownCloud dependencies found';
-            AmanuSetup::showContent('Dependency check',$txt,2);
+            $txt='Der Server scheint die Systemanforderungen zu erfüllen.
+                    Klicke auf "Weiter" um die aktuelle Version von amanu automatisch auf deinen Server zu laden und zu entpacken.<br/>
+                    <br/>
+                    Sollte der Download fehlschlagen, lade <a href="http://deploy.amanu-app.de/download/amanu-current.zip">diese Datei</a> herunter und platziere sie auf deinem Server neben diesem Installationsscript.';
+            AmanuSetup::showContent('Systemanforderungen',$txt,2);
         }else{
-            $txt='Dependencies not found.<br />'.$error;
-            AmanuSetup::showContent('Dependency check',$txt);
+            $txt='Der Server erfüllt einige Systemanforderungen nicht:<br/><br />'.$error;
+            AmanuSetup::showContent('Systemanforderungen',$txt);
         }
     }
 
@@ -267,13 +309,63 @@ class AmanuSetup {
         $error=AmanuSetup::install();
 
         if($error=='') {
-            $txt='ownCloud is now installed';
-            AmanuSetup::showContent('Success',$txt,3);
+            $txt='Die amanu Installationsdateien wurden erfolgreich auf deinen Server geladen und entpackt.';
+            AmanuSetup::showContent('Erfolg',$txt,3);
         }else{
-            $txt='amanu is NOT installed<br />'.$error;
-            AmanuSetup::showContent('Error',$txt);
+            $txt='Die amanu Installationsdateien konnten nicht auf deinen Server geladen werden.<br />'.$error;
+            AmanuSetup::showContent('Fehler',$txt);
         }
     }
+
+    /**
+     * Shows a form for entry of db credentials
+     */
+    static public function showDbForm() {
+        if(file_exists('./classes/config/config.json')) {
+
+            $txt='';
+            $form='
+            <form method="post">
+                <label for="host">Host</label>
+                <input id="host" name="host" type="text" required value="localhost" />
+                <label for="port">Port</label>
+                <input id="port" name="port" type="text" required value="3306" />
+                <label for="database">Datenbank</label>
+                <input id="database" name="database" type="text" required />
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required />
+                <label for="password">Passwort</label>
+                <input id="password" name="password" type="password" required />
+                <input type="submit" value="Weiter" class="button">
+            </form>
+            ';
+            $error = '<p class="error">Die Datenbankzugangsdaten sind inkorrekt. Geben Sie die Zugangsdaten zu einer existierenden MySQL Datenbank ein, in die amanu installiert werden soll.</p>';
+
+            if(isset($_GET['error']))
+            {
+                $txt = $error.$form;
+            }
+            else
+            {
+                $txt=$form;
+            }
+
+            AmanuSetup::showContent('Datenbankzugang',$txt);
+        }else{
+            $txt='Offensichtlich ist doch etwas fatal schief gelaufen, da das Config-File nicht gefunden werden kann.';
+            AmanuSetup::showContent('Fehler',$txt);
+        }
+    }
+
+    /**
+     * Shows a db installed message
+     */
+    static public function showDbInstalled() {
+        $txt="Die Datenbank wurde erfolgreich eingerichtet";
+        AmanuSetup::showContent('Datenbankzugang',$txt, 5);
+    }
+
+
 
     /**
      * Shows the redirect screen
@@ -282,7 +374,7 @@ class AmanuSetup {
         // delete own file
         @unlink($_SERVER['SCRIPT_FILENAME']);
 
-        // redirect to ownCloud
+        // redirect to amanu
         header("Location: ".$_GET['directory']);
     }
 
@@ -299,7 +391,10 @@ AmanuSetup::showHeader();
 if     ($step==0) AmanuSetup::showWelcome();
 elseif ($step==1) AmanuSetup::showCheckDependencies();
 elseif ($step==2) AmanuSetup::showInstall();
-elseif ($step==3) AmanuSetup::showRedirect();
+elseif ($step==3 && isset($_POST['host'])) AmanuSetup::installDb();
+elseif ($step==3) AmanuSetup::showDbForm();
+elseif ($step==4) AmanuSetup::showDbInstalled();
+elseif ($step==5) AmanuSetup::showRedirect();
 else  echo('Internal error. Please try again.');
 
 // show the footer
