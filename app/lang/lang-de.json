@@ -210,7 +210,9 @@
     "accept": "Kunde nimmt an",
     "decline": "Kunde lehnt ab",
     "notAccepted": "Doch nicht abgenommen",
-    "nextStep": "Überführen in..."
+    "nextStep": "Überführen in...",
+    "createAcceptance": "Abnahme erstellen",
+    "newAcceptanceFor": "Neue Abnahme im Projekt"
   },
   "acceptances": {
     "states": {

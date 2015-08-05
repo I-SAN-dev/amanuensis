@@ -23,12 +23,17 @@
                              data-input-id="name"
                              data-input-required="true"
                              data-input-label="{{'global.name'|translate}}"></div>
+                    <div class="form-group">
                         <div data-material-input
                              data-ng-model="create.newInvoice.description"
                              data-input-id="description"
                              data-input-type="wysiwyg"
                              data-input-label="{{'global.description'|translate}}"></div>
-                        <button class="btn btn-success pull-right margin-top" type="submit">{{'invoice.createInvoice'|translate}}</button>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button class="btn btn-success" type="submit">{{'invoice.createInvoice'|translate}}</button>
+                    </div>
                 </div>
             </form>
         </div>
