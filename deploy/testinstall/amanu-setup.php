@@ -189,6 +189,27 @@ class AmanuSetup {
 
     }
 
+    /**
+     * installs the amanu db and updates the config file
+     */
+    static public function installDb()
+    {
+        $error = false;
+
+
+
+        if($error)
+        {
+            // redirect to step3
+            header("Location: amanu-setup.php?step=3&error");
+        }
+        else
+        {
+            // redirect to step4
+            header("Location: amanu-setup.php?step=4");
+        }
+    }
+
 
     /**
      * Shows the html header of the setup page
@@ -289,7 +310,7 @@ class AmanuSetup {
 
         if($error=='') {
             $txt='Die amanu Installationsdateien wurden erfolgreich auf deinen Server geladen und entpackt.';
-            AmanuSetup::showContent('Success',$txt,3);
+            AmanuSetup::showContent('Erfolg',$txt,3);
         }else{
             $txt='Die amanu Installationsdateien konnten nicht auf deinen Server geladen werden.<br />'.$error;
             AmanuSetup::showContent('Fehler',$txt);
@@ -300,14 +321,48 @@ class AmanuSetup {
      * Shows a form for entry of db credentials
      */
     static public function showDbForm() {
-       //todo
+        if(file_exists('./classes/config/config.json')) {
+
+            $txt='';
+            $form='
+            <form method="post">
+                <label for="host">Host</label>
+                <input id="host" name="host" type="text" required value="localhost" />
+                <label for="port">Port</label>
+                <input id="port" name="port" type="text" required value="3306" />
+                <label for="database">Datenbank</label>
+                <input id="database" name="database" type="text" required />
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required />
+                <label for="password">Passwort</label>
+                <input id="password" name="password" type="password" required />
+                <input type="submit" value="Weiter" class="button">
+            </form>
+            ';
+            $error = '<p class="error">Die Datenbankzugangsdaten sind inkorrekt. Geben Sie die Zugangsdaten zu einer existierenden MySQL Datenbank ein, in die amanu installiert werden soll.</p>';
+
+            if(isset($_GET['error']))
+            {
+                $txt = $error.$form;
+            }
+            else
+            {
+                $txt=$form;
+            }
+
+            AmanuSetup::showContent('Datenbankzugang',$txt);
+        }else{
+            $txt='Offensichtlich ist doch etwas fatal schief gelaufen, da das Config-File nicht gefunden werden kann.';
+            AmanuSetup::showContent('Fehler',$txt);
+        }
     }
 
     /**
      * Shows a db installed message
      */
     static public function showDbInstalled() {
-        //todo
+        $txt="Die Datenbank wurde erfolgreich eingerichtet";
+        AmanuSetup::showContent('Datenbankzugang',$txt, 5);
     }
 
 
@@ -319,7 +374,7 @@ class AmanuSetup {
         // delete own file
         @unlink($_SERVER['SCRIPT_FILENAME']);
 
-        // redirect to ownCloud
+        // redirect to amanu
         header("Location: ".$_GET['directory']);
     }
 
@@ -336,6 +391,7 @@ AmanuSetup::showHeader();
 if     ($step==0) AmanuSetup::showWelcome();
 elseif ($step==1) AmanuSetup::showCheckDependencies();
 elseif ($step==2) AmanuSetup::showInstall();
+elseif ($step==3 && isset($_POST['host'])) AmanuSetup::installDb();
 elseif ($step==3) AmanuSetup::showDbForm();
 elseif ($step==4) AmanuSetup::showDbInstalled();
 elseif ($step==5) AmanuSetup::showRedirect();
