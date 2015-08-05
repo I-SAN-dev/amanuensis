@@ -20,7 +20,6 @@ app.factory('PanelService', [
              * @returns {int} The number of the currently shown panel
              */
             getPanel: function (site) {
-                console.log(panels);
                 if(panels[site])
                     return panels[site];
                 else return 1;

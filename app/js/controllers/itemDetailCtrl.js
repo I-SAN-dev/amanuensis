@@ -68,7 +68,6 @@ app.controller('ItemDetailCtrl', [
          * @param {boolean} [keyboard] Indicates if the selection was taken by keyboard input
          */
         this.detailChanged = function (item, keyboard) {
-            console.log('detail changed');
             self.item = item;
 
             self.getTime();

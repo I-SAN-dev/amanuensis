@@ -123,7 +123,6 @@ app.directive('masterDetail', [function(){
                 };
 
                 $scope.setFirstAsDetail=function(){
-                    console.log('first');
                     $scope.$watch('masterList', function () {
                         if($scope.masterList) {
                             if ($scope.masterList.length > 0) {

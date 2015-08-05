@@ -54,7 +54,6 @@ app.factory('MasterDetailService', [
              */
             setDetail: function(ctrl) {
                 detail = ctrl;
-                console.log(detail);
             },
             /**
              * Registers the editor controller
@@ -69,8 +68,6 @@ app.factory('MasterDetailService', [
              */
             setController: function (ctrl) {
                 controller = ctrl;
-
-                console.log(controller);
             },
             /**
              * Sets a flag in the service indicating if the detail is currently in edit mode.
@@ -118,7 +115,6 @@ app.factory('MasterDetailService', [
              */
             setDetailView: function(detailItem, keyboard){
                 if(editMode) {
-                    console.log('cancel edit');
                     self.notifyEditor('cancel');
                     editMode = false;
                 }
@@ -126,7 +122,6 @@ app.factory('MasterDetailService', [
                 if($state.params.hasDetails)
                     $state.go($state.current.name, {id: detailItem.id});
                 self.notifyDetail('detailChanged', detailItem, keyboard);
-                console.log('setView');
                 return detailItem;
             }
         }
