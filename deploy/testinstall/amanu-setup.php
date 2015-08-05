@@ -113,6 +113,12 @@ class AmanuSetup {
             $error.='Can\'t write to the current directory. Please fix this by giving the webserver user write access to the directory.<br/>';
         }
 
+        // check if we are at root uri
+        if($_SERVER['REQUEST_URI'] != '/amanu-setup.php?step=1')
+        {
+            $error.='amanu muss im root einer Domain oder Subdomain installiert werden. Füge deinem Server eine Subdomain hinzu, die auf dieses Verzeichnis zeigt!<br/>';
+        }
+
         return($error);
     }
 
