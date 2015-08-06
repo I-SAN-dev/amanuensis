@@ -75,6 +75,7 @@ class Scripts
         "js/services/panelService.js",
         "js/services/stateManager.js",
         "js/services/nextStepModal.js",
+        "js/services/goBackService.js",
         // Directives
         "js/directives/menu.js",
         "js/directives/module.js",

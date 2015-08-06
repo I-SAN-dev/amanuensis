@@ -103,9 +103,10 @@
                         <label for="comment">{{'clients.comment'|translate}}</label>
                         <textarea class="form-control" id="comment" placeholder="{{'clients.comment'|translate}}" data-ng-model="create.newClient.comment"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success pull-right">{{'clients.addClient'|translate}}</button>
-
-
+                    <div class="pull-right">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button type="submit" class="btn btn-success">{{'clients.addClient'|translate}}</button>
+                    </div>
                 </div>
 
 

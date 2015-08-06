@@ -46,8 +46,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-6">
-                            <button class="btn btn-success pull-right linebefore" type="submit">{{'contract.createContract'|translate}}</button>
+                        <div class="col-sm-6 col-sm-offset-6 btn linebefore">
+                            <div class="pull-right">
+                                <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                                <button class="btn btn-success" type="submit">{{'contract.createContract'|translate}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>

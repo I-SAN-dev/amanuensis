@@ -172,8 +172,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <button data-ng-if="create.newItem" class="btn btn-success pull-right margin-top margin-bottom" type="submit">{{'items.addItem'|translate}}</button>
-                            <button data-ng-if="!create.newItem" class="btn btn-success disabled pull-right margin-top margin-bottom" disabled>{{'items.addItem'|translate}}</button>
+                            <div class="pull-right margin-top margin-bottom">
+                                <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                                <button data-ng-if="create.newItem" class="btn btn-success" type="submit">{{'items.addItem'|translate}}</button>
+                                <button data-ng-if="!create.newItem" class="btn btn-success disabled" disabled>{{'items.addItem'|translate}}</button>
+                            </div>
+
                         </form>
                     </div>
 
@@ -255,7 +259,11 @@
 
                                     </div>
                                 </div>
-                                <button class="btn btn-success pull-right margin-top margin-bottom"  type="submit">{{'items.importItem'|translate}}</button>
+                                <div class="pull-right margin-top margin-bottom">
+                                    <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                                    <button class="btn btn-success"  type="submit">{{'items.importItem'|translate}}</button>
+                                </div>
+
                             </div>
 
                         </form>

@@ -1,6 +1,6 @@
 <div class="row scroll-y" data-ng-controller="AcceptanceCreationCtrl as create">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-        <h2>!!Create acceptance for project {{create.projectName}}</h2>
+        <h2>{{'acceptance.newAcceptanceFor'|translate}} {{create.projectName}}</h2>
         <div class="panel panel-default">
             <div class="panel-body">
                 <form data-ng-submit="create.createAcceptance()">
@@ -17,7 +17,10 @@
                          data-ng-model="create.newAcceptance.refnumber"
                          data-input-id="refnumber"
                          data-input-label="{{'acceptances.refNumber'|translate}}"></div>
-                    <button class="btn btn-success" type="submit">{{'acceptances.createAcceptance'|translate}}</button>
+                    <div class="pull-right">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button class="btn btn-success" type="submit">{{'acceptance.createAcceptance'|translate}}</button>
+                    </div>
                 </form>
             </div>
         </div>

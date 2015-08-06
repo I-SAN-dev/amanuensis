@@ -141,5 +141,7 @@ app.controller('ItemCreationCtrl', [
                 });
             }
         };
+
+        this.cancel = goBack;
     }
 ]);

@@ -22,8 +22,10 @@
                                  data-output-value="create.newTodo.due|amaDate:'dd.MM.yyyy'"></div>
                         </div>
                     </div>
-                    <button class="btn btn-success pull-right margin-top" type="submit">{{'todo.createTodo'|translate}}</button>
-
+                    <div class="pull-right margin-top">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button class="btn btn-success" type="submit">{{'todo.createTodo'|translate}}</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -29,7 +29,10 @@
                          data-input-type="wysiwyg"
                          data-input-label="{{'global.description'|translate}}"></div>
 
-                    <button class="btn btn-success pull-right margin-top" type="submit">{{'reminder.createReminder'|translate}}</button>
+                    <div class="pull-right margin-top">
+                        <button class="btn btn-danger" data-ng-click="create.cancel()">{{'global.cancel'|translate}}</button>
+                        <button class="btn btn-success" type="submit">{{'reminder.createReminder'|translate}}</button>
+                    </div>
                 </div>
             </form>
         </div>
