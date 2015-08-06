@@ -201,17 +201,13 @@ app.controller('SettingsCtrl', [
         };
 
 
-        this.response =  LocalStorage.getData('settings');
-        this.settings = this.response ? this.response.settings : {};
-        this.settingtypes = this.response ? this.response.types: {};
-        this.settingkeys = this.objectKeys(this.settings);
-
         ApiAbstractionLayer('GET', 'settings').then(function (data) {
             LocalStorage.setData('settings', data);
             self.settings = data.settings;
             self.settingtypes = data.types;
-            self.settingkeys = self.objectKeys(self.settings);
+            self.settingkeys = self.objectKeys(data.settings);
         });
+
 
         ApiAbstractionLayer('GET','apps').then(function(data){
             self.apps = data;

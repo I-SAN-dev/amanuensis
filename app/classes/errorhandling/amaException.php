@@ -29,6 +29,7 @@ class amaException {
         $this->file = '';
         $this->line = '';
         $this->languagestring = '';
+        $this->trace = '';
 
         /* Get values from the exception */
         if($e != NULL)
@@ -37,6 +38,7 @@ class amaException {
             $this->errorcode = $e->getCode();
             $this->file = $e->getFile();
             $this->line = $e->getLine();
+            $this->trace = $e->getTraceAsString();
         }
 
         /* Override the Errorcode */
@@ -125,20 +127,26 @@ class amaException {
      */
     private function getData()
     {
+        $debug = Config::getInstance()->get['debug'];
         $error = array(
             "code" => $this->errorcode,
             "message" => $this->errormessage,
             "languagestring" => $this->languagestring
         );
-        if(Config::getInstance()->get['debug'])
+        if($debug)
         {
             $error["file"] = $this->file;
             $error["line"] = $this->line;
+            $error["trace"] = $this->trace;
         }
         /* echo only supported types, so the frontend can display it nicely */
         if(!in_array($error['code'], array(401,403,404,400,405,500)))
         {
             $error['code'] = 500;
+            if(!$debug)
+            {
+                $error['message'] = "An error occured";
+            }
         }
 
         return $error;
