@@ -40,15 +40,7 @@ ob_start();
  */
 function catchAll($e)
 {
-    $conf = Config::getInstance();
-    if($conf->get["debug"])
-    {
-        $error = new amaException($e);
-    }
-    else
-    {
-        $error = new amaException(NULL, 500, "An error occurred");
-    }
+    $error = new amaException($e);
     $error->renderJSONerror();
     $error->setHeaders();
     die();
@@ -194,15 +186,7 @@ if(is_callable($callarray))
     }
     catch (Exception $e)
     {
-        $conf = Config::getInstance();
-        if($conf->get["debug"])
-        {
-            $error = new amaException($e);
-        }
-        else
-        {
-            $error = new amaException(NULL, 500, "An error occurred");
-        }
+        $error = new amaException($e);
         $error->renderJSONerror();
         $error->setHeaders();
         die();

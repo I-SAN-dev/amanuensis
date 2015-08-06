@@ -28,10 +28,19 @@ class AmaProject {
             array('name', 'description', 'client', 'state'),
             array('id', $this->id),
             1);
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->clientid = $data['client'];
-        $this->state = $data['state'];
+        if(count($data) == 0)
+        {
+            $error = new AmaException(NULL, 404, "No project with given id found");
+            $error->renderJSONerror();
+            $error->setHeaders();
+        }
+        else
+        {
+            $this->name = $data['name'];
+            $this->description = $data['description'];
+            $this->clientid = $data['client'];
+            $this->state = $data['state'];
+        }
     }
 
     /**
