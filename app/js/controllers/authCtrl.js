@@ -3,7 +3,11 @@
  * Controller for the login view
  */
 angular.module('ama')
-.controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {
+.controller('AuthCtrl', ['AuthService', '$state', '$stateParams','$rootScope', function (AuthService, $state, $stateParams, $rootScope) {;
+
+        AuthService.currentUser(true).then(function () {
+            $state.go('app.dashboard');
+        });
 
         /**
          * @type {String}

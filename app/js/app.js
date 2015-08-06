@@ -37,6 +37,11 @@ app.run(function ($rootScope, $state, constants) {
 
 });
 /**
+ * Checks if the current user is logged in and sets the 'loggedin' variable
+ * which will be used to get the login state at any other point
+ * @return {Object}
+ */
+/**
  * @class ama.constants.sites
  * The 'sites' constant.
  * Contains information about all app states,
@@ -101,11 +106,6 @@ app.constant('sites', [
                 }
             },
             resolve: {
-                /*
-                 * Checks if the current user is logged in and sets the 'loggedin' variable
-                 * which will be used to get the login state at any other point
-                 * @return {Object}
-                 */
                 auth: function(AuthService, LocalStorage, $rootScope, $q){
                     var deferred = $q.defer();
 

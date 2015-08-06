@@ -94,5 +94,6 @@ app
             isLoggedIn: function(){
                 return ApiAbstractionLayer('GET','login');
             }
+
         }
     }]);
