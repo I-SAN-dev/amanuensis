@@ -97,7 +97,7 @@ class project {
                 ),
                 array('client', $_GET["client"]),
                 0,
-                'state DESC'
+                'FIELD(state, 7, 6, 5, 4, 3, 2, 1, 0, 8)'
             );
 
             /* postprocess the projects */
