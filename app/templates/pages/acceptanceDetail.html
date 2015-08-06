@@ -37,7 +37,8 @@
                         <div class="detail-inline detail-inline-date">
                             <i class="md md-schedule"></i>
                             <div class="date-container">
-                                <span data-in-place-edit
+                                <span data-ng-if="acceptance.acceptance.state < 2"
+                                      data-in-place-edit
                                       data-api-id="acceptance.acceptance.id"
                                       data-api-name="'acceptance'"
                                       data-ipe-key="'date'"
@@ -47,6 +48,7 @@
                                       data-ipe-type="'date'"
                                       data-output-value="acceptance.acceptance.date|amaDate:'dd.MM.yyyy'"
                                         ></span>
+                                <span data-ng-if="acceptance.acceptance.state >= 2">{{acceptance.acceptance.date|amaDate:'dd.MM.yyyy'}}</span>
                             </div>
                         </div>
                         <div class="delete-document">
