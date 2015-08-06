@@ -183,10 +183,9 @@ app.controller('ItemDetailCtrl', [
         };
 
 
-        if(MasterDetailService.reloaded == 0) {
-            MasterDetailService.notifyController('setFirstAsDetail');
-        }
-        console.log(MasterDetailService.reloaded);
+        $scope.$watch
+
+        MasterDetailService.notifyController('setFirstAsDetail');
 
     }
 ]);
