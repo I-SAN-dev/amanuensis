@@ -27,7 +27,6 @@ app.factory('ErrorDialog', function (btfModal) {
                     this.line = errorObj.line;
 
                     this.close = function () {
-                        console.log('close');
                         self.errorActive = false;
                         modal.deactivate();
                     };

@@ -17,7 +17,8 @@ app
         'ErrorDialog',
         '$stateParams',
         '$rootScope',
-        function ($http, constants, $q, $state, ErrorDialog, $stateParams, $rootScope) {
+        'GoBackService',
+        function ($http, constants, $q, $state, ErrorDialog, $stateParams, $rootScope, GoBackService) {
             //var specialParams = {};
             var apiUrl = 'api/';
             if(constants.SECUREURL)
@@ -57,6 +58,9 @@ app
                         if (!noErrorModal) {
                             // Open modal with error information
                             ErrorDialog(data.error).activate();
+                            if (status == 404) {
+                                GoBackService();
+                            }
                         }
                         // handle 401 (Authentication required) errors in place
                         if (status == 401) {
@@ -66,6 +70,8 @@ app
                                 $state.go('login', {referrer: $state.current.name, referrerParams: angular.copy($stateParams)});
                             }
                         }
+
+
                         $rootScope.loaded = true;
                         defer.reject(data);
                     });
