@@ -263,7 +263,8 @@
     "itemPreset":"Baustein",
     "itemPresets":"Bausteine",
     "actions":{
-      "new":"Neuer Baustein"
+      "new":"Neuer Baustein",
+      "delete": "Baustein löschen"
     }
   },
 
