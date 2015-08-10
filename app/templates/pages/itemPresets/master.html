@@ -35,7 +35,7 @@
                     <h3>{{preset.total | price}}</h3>
                     <h2>{{preset.name}}</h2>
                 </a>
-                <button class="btn btn-danger btn-link btn-icon-round btn-on-list" title="{{'itemPresets.actions.delete' | translate}}" data-ng-click="MasterDetailCtrl.notifyMaster('deletePreset',preset.id);"><i class="md md-delete"></i></button>
+                <button class="btn btn-danger btn-link btn-icon-round btn-on-list" title="{{'itemPresets.actions.delete' | translate}}" data-ng-click="MasterDetailCtrl.removeItem('item_preset',preset.id);"><i class="md md-delete"></i></button>
             </div>
         </div>
     </div>

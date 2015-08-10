@@ -135,6 +135,11 @@ app.directive('masterDetail', [function(){
 
                 };
 
+                /**
+                 * Deletes an item from the list using {@link ama.services.DeleteService DeleteService}. Sets the first list item as detail and updates the list.
+                 * @param {string} type The type of item to be deleted
+                 * @param {string|int} id The ID of the item to be deleted
+                 */
                 this.removeItem = function (type, id) {
                     DeleteService(type, id).then(function (data) {
                         $scope.setFirstAsDetail();

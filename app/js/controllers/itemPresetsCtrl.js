@@ -64,8 +64,12 @@ app.controller('ItemPresetsCtrl', [
         this.priceChanged = function()
         {
             getPresets();
-        }
+        };
 
+
+        this.updateList = function () {
+            getPresets();
+        };
 
     }
 ]);
