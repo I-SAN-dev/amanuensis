@@ -22,6 +22,7 @@ app.controller('OfferDetailCtrl', [
             MasterDetailService.setMaster(this);
             var self = this;
 
+
             /**
              * Uses the {@link ama.services.PdfService PdfService} to show either a PDF preview
              * or the generated PDF of the offer.
@@ -126,7 +127,7 @@ app.controller('OfferDetailCtrl', [
              * @param {id} itemId The id of the item to be deleted
              */
             this.deleteItem = function (itemId) {
-                DeleteService('item', itemId).then(function (data) {
+                DeleteService('item', {id:itemId, for: 'offer', forid: self.offer.id}).then(function (data) {
                     self.offer.items = data;
                     LocalStorage.setData('offer/'+id, self.offer);
                 });
@@ -211,8 +212,9 @@ app.controller('OfferDetailCtrl', [
              */
             this.removeItemFromDocument = function(item)
             {
-                ItemService.removeItemFromDocument(item, 'offer');
-                getOffer();
+                ItemService.removeItemFromDocument(item, 'offer').then(function () {
+                    getOffer();
+                });
             };
 
             /**
@@ -223,6 +225,13 @@ app.controller('OfferDetailCtrl', [
                     $state.go('app.projectDetail', {id: self.offer.project.id});
                 });
             };
+
+            this.itemListChanged = function (items) {
+                if(items)
+                    self.offer.items = items;
+                else
+                    getOffer();
+            }
         }
     ]
 );

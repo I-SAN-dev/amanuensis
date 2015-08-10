@@ -12,9 +12,11 @@ app.controller('ItemDetailCtrl', [
     'PanelService',
     'ItemContainerService',
     '$scope',
-    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService, $scope) {
+    '$state',
+    '$stateParams',
+    '$filter',
+    function (ApiAbstractionLayer, LocalStorage, MasterDetailService, DeleteService, PanelService, ItemContainerService, $scope, $state, $stateParams, $filter) {
         MasterDetailService.setDetail(this);
-
 
 
         /**
@@ -96,7 +98,9 @@ app.controller('ItemDetailCtrl', [
          * Deletes the current item by notifying the master controller via {@link ama.services.MasterDetailService#notifyMaster the MasterDetailService}.
          */
         this.deleteItem = function () {
-            MasterDetailService.notifyMaster('deleteItem', self.item.id);
+            DeleteService('item', {id:self.item.id, for: $filter('amaStates')($state.current.name, 'stateToApi'), forid: $stateParams.id}).then(function (data) {
+                MasterDetailService.notifyMaster('itemListChanged', data);
+            });
         };
 
         /**
@@ -183,7 +187,6 @@ app.controller('ItemDetailCtrl', [
         };
 
 
-        $scope.$watch
 
         MasterDetailService.notifyController('setFirstAsDetail');
 

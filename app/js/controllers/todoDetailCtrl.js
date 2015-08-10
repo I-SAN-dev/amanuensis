@@ -89,6 +89,9 @@ app.controller('TodoDetailCtrl', [
             getTodo();
         };
 
+
+
+
         /**
          * Deletes the current todolist via {@link ama.services.DeleteService DeleteService}
          */
@@ -99,5 +102,11 @@ app.controller('TodoDetailCtrl', [
         };
 
 
+        this.itemListChanged = function (items) {
+            if(items)
+                self.todo.items = items;
+            else
+                getTodo();
+        }
     }
 ]);

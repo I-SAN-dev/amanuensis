@@ -7,9 +7,10 @@
 app.factory('ItemService',[
     'ApiAbstractionLayer',
     'LocalStorage',
+    'DeleteService',
     'btfModal',
     '$state',
-    function (ApiAbstractionLayer, LocalStorage, btfModal, $state) {
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, btfModal, $state) {
 
         var sortNumber = function (a,b) {
             return a-b;
@@ -188,7 +189,7 @@ app.factory('ItemService',[
              */
             removeItemFromDocument: function(item, type)
             {
-                data = {
+                var data = {
                     id: item.id
                 };
                 data[type] = '';

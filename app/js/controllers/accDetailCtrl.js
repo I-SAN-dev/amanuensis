@@ -162,5 +162,12 @@ app.controller('AcceptanceDetailCtrl', [
             });
         };
 
+        this.itemListChanged = function (items) {
+            if(items)
+                self.acceptance.items = items;
+            else
+                getAcceptance();
+        }
+
 
     }]);

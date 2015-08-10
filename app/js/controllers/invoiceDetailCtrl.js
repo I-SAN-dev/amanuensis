@@ -85,7 +85,7 @@ app.controller('InvoiceDetailCtrl', [
          * @param {id} itemId The id of the item to be deleted
          */
         this.deleteItem = function (itemId) {
-            DeleteService('item', itemId).then(function (data) {
+            DeleteService('item', {id:itemId, for: 'invoice', forid: self.invoice.id}).then(function (data) {
                 self.invoice.items = data;
                 LocalStorage.setData('invoice/'+id, self.invoice);
             });
@@ -165,5 +165,12 @@ app.controller('InvoiceDetailCtrl', [
                 $state.go('app.projectDetail', {id: self.invoice.project.id});
             });
         };
+
+        this.itemListChanged = function (items) {
+            if(items)
+                self.invoice.items = items;
+            else
+                getInvoice();
+        }
     }
 ]);
