@@ -42,10 +42,7 @@ app.controller('InvoiceCreationCtrl', [
          * Creates a new invoice in the current project
          */
         this.createInvoice = function () {
-            ItemContainerService.createItemContainer('invoice', projectId, self.newInvoice).then(function (data) {
-                // go to where we came from
-                GoBackService();
-            });
+            ItemContainerService.createItemContainer('invoice', projectId, self.newInvoice);
         };
 
         this.cancel = GoBackService;

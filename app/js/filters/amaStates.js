@@ -1,7 +1,7 @@
 /**
  * @class ama.filters.amaStates
  * # The amaStates filter
- * Converts an amanu status code to a language string representing the status or an amanu app state name to an API name (i.e. 'app.offerDetail'->'offer').
+ * Converts an amanu status code to a language string representing the status or an amanu app state name to an API name or vice versa (i.e. 'app.offerDetail'->'offer').
  *
  * ## Usage
  * HTML:
@@ -59,7 +59,15 @@ app.filter('amaStates', function () {
             'app.offerDetail': 'offer',
             'app.contractDetail': 'contract',
             'app.acceptanceDetail': 'acceptance',
-            'app.invoiceDetail': 'invoice'
+            'app.invoiceDetail': 'invoice',
+            'app.todoDetail': 'todo'
+        },
+        apiToState: {
+            'offer':'app.offerDetail',
+            'contract':'app.contractDetail',
+            'acceptance':'app.acceptanceDetail',
+            'invoice':'app.invoiceDetail',
+            'todo': 'app.todoDetail'
         },
         error: {
             "400": "errors.codes.400.message",

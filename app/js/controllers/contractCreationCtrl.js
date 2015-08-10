@@ -81,25 +81,17 @@ app.controller('ContractCreationCtrl', [
                 {
                     ItemContainerService.createItemContainer('fileContract',projectId, self.newContract).then(function (data) {
                         var file = self.fileContract;
-                        console.log(file);
                         var uploadUrl = constants.URL+'/api/?action=fileContract&uploadfor='+data.id;
                         fileUploadService.uploadFile(file,uploadUrl).then(function(path){
                             ApiAbstractionLayer('POST', {name:'fileContract', data: {id: data.id, path: path}}).then(function (data) {
                                 ItemContainerService.updateLocalStorage('fileContract', projectId, data);
-                                // go to where we came from
-                                var to = $stateParams.referrer;
-                                var toParams = $stateParams.referrerParams;
-                                $state.go(to,toParams);
                             });
                         });
                     });
                 }
 
             } else {
-                ItemContainerService.createItemContainer('contract', projectId, self.newContract).then(function (data) {
-                    // go to where we came from
-                    GoBackService();
-                });
+                ItemContainerService.createItemContainer('contract', projectId, self.newContract);
             }
         };
 

@@ -11,7 +11,8 @@ app.factory('ItemContainerService',[
     'DeleteService',
     '$filter',
     '$q',
-    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, $q) {
+    '$state',
+    function (ApiAbstractionLayer, LocalStorage, DeleteService, $filter, $q, $state) {
         var containerMap = {
             offer: 'offers',
             contract: 'contracts',
@@ -48,6 +49,10 @@ app.factory('ItemContainerService',[
                 };
                 ApiAbstractionLayer('POST', apiObject).then(function (data) {
                     updateLocalStorage(type,projectId,data);
+                    // go to the new document
+                    var to = $filter('amaStates')(type, 'apiToState');
+                    var toParams = {id:data.id, type: type};
+                    $state.go(to, toParams);
                     defer.resolve(data);
                 });
                 return defer.promise;

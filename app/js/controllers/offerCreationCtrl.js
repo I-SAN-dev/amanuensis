@@ -44,10 +44,7 @@ app.controller('OfferCreationCtrl', [
          * Creates a new offer in the current project.
          */
         this.createOffer = function () {
-            ItemContainerService.createItemContainer('offer', projectId, self.newOffer).then(function (data) {
-                // go to where we came from
-                GoBackService();
-            });
+            ItemContainerService.createItemContainer('offer', projectId, self.newOffer);
         };
 
         this.cancel = GoBackService;

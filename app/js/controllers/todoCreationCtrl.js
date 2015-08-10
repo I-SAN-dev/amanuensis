@@ -35,9 +35,7 @@ app.controller('TodoCreationCtrl', [
          * Creates a new todoList in the current project
          */
         this.createTodo = function () {
-            ItemContainerService.createItemContainer('todo',projectId,self.newTodo).then(function (data) {
-                $state.go('app.todoDetail',{id:data.id});
-            });
+            ItemContainerService.createItemContainer('todo',projectId,self.newTodo);
         };
 
         this.cancel = GoBackService;

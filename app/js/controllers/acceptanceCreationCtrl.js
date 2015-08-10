@@ -45,10 +45,7 @@ app.controller('AcceptanceCreationCtrl', [
          * Creates a new acceptance
          */
         this.createAcceptance = function () {
-            ItemContainerService.createItemContainer('acceptance', projectId, self.newAcceptance).then(function (data) {
-                // go to where we came from
-                GoBackService();
-            });
+            ItemContainerService.createItemContainer('acceptance', projectId, self.newAcceptance);
         };
 
         this.cancel = GoBackService;
