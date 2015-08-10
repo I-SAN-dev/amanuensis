@@ -165,12 +165,5 @@ app.controller('InvoiceDetailCtrl', [
                 $state.go('app.projectDetail', {id: self.invoice.project.id});
             });
         };
-
-        this.itemListChanged = function (items) {
-            if(items)
-                self.invoice.items = items;
-            else
-                getInvoice();
-        }
     }
 ]);

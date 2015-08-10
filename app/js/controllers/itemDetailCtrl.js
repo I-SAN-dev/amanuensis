@@ -99,7 +99,14 @@ app.controller('ItemDetailCtrl', [
          */
         this.deleteItem = function () {
             DeleteService('item', {id:self.item.id, for: $filter('amaStates')($state.current.name, 'stateToApi'), forid: $stateParams.id}).then(function (data) {
-                MasterDetailService.notifyMaster('itemListChanged', data);
+                if(!data[0]) {
+                    MasterDetailService.notifyMaster('priceChanged');
+                    self.item = null;
+                } else {
+                    MasterDetailService.notifyMaster('priceChanged', data[0]);
+                    MasterDetailService.notifyController('setFirstAsDetail');
+                }
+
             });
         };
 

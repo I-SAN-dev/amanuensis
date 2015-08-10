@@ -101,12 +101,5 @@ app.controller('TodoDetailCtrl', [
             });
         };
 
-
-        this.itemListChanged = function (items) {
-            if(items)
-                self.todo.items = items;
-            else
-                getTodo();
-        }
     }
 ]);

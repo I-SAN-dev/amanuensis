@@ -79,7 +79,8 @@ app.directive('masterDetail', [function(){
                  * @param [keyboard] - indicates if the detail was changed by keyboard input
                  */
                 $scope.setDetail = function(detail, keyboard){
-                    self.detail = MasterDetailService.setDetailView(detail, keyboard);
+                    if(detail)
+                        self.detail = MasterDetailService.setDetailView(detail, keyboard);
                 };
 
 

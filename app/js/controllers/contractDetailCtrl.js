@@ -120,11 +120,5 @@ app.controller('ContractDetailCtrl', [
             NextStepModal('contract', self.contract);
         };
 
-        this.itemListChanged = function (items) {
-            if(items)
-                self.contract.items = items;
-            else
-                getContract();
-        }
     }
 ]);

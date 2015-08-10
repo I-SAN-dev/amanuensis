@@ -226,12 +226,6 @@ app.controller('OfferDetailCtrl', [
                 });
             };
 
-            this.itemListChanged = function (items) {
-                if(items)
-                    self.offer.items = items;
-                else
-                    getOffer();
-            }
         }
     ]
 );
