@@ -1,6 +1,5 @@
-<div class="form-group">
+<div class="form-group" data-ng-click="focusCalendar()">
     <input  placeholder="{{label}}"
-            data-ng-focus="selectDate = true"
             id="{{id}}"
             data-ng-model="model"
             data-ng-required="required || false"
@@ -13,6 +12,6 @@
     <button id="delete-{{id}}" class="{{buttons.delete.class}}" data-ng-if="buttons.delete.isSet != false" data-ng-click="buttons.delete.delete()"><i class="{{buttons.delete.iconClass}}"></i></button>
     <button id="cancel-{{id}}" class="{{buttons.cancel.class}}" data-ng-click="buttons.cancel.cancel()"><i class="{{buttons.cancel.iconClass}}"></i></button>
 </div>
-<div class="datepicker-container" tabindex="0" data-ng-blur="selectDate = false">
+<div class="datepicker-container {{id}}" tabindex="0" data-ng-blur="selectDate = false">
     <div data-pickadate data-ng-model="model" data-ng-show="selectDate" data-ng-click="processDate()"></div>
 </div>

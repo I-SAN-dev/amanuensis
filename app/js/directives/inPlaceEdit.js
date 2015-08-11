@@ -36,7 +36,7 @@ app.directive('inPlaceEdit',
                     callback: '&ipeCallback'
                 },
                 templateUrl: 'templates/directives/inPlaceEdit.html',
-                controller: ['$scope', 'MasterDetailService', function($scope, MasterDetailService){
+                controller: ['$scope', 'MasterDetailService', '$filter', function($scope, MasterDetailService, $filter){
                     var self = this;
 
                     /**
@@ -59,6 +59,7 @@ app.directive('inPlaceEdit',
                         self.deletableItem = $scope.deletableItem;
                         self.type = $scope.type;
                         self.val = $scope.val;
+
                         if(!keep)
                         {
                             self.editMode = MasterDetailService.editMode(true);

@@ -219,14 +219,15 @@ app.directive('materialInput', [
                     // backup the initial date value
                     var initialDate = angular.copy($scope.model);
 
+                    $scope.focusCalendar = function () {
+                        $scope.selectDate = true;
+                        $('.'+$scope.id).focus();
+                    };
+
                     /**
                      * updates the backup
                      */
-                    $scope.processDate = function (e) {
-                        console.log(e);
-                        if(e){
-                            $scope.selectDate = false;
-                        }
+                    $scope.processDate = function () {
                         if(initialDate != $scope.model) {
                             initialDate = angular.copy($scope.model);
                             $scope.selectDate = false;
@@ -330,9 +331,16 @@ app.directive('materialInput', [
 
                     // autofocus the created input field if autofocus attribute is present
                     if(attr.inputAutofocus){
-                        var input = element.find('.form-control').first();
-                        input.focus();
+                        if(type!='date') {
+                            var input = element.find('.form-control').first();
+                            input.focus();
+                        } else {
+                            var calendar = element[4];
+                            calendar.focus();
+                            scope.selectDate = true;
+                        }
                     }
+
 
                     // wysiwyg fields
                     if(type=='wysiwyg') {
