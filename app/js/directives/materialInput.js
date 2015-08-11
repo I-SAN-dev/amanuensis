@@ -219,11 +219,6 @@ app.directive('materialInput', [
                     // backup the initial date value
                     var initialDate = angular.copy($scope.model);
 
-                    $scope.focusCalendar = function () {
-                        $scope.selectDate = true;
-                        $('.'+$scope.id).focus();
-                    };
-
                     /**
                      * updates the backup
                      */
@@ -304,6 +299,14 @@ app.directive('materialInput', [
                     };
                 }
 
+                if($scope.inputType == 'date' || $scope.inputType == 'datetime'){
+                    $scope.showPage = 1;
+                    $scope.focusCalendar = function () {
+                        $scope.selectDate = true;
+                        $('.'+$scope.id).focus();
+                    };
+                }
+
                 // bool fields
                 if($scope.inputType == 'bool'){
                     /**
@@ -331,11 +334,12 @@ app.directive('materialInput', [
 
                     // autofocus the created input field if autofocus attribute is present
                     if(attr.inputAutofocus){
-                        if(type!='date') {
+                        if(type!='date' && type != 'datetime') {
                             var input = element.find('.form-control').first();
                             input.focus();
                         } else {
-                            var calendar = element[4];
+                            var calendar = element[4] || element[1];
+                            console.log(element);
                             calendar.focus();
                             scope.selectDate = true;
                         }

@@ -1,15 +1,12 @@
-<div class="form-group">
+<div class="form-group" data-ng-click="focusCalendar()">
     <input  placeholder="{{label}}"
-            data-ng-focus="selectDate = true; showPage=1"
             id="{{id}}"
             data-ng-model="model"
             data-ng-required="required || false"
             class="form-control">
     <span class="bar"></span>
     <label for="{{id}}">{{label}}</label>
-</div>
-
-<div class="datepicker-container" data-ng-show="selectDate">
+</div><div class="datepicker-container {{id}}" tabindex="0" data-ng-blur="selectDate = false" data-ng-show="selectDate">
     <div class="slideanim2" data-ng-class="{panel2: showPage==2}">
         <div class="slideanim-item">
             <div data-pickadate data-min-date="minDate" data-max-date="maxDate" data-ng-model="datetimeModel[0]" data-ng-click="applyDate($event)"></div>
