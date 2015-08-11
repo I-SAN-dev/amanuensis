@@ -222,11 +222,16 @@ app.directive('materialInput', [
                     /**
                      * updates the backup
                      */
-                    $scope.processDate = function () {
-                        if(initialDate != $scope.model) {
+                    $scope.processDate = function (e) {
+                        console.log(e);
+                        if(e){
                             $scope.selectDate = false;
-                            initialDate = angular.copy($scope.model);
                         }
+                        if(initialDate != $scope.model) {
+                            initialDate = angular.copy($scope.model);
+                            $scope.selectDate = false;
+                        }
+
                     }
                 }
 
