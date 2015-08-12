@@ -1,51 +1,51 @@
 {
   "db":{
-    "host":"localhost",
-    "database":"isande_ama",
-    "port":"3306",
-    "user":"isande_ama",
-    "password":"bachelor2015"
+    "host":"",
+    "database":"",
+    "port":"",
+    "user":"",
+    "password":""
   },
 
-  "baseurl":"http://sa.ama.i-san.de",
-  "secureurl":"https://secure83.tophost.ch/~isande/amanuensis/dev_sa",
-  "appsecret":"asdfkkj83n8429fkf9ek0kj",
+  "baseurl":"",
+  "secureurl":"",
+  "appsecret":"",
   "sessiontimeout":"60",
 
-  "company":"I-SAN.de Webdesign & Hosting GbR",
-  "company_addition":"vertreten durch Sebastian Antosch & Christian Baur",
+  "company":"Firmenname",
+  "company_addition":"",
   "address":
   {
-    "street":"Augustusstraße 5c",
-    "city":"Königsbrunn",
-    "zip":"86343",
+    "street":"Beispielstraße 1337",
+    "city":"Testhausen",
+    "zip":"13337",
     "country": "Deutschland",
-    "web":"http://i-san.de",
-    "telephone":"+49 1578 8562613",
+    "web":"http://example.com",
+    "telephone":"+49 1234 56789",
     "fax":"1234 567890"
   },
   "account":
   {
-    "owner":"Christian Baur",
-    "bank":"Augusta Bank eG",
-    "IBAN":"DE36 7209 0000 0007 6020 90",
-    "BIC":"GENODEF1AUB"
+    "owner":"Max Mustermann",
+    "bank":"Beispiel Bank",
+    "IBAN":"DE12 3456 0000 0001 2345 67",
+    "BIC":"xxxxDExxxxx"
   },
   "design":
   {
-    "color":"#0097AB",
-    "logo":"http://i-san.de/templates/i-san2014template/images/i-san.de-logo.png",
-    "fontname":"Share",
-    "googlefontlink":"http://fonts.googleapis.com/css?family=Share:400"
+    "color":"#404877",
+    "logo":"http://amanu-app.de/favicon-96x96.png",
+    "fontname":"Roboto",
+    "googlefontlink":"http://fonts.googleapis.com/css?family=Roboto"
   },
 
   "lang":"de",
 
   "mail": {
-    "sender": "kontakt@i-san.de",
-    "replyto": "kontakt@i-san.de",
-    "archive": "kontakt@i-san.de",
-    "admin": "kontakt@i-san.de",
+    "sender": "example@example.com",
+    "replyto": "example@example.com",
+    "archive": "example@example.com",
+    "admin": "example@example.com",
     "usesmtp": false,
     "smtphost": "",
     "smtpauth": true,
@@ -101,43 +101,43 @@
     "calc_tax": true,
     "tax":"19",
     "tax_label":"Umsatzsteuer",
-    "hint_kleinunternehmerregelung":true,
-    "hint_agb":true,
-    "link_agb":"http://i-san.de/downloads/agb-webdesign-i-san.pdf",
+    "hint_kleinunternehmerregelung":false,
+    "hint_agb":false,
+    "link_agb":"",
     "umsatzsteuerid":"",
-    "steuernummer":"102/158/21208"
+    "steuernummer":""
   },
   "invoice_due_days":"14",
 
   "refnumber_offers":
   {
     "idminlength": 4,
-    "scheme": "OFF-%yy%-%dddd%-%id%"
+    "scheme": "OFF-%yy%-%q%-%c%-%id%"
   },
   "refnumber_contracts":
   {
     "idminlength": 4,
-    "scheme": "CON-%yy%-%dddd%-%id%"
+    "scheme": "CON-%yy%-%q%-%c%-%id%"
   },
   "refnumber_acceptances":
   {
     "idminlength": 4,
-    "scheme": "ACC-%yy%-%dddd%-%id%"
+    "scheme": "ACC-%yy%-%q%-%c%-%id%"
   },
   "refnumber_invoices":
   {
     "idminlength": 4,
-    "scheme": "INV-%yy%-%dddd%-%c%-%id%"
+    "scheme": "INV-%yy%-%q%-%c%-%id%"
   },
   "refnumber_reminders":
   {
     "idminlength": 4,
-    "scheme": "REM-%yy%-%dddd%-%id%"
+    "scheme": "REM-%yy%-%q%-%c%-%id%"
   },
   "refnumber_customers":
   {
     "idminlength": 4,
-    "scheme": "%yy% %m% %mm% %d% %dd% %ddd% %dddd% %id% hallo"
+    "scheme": "%id%"
   }
 
 }
