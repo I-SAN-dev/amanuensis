@@ -60,7 +60,7 @@
 
     "subject_offer":"Ihr Angebot %ref%",
     "content_offer":"user_templates/mail/offer.phtml",
-    "attachment_offer":"user_templates/attachments/agb-i-san.pdf",
+    "attachment_offer":"",
 
     "subject_acceptance":"Bitte um Abnahme %ref%",
     "content_acceptance":"user_templates/mail/acceptance.phtml",
@@ -68,7 +68,7 @@
 
     "subject_invoice":"Ihre Rechnung %ref%",
     "content_invoice":"user_templates/mail/invoice.phtml",
-    "attachment_invoice":"user_templates/attachments/agb-i-san.pdf",
+    "attachment_invoice":"",
 
     "subject_reminder":"Zahlungserinnerung %ref%",
     "content_reminder":"user_templates/mail/reminder.phtml",
