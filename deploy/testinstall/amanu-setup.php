@@ -277,6 +277,9 @@ class AmanuSetup {
         }
         else
         {
+            // delete setup sql file
+            @unlink('amanu_db_setup.sql');
+
             // redirect to step4
             header("Location: amanu-setup.php?step=4");
         }
