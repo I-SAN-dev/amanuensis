@@ -377,7 +377,11 @@ class AmanuSetup {
 
         echo('
 		        </form>
+		        <div id="loading">
+                	<p>Dies kann einige Zeit dauern.<br/>Bitte lass das Browserfenster geöffnet.</p>
+                </div>
 		    </div>
+
 
 
 		');
