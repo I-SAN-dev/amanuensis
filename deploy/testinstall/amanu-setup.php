@@ -277,6 +277,9 @@ class AmanuSetup {
         }
         else
         {
+            // delete setup sql file
+            @unlink('amanu_db_setup.sql');
+
             // redirect to step4
             header("Location: amanu-setup.php?step=4");
         }
@@ -374,7 +377,11 @@ class AmanuSetup {
 
         echo('
 		        </form>
+		        <div id="loading">
+                	<p>Dies kann einige Zeit dauern.<br/>Bitte lass das Browserfenster geöffnet.</p>
+                </div>
 		    </div>
+
 
 
 		');
