@@ -7,8 +7,8 @@
     "password":"bachelor2015"
   },
 
-  "baseurl":"http://sa.ama.i-san.de",
-  "secureurl":"https://secure83.tophost.ch/~isande/amanuensis/dev_sa",
+  "baseurl":"http://cb.ama.i-san.de",
+  "secureurl":"https://secure83.tophost.ch/~isande/amanuensis/dev_cb",
   "appsecret":"asdfkkj83n8429fkf9ek0kj",
   "sessiontimeout":"60",
 

@@ -34,11 +34,7 @@ app.controller('ItemPresetCreationCtrl', [
 
         var goBack = function () {
             var to = $stateParams.referrer || 'app.itemPresets.detail';
-            var toParams;
-            if(to=='app.itemPresets.detail')
-                toParams = {id:data.id};
-            else
-                toParams = $stateParams.referrerParams;
+            var toParams = $stateParams.referrerParams;
             $state.go(to,toParams);
         };
 
