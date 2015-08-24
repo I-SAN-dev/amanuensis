@@ -45,6 +45,7 @@ class AmanuSetup {
                 'gzencode' => 'zlib',
                 'hash' => 'HASH Message Digest Framework',
                 'curl_init' => 'curl',
+                'getallheaders' => 'amanu muss auf einem Apache-Server installiert werden!'
             ),
             'defined' => array(
                 'PDO::ATTR_DRIVER_NAME' => 'PDO'
@@ -527,7 +528,8 @@ class AmanuSetup {
      */
     static public function showFinished() {
         $txt='amanu sollte jetzt erfolgreich auf diesem Server installiert sein.
-         <br/><br/>Mit einem Klick auf "Weiter" löscht sich diese Installationsdatei nun aus Sicherheitsgründen selbst und öffnet im Anschluss amanu.';
+         <br/><br/>Mit einem Klick auf "Weiter" löscht sich diese Installationsdatei nun aus Sicherheitsgründen selbst und öffnet im Anschluss amanu.
+         <br/><br/>Im Anschluss solltest du in den Einstellungen von amanu (oben rechts) deine Unternehmensdaten hinterlegen.';
         AmanuSetup::showContent('Fertig',$txt, 7);
     }
 
