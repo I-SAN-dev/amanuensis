@@ -8,7 +8,7 @@ app.controller('InvoiceCreationCtrl', [
     '$stateParams',
     '$state',
     'ErrorDialog',
-    'GobBackService',
+    'GoBackService',
     function (RefnumberService, ItemContainerService, $stateParams, $state, ErrorDialog, GoBackService) {
         var self = this;
         if(!$stateParams.project){
