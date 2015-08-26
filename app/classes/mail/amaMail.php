@@ -67,6 +67,14 @@ class AmaMail {
         $this->mail->Subject = $subject;
         $this->mail->isHTML(true);
 
+        $this->mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
         $this->contentSet = false;
     }
 
