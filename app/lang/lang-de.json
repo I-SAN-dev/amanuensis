@@ -507,7 +507,7 @@
       "refnumber_contracts":"Vertrags-Referenznummern",
       "refnumber_acceptances":"Abnahmeformular-Referenznummern",
       "refnumber_invoices":"Rechnungs-Referenznummern / Rechnungsnummern",
-      "refnumber_reminders":"Zahlugserinnerungs-Refernznummern",
+      "refnumber_reminders":"Zahlungserinnerungs-Refernznummern",
       "refnumber_customers":"Kunden-Referenznummern / Kundenummern",
       "path":"Systempfade",
       "db":"Datenbankanbindung"
@@ -550,7 +550,7 @@
     "design":
     {
       "color":"Farbe, wird unter anderem in Emails verwendet, um diese an Ihr Corporate Design anzupassen",
-      "logo":"Pfad zu Ihrem Logo",
+      "logo":"Pfad zu deinem Logo",
       "fontname": "Schriftart, zur Verwendung in PDF-Dokumenten",
       "googlefontlink": "Link zur Schriftart bei Google Fonts"
     },
